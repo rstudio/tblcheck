@@ -1,4 +1,4 @@
 
 # tblcheck
 
-Functions that instead tibbles or dataframes for grading/testing with `gradethis`
+Functions that inspect tibbles or dataframes for grading/testing with `gradethis`

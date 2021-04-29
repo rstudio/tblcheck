@@ -1,5 +1,6 @@
 
 test_that("has_extra_columns works", {
+  expect_error(has_extra_columns(mtcars))
   expect_false(has_extra_columns(mtcars, mtcars))
   expect_true(has_extra_columns(mtcars, mtcars[, 1:2]))
   expect_false(has_extra_columns(mtcars, col_names = names(mtcars)))
@@ -8,6 +9,7 @@ test_that("has_extra_columns works", {
 })
 
 test_that("has_missing_columns works", {
+  expect_error(has_missing_columns(mtcars))
   expect_false(has_missing_columns(mtcars, mtcars))
   expect_false(has_missing_columns(mtcars, col_names = names(mtcars)))
   expect_true(has_missing_columns(mtcars["mpg"], mtcars))
@@ -16,6 +18,7 @@ test_that("has_missing_columns works", {
 })
 
 test_that("has_column_types works", {
+  expect_error(has_column_types(mtcars))
   expect_true(has_column_types(mtcars, mtcars))
   expect_true(has_column_types(mtcars["mpg"], col_types = "numeric"))
   # incorrect case

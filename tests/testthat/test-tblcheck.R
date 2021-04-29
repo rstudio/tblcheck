@@ -1,5 +1,6 @@
 
 test_that("has_classes works", {
+  expect_error(has_classes(mtcars))
   expect_true(has_classes(mtcars, mtcars))
   expect_true(has_classes(mtcars, classes = "data.frame"))
   expect_false(has_classes(mtcars, classes = "grouped_df"))
