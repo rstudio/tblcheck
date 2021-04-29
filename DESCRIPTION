@@ -1,0 +1,25 @@
+Package: tblcheck
+Title: Functions that facilitate grading dataframes or tibbles
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Garrick",
+             family = "Aden-Buie",
+             role = c("aut", "cre"),
+             email = "garrick@rstudio.com",
+             comment = c(ORCID = "0000-0002-7111-0077")),
+      person(given = "Nischal",
+             family = "Shrestha",
+             role = c("aut"),
+             email = "nsrocker92@gmail.com",
+             comment = c(ORCID = "0000-0003-3321-1712")))
+Description: tblcheck provides functions that inspect dataframe or tibble objects to 
+  make it easier for teachers to check that student tables meet expectations.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+  magrittr,
+  dplyr,
+  testthat
