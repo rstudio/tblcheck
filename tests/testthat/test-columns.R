@@ -26,5 +26,3 @@ test_that("has_column_types works", {
   mtcars_bad["mpg"] <- as.character(mtcars_bad["mpg"])
   expect_false(has_column_types(mtcars_bad, mtcars))
 })
-
-

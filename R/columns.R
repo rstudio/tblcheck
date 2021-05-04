@@ -80,4 +80,5 @@ has_column_types <- function(
   return(length(not_same) == 0)
 }
 
+# TODO order of columns?
 
