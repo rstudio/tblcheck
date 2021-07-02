@@ -12,9 +12,16 @@
 #' @export
 
 check_table <- function(
-  object   = get(".result", parent.frame()),
-  expected = get(".solution", parent.frame())
+  object      = .result,
+  expected    = .solution,
 ) {
+  if (inherits(object, "gradethis_placeholder")) {
+    x <- get(".solution", parent.frame(2))
+  }
+  if (inherits(expected, "gradethis_placeholder")) {
+    y <- get(".solution", parent.frame(2))
+  }
+  
   # check length ----
   if (!identical(nrow(object), nrow(expected))) { 
     gradethis::fail("Your table should have {nrow(expected)} rows.")
