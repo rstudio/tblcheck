@@ -7,7 +7,7 @@
 #' @param object An object to be compared to `expected`.
 #' @param expected An object with the expected names.
 #' @param max The maximum number of missing and/or unexpected names to include
-#'   in an informative failure message.
+#'   in an informative failure message. Defaults to 3.
 #'
 #' @return Returns `object` invisibly.
 #' @export

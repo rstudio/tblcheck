@@ -17,6 +17,8 @@
 #'   running both is redundant.
 #' @param check_columns A [logical] indicating whether to check that all columns
 #'   have the same contents with [check_column()].
+#' @param max The maximum number of name mismatches to print,
+#'   passed to `check_names()`. Defaults to 3.
 #'
 #' @return Returns `object` invisibly.
 #' @export
@@ -26,7 +28,8 @@ check_table <- function(
   expected    = .solution,
   check_nrow  = TRUE,
   check_names = TRUE,
-  check_ncol  = !check_names
+  check_ncol  = !check_names,
+  max         = 3
 ) {
   if (inherits(object, "gradethis_placeholder")) {
     x <- get(".solution", parent.frame(2))
@@ -43,7 +46,7 @@ check_table <- function(
   }
   
   # check column names ----
-  if (check_names) check_names(object, expected)
+  if (check_names) check_names(object, expected, max = max)
   
   # check number of columns ----
   if (check_ncol) {
