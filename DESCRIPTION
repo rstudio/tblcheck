@@ -21,6 +21,7 @@ Imports:
     gradethis,
     knitr,
     magrittr,
+    plu,
     testthat
 Suggests:
     dplyr,

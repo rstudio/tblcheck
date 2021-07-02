@@ -40,8 +40,10 @@ check_table <- function(
   
   # check length ----
   if (check_nrow) {
-    if (!identical(nrow(object), nrow(expected))) { 
-      gradethis::fail("Your table should have {nrow(expected)} rows.")
+    if (!identical(nrow(object), rows <- nrow(expected))) { 
+      gradethis::fail(
+        "Your table should have {rows} {plu::ral('row', n = rows)}."
+      )
     }
   }
   
@@ -50,8 +52,10 @@ check_table <- function(
   
   # check number of columns ----
   if (check_ncol) {
-    if (!identical(ncol(object), ncol(expected))) { 
-      gradethis::fail("Your table should have {ncol(expected)} columns.")
+    if (!identical(ncol(object), cols <- ncol(expected))) { 
+      gradethis::fail(
+        "Your table should have {cols} {plu::ral('column', n = cols)}."
+      )
     }
   }
   
