@@ -7,13 +7,26 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
+#' @param check_nrow A [logical] indicating whether to check that `object` and 
+#'   `expected` have the same number of rows with [nrow()].
+#' @param check_names A [logical] indicating whether to check that `object` and
+#'   `expected` have the same column names with [check_names()].
+#' @param check_ncol A [logical] indicating whether to check that `object` and
+#'   `expected` have the same number of columns with [ncol()].
+#'   By default, `check_ncol` is [`FALSE`] if `check_names` is [`TRUE`], as
+#'   running both is redundant.
+#' @param check_columns A [logical] indicating whether to check that all columns
+#'   have the same contents with [check_column()].
 #'
-#' @return Invisible [`NULL`]
+#' @return Returns `object` invisibly.
 #' @export
 
 check_table <- function(
   object      = .result,
   expected    = .solution,
+  check_nrow  = TRUE,
+  check_names = TRUE,
+  check_ncol  = !check_names
 ) {
   if (inherits(object, "gradethis_placeholder")) {
     x <- get(".solution", parent.frame(2))
@@ -23,19 +36,24 @@ check_table <- function(
   }
   
   # check length ----
-  if (!identical(nrow(object), nrow(expected))) { 
-    gradethis::fail("Your table should have {nrow(expected)} rows.")
+  if (check_nrow) {
+    if (!identical(nrow(object), nrow(expected))) { 
+      gradethis::fail("Your table should have {nrow(expected)} rows.")
+    }
   }
   
   # check column names ----
   if (check_names) check_names(object, expected)
   
-  if (!is.null(missing_msg) || !is.null(unexpected_msg)) {
-    gradethis::fail("{missing_msg}{unexpected_msg}")
+  # check number of columns ----
+  if (check_ncol) {
+    if (!identical(ncol(object), ncol(expected))) { 
+      gradethis::fail("Your table should have {ncol(expected)} rows.")
+    }
   }
   
   # check column contents ----
-  # lapply(object_names, check_column)
+  # if (check_columns) lapply(object_names, check_column)
   
-  return(invisible(NULL))
+  return(invisible(object))
 }
