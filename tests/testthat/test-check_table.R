@@ -55,7 +55,7 @@ test_that("check_table rows", {
   )
   expect_match(result$feedback$message, "should have 25 rows")
   
-  ex$solution_code <- "tibble(a = letters[1])"
+  ex$solution <- "tibble(a = letters[1])"
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
@@ -75,7 +75,7 @@ test_that("check_table columns", {
   )
   expect_match(result$feedback$message, "should have 2 columns")
   
-  ex$solution_code <- "tibble(a = letters)"
+  ex$solution <- "tibble(a = letters)"
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
