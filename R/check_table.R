@@ -51,7 +51,7 @@ check_table <- function(
   # check number of columns ----
   if (check_ncol) {
     if (!identical(ncol(object), ncol(expected))) { 
-      gradethis::fail("Your table should have {ncol(expected)} rows.")
+      gradethis::fail("Your table should have {ncol(expected)} columns.")
     }
   }
   
