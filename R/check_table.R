@@ -31,11 +31,11 @@ check_table <- function(
   check_ncol  = !check_names,
   max         = 3
 ) {
-  if (inherits(object, "gradethis_placeholder")) {
-    x <- get(".solution", parent.frame(2))
+  if (inherits(object, ".result")) {
+    object <- get(".result", parent.frame())
   }
-  if (inherits(expected, "gradethis_placeholder")) {
-    y <- get(".solution", parent.frame(2))
+  if (inherits(expected, ".solution")) {
+    expected <- get(".solution", parent.frame())
   }
   
   # check length ----
