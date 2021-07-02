@@ -23,12 +23,16 @@ check_names <- function(object, expected, max = 3) {
   missing_names <- list_setdiff(
     expected_names, object_names, max = max, before = "`"
   )
-  missing_msg <- glue::glue("Your result should have {unit} {names}. ")
+  missing_msg <- glue::glue(
+    "Your result should have {unit} {missing_names}. "
+  )
   
   unexpected_names <- list_setdiff(
     object_names, expected_names, max = max, and = " or ", before = "`"
   )
-  unexpected_msg <- glue::glue("Your result should not have {unit} {names}.")
+  unexpected_msg <- glue::glue(
+    "Your result should not have {unit} {unexpected_names}."
+  )
   
   if (!is.null(missing_msg) || !is.null(unexpected_msg)) {
     gradethis::fail(paste0(missing_msg, unexpected_msg))
