@@ -5,17 +5,38 @@
 \title{Check that the rows and columns of two tables are the same}
 \usage{
 check_table(
-  object = get(".result", parent.frame()),
-  expected = get(".solution", parent.frame())
+  object = .result,
+  expected = .solution,
+  check_nrow = TRUE,
+  check_names = TRUE,
+  check_ncol = !check_names,
+  max = 3
 )
 }
 \arguments{
 \item{object}{A data frame to be compared to \code{expected}.}
 
 \item{expected}{A data frame containing the expected result.}
+
+\item{check_nrow}{A \link{logical} indicating whether to check that \code{object} and
+\code{expected} have the same number of rows with \code{\link[=nrow]{nrow()}}.}
+
+\item{check_names}{A \link{logical} indicating whether to check that \code{object} and
+\code{expected} have the same column names with \code{\link[=check_names]{check_names()}}.}
+
+\item{check_ncol}{A \link{logical} indicating whether to check that \code{object} and
+\code{expected} have the same number of columns with \code{\link[=ncol]{ncol()}}.
+By default, \code{check_ncol} is \code{\link{FALSE}} if \code{check_names} is \code{\link{TRUE}}, as
+running both is redundant.}
+
+\item{max}{The maximum number of name mismatches to print,
+passed to \code{check_names()}. Defaults to 3.}
+
+\item{check_columns}{A \link{logical} indicating whether to check that all columns
+have the same contents with \code{\link[=check_column]{check_column()}}.}
 }
 \value{
-Invisible \code{\link{NULL}}
+Returns \code{object} invisibly.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same number of rows, the same

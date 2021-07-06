@@ -17,7 +17,7 @@ check_names <- function(object, expected, max = 3) {
   object_names   <- names(object)
   
   unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
-  
+
   missing     <- max_setdiff(expected_names, object_names, max = max)
   missing_str <- knitr::combine_words(missing, before = "`")
   missing_msg <- glue::glue(
@@ -43,12 +43,11 @@ check_names <- function(object, expected, max = 3) {
 #' Calls [setdiff()], optionally limits the result to `max` items, and then
 #' combines the result with [knitr::combine_words()].
 #'
-#' @param x,y Vectors. Elements that appear in `x` but not `y` will be listed.
-#' @param max The maximum number of elements to list.
-#'   Defaults to [Inf], which includes all elements.
+#' @inheritParams max_setdiff
 #' @param ... Additional arguments passed to [knitr::combine_words()]
 #'
 #' @return A single [character] string.
+#' @keywords internal
 
 list_setdiff <- function(x, y, max = Inf, ...) {
   max_setdiff(x, y, max = max)
@@ -57,8 +56,11 @@ list_setdiff <- function(x, y, max = Inf, ...) {
 
 #' Find up to a certain number of differences between two vectors
 #'
-#' @inheritParams list_setdiff
+#' @param x,y Vectors. Elements that appear in `x` but not `y` will be listed.
+#' @param max The maximum number of elements to list.
+#'   Defaults to [Inf], which includes all elements.
 #' @return A vector with no more than `max` elements.
+#' @keywords internal
 
 max_setdiff <- function(x, y, max = Inf) {
   diff <- setdiff(x, y)
