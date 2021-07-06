@@ -30,9 +30,10 @@ check_names <- function(object, expected, max = 3) {
     "Your result should not have {plu::ral(unit, unexpected)} {unexpected_str}."
   )
   
-  if (length(missing_msg) || length(unexpected_msg)) {
-    gradethis::fail(paste0(missing_msg, unexpected_msg))
-  }
+  gradethis::fail_if(
+    length(missing_msg) || length(unexpected_msg),
+    paste0(missing_msg, unexpected_msg)
+  )
   
   return(invisble(object))
 }
