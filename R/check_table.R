@@ -38,10 +38,9 @@ check_table <- function(
     expected <- get(".solution", parent.frame())
   }
   
-  # check length ----
-  if (check_nrow) {
-    gradethis::fail_if(
-      !identical(nrow(object), nrow(expected)),
+  # check number of rows ----
+  if (check_nrow && !identical(nrow(object), nrow(expected))) {
+    gradethis::fail(
       "Your table should have {plu::ral('n row', n = nrow(expected))}."
     )
   }
@@ -50,9 +49,8 @@ check_table <- function(
   if (check_names) check_names(object, expected, max = max)
   
   # check number of columns ----
-  if (check_ncol) {
-    gradethis::fail_if(
-      !identical(ncol(object), ncol(expected)),
+  if (check_ncol && !identical(ncol(object), ncol(expected))) {
+    gradethis::fail(
       "Your table should have {plu::ral('n column', n = ncol(expected))}."
     )
   }

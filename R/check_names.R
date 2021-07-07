@@ -30,12 +30,11 @@ check_names <- function(object, expected, max = 3) {
     "Your result should not have {plu::ral(unit, unexpected)} {unexpected_str}."
   )
   
-  gradethis::fail_if(
-    length(missing_msg) || length(unexpected_msg),
-    paste0(missing_msg, unexpected_msg)
-  )
+  if (length(missing_msg) || length(unexpected_msg)) {
+    gradethis::fail(paste0(missing_msg, unexpected_msg))
+  }
   
-  return(invisble(object))
+  return(invisible(object))
 }
 
 #' List the difference between two vectors in a user-friendly string
