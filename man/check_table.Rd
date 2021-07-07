@@ -10,6 +10,7 @@ check_table(
   check_nrow = TRUE,
   check_names = TRUE,
   check_ncol = !check_names,
+  check_columns = TRUE,
   max = 3
 )
 }
@@ -29,11 +30,11 @@ check_table(
 By default, \code{check_ncol} is \code{\link{FALSE}} if \code{check_names} is \code{\link{TRUE}}, as
 running both is redundant.}
 
-\item{max}{The maximum number of name mismatches to print,
-passed to \code{check_names()}. Defaults to 3.}
-
 \item{check_columns}{A \link{logical} indicating whether to check that all columns
 have the same contents with \code{\link[=check_column]{check_column()}}.}
+
+\item{max}{The maximum number of name mismatches to print,
+passed to \code{check_names()}. Defaults to 3.}
 }
 \value{
 Returns \code{object} invisibly.

@@ -24,12 +24,13 @@
 #' @export
 
 check_table <- function(
-  object      = .result,
-  expected    = .solution,
-  check_nrow  = TRUE,
-  check_names = TRUE,
-  check_ncol  = !check_names,
-  max         = 3
+  object        = .result,
+  expected      = .solution,
+  check_nrow    = TRUE,
+  check_names   = TRUE,
+  check_ncol    = !check_names,
+  check_columns = TRUE,
+  max           = 3
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
