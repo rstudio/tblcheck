@@ -42,7 +42,7 @@ check_column <- function(
   # check class
   if (check_class && !identical(obj_class, exp_class)) {
     gradethis::fail(
-      "Your `{name}` column should have {plu::ral('class', exp_class)} {plu::stick(exp_class)}, but it has {plu::ral('class', obj_class)} {plu::stick(obj_class)}."
+      "Your `{name}` column should have {plu::ral('class', exp_class)} {knitr::combine_words(exp_class)}, but it has {plu::ral('class', obj_class)} {knitr::combine_words(obj_class)}."
     )
   }
   
