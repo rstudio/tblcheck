@@ -49,7 +49,7 @@ check_column <- function(
   # check rows
   if (check_values) {
     if (!identical(obj_col[1:n_values], exp_col[1:n_values])) {
-      gradethis::fail("The first {n_values} {plu::ral('value', 1:n_values)} of your `{name}` column should be {plu::stick(sapply(exp_col[1:n_values], encodeString, quote = '`'))}.")
+      gradethis::fail("The first {n_values} {plu::ral('value', 1:n_values)} of your `{name}` column should be {knitr::combine_words(exp_col[1:n_values], before = '`')}.")
     }
     
     else if (!identical(obj_col, exp_col)) {
