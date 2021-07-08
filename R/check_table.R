@@ -7,6 +7,12 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
+#' @param max The maximum number of mismatched values to display in an
+#'   informative failure message.
+#'   Passed to [check_names()] to determine the number of mismatched column
+#'   names to display and the `n_values` argument of [check_column()] to
+#'   determine the number of mismatched column values to display.
+#'   Defaults to 3.
 #' @param check_nrow A [logical] indicating whether to check that `object` and 
 #'   `expected` have the same number of rows with [nrow()].
 #' @param check_names A [logical] indicating whether to check that `object` and
@@ -17,8 +23,7 @@
 #'   running both is redundant.
 #' @param check_columns A [logical] indicating whether to check that all columns
 #'   have the same contents with [check_column()].
-#' @param max The maximum number of name mismatches to print,
-#'   passed to `check_names()`. Defaults to 3.
+#' @inheritParams check_column
 #'
 #' @return Returns `object` invisibly.
 #' @export
@@ -26,11 +31,13 @@
 check_table <- function(
   object        = .result,
   expected      = .solution,
+  max_print     = 3,
   check_nrow    = TRUE,
   check_names   = TRUE,
   check_ncol    = !check_names,
   check_columns = TRUE,
-  max           = 3
+  check_class   = check_columns,
+  check_values  = check_columns
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -57,7 +64,12 @@ check_table <- function(
   }
   
   # check column contents ----
-  # if (check_columns) lapply(object_names, check_column)
+  if (check_columns) {
+    lapply(
+      object, check_column,
+      check_class = check_class, check_values = check_values, n_values = max
+    )
+  }
   
   return(invisible(object))
 }
