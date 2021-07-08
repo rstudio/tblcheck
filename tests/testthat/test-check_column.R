@@ -33,7 +33,7 @@ test_that("check_column() checks the first three values", {
   
   expect_match(
     result$feedback$message,
-    "should be <code>a</code>, <code>b</code> and <code>c</code>."
+    "should be <code>a</code>, <code>b</code>, and <code>c</code>."
   )
   
 })
@@ -53,7 +53,7 @@ test_that("check_column() checks multiple classes", {
   
   expect_match(
     result$feedback$message,
-    "should have classes tbl_df, tbl and data.frame, but it has class data.frame."
+    "should have classes tbl_df, tbl, and data.frame, but it has class data.frame."
   )
   
 })
@@ -93,7 +93,7 @@ test_that("n_values modifies the number of values to print", {
   
   expect_match(
     result$feedback$message,
-    "The first 5 values of your <code>a</code> column should be <code>z</code>, <code>y</code>, <code>x</code>, <code>w</code> and <code>v</code>."
+    "The first 5 values of your <code>a</code> column should be <code>z</code>, <code>y</code>, <code>x</code>, <code>w</code>, and <code>v</code>."
   )
   
 })
