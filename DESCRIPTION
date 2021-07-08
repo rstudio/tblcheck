@@ -15,13 +15,20 @@ Authors@R:
 Description: tblcheck provides functions that inspect dataframe or tibble objects to 
   make it easier for teachers to check that student tables meet expectations.
 License: MIT + file LICENSE
+Imports:
+    glue,
+    gradethis,
+    knitr,
+    magrittr,
+    plu,
+    testthat
+Suggests:
+    learnr,
+    dplyr,
+    tibble
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports:
-  magrittr,
-  testthat
-Suggests:
-  tibble,
-  dplyr
+Remotes: 
+    rstudio/gradethis
