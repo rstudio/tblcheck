@@ -4,19 +4,17 @@ test_that("check_table names", {
     solution_code    = "tibble(x = letters, y = x, z = x, w = x)",
     check            = "grade_this({check_table()})",
     global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis::gradethis_exercise_checker"
+    exercise.checker = "gradethis_exercise_checker"
   )
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should have columns named .*x.*, .*y.*, and .*z"
+  expect_result_message(
+    result, "should have columns named .*x.*, .*y.*, and .*z"
   )
-  expect_match(
-    result$feedback$message,
-    "should not have columns named .*a.*, .*b.*, or .*c"
+  expect_result_message(
+    result, "should not have columns named .*a.*, .*b.*, or .*c"
   )
   
   ex$check <- "grade_this({check_table(max = Inf)})"
@@ -24,13 +22,11 @@ test_that("check_table names", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should have columns named .*x.*, .*y.*, .*z.*, and .*w"
+  expect_result_message(
+    result, "should have columns named .*x.*, .*y.*, .*z.*, and .*w"
   )
-  expect_match(
-    result$feedback$message,
-    "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
+  expect_result_message(
+    result, "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
   )
   
   ex$check <- "grade_this({check_table(max = 1)})"
@@ -38,8 +34,8 @@ test_that("check_table names", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(result$feedback$message, "should have a column named .*x")
-  expect_match(result$feedback$message, "should not have a column named .*a")
+  expect_result_message(result, "should have a column named .*x")
+  expect_result_message(result, "should not have a column named .*a")
 })
 
 test_that("check_table rows", {
@@ -48,18 +44,18 @@ test_that("check_table rows", {
     solution_code    = "tibble(a = letters[1:25])",
     check            = "grade_this({check_table()})",
     global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis::gradethis_exercise_checker"
+    exercise.checker = "gradethis_exercise_checker"
   )
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
-  expect_match(result$feedback$message, "should have 25 rows")
+  expect_result_message(result, "should have 25 rows")
   
   ex$solution <- "tibble(a = letters[1])"
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
-  expect_match(result$feedback$message, "should have 1 row")
+  expect_result_message(result, "should have 1 row")
 })
 
 test_that("check_table columns", {
@@ -68,16 +64,16 @@ test_that("check_table columns", {
     solution_code    = "tibble(a = letters, b = letters)",
     check            = "grade_this({check_table(check_names = FALSE)})",
     global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis::gradethis_exercise_checker"
+    exercise.checker = "gradethis_exercise_checker"
   )
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
-  expect_match(result$feedback$message, "should have 2 columns")
+  expect_result_message(result, "should have 2 columns")
   
   ex$solution <- "tibble(a = letters)"
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
-  expect_match(result$feedback$message, "should have 1 column")
+  expect_result_message(result, "should have 1 column")
 })
