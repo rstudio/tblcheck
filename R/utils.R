@@ -11,3 +11,5 @@
 NULL
 
 "%||%" <- function(x, y) if (is.null(x)) y else x
+
+md_code <- function(x) paste0("`", x, "`")

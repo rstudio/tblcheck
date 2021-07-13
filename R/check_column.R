@@ -41,10 +41,10 @@ check_column <- function(
   # check class
   if (check_class && !identical(obj_class, exp_class)) {
     t_class <- plu::ral("class", exp_class)
-    exp_class <- knitr::combine_words(exp_class)
+    exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
     
     t_obj_class <- plu::ral("class", obj_class)
-    obj_class <- knitr::combine_words(obj_class)
+    obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
     
     gradethis::fail(
       "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}."
