@@ -1,3 +1,6 @@
+library(gradethis)
+library(tibble)
+
 test_that("check_table names", {
   ex <- learnr:::mock_exercise(
     user_code        = "tibble(a = letters, b = a, c = a, d = a)",
