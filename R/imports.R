@@ -1,3 +1,6 @@
+#' @importFrom gradethis pass fail
+NULL
+
 #' @importFrom gradethis .result
 #' @export
 gradethis::.result
