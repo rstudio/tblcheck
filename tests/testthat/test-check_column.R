@@ -97,3 +97,16 @@ test_that("n_values modifies the number of values to print", {
   )
   
 })
+
+test_that("n_values doesn't overflow", {
+  result <- tibble(a = letters[1:3])
+  solution <- tibble(a = letters[2:1])
+  
+  grade <- gradethis:::capture_graded(
+    check_column("a", object = result, expected = solution, n_values = 3)
+  )
+  
+  expect_false(grade$correct)
+  expect_false(grepl("`NA`", grade$message))
+  expect_match(grade$message, "`b` and `a`.")
+})

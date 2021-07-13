@@ -33,6 +33,7 @@ check_column <- function(
 
   obj_col <- object[[name]]
   exp_col <- expected[[name]]
+  n_values <- min(length(exp_col), n_values)
 
   obj_class <- class(obj_col)
   exp_class <- class(exp_col)
