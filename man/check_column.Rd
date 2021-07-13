@@ -20,8 +20,8 @@ check_column(
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{check_class}{A logical indicating whether to check that \code{name} has
-the same class in \code{object} and \code{expected}.}
+\item{check_class}{A logical indicating whether to check that \code{name} has the
+same class in \code{object} and \code{expected}.}
 
 \item{check_values}{A logical indicating whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
@@ -33,7 +33,6 @@ Invisible \code{\link{NULL}}
 }
 \description{
 Checks if the \code{name} column has the same class and values in \code{object} and
-\code{expected}.
-If the columns differ, returns a failure state and an informative message
-with \code{\link[gradethis:graded]{gradethis::fail()}}.
+\code{expected}. If the columns differ, returns a failure state and an informative
+message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 }
