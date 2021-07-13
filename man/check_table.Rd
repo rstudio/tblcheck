@@ -7,11 +7,13 @@
 check_table(
   object = .result,
   expected = .solution,
+  max_print = 3,
   check_nrow = TRUE,
   check_names = TRUE,
   check_ncol = !check_names,
   check_columns = TRUE,
-  max = 3
+  check_class = check_columns,
+  check_values = check_columns
 )
 }
 \arguments{
@@ -33,8 +35,12 @@ running both is redundant.}
 \item{check_columns}{A \link{logical} indicating whether to check that all columns
 have the same contents with \code{\link[=check_column]{check_column()}}.}
 
-\item{max}{The maximum number of name mismatches to print,
-passed to \code{check_names()}. Defaults to 3.}
+\item{max}{The maximum number of mismatched values to display in an
+informative failure message.
+Passed to \code{\link[=check_names]{check_names()}} to determine the number of mismatched column
+names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to
+determine the number of mismatched column values to display.
+Defaults to 3.}
 }
 \value{
 Returns \code{object} invisibly.
