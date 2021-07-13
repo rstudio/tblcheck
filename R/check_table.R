@@ -7,7 +7,7 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
-#' @param max The maximum number of mismatched values to display in an
+#' @param max_print The maximum number of mismatched values to display in an
 #'   informative failure message.
 #'   Passed to [check_names()] to determine the number of mismatched column
 #'   names to display and the `n_values` argument of [check_column()] to
@@ -54,7 +54,7 @@ check_table <- function(
   }
   
   # check column names ----
-  if (check_names) check_names(object, expected, max = max)
+  if (check_names) check_names(object, expected, max = max_print)
   
   # check number of columns ----
   if (check_ncol && !identical(ncol(object), ncol(expected))) {
@@ -67,7 +67,9 @@ check_table <- function(
   if (check_columns) {
     lapply(
       object, check_column,
-      check_class = check_class, check_values = check_values, n_values = max
+      check_class  = check_class,
+      check_values = check_values,
+      n_values     = max_print
     )
   }
   
