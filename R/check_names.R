@@ -13,21 +13,18 @@
 #' @export
 
 check_names <- function(object, expected, max = 3) {
-  expected_names <- names(expected)
-  object_names   <- names(object)
-  
   unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
-
-  missing     <- max_setdiff(expected_names, object_names, max = max)
-  missing_str <- knitr::combine_words(missing, before = "`")
-  missing_msg <- glue::glue(
-    "Your result should have {plu::ral(unit, missing)} {missing_str}. "
-  )
   
-  unexpected     <- max_setdiff(object_names, expected_names, max = max)
-  unexpected_str <- knitr::combine_words(unexpected, and = " or ", before = "`")
-  unexpected_msg <- glue::glue(
-    "Your result should not have {plu::ral(unit, unexpected)} {unexpected_str}."
+  missing_msg <- check_names_message(
+    names(expected), names(object),
+    "Your result should have {unit} {str}. ",
+    unit = unit, max = max
+  )
+
+  unexpected_msg <- check_names_message(
+    names(object), names(expected),
+    "Your result should not have {unit} {str}.",
+    unit = unit, max = max, and = " or "
   )
   
   if (length(missing_msg) || length(unexpected_msg)) {
@@ -35,6 +32,13 @@ check_names <- function(object, expected, max = 3) {
   }
   
   return(invisible(object))
+}
+
+check_names_message <- function(x, y, glue_string, unit, max, and = " and ") {
+  names <- max_setdiff(x, y, max = max)
+  str   <- knitr::combine_words(names, and = and, before = "`")
+  unit  <- plu::ral(unit, names)
+  glue::glue(glue_string)
 }
 
 #' Find up to a certain number of differences between two vectors
