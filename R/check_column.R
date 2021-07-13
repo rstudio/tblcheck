@@ -41,22 +41,28 @@ check_column <- function(
   
   # check class
   if (check_class && !identical(obj_class, exp_class)) {
+    t_class     <- plu::ral('class', exp_class)
+    exp_class   <- knitr::combine_words(exp_class)
+    t_obj_class <- plu::ral('class', obj_class)
+    obj_class   <- knitr::combine_words(obj_class)
     gradethis::fail(
-      "Your `{name}` column should have {plu::ral('class', exp_class)} {knitr::combine_words(exp_class)}, but it has {plu::ral('class', obj_class)} {knitr::combine_words(obj_class)}."
+      "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}."
     )
   }
   
   # check rows
   if (check_values) {
     if (!identical(obj_col[1:n_values], exp_col[1:n_values])) {
-      gradethis::fail("The first {n_values} {plu::ral('value', 1:n_values)} of your `{name}` column should be {knitr::combine_words(exp_col[1:n_values], before = '`')}.")
+      n_values <- plu::ral('n value', n = n_values)
+      first_n_values <- knitr::combine_words(exp_col[1:n_values], before = '`')
+      gradethis::fail("The first {n_values} of your `{name}` column should be {first_n_values}.")
     }
     
-    else if (!identical(obj_col, exp_col)) {
+    if (!identical(obj_col, exp_col)) {
       gradethis::fail("Your `{name}` column contains unexpected values.") 
     }
   }
   
-  return(invisible(NULL))
+  invisible()
   
 }
