@@ -21,6 +21,13 @@ check_table(
 
 \item{expected}{A data frame containing the expected result.}
 
+\item{max_print}{The maximum number of mismatched values to display in an
+informative failure message.
+Passed to \code{\link[=check_names]{check_names()}} to determine the number of mismatched column
+names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to
+determine the number of mismatched column values to display.
+Defaults to 3.}
+
 \item{check_nrow}{A \link{logical} indicating whether to check that \code{object} and
 \code{expected} have the same number of rows with \code{\link[=nrow]{nrow()}}.}
 
@@ -34,13 +41,6 @@ running both is redundant.}
 
 \item{check_columns}{A \link{logical} indicating whether to check that all columns
 have the same contents with \code{\link[=check_column]{check_column()}}.}
-
-\item{max}{The maximum number of mismatched values to display in an
-informative failure message.
-Passed to \code{\link[=check_names]{check_names()}} to determine the number of mismatched column
-names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to
-determine the number of mismatched column values to display.
-Defaults to 3.}
 }
 \value{
 Returns \code{object} invisibly.
