@@ -48,9 +48,8 @@ check_table <- function(
   
   # check number of rows ----
   if (check_nrow && !identical(nrow(object), nrow(expected))) {
-    gradethis::fail(
-      "Your table should have {plu::ral('n row', n = nrow(expected))}."
-    )
+    n_rows <- plu::ral('n row', n = nrow(expected))
+    gradethis::fail("Your table should have {n_rows}.")
   }
   
   # check column names ----
@@ -58,9 +57,8 @@ check_table <- function(
   
   # check number of columns ----
   if (check_ncol && !identical(ncol(object), ncol(expected))) {
-    gradethis::fail(
-      "Your table should have {plu::ral('n column', n = ncol(expected))}."
-    )
+    n_cols <- plu::ral('n column', n = ncol(expected))
+    gradethis::fail("Your table should have {n_cols}.")
   }
   
   # check column contents ----
