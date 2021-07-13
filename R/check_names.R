@@ -37,22 +37,6 @@ check_names <- function(object, expected, max = 3) {
   return(invisible(object))
 }
 
-#' List the difference between two vectors in a user-friendly string
-#' 
-#' Calls [setdiff()], optionally limits the result to `max` items, and then
-#' combines the result with [knitr::combine_words()].
-#'
-#' @inheritParams max_setdiff
-#' @param ... Additional arguments passed to [knitr::combine_words()]
-#'
-#' @return A single [character] string.
-#' @keywords internal
-
-list_setdiff <- function(x, y, max = Inf, ...) {
-  max_setdiff(x, y, max = max)
-  knitr::combine_words(diff, ...)
-}
-
 #' Find up to a certain number of differences between two vectors
 #'
 #' @param x,y Vectors. Elements that appear in `x` but not `y` will be listed.
