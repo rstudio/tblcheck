@@ -61,10 +61,11 @@ check_table <- function(
   
   # check number of rows ----
   if (check_nrow && !identical(nrow(object), nrow(expected))) {
-    n_rows <- plu::ral('n row', n = nrow(expected))
+    exp_rows <- plu::ral("n row", n = nrow(expected))
+    obj_rows <- plu::ral("n row", n = nrow(object))
     gradethis::fail(
-      "Your table should have {n_rows}.",
-      problem = problem("table_nrow")
+      "Your table should have {exp_rows}, but it has {obj_rows}.",
+      problem = problem("table_nrow", nrow(expected), nrow(object))
     )
   }
   
@@ -73,10 +74,11 @@ check_table <- function(
   
   # check number of columns ----
   if (check_ncol && !identical(ncol(object), ncol(expected))) {
-    n_cols <- plu::ral('n column', n = ncol(expected))
+    exp_cols <- plu::ral('n column', n = ncol(expected))
+    obj_cols <- plu::ral('n column', n = ncol(object))
     gradethis::fail(
-      "Your table should have {n_cols}.",
-      problem = problem("table_ncol")
+      "Your table should have {exp_cols}, but it has {obj_cols}.",
+      problem = problem("table_ncol", ncol(expected), ncol(object))
     )
   }
   
