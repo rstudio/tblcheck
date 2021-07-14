@@ -22,7 +22,7 @@
 #'
 #' @return Invisible [`NULL`]
 #' @export
-#'
+
 check_column <- function(
   name,
   object = .result,
@@ -40,8 +40,7 @@ check_column <- function(
   
   assert_internally({
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
-    checkmate::assert_logical(check_class, len = 1)
-    checkmate::assert_logical(check_values, len = 1)
+    assert_map(checkmate::assert_logical, check_class, check_values, len = 1)
     checkmate::assert_number(max_print, lower = 1)
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)

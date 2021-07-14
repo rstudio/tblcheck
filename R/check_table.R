@@ -49,12 +49,11 @@ check_table <- function(
   assert_internally({
     checkmate::assert_number(max_print, lower = 1)
     
-    lgl_args <- ilist(
+    assert_map(
+      checkmate::assert_logical,
       check_nrow, check_names, check_ncol, check_columns,
-      check_class, check_values
-    )
-    Map(
-      checkmate::assert_logical, lgl_args, .var.name = names(lgl_args), len = 1
+      check_class, check_values,
+      len = 1
     )
     
     checkmate::assert_data_frame(object)
