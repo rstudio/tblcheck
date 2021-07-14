@@ -1,11 +1,11 @@
 test_that("check_column() checks classes", {
   ex <- learnr:::mock_exercise(
-      user_code        = "tibble(a = letters)",
-      solution_code    = "tibble(a = 1:3)",
-      check            = "grade_this({check_column('a')})",
-      global_setup     = "library(gradethis); library(tibble)",
-      exercise.checker = "gradethis::gradethis_exercise_checker"
-    )
+    user_code        = "tibble(a = letters)",
+    solution_code    = "tibble(a = 1:3)",
+    check            = "grade_this({check_column('a')})",
+    global_setup     = "library(gradethis); library(tibble)",
+    exercise.checker = "gradethis::gradethis_exercise_checker"
+  )
   
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
@@ -13,7 +13,7 @@ test_that("check_column() checks classes", {
   
   expect_match(
     result$feedback$message,
-    "should have class integer, but it has class character"
+    "should have class .*integer.*, but it has class .*character.*"
   )
 
 })
@@ -53,7 +53,7 @@ test_that("check_column() checks multiple classes", {
   
   expect_match(
     result$feedback$message,
-    "should have classes tbl_df, tbl, and data.frame, but it has class data.frame."
+    "should have classes .*tbl_df.*, .*tbl.*, and .*data.frame.*, but it has class .*data.frame"
   )
   
 })
