@@ -1,3 +1,6 @@
+library(gradethis)
+library(tibble)
+
 test_that("check_column() checks classes", {
   ex <- learnr:::mock_exercise(
     user_code        = "tibble(a = letters)",
@@ -11,9 +14,8 @@ test_that("check_column() checks classes", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should have class .*integer.*, but it has class .*character.*"
+  expect_result_message(
+    result, "should have class .*integer.*, but it has class .*character.*"
   )
 
 })
@@ -31,11 +33,7 @@ test_that("check_column() checks the first three values", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should be <code>a</code>, <code>b</code>, and <code>c</code>."
-  )
-  
+  expect_result_message(result, "should be .*a.*, .*b.*, and .*c")
 })
 
 test_that("check_column() checks multiple classes", {
@@ -51,11 +49,10 @@ test_that("check_column() checks multiple classes", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
+  expect_result_message(
+    result,
     "should have classes .*tbl_df.*, .*tbl.*, and .*data.frame.*, but it has class .*data.frame"
   )
-  
 })
 
 test_that("check_column() checks for value differences beyond the first 3", {
@@ -71,11 +68,7 @@ test_that("check_column() checks for value differences beyond the first 3", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "column contains unexpected values."
-  )
-  
+  expect_result_message(result, "column contains unexpected values.")
 })
 
 test_that("max_print modifies the number of values to print", {
@@ -91,9 +84,9 @@ test_that("max_print modifies the number of values to print", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "The first 5 values of your <code>a</code> column should be <code>z</code>, <code>y</code>, <code>x</code>, <code>w</code>, and <code>v</code>."
+  expect_result_message(
+    result,
+    "The first 5 values of your .*a.* column should be .*z.*, .*y.*, .*x.*, .*w.*, and .*v"
   )
   
 })
