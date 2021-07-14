@@ -60,7 +60,7 @@ check_table <- function(
       checkmate::assert_logical,
       check_nrow, check_names, check_ncol, check_columns,
       check_class, check_values,
-      len = 1
+      any.missing = FALSE, len = 1
     )
     
     assert_map(checkmate::assert_data_frame, object, expected)

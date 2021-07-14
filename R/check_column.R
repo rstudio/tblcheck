@@ -45,7 +45,7 @@ check_column <- function(
     assert_map(
       checkmate::assert_logical,
       check_class, check_values, check_length,
-      len = 1
+      any.missing = FALSE, len = 1
     )
     assert_map(checkmate::assert_data_frame, object, expected)
   })
