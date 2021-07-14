@@ -16,6 +16,8 @@
 #' @param expected A data frame containing the expected result.
 #' @param check_class A logical indicating whether to check that `name` has the
 #'   same class in `object` and `expected`.
+#' @param check_length A logical indicating whether to check that `name` has the
+#'   same length in `object` and `expected`.
 #' @param check_values A logical indicating whether to check that `name` has the
 #'   same values in `object` and `expected`.
 #' @param max_print The number of mismatched values to print. Defaults to 3.

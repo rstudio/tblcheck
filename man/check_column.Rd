@@ -24,6 +24,9 @@ check_column(
 \item{check_class}{A logical indicating whether to check that \code{name} has the
 same class in \code{object} and \code{expected}.}
 
+\item{check_length}{A logical indicating whether to check that \code{name} has the
+same length in \code{object} and \code{expected}.}
+
 \item{check_values}{A logical indicating whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
 
