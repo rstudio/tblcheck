@@ -131,6 +131,20 @@ test_that("checks that the column is present in object", {
   expect_match(grade$message, "should have a column named `a`")
 })
 
+test_that("check_column() with no problems returns invisible()", {
+  result   <- tibble::tibble(a = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
+  
+  expect_invisible(
+    grade <- gradethis:::capture_graded(
+      check_column("a", object = result, expected = solution)
+    )
+  )
+  expect_null(grade$problem)
+  expect_null(grade$correct)
+  expect_null(grade$message)
+})
+
 test_that("check_column() handles bad user input", {
   result <- tibble::tibble(b = letters[1:3])
   solution <- tibble::tibble(a = letters[1:3])
