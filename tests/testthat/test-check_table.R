@@ -1,84 +1,81 @@
 library(gradethis)
 library(tibble)
 
-test_that("check_table names", {
-  ex <- learnr:::mock_exercise(
-    user_code        = "tibble(a = letters, b = a, c = a, d = a)",
-    solution_code    = "tibble(x = letters, y = x, z = x, w = x)",
-    check            = "grade_this({check_table()})",
-    global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis_exercise_checker"
-  )
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+test_that("check_table() rows", {
+  result   <- tibble::tibble(a = letters, b = a)
+  solution <- tibble::tibble(x = letters[-1], y = x)
+  
+  grade <- gradethis:::capture_graded(
+    check_table(object = result, expected = solution)
   )
   
-  expect_result_message(
-    result, "should have columns named .*x.*, .*y.*, and .*z"
-  )
-  expect_result_message(
-    result, "should not have columns named .*a.*, .*b.*, or .*c"
+  expect_equal(grade$problem, problem("table_nrow", 25, 26))
+  expect_false(grade$correct)
+  expect_match(grade$message, "should have 25 rows")
+  
+  solution <- tibble::tibble(x = letters[1], y = x)
+  grade    <- gradethis:::capture_graded(
+    check_table(object = result, expected = solution)
   )
   
-  ex$check <- "grade_this({check_table(max = Inf)})"
-  result   <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
-  )
-  
-  expect_result_message(
-    result, "should have columns named .*x.*, .*y.*, .*z.*, and .*w"
-  )
-  expect_result_message(
-    result, "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
-  )
-  
-  ex$check <- "grade_this({check_table(max = 1)})"
-  result   <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
-  )
-  
-  expect_result_message(result, "should have a column named .*x")
-  expect_result_message(result, "should not have a column named .*a")
+  expect_equal(grade$problem, problem("table_nrow", 1, 26))
+  expect_false(grade$correct)
+  expect_match(grade$message, "should have 1 row")
 })
 
-test_that("check_table rows", {
-  ex <- learnr:::mock_exercise(
-    user_code        = "tibble(a = letters)",
-    solution_code    = "tibble(a = letters[1:25])",
-    check            = "grade_this({check_table()})",
-    global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis_exercise_checker"
-  )
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
-  )
-  expect_result_message(result, "should have 25 rows")
+test_that("check_table() ncol", {
+  result   <- tibble::tibble(a = letters, b = a, c = a)
+  solution <- tibble::tibble(a = letters, b = a)
   
-  ex$solution <- "tibble(a = letters[1])"
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+  grade <- gradethis:::capture_graded(
+    check_table(object = result, expected = solution, check_names = FALSE)
   )
-  expect_result_message(result, "should have 1 row")
+  
+  expect_equal(grade$problem, problem("table_ncol", 2, 3))
+  expect_false(grade$correct)
+  expect_match(grade$message, "should have 2 columns")
+  
+  solution <- tibble::tibble(a = letters)
+  grade   <- gradethis:::capture_graded(
+    check_table(object = result, expected = solution, check_names = FALSE)
+  )
+  
+  expect_equal(grade$problem, problem("table_ncol", 1, 3))
+  expect_false(grade$correct)
+  expect_match(grade$message, "should have 1 column")
 })
 
-test_that("check_table columns", {
-  ex <- learnr:::mock_exercise(
-    user_code        = "tibble(a = letters, b = letters, c = letters)",
-    solution_code    = "tibble(a = letters, b = letters)",
-    check            = "grade_this({check_table(check_names = FALSE)})",
-    global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis_exercise_checker"
-  )
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
-  )
-  expect_result_message(result, "should have 2 columns")
+test_that("check_table() names", {
+  result   <- tibble::tibble(a = letters[1:3], b = a)
+  solution <- tibble::tibble(x = letters[1:3], y = x)
   
-  ex$solution <- "tibble(a = letters)"
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+  grade <- gradethis:::capture_graded(
+    check_table(object = result, expected = solution)
   )
-  expect_result_message(result, "should have 1 column")
+  
+  expect_equal(
+    grade$problem,
+    problem("names", missing = c("x", "y"), unexpected = c("a", "b"))
+  )
+  expect_false(grade$correct)
+  expect_match(grade$message, "should have columns named `x` and `y`")
+  expect_match(grade$message, "should not have columns named `a` or `b`")
+})
+
+test_that("check_table() columns", {
+  result   <- tibble::tibble(a = letters[1:3])
+  solution <- tibble::tibble(a = letters[24:26])
+  
+  grade <- gradethis:::capture_graded(
+    check_table(object = result, expected = solution)
+  )
+  
+  expect_equal(grade$problem, problem("column_values"))
+  expect_false(grade$correct)
+  expect_match(
+    grade$message,
+    "first 3 values of your `a` column should be `x`, `y`, and `z`"
+  )
 })
 
 test_that("check_table() with no problems returns invisible()", {
@@ -175,4 +172,84 @@ test_that("check_table() handles bad user input", {
     ),
     "check_values"
   )
+})
+
+test_that("check_table() rows passes through to learnr", {
+  ex <- learnr:::mock_exercise(
+    user_code        = "tibble(a = letters)",
+    solution_code    = "tibble(a = letters[1:25])",
+    check            = "grade_this({check_table()})",
+    global_setup     = "library(gradethis); library(tibble)",
+    exercise.checker = "gradethis_exercise_checker"
+  )
+  result <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  expect_result_message(result, "should have 25 rows")
+  
+  ex$solution <- "tibble(a = letters[1])"
+  result <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  expect_result_message(result, "should have 1 row")
+})
+
+test_that("check_table() ncol passes through to learnr", {
+  ex <- learnr:::mock_exercise(
+    user_code        = "tibble(a = letters, b = letters, c = letters)",
+    solution_code    = "tibble(a = letters, b = letters)",
+    check            = "grade_this({check_table(check_names = FALSE)})",
+    global_setup     = "library(gradethis); library(tibble)",
+    exercise.checker = "gradethis_exercise_checker"
+  )
+  result <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  expect_result_message(result, "should have 2 columns")
+  
+  ex$solution <- "tibble(a = letters)"
+  result <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  expect_result_message(result, "should have 1 column")
+})
+
+test_that("check_table() names passes through to learnr", {
+  ex <- learnr:::mock_exercise(
+    user_code        = "tibble(a = letters, b = a, c = a, d = a)",
+    solution_code    = "tibble(x = letters, y = x, z = x, w = x)",
+    check            = "grade_this({check_table()})",
+    global_setup     = "library(gradethis); library(tibble)",
+    exercise.checker = "gradethis_exercise_checker"
+  )
+  result <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  
+  expect_result_message(
+    result, "should have columns named .*x.*, .*y.*, and .*z"
+  )
+  expect_result_message(
+    result, "should not have columns named .*a.*, .*b.*, or .*c"
+  )
+  
+  ex$check <- "grade_this({check_table(max_print = Inf)})"
+  result   <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  
+  expect_result_message(
+    result, "should have columns named .*x.*, .*y.*, .*z.*, and .*w"
+  )
+  expect_result_message(
+    result, "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
+  )
+  
+  ex$check <- "grade_this({check_table(max_print = 1)})"
+  result   <- learnr:::evaluate_exercise(
+    ex, new.env(), evaluate_global_setup = TRUE
+  )
+  
+  expect_result_message(result, "should have a column named .*x")
+  expect_result_message(result, "should not have a column named .*a")
 })
