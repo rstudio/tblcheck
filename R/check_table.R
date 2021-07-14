@@ -86,6 +86,7 @@ check_table <- function(
       object, check_column,
       check_class  = check_class,
       check_values = check_values,
+      check_length = FALSE,
       n_values     = max_print
     )
   }

@@ -4,14 +4,14 @@
 \alias{check_names}
 \title{Check that the names of two object are the same}
 \usage{
-check_names(object, expected, max = 3)
+check_names(object, expected, max_print = 3)
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object with the expected names.}
 
-\item{max}{The maximum number of missing and/or unexpected names to include
+\item{max_print}{The maximum number of missing and/or unexpected names to include
 in an informative failure message. Defaults to 3.}
 }
 \value{

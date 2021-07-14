@@ -28,6 +28,7 @@ check_column <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  check_length = TRUE,
   check_values = TRUE,
   max_print = 3
 ) {
@@ -40,8 +41,12 @@ check_column <- function(
   
   assert_internally({
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
-    assert_map(checkmate::assert_logical, check_class, check_values, len = 1)
     checkmate::assert_number(max_print, lower = 1)
+    assert_map(
+      checkmate::assert_logical,
+      check_class, check_values, check_length,
+      len = 1
+    )
     assert_map(checkmate::assert_data_frame, object, expected)
   })
   
@@ -81,12 +86,12 @@ check_column <- function(
   }
   
   # check length
-  obj_col_len <- length(obj_col)
-  exp_col_len <- length(exp_col)
-  if (obj_col_len != exp_col_len) {
+  if (check_length && !identical(length(obj_col), length(exp_col))) {
+    exp_rows <- plu::ral('n value', n = length(exp_col))
+    obj_rows <- plu::ral('n value', n = length(obj_col))
     gradethis::fail(
-      "Your `{name}` column should contain {exp_col_len} values, but it has {obj_col_len}.",
-      problem = problem("column_length", exp_col_len, obj_col_len)
+      "Your `{name}` column should have {exp_rows}, but it has {obj_rows}.",
+      problem = problem("column_length", length(exp_col), length(obj_col))
     )
   }
 

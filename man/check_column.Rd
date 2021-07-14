@@ -9,8 +9,9 @@ check_column(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  check_length = TRUE,
   check_values = TRUE,
-  n_values = 3
+  max_print = 3
 )
 }
 \arguments{
@@ -26,7 +27,7 @@ same class in \code{object} and \code{expected}.}
 \item{check_values}{A logical indicating whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
 
-\item{n_values}{The number of mismatched values to print. Defaults to 3.}
+\item{max_print}{The number of mismatched values to print. Defaults to 3.}
 }
 \value{
 Invisible \code{\link{NULL}}

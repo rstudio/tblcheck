@@ -41,6 +41,12 @@ running both is redundant.}
 
 \item{check_columns}{A \link{logical} indicating whether to check that all columns
 have the same contents with \code{\link[=check_column]{check_column()}}.}
+
+\item{check_class}{A logical indicating whether to check that \code{name} has the
+same class in \code{object} and \code{expected}.}
+
+\item{check_values}{A logical indicating whether to check that \code{name} has the
+same values in \code{object} and \code{expected}.}
 }
 \value{
 Returns \code{object} invisibly.
