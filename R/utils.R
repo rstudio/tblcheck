@@ -37,3 +37,10 @@ str_subset <- function(string, pattern, negate = FALSE) {
   if (negate) matches <- !matches
   string[matches]
 }
+
+
+ilist <- function(...) {
+  result <- list(...)
+  names(result) <- as.character(sys.call()[-1])
+  result
+}

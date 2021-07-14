@@ -49,9 +49,13 @@ check_table <- function(
   assert_internally({
     checkmate::assert_number(max_print, lower = 1)
     
-    lgl_args <- str_subset(names(formals()), "check_")
-    lgl_vals <- lapply(logical_arguments, get)
-    Map(checkmate::assert_logical, lgl_vals, .var.name = lgl_args, len = 1)
+    lgl_args <- ilist(
+      check_nrow, check_names, check_ncol, check_columns,
+      check_class, check_values
+    )
+    Map(
+      checkmate::assert_logical, lgl_args, .var.name = names(lgl_args), len = 1
+    )
     
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
@@ -84,3 +88,4 @@ check_table <- function(
   
   return(invisible(object))
 }
+
