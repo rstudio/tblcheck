@@ -32,12 +32,6 @@ internal_error <- function(err) {
   )
 }
 
-str_subset <- function(string, pattern, negate = FALSE) {
-  matches <- grepl(pattern, string)
-  if (negate) matches <- !matches
-  string[matches]
-}
-
 assert_map <- function(fn, ...) {
   call <- as.list(match.call()[-1])
   call <- call[names(call) != "fn"]
