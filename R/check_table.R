@@ -92,11 +92,14 @@ check_table <- function(
   # check column contents ----
   if (check_columns) {
     lapply(
-      object, check_column,
+      names(object),
+      check_column,
+      object       = object,
+      expected     = expected,
       check_class  = check_class,
       check_values = check_values,
       check_length = FALSE,
-      n_values     = max_print
+      max_print    = max_print
     )
   }
   
