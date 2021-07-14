@@ -15,6 +15,12 @@
 check_names <- function(object, expected, max_print = 3) {
   unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
   
+  assert_internally({
+    checkmate::assert_number(max_print, lower = 1)
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
+  })
+  
   missing_msg <- check_names_message(
     names(expected), names(object),
     "Your result should have {unit} {str}. ",
