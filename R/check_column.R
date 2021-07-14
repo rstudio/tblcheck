@@ -42,8 +42,8 @@ check_column <- function(
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
     checkmate::assert_logical(check_class, len = 1)
     checkmate::assert_logical(check_values, len = 1)
-    checkmate::assert(check_table(object))
-    checkmate::assert(check_table(expected))
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
   })
   
   if (!name %in% names(expected)) {
