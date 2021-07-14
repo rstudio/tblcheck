@@ -94,3 +94,85 @@ test_that("check_table() with no problems returns invisible()", {
   expect_null(grade$correct)
   expect_null(grade$message)
 })
+
+test_that("check_table() handles bad user input", {
+  result <- tibble::tibble(b = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("b", object = 12, expected = solution)
+    ),
+    "object"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("a", object = result, expected = list(a = 1))
+    ),
+    "expected"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_names(object = result, expected = solution, max_print = "a")
+    ),
+    "max_print"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_names(object = result, expected = solution, max_print = -1)
+    ),
+    "max_print"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_names(object = result, expected = solution, max_print = 1:2)
+    ),
+    "max_print"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_table(object = result, expected = solution, check_nrow = "yes")
+    ),
+    "check_nrow"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_table(object = result, expected = solution, check_names = 5)
+    ),
+    "check_names"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_table(object = result, expected = solution, check_ncol = list())
+    ),
+    "check_ncol"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_table(object = result, expected = solution, check_columns = NULL)
+    ),
+    "check_columns"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_table(object = result, expected = solution, check_class = NA)
+    ),
+    "check_class"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_table(object = result, expected = solution, check_values = c(TRUE, TRUE))
+    ),
+    "check_values"
+  )
+})
