@@ -37,3 +37,9 @@ internal_error <- function(err) {
     problem = problem("internal_feedback_error", error = err$message)
   )
 }
+
+str_subset <- function(string, pattern, negate = FALSE) {
+  matches <- grepl(pattern, string)
+  if (negate) matches <- !matches
+  string[matches]
+}

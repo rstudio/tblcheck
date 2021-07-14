@@ -46,6 +46,17 @@ check_table <- function(
     expected <- get(".solution", parent.frame())
   }
   
+  assert_internally({
+    checkmate::assert_number(max_print, lower = 1)
+    
+    lgl_args <- str_subset(names(formals()), "check_")
+    lgl_vals <- lapply(logical_arguments, get)
+    Map(checkmate::assert_logical, lgl_vals, .var.name = lgl_args, len = 1)
+    
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
+  })
+  
   # check number of rows ----
   if (check_nrow && !identical(nrow(object), nrow(expected))) {
     n_rows <- plu::ral('n row', n = nrow(expected))
