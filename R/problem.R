@@ -12,11 +12,7 @@
 #' @keywords internal
 #' @noRd
 problem <- function(type, expected = NULL, actual = NULL, ...) {
-  stopifnot(
-    "`type` must be string" = is.character(type),
-    "`type` must be length 1" = length(type) == 1,
-    "`type` must have a character value" = nzchar(type)
-  )
+  checkmate::assert_string(type, min.chars = 1)
   
   list(
     type = type,
