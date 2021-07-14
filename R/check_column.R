@@ -3,6 +3,12 @@
 #' Checks if the `name` column has the same class and values in `object` and
 #' `expected`. If the columns differ, returns a failure state and an informative
 #' message with [gradethis::fail()].
+#' 
+#' @section Problems:
+#' 
+#' 1. `column_class`: Any mismatch in the classes of the `name` column
+#' 2. `column_length`: The `name` column doesn't have the expected length
+#' 3. `column_values`: The `name` column doesn't have the expected values
 #'
 #' @param name A character string of the name of the column to check.
 #' @param object A data frame to be compared to `expected`.
@@ -40,7 +46,7 @@ check_column <- function(
 
   # check class
   if (check_class && !identical(obj_class, exp_class)) {
-    problem <- problem("column_class", exp_class, obj_class)
+    class_problem <- problem("column_class", exp_class, obj_class)
     
     t_class <- plu::ral("class", exp_class)
     exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
@@ -50,7 +56,7 @@ check_column <- function(
     
     gradethis::fail(
       "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}.",
-      problem = problem
+      problem = class_problem
     )
   }
   
