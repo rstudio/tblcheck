@@ -4,6 +4,13 @@
 #' column names, and the same column contents.
 #' If the data frames differ, returns a failure state and an informative message
 #' with [gradethis::fail()].
+#' 
+#' @section Problems:
+#' 
+#' 1. `table_nrow`: The table doesn't have the expected number of rows
+#' 2. `table_ncol`: The table doesn't have the expected number of columns
+#' 
+#' Additional problems may be produced by [check_names()] and [check_column()]
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.

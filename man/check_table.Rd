@@ -57,3 +57,13 @@ column names, and the same column contents.
 If the data frames differ, returns a failure state and an informative message
 with \code{\link[gradethis:graded]{gradethis::fail()}}.
 }
+\section{Problems}{
+
+\enumerate{
+\item \code{table_nrow}: The table doesn't have the expected number of rows
+\item \code{table_ncol}: The table doesn't have the expected number of columns
+}
+
+Additional problems may be produced by \code{\link[=check_names]{check_names()}} and \code{\link[=check_column]{check_column()}}
+}
+
