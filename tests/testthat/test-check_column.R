@@ -124,3 +124,16 @@ test_that("checks that columns have the same length", {
   expect_false(grade$correct)
   expect_match(grade$message, "should contain 4 values")
 })
+
+test_that("checks that the column is present in object", {
+  result <- tibble(b = letters[1:3])
+  solution <- tibble(a = letters[1:3])
+  
+  grade <- gradethis:::capture_graded(
+    check_column("a", object = result, expected = solution)
+  )
+  
+  expect_equal(grade$problem, problem("column_name", "a"))
+  expect_false(grade$correct)
+  expect_match(grade$message, "should have a column named `a`")
+})

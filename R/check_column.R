@@ -9,6 +9,7 @@
 #' 1. `column_class`: Any mismatch in the classes of the `name` column
 #' 2. `column_length`: The `name` column doesn't have the expected length
 #' 3. `column_values`: The `name` column doesn't have the expected values
+#' 4. `column_name`: The `name` column doesn't appear in the `object`
 #'
 #' @param name A character string of the name of the column to check.
 #' @param object A data frame to be compared to `expected`.
@@ -35,6 +36,18 @@ check_column <- function(
   }
   if (inherits(expected, ".solution")) {
     expected <- get(".solution", parent.frame())
+  }
+  
+  if (!name %in% names(expected)) {
+    warning("`", name, "` is not a column in `expected`.")
+    return()
+  }
+  
+  if (!name %in% names(object)) {
+    gradethis::fail(
+      "Your table should have a column named `{name}`.",
+      problem = problem("column_name", name)
+    )
   }
 
   obj_col <- object[[name]]
