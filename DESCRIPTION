@@ -17,8 +17,9 @@ Description: tblcheck provides functions that inspect dataframe or tibble
     meet expectations.
 License: MIT + file LICENSE
 Imports:
+    checkmate,
     glue,
-    gradethis,
+    gradethis (>= 0.2.3.9001),
     knitr,
     magrittr,
     plu,
