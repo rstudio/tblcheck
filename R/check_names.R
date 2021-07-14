@@ -28,7 +28,10 @@ check_names <- function(object, expected, max = 3) {
   )
   
   if (length(missing_msg) || length(unexpected_msg)) {
-    gradethis::fail(paste0(missing_msg, unexpected_msg))
+    gradethis::fail(
+      paste0(missing_msg, unexpected_msg),
+      problem = problem("table_names")
+    )
   }
   
   return(invisible(object))
