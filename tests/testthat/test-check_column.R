@@ -99,8 +99,8 @@ test_that("max_print modifies the number of values to print", {
 })
 
 test_that("max_print doesn't overflow", {
-  result <- tibble(a = letters[1:2])
-  solution <- tibble(a = letters[2:1])
+  result <- tibble::tibble(a = letters[1:2])
+  solution <- tibble::tibble(a = letters[2:1])
   
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution, max_print = 3)
@@ -113,8 +113,8 @@ test_that("max_print doesn't overflow", {
 })
 
 test_that("checks that columns have the same length", {
-  result <- tibble(a = letters[1:3])
-  solution <- tibble(a = letters[1:4])
+  result <- tibble::tibble(a = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:4])
   
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution)
@@ -126,8 +126,8 @@ test_that("checks that columns have the same length", {
 })
 
 test_that("checks that the column is present in object", {
-  result <- tibble(b = letters[1:3])
-  solution <- tibble(a = letters[1:3])
+  result <- tibble::tibble(b = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
   
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution)
@@ -139,8 +139,8 @@ test_that("checks that the column is present in object", {
 })
 
 test_that("check_column() handles bad user input", {
-  result <- tibble(b = letters[1:3])
-  solution <- tibble(a = letters[1:3])
+  result <- tibble::tibble(b = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
   
   expect_internal_problem(
     gradethis:::capture_graded(
