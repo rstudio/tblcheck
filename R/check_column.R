@@ -90,7 +90,7 @@ check_column <- function(
     exp_rows <- plu::ral('n value', n = length(exp_col))
     obj_rows <- plu::ral('n value', n = length(obj_col))
     gradethis::fail(
-      "Your `{name}` column should have {exp_rows}, but it has {obj_rows}.",
+      "Your `{name}` column should contain {exp_rows}, but it has {obj_rows}.",
       problem = problem("column_length", length(exp_col), length(obj_col))
     )
   }
