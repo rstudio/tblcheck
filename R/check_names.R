@@ -3,6 +3,11 @@
 #' Checks if `object` and `expected` have the same [names][names()].
 #' If the names differ, returns a failure state and an informative message
 #' with [gradethis::fail()].
+#' 
+#' @section Problem:
+#' 
+#' 1. `names`: The table has names that are not expected,
+#'   or is missing names that are expected.
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object with the expected names.

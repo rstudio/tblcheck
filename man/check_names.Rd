@@ -22,3 +22,11 @@ Checks if \code{object} and \code{expected} have the same \link[=names]{names}.
 If the names differ, returns a failure state and an informative message
 with \code{\link[gradethis:graded]{gradethis::fail()}}.
 }
+\section{Problem}{
+
+\enumerate{
+\item \code{names}: The table has names that are not expected,
+or is missing names that are expected.
+}
+}
+
