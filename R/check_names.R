@@ -6,25 +6,25 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object with the expected names.
-#' @param max The maximum number of missing and/or unexpected names to include
+#' @param max_print The maximum number of missing and/or unexpected names to include
 #'   in an informative failure message. Defaults to 3.
 #'
 #' @return Returns `object` invisibly.
 #' @export
 
-check_names <- function(object, expected, max = 3) {
+check_names <- function(object, expected, max_print = 3) {
   unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
   
   missing_msg <- check_names_message(
     names(expected), names(object),
     "Your result should have {unit} {str}. ",
-    unit = unit, max = max
+    unit = unit, max_print = max_print
   )
 
   unexpected_msg <- check_names_message(
     names(object), names(expected),
     "Your result should not have {unit} {str}.",
-    unit = unit, max = max, and = " or "
+    unit = unit, max_print = max_print, and = " or "
   )
   
   if (length(missing_msg) || length(unexpected_msg)) {
@@ -37,8 +37,10 @@ check_names <- function(object, expected, max = 3) {
   return(invisible(object))
 }
 
-check_names_message <- function(x, y, glue_string, unit, max, and = " and ") {
-  names <- max_setdiff(x, y, max = max)
+check_names_message <- function(
+  x, y, glue_string, unit, max_print, and = " and "
+) {
+  names <- max_setdiff(x, y, max = max_print)
   str   <- knitr::combine_words(names, and = and, before = "`")
   unit  <- plu::ral(unit, names)
   glue::glue(glue_string)

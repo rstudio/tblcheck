@@ -78,11 +78,11 @@ test_that("check_column() checks for value differences beyond the first 3", {
   
 })
 
-test_that("n_values modifies the number of values to print", {
+test_that("max_print modifies the number of values to print", {
   ex <- learnr:::mock_exercise(
     user_code        = "tibble(a = letters)",
     solution_code    = "tibble(a = rev(letters))",
-    check            = "grade_this({check_column('a', n_values = 5)})",
+    check            = "grade_this({check_column('a', max_print = 5)})",
     global_setup     = "library(gradethis); library(tibble)",
     exercise.checker = "gradethis::gradethis_exercise_checker"
   )
@@ -98,12 +98,12 @@ test_that("n_values modifies the number of values to print", {
   
 })
 
-test_that("n_values doesn't overflow", {
+test_that("max_print doesn't overflow", {
   result <- tibble(a = letters[1:2])
   solution <- tibble(a = letters[2:1])
   
   grade <- gradethis:::capture_graded(
-    check_column("a", object = result, expected = solution, n_values = 3)
+    check_column("a", object = result, expected = solution, max_print = 3)
   )
   
   expect_equal(grade$problem, problem("column_values"))

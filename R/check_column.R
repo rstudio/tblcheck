@@ -18,7 +18,7 @@
 #'   same class in `object` and `expected`.
 #' @param check_values A logical indicating whether to check that `name` has the
 #'   same values in `object` and `expected`.
-#' @param n_values The number of mismatched values to print. Defaults to 3.
+#' @param max_print The number of mismatched values to print. Defaults to 3.
 #'
 #' @return Invisible [`NULL`]
 #' @export
@@ -29,7 +29,7 @@ check_column <- function(
   expected = .solution,
   check_class = TRUE,
   check_values = TRUE,
-  n_values = 3
+  max_print = 3
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -42,6 +42,7 @@ check_column <- function(
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
     checkmate::assert_logical(check_class, len = 1)
     checkmate::assert_logical(check_values, len = 1)
+    checkmate::assert_number(max_print, lower = 1)
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
@@ -60,7 +61,7 @@ check_column <- function(
 
   obj_col <- object[[name]]
   exp_col <- expected[[name]]
-  n_values <- min(length(exp_col), n_values)
+  n_values <- min(length(exp_col), max_print)
 
   obj_class <- class(obj_col)
   exp_class <- class(exp_col)
