@@ -42,6 +42,7 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \item \code{column_class}: Any mismatch in the classes of the \code{name} column
 \item \code{column_length}: The \code{name} column doesn't have the expected length
 \item \code{column_values}: The \code{name} column doesn't have the expected values
+\item \code{column_name}: The \code{name} column doesn't appear in the \code{object}
 }
 }
 
