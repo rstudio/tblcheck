@@ -48,7 +48,7 @@ check_names <- function(object, expected, max_print = 3) {
     )
   }
   
-  return(invisible(object))
+  invisible()
 }
 
 check_names_message <- function(
