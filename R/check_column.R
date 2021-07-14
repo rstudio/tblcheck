@@ -50,6 +50,15 @@ check_column <- function(
       "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}."
     )
   }
+  
+  # check length
+  obj_col_len <- length(obj_col)
+  exp_col_len <- length(exp_col)
+  if (obj_col_len != exp_col_len) {
+    gradethis::fail(
+      "Your `{name}` column should contain {exp_col_len} values, but it has {obj_col_len}."
+    )
+  }
 
   # check rows
   if (check_values) {
