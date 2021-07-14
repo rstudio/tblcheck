@@ -107,6 +107,6 @@ test_that("n_values doesn't overflow", {
   )
   
   expect_false(grade$correct)
-  expect_false(grepl("`NA`", grade$message))
+  expect_no_match(grade$message, "`NA`")
   expect_match(grade$message, "`b` and `a`.")
 })
