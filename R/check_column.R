@@ -38,6 +38,14 @@ check_column <- function(
     expected <- get(".solution", parent.frame())
   }
   
+  assert_internally({
+    checkmate::assert_character(name, len = 1, any.missing = FALSE)
+    checkmate::assert_logical(check_class, len = 1)
+    checkmate::assert_logical(check_values, len = 1)
+    checkmate::assert(check_table(object))
+    checkmate::assert(check_table(expected))
+  })
+  
   if (!name %in% names(expected)) {
     warning("`", name, "` is not a column in `expected`.")
     return()

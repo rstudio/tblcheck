@@ -137,3 +137,50 @@ test_that("checks that the column is present in object", {
   expect_false(grade$correct)
   expect_match(grade$message, "should have a column named `a`")
 })
+
+test_that("check_column() handles bad user input", {
+  result <- tibble(b = letters[1:3])
+  solution <- tibble(a = letters[1:3])
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column(3, object = result, expected = solution)
+    ),
+    "name"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column(c("a", "b"), object = result, expected = solution)
+    ),
+    "name"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("a", object = result, expected = solution, check_class = "yes")
+    ),
+    "check_class"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("a", object = result, expected = solution, check_values = "yes")
+    ),
+    "check_values"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("b", object = 12, expected = solution)
+    ),
+    "object"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("a", object = result, expected = list(a = 1))
+    ),
+    "expected"
+  )
+})

@@ -13,3 +13,26 @@ NULL
 "%||%" <- function(x, y) if (is.null(x)) y else x
 
 md_code <- function(x) paste0("`", x, "`")
+
+check_table <- function(x) {
+  name <- deparse(substitute(x))
+  if (inherits(x, "data.frame")) return(TRUE)
+  sprintf("%s is not a data frame", name)
+}
+
+assert_internally <- function(expr, ..., error = NULL) {
+  error <- error %||% function(err) {
+    message("An error occurred in the grading code: ", err$message)
+    gradethis::graded(
+      message = paste(
+        "Uh-oh! We can't provide feedback at this time. Don't worry, it's not", 
+        "your fault! There's an issue behind-the-scenes with this exercise."
+      ),
+      correct = logical(0),
+      type = "warning",
+      location = "replace",
+      problem = problem("internal_feedback_error", error = err$message)
+    )
+  }
+  tryCatch(expr, error = error, ...)
+}
