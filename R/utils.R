@@ -14,12 +14,6 @@ NULL
 
 md_code <- function(x) paste0("`", x, "`")
 
-check_table <- function(x) {
-  name <- deparse(substitute(x))
-  if (inherits(x, "data.frame")) return(TRUE)
-  sprintf("%s is not a data frame", name)
-}
-
 assert_internally <- function(expr, ..., error = internal_error) {
   tryCatch(expr, error = error, ...)
 }
