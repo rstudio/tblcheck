@@ -103,6 +103,6 @@ check_table <- function(
     )
   }
   
-  return(invisible(object))
+  invisible()
 }
 

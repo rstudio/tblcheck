@@ -80,3 +80,17 @@ test_that("check_table columns", {
   )
   expect_result_message(result, "should have 1 column")
 })
+
+test_that("check_table() with no problems returns invisible()", {
+  result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
+  solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
+  
+  expect_invisible(
+    grade <- gradethis:::capture_graded(
+      check_table(object = result, expected = solution)
+    )
+  )
+  expect_null(grade$problem)
+  expect_null(grade$correct)
+  expect_null(grade$message)
+})
