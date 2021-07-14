@@ -106,6 +106,7 @@ test_that("n_values doesn't overflow", {
     check_column("a", object = result, expected = solution, n_values = 3)
   )
   
+  expect_equal(grade$problem, problem("column_values"))
   expect_false(grade$correct)
   expect_no_match(grade$message, "`NA`")
   expect_match(grade$message, "`b` and `a`.")
@@ -119,6 +120,7 @@ test_that("checks that columns have the same length", {
     check_column("a", object = result, expected = solution)
   )
   
+  expect_equal(grade$problem, problem("column_length", 4, 3))
   expect_false(grade$correct)
   expect_match(grade$message, "should contain 4 values")
 })

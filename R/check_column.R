@@ -40,6 +40,8 @@ check_column <- function(
 
   # check class
   if (check_class && !identical(obj_class, exp_class)) {
+    problem <- problem("column_class", exp_class, obj_class)
+    
     t_class <- plu::ral("class", exp_class)
     exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
     
@@ -47,7 +49,8 @@ check_column <- function(
     obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
     
     gradethis::fail(
-      "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}."
+      "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}.",
+      problem = problem
     )
   }
   
@@ -56,7 +59,8 @@ check_column <- function(
   exp_col_len <- length(exp_col)
   if (obj_col_len != exp_col_len) {
     gradethis::fail(
-      "Your `{name}` column should contain {exp_col_len} values, but it has {obj_col_len}."
+      "Your `{name}` column should contain {exp_col_len} values, but it has {obj_col_len}.",
+      problem = problem("column_length", exp_col_len, obj_col_len)
     )
   }
 
@@ -65,11 +69,17 @@ check_column <- function(
     if (!identical(obj_col[1:n_values], exp_col[1:n_values])) {
       t_values <- plu::ral("n value", n = n_values)
       first_n_values <- knitr::combine_words(exp_col[1:n_values], before = "`")
-      gradethis::fail("The first {t_values} of your `{name}` column should be {first_n_values}.")
+      gradethis::fail(
+        "The first {t_values} of your `{name}` column should be {first_n_values}.",
+        problem = problem("column_values")
+      )
     }
 
     if (!identical(obj_col, exp_col)) {
-      gradethis::fail("Your `{name}` column contains unexpected values.")
+      gradethis::fail(
+        "Your `{name}` column contains unexpected values.",
+        problem = problem("column_values")
+      )
     }
   }
 
