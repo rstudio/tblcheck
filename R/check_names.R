@@ -17,8 +17,7 @@ check_names <- function(object, expected, max_print = 3) {
   
   assert_internally({
     checkmate::assert_number(max_print, lower = 1)
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
+    assert_map(checkmate::assert_data_frame, object, expected)
   })
   
   missing_msg <- check_names_message(

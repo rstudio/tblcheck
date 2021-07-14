@@ -42,8 +42,7 @@ check_column <- function(
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
     assert_map(checkmate::assert_logical, check_class, check_values, len = 1)
     checkmate::assert_number(max_print, lower = 1)
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
+    assert_map(checkmate::assert_data_frame, object, expected)
   })
   
   if (!name %in% names(expected)) {

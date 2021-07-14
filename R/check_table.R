@@ -56,8 +56,7 @@ check_table <- function(
       len = 1
     )
     
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
+    assert_map(checkmate::assert_data_frame, object, expected)
   })
   
   # check number of rows ----
