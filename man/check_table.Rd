@@ -49,7 +49,8 @@ same class in \code{object} and \code{expected}.}
 same values in \code{object} and \code{expected}.}
 }
 \value{
-Returns \code{object} invisibly.
+If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
+Otherwise, invisibly return \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same number of rows, the same

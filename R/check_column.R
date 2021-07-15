@@ -22,7 +22,7 @@
 #'   same values in `object` and `expected`.
 #' @param max_print The number of mismatched values to print. Defaults to 3.
 #'
-#' @return Invisible [`NULL`]
+#' @inherit check_table return
 #' @export
 
 check_column <- function(

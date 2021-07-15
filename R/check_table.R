@@ -32,7 +32,8 @@
 #'   have the same contents with [check_column()].
 #' @inheritParams check_column
 #'
-#' @return Returns `object` invisibly.
+#' @return If there are any issues, generate a [gradethis::fail()] message.
+#'   Otherwise, invisibly return [`NULL`].
 #' @export
 
 check_table <- function(

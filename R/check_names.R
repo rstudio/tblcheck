@@ -14,7 +14,7 @@
 #' @param max_print The maximum number of missing and/or unexpected names to include
 #'   in an informative failure message. Defaults to 3.
 #'
-#' @return Returns `object` invisibly.
+#' @inherit check_table return
 #' @export
 
 check_names <- function(object, expected, max_print = 3) {

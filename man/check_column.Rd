@@ -33,7 +33,8 @@ same values in \code{object} and \code{expected}.}
 \item{max_print}{The number of mismatched values to print. Defaults to 3.}
 }
 \value{
-Invisible \code{\link{NULL}}
+If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
+Otherwise, invisibly return \code{\link{NULL}}.
 }
 \description{
 Checks if the \code{name} column has the same class and values in \code{object} and
