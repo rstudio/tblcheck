@@ -12,7 +12,10 @@ NULL
 
 "%||%" <- function(x, y) if (is.null(x)) y else x
 
-md_code <- function(x) paste0("`", x, "`")
+md_code <- function(x) {
+  if (!length(x)) return(x)
+  paste0("`", x, "`")
+}
 
 assert_internally <- function(expr, ..., error = internal_error) {
   tryCatch(expr, error = error, ...)
