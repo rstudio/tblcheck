@@ -112,23 +112,23 @@ test_that("check_table() handles bad user input", {
   
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_names(object = result, expected = solution, max_print = "a")
+      check_names(object = result, expected = solution, max_diffs = "a")
     ),
-    "max_print"
+    "max_diffs"
   )
   
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_names(object = result, expected = solution, max_print = -1)
+      check_names(object = result, expected = solution, max_diffs = -1)
     ),
-    "max_print"
+    "max_diffs"
   )
   
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_names(object = result, expected = solution, max_print = 1:2)
+      check_names(object = result, expected = solution, max_diffs = 1:2)
     ),
-    "max_print"
+    "max_diffs"
   )
   
   expect_internal_problem(
@@ -233,7 +233,7 @@ test_that("check_table() names passes through to learnr", {
     result, "should not have columns named .*a.*, .*b.*, or .*c"
   )
   
-  ex$check <- "grade_this({check_table(max_print = Inf)})"
+  ex$check <- "grade_this({check_table(max_diffs = Inf)})"
   result   <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
@@ -245,7 +245,7 @@ test_that("check_table() names passes through to learnr", {
     result, "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
   )
   
-  ex$check <- "grade_this({check_table(max_print = 1)})"
+  ex$check <- "grade_this({check_table(max_diffs = 1)})"
   result   <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )

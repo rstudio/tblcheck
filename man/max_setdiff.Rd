@@ -4,12 +4,12 @@
 \alias{max_setdiff}
 \title{Find up to a certain number of differences between two vectors}
 \usage{
-max_setdiff(x, y, max = Inf)
+max_setdiff(x, y, max_diffs = Inf)
 }
 \arguments{
 \item{x, y}{Vectors. Elements that appear in \code{x} but not \code{y} will be listed.}
 
-\item{max}{The maximum number of elements to list.
+\item{max_diffs}{The maximum number of elements to list.
 Defaults to \link{Inf}, which includes all elements.}
 }
 \value{

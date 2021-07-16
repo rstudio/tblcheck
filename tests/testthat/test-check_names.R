@@ -73,7 +73,7 @@ test_that("check missing and unexpected names", {
   expect_match(grade$message, "should not have columns named `a` or `b`")
 })
 
-test_that("check names max_print()", {
+test_that("check names max_diffs()", {
   result   <- tibble::tibble()
   solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
   
@@ -89,14 +89,14 @@ test_that("check names max_print()", {
   expect_match(grade$message, "should have columns named `a`, `b`, and `c`")
   
   grade <- gradethis:::capture_graded(
-    check_names(object = result, expected = solution, max_print = Inf)
+    check_names(object = result, expected = solution, max_diffs = Inf)
   )
   expect_match(
     grade$message, "should have columns named `a`, `b`, `c`, and `d`"
   )
   
   grade <- gradethis:::capture_graded(
-    check_names(object = result, expected = solution, max_print = 1)
+    check_names(object = result, expected = solution, max_diffs = 1)
   )
   expect_match(grade$message, "should have a column named `a`")
 })
@@ -135,22 +135,22 @@ test_that("check_names() handles bad user input", {
   
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_names(object = result, expected = solution, max_print = "a")
+      check_names(object = result, expected = solution, max_diffs = "a")
     ),
-    "max_print"
+    "max_diffs"
   )
   
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_names(object = result, expected = solution, max_print = -1)
+      check_names(object = result, expected = solution, max_diffs = -1)
     ),
-    "max_print"
+    "max_diffs"
   )
   
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_names(object = result, expected = solution, max_print = 1:2)
+      check_names(object = result, expected = solution, max_diffs = 1:2)
     ),
-    "max_print"
+    "max_diffs"
   )
 })

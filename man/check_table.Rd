@@ -7,7 +7,7 @@
 check_table(
   object = .result,
   expected = .solution,
-  max_print = 3,
+  max_diffs = 3,
   check_nrow = TRUE,
   check_names = TRUE,
   check_ncol = !check_names,
@@ -21,7 +21,7 @@ check_table(
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{max_print}{The maximum number of mismatched values to display in an
+\item{max_diffs}{The maximum number of mismatched values to display in an
 informative failure message.
 Passed to \code{\link[=check_names]{check_names()}} to determine the number of mismatched column
 names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to

@@ -14,7 +14,7 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
-#' @param max_print The maximum number of mismatched values to display in an
+#' @param max_diffs The maximum number of mismatched values to display in an
 #'   informative failure message.
 #'   Passed to [check_names()] to determine the number of mismatched column
 #'   names to display and the `n_values` argument of [check_column()] to
@@ -39,7 +39,7 @@
 check_table <- function(
   object        = .result,
   expected      = .solution,
-  max_print     = 3,
+  max_diffs     = 3,
   check_nrow    = TRUE,
   check_names   = TRUE,
   check_ncol    = !check_names,
@@ -55,7 +55,7 @@ check_table <- function(
   }
   
   assert_internally({
-    checkmate::assert_number(max_print, lower = 1)
+    checkmate::assert_number(max_diffs, lower = 1)
     
     assert_map(
       checkmate::assert_logical,
@@ -78,7 +78,7 @@ check_table <- function(
   }
   
   # check column names ----
-  if (check_names) check_names(object, expected, max = max_print)
+  if (check_names) check_names(object, expected, max = max_diffs)
   
   # check number of columns ----
   if (check_ncol && !identical(ncol(object), ncol(expected))) {
@@ -100,7 +100,7 @@ check_table <- function(
       check_class  = check_class,
       check_values = check_values,
       check_length = FALSE,
-      max_print    = max_print
+      max_diffs    = max_diffs
     )
   }
   
