@@ -92,7 +92,7 @@ check_table <- function(
   
   # check column contents ----
   if (check_columns) {
-    lapply(
+    purrr::walk(
       names(object),
       check_column,
       object       = object,
