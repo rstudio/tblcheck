@@ -55,7 +55,7 @@ check_names_message <- function(
   x, y, glue_string, unit, max_print, and = " and "
 ) {
   names <- max_setdiff(x, y, max = max_print)
-  str   <- knitr::combine_words(names, and = and, before = "`")
+  str   <- knitr::combine_words(md_code(names), and = and)
   unit  <- plu::ral(unit, names)
   glue::glue(glue_string)
 }
