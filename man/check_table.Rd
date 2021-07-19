@@ -21,31 +21,31 @@ check_table(
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{max_diffs}{The maximum number of mismatched values to display in an
-informative failure message.
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+display in an informative failure message.
 Passed to \code{\link[=check_names]{check_names()}} to determine the number of mismatched column
 names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to
 determine the number of mismatched column values to display.
 Defaults to 3.}
 
-\item{check_nrow}{A \link{logical} indicating whether to check that \code{object} and
+\item{check_nrow}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows with \code{\link[=nrow]{nrow()}}.}
 
-\item{check_names}{A \link{logical} indicating whether to check that \code{object} and
+\item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=check_names]{check_names()}}.}
 
-\item{check_ncol}{A \link{logical} indicating whether to check that \code{object} and
+\item{check_ncol}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of columns with \code{\link[=ncol]{ncol()}}.
 By default, \code{check_ncol} is \code{\link{FALSE}} if \code{check_names} is \code{\link{TRUE}}, as
 running both is redundant.}
 
-\item{check_columns}{A \link{logical} indicating whether to check that all columns
+\item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=check_column]{check_column()}}.}
 
-\item{check_class}{A logical indicating whether to check that \code{name} has the
+\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same class in \code{object} and \code{expected}.}
 
-\item{check_values}{A logical indicating whether to check that \code{name} has the
+\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
 }
 \value{

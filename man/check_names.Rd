@@ -7,12 +7,13 @@
 check_names(object, expected, max_diffs = 3)
 }
 \arguments{
-\item{object}{An object to be compared to \code{expected}.}
+\item{object}{A data frame to be compared to \code{expected}.}
 
-\item{expected}{An object with the expected names.}
+\item{expected}{A data frame containing the expected result.}
 
-\item{max_diffs}{The maximum number of missing and/or unexpected names to include
-in an informative failure message. Defaults to 3.}
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
+unexpected names to include in an informative failure message.
+Defaults to 3.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
@@ -23,7 +24,7 @@ Checks if \code{object} and \code{expected} have the same \link[=names]{names}.
 If the names differ, returns a failure state and an informative message
 with \code{\link[gradethis:graded]{gradethis::fail()}}.
 }
-\section{Problem}{
+\section{Problems}{
 
 \enumerate{
 \item \code{names}: The table has names that are not expected,

@@ -15,22 +15,23 @@ check_column(
 )
 }
 \arguments{
-\item{name}{A character string of the name of the column to check.}
+\item{name}{\verb{[character(1)]}\cr The name of the column to check.}
 
 \item{object}{A data frame to be compared to \code{expected}.}
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{check_class}{A logical indicating whether to check that \code{name} has the
+\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same class in \code{object} and \code{expected}.}
 
-\item{check_length}{A logical indicating whether to check that \code{name} has the
+\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same length in \code{object} and \code{expected}.}
 
-\item{check_values}{A logical indicating whether to check that \code{name} has the
+\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
 
-\item{max_diffs}{The number of mismatched values to print. Defaults to 3.}
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+print. Defaults to 3.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.

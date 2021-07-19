@@ -11,16 +11,16 @@
 #' 3. `column_values`: The `name` column doesn't have the expected values
 #' 4. `column_name`: The `name` column doesn't appear in the `object`
 #'
-#' @param name A character string of the name of the column to check.
-#' @param object A data frame to be compared to `expected`.
-#' @param expected A data frame containing the expected result.
-#' @param check_class A logical indicating whether to check that `name` has the
+#' @param name `[character(1)]`\cr The name of the column to check.
+#' @inheritParams check_table
+#' @param check_class `[logical(1)]`\cr Whether to check that `name` has the
 #'   same class in `object` and `expected`.
-#' @param check_length A logical indicating whether to check that `name` has the
+#' @param check_length `[logical(1)]`\cr Whether to check that `name` has the
 #'   same length in `object` and `expected`.
-#' @param check_values A logical indicating whether to check that `name` has the
+#' @param check_values `[logical(1)]`\cr Whether to check that `name` has the
 #'   same values in `object` and `expected`.
-#' @param max_diffs The number of mismatched values to print. Defaults to 3.
+#' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
+#'   print. Defaults to 3.
 #'
 #' @inherit check_table return
 #' @export

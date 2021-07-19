@@ -14,21 +14,21 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
-#' @param max_diffs The maximum number of mismatched values to display in an
-#'   informative failure message.
+#' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
+#'   display in an informative failure message.
 #'   Passed to [check_names()] to determine the number of mismatched column
 #'   names to display and the `n_values` argument of [check_column()] to
 #'   determine the number of mismatched column values to display.
 #'   Defaults to 3.
-#' @param check_nrow A [logical] indicating whether to check that `object` and 
+#' @param check_nrow `[logical(1)]`\cr Whether to check that `object` and 
 #'   `expected` have the same number of rows with [nrow()].
-#' @param check_names A [logical] indicating whether to check that `object` and
+#' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [check_names()].
-#' @param check_ncol A [logical] indicating whether to check that `object` and
+#' @param check_ncol `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same number of columns with [ncol()].
 #'   By default, `check_ncol` is [`FALSE`] if `check_names` is [`TRUE`], as
 #'   running both is redundant.
-#' @param check_columns A [logical] indicating whether to check that all columns
+#' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [check_column()].
 #' @inheritParams check_column
 #'
