@@ -8,10 +8,10 @@ check_column(
   name,
   object = .result,
   expected = .solution,
+  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
-  check_values = TRUE,
-  max_diffs = 3
+  check_values = TRUE
 )
 }
 \arguments{
@@ -21,6 +21,9 @@ check_column(
 
 \item{expected}{A data frame containing the expected result.}
 
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+print. Defaults to 3.}
+
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same class in \code{object} and \code{expected}.}
 
@@ -29,9 +32,6 @@ same length in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
-
-\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
-print. Defaults to 3.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.

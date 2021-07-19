@@ -13,14 +13,14 @@
 #'
 #' @param name `[character(1)]`\cr The name of the column to check.
 #' @inheritParams check_table
+#' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
+#'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `name` has the
 #'   same class in `object` and `expected`.
 #' @param check_length `[logical(1)]`\cr Whether to check that `name` has the
 #'   same length in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `name` has the
 #'   same values in `object` and `expected`.
-#' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
-#'   print. Defaults to 3.
 #'
 #' @inherit check_table return
 #' @export
@@ -29,10 +29,10 @@ check_column <- function(
   name,
   object = .result,
   expected = .solution,
+  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
-  check_values = TRUE,
-  max_diffs = 3
+  check_values = TRUE
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
