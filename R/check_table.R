@@ -82,7 +82,9 @@ check_table <- function(
   }
   
   # check column names ----
-  if (check_names) check_names(object, expected, max = max_diffs)
+  if (check_names) {
+    check_names(object, expected, max_diffs = max_diffs)
+  }
   
   # check number of columns ----
   if (check_ncol) {

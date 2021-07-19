@@ -28,13 +28,13 @@ check_names <- function(object, expected, max_diffs = 3) {
   
   missing_msg <- check_names_message(
     names(expected), names(object),
-    "Your result should have {unit} {str}. ",
+    "Your result should have {unit} {diffs}. ",
     unit = unit, max_diffs = max_diffs
   )
 
   unexpected_msg <- check_names_message(
     names(object), names(expected),
-    "Your result should not have {unit} {str}.",
+    "Your result should not have {unit} {diffs}.",
     unit = unit, max_diffs = max_diffs, and = " or "
   )
   
@@ -56,7 +56,7 @@ check_names_message <- function(
   x, y, glue_string, unit, max_diffs, and = " and "
 ) {
   names <- max_setdiff(x, y, max_diffs = max_diffs)
-  str   <- knitr::combine_words(md_code(names), and = and)
+  diffs <- knitr::combine_words(md_code(names), and = and)
   unit  <- plu::ral(unit, names)
   glue::glue(glue_string)
 }
@@ -66,7 +66,7 @@ check_names_message <- function(
 #' @param x,y Vectors. Elements that appear in `x` but not `y` will be listed.
 #' @param max_diffs The maximum number of elements to list.
 #'   Defaults to [Inf], which includes all elements.
-#' @return A vector with no more than `max` elements.
+#' @return A vector with no more than `max_diffs` elements.
 #' @keywords internal
 
 max_setdiff <- function(x, y, max_diffs = Inf) {
