@@ -4,7 +4,7 @@
 #' If the names differ, returns a failure state and an informative message
 #' with [gradethis::fail()].
 #' 
-#' @section Problem:
+#' @section Problems:
 #' 
 #' 1. `names`: The table has names that are not expected,
 #'   or is missing names that are expected.
