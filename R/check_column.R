@@ -88,13 +88,18 @@ check_column <- function(
   }
   
   # check length
-  if (check_length && !identical(length(obj_col), length(exp_col))) {
-    exp_rows <- plu::ral('n value', n = length(exp_col))
-    obj_rows <- plu::ral('n value', n = length(obj_col))
-    gradethis::fail(
-      "Your `{name}` column should contain {exp_rows}, but it has {obj_rows}.",
-      problem = problem("column_length", length(exp_col), length(obj_col))
-    )
+  if (check_length) {
+    obj_col_len <- length(obj_col)
+    exp_col_len <- length(exp_col)
+    
+    if (!identical(obj_col_len, exp_col_len)) {
+      exp_rows <- plu::ral('n value', n = exp_col_len)
+      obj_rows <- plu::ral('n value', n = obj_col_len)
+      gradethis::fail(
+        "Your `{name}` column should contain {exp_rows}, but it has {obj_rows}.",
+        problem = problem("column_length", exp_col_len, obj_col_len)
+      )
+    }
   }
 
   # check rows

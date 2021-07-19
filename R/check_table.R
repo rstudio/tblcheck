@@ -68,26 +68,36 @@ check_table <- function(
   })
   
   # check number of rows ----
-  if (check_nrow && !identical(nrow(object), nrow(expected))) {
-    exp_rows <- plu::ral("n row", n = nrow(expected))
-    obj_rows <- plu::ral("n row", n = nrow(object))
-    gradethis::fail(
-      "Your table should have {exp_rows}, but it has {obj_rows}.",
-      problem = problem("table_nrow", nrow(expected), nrow(object))
-    )
+  if (check_nrow) {
+    nrow_object   <- nrow(object)
+    nrow_expected <- nrow(expected)
+    
+    if (!identical(nrow_object, nrow_expected)) {
+      exp_rows <- plu::ral("n row", n = nrow_expected)
+      obj_rows <- plu::ral("n row", n = nrow_object)
+      gradethis::fail(
+        "Your table should have {exp_rows}, but it has {obj_rows}.",
+        problem = problem("table_nrow", nrow_expected, nrow_object)
+      )
+    }
   }
   
   # check column names ----
   if (check_names) check_names(object, expected, max = max_diffs)
   
   # check number of columns ----
-  if (check_ncol && !identical(ncol(object), ncol(expected))) {
-    exp_cols <- plu::ral('n column', n = ncol(expected))
-    obj_cols <- plu::ral('n column', n = ncol(object))
-    gradethis::fail(
-      "Your table should have {exp_cols}, but it has {obj_cols}.",
-      problem = problem("table_ncol", ncol(expected), ncol(object))
-    )
+  if (check_ncol) {
+    ncol_object <- ncol(object)
+    ncol_expected <- ncol(expected)
+  
+    if(!identical(ncol_object, ncol_expected)) {
+      exp_cols <- plu::ral('n column', n = ncol_expected)
+      obj_cols <- plu::ral('n column', n = ncol_object)
+      gradethis::fail(
+        "Your table should have {exp_cols}, but it has {obj_cols}.",
+        problem = problem("table_ncol", ncol_expected, ncol_object)
+      )
+    }
   }
   
   # check column contents ----
@@ -106,4 +116,3 @@ check_table <- function(
   
   invisible()
 }
-
