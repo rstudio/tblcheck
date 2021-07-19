@@ -44,12 +44,11 @@ check_column <- function(
   assert_internally({
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
     checkmate::assert_number(max_diffs, lower = 1)
-    assert_map(
-      checkmate::assert_logical,
-      check_class, check_values, check_length,
-      any.missing = FALSE, len = 1
-    )
-    assert_map(checkmate::assert_data_frame, object, expected)
+    checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
   })
   
   if (!name %in% names(expected)) {

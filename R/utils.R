@@ -34,15 +34,3 @@ internal_error <- function(err) {
     problem = problem("internal_feedback_error", error = err$message)
   )
 }
-
-assert_map <- function(fn, ...) {
-  call <- as.list(match.call()[-1])
-  call <- call[names(call) != "fn"]
-  
-  dots <- list(...)
-  args <- dots[!names(call) == ""]
-  vars <- dots[names(call) == ""]
-  names(vars) <- call[names(call) == ""]
-  
-  mapply(fn, vars, .var.name = names(vars), MoreArgs = args)
-}

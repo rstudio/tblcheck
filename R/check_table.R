@@ -56,15 +56,14 @@ check_table <- function(
   
   assert_internally({
     checkmate::assert_number(max_diffs, lower = 1)
-    
-    assert_map(
-      checkmate::assert_logical,
-      check_nrow, check_names, check_ncol, check_columns,
-      check_class, check_values,
-      any.missing = FALSE, len = 1
-    )
-    
-    assert_map(checkmate::assert_data_frame, object, expected)
+    checkmate::assert_logical(check_nrow,    any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_names,   any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_ncol,    any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_columns, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_class,   any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_values,  any.missing = FALSE, len = 1)
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
   })
   
   # check number of rows ----
