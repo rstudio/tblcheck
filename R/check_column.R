@@ -103,9 +103,9 @@ check_column <- function(
 
   # check rows
   if (check_values) {
-    if (!identical(obj_col[1:n_values], exp_col[1:n_values])) {
+    if (!identical(obj_col[seq_len(n_values)], exp_col[seq_len(n_values)])) {
       t_values <- plu::ral("n value", n = n_values)
-      first_n_values <- knitr::combine_words(exp_col[1:n_values], before = "`")
+      first_n_values <- knitr::combine_words(exp_col[seq_len(n_values)], before = "`")
       gradethis::fail(
         "The first {t_values} of your `{name}` column should be {first_n_values}.",
         problem = problem("column_values")
