@@ -86,7 +86,9 @@ test_that("check names max_diffs()", {
     problem("names", missing = letters[1:4], unexpected = character(0))
   )
   expect_false(grade$correct)
-  expect_match(grade$message, "should have columns named `a`, `b`, and `c`")
+  expect_match(
+    grade$message, "should have columns named `a`, `b`, `c`, and 1 more"
+  )
   
   grade <- gradethis:::capture_graded(
     check_names(object = result, expected = solution, max_diffs = Inf)
@@ -98,7 +100,7 @@ test_that("check names max_diffs()", {
   grade <- gradethis:::capture_graded(
     check_names(object = result, expected = solution, max_diffs = 1)
   )
-  expect_match(grade$message, "should have a column named `a`")
+  expect_match(grade$message, "should have columns named `a` and 3 more")
 })
 
 test_that("check_names() with no problems returns invisible()", {

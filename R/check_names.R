@@ -26,16 +26,22 @@ check_names <- function(object, expected, max_diffs = 3) {
     checkmate::assert_data_frame(expected)
   })
   
-  missing_msg <- check_names_message(
-    names(expected), names(object),
-    "Your result should have {unit} {diffs}. ",
-    unit = unit, max_diffs = max_diffs
+  missing <- max_setdiff(
+    md_code(names(expected)), md_code(names(object)), max_diffs = max_diffs
+  )
+  missing_unit <- plu::ral(unit, missing)
+  missing      <- knitr::combine_words(missing, and = " and ")
+  missing_msg  <- glue::glue(
+    "Your result should have {missing_unit} {missing}. "
   )
 
-  unexpected_msg <- check_names_message(
-    names(object), names(expected),
-    "Your result should not have {unit} {diffs}.",
-    unit = unit, max_diffs = max_diffs, and = " or "
+  unexpected <- max_setdiff(
+    md_code(names(object)), md_code(names(expected)), max_diffs = max_diffs
+  )
+  unexpected_unit <- plu::ral(unit, unexpected)
+  unexpected      <- knitr::combine_words(unexpected, and = " or ")
+  unexpected_msg  <- glue::glue(
+    "Your result should not have {unexpected_unit} {unexpected}. "
   )
   
   if (length(missing_msg) || length(unexpected_msg)) {
@@ -52,15 +58,6 @@ check_names <- function(object, expected, max_diffs = 3) {
   invisible()
 }
 
-check_names_message <- function(
-  x, y, glue_string, unit, max_diffs, and = " and "
-) {
-  names <- max_setdiff(x, y, max_diffs = max_diffs)
-  diffs <- knitr::combine_words(md_code(names), and = and)
-  unit  <- plu::ral(unit, names)
-  glue::glue(glue_string)
-}
-
 #' Find up to a certain number of differences between two vectors
 #'
 #' @param x,y Vectors. Elements that appear in `x` but not `y` will be listed.
@@ -70,6 +67,14 @@ check_names_message <- function(
 #' @keywords internal
 
 max_setdiff <- function(x, y, max_diffs = Inf) {
-  diff <- setdiff(x, y)
-  diff[seq_len(min(max_diffs, length(diff)))]
+  diffs     <- setdiff(x, y)
+  max_diffs <- diffs[seq_len(min(max_diffs, length(diffs)))]
+  
+  more <- if (length(diffs) > length(max_diffs)) {
+    glue::glue(length(diffs) - length(max_diffs), " more")
+  } else {
+    NULL
+  }
+  
+  c(max_diffs, more)
 }

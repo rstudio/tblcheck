@@ -227,10 +227,10 @@ test_that("check_table() names passes through to learnr", {
   )
   
   expect_result_message(
-    result, "should have columns named .*x.*, .*y.*, and .*z"
+    result, "should have columns named .*x.*, .*y.*, .*z.*, and 1 more"
   )
   expect_result_message(
-    result, "should not have columns named .*a.*, .*b.*, or .*c"
+    result, "should not have columns named .*a.*, .*b.*, .*c.*, or 1 more"
   )
   
   ex$check <- "grade_this({check_table(max_diffs = Inf)})"
@@ -250,6 +250,10 @@ test_that("check_table() names passes through to learnr", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_result_message(result, "should have a column named .*x")
-  expect_result_message(result, "should not have a column named .*a")
+  expect_result_message(
+    result, "should have columns named .*x.* and 3 more"
+  )
+  expect_result_message(
+    result, "should not have columns named .*a.* or 3 more"
+  )
 })
