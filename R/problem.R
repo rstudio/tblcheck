@@ -22,5 +22,5 @@ problem <- function(type, expected = NULL, actual = NULL, ...) {
     ...
   )
   
-  Filter(function(problem) !is.null(problem), problem)
+  purrr::compact(problem)
 }
