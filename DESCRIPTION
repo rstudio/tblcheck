@@ -11,7 +11,12 @@ Authors@R:
              family = "Shrestha",
              role = "aut",
              email = "nsrocker92@gmail.com",
-             comment = c(ORCID = "0000-0003-3321-1712")))
+             comment = c(ORCID = "0000-0003-3321-1712")),
+      person(given = "Alexander",
+             family = "Rossell Hayes",
+             role = "aut",
+             email = "alexander@rossellhayes.com",
+             comment = c(ORCID = "0000-0001-9412-0457")))
 Description: tblcheck provides functions that inspect dataframe or tibble
     objects to make it easier for teachers to check that student tables
     meet expectations.
