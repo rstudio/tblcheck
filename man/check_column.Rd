@@ -8,28 +8,34 @@ check_column(
   name,
   object = .result,
   expected = .solution,
+  max_diffs = 3,
   check_class = TRUE,
-  check_values = TRUE,
-  n_values = 3
+  check_length = TRUE,
+  check_values = TRUE
 )
 }
 \arguments{
-\item{name}{A character string of the name of the column to check.}
+\item{name}{\verb{[character(1)]}\cr The name of the column to check.}
 
 \item{object}{A data frame to be compared to \code{expected}.}
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{check_class}{A logical indicating whether to check that \code{name} has the
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+print. Defaults to 3.}
+
+\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same class in \code{object} and \code{expected}.}
 
-\item{check_values}{A logical indicating whether to check that \code{name} has the
-same values in \code{object} and \code{expected}.}
+\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+same length in \code{object} and \code{expected}.}
 
-\item{n_values}{The number of mismatched values to print. Defaults to 3.}
+\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+same values in \code{object} and \code{expected}.}
 }
 \value{
-Invisible \code{\link{NULL}}
+If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
+Otherwise, invisibly return \code{\link{NULL}}.
 }
 \description{
 Checks if the \code{name} column has the same class and values in \code{object} and

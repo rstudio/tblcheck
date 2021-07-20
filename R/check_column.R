@@ -11,25 +11,28 @@
 #' 3. `column_values`: The `name` column doesn't have the expected values
 #' 4. `column_name`: The `name` column doesn't appear in the `object`
 #'
-#' @param name A character string of the name of the column to check.
-#' @param object A data frame to be compared to `expected`.
-#' @param expected A data frame containing the expected result.
-#' @param check_class A logical indicating whether to check that `name` has the
+#' @param name `[character(1)]`\cr The name of the column to check.
+#' @inheritParams check_table
+#' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
+#'   print. Defaults to 3.
+#' @param check_class `[logical(1)]`\cr Whether to check that `name` has the
 #'   same class in `object` and `expected`.
-#' @param check_values A logical indicating whether to check that `name` has the
+#' @param check_length `[logical(1)]`\cr Whether to check that `name` has the
+#'   same length in `object` and `expected`.
+#' @param check_values `[logical(1)]`\cr Whether to check that `name` has the
 #'   same values in `object` and `expected`.
-#' @param n_values The number of mismatched values to print. Defaults to 3.
 #'
-#' @return Invisible [`NULL`]
+#' @inherit check_table return
 #' @export
-#'
+
 check_column <- function(
   name,
   object = .result,
   expected = .solution,
+  max_diffs = 3,
   check_class = TRUE,
-  check_values = TRUE,
-  n_values = 3
+  check_length = TRUE,
+  check_values = TRUE
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -40,8 +43,10 @@ check_column <- function(
   
   assert_internally({
     checkmate::assert_character(name, len = 1, any.missing = FALSE)
-    checkmate::assert_logical(check_class, len = 1)
-    checkmate::assert_logical(check_values, len = 1)
+    checkmate::assert_number(max_diffs, lower = 1)
+    checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
@@ -60,7 +65,7 @@ check_column <- function(
 
   obj_col <- object[[name]]
   exp_col <- expected[[name]]
-  n_values <- min(length(exp_col), n_values)
+  n_values <- min(length(exp_col), max_diffs)
 
   obj_class <- class(obj_col)
   exp_class <- class(exp_col)
@@ -82,20 +87,25 @@ check_column <- function(
   }
   
   # check length
-  obj_col_len <- length(obj_col)
-  exp_col_len <- length(exp_col)
-  if (obj_col_len != exp_col_len) {
-    gradethis::fail(
-      "Your `{name}` column should contain {exp_col_len} values, but it has {obj_col_len}.",
-      problem = problem("column_length", exp_col_len, obj_col_len)
-    )
+  if (check_length) {
+    obj_col_len <- length(obj_col)
+    exp_col_len <- length(exp_col)
+    
+    if (!identical(obj_col_len, exp_col_len)) {
+      exp_rows <- plu::ral('n value', n = exp_col_len)
+      obj_rows <- plu::ral('n value', n = obj_col_len)
+      gradethis::fail(
+        "Your `{name}` column should contain {exp_rows}, but it has {obj_rows}.",
+        problem = problem("column_length", exp_col_len, obj_col_len)
+      )
+    }
   }
 
   # check rows
   if (check_values) {
-    if (!identical(obj_col[1:n_values], exp_col[1:n_values])) {
+    if (!identical(obj_col[seq_len(n_values)], exp_col[seq_len(n_values)])) {
       t_values <- plu::ral("n value", n = n_values)
-      first_n_values <- knitr::combine_words(exp_col[1:n_values], before = "`")
+      first_n_values <- knitr::combine_words(exp_col[seq_len(n_values)], before = "`")
       gradethis::fail(
         "The first {t_values} of your `{name}` column should be {first_n_values}.",
         problem = problem("column_values")

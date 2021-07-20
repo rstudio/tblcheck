@@ -1,19 +1,21 @@
+library(gradethis)
+library(tibble)
+
 test_that("check_column() checks classes", {
   ex <- learnr:::mock_exercise(
-      user_code        = "tibble(a = letters)",
-      solution_code    = "tibble(a = 1:3)",
-      check            = "grade_this({check_column('a')})",
-      global_setup     = "library(gradethis); library(tibble)",
-      exercise.checker = "gradethis::gradethis_exercise_checker"
-    )
+    user_code        = "tibble(a = letters)",
+    solution_code    = "tibble(a = 1:3)",
+    check            = "grade_this({check_column('a')})",
+    global_setup     = "library(gradethis); library(tibble)",
+    exercise.checker = "gradethis::gradethis_exercise_checker"
+  )
   
   result <- learnr:::evaluate_exercise(
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should have class integer, but it has class character"
+  expect_result_message(
+    result, "should have class .*integer.*, but it has class .*character.*"
   )
 
 })
@@ -31,11 +33,7 @@ test_that("check_column() checks the first three values", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should be <code>a</code>, <code>b</code>, and <code>c</code>."
-  )
-  
+  expect_result_message(result, "should be .*a.*, .*b.*, and .*c")
 })
 
 test_that("check_column() checks multiple classes", {
@@ -51,11 +49,10 @@ test_that("check_column() checks multiple classes", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "should have classes tbl_df, tbl, and data.frame, but it has class data.frame."
+  expect_result_message(
+    result,
+    "should have classes .*tbl_df.*, .*tbl.*, and .*data.frame.*, but it has class .*data.frame"
   )
-  
 })
 
 test_that("check_column() checks for value differences beyond the first 3", {
@@ -71,18 +68,14 @@ test_that("check_column() checks for value differences beyond the first 3", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "column contains unexpected values."
-  )
-  
+  expect_result_message(result, "column contains unexpected values.")
 })
 
-test_that("n_values modifies the number of values to print", {
+test_that("max_diffs modifies the number of values to print", {
   ex <- learnr:::mock_exercise(
     user_code        = "tibble(a = letters)",
     solution_code    = "tibble(a = rev(letters))",
-    check            = "grade_this({check_column('a', n_values = 5)})",
+    check            = "grade_this({check_column('a', max_diffs = 5)})",
     global_setup     = "library(gradethis); library(tibble)",
     exercise.checker = "gradethis::gradethis_exercise_checker"
   )
@@ -91,19 +84,19 @@ test_that("n_values modifies the number of values to print", {
     ex, new.env(), evaluate_global_setup = TRUE
   )
   
-  expect_match(
-    result$feedback$message,
-    "The first 5 values of your <code>a</code> column should be <code>z</code>, <code>y</code>, <code>x</code>, <code>w</code>, and <code>v</code>."
+  expect_result_message(
+    result,
+    "The first 5 values of your .*a.* column should be .*z.*, .*y.*, .*x.*, .*w.*, and .*v"
   )
   
 })
 
-test_that("n_values doesn't overflow", {
-  result <- tibble(a = letters[1:2])
-  solution <- tibble(a = letters[2:1])
+test_that("max_diffs doesn't overflow", {
+  result <- tibble::tibble(a = letters[1:2])
+  solution <- tibble::tibble(a = letters[2:1])
   
   grade <- gradethis:::capture_graded(
-    check_column("a", object = result, expected = solution, n_values = 3)
+    check_column("a", object = result, expected = solution, max_diffs = 3)
   )
   
   expect_equal(grade$problem, problem("column_values"))
@@ -113,8 +106,8 @@ test_that("n_values doesn't overflow", {
 })
 
 test_that("checks that columns have the same length", {
-  result <- tibble(a = letters[1:3])
-  solution <- tibble(a = letters[1:4])
+  result <- tibble::tibble(a = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:4])
   
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution)
@@ -126,8 +119,8 @@ test_that("checks that columns have the same length", {
 })
 
 test_that("checks that the column is present in object", {
-  result <- tibble(b = letters[1:3])
-  solution <- tibble(a = letters[1:3])
+  result <- tibble::tibble(b = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
   
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution)
@@ -138,9 +131,38 @@ test_that("checks that the column is present in object", {
   expect_match(grade$message, "should have a column named `a`")
 })
 
+test_that("checks that the column is present in expected", {
+  result <- tibble::tibble(b = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
+  
+  expect_warning(
+    grade <- gradethis:::capture_graded(
+      check_column("b", object = result, expected = solution)
+    ),
+    "`b` is not a column in `expected`"
+  )
+  expect_null(grade$problem)
+  expect_null(grade$correct)
+  expect_null(grade$message)
+})
+
+test_that("check_column() with no problems returns invisible()", {
+  result   <- tibble::tibble(a = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
+  
+  expect_invisible(
+    grade <- gradethis:::capture_graded(
+      check_column("a", object = result, expected = solution)
+    )
+  )
+  expect_null(grade$problem)
+  expect_null(grade$correct)
+  expect_null(grade$message)
+})
+
 test_that("check_column() handles bad user input", {
-  result <- tibble(b = letters[1:3])
-  solution <- tibble(a = letters[1:3])
+  result <- tibble::tibble(b = letters[1:3])
+  solution <- tibble::tibble(a = letters[1:3])
   
   expect_internal_problem(
     gradethis:::capture_graded(

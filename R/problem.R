@@ -8,20 +8,19 @@
 #' @param expected,actual The expected and actual values. These should be
 #'   included when the value is a summary, e.g. `nrow(expected)` or 
 #'   `length(actual)`. Be careful not to include large amounts of data.
+#' @param ... Additional elements to be included in the `problem` object.
 #'   
 #' @keywords internal
 #' @noRd
 problem <- function(type, expected = NULL, actual = NULL, ...) {
-  stopifnot(
-    "`type` must be string" = is.character(type),
-    "`type` must be length 1" = length(type) == 1,
-    "`type` must have a character value" = nzchar(type)
-  )
+  checkmate::assert_string(type, min.chars = 1)
   
-  list(
+  problem <- list(
     type = type,
     expected = expected,
     actual = actual,
     ...
   )
+  
+  purrr::compact(problem)
 }
