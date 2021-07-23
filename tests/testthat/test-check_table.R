@@ -1,5 +1,3 @@
-library(gradethis)
-library(tibble)
 
 test_that("check_table() rows", {
   result   <- tibble::tibble(a = letters, b = a)
@@ -174,86 +172,107 @@ test_that("check_table() handles bad user input", {
   )
 })
 
-test_that("check_table() rows passes through to learnr", {
-  ex <- learnr:::mock_exercise(
-    user_code        = "tibble(a = letters)",
-    solution_code    = "tibble(a = letters[1:25])",
-    check            = "grade_this({check_table()})",
-    global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis_exercise_checker"
+test_that("check_table() returns grades with row problems", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = tibble::tibble(a = letters),
+    .solution_code = tibble::tibble(a = letters[1:25])
   )
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
-  )
-  expect_result_message(result, "should have 25 rows")
   
-  ex$solution <- "tibble(a = letters[1])"
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+  grade <- gradethis::grade_this(check_table())(ex)
+  
+  expect_grade(
+    grade,
+    "should have 25 rows",
+    problem = problem(type = "table_nrow", expected = 25L, actual = 26L)
   )
-  expect_result_message(result, "should have 1 row")
+  
+  ex_single <- gradethis::mock_this_exercise(
+    .user_code = tibble::tibble(a = letters),
+    .solution_code = tibble::tibble(a = letters[1])
+  )
+  
+  grade_single <- gradethis::grade_this(check_table())(ex_single)
+  
+  expect_grade(
+    grade_single,
+    "should have 1 row",
+    problem = problem(type = "table_nrow", expected = 1L, actual = 26L)
+  )
 })
 
-test_that("check_table() ncol passes through to learnr", {
-  ex <- learnr:::mock_exercise(
-    user_code        = "tibble(a = letters, b = letters, c = letters)",
-    solution_code    = "tibble(a = letters, b = letters)",
-    check            = "grade_this({check_table(check_names = FALSE)})",
-    global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis_exercise_checker"
+test_that("check_table() returns ncol feedback to learnr", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = tibble::tibble(a = letters, b = letters, c = letters),
+    .solution_code = tibble::tibble(a = letters, b = letters)
   )
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
-  )
-  expect_result_message(result, "should have 2 columns")
   
-  ex$solution <- "tibble(a = letters)"
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+  grade <- gradethis::grade_this(check_table(check_names = FALSE))(ex)
+  
+  expect_grade(
+    grade,
+    "should have 2 columns",
+    problem = problem("table_ncol", 2, 3)
   )
-  expect_result_message(result, "should have 1 column")
+  
+  
+  ex_one <- gradethis::mock_this_exercise(
+    .user_code = tibble::tibble(a = letters, b = letters, c = letters),
+    .solution_code = tibble::tibble(a = letters)
+  )
+  
+  grade_one <- gradethis::grade_this(check_table(check_names = FALSE))(ex_one)
+  
+  expect_grade(
+    grade_one,
+    "should have 1 column",
+    problem = problem("table_ncol", 1, 3)
+  )
 })
 
-test_that("check_table() names passes through to learnr", {
-  ex <- learnr:::mock_exercise(
-    user_code        = "tibble(a = letters, b = a, c = a, d = a)",
-    solution_code    = "tibble(x = letters, y = x, z = x, w = x)",
-    check            = "grade_this({check_table()})",
-    global_setup     = "library(gradethis); library(tibble)",
-    exercise.checker = "gradethis_exercise_checker"
-  )
-  result <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+test_that("check_table() returns names feedback to learnr", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = tibble::tibble(a = letters, b = a, c = a, d = a),
+    .solution_code = tibble::tibble(x = letters, y = x, z = x, w = x)
   )
   
-  expect_result_message(
-    result, "should have columns named .*x.*, .*y.*, .*z.*, and 1 more"
-  )
-  expect_result_message(
-    result, "should not have columns named .*a.*, .*b.*, .*c.*, or 1 more"
+  grade <- gradethis::grade_this(check_table())(ex)
+  
+  expect_grade(
+    grade, 
+    "should have columns named .*x.*, .*y.*, .*z.*, and 1 more",
+    problem = problem("names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
   )
   
-  ex$check <- "grade_this({check_table(max_diffs = Inf)})"
-  result   <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+  expect_grade(
+    grade,
+    "should not have columns named .*a.*, .*b.*, .*c.*, or 1 more"
   )
   
-  expect_result_message(
-    result, "should have columns named .*x.*, .*y.*, .*z.*, and .*w"
-  )
-  expect_result_message(
-    result, "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
+  # ---- with all diffs ---
+  grade_inf <- gradethis::grade_this(check_table(max_diffs = Inf))(ex)
+  
+  expect_grade(
+    grade_inf,
+    "should have columns named .*x.*, .*y.*, .*z.*, and .*w",
+    problem = problem("names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
   )
   
-  ex$check <- "grade_this({check_table(max_diffs = 1)})"
-  result   <- learnr:::evaluate_exercise(
-    ex, new.env(), evaluate_global_setup = TRUE
+  expect_grade(
+    grade_inf,
+    "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
   )
   
-  expect_result_message(
-    result, "should have columns named .*x.* and 3 more"
+  # ---- with one diff ---
+  grade_one <- gradethis::grade_this(check_table(max_diffs = 1))(ex)
+  
+  expect_grade(
+    grade_one,
+    "should have columns named .*x.* and 3 more",
+    problem = problem("names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
   )
-  expect_result_message(
-    result, "should not have columns named .*a.* or 3 more"
+  
+  expect_grade(
+    grade_one,
+    "should not have columns named .*a.* or 3 more"
   )
 })
