@@ -77,12 +77,11 @@ test_that("check_table() columns", {
 })
 
 test_that("check_table() with no problems returns invisible()", {
-  result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
   solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
   expect_invisible(
     grade <- gradethis:::capture_graded(
-      check_table(object = result, expected = solution)
+      check_table(object = solution, expected = solution)
     )
   )
   expect_null(grade$problem)
