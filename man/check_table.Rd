@@ -13,7 +13,8 @@ check_table(
   check_ncol = !check_names,
   check_columns = TRUE,
   check_class = check_columns,
-  check_values = check_columns
+  check_values = check_columns,
+  final = gradethis::pass()
 )
 }
 \arguments{
@@ -47,6 +48,10 @@ same class in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
+
+\item{final}{The final grade returned if all of the table checks pass.
+Defaults to \code{\link[gradethis:graded]{gradethis::pass()}}, set to \code{NULL} to only return a failing
+grade.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.

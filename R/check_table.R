@@ -30,6 +30,9 @@
 #'   running both is redundant.
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [check_column()].
+#' @param final The final grade returned if all of the table checks pass.
+#'   Defaults to [gradethis::pass()], set to `NULL` to only return a failing
+#'   grade.
 #' @inheritParams check_column
 #'
 #' @return If there are any issues, generate a [gradethis::fail()] message.
@@ -45,7 +48,8 @@ check_table <- function(
   check_ncol    = !check_names,
   check_columns = TRUE,
   check_class   = check_columns,
-  check_values  = check_columns
+  check_values  = check_columns,
+  final = gradethis::pass()
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -114,6 +118,8 @@ check_table <- function(
       max_diffs    = max_diffs
     )
   }
+  
+  force(final)
   
   invisible()
 }
