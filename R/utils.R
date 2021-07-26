@@ -18,7 +18,7 @@ md_code <- function(x) {
 }
 
 assert_internally <- function(expr, ..., error = internal_error) {
-  tryCatch(expr, error = error, ...)
+  return_if_graded(tryCatch(expr, error = error, ...), parent.frame())
 }
 
 internal_error <- function(err) {
@@ -32,5 +32,18 @@ internal_error <- function(err) {
     type = "warning",
     location = "replace",
     problem = problem("internal_feedback_error", error = err$message)
+  )
+}
+
+# Wrap any expression that may return a grade in `return_if_graded()` to return
+# the graded condition from the calling function if we don't have another
+# calling handler watching for the `gradethis_graded` condition.
+return_if_graded <- function(expr, envir = parent.frame()) {
+  tryCatch(
+    expr,
+    gradethis_graded = function(grade) {
+      signalCondition(grade)
+      rlang::return_from(envir, grade)
+    }
   )
 }
