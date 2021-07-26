@@ -1,0 +1,166 @@
+test_that("check_vector() checks classes", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = letters,
+    .solution_code = 1:3
+  )
+  
+  grade <- gradethis::grade_this(check_vector())(ex)
+  
+  expect_grade(
+    grade,
+    "Your result should have class `integer`, but it has class `character`",
+    problem = problem("vector_class", "integer", "character")
+  )
+})
+
+test_that("check_vector() checks the first three values", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code     = rev(letters),
+    .solution_code = letters
+  )
+  
+  grade <- gradethis::grade_this(check_vector())(ex)
+  
+  expect_grade(
+    grade,
+    "The first 3 values of your result should be `a`, `b`, and `c",
+    problem = problem("vector_values")
+  )
+})
+
+test_that("check_vector() checks multiple classes", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = 1:10,
+    .solution_code = `class<-`(1:10, c("test", "class", "integer"))
+  )
+  
+  grade <- gradethis::grade_this(check_vector())(ex)
+  
+  expect_grade(
+    grade,
+    "Your result should have classes `test`, `class`, and `integer`, but it has class `integer`",
+    problem = problem(
+      type = "vector_class", 
+      expected = c("test", "class", "integer"), 
+      actual = "integer"
+    )
+  )
+})
+
+test_that("check_vector() checks for value differences beyond the first 3", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = c(rep(1, 3), 5:10),
+    .solution_code = c(rep(1, 3), 10:15)
+  )
+  
+  grade <- gradethis::grade_this(check_vector())(ex)
+  
+  expect_grade(
+    grade,
+    "Your result contains unexpected values.",
+    problem = problem("vector_values")
+  )
+})
+
+test_that("max_diffs modifies the number of values to print", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = letters,
+    .solution_code = rev(letters)
+  )
+  
+  grade <- gradethis::grade_this(check_vector(max_diffs = 5))(ex)
+  
+  expect_grade(
+    grade,
+    "The first 5 values of your result should be `z`, `y`, `x`, `w`, and `v`",
+    problem = problem("vector_values")
+  )
+})
+
+test_that("max_diffs doesn't overflow", {
+  result <- letters[1:2]
+  solution <- letters[2:1]
+
+  grade <- gradethis:::capture_graded(
+    check_vector(object = result, expected = solution, max_diffs = 3)
+  )
+
+  expect_equal(grade$problem, problem("vector_values"))
+  expect_false(grade$correct)
+  expect_no_match(grade$message, "`NA`")
+  expect_match(grade$message, "`b` and `a`.")
+})
+
+test_that("checks that vectors have the same length", {
+  result <- letters[1:3]
+  solution <- letters[1:4]
+
+  grade <- gradethis:::capture_graded(
+    check_vector(object = result, expected = solution)
+  )
+
+  expect_equal(grade$problem, problem("vector_length", 4, 3))
+  expect_false(grade$correct)
+  expect_match(grade$message, "should contain 4 values")
+})
+
+test_that("check_vector() with no problems returns invisible()", {
+  result   <- letters[1:3]
+  solution <- letters[1:3]
+
+  expect_invisible(
+    grade <- gradethis:::capture_graded(
+      check_vector(object = result, expected = solution)
+    )
+  )
+  expect_null(grade$problem)
+  expect_null(grade$correct)
+  expect_null(grade$message)
+})
+
+test_that("check_vector() handles bad user input", {
+  result <- letters[1:3]
+  solution <- letters[1:3]
+
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_vector(object = result, expected = solution, check_class = "yes")
+    ),
+    "check_class"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_vector(object = result, expected = solution, check_length = c(TRUE, TRUE))
+    ),
+    "check_length"
+  )
+
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_vector(object = result, expected = solution, check_values = NULL)
+    ),
+    "check_values"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_vector(object = result, expected = solution, max_diffs = 1:3)
+    ),
+    "max_diffs"
+  )
+
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_vector(object = NULL, expected = solution)
+    ),
+    "object"
+  )
+
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_vector(object = result, expected = NULL)
+    ),
+    "expected"
+  )
+})
