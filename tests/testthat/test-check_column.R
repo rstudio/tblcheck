@@ -1,4 +1,3 @@
-
 test_that("check_column() checks classes", {
   ex <- gradethis::mock_this_exercise(
     .user_code = tibble::tibble(a = letters),
@@ -9,7 +8,7 @@ test_that("check_column() checks classes", {
   
   expect_grade(
     grade,
-    "should have class .*integer.*, but it has class .*character.*",
+    "Your `a` column should have class `integer`, but it has class `character`",
     problem = problem("column_class", "integer", "character")
   )
 })
@@ -24,7 +23,7 @@ test_that("check_column() checks the first three values", {
   
   expect_grade(
     grade,
-    "should be .*a.*, .*b.*, and .*c",
+    "The first 3 values of your `a` column should be `a`, `b`, and `c",
     problem = problem("column_values")
   )
 })
@@ -39,15 +38,13 @@ test_that("check_column() checks multiple classes", {
   
   expect_grade(
     grade,
-    "should have classes .*tbl_df.*, .*tbl.*, and .*data.frame.*, but it has class .*data.frame",
+    "Your `a` column should have classes `tbl_df`, `tbl`, and `data.frame`, but it has class `data.frame",
     problem = problem(
       type = "column_class", 
       expected = c("tbl_df", "tbl", "data.frame"), 
       actual = "data.frame"
     )
   )
-  
-  
 })
 
 test_that("check_column() checks for value differences beyond the first 3", {
@@ -60,13 +57,12 @@ test_that("check_column() checks for value differences beyond the first 3", {
   
   expect_grade(
     grade,
-    "column contains unexpected values.",
+    "Your `a` column contains unexpected values.",
     problem = problem("column_values")
   )
 })
 
 test_that("max_diffs modifies the number of values to print", {
-  
   ex <- gradethis::mock_this_exercise(
     .user_code = tibble::tibble(a = letters),
     .solution_code = tibble::tibble(a = rev(letters))
@@ -76,7 +72,7 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_grade(
     grade,
-    "The first 5 values of your .*a.* column should be .*z.*, .*y.*, .*x.*, .*w.*, and .*v",
+    "The first 5 values of your `a` column should be `z`, `y`, `x`, `w`, and `v",
     problem = problem("column_values")
   )
 })
@@ -174,12 +170,26 @@ test_that("check_column() handles bad user input", {
     ),
     "check_class"
   )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("a", object = result, expected = solution, check_length =c(TRUE, TRUE))
+    ),
+    "check_length"
+  )
 
   expect_internal_problem(
     gradethis:::capture_graded(
-      check_column("a", object = result, expected = solution, check_values = "yes")
+      check_column("a", object = result, expected = solution, check_values = NULL)
     ),
     "check_values"
+  )
+  
+  expect_internal_problem(
+    gradethis:::capture_graded(
+      check_column("a", object = result, expected = solution, max_diffs = 1:3)
+    ),
+    "max_diffs"
   )
 
   expect_internal_problem(
