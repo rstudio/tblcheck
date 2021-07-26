@@ -4,7 +4,7 @@
 \alias{check_names}
 \title{Check that the names of two object are the same}
 \usage{
-check_names(object, expected, max_diffs = 3)
+check_names(object = .result, expected = .solution, max_diffs = 3)
 }
 \arguments{
 \item{object}{A data frame to be compared to \code{expected}.}

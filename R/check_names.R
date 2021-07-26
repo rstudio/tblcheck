@@ -17,14 +17,21 @@
 #' @inherit check_table return
 #' @export
 
-check_names <- function(object, expected, max_diffs = 3) {
-  unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
+check_names <- function(object = .result, expected = .solution, max_diffs = 3) {
+  if (inherits(object, ".result")) {
+    object <- get(".result", parent.frame())
+  }
+  if (inherits(expected, ".solution")) {
+    expected <- get(".solution", parent.frame())
+  }
   
   assert_internally({
     checkmate::assert_number(max_diffs, lower = 1)
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
+  
+  unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
   
   names_exp <- names(expected)
   names_obj <- names(object)
