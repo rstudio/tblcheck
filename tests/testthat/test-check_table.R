@@ -76,17 +76,43 @@ test_that("check_table() columns", {
   )
 })
 
-test_that("check_table() with no problems returns invisible()", {
+test_that("check_table() with no problems and final = NULL returns invisible(NULL)", {
+  result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
   solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
   expect_invisible(
     grade <- gradethis:::capture_graded(
-      check_table(object = solution, expected = solution)
+      check_table(object = result, expected = solution, final = NULL)
     )
   )
   expect_null(grade$problem)
   expect_null(grade$correct)
   expect_null(grade$message)
+})
+
+test_that("check_table() returns the final grade if all checks pass", {
+  solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
+  
+  grade <- gradethis:::capture_graded(
+    check_table(object = solution, expected = solution, final = pass("Good job!"))
+  )
+  expect_grade(grade, "Good job!", correct = TRUE)
+})
+
+test_that("check_table() final grade finds gradethis placeholders", {
+  ex <- gradethis::mock_this_exercise(
+    .user_code = "x",
+    .solution_code = "x",
+    setup_global = "x <- tibble::tibble(a = letters[1:3], b = a, c = a)",
+    .label = "check-table-test"
+  )
+  
+  grader <- gradethis::grade_this(
+    check_table(final = pass("{.label} - {nrow(.result)} - {.user_code}"))
+  )
+  
+  grade <- grader(ex)
+  expect_grade(grade, "check-table-test - 3 - x", correct = TRUE)
 })
 
 test_that("check_table() handles bad user input", {
