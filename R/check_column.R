@@ -63,62 +63,13 @@ check_column <- function(
     )
   }
 
-  obj_col <- object[[name]]
-  exp_col <- expected[[name]]
-  n_values <- min(length(exp_col), max_diffs)
-
-  obj_class <- class(obj_col)
-  exp_class <- class(exp_col)
-
-  # check class
-  if (check_class && !identical(obj_class, exp_class)) {
-    class_problem <- problem("column_class", exp_class, obj_class)
-    
-    t_class <- plu::ral("class", exp_class)
-    exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
-    
-    t_obj_class <- plu::ral("class", obj_class)
-    obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
-    
-    gradethis::fail(
-      "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}.",
-      problem = class_problem
-    )
-  }
-  
-  # check length
-  if (check_length) {
-    obj_col_len <- length(obj_col)
-    exp_col_len <- length(exp_col)
-    
-    if (!identical(obj_col_len, exp_col_len)) {
-      exp_rows <- plu::ral('n value', n = exp_col_len)
-      obj_rows <- plu::ral('n value', n = obj_col_len)
-      gradethis::fail(
-        "Your `{name}` column should contain {exp_rows}, but it has {obj_rows}.",
-        problem = problem("column_length", exp_col_len, obj_col_len)
-      )
-    }
-  }
-
-  # check rows
-  if (check_values) {
-    if (!identical(obj_col[seq_len(n_values)], exp_col[seq_len(n_values)])) {
-      t_values <- plu::ral("n value", n = n_values)
-      first_n_values <- knitr::combine_words(exp_col[seq_len(n_values)], before = "`")
-      gradethis::fail(
-        "The first {t_values} of your `{name}` column should be {first_n_values}.",
-        problem = problem("column_values")
-      )
-    }
-
-    if (!identical(obj_col, exp_col)) {
-      gradethis::fail(
-        "Your `{name}` column contains unexpected values.",
-        problem = problem("column_values")
-      )
-    }
-  }
-
-  invisible()
+  check_vector(
+    object[[name]],
+    expected[[name]],
+    max_diffs = max_diffs,
+    check_class = check_class,
+    check_length = check_length,
+    check_values = check_values,
+    name = name
+  )
 }
