@@ -7,18 +7,22 @@ test_that("check_table() rows", {
     check_table(object = result, expected = solution)
   )
   
-  expect_equal(grade$problem, problem("table_nrow", 25, 26))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have 25 rows")
+  expect_grade(
+    grade,
+    message = "should have 25 rows",
+    problem = problem("table_nrow", 25, 26)
+  )
   
   solution <- tibble::tibble(x = letters[1], y = x)
   grade    <- gradethis:::capture_graded(
     check_table(object = result, expected = solution)
   )
   
-  expect_equal(grade$problem, problem("table_nrow", 1, 26))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have 1 row")
+  expect_grade(
+    grade,
+    message = "should have 1 row",
+    problem = problem("table_nrow", 1, 26)
+  )
 })
 
 test_that("check_table() ncol", {
@@ -29,18 +33,22 @@ test_that("check_table() ncol", {
     check_table(object = result, expected = solution, check_names = FALSE)
   )
   
-  expect_equal(grade$problem, problem("table_ncol", 2, 3))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have 2 columns")
+  expect_grade(
+    grade,
+    message = "should have 2 columns",
+    problem = problem("table_ncol", 2, 3)
+  )
   
   solution <- tibble::tibble(a = letters)
   grade   <- gradethis:::capture_graded(
     check_table(object = result, expected = solution, check_names = FALSE)
   )
   
-  expect_equal(grade$problem, problem("table_ncol", 1, 3))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have 1 column")
+  expect_grade(
+    grade,
+    message = "should have 1 column",
+    problem = problem("table_ncol", 1, 3)
+  )
 })
 
 test_that("check_table() names", {
@@ -51,12 +59,11 @@ test_that("check_table() names", {
     check_table(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = c("x", "y"), unexpected = c("a", "b"))
+  expect_grade(
+    grade,
+    message = "should have columns named `x` and `y`",
+    problem = problem("names", missing = c("x", "y"), unexpected = c("a", "b"))
   )
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have columns named `x` and `y`")
   expect_match(grade$message, "should not have columns named `a` or `b`")
 })
 
@@ -68,11 +75,10 @@ test_that("check_table() columns", {
     check_table(object = result, expected = solution)
   )
   
-  expect_equal(grade$problem, problem("column_values"))
-  expect_false(grade$correct)
-  expect_match(
-    grade$message,
-    "first 3 values of your `a` column should be `x`, `y`, and `z`"
+  expect_grade(
+    grade,
+    message = "first 3 values of your `a` column should be `x`, `y`, and `z`",
+    problem = problem("column_values")
   )
 })
 

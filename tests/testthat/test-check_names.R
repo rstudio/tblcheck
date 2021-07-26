@@ -6,12 +6,11 @@ test_that("check missing names", {
     check_names(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = "b", unexpected = character(0))
+  expect_grade(
+    grade,
+    message = "should have a column named `b`",
+    problem = problem("names", missing = "b", unexpected = character(0))
   )
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have a column named `b`")
   
   solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
@@ -19,12 +18,11 @@ test_that("check missing names", {
     check_names(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = c("b", "c"), unexpected = character(0))
+  expect_grade(
+    grade,
+    message = "should have columns named `b` and `c`",
+    problem = problem("names", missing = c("b", "c"), unexpected = character(0))
   )
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have columns named `b` and `c`")
 })
 
 test_that("check unexpected names", {
@@ -35,12 +33,11 @@ test_that("check unexpected names", {
     check_names(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = character(0), unexpected = "b")
+  expect_grade(
+    grade,
+    message = "should not have a column named `b`",
+    problem = problem("names", missing = character(0), unexpected = "b")
   )
-  expect_false(grade$correct)
-  expect_match(grade$message, "should not have a column named `b`")
   
   result <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
@@ -48,12 +45,11 @@ test_that("check unexpected names", {
     check_names(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = character(0), unexpected = c("b", "c"))
+  expect_grade(
+    grade,
+    message = "should not have columns named `b` or `c`",
+    problem = problem("names", missing = character(0), unexpected = c("b", "c"))
   )
-  expect_false(grade$correct)
-  expect_match(grade$message, "should not have columns named `b` or `c`")
 })
 
 test_that("check missing and unexpected names", {
@@ -64,12 +60,11 @@ test_that("check missing and unexpected names", {
     check_names(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = c("x", "y"), unexpected = c("a", "b"))
+  expect_grade(
+    grade,
+    message = "should have columns named `x` and `y`",
+    problem = problem("names", missing = c("x", "y"), unexpected = c("a", "b"))
   )
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have columns named `x` and `y`")
   expect_match(grade$message, "should not have columns named `a` or `b`")
 })
 
@@ -81,13 +76,10 @@ test_that("check names max_diffs()", {
     check_names(object = result, expected = solution)
   )
   
-  expect_equal(
-    grade$problem,
-    problem("names", missing = letters[1:4], unexpected = character(0))
-  )
-  expect_false(grade$correct)
-  expect_match(
-    grade$message, "should have columns named `a`, `b`, `c`, and 1 more"
+  expect_grade(
+    grade,
+    message = "should have columns named `a`, `b`, `c`, and 1 more",
+    problem = problem("names", missing = letters[1:4], unexpected = character(0))
   )
   
   grade <- gradethis:::capture_graded(

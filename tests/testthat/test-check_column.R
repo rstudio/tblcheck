@@ -89,10 +89,12 @@ test_that("max_diffs doesn't overflow", {
     check_column("a", object = result, expected = solution, max_diffs = 3)
   )
 
-  expect_equal(grade$problem, problem("column_values"))
-  expect_false(grade$correct)
+  expect_grade(
+    grade,
+    message = "`b` and `a`.",
+    problem = problem("column_values")
+  )
   expect_no_match(grade$message, "`NA`")
-  expect_match(grade$message, "`b` and `a`.")
 })
 
 test_that("checks that columns have the same length", {
@@ -102,10 +104,12 @@ test_that("checks that columns have the same length", {
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution)
   )
-
-  expect_equal(grade$problem, problem("column_length", 4, 3))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should contain 4 values")
+  
+  expect_grade(
+    grade,
+    message = "should contain 4 values",
+    problem = problem("column_length", 4, 3)
+  )
 })
 
 test_that("checks that the column is present in object", {
@@ -115,10 +119,12 @@ test_that("checks that the column is present in object", {
   grade <- gradethis:::capture_graded(
     check_column("a", object = result, expected = solution)
   )
-
-  expect_equal(grade$problem, problem("column_name", "a"))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have a column named `a`")
+  
+  expect_grade(
+    grade,
+    message = "should have a column named `a`",
+    problem = problem("column_name", "a")
+  )
 })
 
 test_that("checks that the column is present in expected", {
