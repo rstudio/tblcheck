@@ -29,10 +29,12 @@ Imports:
     magrittr,
     plu,
     purrr,
-    testthat
+    rlang,
+    utils
 Suggests:
     dplyr,
     learnr,
+    testthat,
     tibble
 Remotes: 
     rstudio/gradethis
