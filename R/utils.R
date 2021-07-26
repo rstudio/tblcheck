@@ -47,3 +47,8 @@ return_if_graded <- function(expr, envir = parent.frame()) {
     }
   )
 }
+
+return_fail <- function(..., env = parent.frame()) {
+  grade <- gradethis::fail(..., env = env)
+  rlang::return_from(env, grade)
+}
