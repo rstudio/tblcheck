@@ -20,6 +20,9 @@
 #'   `expected` have the same length.
 #' @param check_values `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` contain the same values.
+#' @param name `[character(1)]`\cr If not `NULL`, the name of the column
+#'   represented by `object` and `expected`, usually passed
+#'   from [check_column()].
 #'
 #' @inherit check_table return
 #' @export
