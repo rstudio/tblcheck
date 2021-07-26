@@ -17,7 +17,7 @@ Defaults to 3.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
-Otherwise, invisibly return \code{\link{NULL}}.
+Otherwise, return a \code{final_grade} or invisibly return \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same \link[=names]{names}.

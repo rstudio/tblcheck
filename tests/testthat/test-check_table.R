@@ -82,7 +82,7 @@ test_that("check_table() with no problems and final = NULL returns invisible(NUL
   
   expect_invisible(
     grade <- gradethis:::capture_graded(
-      check_table(object = result, expected = solution, final = NULL)
+      check_table(object = result, expected = solution, final_grade = NULL)
     )
   )
   expect_null(grade$problem)
@@ -94,7 +94,7 @@ test_that("check_table() returns the final grade if all checks pass", {
   solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
   grade <- gradethis:::capture_graded(
-    check_table(object = solution, expected = solution, final = pass("Good job!"))
+    check_table(object = solution, expected = solution, final_grade = pass("Good job!"))
   )
   expect_grade(grade, "Good job!", correct = TRUE)
 })
@@ -108,7 +108,7 @@ test_that("check_table() final grade finds gradethis placeholders", {
   )
   
   grader <- gradethis::grade_this(
-    check_table(final = pass("{.label} - {nrow(.result)} - {.user_code}"))
+    check_table(final_grade = pass("{.label} - {nrow(.result)} - {.user_code}"))
   )
   
   grade <- grader(ex)

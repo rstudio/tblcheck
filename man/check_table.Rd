@@ -14,7 +14,7 @@ check_table(
   check_columns = TRUE,
   check_class = check_columns,
   check_values = check_columns,
-  final = pass()
+  final_grade = pass()
 )
 }
 \arguments{
@@ -49,13 +49,13 @@ same class in \code{object} and \code{expected}.}
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
 
-\item{final}{The final grade returned if all of the table checks pass.
-Defaults to \code{\link[gradethis:graded]{gradethis::pass()}}, set to \code{NULL} to only return a failing
-grade.}
+\item{final_grade}{The final grade returned if all of the table checks pass.
+Defaults to \code{\link[gradethis:graded]{gradethis::pass()}}. Set to \code{NULL} to return an invisible
+\code{NULL} value if all checks pass.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
-Otherwise, invisibly return \code{\link{NULL}}.
+Otherwise, return a \code{final_grade} or invisibly return \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same number of rows, the same
