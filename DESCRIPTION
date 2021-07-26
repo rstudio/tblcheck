@@ -29,6 +29,7 @@ Imports:
     magrittr,
     plu,
     purrr,
+    rlang,
     testthat
 Suggests:
     dplyr,
