@@ -34,3 +34,9 @@ internal_error <- function(err) {
     problem = problem("internal_feedback_error", error = err$message)
   )
 }
+
+to_sentence <- function(x) {
+  x <- glue::glue(x, .envir = rlang::caller_env())
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
