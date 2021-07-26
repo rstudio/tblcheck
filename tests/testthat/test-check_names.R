@@ -1,10 +1,9 @@
 test_that("check missing names", {
-  result   <- tibble::tibble(a = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:3], b = a)
-  
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble(a = letters[1:3])
+    solution <- tibble::tibble(a = letters[1:3], b = a)
     check_names(object = result, expected = solution)
-  )
+  })
   
   expect_grade(
     grade,
@@ -12,11 +11,12 @@ test_that("check missing names", {
     problem = problem("names", missing = "b", unexpected = character(0))
   )
   
-  solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble(a = letters[1:3])
+    solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
     check_names(object = result, expected = solution)
-  )
+  })
   
   expect_grade(
     grade,
@@ -26,12 +26,11 @@ test_that("check missing names", {
 })
 
 test_that("check unexpected names", {
-  result   <- tibble::tibble(a = letters[1:3], b = a)
-  solution <- tibble::tibble(a = letters[1:3])
-  
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble(a = letters[1:3], b = a)
+    solution <- tibble::tibble(a = letters[1:3])
     check_names(object = result, expected = solution)
-  )
+  })
   
   expect_grade(
     grade,
@@ -39,11 +38,11 @@ test_that("check unexpected names", {
     problem = problem("names", missing = character(0), unexpected = "b")
   )
   
-  result <- tibble::tibble(a = letters[1:3], b = a, c = a)
-  
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result <- tibble::tibble(a = letters[1:3], b = a, c = a)
+    solution <- tibble::tibble(a = letters[1:3])
     check_names(object = result, expected = solution)
-  )
+  })
   
   expect_grade(
     grade,
@@ -53,12 +52,11 @@ test_that("check unexpected names", {
 })
 
 test_that("check missing and unexpected names", {
-  result   <- tibble::tibble(a = letters[1:3], b = a)
-  solution <- tibble::tibble(x = letters[1:3], y = x)
-  
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble(a = letters[1:3], b = a)
+    solution <- tibble::tibble(x = letters[1:3], y = x)
     check_names(object = result, expected = solution)
-  )
+  })
   
   expect_grade(
     grade,
@@ -69,12 +67,11 @@ test_that("check missing and unexpected names", {
 })
 
 test_that("check names max_diffs()", {
-  result   <- tibble::tibble()
-  solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
-  
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble()
+    solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     check_names(object = result, expected = solution)
-  )
+  })
   
   expect_grade(
     grade,
@@ -82,69 +79,79 @@ test_that("check names max_diffs()", {
     problem = problem("names", missing = letters[1:4], unexpected = character(0))
   )
   
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble()
+    solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     check_names(object = result, expected = solution, max_diffs = Inf)
-  )
-  expect_match(
-    grade$message, "should have columns named `a`, `b`, `c`, and `d`"
+  })
+  
+  expect_grade(
+    grade, 
+    message = "should have columns named `a`, `b`, `c`, and `d`",
+    problem = problem("names", missing = letters[1:4], unexpected = character(0))
   )
   
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result   <- tibble::tibble()
+    solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     check_names(object = result, expected = solution, max_diffs = 1)
+  })
+  
+  expect_grade(
+    grade, 
+    message = "should have columns named `a` and 3 more",
+    problem = problem("names", missing = letters[1:4], unexpected = character(0))
   )
-  expect_match(grade$message, "should have columns named `a` and 3 more")
 })
 
 test_that("check_names() with no problems returns invisible()", {
   result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
   solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
-  expect_invisible(
-    grade <- gradethis:::capture_graded(
-      check_names(object = result, expected = solution)
-    )
-  )
+  grade <- expect_invisible(check_names(object = result, expected = solution))
   expect_null(grade$problem)
   expect_null(grade$correct)
   expect_null(grade$message)
 })
 
 test_that("check_names() handles bad user input", {
-  result <- tibble::tibble(b = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:3])
-  
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_names(object = 12, expected = solution)
-    ),
+    }),
     "object"
   )
   
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_names(object = result, expected = list(a = 1))
-    ),
+    }),
     "expected"
   )
   
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_names(object = result, expected = solution, max_diffs = "a")
-    ),
+    }),
     "max_diffs"
   )
   
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_names(object = result, expected = solution, max_diffs = -1)
-    ),
+    }),
     "max_diffs"
   )
   
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_names(object = result, expected = solution, max_diffs = 1:2)
-    ),
+    }),
     "max_diffs"
   )
 })
