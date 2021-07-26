@@ -56,9 +56,9 @@ check_names <- function(object, expected, max_diffs = 3) {
         unexpected = unexpected$diffs
       )
     )
+  } else {
+    invisible()
   }
-  
-  invisible()
 }
 
 #' Find up to a certain number of differences between two vectors

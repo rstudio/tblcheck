@@ -74,7 +74,7 @@ check_table <- function(
     if (!identical(nrow_object, nrow_expected)) {
       exp_rows <- plu::ral("n row", n = nrow_expected)
       obj_rows <- plu::ral("n row", n = nrow_object)
-      gradethis::fail(
+      return_fail(
         "Your table should have {exp_rows}, but it has {obj_rows}.",
         problem = problem("table_nrow", nrow_expected, nrow_object)
       )
@@ -83,7 +83,9 @@ check_table <- function(
   
   # check column names ----
   if (check_names) {
-    check_names(object, expected, max_diffs = max_diffs)
+    return_if_graded(
+      check_names(object, expected, max_diffs = max_diffs)
+    )
   }
   
   # check number of columns ----
@@ -94,7 +96,7 @@ check_table <- function(
     if(!identical(ncol_object, ncol_expected)) {
       exp_cols <- plu::ral('n column', n = ncol_expected)
       obj_cols <- plu::ral('n column', n = ncol_object)
-      gradethis::fail(
+      return_fail(
         "Your table should have {exp_cols}, but it has {obj_cols}.",
         problem = problem("table_ncol", ncol_expected, ncol_object)
       )
@@ -103,15 +105,17 @@ check_table <- function(
   
   # check column contents ----
   if (check_columns) {
-    purrr::walk(
-      names(object),
-      check_column,
-      object       = object,
-      expected     = expected,
-      check_class  = check_class,
-      check_values = check_values,
-      check_length = FALSE,
-      max_diffs    = max_diffs
+    return_if_graded(
+      purrr::walk(
+        names(object),
+        check_column,
+        object       = object,
+        expected     = expected,
+        check_class  = check_class,
+        check_values = check_values,
+        check_length = FALSE,
+        max_diffs    = max_diffs
+      )
     )
   }
   

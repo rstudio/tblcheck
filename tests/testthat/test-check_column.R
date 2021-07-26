@@ -1,11 +1,10 @@
 
 test_that("check_column() checks classes", {
-  ex <- gradethis::mock_this_exercise(
-    .user_code = tibble::tibble(a = letters),
-    .solution_code = tibble::tibble(a = 1:3)
-  )
-  
-  grade <- gradethis::grade_this(check_column("a"))(ex)
+  grade <- tblcheck_test_grade({
+    .result = tibble::tibble(a = letters)
+    .solution = tibble::tibble(a = 1:3)
+    check_column("a")
+  })
   
   expect_grade(
     grade,
@@ -15,12 +14,11 @@ test_that("check_column() checks classes", {
 })
 
 test_that("check_column() checks the first three values", {
-  ex <- gradethis::mock_this_exercise(
-    .user_code     = tibble::tibble(a = rev(letters)),
-    .solution_code = tibble::tibble(a = letters)
-  )
-  
-  grade <- gradethis::grade_this(check_column("a"))(ex)
+  grade <- tblcheck_test_grade({
+    .result     = tibble::tibble(a = rev(letters))
+    .solution = tibble::tibble(a = letters)
+    check_column("a")
+  })
   
   expect_grade(
     grade,
@@ -30,12 +28,11 @@ test_that("check_column() checks the first three values", {
 })
 
 test_that("check_column() checks multiple classes", {
-  ex <- gradethis::mock_this_exercise(
-    .user_code = tibble::tibble(a = data.frame(x = 1)),
-    .solution_code = tibble::tibble(a = tibble::tibble(x = 1))
-  )
-  
-  grade <- gradethis::grade_this(check_column('a'))(ex)
+  grade <- tblcheck_test_grade({
+    .result = tibble::tibble(a = data.frame(x = 1))
+    .solution = tibble::tibble(a = tibble::tibble(x = 1))
+    check_column('a')
+  })
   
   expect_grade(
     grade,
@@ -51,12 +48,11 @@ test_that("check_column() checks multiple classes", {
 })
 
 test_that("check_column() checks for value differences beyond the first 3", {
-  ex <- gradethis::mock_this_exercise(
-    .user_code = tibble::tibble(a = c(rep(1, 3), 5:10)),
-    .solution_code = tibble::tibble(a = c(rep(1, 3), 10:15))
-  )
-  
-  grade <- gradethis::grade_this(check_column("a"))(ex)
+  grade <- tblcheck_test_grade({
+    .result = tibble::tibble(a = c(rep(1, 3), 5:10))
+    .solution = tibble::tibble(a = c(rep(1, 3), 10:15))
+    check_column("a")
+  })
   
   expect_grade(
     grade,
@@ -67,12 +63,11 @@ test_that("check_column() checks for value differences beyond the first 3", {
 
 test_that("max_diffs modifies the number of values to print", {
   
-  ex <- gradethis::mock_this_exercise(
-    .user_code = tibble::tibble(a = letters),
-    .solution_code = tibble::tibble(a = rev(letters))
-  )
-  
-  grade <- gradethis::grade_this(check_column("a", max_diffs = 5))(ex)
+  grade <- tblcheck_test_grade({
+    .result = tibble::tibble(a = letters)
+    .solution = tibble::tibble(a = rev(letters))
+    check_column("a", max_diffs = 5)
+  })
   
   expect_grade(
     grade,
@@ -82,117 +77,125 @@ test_that("max_diffs modifies the number of values to print", {
 })
 
 test_that("max_diffs doesn't overflow", {
-  result <- tibble::tibble(a = letters[1:2])
-  solution <- tibble::tibble(a = letters[2:1])
-
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result <- tibble::tibble(a = letters[1:2])
+    solution <- tibble::tibble(a = letters[2:1])
     check_column("a", object = result, expected = solution, max_diffs = 3)
-  )
+  })
 
-  expect_equal(grade$problem, problem("column_values"))
-  expect_false(grade$correct)
+  expect_grade(
+    grade,
+    message = "`b` and `a`.",
+    problem = problem("column_values")
+  )
   expect_no_match(grade$message, "`NA`")
-  expect_match(grade$message, "`b` and `a`.")
 })
 
 test_that("checks that columns have the same length", {
-  result <- tibble::tibble(a = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:4])
-
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result <- tibble::tibble(a = letters[1:3])
+    solution <- tibble::tibble(a = letters[1:4])
     check_column("a", object = result, expected = solution)
+  })
+  
+  expect_grade(
+    grade,
+    message = "should contain 4 values",
+    problem = problem("column_length", 4, 3)
   )
-
-  expect_equal(grade$problem, problem("column_length", 4, 3))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should contain 4 values")
 })
 
 test_that("checks that the column is present in object", {
-  result <- tibble::tibble(b = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:3])
-
-  grade <- gradethis:::capture_graded(
+  grade <- tblcheck_test_grade({
+    result <- tibble::tibble(b = letters[1:3])
+    solution <- tibble::tibble(a = letters[1:3])
     check_column("a", object = result, expected = solution)
+  })
+  
+  expect_grade(
+    grade,
+    message = "should have a column named `a`",
+    problem = problem("column_name", "a")
   )
-
-  expect_equal(grade$problem, problem("column_name", "a"))
-  expect_false(grade$correct)
-  expect_match(grade$message, "should have a column named `a`")
 })
 
 test_that("checks that the column is present in expected", {
-  result <- tibble::tibble(b = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:3])
-
-  expect_warning(
-    grade <- gradethis:::capture_graded(
+  grade <- expect_warning(
+    tblcheck_test_grade({
+      result <- tibble::tibble(b = letters[1:3])
+      solution <- tibble::tibble(a = letters[1:3])
       check_column("b", object = result, expected = solution)
-    ),
+    }),
     "`b` is not a column in `expected`"
   )
+
   expect_null(grade$problem)
   expect_null(grade$correct)
   expect_null(grade$message)
 })
 
 test_that("check_column() with no problems returns invisible()", {
-  result   <- tibble::tibble(a = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:3])
-
-  expect_invisible(
-    grade <- gradethis:::capture_graded(
+  grade <-  expect_null(
+    tblcheck_test_grade({
+      result   <- tibble::tibble(a = letters[1:3])
+      solution <- tibble::tibble(a = letters[1:3])
       check_column("a", object = result, expected = solution)
-    )
+    })
   )
+  
+  expect_invisible(check_column("a", tibble::tibble(a = 1), tibble::tibble(a = 1)))
+
   expect_null(grade$problem)
   expect_null(grade$correct)
   expect_null(grade$message)
 })
 
 test_that("check_column() handles bad user input", {
-  result <- tibble::tibble(b = letters[1:3])
-  solution <- tibble::tibble(a = letters[1:3])
-
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_column(3, object = result, expected = solution)
-    ),
+    }),
     "name"
   )
 
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_column(c("a", "b"), object = result, expected = solution)
-    ),
+    }),
     "name"
   )
 
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_column("a", object = result, expected = solution, check_class = "yes")
-    ),
+    }),
     "check_class"
   )
 
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_column("a", object = result, expected = solution, check_values = "yes")
-    ),
+    }),
     "check_values"
   )
 
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_column("b", object = 12, expected = solution)
-    ),
+    }),
     "object"
   )
 
   expect_internal_problem(
-    gradethis:::capture_graded(
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
       check_column("a", object = result, expected = list(a = 1))
-    ),
+    }),
     "expected"
   )
 })
