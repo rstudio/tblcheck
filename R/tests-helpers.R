@@ -13,7 +13,9 @@ expect_result_message <- function(result, expected, ...) {
 expect_grade <- function(grade, message, correct = FALSE, problem = NULL, ...) {
   testthat::expect_s3_class(grade, "gradethis_graded")
   testthat::expect_equal(grade$correct, correct)
-  testthat::expect_match(grade$message, message, ...)
+  if (!is.null(message)) {
+    testthat::expect_match(grade$message, message, ...)
+  }
   if (!is.null(problem)) {
     testthat::expect_equal(grade$problem, problem)
   }
