@@ -14,7 +14,7 @@ check_table(
   check_columns = TRUE,
   check_class = check_columns,
   check_values = check_columns,
-  final = gradethis::pass()
+  final = pass()
 )
 }
 \arguments{

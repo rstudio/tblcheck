@@ -1,5 +1,10 @@
-#' @importFrom gradethis pass fail
-NULL
+#' @importFrom gradethis pass
+#' @export
+gradethis::pass
+
+#' @importFrom gradethis fail
+#' @export
+gradethis::fail
 
 #' @importFrom gradethis .result
 #' @export

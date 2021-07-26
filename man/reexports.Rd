@@ -3,6 +3,8 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
+\alias{pass}
+\alias{fail}
 \alias{.result}
 \alias{.solution}
 \title{Objects exported from other packages}
@@ -12,6 +14,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{gradethis}{\code{\link[gradethis:grade_this-objects]{.result}}, \code{\link[gradethis:grade_this-objects]{.solution}}}
+  \item{gradethis}{\code{\link[gradethis:grade_this-objects]{.result}}, \code{\link[gradethis:grade_this-objects]{.solution}}, \code{\link[gradethis:graded]{fail}}, \code{\link[gradethis:graded]{pass}}}
 }}
 

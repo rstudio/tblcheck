@@ -49,7 +49,7 @@ check_table <- function(
   check_columns = TRUE,
   check_class   = check_columns,
   check_values  = check_columns,
-  final = gradethis::pass()
+  final = pass()
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
