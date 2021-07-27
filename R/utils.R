@@ -18,7 +18,7 @@ md_code <- function(x) {
 }
 
 assert_internally <- function(expr, ..., error = internal_error) {
-  tryCatch(expr, error = error, ...)
+  return_if_graded(tryCatch(expr, error = error, ...), parent.frame())
 }
 
 internal_error <- function(err) {
@@ -39,4 +39,26 @@ to_sentence <- function(x) {
   x <- glue::glue(x, .envir = rlang::caller_env())
   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
   x
+}
+  
+# Wrap any expression that may return a grade in `return_if_graded()` to return
+# the graded condition from the calling function if we don't have another
+# calling handler watching for the `gradethis_graded` condition.
+return_if_graded <- function(expr, envir = parent.frame()) {
+  withCallingHandlers(
+    expr,
+    gradethis_graded = function(grade) {
+      signalCondition(grade)
+      if (getOption("tblcheck.return_first_grade", TRUE)) {
+        rlang::return_from(envir, grade)
+      }
+    }
+  )
+}
+
+return_fail <- function(..., env = parent.frame()) {
+  grade <- gradethis::fail(..., env = env)
+  if (getOption("tblcheck.return_first_grade", TRUE)) {
+    rlang::return_from(env, grade)
+  }
 }

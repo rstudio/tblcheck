@@ -57,7 +57,7 @@ check_column <- function(
   }
   
   if (!name %in% names(object)) {
-    gradethis::fail(
+    return_fail(
       "Your table should have a column named `{name}`.",
       problem = problem("column_name", name)
     )

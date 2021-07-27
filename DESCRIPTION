@@ -30,10 +30,11 @@ Imports:
     plu,
     purrr,
     rlang,
-    testthat
+    utils
 Suggests:
     dplyr,
     learnr,
+    testthat,
     tibble
 Remotes: 
     rstudio/gradethis
