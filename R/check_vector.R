@@ -20,9 +20,10 @@
 #'   `expected` have the same length.
 #' @param check_values `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` contain the same values.
-#' @param name `[character(1)]`\cr If not `NULL`, the name of the column
-#'   represented by `object` and `expected`, usually passed
-#'   from [check_column()].
+#' @param unit `[character(1)]`\cr The label used to describe the vector in
+#'   feedback messages. Defaults to `"result"`.
+#' @param prefix `[character(1)]`\cr The prefix appended to the `problem` label 
+#'   in [gradethis::fail()] objects. Defaults to `"vector_"`.
 #'
 #' @inherit check_table return
 #' @export
@@ -34,7 +35,8 @@ check_vector <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  name = NULL
+  unit   = "result",
+  prefix = "vector_"
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -50,21 +52,16 @@ check_vector <- function(
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+    checkmate::assert_string(unit)
+    checkmate::assert_string(prefix)
   })
-  
-  prefix <- if (!is.null(name)) "column" else "vector"
-  unit <- if (!is.null(name)) {
-    glue::glue("your `{name}` column")
-  } else {
-    "your result"
-  }
   
   if (check_class) {
     obj_class <- class(object)
     exp_class <- class(expected)
     
     if (!identical(obj_class, exp_class)) {
-      class_problem <- problem("{prefix}_class", exp_class, obj_class)
+      class_problem <- problem("{prefix}class", exp_class, obj_class)
       
       t_exp_class <- plu::ral("class", exp_class)
       exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
@@ -73,7 +70,7 @@ check_vector <- function(
       obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
       
       return_fail(
-        to_sentence("{unit} should have {t_exp_class} {exp_class}, but it has {t_obj_class} {obj_class}."),
+        to_sentence("Your {unit} should have {t_exp_class} {exp_class}, but it has {t_obj_class} {obj_class}."),
         problem = class_problem
       )
     }
@@ -84,13 +81,13 @@ check_vector <- function(
     exp_length <- length(expected)
     
     if (!identical(obj_length, exp_length)) {
-      length_problem <- problem("{prefix}_length", exp_length, obj_length)
+      length_problem <- problem("{prefix}length", exp_length, obj_length)
       
       exp_length <- plu::ral("n value", n = exp_length)
       obj_length <- plu::ral("n value", n = obj_length)
       
       return_fail(
-        to_sentence("{unit} should contain {exp_length}, but it has {obj_length}."),
+        to_sentence("Your {unit} should contain {exp_length}, but it has {obj_length}."),
         problem = length_problem
       )
     }
@@ -104,15 +101,15 @@ check_vector <- function(
       first_n_values <- knitr::combine_words(expected[seq_len(n_values)], before = "`")
       
       return_fail(
-        to_sentence("The first {t_values} of {unit} should be {first_n_values}."),
-        problem = problem("{prefix}_values")
+        to_sentence("The first {t_values} of your {unit} should be {first_n_values}."),
+        problem = problem("{prefix}values")
       )
     }
     
     if (!identical(object, expected)) {
       return_fail(
-        to_sentence("{unit} contains unexpected values."),
-        problem = problem("{prefix}_values")
+        to_sentence("Your {unit} contains unexpected values."),
+        problem = problem("{prefix}values")
       )
     }
   }

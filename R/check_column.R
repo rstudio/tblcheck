@@ -71,7 +71,8 @@ check_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
-      name = name
+      unit = glue::glue("`{name}` column"),
+      prefix = "column_"
     )
   )
 }
