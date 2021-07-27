@@ -72,7 +72,7 @@ check_vector <- function(
       t_obj_class <- plu::ral("class", obj_class)
       obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
       
-      gradethis::fail(
+      return_fail(
         to_sentence("{unit} should have {t_exp_class} {exp_class}, but it has {t_obj_class} {obj_class}."),
         problem = class_problem
       )
@@ -89,7 +89,7 @@ check_vector <- function(
       exp_length <- plu::ral("n value", n = exp_length)
       obj_length <- plu::ral("n value", n = obj_length)
       
-      gradethis::fail(
+      return_fail(
         to_sentence("{unit} should contain {exp_length}, but it has {obj_length}."),
         problem = length_problem
       )
@@ -103,14 +103,14 @@ check_vector <- function(
       t_values <- plu::ral("n value", n = n_values)
       first_n_values <- knitr::combine_words(expected[seq_len(n_values)], before = "`")
       
-      gradethis::fail(
+      return_fail(
         to_sentence("The first {t_values} of {unit} should be {first_n_values}."),
         problem = problem("{prefix}_values")
       )
     }
     
     if (!identical(object, expected)) {
-      gradethis::fail(
+      return_fail(
         to_sentence("{unit} contains unexpected values."),
         problem = problem("{prefix}_values")
       )

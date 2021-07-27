@@ -63,13 +63,15 @@ check_column <- function(
     )
   }
 
-  check_vector(
-    object[[name]],
-    expected[[name]],
-    max_diffs = max_diffs,
-    check_class = check_class,
-    check_length = check_length,
-    check_values = check_values,
-    name = name
+  return_if_graded(
+    check_vector(
+      object[[name]],
+      expected[[name]],
+      max_diffs = max_diffs,
+      check_class = check_class,
+      check_length = check_length,
+      check_values = check_values,
+      name = name
+    )
   )
 }
