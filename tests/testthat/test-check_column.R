@@ -166,30 +166,32 @@ test_that("check_column() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       result <- solution <- tibble::tibble(b = letters[1:3])
-      check_column("a", object = result, expected = solution, check_class = "yes")
+      check_column("b", object = result, expected = solution, check_class = "yes")
     }),
     "check_class"
   )
   
   expect_internal_problem(
-    gradethis:::capture_graded(
-      check_column("a", object = result, expected = solution, check_length =c(TRUE, TRUE))
-    ),
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
+      check_column("b", object = result, expected = solution, check_length = c(TRUE, TRUE))
+    }),
     "check_length"
   )
 
   expect_internal_problem(
     tblcheck_test_grade({
       result <- solution <- tibble::tibble(b = letters[1:3])
-      check_column("a", object = result, expected = solution, check_values = "yes")
+      check_column("b", object = result, expected = solution, check_values = "yes")
     }),
     "check_values"
   )
   
   expect_internal_problem(
-    gradethis:::capture_graded(
-      check_column("a", object = result, expected = solution, max_diffs = 1:3)
-    ),
+    tblcheck_test_grade({
+      result <- solution <- tibble::tibble(b = letters[1:3])
+      check_column("b", object = result, expected = solution, max_diffs = 1:3)
+    }),
     "max_diffs"
   )
 
@@ -204,7 +206,7 @@ test_that("check_column() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       result <- solution <- tibble::tibble(b = letters[1:3])
-      check_column("a", object = result, expected = list(a = 1))
+      check_column("b", object = result, expected = list(a = 1))
     }),
     "expected"
   )
