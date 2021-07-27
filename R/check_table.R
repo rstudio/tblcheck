@@ -37,15 +37,16 @@
 #' @export
 
 check_table <- function(
-  object        = .result,
-  expected      = .solution,
-  max_diffs     = 3,
-  check_nrow    = TRUE,
-  check_names   = TRUE,
-  check_ncol    = !check_names,
-  check_columns = TRUE,
-  check_class   = check_columns,
-  check_values  = check_columns
+  object              = .result,
+  expected            = .solution,
+  max_diffs           = 3,
+  check_class         = TRUE,
+  check_nrow          = TRUE,
+  check_names         = TRUE,
+  check_ncol          = !check_names,
+  check_columns       = TRUE,
+  check_column_class  = check_columns,
+  check_column_values = check_columns
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -65,6 +66,13 @@ check_table <- function(
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
+  
+  # check table class ----
+  if (check_class) {
+    return_if_graded(
+      check_class(object, expected, unit = "table", prefix = "table_")
+    )
+  }
   
   # check number of rows ----
   if (check_nrow) {
