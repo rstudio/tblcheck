@@ -71,18 +71,9 @@ check_column <- function(
   exp_class <- class(exp_col)
   
   # check class
-  if (check_class && !identical(obj_class, exp_class)) {
-    class_problem <- problem("column_class", exp_class, obj_class)
-    
-    t_class <- plu::ral("class", exp_class)
-    exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
-    
-    t_obj_class <- plu::ral("class", obj_class)
-    obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
-    
-    return_fail(
-      "Your `{name}` column should have {t_class} {exp_class}, but it has {t_obj_class} {obj_class}.",
-      problem = class_problem
+  if (check_class) {
+    return_if_graded(
+      check_class(obj_col, exp_col, glue::glue("`{name}` column"), "column_")
     )
   }
   
