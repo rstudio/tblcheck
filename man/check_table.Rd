@@ -8,12 +8,13 @@ check_table(
   object = .result,
   expected = .solution,
   max_diffs = 3,
+  check_class = TRUE,
   check_nrow = TRUE,
   check_names = TRUE,
   check_ncol = !check_names,
   check_columns = TRUE,
-  check_class = check_columns,
-  check_values = check_columns
+  check_column_class = check_columns,
+  check_column_values = check_columns
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ Passed to \code{\link[=check_names]{check_names()}} to determine the number of m
 names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to
 determine the number of mismatched column values to display.
 Defaults to 3.}
+
+\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same classes with \code{\link[=class]{class()}}.}
 
 \item{check_nrow}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows with \code{\link[=nrow]{nrow()}}.}
@@ -42,11 +46,11 @@ running both is redundant.}
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=check_column]{check_column()}}.}
 
-\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
-same class in \code{object} and \code{expected}.}
+\item{check_column_class}{\verb{[logical(1)]}\cr Whether to check that each
+columns has the same class in \code{object} and \code{expected}.}
 
-\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
-same values in \code{object} and \code{expected}.}
+\item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
+column has the same values in \code{object} and \code{expected}.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
