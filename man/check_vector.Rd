@@ -11,7 +11,8 @@ check_vector(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  name = NULL
+  unit = "result",
+  prefix = "vector_"
 )
 }
 \arguments{
@@ -31,9 +32,11 @@ print. Defaults to 3.}
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}
 
-\item{name}{\verb{[character(1)]}\cr If not \code{NULL}, the name of the column
-represented by \code{object} and \code{expected}, usually passed
-from \code{\link[=check_column]{check_column()}}.}
+\item{unit}{\verb{[character(1)]}\cr The label used to describe the vector in
+feedback messages. Defaults to \code{"result"}.}
+
+\item{prefix}{\verb{[character(1)]}\cr The prefix appended to the \code{problem} label
+in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{"vector_"}.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
