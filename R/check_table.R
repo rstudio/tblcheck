@@ -20,6 +20,8 @@
 #'   names to display and the `n_values` argument of [check_column()] to
 #'   determine the number of mismatched column values to display.
 #'   Defaults to 3.
+#' @param check_class `[logical(1)]`\cr Whether to check that `object` and 
+#'   `expected` have the same classes with [class()].
 #' @param check_nrow `[logical(1)]`\cr Whether to check that `object` and 
 #'   `expected` have the same number of rows with [nrow()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
@@ -30,22 +32,26 @@
 #'   running both is redundant.
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [check_column()].
-#' @inheritParams check_column
+#' @param check_column_class `[logical(1)]`\cr Whether to check that each
+#'   columns has the same class in `object` and `expected`.
+#' @param check_column_values `[logical(1)]`\cr Whether to check that each
+#'   column has the same values in `object` and `expected`.
 #'
 #' @return If there are any issues, generate a [gradethis::fail()] message.
 #'   Otherwise, invisibly return [`NULL`].
 #' @export
 
 check_table <- function(
-  object        = .result,
-  expected      = .solution,
-  max_diffs     = 3,
-  check_nrow    = TRUE,
-  check_names   = TRUE,
-  check_ncol    = !check_names,
-  check_columns = TRUE,
-  check_class   = check_columns,
-  check_values  = check_columns
+  object              = .result,
+  expected            = .solution,
+  max_diffs           = 3,
+  check_class         = TRUE,
+  check_nrow          = TRUE,
+  check_names         = TRUE,
+  check_ncol          = !check_names,
+  check_columns       = TRUE,
+  check_column_class  = check_columns,
+  check_column_values = check_columns
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -56,15 +62,23 @@ check_table <- function(
   
   assert_internally({
     checkmate::assert_number(max_diffs, lower = 1)
-    checkmate::assert_logical(check_nrow,    any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_names,   any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_ncol,    any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_columns, any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_class,   any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_values,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_nrow,          any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_ncol,          any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
+  
+  # check table class ----
+  if (check_class) {
+    return_if_graded(
+      check_class(object, expected, unit = "table", prefix = "table_")
+    )
+  }
   
   # check number of rows ----
   if (check_nrow) {
@@ -111,8 +125,8 @@ check_table <- function(
         check_column,
         object       = object,
         expected     = expected,
-        check_class  = check_class,
-        check_values = check_values,
+        check_class  = check_column_class,
+        check_values = check_column_values,
         check_length = FALSE,
         max_diffs    = max_diffs
       )

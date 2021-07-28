@@ -62,7 +62,7 @@ check_column <- function(
       problem = problem("column_name", name)
     )
   }
-
+  
   return_if_graded(
     check_vector(
       object[[name]],

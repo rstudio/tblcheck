@@ -3,6 +3,7 @@
 export("%>%")
 export(.result)
 export(.solution)
+export(check_class)
 export(check_column)
 export(check_names)
 export(check_table)
