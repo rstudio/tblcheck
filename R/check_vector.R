@@ -57,23 +57,9 @@ check_vector <- function(
   })
   
   if (check_class) {
-    obj_class <- class(object)
-    exp_class <- class(expected)
-    
-    if (!identical(obj_class, exp_class)) {
-      class_problem <- problem("{prefix}class", exp_class, obj_class)
-      
-      t_exp_class <- plu::ral("class", exp_class)
-      exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
-      
-      t_obj_class <- plu::ral("class", obj_class)
-      obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
-      
-      return_fail(
-        to_sentence("Your {unit} should have {t_exp_class} {exp_class}, but it has {t_obj_class} {obj_class}."),
-        problem = class_problem
-      )
-    }
+    return_if_graded(
+      check_class(object, expected, unit = unit, prefix = prefix)
+    )
   }
   
   if (check_length) {
