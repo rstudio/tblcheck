@@ -24,6 +24,32 @@ test_that("check_class()", {
     problem = problem("class", "numeric", "character"),
     fixed   = TRUE
   )
+  
+  grade <- tblcheck_test_grade({
+    .result   <- "2021-07-29 10:59:59"
+    .solution <- as.POSIXct("2021-07-29 10:59:59")
+    check_class()
+  })
+  
+  expect_grade(
+    grade,
+    message = "Your result should be a date-time (class `POSIXct`), but it is a text string (class `character`).",
+    problem = problem("class", c("POSIXct", "POSIXt"), "character"),
+    fixed   = TRUE
+  )
+  
+  grade <- tblcheck_test_grade({
+    .result   <- c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
+    .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+    check_class()
+  })
+  
+  expect_grade(
+    grade,
+    message = "Your result should be a vector of date-times (class `POSIXlt`), but it is a vector of text (class `character`).",
+    problem = problem("class", c("POSIXlt", "POSIXt"), "character"),
+    fixed   = TRUE
+  )
 })
 
 test_that("check_class() ignores inconsequential mismatches", {
@@ -38,6 +64,14 @@ test_that("check_class() ignores inconsequential mismatches", {
   grade <- tblcheck_test_grade({
     .result   <- glue::glue("x")
     .solution <- "x"
+    check_class()
+  })
+  
+  expect_null(grade)
+  
+  grade <- tblcheck_test_grade({
+    .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+    .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
     check_class()
   })
   

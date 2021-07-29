@@ -35,6 +35,7 @@ check_class <- function(
   if (!identical(obj_class, exp_class)) {
     if (identical(exp_class, "numeric") && identical(obj_class, "integer")) return()
     if (identical(sort(union(exp_class, obj_class)), c("character", "glue"))) return()
+    if (identical(sort(union(exp_class, obj_class)), c("POSIXct", "POSIXlt", "POSIXt"))) return()
     
     class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
@@ -97,6 +98,12 @@ friendly_class <- function(class, x) {
   if (identical(class, "integer")) {
     if (length(x) > 1) return("a vector of integers (class `integer`)")
     return("an integer (class `integer`)")
+  }
+  
+  if (all(class %in% c("POSIXt", "POSIXct", "POSIXlt"))) {
+    class <- setdiff(class, "POSIXt")
+    if (length(x) > 1) return(glue::glue("a vector of date-times (class `{class}`)"))
+    return(glue::glue("a date-time (class `{class}`)"))
   }
   
   if (identical(class, c("tbl_df", "tbl", "data.frame"))) {
