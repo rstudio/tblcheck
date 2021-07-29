@@ -33,6 +33,9 @@ check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
+    if (identical(exp_class, "numeric") && identical(obj_class, "integer")) return()
+    if (identical(sort(union(exp_class, obj_class)), c("character", "glue"))) return()
+    
     class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
     t_exp_class <- ngettext(length(exp_class), "class", "classes")
