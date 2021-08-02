@@ -74,7 +74,7 @@ check_vector <- function(
       obj_length <- plu::ral("n value", n = obj_length)
       
       return_fail(
-        to_sentence("Your {unit} should contain {exp_length}, but it has {obj_length}."),
+        "Your {unit} should contain {exp_length}, but it has {obj_length}.",
         problem = length_problem
       )
     }
@@ -88,14 +88,14 @@ check_vector <- function(
       first_n_values <- knitr::combine_words(expected[seq_len(n_values)], before = "`")
       
       return_fail(
-        to_sentence("The first {t_values} of your {unit} should be {first_n_values}."),
+        "The first {t_values} of your {unit} should be {first_n_values}.",
         problem = problem(paste0(prefix, "values"), first_n_values)
       )
     }
     
     if (!identical(object, expected)) {
       return_fail(
-        to_sentence("Your {unit} contains unexpected values."),
+        "Your {unit} contains unexpected values.",
         problem = problem(paste0(prefix, "values"), NULL)
       )
     }

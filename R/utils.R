@@ -34,12 +34,6 @@ internal_error <- function(err) {
     problem = problem("internal_feedback_error", error = err$message)
   )
 }
-
-to_sentence <- function(x) {
-  x <- glue::glue(x, .envir = rlang::caller_env())
-  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
-  x
-}
   
 # Wrap any expression that may return a grade in `return_if_graded()` to return
 # the graded condition from the calling function if we don't have another
