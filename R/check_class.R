@@ -12,8 +12,9 @@
 #' @param expected A vector containing the expected result.
 #' @param unit `[character(1)]`\cr The label used to describe the object in
 #'   feedback messages. Defaults to `"result"`.
-#' @param problem_prefix `[character(1)]`\cr The prefix appended to the `problem` label 
-#'   in [gradethis::fail()] objects. Defaults to `""`, which appends no prefix.
+#' @param problem_prefix `[character(1)]`\cr The prefix appended to the
+#'   `problem` label in [gradethis::fail()] objects.
+#'   Defaults to `""`, which appends no prefix.
 #'
 #' @inherit check_table return
 #' @export

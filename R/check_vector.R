@@ -22,8 +22,8 @@
 #'   `expected` contain the same values.
 #' @param unit `[character(1)]`\cr The label used to describe the vector in
 #'   feedback messages. Defaults to `"result"`.
-#' @param prefix `[character(1)]`\cr The prefix appended to the `problem` label 
-#'   in [gradethis::fail()] objects. Defaults to `"vector_"`.
+#' @param problem_prefix `[character(1)]`\cr The prefix appended to the
+#'   `problem` label in [gradethis::fail()] objects. Defaults to `"vector_"`.
 #'
 #' @inherit check_table return
 #' @export
@@ -35,8 +35,8 @@ check_vector <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  unit   = "result",
-  prefix = "vector_"
+  unit = "result",
+  problem_prefix = "vector_"
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -53,12 +53,14 @@ check_vector <- function(
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
     checkmate::assert_string(unit)
-    checkmate::assert_string(prefix)
+    checkmate::assert_string(problem_prefix)
   })
   
   if (check_class) {
     return_if_graded(
-      check_class(object, expected, unit = unit, prefix = prefix)
+      check_class(
+        object, expected, unit = unit, problem_prefix = problem_prefix
+      )
     )
   }
   
@@ -68,7 +70,7 @@ check_vector <- function(
     
     if (!identical(obj_length, exp_length)) {
       length_problem <- problem(
-        paste0(prefix, "length"), exp_length, obj_length
+        paste0(problem_prefix, "length"), exp_length, obj_length
       )
       exp_length <- plu::ral("n value", n = exp_length)
       obj_length <- plu::ral("n value", n = obj_length)
@@ -85,7 +87,7 @@ check_vector <- function(
     first_n_values <- expected[seq_len(n_values)]
     
     if (!identical(object[seq_len(n_values)], first_n_values)) {
-      values_problem <- problem(paste0(prefix, "values"), first_n_values)
+      values_problem <- problem(paste0(problem_prefix, "values"), first_n_values)
       n_values <- paste(n_values, ngettext(n_values, "value", "values"))
       first_n_values <- knitr::combine_words(first_n_values, before = "`")
       
@@ -98,7 +100,7 @@ check_vector <- function(
     if (!identical(object, expected)) {
       return_fail(
         "Your {unit} contains unexpected values.",
-        problem = problem(paste0(prefix, "values"), NULL)
+        problem = problem(paste0(problem_prefix, "values"), NULL)
       )
     }
   }
