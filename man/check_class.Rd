@@ -8,7 +8,7 @@ check_class(
   object = .result,
   expected = .solution,
   unit = "result",
-  prefix = ""
+  problem_prefix = ""
 )
 }
 \arguments{
@@ -19,7 +19,7 @@ check_class(
 \item{unit}{\verb{[character(1)]}\cr The label used to describe the object in
 feedback messages. Defaults to \code{"result"}.}
 
-\item{prefix}{\verb{[character(1)]}\cr The prefix appended to the \code{problem} label
+\item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the \code{problem} label
 in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{""}, which appends no prefix.}
 }
 \value{

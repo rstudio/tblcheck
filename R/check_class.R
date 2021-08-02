@@ -12,7 +12,7 @@
 #' @param expected A vector containing the expected result.
 #' @param unit `[character(1)]`\cr The label used to describe the object in
 #'   feedback messages. Defaults to `"result"`.
-#' @param prefix `[character(1)]`\cr The prefix appended to the `problem` label 
+#' @param problem_prefix `[character(1)]`\cr The prefix appended to the `problem` label 
 #'   in [gradethis::fail()] objects. Defaults to `""`, which appends no prefix.
 #'
 #' @inherit check_table return
@@ -20,7 +20,7 @@
 
 
 check_class <- function(
-  object = .result, expected = .solution, unit = "result", prefix = ""
+  object = .result, expected = .solution, unit = "result", problem_prefix = ""
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
@@ -33,7 +33,7 @@ check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    class_problem <- problem(paste0(prefix, "class"), exp_class, obj_class)
+    class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
     t_exp_class <- ngettext(length(exp_class), "class", "classes")
     exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
