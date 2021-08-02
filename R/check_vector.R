@@ -68,7 +68,6 @@ check_vector <- function(
     
     if (!identical(obj_length, exp_length)) {
       length_problem <- problem("{prefix}length", exp_length, obj_length)
-      
       exp_length <- plu::ral("n value", n = exp_length)
       obj_length <- plu::ral("n value", n = obj_length)
       
