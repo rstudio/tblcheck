@@ -33,7 +33,7 @@ check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    class_problem <- problem("{prefix}class", exp_class, obj_class)
+    class_problem <- problem(paste0(prefix, "class"), exp_class, obj_class)
     
     t_exp_class <- ngettext(length(exp_class), "class", "classes")
     exp_class <- exp_class %>% md_code() %>% knitr::combine_words()

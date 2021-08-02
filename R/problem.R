@@ -16,7 +16,7 @@ problem <- function(type, expected = NULL, actual = NULL, ...) {
   checkmate::assert_string(type, min.chars = 1)
   
   problem <- list(
-    type = as.character(glue::glue(type, .envir = rlang::caller_env())),
+    type = type,
     expected = expected,
     actual = actual,
     ...

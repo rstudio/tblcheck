@@ -67,7 +67,9 @@ check_vector <- function(
     exp_length <- length(expected)
     
     if (!identical(obj_length, exp_length)) {
-      length_problem <- problem("{prefix}length", exp_length, obj_length)
+      length_problem <- problem(
+        paste0(prefix, "length"), exp_length, obj_length
+      )
       
       exp_length <- plu::ral("n value", n = exp_length)
       obj_length <- plu::ral("n value", n = obj_length)
@@ -88,14 +90,14 @@ check_vector <- function(
       
       return_fail(
         to_sentence("The first {t_values} of your {unit} should be {first_n_values}."),
-        problem = problem("{prefix}values")
+        problem = problem(paste0(prefix, "values"))
       )
     }
     
     if (!identical(object, expected)) {
       return_fail(
         to_sentence("Your {unit} contains unexpected values."),
-        problem = problem("{prefix}values")
+        problem = problem(paste0(prefix, "values"))
       )
     }
   }
