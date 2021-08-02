@@ -90,14 +90,14 @@ check_vector <- function(
       
       return_fail(
         to_sentence("The first {t_values} of your {unit} should be {first_n_values}."),
-        problem = problem(paste0(prefix, "values"))
+        problem = problem(paste0(prefix, "values"), first_n_values)
       )
     }
     
     if (!identical(object, expected)) {
       return_fail(
         to_sentence("Your {unit} contains unexpected values."),
-        problem = problem(paste0(prefix, "values"))
+        problem = problem(paste0(prefix, "values"), NULL)
       )
     }
   }
