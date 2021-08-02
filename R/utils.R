@@ -34,7 +34,7 @@ internal_error <- function(err) {
     problem = problem("internal_feedback_error", error = err$message)
   )
 }
-
+  
 # Wrap any expression that may return a grade in `return_if_graded()` to return
 # the graded condition from the calling function if we don't have another
 # calling handler watching for the `gradethis_graded` condition.

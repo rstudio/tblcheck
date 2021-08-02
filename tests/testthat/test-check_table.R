@@ -79,7 +79,7 @@ test_that("check_table() columns", {
   expect_grade(
     grade,
     message = "first 3 values of your `a` column should be `x`, `y`, and `z`",
-    problem = problem("column_values")
+    problem = problem("column_values", letters[24:26])
   )
 })
 
@@ -179,9 +179,9 @@ test_that("check_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      check_table(object = result, expected = solution, check_values = c(TRUE, TRUE))
+      check_table(object = result, expected = solution, check_column_values = c(TRUE, TRUE))
     }),
-    "check_values"
+    "check_column_values"
   )
 })
 
