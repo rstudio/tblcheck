@@ -38,15 +38,105 @@ check_class <- function(
     
     class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
-    t_exp_class <- ngettext(length(exp_class), "class", "classes")
-    exp_class <- exp_class %>% md_code() %>% knitr::combine_words()
+    if ("rowwise_df" %in% obj_class && "grouped_df" %in% exp_class) {
+      return_fail(
+        "Your {unit} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
+        problem = class_problem
+      )
+    }
     
-    t_obj_class <- ngettext(length(obj_class), "class", "classes")
-    obj_class <- obj_class %>% md_code() %>% knitr::combine_words()
+    table_class_message <- table_class_message(obj_class, exp_class)
+    if (!is.null(table_class_message)) {
+      return_fail(
+        table_class_message,
+        problem = class_problem
+      )
+    }
     
-    return_fail(
-      "Your {unit} should have {t_exp_class} {exp_class}, but it has {t_obj_class} {obj_class}.",
-      problem = class_problem
-    )
+    friendly_exp_class <- friendly_class(exp_class, expected)
+    
+    if (!is.null(friendly_exp_class)) {
+      exp_message <- glue::glue("Your {unit} should be {friendly_exp_class},")
+    } else {
+      exp_class_str <- knitr::combine_words(md_code(exp_class))
+      exp_message   <- ngettext(
+        length(exp_class),
+        glue::glue("Your {unit} should have class {exp_class_str},"),
+        glue::glue("Your {unit} should have classes {exp_class_str},")
+      )
+    }
+    
+    friendly_obj_class <- friendly_class(obj_class, object)
+    
+    if (!is.null(friendly_obj_class)) {
+      obj_message <- glue::glue("but it is {friendly_obj_class}.")
+    } else {
+      obj_class_str <- knitr::combine_words(md_code(obj_class))
+      obj_message   <- ngettext(
+        length(obj_class),
+        glue::glue("but it has class {obj_class_str}."),
+        glue::glue("but it has classes {obj_class_str}.")
+      )
+    }
+    
+    return_fail(paste(exp_message, obj_message), problem = class_problem)
   }
 }
+
+friendly_class <- function(class, x) {
+  if (identical(class, "character")) {
+    if (length(x) > 1) return("a vector of text (class `character`)")
+    return("a text string (class `character`)")
+  }
+  
+  if (identical(class, "numeric")) {
+    if (length(x) > 1) return("a vector of numbers (class `numeric`)")
+    return("a number (class `numeric`)")
+  }
+  
+  if (identical(class, "integer")) {
+    if (length(x) > 1) return("a vector of integers (class `integer`)")
+    return("an integer (class `integer`)")
+  }
+  
+  if (identical(class, c("tbl_df", "tbl", "data.frame"))) {
+    return("a tibble (class `tbl_df`)")
+  }
+  
+  if (identical(class, "data.frame")) {
+    return("a data frame (class `data.frame`)")
+  }
+  
+  invisible()
+}
+
+table_class_message <- function(obj_class, exp_class) {
+  for (class in class_message_list[, "class"]) {
+    if (class %in% obj_class && !class %in% exp_class) {
+      return(
+        class_message_list[class_message_list[, "class"] == class, "unexpected"]
+      )
+    }
+    
+    if (!class %in% obj_class && class %in% exp_class) {
+      return(
+        class_message_list[class_message_list[, "class"] == class, "missing"]
+      )
+    }
+  }
+  
+  invisible()
+}
+
+class_message_list <- rbind(
+  list(
+    class = "grouped_df",
+    missing = "Your {unit} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
+    unexpected = "Your {unit} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+  ),
+  list(
+    class = "rowwise_df",
+    missing = "Your {unit} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?",
+    unexpected = "Your {unit} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+  )
+)

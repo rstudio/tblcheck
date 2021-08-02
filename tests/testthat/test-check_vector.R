@@ -7,8 +7,9 @@ test_that("check_vector() checks classes", {
   
   expect_grade(
     grade,
-    "Your result should have class `integer`, but it has class `character`",
-    problem = problem("vector_class", "integer", "character")
+    "Your result should be a vector of integers (class `integer`), but it is a vector of text (class `character`).",
+    problem = problem("vector_class", "integer", "character"),
+    fixed = TRUE
   )
 })
 
@@ -36,12 +37,13 @@ test_that("check_vector() checks multiple classes", {
   
   expect_grade(
     grade,
-    "Your result should have classes `test`, `class`, and `integer`, but it has class `integer`",
+    "Your result should have classes `test`, `class`, and `integer`, but it is a vector of integers (class `integer`).",
     problem = problem(
       type = "vector_class", 
       expected = c("test", "class", "integer"), 
       actual = "integer"
-    )
+    ),
+    fixed = TRUE
   )
 })
 
