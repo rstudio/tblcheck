@@ -70,7 +70,6 @@ check_vector <- function(
       length_problem <- problem(
         paste0(prefix, "length"), exp_length, obj_length
       )
-      
       exp_length <- plu::ral("n value", n = exp_length)
       obj_length <- plu::ral("n value", n = obj_length)
       
