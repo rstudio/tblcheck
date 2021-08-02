@@ -14,7 +14,7 @@ test_that("check_column() checks classes", {
 
 test_that("check_column() checks the first three values", {
   grade <- tblcheck_test_grade({
-    .result     = tibble::tibble(a = rev(letters))
+    .result   = tibble::tibble(a = rev(letters))
     .solution = tibble::tibble(a = letters)
     check_column("a")
   })
@@ -22,7 +22,7 @@ test_that("check_column() checks the first three values", {
   expect_grade(
     grade,
     "The first 3 values of your `a` column should be `a`, `b`, and `c",
-    problem = problem("column_values")
+    problem = problem("column_values", letters[1:3])
   )
 })
 
@@ -60,7 +60,7 @@ test_that("check_column() checks for value differences beyond the first 3", {
 
 test_that("max_diffs modifies the number of values to print", {
   grade <- tblcheck_test_grade({
-    .result = tibble::tibble(a = letters)
+    .result   = tibble::tibble(a = letters)
     .solution = tibble::tibble(a = rev(letters))
     check_column("a", max_diffs = 5)
   })
@@ -68,7 +68,7 @@ test_that("max_diffs modifies the number of values to print", {
   expect_grade(
     grade,
     "The first 5 values of your `a` column should be `z`, `y`, `x`, `w`, and `v",
-    problem = problem("column_values")
+    problem = problem("column_values", letters[26:22])
   )
 })
 
@@ -82,7 +82,7 @@ test_that("max_diffs doesn't overflow", {
   expect_grade(
     grade,
     message = "`b` and `a`.",
-    problem = problem("column_values")
+    problem = problem("column_values", letters[2:1])
   )
   expect_no_match(grade$message, "`NA`")
 })

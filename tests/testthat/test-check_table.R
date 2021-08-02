@@ -79,7 +79,7 @@ test_that("check_table() columns", {
   expect_grade(
     grade,
     message = "first 3 values of your `a` column should be `x`, `y`, and `z`",
-    problem = problem("column_values")
+    problem = problem("column_values", letters[24:26])
   )
 })
 

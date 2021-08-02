@@ -22,7 +22,7 @@ test_that("check_vector() checks the first three values", {
   expect_grade(
     grade,
     "The first 3 values of your result should be `a`, `b`, and `c",
-    problem = problem("vector_values")
+    problem = problem("vector_values", letters[1:3])
   )
 })
 
@@ -69,7 +69,7 @@ test_that("max_diffs modifies the number of values to print", {
   expect_grade(
     grade,
     "The first 5 values of your result should be `z`, `y`, `x`, `w`, and `v`",
-    problem = problem("vector_values")
+    problem = problem("vector_values", letters[26:22])
   )
 })
 
@@ -80,7 +80,7 @@ test_that("max_diffs doesn't overflow", {
     check_vector(max_diffs = 3)
   })
 
-  expect_equal(grade$problem, problem("vector_values"))
+  expect_equal(grade$problem, problem("vector_values", letters[2:1]))
   expect_false(grade$correct)
   expect_no_match(grade$message, "`NA`")
   expect_match(grade$message, "`b` and `a`.")

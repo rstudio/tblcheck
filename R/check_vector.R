@@ -82,14 +82,16 @@ check_vector <- function(
   
   if (check_values) {
     n_values <- min(length(expected), max_diffs)
+    first_n_values <- expected[seq_len(n_values)]
     
-    if (!identical(object[seq_len(n_values)], expected[seq_len(n_values)])) {
-      t_values <- plu::ral("n value", n = n_values)
-      first_n_values <- knitr::combine_words(expected[seq_len(n_values)], before = "`")
+    if (!identical(object[seq_len(n_values)], first_n_values)) {
+      values_problem <- problem(paste0(prefix, "values"), first_n_values)
+      n_values <- paste(n_values, ngettext(n_values, "value", "values"))
+      first_n_values <- knitr::combine_words(first_n_values, before = "`")
       
       return_fail(
-        "The first {t_values} of your {unit} should be {first_n_values}.",
-        problem = problem(paste0(prefix, "values"), first_n_values)
+        "The first {n_values} of your {unit} should be {first_n_values}.",
+        problem = values_problem
       )
     }
     
