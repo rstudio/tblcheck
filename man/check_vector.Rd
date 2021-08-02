@@ -12,7 +12,7 @@ check_vector(
   check_length = TRUE,
   check_values = TRUE,
   unit = "result",
-  prefix = "vector_"
+  problem_prefix = "vector_"
 )
 }
 \arguments{

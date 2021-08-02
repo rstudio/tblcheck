@@ -12,9 +12,9 @@ check_class(
 )
 }
 \arguments{
-\item{object}{A vector to be compared to \code{expected}.}
+\item{object}{An object to be compared to \code{expected}.}
 
-\item{expected}{A vector containing the expected result.}
+\item{expected}{An object containing the expected result.}
 
 \item{unit}{\verb{[character(1)]}\cr The label used to describe the object in
 feedback messages. Defaults to \code{"result"}.}

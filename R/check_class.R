@@ -8,8 +8,8 @@
 #' 
 #' 1. `class`: `object` doesn't have the same classes as `expected`
 #'
-#' @param object A vector to be compared to `expected`.
-#' @param expected A vector containing the expected result.
+#' @param object An object to be compared to `expected`.
+#' @param expected An object containing the expected result.
 #' @param unit `[character(1)]`\cr The label used to describe the object in
 #'   feedback messages. Defaults to `"result"`.
 #' @param problem_prefix `[character(1)]`\cr The prefix appended to the
