@@ -88,7 +88,7 @@ test_that("check_class() with multiple classes", {
   
   expect_grade(
     grade,
-    message = "Your result should have classes `test`, `class`, and `integer`, but it is an integer (class `integer`).",
+    message = "Your result should be an object with classes `test`, `class`, and `integer`, but it is an integer (class `integer`).",
     problem = problem("class", c("test", "class", "integer"), "integer"),
     fixed   = TRUE
   )
@@ -102,7 +102,7 @@ test_that("check_class() with multiple classes", {
   
   expect_grade(
     grade,
-    message = "Your result should be an integer (class `integer`), but it has classes `test`, `class`, and `integer`.",
+    message = "Your result should be an integer (class `integer`), but it is an object with classes `test`, `class`, and `integer`.",
     problem = problem("class", "integer", c("test", "class", "integer")),
     fixed   = TRUE
   )

@@ -61,32 +61,12 @@ check_class <- function(
     }
     
     friendly_exp_class <- friendly_class(exp_class, expected)
-    
-    if (!is.null(friendly_exp_class)) {
-      exp_message <- glue::glue("Your {unit} should be {friendly_exp_class},")
-    } else {
-      exp_class_str <- knitr::combine_words(md_code(exp_class))
-      exp_message   <- ngettext(
-        length(exp_class),
-        glue::glue("Your {unit} should have class {exp_class_str},"),
-        glue::glue("Your {unit} should have classes {exp_class_str},")
-      )
-    }
-    
     friendly_obj_class <- friendly_class(obj_class, object)
+    message <- glue::glue(
+      "Your {unit} should be {friendly_exp_class}, but it is {friendly_obj_class}."
+    )
     
-    if (!is.null(friendly_obj_class)) {
-      obj_message <- glue::glue("but it is {friendly_obj_class}.")
-    } else {
-      obj_class_str <- knitr::combine_words(md_code(obj_class))
-      obj_message   <- ngettext(
-        length(obj_class),
-        glue::glue("but it has class {obj_class_str}."),
-        glue::glue("but it has classes {obj_class_str}.")
-      )
-    }
-    
-    return_fail(paste(exp_message, obj_message), problem = class_problem)
+    return_fail(message, problem = class_problem)
   }
 }
 
@@ -120,7 +100,12 @@ friendly_class <- function(class, x) {
     return("a data frame (class `data.frame`)")
   }
   
-  invisible()
+  paste(
+    ifelse(length(x) > 1, "a vector", "an object"),
+    "with",
+    ngettext(length(class), "class", "classes"),
+    knitr::combine_words(md_code(class))
+  )
 }
 
 table_class_message <- function(obj_class, exp_class) {
