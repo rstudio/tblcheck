@@ -33,6 +33,11 @@ check_class <- function(
   obj_class <- class(object)
   exp_class <- class(expected)
   
+  assert_internally({
+    checkmate::assert_string(unit)
+    checkmate::assert_string(problem_prefix)
+  })
+  
   if (!identical(obj_class, exp_class)) {
     if (identical(exp_class, "numeric") && identical(obj_class, "integer")) return()
     if (identical(sort(union(exp_class, obj_class)), c("character", "glue"))) return()
