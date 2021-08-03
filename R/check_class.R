@@ -39,9 +39,9 @@ check_class <- function(
   })
   
   if (!identical(obj_class, exp_class)) {
-    if (identical(exp_class, "numeric") && identical(obj_class, "integer")) return()
-    if (identical(sort(union(exp_class, obj_class)), c("character", "glue"))) return()
-    if (identical(sort(union(exp_class, obj_class)), c("POSIXct", "POSIXlt", "POSIXt"))) return()
+    if (!has_meaningful_class_difference(exp_class, obj_class)) {
+      return()
+    }
     
     class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
@@ -68,6 +68,30 @@ check_class <- function(
     
     return_fail(message, problem = class_problem)
   }
+}
+
+has_meaningful_class_difference <- function(exp_class, obj_class) {
+  class_union <- sort(union(exp_class, obj_class))
+  
+  # Check that the union of `exp_class` and `obj_class` is not in the list
+  # of insignificant class differences
+  !any(
+    purrr::map_lgl(insignificant_class_differences(), identical, class_union)
+  )
+}
+
+insignificant_class_differences <- function() {
+  # The list is sorted when called in order to ensure the same
+  # locale-specific sorting rules apply to both inputs to
+  # `identical()` in `has_meaningful_class_difference()`
+  lapply(
+    list(
+      c("integer", "numeric"),
+      c("character", "glue"),
+      c("POSIXct", "POSIXlt", "POSIXt")
+    ),
+    sort
+  )
 }
 
 friendly_class <- function(class, x) {
