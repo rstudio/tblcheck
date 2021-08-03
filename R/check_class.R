@@ -45,12 +45,9 @@ check_class <- function(
     
     class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
-    table_class_message <- table_class_message(obj_class, exp_class)
-    if (!is.null(table_class_message)) {
-      return_fail(
-        table_class_message,
-        problem = class_problem
-      )
+    hinted_class_message <- hinted_class_message(obj_class, exp_class)
+    if (!is.null(hinted_class_message)) {
+      return_fail(hinted_class_message, problem = class_problem)
     }
     
     friendly_exp_class <- friendly_class(exp_class, expected)
@@ -125,11 +122,11 @@ friendly_class <- function(class, x) {
   )
 }
 
-table_class_message <- function(obj_class, exp_class) {
-  class_message_list <- class_message_list()
+hinted_class_message <- function(obj_class, exp_class) {
+  hinted_class_message_list <- hinted_class_message_list()
   
-  for (i in seq_along(class_message_list)) {
-    list <- class_message_list[[i]]
+  for (i in seq_along(hinted_class_message_list)) {
+    list <- hinted_class_message_list[[i]]
     
     if (
       list$obj_test(list$obj_class, obj_class) &&
@@ -142,7 +139,7 @@ table_class_message <- function(obj_class, exp_class) {
   invisible()
 }
 
-class_message_list <- function() {
+hinted_class_message_list <- function() {
   list(
     list(
       obj_class = "rowwise_df",
