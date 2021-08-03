@@ -81,40 +81,76 @@ has_meaningful_class_difference <- function(exp_class, obj_class) {
 }
 
 friendly_class <- function(class, x) {
-  if (identical(class, "character")) {
-    if (length(x) > 1) return("a vector of text (class `character`)")
-    return("a text string (class `character`)")
+  friendly_class_list <- friendly_class_list()
+  
+  for (i in seq_along(friendly_class_list)) {
+    list <- friendly_class_list[[i]]
+    
+    if (unordered_identical(list$class, class)) {
+      if (length(x) > 1) return(list$multiple %||% list$single)
+      return(list$single)
+    }
   }
   
-  if (identical(class, "numeric")) {
-    if (length(x) > 1) return("a vector of numbers (class `numeric`)")
-    return("a number (class `numeric`)")
-  }
+  class_str <- knitr::combine_words(md_code(class))
   
-  if (identical(class, "integer")) {
-    if (length(x) > 1) return("a vector of integers (class `integer`)")
-    return("an integer (class `integer`)")
-  }
-  
-  if (all(class %in% c("POSIXt", "POSIXct", "POSIXlt"))) {
-    class <- setdiff(class, "POSIXt")
-    if (length(x) > 1) return(glue::glue("a vector of date-times (class `{class}`)"))
-    return(glue::glue("a date-time (class `{class}`)"))
-  }
-  
-  if (identical(class, c("tbl_df", "tbl", "data.frame"))) {
-    return("a tibble (class `tbl_df`)")
-  }
-  
-  if (identical(class, "data.frame")) {
-    return("a data frame (class `data.frame`)")
-  }
-  
-  paste(
-    ifelse(length(x) > 1, "a vector", "an object"),
-    "with",
-    ngettext(length(class), "class", "classes"),
-    knitr::combine_words(md_code(class))
+  glue::glue(
+    ifelse(
+      length(x) > 1,
+      ngettext(
+        length(class),
+        "a vector with class {class_str}",
+        "a vector with classes {class_str}"
+      ),
+      ngettext(
+        length(class),
+        "an object with class {class_str}",
+        "an object with classes {class_str}"
+      )
+    )
+  )
+}
+
+friendly_class_list <- function() {
+  list(
+    list(
+      class    = "character",
+      single   = "a text string (class `character`)",
+      multiple = "a vector of text (class `character`)"
+    ),
+    list(
+      class    = "numeric",
+      single   = "a number (class `numeric`)",
+      multiple = "a vector of numbers (class `numeric`)"
+    ),
+    list(
+      class    = "integer",
+      single   = "an integer (class `integer`)",
+      multiple = "a vector of integers (class `integer`)"
+    ),
+    list(
+      class    = "logical",
+      single   = "an TRUE/FALSE value (class `integer`)",
+      multiple = "a vector of TRUE/FALSE values (class `integer`)"
+    ),
+    list(
+      class    = c("POSIXct", "POSIXt"),
+      single   = "a date-time (class `POSIXct`)",
+      multiple = "a vector of date-times (class `POSIXct`)"
+    ),
+    list(
+      class    = c("POSIXlt", "POSIXt"),
+      single   = "a date-time (class `POSIXlt`)",
+      multiple = "a vector of date-times (class `POSIXlt`)"
+    ),
+    list(
+      class    = c("tbl_df", "tbl", "data.frame"),
+      single   = "a tibble (class `tbl_df`)"
+    ),
+    list(
+      class    = "data.frame",
+      single   = "a data frame (class `data.frame`)"
+    )
   )
 }
 
@@ -171,7 +207,8 @@ hinted_class_message_list <- function() {
   )
 }
 
-# Test that two vectors are identical with the exception that they may be in different orders
+# Test that two vectors are identical
+# with the exception that they may be in different orders
 unordered_identical <- function(x, y) {
   all(x %in% y) && all(y %in% x)
 }
