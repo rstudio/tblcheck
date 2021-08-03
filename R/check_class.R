@@ -174,3 +174,8 @@ hinted_class_message_list <- function() {
     )
   )
 }
+
+# Test that two vectors are identical with the exception that they may be in different orders
+unordered_identical <- function(x, y) {
+  all(x %in% y) && all(y %in% x)
+}
