@@ -45,13 +45,6 @@ check_class <- function(
     
     class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
     
-    if ("rowwise_df" %in% obj_class && "grouped_df" %in% exp_class) {
-      return_fail(
-        "Your {unit} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
-        problem = class_problem
-      )
-    }
-    
     table_class_message <- table_class_message(obj_class, exp_class)
     if (!is.null(table_class_message)) {
       return_fail(
@@ -133,32 +126,54 @@ friendly_class <- function(class, x) {
 }
 
 table_class_message <- function(obj_class, exp_class) {
-  for (class in class_message_list[, "class"]) {
-    if (class %in% obj_class && !class %in% exp_class) {
-      return(
-        class_message_list[class_message_list[, "class"] == class, "unexpected"]
-      )
-    }
+  class_message_list <- class_message_list()
+  
+  for (i in seq_along(class_message_list)) {
+    list <- class_message_list[[i]]
     
-    if (!class %in% obj_class && class %in% exp_class) {
-      return(
-        class_message_list[class_message_list[, "class"] == class, "missing"]
-      )
+    if (
+      list$obj_test(list$obj_class, obj_class) &&
+      list$exp_test(list$exp_class, exp_class)
+    ) {
+      return(list$message)
     }
   }
   
   invisible()
 }
 
-class_message_list <- rbind(
+class_message_list <- function() {
   list(
-    class = "grouped_df",
-    missing = "Your {unit} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
-    unexpected = "Your {unit} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
-  ),
-  list(
-    class = "rowwise_df",
-    missing = "Your {unit} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?",
-    unexpected = "Your {unit} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+    list(
+      obj_class = "rowwise_df",
+      obj_test  = `%in%`,
+      exp_class = "grouped_df",
+      exp_test  = `%in%`,
+      message   = "Your {unit} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+    ),
+    list(
+      obj_test  = function(...) TRUE,
+      exp_class = "grouped_df",
+      exp_test  = `%in%`,
+      message   = "Your {unit} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+    ),
+    list(
+      obj_class = "grouped_df",
+      obj_test  = `%in%`,
+      exp_test  = function(...) TRUE,
+      message   = "Your {unit} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+    ),
+    list(
+      obj_test  = function(...) TRUE,
+      exp_class = "rowwise_df",
+      exp_test  = `%in%`,
+      message   = "Your {unit} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+    ),
+    list(
+      obj_class = "rowwise_df",
+      obj_test  = `%in%`,
+      exp_test  = function(...) TRUE,
+      message   = "Your {unit} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+    )
   )
-)
+}
