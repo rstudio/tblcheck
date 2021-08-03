@@ -61,26 +61,22 @@ check_class <- function(
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {
-  class_union <- sort(union(exp_class, obj_class))
+  differences <- union(setdiff(exp_class, obj_class), setdiff(obj_class, exp_class))
   
-  # Check that the union of `exp_class` and `obj_class` is not in the list
-  # of insignificant class differences
-  !any(
-    purrr::map_lgl(insignificant_class_differences(), identical, class_union)
+  insignificant_class_differences <- list(
+    c("integer", "numeric"),
+    c("glue"),
+    c("POSIXct", "POSIXlt")
   )
-}
-
-insignificant_class_differences <- function() {
-  # The list is sorted when called in order to ensure the same
-  # locale-specific sorting rules apply to both inputs to
-  # `identical()` in `has_meaningful_class_difference()`
-  lapply(
-    list(
-      c("integer", "numeric"),
-      c("character", "glue"),
-      c("POSIXct", "POSIXlt", "POSIXt")
-    ),
-    sort
+  
+  # Check that the differences between `exp_class` and `obj_class` is not in the
+  # list of insignificant class differences
+  !any(
+    purrr::map_lgl(
+      insignificant_class_differences,
+      unordered_identical,
+      differences
+    )
   )
 }
 
