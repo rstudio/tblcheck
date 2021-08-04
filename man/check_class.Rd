@@ -8,19 +8,20 @@ check_class(
   object = .result,
   expected = .solution,
   unit = "result",
-  prefix = ""
+  problem_prefix = ""
 )
 }
 \arguments{
-\item{object}{A vector to be compared to \code{expected}.}
+\item{object}{An object to be compared to \code{expected}.}
 
-\item{expected}{A vector containing the expected result.}
+\item{expected}{An object containing the expected result.}
 
 \item{unit}{\verb{[character(1)]}\cr The label used to describe the object in
 feedback messages. Defaults to \code{"result"}.}
 
-\item{prefix}{\verb{[character(1)]}\cr The prefix appended to the \code{problem} label
-in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{""}, which appends no prefix.}
+\item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the
+\code{problem} label in \code{\link[gradethis:graded]{gradethis::fail()}} objects.
+Defaults to \code{""}, which appends no prefix.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.

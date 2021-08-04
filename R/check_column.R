@@ -72,7 +72,7 @@ check_column <- function(
       check_length = check_length,
       check_values = check_values,
       unit = glue::glue("`{name}` column"),
-      prefix = "column_"
+      problem_prefix = "column_"
     )
   )
 }

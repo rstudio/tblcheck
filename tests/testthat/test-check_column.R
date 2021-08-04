@@ -7,8 +7,9 @@ test_that("check_column() checks classes", {
   
   expect_grade(
     grade,
-    "Your `a` column should have class `integer`, but it has class `character`",
-    problem = problem("column_class", "integer", "character")
+    "Your `a` column should be a vector of integers (class `integer`), but it is a vector of text (class `character`).",
+    problem = problem("column_class", "integer", "character"),
+    fixed   = TRUE
   )
 })
 
@@ -35,12 +36,13 @@ test_that("check_column() checks multiple classes", {
   
   expect_grade(
     grade,
-    "Your `a` column should have classes `tbl_df`, `tbl`, and `data.frame`, but it has class `data.frame",
+    "Your `a` column should be a tibble (class `tbl_df`), but it is a data frame (class `data.frame`).",
     problem = problem(
       type = "column_class", 
       expected = c("tbl_df", "tbl", "data.frame"), 
       actual = "data.frame"
-    )
+    ),
+    fixed = TRUE
   )
 })
 

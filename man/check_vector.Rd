@@ -12,7 +12,7 @@ check_vector(
   check_length = TRUE,
   check_values = TRUE,
   unit = "result",
-  prefix = "vector_"
+  problem_prefix = "vector_"
 )
 }
 \arguments{
@@ -35,8 +35,8 @@ print. Defaults to 3.}
 \item{unit}{\verb{[character(1)]}\cr The label used to describe the vector in
 feedback messages. Defaults to \code{"result"}.}
 
-\item{prefix}{\verb{[character(1)]}\cr The prefix appended to the \code{problem} label
-in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{"vector_"}.}
+\item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the
+\code{problem} label in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{"vector_"}.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.

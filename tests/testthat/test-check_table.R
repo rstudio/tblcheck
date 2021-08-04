@@ -1,6 +1,100 @@
+test_that("check_table() class", {
+  grade <- tblcheck_test_grade({
+    .result   <- data.frame(a = 1:10, b = 1:10)
+    .solution <- tibble::tibble(a = 1:10, b = 1:10)
+    check_table()
+  })
+  
+  expect_grade(
+    grade,
+    message = "Your table should be a tibble (class `tbl_df`), but it is a data frame (class `data.frame`)",
+    problem = problem(
+      "table_class",
+      c("tbl_df", "tbl", "data.frame"),
+      "data.frame"
+    ),
+    fixed = TRUE
+  )
+  
+  grade <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = 1:10, b = a)
+    .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
+    check_table()
+  })
+  
+  expect_grade(
+    grade,
+    message = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
+    problem = problem(
+      "table_class",
+      c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      c("tbl_df", "tbl", "data.frame")
+    ),
+    fixed = TRUE
+  )
+  
+  grade <- tblcheck_test_grade({
+    .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
+    .solution <- tibble::tibble(a = 1:10, b = a)
+    check_table()
+  })
+  
+  expect_grade(
+    grade,
+    message =  "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?",
+    problem = problem(
+      "table_class",
+      c("tbl_df", "tbl", "data.frame"),
+      c("rowwise_df", "tbl_df", "tbl", "data.frame")
+    ),
+    fixed = TRUE
+  )
+  
+  grade <- tblcheck_test_grade({
+    .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
+    .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
+    check_table()
+  })
+  
+  expect_grade(
+    grade,
+    message =  "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
+    problem = problem(
+      "table_class",
+      c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      c("rowwise_df", "tbl_df", "tbl", "data.frame")
+    ),
+    fixed = TRUE
+  )
+})
 
 test_that("check_table() rows", {
+  grade <- tblcheck_test_grade({
+    result <- tibble::tibble(a = letters, b = a)
+    solution <- tibble::tibble(x = letters[-1], y = x)
+    check_table(object = result, expected = solution)
+  })
   
+  expect_grade(
+    grade,
+    message = "should have 25 rows",
+    problem = problem("table_nrow", 25, 26)
+  )
+  
+  grade <- tblcheck_test_grade({
+    result <- tibble::tibble(a = letters, b = a)
+    solution <- tibble::tibble(x = letters[1], y = x)
+    check_table(object = result, expected = solution)
+  })
+  
+  expect_grade(
+    grade,
+    message = "should have 1 row",
+    problem = problem("table_nrow", 1, 26)
+  )
+})
+
+test_that("check_table() rows", {
   grade <- tblcheck_test_grade({
     result <- tibble::tibble(a = letters, b = a)
     solution <- tibble::tibble(x = letters[-1], y = x)

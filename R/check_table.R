@@ -76,7 +76,7 @@ check_table <- function(
   # check table class ----
   if (check_class) {
     return_if_graded(
-      check_class(object, expected, unit = "table", prefix = "table_")
+      check_class(object, expected, unit = "table", problem_prefix = "table_")
     )
   }
   
