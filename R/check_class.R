@@ -174,6 +174,21 @@ friendly_class_list <- function() {
       multiple = "a vector of TRUE/FALSE values (class `integer`)"
     ),
     list(
+      class    = "complex",
+      single   = "a complex number (class `complex`)",
+      multiple = "a vector of complex numbers (class `complex`)"
+    ),
+    list(
+      class    = "raw",
+      single   = "a raw byte value (class `raw`)",
+      multiple = "a vector of raw byte values (class `raw`)"
+    ),
+    list(
+      class    = "factor",
+      single   = "a factor (class `factor`)",
+      multiple = "a vector of factors (class `factor`)"
+    ),
+    list(
       class    = c("POSIXct", "POSIXt"),
       single   = "a date-time (class `POSIXct`)",
       multiple = "a vector of date-times (class `POSIXct`)"
@@ -190,6 +205,22 @@ friendly_class_list <- function() {
     list(
       class    = "data.frame",
       single   = "a data frame (class `data.frame`)"
+    ),
+    list(
+      class    = "list",
+      single   = "a list (class `list`)"
+    ),
+    list(
+      class    = "matrix",
+      single   = "a matrix (class `matrix`)"
+    ),
+    list(
+      class    = c("matrix", "array"),
+      single   = "a matrix (class `matrix`)"
+    ),
+    list(
+      class    = "array",
+      single   = "an array (class `array`)"
     )
   )
 }
