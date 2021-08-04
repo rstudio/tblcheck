@@ -80,15 +80,55 @@ has_meaningful_class_difference <- function(exp_class, obj_class) {
   )
 }
 
-friendly_class <- function(class, x) {
-  friendly_class_list <- friendly_class_list()
+hinted_class_message <- function(obj_class, exp_class) {
+  list <- hinted_class_message_list()
   
-  for (i in seq_along(friendly_class_list)) {
-    list <- friendly_class_list[[i]]
-    
-    if (unordered_identical(list$class, class)) {
-      if (length(x) > 1) return(list$multiple %||% list$single)
-      return(list$single)
+  for (i in seq_along(list)) {
+    if (
+      all(list[[i]]$obj_class %in% obj_class) &&
+      all(list[[i]]$exp_class %in% exp_class)
+    ) {
+      return(list[[i]]$message)
+    }
+  }
+  
+  invisible()
+}
+
+hinted_class_message_list <- function() {
+  # If `obj_class` or `exp_class` is unspecified, any class will be matched
+  list(
+    list(
+      obj_class = "rowwise_df",
+      exp_class = "grouped_df",
+      message   = "Your {unit} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+    ),
+    list(
+      exp_class = "grouped_df",
+      message   = "Your {unit} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+    ),
+    list(
+      obj_class = "grouped_df",
+      message   = "Your {unit} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+    ),
+    list(
+      exp_class = "rowwise_df",
+      message   = "Your {unit} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+    ),
+    list(
+      obj_class = "rowwise_df",
+      message   = "Your {unit} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+    )
+  )
+}
+
+friendly_class <- function(class, x) {
+  list <- friendly_class_list()
+  
+  for (i in seq_along(list)) {
+    if (unordered_identical(list[[i]]$class, class)) {
+      if (length(x) > 1) return(list[[i]]$multiple %||% list[[i]]$single)
+      return(list[[i]]$single)
     }
   }
   
@@ -150,59 +190,6 @@ friendly_class_list <- function() {
     list(
       class    = "data.frame",
       single   = "a data frame (class `data.frame`)"
-    )
-  )
-}
-
-hinted_class_message <- function(obj_class, exp_class) {
-  hinted_class_message_list <- hinted_class_message_list()
-  
-  for (i in seq_along(hinted_class_message_list)) {
-    list <- hinted_class_message_list[[i]]
-    
-    if (
-      list$obj_test(list$obj_class, obj_class) &&
-      list$exp_test(list$exp_class, exp_class)
-    ) {
-      return(list$message)
-    }
-  }
-  
-  invisible()
-}
-
-hinted_class_message_list <- function() {
-  list(
-    list(
-      obj_class = "rowwise_df",
-      obj_test  = `%in%`,
-      exp_class = "grouped_df",
-      exp_test  = `%in%`,
-      message   = "Your {unit} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
-    ),
-    list(
-      obj_test  = function(...) TRUE,
-      exp_class = "grouped_df",
-      exp_test  = `%in%`,
-      message   = "Your {unit} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
-    ),
-    list(
-      obj_class = "grouped_df",
-      obj_test  = `%in%`,
-      exp_test  = function(...) TRUE,
-      message   = "Your {unit} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
-    ),
-    list(
-      obj_test  = function(...) TRUE,
-      exp_class = "rowwise_df",
-      exp_test  = `%in%`,
-      message   = "Your {unit} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
-    ),
-    list(
-      obj_class = "rowwise_df",
-      obj_test  = `%in%`,
-      exp_test  = function(...) TRUE,
-      message   = "Your {unit} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
     )
   )
 }
