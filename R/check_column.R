@@ -71,6 +71,7 @@ check_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
+      check_names = FALSE,
       unit = glue::glue("`{name}` column"),
       problem_prefix = "column_"
     )

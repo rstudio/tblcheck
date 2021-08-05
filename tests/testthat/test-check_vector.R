@@ -100,6 +100,20 @@ test_that("checks that vectors have the same length", {
   expect_match(grade$message, "should contain 4 values")
 })
 
+test_that("checks that vectors have the same names", {
+  grade <- tblcheck_test_grade({
+    .result   <- c(x = 1, y = 2, z = 3)
+    .solution <- c(a = 1, b = 2, c = 3)
+    check_vector()
+  })
+  
+  expect_grade(
+    grade, 
+    message = "Your result should have the names `a`, `b`, and `c`. Your result should not have the names `x`, `y`, or `z`.",
+    problem = problem("vector_names", missing = letters[1:3], unexpected = letters[24:26])
+  )
+})
+
 test_that("check_vector() with no problems returns invisible()", {
   expect_invisible(
     grade <- tblcheck_test_grade({
