@@ -22,5 +22,8 @@ problem <- function(type, expected = NULL, actual = NULL, ...) {
     ...
   )
   
-  purrr::compact(problem)
+  structure(
+    purrr::compact(problem),
+    class = c("tblcheck_problem", "gradethis_problem", "list")
+  )
 }
