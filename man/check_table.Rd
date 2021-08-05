@@ -65,10 +65,13 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \section{Problems}{
 
 \enumerate{
+\item \code{table_class}: The table does not have the expected classes
 \item \code{table_nrow}: The table doesn't have the expected number of rows
 \item \code{table_ncol}: The table doesn't have the expected number of columns
+\item \code{table_names}: The table has names that are not expected,
+or is missing names that are expected.
 }
 
-Additional problems may be produced by \code{\link[=check_names]{check_names()}} and \code{\link[=check_column]{check_column()}}
+Additional problems may be produced by \code{\link[=check_column]{check_column()}}
 }
 

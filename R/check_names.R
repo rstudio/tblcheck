@@ -6,7 +6,7 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `names`: The table has names that are not expected,
+#' 1. `names`: The object has names that are not expected,
 #'   or is missing names that are expected.
 #'
 #' @inheritParams check_class

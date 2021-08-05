@@ -35,7 +35,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \section{Problems}{
 
 \enumerate{
-\item \code{class}: \code{object} doesn't have the same classes as \code{expected}
+\item \code{class}: The object does not have the expected classes
 }
 }
 

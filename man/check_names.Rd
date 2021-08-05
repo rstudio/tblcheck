@@ -40,7 +40,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \section{Problems}{
 
 \enumerate{
-\item \code{names}: The table has names that are not expected,
+\item \code{names}: The object has names that are not expected,
 or is missing names that are expected.
 }
 }
