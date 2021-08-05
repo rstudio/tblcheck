@@ -9,7 +9,7 @@ max_setdiff(
   y,
   max_diffs = Inf,
   and = " and ",
-  unit = NULL,
+  column = FALSE,
   transform = md_code
 )
 }
@@ -21,12 +21,12 @@ Defaults to \link{Inf}, which includes all elements.}
 
 \item{and}{Character string to be prepended to the last word.}
 
-\item{unit}{An optional string describing the elements in \code{x} and \code{y}. Passed
-to \code{\link[plu:plu_ral]{plu::ral()}}. Should be written in the singular form, e.g. \code{"n column"}.}
-
 \item{transform}{A function applied to each element of the items appearing in
 the string, prior to combining into a string. Use \code{identity} to keep the
 items without modification.}
+
+\item{unit}{An optional string describing the elements in \code{x} and \code{y}. Passed
+to \code{\link[plu:plu_ral]{plu::ral()}}. Should be written in the singular form, e.g. \code{"n column"}.}
 }
 \value{
 A list with three items:

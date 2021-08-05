@@ -9,7 +9,7 @@
 #' 1. `names`: The table has names that are not expected,
 #'   or is missing names that are expected.
 #'
-#' @inheritParams check_table
+#' @inheritParams check_class
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
@@ -17,7 +17,10 @@
 #' @inherit check_table return
 #' @export
 
-check_names <- function(object = .result, expected = .solution, max_diffs = 3) {
+check_names <- function(
+  object = .result, expected = .solution,
+  max_diffs = 3, unit = "result", problem_prefix = ""
+) {
   if (inherits(object, ".result")) {
     object <- get(".result", parent.frame())
   }
@@ -27,45 +30,46 @@ check_names <- function(object = .result, expected = .solution, max_diffs = 3) {
   
   assert_internally({
     checkmate::assert_number(max_diffs, lower = 1)
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
+    checkmate::assert_string(unit)
+    checkmate::assert_string(problem_prefix)
   })
-  
-  unit <- if (inherits(object, "data.frame")) "a column {named}" else "the name"
   
   names_exp <- names(expected)
   names_obj <- names(object)
   
-  missing <- max_setdiff(names_exp, names_obj, max_diffs = max_diffs, unit = unit)
+  missing <- max_setdiff(
+    names_exp, names_obj,
+    max_diffs = max_diffs,
+    column = inherits(object, "data.frame")
+  )
   
   missing_msg  <- glue::glue(
-    "Your result should have {missing$unit} {missing$str}. "
+    "Your {unit} should have {missing$unit} {missing$str}. "
   )
 
   unexpected <- max_setdiff(
-    x = names_obj, 
-    y = names_exp, 
-    max_diffs = max_diffs, 
-    unit = unit,
+    names_obj, names_exp,
+    max_diffs = max_diffs,
+    column = inherits(object, "data.frame"),
     and = " or "
   )
   
   unexpected_msg  <- glue::glue(
-    "Your result should not have {unexpected$unit} {unexpected$str}. "
+    "Your {unit} should not have {unexpected$unit} {unexpected$str}. "
   )
   
   if (length(missing$diffs) || length(unexpected$diffs)) {
-    gradethis::fail(
+    return_fail(
       paste0(missing_msg, unexpected_msg),
       problem = problem(
-        "names",
+        paste0(problem_prefix, "names"),
         missing = missing$diffs,
         unexpected = unexpected$diffs
       )
     )
-  } else {
-    invisible()
   }
+  
+  invisible()
 }
 
 #' Find up to a certain number of differences between two vectors
@@ -92,7 +96,7 @@ max_setdiff <- function(
   y,
   max_diffs = Inf,
   and = " and ",
-  unit = NULL,
+  column = FALSE,
   transform = md_code
 ) {
   diffs <- setdiff(x, y)
@@ -105,10 +109,16 @@ max_setdiff <- function(
   }
 
   diffs_max <- c(transform(diffs_max), more)
+  
+  unit <- if (column) {
+    ngettext(length(diffs), "a column named", "columns named")
+  } else {
+    ngettext(length(diffs), "the name", "the names")
+  }
 
   list(
     diffs = diffs,
     str = knitr::combine_words(diffs_max, and = and),
-    unit = if (!is.null(unit)) plu::ral(unit, diffs)
+    unit = unit
   )
 }

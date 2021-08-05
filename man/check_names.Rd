@@ -4,16 +4,29 @@
 \alias{check_names}
 \title{Check that the names of two object are the same}
 \usage{
-check_names(object = .result, expected = .solution, max_diffs = 3)
+check_names(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  unit = "result",
+  problem_prefix = ""
+)
 }
 \arguments{
-\item{object}{A data frame to be compared to \code{expected}.}
+\item{object}{An object to be compared to \code{expected}.}
 
-\item{expected}{A data frame containing the expected result.}
+\item{expected}{An object containing the expected result.}
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
 unexpected names to include in an informative failure message.
 Defaults to 3.}
+
+\item{unit}{\verb{[character(1)]}\cr The label used to describe the object in
+feedback messages. Defaults to \code{"result"}.}
+
+\item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the
+\code{problem} label in \code{\link[gradethis:graded]{gradethis::fail()}} objects.
+Defaults to \code{""}, which appends no prefix.}
 }
 \value{
 If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.

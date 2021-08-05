@@ -98,7 +98,10 @@ check_table <- function(
   # check column names ----
   if (check_names) {
     return_if_graded(
-      check_names(object, expected, max_diffs = max_diffs)
+      check_names(
+        object, expected,
+        max_diffs = max_diffs, unit = "table", problem_prefix = "table_"
+      )
     )
   }
   
