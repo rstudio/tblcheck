@@ -11,6 +11,7 @@ check_vector(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
+  check_names = TRUE,
   unit = "result",
   problem_prefix = "vector_"
 )
@@ -31,6 +32,9 @@ print. Defaults to 3.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}
+
+\item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same names.}
 
 \item{unit}{\verb{[character(1)]}\cr The label used to describe the vector in
 feedback messages. Defaults to \code{"result"}.}
@@ -53,6 +57,7 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
 \item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
+\item \code{vector_names}: \code{object} has different \code{names} than \code{expected}
 }
 }
 

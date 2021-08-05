@@ -118,22 +118,6 @@ test_that("check_names() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       result <- solution <- tibble::tibble(b = letters[1:3])
-      check_names(object = 12, expected = solution)
-    }),
-    "object"
-  )
-  
-  expect_internal_problem(
-    tblcheck_test_grade({
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      check_names(object = result, expected = list(a = 1))
-    }),
-    "expected"
-  )
-  
-  expect_internal_problem(
-    tblcheck_test_grade({
-      result <- solution <- tibble::tibble(b = letters[1:3])
       check_names(object = result, expected = solution, max_diffs = "a")
     }),
     "max_diffs"

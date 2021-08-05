@@ -6,7 +6,7 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `class`: `object` doesn't have the same classes as `expected`
+#' 1. `class`: The object does not have the expected classes
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.

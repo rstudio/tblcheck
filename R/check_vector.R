@@ -9,6 +9,7 @@
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
 #' 2. `vector_length`: `object` doesn't have the same length as `expected`
 #' 3. `vector_values`: `object` doesn't contain the same values as `expected`
+#' 4. `vector_names`: `object` has different `names` than `expected`
 #'
 #' @param object A vector to be compared to `expected`.
 #' @param expected A vector containing the expected result.
@@ -20,6 +21,8 @@
 #'   `expected` have the same length.
 #' @param check_values `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` contain the same values.
+#' @param check_names `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same names.
 #' @param unit `[character(1)]`\cr The label used to describe the vector in
 #'   feedback messages. Defaults to `"result"`.
 #' @param problem_prefix `[character(1)]`\cr The prefix appended to the
@@ -35,6 +38,7 @@ check_vector <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
+  check_names  = TRUE,
   unit = "result",
   problem_prefix = "vector_"
 ) {
@@ -86,7 +90,7 @@ check_vector <- function(
     n_values <- min(length(expected), max_diffs)
     first_n_values <- expected[seq_len(n_values)]
     
-    if (!identical(object[seq_len(n_values)], first_n_values)) {
+    if (!identical(unname(object[seq_len(n_values)]), unname(first_n_values))) {
       values_problem <- problem(paste0(problem_prefix, "values"), first_n_values)
       n_values <- paste(n_values, ngettext(n_values, "value", "values"))
       first_n_values <- knitr::combine_words(first_n_values, before = "`")
@@ -97,11 +101,22 @@ check_vector <- function(
       )
     }
     
-    if (!identical(object, expected)) {
+    if (!identical(unname(object), unname(expected))) {
       return_fail(
         "Your {unit} contains unexpected values.",
         problem = problem(paste0(problem_prefix, "values"), NULL)
       )
     }
   }
+  
+  if (check_names) {
+    return_if_graded(
+      check_names(
+        object, expected,
+        max_diffs = max_diffs, unit = unit, problem_prefix = problem_prefix
+      )
+    )
+  }
+  
+  invisible()
 }

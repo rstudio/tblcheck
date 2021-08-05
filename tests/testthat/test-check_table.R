@@ -157,8 +157,8 @@ test_that("check_table() names", {
   
   expect_grade(
     grade,
-    message = "should have columns named `x` and `y`",
-    problem = problem("names", missing = c("x", "y"), unexpected = c("a", "b"))
+    message = "Your table should have columns named `x` and `y`",
+    problem = problem("table_names", missing = c("x", "y"), unexpected = c("a", "b"))
   )
   expect_match(grade$message, "should not have columns named `a` or `b`")
 })
@@ -341,13 +341,13 @@ test_that("check_table() returns names feedback to learnr", {
 
   expect_grade(
     grade, 
-    "should have columns named .*x.*, .*y.*, .*z.*, and 1 more",
-    problem = problem("names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
+    "Your table should have columns named .*x.*, .*y.*, .*z.*, and 1 more",
+    problem = problem("table_names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
   )
   
   expect_grade(
     grade,
-    "should not have columns named .*a.*, .*b.*, .*c.*, or 1 more"
+    "Your table should not have columns named .*a.*, .*b.*, .*c.*, or 1 more"
   )
   
   # ---- with all diffs ---
@@ -359,13 +359,13 @@ test_that("check_table() returns names feedback to learnr", {
   
   expect_grade(
     grade_inf,
-    "should have columns named .*x.*, .*y.*, .*z.*, and .*w",
-    problem = problem("names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
+    "Your table should have columns named .*x.*, .*y.*, .*z.*, and .*w",
+    problem = problem("table_names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
   )
   
   expect_grade(
     grade_inf,
-    "should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
+    "Your table should not have columns named .*a.*, .*b.*, .*c.*, or .*d"
   )
   
   # ---- with one diff ---
@@ -377,12 +377,12 @@ test_that("check_table() returns names feedback to learnr", {
   
   expect_grade(
     grade_one,
-    "should have columns named .*x.* and 3 more",
-    problem = problem("names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
+    "Your table should have columns named .*x.* and 3 more",
+    problem = problem("table_names", missing = c("x", "y", "z", "w"), unexpected = c("a", "b", "c", "d"))
   )
   
   expect_grade(
     grade_one,
-    "should not have columns named .*a.* or 3 more"
+    "Your table should not have columns named .*a.* or 3 more"
   )
 })

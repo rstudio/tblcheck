@@ -7,10 +7,13 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `table_nrow`: The table doesn't have the expected number of rows
-#' 2. `table_ncol`: The table doesn't have the expected number of columns
+#' 1. `table_class`: The table does not have the expected classes
+#' 2. `table_nrow`: The table doesn't have the expected number of rows
+#' 3. `table_ncol`: The table doesn't have the expected number of columns
+#' 4. `table_names`: The table has names that are not expected,
+#'   or is missing names that are expected.
 #' 
-#' Additional problems may be produced by [check_names()] and [check_column()]
+#' Additional problems may be produced by [check_column()]
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
@@ -98,7 +101,10 @@ check_table <- function(
   # check column names ----
   if (check_names) {
     return_if_graded(
-      check_names(object, expected, max_diffs = max_diffs)
+      check_names(
+        object, expected,
+        max_diffs = max_diffs, unit = "table", problem_prefix = "table_"
+      )
     )
   }
   
