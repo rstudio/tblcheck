@@ -9,7 +9,7 @@
 #' 1. `names`: The object has names that are not expected,
 #'   or is missing names that are expected.
 #'
-#' @inheritParams check_class
+#' @inheritParams tbl_check_class
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.

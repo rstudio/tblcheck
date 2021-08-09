@@ -34,7 +34,9 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
     final_call <- paste(expr[[1]])
   }
   
-  check_fns <- grep("^check_", paste(utils::lsf.str("package:tblcheck")), value = TRUE)
+  check_fns <- grep(
+    "^tbl_", paste(utils::lsf.str("package:tblcheck")), value = TRUE
+  )
   if (!final_call %in% check_fns) {
     stop("tblcheck_test_grade() expected a {tblcheck} function as the final expression")
   }

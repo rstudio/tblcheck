@@ -12,13 +12,16 @@
 #'   
 #' @keywords internal
 #' @noRd
-problem <- function(type, expected = NULL, actual = NULL, ...) {
+problem <- function(
+  type, expected = NULL, actual = NULL, object_label = "result", ...
+) {
   checkmate::assert_string(type, min.chars = 1)
   
   problem <- list(
     type = type,
     expected = expected,
     actual = actual,
+    object_label = object_label,
     ...
   )
   

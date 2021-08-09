@@ -56,3 +56,9 @@ return_fail <- function(..., env = parent.frame()) {
     rlang::return_from(env, grade)
   }
 }
+
+return_if_problem <- function(problem, envir = parent.frame()) {
+  if (inherits(problem, "tblcheck_problem")) {
+    rlang::return_from(envir, problem)
+  }
+}
