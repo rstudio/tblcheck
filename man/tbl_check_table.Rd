@@ -40,8 +40,8 @@ tbl_grade_table(
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 display in an informative failure message.
-Passed to \code{\link[=check_names]{check_names()}} to determine the number of mismatched column
-names to display and the \code{n_values} argument of \code{\link[=check_column]{check_column()}} to
+Passed to \code{\link[=tbl_check_names]{tbl_check_names()}} to determine the number of mismatched column
+names to display and the \code{n_values} argument of \code{\link[=tbl_check_column]{tbl_check_column()}} to
 determine the number of mismatched column values to display.
 Defaults to 3.}
 
@@ -52,7 +52,7 @@ Defaults to 3.}
 \code{expected} have the same number of rows with \code{\link[=nrow]{nrow()}}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same column names with \code{\link[=check_names]{check_names()}}.}
+\code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
 
 \item{check_ncol}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of columns with \code{\link[=ncol]{ncol()}}.
@@ -60,7 +60,7 @@ By default, \code{check_ncol} is \code{\link{FALSE}} if \code{check_names} is \c
 running both is redundant.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
-have the same contents with \code{\link[=check_column]{check_column()}}.}
+have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
 
 \item{check_column_class}{\verb{[logical(1)]}\cr Whether to check that each
 columns has the same class in \code{object} and \code{expected}.}
@@ -95,6 +95,6 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 or is missing names that are expected.
 }
 
-Additional problems may be produced by \code{\link[=check_column]{check_column()}}
+Additional problems may be produced by \code{\link[=tbl_check_column]{tbl_check_column()}}
 }
 
