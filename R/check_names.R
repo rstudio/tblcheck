@@ -22,8 +22,11 @@
 #' @export
 
 tbl_check_names <- function(
-  object = .result, expected = .solution,
-  object_label = NULL, problem_prefix = "", envir = parent.frame()
+  object = .result,
+  expected = .solution,
+  object_label = NULL,
+  problem_prefix = "",
+  envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", envir)
@@ -64,7 +67,10 @@ tbl_check_names <- function(
 #' @export
 
 tbl_grade_names <- function(
-  object = .result, expected = .solution, max_diffs = 3, envir = parent.frame()
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  envir = parent.frame()
 ) {
   return_if_graded(
     tbl_grade(
@@ -74,7 +80,7 @@ tbl_grade_names <- function(
   )
 }
 
-tbl_message_names <- function(problem, max_diffs = 3) {
+tbl_message_names <- function(problem, max_diffs = 3, ...) {
   object_label <- problem$object_label
   
   missing_names <- combine_words_with_more(
@@ -111,8 +117,8 @@ tbl_message_names <- function(problem, max_diffs = 3) {
     } else {
       ngettext(
         length(problem$unexpected),
-        "Your {unit} should not have the name {unexpected_names}.",
-        "Your {unit} should not have the names {unexpected_names}."
+        "Your {object_label} should not have the name {unexpected_names}.",
+        "Your {object_label} should not have the names {unexpected_names}."
       )
     }
   } else {

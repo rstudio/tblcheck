@@ -73,7 +73,7 @@ tbl_grade_class <- function(
   )
 }
 
-tbl_message_class <- function(problem) {
+tbl_message_class <- function(problem, ...) {
   object_label <- problem$object_label
   
   exp_class <- problem$expected$class

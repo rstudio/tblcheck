@@ -23,23 +23,23 @@
 #'   `expected` contain the same values.
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same names.
-#' @param unit `[character(1)]`\cr The label used to describe the vector in
-#'   feedback messages. Defaults to `"result"`.
+#' @param object_label `[character(1)]`\cr The label used to describe the vector
+#'   in feedback messages. Defaults to `"result"`.
 #' @param problem_prefix `[character(1)]`\cr The prefix appended to the
 #'   `problem` label in [gradethis::fail()] objects. Defaults to `"vector_"`.
 #'
 #' @inherit check_table return
 #' @export
 
-check_vector <- function(
+tbl_check_vector <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  check_names  = TRUE,
-  unit = "result",
+  check_names = TRUE,
+  object_label = NULL,
   problem_prefix = "vector_"
 ) {
   if (inherits(object, ".result")) {
@@ -49,6 +49,8 @@ check_vector <- function(
     expected <- get(".solution", parent.frame())
   }
   
+  object_label <- object_label %||% "result"
+  
   assert_internally({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
@@ -56,67 +58,107 @@ check_vector <- function(
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
-    checkmate::assert_string(unit)
+    checkmate::assert_string(object_label)
     checkmate::assert_string(problem_prefix)
   })
   
   if (check_class) {
-    return_if_graded(
-      check_class(
-        object, expected, unit = unit, problem_prefix = problem_prefix
+    return_if_problem(
+      tbl_check_class(
+        object, expected,
+        object_label = object_label,
+        problem_prefix = problem_prefix
       )
     )
   }
   
   if (check_length) {
-    obj_length <- length(object)
-    exp_length <- length(expected)
-    
-    if (!identical(obj_length, exp_length)) {
-      length_problem <- problem(
-        paste0(problem_prefix, "length"), exp_length, obj_length
-      )
-      exp_length <- plu::ral("n value", n = exp_length)
-      obj_length <- plu::ral("n value", n = obj_length)
-      
-      return_fail(
-        "Your {unit} should contain {exp_length}, but it has {obj_length}.",
-        problem = length_problem
-      )
-    }
-  }
-  
-  if (check_values) {
-    n_values <- min(length(expected), max_diffs)
-    first_n_values <- expected[seq_len(n_values)]
-    
-    if (!identical(unname(object[seq_len(n_values)]), unname(first_n_values))) {
-      values_problem <- problem(paste0(problem_prefix, "values"), first_n_values)
-      n_values <- paste(n_values, ngettext(n_values, "value", "values"))
-      first_n_values <- knitr::combine_words(first_n_values, before = "`")
-      
-      return_fail(
-        "The first {n_values} of your {unit} should be {first_n_values}.",
-        problem = values_problem
-      )
-    }
-    
-    if (!identical(unname(object), unname(expected))) {
-      return_fail(
-        "Your {unit} contains unexpected values.",
-        problem = problem(paste0(problem_prefix, "values"), NULL)
-      )
-    }
-  }
-  
-  if (check_names) {
-    return_if_graded(
-      check_names(
+    return_if_problem(
+      tbl_check_length(
         object, expected,
-        max_diffs = max_diffs, unit = unit, problem_prefix = problem_prefix
+        object_label = object_label,
+        problem_prefix = problem_prefix
       )
     )
   }
   
-  invisible()
+  if (check_values) {
+    exp_values <- unname(expected)
+    obj_values <- unname(object)
+    
+    n_values <- min(length(expected), max_diffs)
+    first_n_values <- exp_values[seq_len(n_values)]
+    
+    if (!identical(obj_values[seq_len(n_values)], first_n_values)) {
+      return(problem(paste0(problem_prefix, "values"), first_n_values))
+    }
+    
+    if (!identical(obj_values, exp_values)) {
+      return(problem(paste0(problem_prefix, "values")))
+    }
+  }
+  
+  if (check_names) {
+    return_if_problem(
+      tbl_check_names(
+        object, expected,
+        object_label = object_label,
+        problem_prefix = problem_prefix
+      )
+    )
+  }
+}
+
+tbl_grade_vector <- function(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  check_length = TRUE,
+  check_values = TRUE,
+  check_names = TRUE,
+  object_label = NULL,
+  problem_prefix = "vector_"
+) {
+  if (inherits(object, ".result")) {
+    object <- get(".result", parent.frame())
+  }
+  if (inherits(expected, ".solution")) {
+    expected <- get(".solution", parent.frame())
+  }
+  
+  return_if_graded(
+    tbl_grade(
+      tbl_check_vector(
+        object = object,
+        expected = expected,
+        max_diffs = max_diffs,
+        check_class = check_class,
+        check_length = check_length,
+        check_values = check_values,
+        check_names = check_names,
+        object_label = object_label,
+        problem_prefix = problem_prefix
+      ),
+      max_diffs = max_diffs
+    )
+  )
+}
+
+tbl_message_values <- function(problem, ...) {
+  object_label <- problem$object_label
+  n_values <- length(problem$expected)
+  exp_values <- knitr::combine_words(md_code(problem$expected))
+  
+  message <- if (n_values != 0) {
+    ngettext(
+      n_values,
+      "The first value of your {object_label} should be {exp_values}.",
+      "The first {n_values} values of your {object_label} should be {exp_values}."
+    )
+  } else {
+    "Your {object_label} contains unexpected values."
+  }
+  
+  return_fail(glue::glue(message), problem = problem)
 }
