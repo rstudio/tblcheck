@@ -45,10 +45,13 @@ same length in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
+
+\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
-If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
-Otherwise, invisibly return \code{\link{NULL}}.
+If there are any issues, a \link{list} from \code{tbl_check_column()} or a
+\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{tbl_grade_column()}.
+Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Checks if the \code{name} column has the same class and values in \code{object} and

@@ -2,8 +2,10 @@
 #'
 #' Checks if `object` and `expected` have the same number of rows, the same
 #' column names, and the same column contents.
-#' If the data frames differ, returns a failure state and an informative message
-#' with [gradethis::fail()].
+#' If the tables differ
+#' - `tbl_check_names()` returns a list describing the problem
+#' - `tbl_grade_names()` returns a failing grade and informative message
+#' with [gradethis::fail()]
 #' 
 #' @section Problems:
 #' 
@@ -39,28 +41,31 @@
 #'   columns has the same class in `object` and `expected`.
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
+#' @param envir The environment in which to find `.result` and `.solution`.
 #'
-#' @return If there are any issues, generate a [gradethis::fail()] message.
-#'   Otherwise, invisibly return [`NULL`].
+#' @return If there are any issues, a [list] from `tbl_check_table()` or a
+#'   [gradethis::fail()] message from `tbl_grade_table()`.
+#'   Otherwise, invisibly returns [`NULL`].
 #' @export
 
-check_table <- function(
-  object              = .result,
-  expected            = .solution,
-  max_diffs           = 3,
-  check_class         = TRUE,
-  check_nrow          = TRUE,
-  check_names         = TRUE,
-  check_ncol          = !check_names,
-  check_columns       = TRUE,
-  check_column_class  = check_columns,
-  check_column_values = check_columns
+tbl_check_table <- function(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  check_nrow = TRUE,
+  check_names = TRUE,
+  check_ncol = !check_names,
+  check_columns = TRUE,
+  check_column_class = check_columns,
+  check_column_values = check_columns,
+  envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", parent.frame())
+    object <- get(".result", envir)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", parent.frame())
+    expected <- get(".solution", envir)
   }
   
   assert_internally({
@@ -124,19 +129,54 @@ check_table <- function(
   
   # check column contents ----
   if (check_columns) {
-    return_if_graded(
-      purrr::walk(
-        names(object),
-        check_column,
-        object       = object,
-        expected     = expected,
-        check_class  = check_column_class,
-        check_values = check_column_values,
-        check_length = FALSE,
-        max_diffs    = max_diffs
+    for (column in names(expected)) {
+      return_if_problem(
+        tbl_check_column(
+          name = column,
+          object = object,
+          expected = expected,
+          check_class = check_column_class,
+          check_values = check_column_values,
+          check_length = FALSE,
+          max_diffs = max_diffs
+        )
       )
-    )
+    }
   }
-  
-  invisible()
+}
+
+#' @rdname tbl_check_table
+#' @export
+
+tbl_grade_table <- function(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  check_nrow = TRUE,
+  check_names = TRUE,
+  check_ncol = !check_names,
+  check_columns = TRUE,
+  check_column_class = check_columns,
+  check_column_values = check_columns,
+  envir = parent.frame()
+) {
+  return_if_graded(
+    tbl_grade(
+      tbl_check_table(
+        object = object,
+        expected = expected,
+        max_diffs = max_diffs,
+        check_class = check_class,
+        check_nrow = check_nrow,
+        check_names = check_names,
+        check_ncol = check_ncol,
+        check_columns = check_columns,
+        check_column_class = check_column_class,
+        check_column_values = check_column_values,
+        envir = envir
+      ),
+      max_diffs = max_diffs
+    )
+  )
 }

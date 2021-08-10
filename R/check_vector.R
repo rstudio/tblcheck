@@ -27,8 +27,11 @@
 #'   in feedback messages. Defaults to `"result"`.
 #' @param problem_prefix `[character(1)]`\cr The prefix appended to the
 #'   `problem` label in [gradethis::fail()] objects. Defaults to `"vector_"`.
+#' @inheritParams tbl_check_table
 #'
-#' @inherit check_table return
+#' @return If there are any issues, a [list] from `tbl_check_vector()` or a
+#'   [gradethis::fail()] message from `tbl_grade_vector()`.
+#'   Otherwise, invisibly returns [`NULL`].
 #' @export
 
 tbl_check_vector <- function(

@@ -67,7 +67,7 @@ test_that("tbl_check_names() with no problems returns invisible()", {
   .result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
   .solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
-  grade <- expect_invisible(tbl_check_names())
+  problem <- expect_invisible(tbl_check_names())
   expect_null(problem)
 })
 

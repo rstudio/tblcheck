@@ -17,7 +17,7 @@
 #' @param problem_prefix `[character(1)]`\cr The prefix appended to the
 #'   `problem` label in [gradethis::fail()] objects.
 #'   Defaults to `""`, which appends no prefix.
-#' @param envir The environment in which to find `.result` and `.solution`.
+#' @inheritParams tbl_check_table
 #'
 #' @return If there are any issues, a [list] from `tbl_check_class()` or a
 #'   [gradethis::fail()] message from `tbl_grade_class()`.

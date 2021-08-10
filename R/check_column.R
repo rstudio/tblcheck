@@ -15,7 +15,7 @@
 #' 4. `column`: The `name` column doesn't appear in the `object`
 #'
 #' @param name `[character(1)]`\cr The name of the column to check.
-#' @inheritParams check_table
+#' @inheritParams tbl_check_table
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
 #'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `name` has the
@@ -25,7 +25,9 @@
 #' @param check_values `[logical(1)]`\cr Whether to check that `name` has the
 #'   same values in `object` and `expected`.
 #'
-#' @inherit check_table return
+#' @return If there are any issues, a [list] from `tbl_check_column()` or a
+#'   [gradethis::fail()] message from `tbl_grade_column()`.
+#'   Otherwise, invisibly returns [`NULL`].
 #' @export
 
 tbl_check_column <- function(

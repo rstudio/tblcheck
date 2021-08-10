@@ -42,10 +42,13 @@ in feedback messages. Defaults to \code{"result"}.}
 
 \item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the
 \code{problem} label in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{"vector_"}.}
+
+\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
-If there are any issues, generate a \code{\link[gradethis:graded]{gradethis::fail()}} message.
-Otherwise, invisibly return \code{\link{NULL}}.
+If there are any issues, a \link{list} from \code{tbl_check_vector()} or a
+\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{tbl_grade_vector()}.
+Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Check if two vectors have the same class, length, and values.
