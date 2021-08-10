@@ -47,7 +47,7 @@ tbl_check_length <- function(
   }
   
   dimension <- match.arg(dimension)
-  dimension_fn <- getFunction(dimension)
+  dimension_fn <- methods::getFunction(dimension)
   
   assert_internally({
     checkmate::assert_string(dimension)
