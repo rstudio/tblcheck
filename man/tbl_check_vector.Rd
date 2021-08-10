@@ -13,7 +13,8 @@ tbl_check_vector(
   check_values = TRUE,
   check_names = TRUE,
   object_label = NULL,
-  problem_prefix = "vector_"
+  problem_prefix = "vector_",
+  envir = parent.frame()
 )
 }
 \arguments{

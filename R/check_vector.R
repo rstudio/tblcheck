@@ -40,13 +40,14 @@ tbl_check_vector <- function(
   check_values = TRUE,
   check_names = TRUE,
   object_label = NULL,
-  problem_prefix = "vector_"
+  problem_prefix = "vector_",
+  envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", parent.frame())
+    object <- get(".result", envir)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", parent.frame())
+    expected <- get(".solution", envir)
   }
   
   object_label <- object_label %||% "result"
@@ -90,11 +91,22 @@ tbl_check_vector <- function(
     first_n_values <- exp_values[seq_len(n_values)]
     
     if (!identical(obj_values[seq_len(n_values)], first_n_values)) {
-      return(problem(paste0(problem_prefix, "values"), first_n_values))
+      return(
+        problem(
+          paste0(problem_prefix, "values"),
+          first_n_values,
+          object_label = object_label
+        )
+      )
     }
     
     if (!identical(obj_values, exp_values)) {
-      return(problem(paste0(problem_prefix, "values")))
+      return(
+        problem(
+          paste0(problem_prefix, "values"),
+          object_label = object_label
+        )
+      )
     }
   }
   
@@ -118,15 +130,9 @@ tbl_grade_vector <- function(
   check_values = TRUE,
   check_names = TRUE,
   object_label = NULL,
-  problem_prefix = "vector_"
+  problem_prefix = "vector_",
+  envir = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", parent.frame())
-  }
-  if (inherits(expected, ".solution")) {
-    expected <- get(".solution", parent.frame())
-  }
-  
   return_if_graded(
     tbl_grade(
       tbl_check_vector(
@@ -138,7 +144,8 @@ tbl_grade_vector <- function(
         check_values = check_values,
         check_names = check_names,
         object_label = object_label,
-        problem_prefix = problem_prefix
+        problem_prefix = problem_prefix,
+        envir = envir
       ),
       max_diffs = max_diffs
     )

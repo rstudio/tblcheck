@@ -78,49 +78,48 @@ check_table <- function(
   
   # check table class ----
   if (check_class) {
-    return_if_graded(
-      check_class(object, expected, unit = "table", problem_prefix = "table_")
+    return_if_problem(
+      tbl_check_class(
+        object, expected,
+        object_label = "table",
+        problem_prefix = "table_"
+      )
     )
   }
   
   # check number of rows ----
   if (check_nrow) {
-    nrow_object   <- nrow(object)
-    nrow_expected <- nrow(expected)
-    
-    if (!identical(nrow_object, nrow_expected)) {
-      exp_rows <- plu::ral("n row", n = nrow_expected)
-      obj_rows <- plu::ral("n row", n = nrow_object)
-      return_fail(
-        "Your table should have {exp_rows}, but it has {obj_rows}.",
-        problem = problem("table_nrow", nrow_expected, nrow_object)
+    return_if_problem(
+      tbl_check_length(
+        object, expected,
+        dimension = "nrow",
+        object_label = "table",
+        problem_prefix = "table_"
       )
-    }
+    )
   }
   
   # check column names ----
   if (check_names) {
-    return_if_graded(
-      check_names(
+    return_if_problem(
+      tbl_check_names(
         object, expected,
-        max_diffs = max_diffs, unit = "table", problem_prefix = "table_"
+        object_label = "table",
+        problem_prefix = "table_"
       )
     )
   }
   
   # check number of columns ----
   if (check_ncol) {
-    ncol_object <- ncol(object)
-    ncol_expected <- ncol(expected)
-  
-    if(!identical(ncol_object, ncol_expected)) {
-      exp_cols <- plu::ral('n column', n = ncol_expected)
-      obj_cols <- plu::ral('n column', n = ncol_object)
-      return_fail(
-        "Your table should have {exp_cols}, but it has {obj_cols}.",
-        problem = problem("table_ncol", ncol_expected, ncol_object)
+    return_if_problem(
+      tbl_check_length(
+        object, expected,
+        dimension = "ncol",
+        object_label = "table",
+        problem_prefix = "table_"
       )
-    }
+    )
   }
   
   # check column contents ----

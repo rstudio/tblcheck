@@ -1,15 +1,18 @@
 #' Checks that a column is identical across two tables
 #'
 #' Checks if the `name` column has the same class and values in `object` and
-#' `expected`. If the columns differ, returns a failure state and an informative
-#' message with [gradethis::fail()].
+#' `expected`.
+#' #' If the columns differ
+#' - `tbl_check_column()` returns a list describing the problem
+#' - `tbl_grade_column()` returns a failing grade and informative message
+#' with [gradethis::fail()]
 #' 
 #' @section Problems:
 #' 
 #' 1. `column_class`: Any mismatch in the classes of the `name` column
 #' 2. `column_length`: The `name` column doesn't have the expected length
 #' 3. `column_values`: The `name` column doesn't have the expected values
-#' 4. `column_name`: The `name` column doesn't appear in the `object`
+#' 4. `column`: The `name` column doesn't appear in the `object`
 #'
 #' @param name `[character(1)]`\cr The name of the column to check.
 #' @inheritParams check_table
@@ -25,20 +28,21 @@
 #' @inherit check_table return
 #' @export
 
-check_column <- function(
+tbl_check_column <- function(
   name,
   object = .result,
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
-  check_values = TRUE
+  check_values = TRUE,
+  envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", parent.frame())
+    object <- get(".result", envir)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", parent.frame())
+    expected <- get(".solution", envir)
   }
   
   assert_internally({
@@ -57,14 +61,11 @@ check_column <- function(
   }
   
   if (!name %in% names(object)) {
-    return_fail(
-      "Your table should have a column named `{name}`.",
-      problem = problem("column_name", name)
-    )
+    return(problem("column", name))
   }
   
-  return_if_graded(
-    check_vector(
+  return_if_problem(
+    tbl_check_vector(
       object[[name]],
       expected[[name]],
       max_diffs = max_diffs,
@@ -72,8 +73,45 @@ check_column <- function(
       check_length = check_length,
       check_values = check_values,
       check_names = FALSE,
-      unit = glue::glue("`{name}` column"),
+      object_label = as.character(glue::glue("`{name}` column")),
       problem_prefix = "column_"
     )
   )
+}
+
+#' @rdname tbl_check_column
+#' @export
+
+tbl_grade_column <- function(
+  name,
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  check_length = TRUE,
+  check_values = TRUE,
+  envir = parent.frame()
+) {
+  return_if_graded(
+    tbl_grade(
+      tbl_check_column(
+        name = name,
+        object = object,
+        expected = expected,
+        max_diffs = max_diffs,
+        check_class = check_class,
+        check_length = check_length,
+        check_values = check_values,
+        envir = envir
+      )
+    )
+  )
+}
+
+tbl_message_column <- function(problem, ...) {
+  exp_column <- problem$expected
+  
+  message <- glue::glue("Your table should have a column named `{exp_column}`.")
+  
+  return_fail(message, problem = problem)
 }
