@@ -63,7 +63,7 @@ tbl_check_column <- function(
   }
   
   if (!name %in% names(object)) {
-    return(problem("column", name))
+    return_if_problem(problem("missing", name), column = name)
   }
   
   return_if_problem(
@@ -74,10 +74,9 @@ tbl_check_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
-      check_names = FALSE,
-      object_label = as.character(glue::glue("`{name}` column")),
-      problem_prefix = "column_"
-    )
+      check_names = FALSE
+    ),
+    column = name
   )
 }
 
@@ -110,7 +109,7 @@ tbl_grade_column <- function(
   )
 }
 
-tbl_message_column <- function(problem, ...) {
+tbl_message_missing <- function(problem, ...) {
   exp_column <- problem$expected
   
   message <- glue::glue("Your table should have a column named `{exp_column}`.")

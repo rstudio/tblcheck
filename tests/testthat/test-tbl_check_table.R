@@ -9,7 +9,7 @@ test_that("tbl_check_table() class", {
       "table_class",
       list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
       list(class = "data.frame", length = 2),
-      object_label = "table"
+      table = TRUE
     )
   )
   
@@ -23,7 +23,7 @@ test_that("tbl_check_table() class", {
       "table_class",
       list(class = c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
       list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
-      object_label = "table"
+      table = TRUE
     )
   )
   
@@ -37,7 +37,7 @@ test_that("tbl_check_table() class", {
       "table_class",
       list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
       list(class = c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      object_label = "table"
+      table = TRUE
     )
   )
 
@@ -51,7 +51,7 @@ test_that("tbl_check_table() class", {
       "table_class",
       list(class = c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
       list(class = c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      object_label = "table"
+      table = TRUE
     )
   )
 })
@@ -63,7 +63,7 @@ test_that("tbl_check_table() rows", {
   
   expect_equal(
     problem,
-    problem("table_nrow", 25, 26, object_label = "table")
+    problem("table_nrow", 25, 26, table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters, b = a)
@@ -72,7 +72,7 @@ test_that("tbl_check_table() rows", {
   
   expect_equal(
     problem,
-    problem("table_nrow", 1, 26, object_label = "table")
+    problem("table_nrow", 1, 26, table = TRUE)
   )
 })
 
@@ -83,7 +83,7 @@ test_that("tbl_check_table() ncol", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 2, 3, object_label = "table")
+    problem("table_ncol", 2, 3, table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters, b = a, c = a)
@@ -92,7 +92,7 @@ test_that("tbl_check_table() ncol", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 1, 3, object_label = "table")
+    problem("table_ncol", 1, 3, table = TRUE)
   )
 })
 
@@ -107,7 +107,7 @@ test_that("tbl_check_table() names", {
       "table_names",
       missing = c("x", "y"),
       unexpected = c("a", "b"),
-      object_label = "table"
+      table = TRUE
     )
   )
 })
@@ -119,7 +119,7 @@ test_that("tbl_check_table() columns", {
   
   expect_equal(
     problem,
-    problem("column_values", letters[24:26], object_label = "`a` column")
+    problem("column_values", letters[24:26], vector = TRUE, column = "a")
   )
 })
 
@@ -191,7 +191,7 @@ test_that("tbl_check_table() returns grades with row problems", {
   expect_equal(
     problem,
     problem(
-      type = "table_nrow", expected = 25L, actual = 26L, object_label = "table"
+      type = "table_nrow", expected = 25L, actual = 26L, table = TRUE
     )
   )
   
@@ -202,7 +202,7 @@ test_that("tbl_check_table() returns grades with row problems", {
   expect_equal(
     problem,
     problem(
-      type = "table_nrow", expected = 1L, actual = 26L, object_label = "table"
+      type = "table_nrow", expected = 1L, actual = 26L, table = TRUE
     )
   )
 })
@@ -214,7 +214,7 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 2, 3, object_label = "table")
+    problem("table_ncol", 2, 3, table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters, b = letters, c = letters)
@@ -223,7 +223,7 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 1, 3, object_label = "table")
+    problem("table_ncol", 1, 3, table = TRUE)
   )
 })
 
@@ -238,7 +238,7 @@ test_that("tbl_check_table() returns names feedback to learnr", {
       "table_names",
       missing = c("x", "y", "z", "w"),
       unexpected = c("a", "b", "c", "d"),
-      object_label = "table"
+      table = TRUE
     )
   )
   
@@ -253,7 +253,7 @@ test_that("tbl_check_table() returns names feedback to learnr", {
       "table_names",
       missing = c("x", "y", "z", "w"),
       unexpected = c("a", "b", "c", "d"),
-      object_label = "table"
+      table = TRUE
     )
   )
   
@@ -268,7 +268,7 @@ test_that("tbl_check_table() returns names feedback to learnr", {
       "table_names",
       missing = c("x", "y", "z", "w"),
       unexpected = c("a", "b", "c", "d"),
-      object_label = "table"
+      table = TRUE
     )
   )
 })

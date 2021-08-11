@@ -5,33 +5,14 @@
 \alias{tbl_grade_class}
 \title{Checks that two objects have the same classes}
 \usage{
-tbl_check_class(
-  object = .result,
-  expected = .solution,
-  object_label = NULL,
-  problem_prefix = "",
-  envir = parent.frame()
-)
+tbl_check_class(object = .result, expected = .solution, envir = parent.frame())
 
-tbl_grade_class(
-  object = .result,
-  expected = .solution,
-  object_label = "result",
-  problem_prefix = "",
-  envir = parent.frame()
-)
+tbl_grade_class(object = .result, expected = .solution, envir = parent.frame())
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
-
-\item{object_label}{\verb{[character(1)]}\cr The label used to describe the object
-in feedback messages. Defaults to \code{"result"}.}
-
-\item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the
-\code{problem} label in \code{\link[gradethis:graded]{gradethis::fail()}} objects.
-Defaults to \code{""}, which appends no prefix.}
 
 \item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
 }

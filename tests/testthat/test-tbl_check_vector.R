@@ -8,7 +8,8 @@ test_that("tbl_check_vector() checks classes", {
     problem(
       "vector_class",
       list(class = "integer", length = 3),
-      list(class = "character", length = 26)
+      list(class = "character", length = 26),
+      vector = TRUE
     )
   )
 })
@@ -18,7 +19,7 @@ test_that("tbl_check_vector() checks the first three values", {
   .solution <- letters
   problem   <- tbl_check_vector()
   
-  expect_equal(problem, problem("vector_values", letters[1:3]))
+  expect_equal(problem, problem("vector_values", letters[1:3], vector = TRUE))
 })
 
 test_that("tbl_check_vector() checks multiple classes", {
@@ -32,7 +33,8 @@ test_that("tbl_check_vector() checks multiple classes", {
     problem(
       type = "vector_class", 
       expected = list(class = c("test", "class", "integer"), length = 10),
-      actual = list(class = "integer", length = 10)
+      actual = list(class = "integer", length = 10),
+      vector = TRUE
     )
   )
 })
@@ -42,7 +44,7 @@ test_that("tbl_check_vector() checks for value differences beyond the first 3", 
   .solution <- c(rep(1, 3), 10:15)
   problem   <- tbl_check_vector()
   
-  expect_equal(problem, problem("vector_values"))
+  expect_equal(problem, problem("vector_values", vector = TRUE))
 })
 
 test_that("max_diffs modifies the number of values to print", {
@@ -50,7 +52,7 @@ test_that("max_diffs modifies the number of values to print", {
   .solution <- rev(letters)
   problem   <- tbl_check_vector(max_diffs = 5)
   
-  expect_equal(problem, problem("vector_values", letters[26:22]))
+  expect_equal(problem, problem("vector_values", letters[26:22], vector = TRUE))
 })
 
 test_that("max_diffs doesn't overflow", {
@@ -58,7 +60,7 @@ test_that("max_diffs doesn't overflow", {
   .solution <- letters[2:1]
   problem   <- tbl_check_vector(max_diffs = 3)
   
-  expect_equal(problem, problem("vector_values", letters[2:1]))
+  expect_equal(problem, problem("vector_values", letters[2:1], vector = TRUE))
 })
 
 test_that("checks that vectors have the same length", {
@@ -66,7 +68,7 @@ test_that("checks that vectors have the same length", {
   .solution <- letters[1:4]
   problem   <- tbl_check_vector()
   
-  expect_equal(problem, problem("vector_length", 4, 3))
+  expect_equal(problem, problem("vector_length", 4, 3, vector = TRUE))
 })
 
 test_that("checks that vectors have the same names", {
@@ -76,7 +78,10 @@ test_that("checks that vectors have the same names", {
   
   expect_equal(
     problem, 
-    problem("vector_names", missing = letters[1:3], unexpected = letters[24:26])
+    problem(
+      "vector_names",
+      missing = letters[1:3], unexpected = letters[24:26], vector = TRUE
+    )
   )
 })
 

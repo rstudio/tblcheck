@@ -12,11 +12,6 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
-#' @param object_label `[character(1)]`\cr The label used to describe the object
-#'   in feedback messages. Defaults to `"result"`.
-#' @param problem_prefix `[character(1)]`\cr The prefix appended to the
-#'   `problem` label in [gradethis::fail()] objects.
-#'   Defaults to `""`, which appends no prefix.
 #' @inheritParams tbl_check_table
 #'
 #' @return If there are any issues, a [list] from `tbl_check_class()` or a
@@ -25,8 +20,7 @@
 #' @export
 
 tbl_check_class <- function(
-  object = .result, expected = .solution,
-  object_label = NULL, problem_prefix = "", envir = parent.frame()
+  object = .result, expected = .solution, envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", envir)
@@ -35,47 +29,32 @@ tbl_check_class <- function(
     expected <- get(".solution", envir)
   }
   
-  object_label <- object_label %||% "result"
-  
-  assert_internally({
-    checkmate::assert_string(object_label)
-    checkmate::assert_string(problem_prefix)
-  })
-  
   obj_class <- class(object)
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
     return(
       problem(
-        paste0(problem_prefix, "class"),
+        "class",
         list(class = exp_class, length = length(expected)),
-        list(class = obj_class, length = length(object)),
-        object_label = object_label
+        list(class = obj_class, length = length(object))
       )
     )
   }
-  
-  invisible()
 }
 
 #' @rdname tbl_check_class
 #' @export
 
 tbl_grade_class <- function(
-  object = .result, expected = .solution,
-  object_label = "result", problem_prefix = "", envir = parent.frame()
+  object = .result, expected = .solution, envir = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(
-      tbl_check_class(object, expected, object_label, problem_prefix, envir)
-    )
+    tbl_grade(tbl_check_class(object, expected, envir))
   )
 }
 
 tbl_message_class <- function(problem, ...) {
-  object_label <- problem$object_label
-  
   exp_class <- problem$expected$class
   obj_class <- problem$actual$class
   
@@ -88,13 +67,20 @@ tbl_message_class <- function(problem, ...) {
     return_fail(hinted_class_message, problem = problem)
   }
   
+  column_name <- problem$column
+  
   friendly_exp_class <- friendly_class(exp_class, problem$expected$length)
   friendly_obj_class <- friendly_class(obj_class, problem$actual$length)
-  message <- glue::glue(
-    "Your {object_label} should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  )
   
-  return_fail(message, problem = problem)
+  message <- if (!is.null(column_name)) {
+    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  } else if (isTRUE(problem$table)) {
+    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  } else {
+    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  }
+  
+  return_fail(glue::glue(message), problem = problem)
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {
@@ -138,23 +124,23 @@ hinted_class_message_list <- function() {
     list(
       obj_class = "rowwise_df",
       exp_class = "grouped_df",
-      message   = "Your {object_label} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       exp_class = "grouped_df",
-      message   = "Your {object_label} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "grouped_df",
-      message   = "Your {object_label} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+      message   = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
     ),
     list(
       exp_class = "rowwise_df",
-      message   = "Your {object_label} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+      message   = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
     ),
     list(
       obj_class = "rowwise_df",
-      message   = "Your {object_label} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+      message   = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
     )
   )
 }

@@ -84,46 +84,32 @@ tbl_check_table <- function(
   # check table class ----
   if (check_class) {
     return_if_problem(
-      tbl_check_class(
-        object, expected,
-        object_label = "table",
-        problem_prefix = "table_"
-      )
+      tbl_check_class(object, expected),
+      table = TRUE
     )
   }
   
   # check number of rows ----
   if (check_nrow) {
     return_if_problem(
-      tbl_check_length(
-        object, expected,
-        dimension = "nrow",
-        object_label = "table",
-        problem_prefix = "table_"
-      )
+      tbl_check_length(object, expected, dimension = "nrow"),
+      table = TRUE
     )
   }
   
   # check column names ----
   if (check_names) {
     return_if_problem(
-      tbl_check_names(
-        object, expected,
-        object_label = "table",
-        problem_prefix = "table_"
-      )
+      tbl_check_names(object, expected),
+      table = TRUE
     )
   }
   
   # check number of columns ----
   if (check_ncol) {
     return_if_problem(
-      tbl_check_length(
-        object, expected,
-        dimension = "ncol",
-        object_label = "table",
-        problem_prefix = "table_"
-      )
+      tbl_check_length(object, expected, dimension = "ncol"),
+      table = TRUE
     )
   }
   

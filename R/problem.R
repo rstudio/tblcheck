@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @noRd
 problem <- function(
-  type, expected = NULL, actual = NULL, object_label = "result", ...
+  type, expected = NULL, actual = NULL, ...
 ) {
   checkmate::assert_string(type, min.chars = 1)
   
@@ -21,12 +21,15 @@ problem <- function(
     type = type,
     expected = expected,
     actual = actual,
-    object_label = object_label,
     ...
   )
   
+  as.problem(purrr::compact(problem))
+}
+
+as.problem <- function(list) {
   structure(
-    purrr::compact(problem),
-    class = c("tblcheck_problem", "gradethis_problem", "list")
+    list,
+    class = c("tblcheck_problem", "gradethis_problem", class(list))
   )
 }

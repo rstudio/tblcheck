@@ -2,17 +2,14 @@ test_that("tbl_grade_column() checks classes", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters)
     .solution <- tibble::tibble(a = 1:3)
-    tbl_grade_column("a")
+    tbl_grade_column("a", .result, .solution)
   })
   
   expect_grade(
     grade,
     "Your `a` column should be a vector of integers (class `integer`), but it is a vector of text (class `character`).",
-    problem = problem(
-      "column_class",
-      list(class = "integer", length = 3), 
-      list(class = "character", length = 26),
-      object_label = "`a` column"
+    problem = tbl_check_column(
+      "a", tibble::tibble(a = letters), tibble::tibble(a = 1:3)
     ),
     fixed = TRUE
   )
@@ -28,10 +25,8 @@ test_that("tbl_grade_column() checks the first three values", {
   expect_grade(
     grade,
     "The first 3 values of your `a` column should be `a`, `b`, and `c",
-    problem = problem(
-      "column_values",
-      letters[1:3],
-      object_label = "`a` column"
+    problem = tbl_check_column(
+      "a", tibble::tibble(a = rev(letters)), tibble::tibble(a = letters)
     )
   )
 })
@@ -40,17 +35,16 @@ test_that("tbl_grade_column() checks multiple classes", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = data.frame(x = 1))
     .solution <- tibble::tibble(a = tibble::tibble(x = 1))
-    tbl_grade_column('a')
+    tbl_grade_column("a")
   })
   
   expect_grade(
     grade,
     "Your `a` column should be a tibble (class `tbl_df`), but it is a data frame (class `data.frame`).",
-    problem = problem(
-      type = "column_class", 
-      expected = list(class = c("tbl_df", "tbl", "data.frame"), length = 1), 
-      actual = list(class = "data.frame", length = 1),
-      object_label = "`a` column"
+    problem = tbl_check_column(
+      "a",
+      tibble::tibble(a = data.frame(x = 1)),
+      tibble::tibble(a = tibble::tibble(x = 1))
     ),
     fixed = TRUE
   )
@@ -66,7 +60,11 @@ test_that("tbl_grade_column() checks for value differences beyond the first 3", 
   expect_grade(
     grade,
     "Your `a` column contains unexpected values.",
-    problem = problem("column_values", object_label = "`a` column")
+    problem = tbl_check_column(
+      "a",
+      tibble::tibble(a = c(rep(1, 3), 5:10)),
+      tibble::tibble(a = c(rep(1, 3), 10:15))
+    )
   )
 })
 
@@ -80,8 +78,11 @@ test_that("max_diffs modifies the number of values to print", {
   expect_grade(
     grade,
     "The first 5 values of your `a` column should be `z`, `y`, `x`, `w`, and `v",
-    problem = problem(
-      "column_values", letters[26:22], object_label = "`a` column"
+    problem = tbl_check_column(
+      "a",
+      tibble::tibble(a = letters),
+      tibble::tibble(a = rev(letters)),
+      max_diffs = 5
     )
   )
 })
@@ -96,8 +97,10 @@ test_that("max_diffs doesn't overflow", {
   expect_grade(
     grade,
     message = "`b` and `a`.",
-    problem = problem(
-      "column_values", letters[2:1], object_label = "`a` column"
+    problem = tbl_check_column(
+      "a",
+      tibble::tibble(a = letters[1:2]),
+      tibble::tibble(a = letters[2:1])
     )
   )
   expect_no_match(grade$message, "`NA`")
@@ -113,7 +116,11 @@ test_that("checks that columns have the same length", {
   expect_grade(
     grade,
     message = "should contain 4 values",
-    problem = problem("column_length", 4, 3, object_label = "`a` column")
+    problem = tbl_check_column(
+      "a",
+      tibble::tibble(a = letters[1:3]),
+      tibble::tibble(a = letters[1:4])
+    )
   )
 })
 
@@ -127,7 +134,11 @@ test_that("checks that the column is present in object", {
   expect_grade(
     grade,
     message = "should have a column named `a`",
-    problem = problem("column", "a"),
+    problem = tbl_check_column(
+      "a",
+      tibble::tibble(b = letters[1:3]),
+      tibble::tibble(a = letters[1:3])
+    )
   )
 })
 
@@ -147,7 +158,7 @@ test_that("checks that the column is present in expected", {
 })
 
 test_that("tbl_grade_column() with no problems returns invisible()", {
-  grade <-  expect_null(
+  grade <- expect_null(
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = letters[1:3])
       .solution <- tibble::tibble(a = letters[1:3])
@@ -155,7 +166,9 @@ test_that("tbl_grade_column() with no problems returns invisible()", {
     })
   )
   
-  expect_invisible(tbl_grade_column("a", tibble::tibble(a = 1), tibble::tibble(a = 1)))
+  expect_invisible(
+    tbl_grade_column("a", tibble::tibble(a = 1), tibble::tibble(a = 1))
+  )
 
   expect_null(grade$problem)
   expect_null(grade$correct)

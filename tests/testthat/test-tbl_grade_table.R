@@ -8,11 +8,9 @@ test_that("tbl_grade_table() class", {
   expect_grade(
     grade,
     message = "Your table should be a tibble (class `tbl_df`), but it is a data frame (class `data.frame`)",
-    problem = problem(
-      "table_class",
-      list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = "data.frame", length = 2),
-      object_label = "table"
+    problem = tbl_check_table(
+      data.frame(a = 1:10, b = 1:10),
+      tibble::tibble(a = 1:10, b = 1:10)
     ),
     fixed = TRUE
   )
@@ -26,11 +24,9 @@ test_that("tbl_grade_table() class", {
   expect_grade(
     grade,
     message = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
-    problem = problem(
-      "table_class",
-      list(class = c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
-      object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = 1:10, b = a),
+      dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
     ),
     fixed = TRUE
   )
@@ -44,11 +40,9 @@ test_that("tbl_grade_table() class", {
   expect_grade(
     grade,
     message = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?",
-    problem = problem(
-      "table_class",
-      list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      object_label = "table"
+    problem = tbl_check_table(
+      dplyr::rowwise(tibble::tibble(a = 1:10, b = a)),
+      tibble::tibble(a = 1:10, b = a)
     ),
     fixed = TRUE
   )
@@ -62,11 +56,9 @@ test_that("tbl_grade_table() class", {
   expect_grade(
     grade,
     message = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?",
-    problem = problem(
-      "table_class",
-      list(class = c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      object_label = "table"
+    problem = tbl_check_table(
+      dplyr::rowwise(tibble::tibble(a = 1:10, b = a)),
+      dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
     ),
     fixed = TRUE
   )
@@ -74,71 +66,83 @@ test_that("tbl_grade_table() class", {
 
 test_that("tbl_grade_table() rows", {
   grade <- tblcheck_test_grade({
-    result <- tibble::tibble(a = letters, b = a)
-    solution <- tibble::tibble(x = letters[-1], y = x)
-    tbl_grade_table(object = result, expected = solution)
+    .result   <- tibble::tibble(a = letters, b = a)
+    .solution <- tibble::tibble(x = letters[-1], y = x)
+    tbl_grade_table()
   })
   
   expect_grade(
     grade,
     message = "should have 25 rows",
-    problem = problem("table_nrow", 25, 26, object_label = "table")
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a),
+      tibble::tibble(x = letters[-1], y = x)
+    )
   )
   
   grade <- tblcheck_test_grade({
-    result <- tibble::tibble(a = letters, b = a)
-    solution <- tibble::tibble(x = letters[1], y = x)
-    tbl_grade_table(object = result, expected = solution)
+    .result   <- tibble::tibble(a = letters, b = a)
+    .solution <- tibble::tibble(x = letters[1], y = x)
+    tbl_grade_table()
   })
   
   expect_grade(
     grade,
     message = "should have 1 row",
-    problem = problem("table_nrow", 1, 26, object_label = "table")
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a),
+      tibble::tibble(x = letters[1], y = x)
+    )
   )
 })
 
 test_that("tbl_grade_table() ncol", {
   grade <- tblcheck_test_grade({
-    result   <- tibble::tibble(a = letters, b = a, c = a)
-    solution <- tibble::tibble(a = letters, b = a)
-    tbl_grade_table(object = result, expected = solution, check_names = FALSE)
+    .result   <- tibble::tibble(a = letters, b = a, c = a)
+    .solution <- tibble::tibble(a = letters, b = a)
+    tbl_grade_table(check_names = FALSE)
   })
   
   expect_grade(
     grade,
     message = "should have 2 columns",
-    problem = problem("table_ncol", 2, 3, object_label = "table")
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a, c = a),
+      tibble::tibble(a = letters, b = a),
+      check_names = FALSE
+    )
   )
   
   grade <- tblcheck_test_grade({
-    result   <- tibble::tibble(a = letters, b = a, c = a)
-    solution <- tibble::tibble(a = letters)
-    tbl_grade_table(object = result, expected = solution, check_names = FALSE)
+    .result   <- tibble::tibble(a = letters, b = a, c = a)
+    .solution <- tibble::tibble(a = letters)
+    tbl_grade_table(check_names = FALSE)
   })
   
   expect_grade(
     grade,
     message = "should have 1 column",
-    problem = problem("table_ncol", 1, 3, object_label = "table")
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a, c = a),
+      tibble::tibble(a = letters),
+      check_names = FALSE
+    )
   )
 })
 
 test_that("tbl_grade_table() names", {
   grade <- tblcheck_test_grade({
-    result   <- tibble::tibble(a = letters[1:3], b = a)
-    solution <- tibble::tibble(x = letters[1:3], y = x)
-    tbl_grade_table(object = result, expected = solution)
+    .result   <- tibble::tibble(a = letters[1:3], b = a)
+    .solution <- tibble::tibble(x = letters[1:3], y = x)
+    tbl_grade_table()
   })
   
   expect_grade(
     grade,
     message = "Your table should have columns named `x` and `y`",
-    problem = problem(
-      "table_names",
-      missing = c("x", "y"),
-      unexpected = c("a", "b"),
-      object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters[1:3], b = a),
+      tibble::tibble(x = letters[1:3], y = x)
     )
   )
   expect_match(grade$message, "should not have columns named `a` or `b`")
@@ -146,16 +150,17 @@ test_that("tbl_grade_table() names", {
 
 test_that("tbl_grade_table() columns", {
   grade <- tblcheck_test_grade({
-    result   <- tibble::tibble(a = letters[1:3])
-    solution <- tibble::tibble(a = letters[24:26])
-    tbl_grade_table(object = result, expected = solution)
+    .result   <- tibble::tibble(a = letters[1:3])
+    .solution <- tibble::tibble(a = letters[24:26])
+    tbl_grade_table()
   })
   
   expect_grade(
     grade,
     message = "first 3 values of your `a` column should be `x`, `y`, and `z`",
-    problem = problem(
-      "column_values", letters[24:26], object_label = "`a` column"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters[1:3]),
+      tibble::tibble(a = letters[24:26])
     )
   )
 })
@@ -232,8 +237,9 @@ test_that("tbl_grade_table() returns grades with row problems", {
   expect_grade(
     grade,
     "should have 25 rows",
-    problem = problem(
-      type = "table_nrow", expected = 25L, actual = 26L, object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters),
+      tibble::tibble(a = letters[1:25])
     )
   )
   
@@ -246,8 +252,9 @@ test_that("tbl_grade_table() returns grades with row problems", {
   expect_grade(
     grade_single,
     "should have 1 row",
-    problem = problem(
-      type = "table_nrow", expected = 1L, actual = 26L, object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters),
+      tibble::tibble(a = letters[1])
     )
   )
 })
@@ -262,7 +269,11 @@ test_that("tbl_grade_table() returns ncol feedback to learnr", {
   expect_grade(
     grade,
     "should have 2 columns",
-    problem = problem("table_ncol", 2, 3, object_label = "table")
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = letters, c = letters),
+      tibble::tibble(a = letters, b = letters),
+      check_names = FALSE
+    )
   )
   
   
@@ -275,7 +286,11 @@ test_that("tbl_grade_table() returns ncol feedback to learnr", {
   expect_grade(
     grade_one,
     "should have 1 column",
-    problem = problem("table_ncol", 1, 3, object_label = "table")
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = letters, c = letters),
+      tibble::tibble(a = letters),
+      check_names = FALSE
+    )
   )
 })
 
@@ -289,11 +304,9 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   expect_grade(
     grade, 
     "Your table should have columns named .*x.*, .*y.*, .*z.*, and 1 more",
-    problem = problem(
-      "table_names",
-      missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d"),
-      object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a, c = a, d = a),
+      tibble::tibble(x = letters, y = x, z = x, w = x)
     )
   )
   
@@ -312,11 +325,9 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   expect_grade(
     grade_inf,
     "Your table should have columns named .*x.*, .*y.*, .*z.*, and .*w",
-    problem = problem(
-      "table_names",
-      missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d"),
-      object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a, c = a, d = a),
+      tibble::tibble(x = letters, y = x, z = x, w = x)
     )
   )
   
@@ -335,11 +346,9 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   expect_grade(
     grade_one,
     "Your table should have columns named .*x.* and 3 more",
-    problem = problem(
-      "table_names",
-      missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d"),
-      object_label = "table"
+    problem = tbl_check_table(
+      tibble::tibble(a = letters, b = a, c = a, d = a),
+      tibble::tibble(x = letters, y = x, z = x, w = x)
     )
   )
   

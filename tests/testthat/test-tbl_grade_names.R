@@ -8,8 +8,9 @@ test_that("grade missing names", {
   expect_grade(
     grade,
     message = "Your table should have a column named `b`.",
-    problem = problem(
-      "names", missing = "b", unexpected = character(0), object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(a = letters[1:3]),
+      tibble::tibble(a = letters[1:3], b = a)
     )
   )
   
@@ -23,9 +24,9 @@ test_that("grade missing names", {
   expect_grade(
     grade,
     message = "Your table should have columns named `b` and `c`.",
-    problem = problem(
-      "names", missing = c("b", "c"), unexpected = character(0),
-      object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(a = letters[1:3]),
+      tibble::tibble(a = letters[1:3], b = a, c = a)
     )
   )
 })
@@ -40,8 +41,9 @@ test_that("grade unexpected names", {
   expect_grade(
     grade,
     message = "Your table should not have a column named `b`.",
-    problem = problem(
-      "names", missing = character(0), unexpected = "b", object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(a = letters[1:3], b = a),
+      tibble::tibble(a = letters[1:3])
     )
   )
   
@@ -54,9 +56,9 @@ test_that("grade unexpected names", {
   expect_grade(
     grade,
     message = "Your table should not have columns named `b` or `c`.",
-    problem = problem(
-      "names", missing = character(0), unexpected = c("b", "c"),
-      object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(a = letters[1:3], b = a, c = a),
+      tibble::tibble(a = letters[1:3])
     )
   )
 })
@@ -71,9 +73,9 @@ test_that("grade missing and unexpected names", {
   expect_grade(
     grade,
     message = "Your table should have columns named `x` and `y`. Your table should not have columns named `a` or `b`.",
-    problem = problem(
-      "names", missing = c("x", "y"), unexpected = c("a", "b"),
-      object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(a = letters[1:3], b = a),
+      tibble::tibble(x = letters[1:3], y = x)
     )
   )
 })
@@ -88,9 +90,9 @@ test_that("grade names max_diffs()", {
   expect_grade(
     grade,
     message = "Your table should have columns named `a`, `b`, `c`, and 1 more.",
-    problem = problem(
-      "names", missing = letters[1:4], unexpected = character(0),
-      object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(),
+      tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     )
   )
   
@@ -103,9 +105,9 @@ test_that("grade names max_diffs()", {
   expect_grade(
     grade, 
     message = "Your table should have columns named `a`, `b`, `c`, and `d`.",
-    problem = problem(
-      "names", missing = letters[1:4], unexpected = character(0),
-      object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(),
+      tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     )
   )
   
@@ -118,9 +120,9 @@ test_that("grade names max_diffs()", {
   expect_grade(
     grade, 
     message = "Your table should have columns named `a` and 3 more.",
-    problem = problem(
-      "names", missing = letters[1:4], unexpected = character(0),
-      object_label = "table"
+    problem = tbl_check_names(
+      tibble::tibble(),
+      tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     )
   )
 })

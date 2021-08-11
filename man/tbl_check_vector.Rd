@@ -12,8 +12,6 @@ tbl_check_vector(
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
-  object_label = NULL,
-  problem_prefix = "vector_",
   envir = parent.frame()
 )
 }
@@ -36,12 +34,6 @@ print. Defaults to 3.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same names.}
-
-\item{object_label}{\verb{[character(1)]}\cr The label used to describe the vector
-in feedback messages. Defaults to \code{"result"}.}
-
-\item{problem_prefix}{\verb{[character(1)]}\cr The prefix appended to the
-\code{problem} label in \code{\link[gradethis:graded]{gradethis::fail()}} objects. Defaults to \code{"vector_"}.}
 
 \item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
 }

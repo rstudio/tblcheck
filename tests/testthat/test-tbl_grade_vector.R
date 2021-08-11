@@ -8,11 +8,7 @@ test_that("tbl_grade_vector() checks classes", {
   expect_grade(
     grade,
     "Your result should be a vector of integers (class `integer`), but it is a vector of text (class `character`).",
-    problem = problem(
-      "vector_class",
-      list(class = "integer", length = 3),
-      list(class = "character", length = 26)
-    ),
+    problem = tbl_check_vector(letters, 1:3),
     fixed = TRUE
   )
 })
@@ -27,7 +23,7 @@ test_that("tbl_grade_vector() checks the first three values", {
   expect_grade(
     grade,
     "The first 3 values of your result should be `a`, `b`, and `c",
-    problem = problem("vector_values", letters[1:3])
+    problem = tbl_check_vector(rev(letters), letters)
   )
 })
 
@@ -42,10 +38,8 @@ test_that("tbl_grade_vector() checks multiple classes", {
   expect_grade(
     grade,
     "Your result should be a vector with classes `test`, `class`, and `integer`, but it is a vector of integers (class `integer`).",
-    problem = problem(
-      type = "vector_class", 
-      expected = list(class = c("test", "class", "integer"), length = 10),
-      actual = list(class = "integer", length = 10)
+    problem = tbl_check_vector(
+      1:10, structure(1:10, class = c("test", "class", "integer"))
     ),
     fixed = TRUE
   )
@@ -61,7 +55,7 @@ test_that("tbl_grade_vector() checks for value differences beyond the first 3", 
   expect_grade(
     grade,
     "Your result contains unexpected values.",
-    problem = problem("vector_values")
+    problem = tbl_check_vector(c(rep(1, 3), 5:10), c(rep(1, 3), 10:15))
   )
 })
 
@@ -75,7 +69,7 @@ test_that("max_diffs modifies the number of values to print", {
   expect_grade(
     grade,
     "The first 5 values of your result should be `z`, `y`, `x`, `w`, and `v`",
-    problem = problem("vector_values", letters[26:22])
+    problem = tbl_check_vector(letters, rev(letters), max_diffs = 5)
   )
 })
 
@@ -86,7 +80,7 @@ test_that("max_diffs doesn't overflow", {
     tbl_grade_vector(max_diffs = 3)
   })
 
-  expect_equal(grade$problem, problem("vector_values", letters[2:1]))
+  expect_equal(grade$problem, tbl_check_vector(letters[1:2], letters[2:1]))
   expect_false(grade$correct)
   expect_no_match(grade$message, "`NA`")
   expect_match(grade$message, "`b` and `a`.")
@@ -99,7 +93,7 @@ test_that("checks that vectors have the same length", {
     tbl_grade_vector()
   })
 
-  expect_equal(grade$problem, problem("vector_length", 4, 3))
+  expect_equal(grade$problem, tbl_check_vector(letters[1:3], letters[1:4]))
   expect_false(grade$correct)
   expect_match(grade$message, "should contain 4 values")
 })
@@ -114,7 +108,7 @@ test_that("checks that vectors have the same names", {
   expect_grade(
     grade, 
     message = "Your result should have the names `a`, `b`, and `c`. Your result should not have the names `x`, `y`, or `z`.",
-    problem = problem("vector_names", missing = letters[1:3], unexpected = letters[24:26])
+    problem = tbl_check_vector(c(x = 1, y = 2, z = 3), c(a = 1, b = 2, c = 3))
   )
 })
 

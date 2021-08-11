@@ -8,11 +8,7 @@ test_that("tbl_grade_class()", {
   expect_grade(
     grade,
     message = "Your result should be a number (class `numeric`), but it is a text string (class `character`).",
-    problem = problem(
-      type     = "class",
-      expected = list(class = "numeric", length = 1),
-      actual   = list(class = "character", length = 1)
-    ),
+    problem = tbl_check_class("1", 1),
     fixed   = TRUE
   )
   
@@ -25,11 +21,7 @@ test_that("tbl_grade_class()", {
   expect_grade(
     grade,
     message = "Your result should be a vector of numbers (class `numeric`), but it is a vector of text (class `character`).",
-    problem = problem(
-      type     = "class",
-      expected = list(class = "numeric", length = 2),
-      actual   = list(class = "character", length = 2)
-    ),
+    problem = tbl_check_class(c("1", "2"), c(1, 2)),
     fixed   = TRUE
   )
   
@@ -42,12 +34,11 @@ test_that("tbl_grade_class()", {
   expect_grade(
     grade,
     message = "Your result should be a date-time (class `POSIXct`), but it is a text string (class `character`).",
-    problem = problem(
-      type     = "class",
-      expected = list(class = c("POSIXct", "POSIXt"), length = 1),
-      actual   = list(class = "character", length = 1)
+    problem = tbl_check_class(
+      "2021-07-29 10:59:59",
+      as.POSIXct("2021-07-29 10:59:59")
     ),
-    fixed   = TRUE
+    fixed = TRUE
   )
   
   grade <- tblcheck_test_grade({
@@ -59,10 +50,9 @@ test_that("tbl_grade_class()", {
   expect_grade(
     grade,
     message = "Your result should be a vector of date-times (class `POSIXlt`), but it is a vector of text (class `character`).",
-    problem = problem(
-      type     = "class",
-      expected = list(class = c("POSIXlt", "POSIXt"), length = 2),
-      actual   = list(class = "character", length = 2)
+    problem = tbl_check_class(
+      c("2021-07-29 15:18:00", "1996-03-05 12:00:00"),
+      as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
     ),
     fixed   = TRUE
   )
@@ -105,16 +95,15 @@ test_that("tbl_grade_class() with multiple classes", {
   expect_grade(
     grade,
     message = "Your result should be an object with classes `test`, `class`, and `integer`, but it is an integer (class `integer`).",
-    problem = problem(
-      type     = "class",
-      expected = list(class = c("test", "class", "integer"), length = 1),
-      actual   = list(class = "integer", length = 1)
+    problem = tbl_check_class(
+      1L,
+      structure(1L, class = c("test", "class", "integer"))
     ),
-    fixed   = TRUE
+    fixed = TRUE
   )
   
   grade <- tblcheck_test_grade({
-    .result   <- 1L
+    .result <- 1L
     class(.result) <- c("test", "class", "integer")
     .solution <- 1L
     tbl_grade_class()
@@ -123,10 +112,9 @@ test_that("tbl_grade_class() with multiple classes", {
   expect_grade(
     grade,
     message = "Your result should be an integer (class `integer`), but it is an object with classes `test`, `class`, and `integer`.",
-    problem = problem(
-      type     = "class",
-      expected = list(class = "integer", length = 1),
-      actual   = list(class = c("test", "class", "integer"), length = 1)
+    problem = tbl_check_class(
+      structure(1L, class = c("test", "class", "integer")),
+      1L
     ),
     fixed   = TRUE
   )

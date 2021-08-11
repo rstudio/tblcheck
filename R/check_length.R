@@ -27,8 +27,6 @@ tbl_check_length <- function(
   object = .result,
   expected = .solution,
   dimension = c("length", "ncol", "nrow"), 
-  object_label = NULL,
-  problem_prefix = "",
   envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -38,35 +36,19 @@ tbl_check_length <- function(
     expected <- get(".solution", envir)
   }
   
-  if (is.null(object_label)) {
-    object_label <- if (is.data.frame(object)) {
-      "table"
-    } else {
-      "result"
-    }
-  }
-  
   dimension <- match.arg(dimension)
   dimension_fn <- methods::getFunction(dimension)
   
   assert_internally({
     checkmate::assert_string(dimension)
     checkmate::assert_function(dimension_fn)
-    checkmate::assert_string(object_label)
-    checkmate::assert_string(problem_prefix)
   })
   
   obj_length <- dimension_fn(object)
   exp_length <- dimension_fn(expected)
   
   if (!identical(obj_length, exp_length)) {
-    return(
-      problem(
-        paste0(problem_prefix, dimension),
-        exp_length, obj_length,
-        object_label = object_label
-      )
-    )
+    return(problem(dimension, exp_length, obj_length))
   }
 }
 
@@ -89,23 +71,37 @@ tbl_grade_length <- function(
 }
 
 tbl_message_length <- function(problem, ...) {
-  exp_length <- problem$expected
-  obj_length <- problem$actual
-  object_label <- problem$object_label
-  dimension <- gsub(".*_", "", problem$type)
+  exp_length  <- problem$expected
+  obj_length  <- problem$actual
+  column_name <- problem$column
   
-  message <- glue::glue(
-    ngettext(
-      exp_length,
-      "Your {object_label} should contain {exp_length} value, ",
-      "Your {object_label} should contain {exp_length} values, "
-    ),
-    ngettext(
-      obj_length,
-      "but it has {obj_length} value.",
-      "but it has {obj_length} values."
+  message <- if (!is.null(column_name)) {
+    glue::glue(
+      ngettext(
+        exp_length,
+        "Your `{column_name}` column should contain {exp_length} value, ",
+        "Your `{column_name}` column should contain {exp_length} values, "
+      ),
+      ngettext(
+        obj_length,
+        "but it has {obj_length} value.",
+        "but it has {obj_length} values."
+      )
     )
-  )
+  } else {
+    glue::glue(
+      ngettext(
+        exp_length,
+        "Your result should contain {exp_length} value, ",
+        "Your result should contain {exp_length} values, "
+      ),
+      ngettext(
+        obj_length,
+        "but it has {obj_length} value.",
+        "but it has {obj_length} values."
+      )
+    )
+  }
   
   return_fail(message, problem = problem)
 }
@@ -113,13 +109,12 @@ tbl_message_length <- function(problem, ...) {
 tbl_message_ncol <- function(problem, ...) {
   exp_length <- problem$expected
   obj_length <- problem$actual
-  object_label <- problem$object_label
   
   message <- glue::glue(
     ngettext(
       exp_length,
-      "Your {object_label} should have {exp_length} column, ",
-      "Your {object_label} should have {exp_length} columns, "
+      "Your table should have {exp_length} column, ",
+      "Your table should have {exp_length} columns, "
     ),
     ngettext(
       obj_length,
@@ -134,13 +129,12 @@ tbl_message_ncol <- function(problem, ...) {
 tbl_message_nrow <- function(problem, ...) {
   exp_length <- problem$expected
   obj_length <- problem$actual
-  object_label <- problem$object_label
   
   message <- glue::glue(
     ngettext(
       exp_length,
-      "Your {object_label} should have {exp_length} row, ",
-      "Your {object_label} should have {exp_length} rows, "
+      "Your table should have {exp_length} row, ",
+      "Your table should have {exp_length} rows, "
     ),
     ngettext(
       obj_length,

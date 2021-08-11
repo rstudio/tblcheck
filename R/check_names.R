@@ -24,8 +24,6 @@
 tbl_check_names <- function(
   object = .result,
   expected = .solution,
-  object_label = NULL,
-  problem_prefix = "",
   envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -35,31 +33,21 @@ tbl_check_names <- function(
     expected <- get(".solution", envir)
   }
   
-  if (is.null(object_label)) {
-    object_label <- if (is.data.frame(object)) {
-      "table"
-    } else {
-      "result"
-    }
-  }
-  
-  assert_internally({
-    checkmate::assert_string(object_label)
-    checkmate::assert_string(problem_prefix)
-  })
-  
   names_exp <- names(expected)
   names_obj <- names(object)
   
   if (!identical(names_exp, names_obj)) {
-    return(
-      problem(
-        paste0(problem_prefix, "names"), 
-        missing = setdiff(names_exp, names_obj),
-        unexpected = setdiff(names_obj, names_exp),
-        object_label = object_label
-      )
+    problem <- problem(
+      "names", 
+      missing = setdiff(names_exp, names_obj),
+      unexpected = setdiff(names_obj, names_exp)
     )
+    
+    if (is.data.frame(object) && is.data.frame(expected)) {
+      problem$table <- TRUE
+    }
+    
+    return(problem)
   }
 }
 
@@ -81,13 +69,19 @@ tbl_grade_names <- function(
 }
 
 tbl_message_names <- function(problem, max_diffs = 3, ...) {
-  object_label <- problem$object_label
+  column_name <- problem$column
   
   missing_names <- combine_words_with_more(
     problem$missing, max_diffs
   )
   missing_msg <- if (!is.null(missing_names)) {
-    if (object_label == "table") {
+    if (!is.null(column_name)) {
+      ngettext(
+        length(problem$missing),
+        "Your `{column_name}` column should have the name {missing_names}. ",
+        "Your `{column_name}` column should have the names {missing_names}. "
+      )
+    } else if (isTRUE(problem$table)) {
       ngettext(
         length(problem$missing),
         "Your table should have a column named {missing_names}. ",
@@ -96,8 +90,8 @@ tbl_message_names <- function(problem, max_diffs = 3, ...) {
     } else {
       ngettext(
         length(problem$missing),
-        "Your {object_label} should have the name {missing_names}. ",
-        "Your {object_label} should have the names {missing_names}. "
+        "Your result should have the name {missing_names}. ",
+        "Your result should have the names {missing_names}. "
       )
     }
   } else {
@@ -108,7 +102,13 @@ tbl_message_names <- function(problem, max_diffs = 3, ...) {
     problem$unexpected, max_diffs, and = " or "
   )
   unexpected_msg <- if (!is.null(unexpected_names)) {
-    if (object_label == "table") {
+    if (!is.null(column_name)) {
+      ngettext(
+        length(problem$unexpected),
+        "Your `{column_name}` column should not have the name {unexpected_names}.",
+        "Your `{column_name}` column should not have the names {unexpected_names}."
+      )
+    } else if (isTRUE(problem$table)) {
       ngettext(
         length(problem$unexpected),
         "Your table should not have a column named {unexpected_names}.",
@@ -117,8 +117,8 @@ tbl_message_names <- function(problem, max_diffs = 3, ...) {
     } else {
       ngettext(
         length(problem$unexpected),
-        "Your {object_label} should not have the name {unexpected_names}.",
-        "Your {object_label} should not have the names {unexpected_names}."
+        "Your result should not have the name {unexpected_names}.",
+        "Your result should not have the names {unexpected_names}."
       )
     }
   } else {

@@ -9,7 +9,8 @@ test_that("tbl_check_column() checks classes", {
       "column_class",
       list(class = "integer", length = 3), 
       list(class = "character", length = 26),
-      object_label = "`a` column"
+      vector = TRUE,
+      column = "a"
     )
   )
 })
@@ -24,7 +25,8 @@ test_that("tbl_check_column() checks the first three values", {
     problem(
       "column_values",
       letters[1:3],
-      object_label = "`a` column"
+      vector = TRUE,
+      column = "a"
     )
   )
 })
@@ -40,7 +42,8 @@ test_that("tbl_check_column() checks multiple classes", {
       type = "column_class", 
       expected = list(class = c("tbl_df", "tbl", "data.frame"), length = 1), 
       actual = list(class = "data.frame", length = 1),
-      object_label = "`a` column"
+      vector = TRUE,
+      column = "a"
     )
   )
 })
@@ -52,7 +55,7 @@ test_that("tbl_check_column() checks for value differences beyond the first 3", 
   
   expect_equal(
     problem, 
-    problem("column_values", object_label = "`a` column")
+    problem("column_values", vector = TRUE, column = "a")
   )
 })
 
@@ -63,7 +66,7 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_equal(
     problem,
-    problem("column_values", letters[26:22], object_label = "`a` column")
+    problem("column_values", letters[26:22], vector = TRUE, column = "a")
   )
 })
 
@@ -74,7 +77,7 @@ test_that("max_diffs doesn't overflow", {
 
   expect_equal(
     problem,
-    problem("column_values", letters[2:1], object_label = "`a` column")
+    problem("column_values", letters[2:1], vector = TRUE, column = "a")
   )
 })
 
@@ -85,7 +88,7 @@ test_that("checks that columns have the same length", {
   
   expect_equal(
     problem,
-    problem("column_length", 4, 3, object_label = "`a` column")
+    problem("column_length", 4, 3, vector = TRUE, column = "a")
   )
 })
 
@@ -96,7 +99,7 @@ test_that("checks that the column is present in object", {
   
   expect_equal(
     problem,
-    problem("column", "a"),
+    problem("column_missing", "a", column = "a"),
   )
 })
 
