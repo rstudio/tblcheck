@@ -36,8 +36,10 @@ tbl_check_class <- function(
     return(
       problem(
         "class",
-        list(class = exp_class, length = length(expected)),
-        list(class = obj_class, length = length(object))
+        # Object lengths are stored as attributes so the correct pluralization
+        # can be applied in tbl_message_class()
+        structure(exp_class, length = length(expected)),
+        structure(obj_class, length = length(object))
       )
     )
   }
@@ -55,8 +57,8 @@ tbl_grade_class <- function(
 }
 
 tbl_message_class <- function(problem, ...) {
-  exp_class <- problem$expected$class
-  obj_class <- problem$actual$class
+  exp_class <- problem$expected
+  obj_class <- problem$actual
   
   if (!has_meaningful_class_difference(exp_class, obj_class)) {
     return()
@@ -69,8 +71,8 @@ tbl_message_class <- function(problem, ...) {
   
   column_name <- problem$column
   
-  friendly_exp_class <- friendly_class(exp_class, problem$expected$length)
-  friendly_obj_class <- friendly_class(obj_class, problem$actual$length)
+  friendly_exp_class <- friendly_class(exp_class)
+  friendly_obj_class <- friendly_class(obj_class)
   
   message <- if (!is.null(column_name)) {
     "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
@@ -145,7 +147,9 @@ hinted_class_message_list <- function() {
   )
 }
 
-friendly_class <- function(class, length) {
+friendly_class <- function(class) {
+  length <- attr(class, "length") %||% 2
+  
   list <- friendly_class_list()
   
   for (i in seq_along(list)) {

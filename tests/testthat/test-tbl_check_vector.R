@@ -7,8 +7,8 @@ test_that("tbl_check_vector() checks classes", {
     problem,
     problem(
       "vector_class",
-      list(class = "integer", length = 3),
-      list(class = "character", length = 26),
+      structure("integer", length = 3),
+      structure("character", length = 26),
       vector = TRUE
     )
   )
@@ -32,8 +32,8 @@ test_that("tbl_check_vector() checks multiple classes", {
     problem,
     problem(
       type = "vector_class", 
-      expected = list(class = c("test", "class", "integer"), length = 10),
-      actual = list(class = "integer", length = 10),
+      expected = structure(c("test", "class", "integer"), length = 10),
+      actual = structure("integer", length = 10),
       vector = TRUE
     )
   )

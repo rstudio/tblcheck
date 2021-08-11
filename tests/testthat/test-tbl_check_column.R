@@ -7,8 +7,8 @@ test_that("tbl_check_column() checks classes", {
     problem,
     problem(
       "column_class",
-      list(class = "integer", length = 3), 
-      list(class = "character", length = 26),
+      structure("integer", length = 3), 
+      structure("character", length = 26),
       vector = TRUE,
       column = "a"
     )
@@ -40,8 +40,8 @@ test_that("tbl_check_column() checks multiple classes", {
     problem,
     problem(
       type = "column_class", 
-      expected = list(class = c("tbl_df", "tbl", "data.frame"), length = 1), 
-      actual = list(class = "data.frame", length = 1),
+      expected = structure(c("tbl_df", "tbl", "data.frame"), length = 1), 
+      actual = structure("data.frame", length = 1),
       vector = TRUE,
       column = "a"
     )

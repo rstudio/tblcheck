@@ -7,8 +7,8 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = "data.frame", length = 2),
+      structure(c("tbl_df", "tbl", "data.frame"), length = 2),
+      structure("data.frame", length = 2),
       table = TRUE
     )
   )
@@ -21,8 +21,8 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      list(class = c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
+      structure(c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
+      structure(c("tbl_df", "tbl", "data.frame"), length = 2),
       table = TRUE
     )
   )
@@ -35,8 +35,8 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      list(class = c("tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
+      structure(c("tbl_df", "tbl", "data.frame"), length = 2),
+      structure(c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
       table = TRUE
     )
   )
@@ -49,8 +49,8 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      list(class = c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      list(class = c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
+      structure(c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
+      structure(c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
       table = TRUE
     )
   )
