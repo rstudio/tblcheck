@@ -2,9 +2,21 @@
 % Please edit documentation in R/check_vector.R
 \name{tbl_check_vector}
 \alias{tbl_check_vector}
+\alias{tbl_grade_vector}
 \title{Checks that two vectors are the same}
 \usage{
 tbl_check_vector(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  check_length = TRUE,
+  check_values = TRUE,
+  check_names = TRUE,
+  envir = parent.frame()
+)
+
+tbl_grade_vector(
   object = .result,
   expected = .solution,
   max_diffs = 3,

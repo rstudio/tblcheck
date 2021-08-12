@@ -94,6 +94,9 @@ tbl_check_vector <- function(
   }
 }
 
+#' @rdname tbl_check_vector
+#' @export
+
 tbl_grade_vector <- function(
   object = .result,
   expected = .solution,
