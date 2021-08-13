@@ -16,7 +16,6 @@
 #'   [gradethis::fail()] message from `tbl_grade_dimensions()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-
 tbl_check_dimensions <- function(
   object = .result,
   expected = .solution,
@@ -39,7 +38,6 @@ tbl_check_dimensions <- function(
 
 #' @rdname tbl_check_dimensions
 #' @export
-
 tbl_grade_dimensions <- function(
   object = .result, 
   expected = .solution,

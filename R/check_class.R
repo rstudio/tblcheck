@@ -18,7 +18,6 @@
 #'   [gradethis::fail()] message from `tbl_grade_class()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-
 tbl_check_class <- function(
   object = .result, expected = .solution, envir = parent.frame()
 ) {
@@ -49,7 +48,6 @@ tbl_check_class <- function(
 
 #' @rdname tbl_check_class
 #' @export
-
 tbl_grade_class <- function(
   object = .result, expected = .solution, envir = parent.frame()
 ) {

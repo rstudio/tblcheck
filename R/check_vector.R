@@ -29,7 +29,6 @@
 #'   [gradethis::fail()] message from `tbl_grade_vector()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-
 tbl_check_vector <- function(
   object = .result,
   expected = .solution,
@@ -96,7 +95,6 @@ tbl_check_vector <- function(
 
 #' @rdname tbl_check_vector
 #' @export
-
 tbl_grade_vector <- function(
   object = .result,
   expected = .solution,

@@ -20,7 +20,6 @@
 #'   [gradethis::fail()] message from `tbl_grade_names()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-
 tbl_check_names <- function(
   object = .result,
   expected = .solution,
@@ -53,7 +52,6 @@ tbl_check_names <- function(
 
 #' @rdname tbl_check_names
 #' @export
-
 tbl_grade_names <- function(
   object = .result,
   expected = .solution,

@@ -5,7 +5,6 @@
 #'
 #' @return A [gradethis::fail()] message.
 #' @export
-
 tbl_grade <- function(problem, max_diffs = 3) {
   if (is.null(problem)) {
     return(invisible())

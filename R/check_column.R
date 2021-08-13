@@ -29,7 +29,6 @@
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-
 tbl_check_column <- function(
   name,
   object = .result,
@@ -82,7 +81,6 @@ tbl_check_column <- function(
 
 #' @rdname tbl_check_column
 #' @export
-
 tbl_grade_column <- function(
   name,
   object = .result,
