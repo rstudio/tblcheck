@@ -1,8 +1,10 @@
 #' Checks that two objects have the same classes
 #'
 #' Checks if `object` and `expected` have the same [class][class()].
-#' If the classes differ, returns a failure state and an informative message
-#' with [gradethis::fail()].
+#' If the classes differ
+#' - `tbl_check_class()` returns a list describing the problem
+#' - `tbl_grade_class()` returns a failing grade and informative message
+#' with [gradethis::fail()]
 #' 
 #' @section Problems:
 #' 
@@ -10,54 +12,80 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
-#' @param unit `[character(1)]`\cr The label used to describe the object in
-#'   feedback messages. Defaults to `"result"`.
-#' @param problem_prefix `[character(1)]`\cr The prefix appended to the
-#'   `problem` label in [gradethis::fail()] objects.
-#'   Defaults to `""`, which appends no prefix.
+#' @inheritParams tbl_check_table
 #'
-#' @inherit check_table return
+#' @return If there are any issues, a [list] from `tbl_check_class()` or a
+#'   [gradethis::fail()] message from `tbl_grade_class()`.
+#'   Otherwise, invisibly returns [`NULL`].
 #' @export
-
-
-check_class <- function(
-  object = .result, expected = .solution, unit = "result", problem_prefix = ""
+tbl_check_class <- function(
+  object = .result, expected = .solution, envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", parent.frame())
+    object <- get(".result", envir)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", parent.frame())
+    expected <- get(".solution", envir)
   }
   
   obj_class <- class(object)
   exp_class <- class(expected)
   
-  assert_internally({
-    checkmate::assert_string(unit)
-    checkmate::assert_string(problem_prefix)
-  })
-  
   if (!identical(obj_class, exp_class)) {
-    if (!has_meaningful_class_difference(exp_class, obj_class)) {
-      return()
-    }
-    
-    class_problem <- problem(paste0(problem_prefix, "class"), exp_class, obj_class)
-    
-    hinted_class_message <- hinted_class_message(obj_class, exp_class)
-    if (!is.null(hinted_class_message)) {
-      return_fail(hinted_class_message, problem = class_problem)
-    }
-    
-    friendly_exp_class <- friendly_class(exp_class, expected)
-    friendly_obj_class <- friendly_class(obj_class, object)
-    message <- glue::glue(
-      "Your {unit} should be {friendly_exp_class}, but it is {friendly_obj_class}."
+    return(
+      problem(
+        "class",
+        # Object lengths are stored so the correct pluralization
+        # can be applied in tbl_message_class()
+        exp_class,
+        obj_class,
+        expected_length = length(expected),
+        actual_length = length(object)
+      )
     )
-    
-    return_fail(message, problem = class_problem)
   }
+}
+
+#' @rdname tbl_check_class
+#' @export
+tbl_grade_class <- function(
+  object = .result, expected = .solution, envir = parent.frame()
+) {
+  return_if_graded(
+    tbl_grade(tbl_check_class(object, expected, envir))
+  )
+}
+
+tbl_message_class <- function(problem, ...) {
+  exp_class <- problem$expected
+  obj_class <- problem$actual
+  
+  if (!has_meaningful_class_difference(exp_class, obj_class)) {
+    return()
+  }
+  
+  hinted_class_message <- hinted_class_message(obj_class, exp_class)
+  if (!is.null(hinted_class_message)) {
+    return_fail(hinted_class_message, problem = problem)
+  }
+  
+  column_name <- problem$column
+  
+  exp_length = problem$expected_length
+  obj_length = problem$actual_length
+  
+  friendly_exp_class <- friendly_class(exp_class, exp_length)
+  friendly_obj_class <- friendly_class(obj_class, obj_length)
+  
+  message <- if (!is.null(column_name)) {
+    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  } else if (isTRUE(problem$table)) {
+    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  } else {
+    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  }
+  
+  return_fail(glue::glue(message), problem = problem)
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {
@@ -101,33 +129,33 @@ hinted_class_message_list <- function() {
     list(
       obj_class = "rowwise_df",
       exp_class = "grouped_df",
-      message   = "Your {unit} is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       exp_class = "grouped_df",
-      message   = "Your {unit} isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "grouped_df",
-      message   = "Your {unit} is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+      message   = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
     ),
     list(
       exp_class = "rowwise_df",
-      message   = "Your {unit} isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+      message   = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
     ),
     list(
       obj_class = "rowwise_df",
-      message   = "Your {unit} is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+      message   = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
     )
   )
 }
 
-friendly_class <- function(class, x) {
+friendly_class <- function(class, length) {
   list <- friendly_class_list()
   
   for (i in seq_along(list)) {
     if (unordered_identical(list[[i]]$class, class)) {
-      if (length(x) > 1) return(list[[i]]$multiple %||% list[[i]]$single)
+      if (length > 1) return(list[[i]]$multiple %||% list[[i]]$single)
       return(list[[i]]$single)
     }
   }
@@ -136,7 +164,7 @@ friendly_class <- function(class, x) {
   
   glue::glue(
     ifelse(
-      length(x) > 1,
+      length > 1,
       ngettext(
         length(class),
         "a vector with class {class_str}",

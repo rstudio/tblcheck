@@ -12,7 +12,9 @@
 #'   
 #' @keywords internal
 #' @noRd
-problem <- function(type, expected = NULL, actual = NULL, ...) {
+problem <- function(
+  type, expected = NULL, actual = NULL, ...
+) {
   checkmate::assert_string(type, min.chars = 1)
   
   problem <- list(
@@ -22,5 +24,12 @@ problem <- function(type, expected = NULL, actual = NULL, ...) {
     ...
   )
   
-  purrr::compact(problem)
+  as.problem(purrr::compact(problem))
+}
+
+as.problem <- function(list) {
+  structure(
+    list,
+    class = c("tblcheck_problem", "gradethis_problem", class(list))
+  )
 }

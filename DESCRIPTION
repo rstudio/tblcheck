@@ -34,8 +34,12 @@ Imports:
 Suggests:
     dplyr,
     learnr,
+    lubridate,
+    rmarkdown,
     testthat,
     tibble
+VignetteBuilder: 
+    knitr
 Remotes: 
     rstudio/gradethis
 Encoding: UTF-8

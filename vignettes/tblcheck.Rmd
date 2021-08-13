@@ -1,0 +1,169 @@
+---
+title: "tblcheck"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tblcheck}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+library(gradethis)
+library(knitr)
+library(tblcheck)
+library(tibble)
+
+opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`tblcheck` provides a family of functions for creating helpful failure messages when a user's submitted code results in a table different from the intended solution.
+
+# Basic usage
+
+In the simplest case, all you need to do to use `tblcheck` is to add `tbl_grade_table()` to your grading code:
+
+````markdown
+```{r exercise-check}`r ""`
+grade_this({
+  pass_if_equal()
+  tbl_grade_table()
+  fail()
+})
+```
+````
+
+By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()`.
+
+## Example
+
+```{r}
+.result   <- tibble(dat = 1:10)
+.solution <- tibble(data = letters)
+```
+
+The user's submitted table, `.result`, differs from the correct table, `.solution`, in a lot of ways. `tblcheck` always returns only one problem to the user, and tries to give the most actionable item first.
+
+```{r}
+tbl_grade_table()
+```
+
+Here, `tbl_grade_table()` first highlighted the difference in the number of rows between the two tables. Let's see what happens when the user fixes this.
+
+```{r}
+.result <- tibble(dat = 1:26)
+tbl_grade_table()
+```
+
+`tbl_grade_table()` now informs the user that they have an incorrect column name.
+
+```{r}
+.result <- tibble(data = 1:26)
+tbl_grade_table()
+```
+
+Next, the user finds out their column contains the wrong type of data.
+
+```{r}
+.result <- tibble(data = as.character(1:26))
+tbl_grade_table()
+```
+
+If all else fails, `tbl_grade_table()` gives a hint as to what the user's values should look like.
+
+```{r}
+.result <- tibble(data = letters)
+tbl_grade_table()
+```
+
+When everything is correct, `tbl_grade_table()` gives no output. It doesn't return a passing grade, in case you would like to apply other checks, so be sure to include a `gradethis` function like `pass()` or `pass_if_equal()` to ensure students can get a passing grade!
+
+# Skipping tests
+
+If there are some tests you would like to skip, `tbl_grade_table()` includes a host of arguments that can be set to `FALSE`. For example:
+
+```{r}
+.result   <- data.frame(data = 1:10)
+.solution <- tibble(data = 1:10)
+
+tbl_grade_table()
+```
+
+When the user's result is a different class than the expected solution, `tbl_grade_table()` gives a failing grade. If you don't care about the class of the table, you can add `check_class = FALSE`.
+
+```{r}
+tbl_grade_table(check_class = FALSE)
+```
+
+Since there are no other problems, we get no output.
+
+Every test performed by `tbl_grade_table()` can be disabled with an argument. Check the help page `?tbl_grade_table()` for more information.
+
+# Grading vectors
+
+For exercises that use vectors rather than tables, `tbl_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
+
+```{r}
+.result   <- 1:10
+.solution <- letters
+tbl_grade_vector()
+```
+
+# Other grading functions
+
+`tbl_grade_table()` calls a number of more specific grading functions internally. You can call these functions directly to perform more specific grading.
+
+- `tbl_grade_column()` grades a single column of a table.
+- `tbl_grade_class()` grades the class of an object.
+- `tbl_grade_length()` grades the `length`, `ncol`, or `nrow` of an object.
+- `tbl_grade_names()` grades the names of an object.
+
+# Custom mistake handling
+
+Sometimes, we want to give special handling to a specific circumstance. For example:
+
+```{r}
+library(lubridate)
+
+.result   <- tibble(time = ymd(20090210) - ymd(20090201))
+.solution <- tibble(time = interval(ymd(20090201), ymd(20090210)))
+
+tbl_grade_table()
+```
+
+If this is a mistake you expect a lot of students to make, you may want to give it special handling. `tbl_check_table()` returns a problem object that you can inspect in your grading code.
+
+```{r}
+tbl_check_table()
+```
+
+You can use `if` statements to give specific feedback based on the nature of the problem object. To apply the default grading code of `tbl_grade_table()`, you can use `tbl_grade()` on the `problem` object.
+
+```{r}
+problem <- tbl_check_table()
+
+if (problem$type == "column_class" && problem$actual == "difftime") {
+  fail("I expected you to create a time interval. Did you remember to use `interval()`?")
+} else {
+  tbl_grade(problem)
+}
+```
+
+Applying the same code to a different mistake, we retain the normal `tbl_grade_table()` functionality.
+
+```{r}
+.result   <- tibble(tiem = interval(ymd(20090201), ymd(20090210)))
+.solution <- tibble(time = interval(ymd(20090201), ymd(20090210)))
+
+problem <- tbl_check_table()
+
+if (problem$type == "column_class" && problem$actual == "difftime") {
+  fail("I expected you to create a time interval. Did you remember to use `interval()`?")
+} else {
+  tbl_grade(problem)
+}
+```
+
+All `tbl_grade_*()` functions have a `tbl_check_*()` equivalent, allowing you to add custom handling for any detected mistake.
