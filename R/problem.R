@@ -57,6 +57,53 @@ return_if_problem <- function(
   }
 }
 
+#' Problem helper functions
+#' 
+#' - `problem_type()` returns a problem's type, or [`NULL`] if the input is
+#'   not a problem.
+#' - `is_problem()` tests whether an object is a `gradethis` problem.
+#' - `is_tblcheck_problem()` tests whether an object is a problem created
+#'   by `tblcheck`.
+#'   
+#' If `type` is specified, `is_problem()` and `is_tblcheck_problem()` test
+#' whether an object is a problem of the specified type.
+#'
+#' @param x An object 
+#' @param type `[character(1)]`\cr A `problem` type
+#'
+#' @return `is_problem()` and `is_tblcheck_problem()` return a [logical]
+#'   of length 1.
+#'   `problem_type()` returns a [character] of length 1.
+#' @export
+#'
+#' @examples
+#' problem_type(tbl_check_vector(1, "1"))
+#' is_problem(tbl_check_vector(1, "1"), "vector_class")
+#' is_tblcheck_problem(tbl_check_vector(1, "1"), "class")
+problem_type <- function(x) {
+  if (is_problem(x)) {
+    return(x$type)
+  }
+  
+  NULL
+}
+
+#' @rdname problem_type
+#' @export
+is_problem <- function(x, type = NULL) {
+  inherits(x, "gradethis_problem") && (
+    is.null(type) || inherits(x, paste0(type, "_problem"))
+  )
+}
+
+#' @rdname problem_type
+#' @export
+is_tblcheck_problem <- function(x, type = NULL) {
+  inherits(x, "tblcheck_problem") && (
+    is.null(type) || inherits(x, paste0(type, "_problem"))
+  )
+}
+
 #' @exportS3Method 
 print.tblcheck_problem <- function(x, ...) {
   problem_list <- x
