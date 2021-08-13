@@ -16,9 +16,8 @@ tbl_grade <- function(problem, max_diffs = 3) {
     checkmate::assert_number(max_diffs, lower = 1)
   })
   
-  message_fn <- methods::getFunction(
-    gsub("(.*_)?(.*)", "tbl_message_\\2", problem$type)
-  )
+  message_fn <- gsub("(.*_)?(.*)", "tbl_message_\\2", problem$type)
+  message_fn <- rlang::as_function(message_fn, rlang::pkg_env("tblcheck"))
   
   return_if_graded(message_fn(problem, max_diffs = max_diffs))
 }

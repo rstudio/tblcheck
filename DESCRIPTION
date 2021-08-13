@@ -27,7 +27,6 @@ Imports:
     gradethis (>= 0.2.3.9001),
     knitr,
     magrittr,
-    methods,
     plu,
     purrr,
     rlang,
