@@ -10,7 +10,7 @@
 #' @section Problems:
 #' 
 #' 1. `column_class`: Any mismatch in the classes of the `name` column
-#' 2. `column_length`: The `name` column doesn't have the expected length
+#' 2. `column_dimensions`: The `name` column doesn't have the expected length
 #' 3. `column_values`: The `name` column doesn't have the expected values
 #' 4. `column`: The `name` column doesn't appear in the `object`
 #'

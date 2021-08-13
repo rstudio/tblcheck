@@ -58,21 +58,21 @@ test_that("tbl_check_table() class", {
 
 test_that("tbl_check_table() rows", {
   .result   <- tibble::tibble(a = letters, b = a)
-  .solution <- tibble::tibble(x = letters[-1], y = x)
-  problem   <- tbl_check_table(object = .result, expected = .solution)
+  .solution <- tibble::tibble(a = letters[-1], b = a)
+  problem   <- tbl_check_table()
   
   expect_equal(
     problem,
-    problem("table_nrow", 25, 26, table = TRUE)
+    problem("table_dimensions", c(25, 2), c(26, 2), table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters, b = a)
-  .solution <- tibble::tibble(x = letters[1], y = x)
-  problem   <- tbl_check_table(object = .result, expected = .solution)
+  .solution <- tibble::tibble(a = letters[1], b = a)
+  problem   <- tbl_check_table()
   
   expect_equal(
     problem,
-    problem("table_nrow", 1, 26, table = TRUE)
+    problem("table_dimensions", c(1, 2), c(26, 2), table = TRUE)
   )
 })
 
@@ -83,7 +83,7 @@ test_that("tbl_check_table() ncol", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 2, 3, table = TRUE)
+    problem("table_dimensions", c(26, 2), c(26, 3), table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters, b = a, c = a)
@@ -92,7 +92,7 @@ test_that("tbl_check_table() ncol", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 1, 3, table = TRUE)
+    problem("table_dimensions", c(26, 1), c(26, 3), table = TRUE)
   )
 })
 
@@ -137,9 +137,9 @@ test_that("tbl_check_table() handles bad user input", {
   expect_internal_problem(
     {
       .solution <- .result <- tibble::tibble(a = 1:3)
-      problem <- tbl_check_table(check_nrow = "yes")
+      problem <- tbl_check_table(check_dimensions = "yes")
     },
-    "check_nrow"
+    "check_dimensions"
   )
   
   expect_internal_problem(
@@ -148,14 +148,6 @@ test_that("tbl_check_table() handles bad user input", {
       problem   <- tbl_check_table(check_names = 5)
     },
     "check_names"
-  )
-  
-  expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_ncol = list())
-    },
-    "check_ncol"
   )
   
   expect_internal_problem(
@@ -190,9 +182,7 @@ test_that("tbl_check_table() returns grades with row problems", {
   
   expect_equal(
     problem,
-    problem(
-      type = "table_nrow", expected = 25L, actual = 26L, table = TRUE
-    )
+    problem("table_dimensions", c(25, 1), c(26, 1), table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters)
@@ -201,9 +191,7 @@ test_that("tbl_check_table() returns grades with row problems", {
   
   expect_equal(
     problem,
-    problem(
-      type = "table_nrow", expected = 1L, actual = 26L, table = TRUE
-    )
+    problem("table_dimensions", c(1, 1), c(26, 1), table = TRUE)
   )
 })
 
@@ -214,7 +202,7 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 2, 3, table = TRUE)
+    problem("table_dimensions", c(26, 2), c(26, 3), table = TRUE)
   )
   
   .result   <- tibble::tibble(a = letters, b = letters, c = letters)
@@ -223,7 +211,7 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
   
   expect_equal(
     problem,
-    problem("table_ncol", 1, 3, table = TRUE)
+    problem("table_dimensions", c(26, 1), c(26, 3), table = TRUE)
   )
 })
 

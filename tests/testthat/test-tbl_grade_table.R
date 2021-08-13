@@ -67,7 +67,7 @@ test_that("tbl_grade_table() class", {
 test_that("tbl_grade_table() rows", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a)
-    .solution <- tibble::tibble(x = letters[-1], y = x)
+    .solution <- tibble::tibble(a = letters[-1], b = a)
     tbl_grade_table()
   })
   
@@ -76,13 +76,13 @@ test_that("tbl_grade_table() rows", {
     message = "should have 25 rows",
     problem = tbl_check_table(
       tibble::tibble(a = letters, b = a),
-      tibble::tibble(x = letters[-1], y = x)
+      tibble::tibble(a = letters[-1], b = a)
     )
   )
   
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a)
-    .solution <- tibble::tibble(x = letters[1], y = x)
+    .solution <- tibble::tibble(a = letters[1], b = a)
     tbl_grade_table()
   })
   
@@ -91,7 +91,7 @@ test_that("tbl_grade_table() rows", {
     message = "should have 1 row",
     problem = tbl_check_table(
       tibble::tibble(a = letters, b = a),
-      tibble::tibble(x = letters[1], y = x)
+      tibble::tibble(a = letters[1], b = a)
     )
   )
 })
@@ -181,9 +181,9 @@ test_that("tbl_grade_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_nrow = "yes")
+      tbl_grade_table(object = result, expected = solution, check_dimensions = "yes")
     }),
-    "check_nrow"
+    "check_dimensions"
   )
   
   expect_internal_problem(
@@ -192,14 +192,6 @@ test_that("tbl_grade_table() handles bad user input", {
       tbl_grade_table(object = result, expected = solution, check_names = 5)
     }),
     "check_names"
-  )
-  
-  expect_internal_problem(
-    tblcheck_test_grade({
-      solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_ncol = list())
-    }),
-    "check_ncol"
   )
   
   expect_internal_problem(

@@ -7,7 +7,7 @@
 #' @section Problems:
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
-#' 2. `vector_length`: `object` doesn't have the same length as `expected`
+#' 2. `vector_dimensions`: `object` doesn't have the same length as `expected`
 #' 3. `vector_values`: `object` doesn't contain the same values as `expected`
 #' 4. `vector_names`: `object` has different `names` than `expected`
 #'
@@ -65,7 +65,7 @@ tbl_check_vector <- function(
   
   if (check_length) {
     return_if_problem(
-      tbl_check_length(object, expected),
+      tbl_check_dimensions(object, expected),
       vector = TRUE
     )
   }

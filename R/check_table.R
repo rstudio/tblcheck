@@ -10,8 +10,8 @@
 #' @section Problems:
 #' 
 #' 1. `table_class`: The table does not have the expected classes
-#' 2. `table_nrow`: The table doesn't have the expected number of rows
-#' 3. `table_ncol`: The table doesn't have the expected number of columns
+#' 2. `table_dimensions`: The table doesn't have the expected number of rows
+#'   and columns
 #' 4. `table_names`: The table has names that are not expected,
 #'   or is missing names that are expected.
 #' 
@@ -27,14 +27,10 @@
 #'   Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and 
 #'   `expected` have the same classes with [class()].
-#' @param check_nrow `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same number of rows with [nrow()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
-#' @param check_ncol `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same number of columns with [ncol()].
-#'   By default, `check_ncol` is [`FALSE`] if `check_names` is [`TRUE`], as
-#'   running both is redundant.
+#' @param check_dimensions `[logical(1)]`\cr Whether to check that `object` and 
+#'   `expected` have the same number of rows and columns with [dim()].
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [tbl_check_column()].
 #' @param check_column_class `[logical(1)]`\cr Whether to check that each
@@ -53,9 +49,8 @@ tbl_check_table <- function(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
-  check_nrow = TRUE,
   check_names = TRUE,
-  check_ncol = !check_names,
+  check_dimensions = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
@@ -71,9 +66,8 @@ tbl_check_table <- function(
   assert_internally({
     checkmate::assert_number(max_diffs, lower = 1)
     checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_nrow,          any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_ncol,          any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_dimensions,    any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
@@ -89,14 +83,6 @@ tbl_check_table <- function(
     )
   }
   
-  # check number of rows ----
-  if (check_nrow) {
-    return_if_problem(
-      tbl_check_length(object, expected, dimension = "nrow"),
-      table = TRUE
-    )
-  }
-  
   # check column names ----
   if (check_names) {
     return_if_problem(
@@ -105,10 +91,10 @@ tbl_check_table <- function(
     )
   }
   
-  # check number of columns ----
-  if (check_ncol) {
+  # check dimensions ----
+  if (check_dimensions) {
     return_if_problem(
-      tbl_check_length(object, expected, dimension = "ncol"),
+      tbl_check_dimensions(object, expected),
       table = TRUE
     )
   }
@@ -139,9 +125,8 @@ tbl_grade_table <- function(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
-  check_nrow = TRUE,
   check_names = TRUE,
-  check_ncol = !check_names,
+  check_dimensions = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
@@ -154,9 +139,8 @@ tbl_grade_table <- function(
         expected = expected,
         max_diffs = max_diffs,
         check_class = check_class,
-        check_nrow = check_nrow,
         check_names = check_names,
-        check_ncol = check_ncol,
+        check_dimensions = check_dimensions,
         check_columns = check_columns,
         check_column_class = check_column_class,
         check_column_values = check_column_values,

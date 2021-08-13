@@ -68,7 +68,7 @@ test_that("checks that vectors have the same length", {
   .solution <- letters[1:4]
   problem   <- tbl_check_vector()
   
-  expect_equal(problem, problem("vector_length", 4, 3, vector = TRUE))
+  expect_equal(problem, problem("vector_dimensions", 4, 3, vector = TRUE))
 })
 
 test_that("checks that vectors have the same names", {

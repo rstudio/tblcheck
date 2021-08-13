@@ -10,9 +10,8 @@ tbl_check_table(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
-  check_nrow = TRUE,
   check_names = TRUE,
-  check_ncol = !check_names,
+  check_dimensions = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
@@ -24,9 +23,8 @@ tbl_grade_table(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
-  check_nrow = TRUE,
   check_names = TRUE,
-  check_ncol = !check_names,
+  check_dimensions = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
@@ -48,16 +46,11 @@ Defaults to 3.}
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=class]{class()}}.}
 
-\item{check_nrow}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same number of rows with \code{\link[=nrow]{nrow()}}.}
-
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
 
-\item{check_ncol}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same number of columns with \code{\link[=ncol]{ncol()}}.
-By default, \code{check_ncol} is \code{\link{FALSE}} if \code{check_names} is \code{\link{TRUE}}, as
-running both is redundant.}
+\item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same number of rows and columns with \code{\link[=dim]{dim()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
@@ -89,8 +82,8 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 
 \enumerate{
 \item \code{table_class}: The table does not have the expected classes
-\item \code{table_nrow}: The table doesn't have the expected number of rows
-\item \code{table_ncol}: The table doesn't have the expected number of columns
+\item \code{table_dimensions}: The table doesn't have the expected number of rows
+and columns
 \item \code{table_names}: The table has names that are not expected,
 or is missing names that are expected.
 }

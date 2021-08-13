@@ -88,7 +88,7 @@ test_that("checks that columns have the same length", {
   
   expect_equal(
     problem,
-    problem("column_length", 4, 3, vector = TRUE, column = "a")
+    problem("column_dimensions", 4, 3, vector = TRUE, column = "a")
   )
 })
 
