@@ -48,7 +48,7 @@ return_if_problem <- function(
         problem_class, c("tblcheck_problem", "gradethis_problem", "list")
       )
       base_class <- custom_classes[length(custom_classes)]
-      class(problem) <- c(paste0(prefix, base_class), problem_class)
+      class(problem) <- unique(c(paste0(prefix, base_class), problem_class))
       
       problem$type <- gsub("^(.*_)?", prefix, problem$type)
     }
