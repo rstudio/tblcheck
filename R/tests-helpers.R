@@ -1,9 +1,15 @@
 expect_internal_problem <- function(grade, message) {
-  testthat::expect_message(grade)
-  testthat::expect_equal(grade$correct, logical())
-  testthat::expect_match(grade$message, "can't provide feedback")
-  testthat::expect_equal(grade$problem$type, "internal_feedback_error")
-  testthat::expect_match(as.character(grade$problem$error), message)
+  suppressMessages({
+    testthat::expect_message(grade)
+    testthat::expect_equal(grade$correct, logical())
+    testthat::expect_match(grade$message, "can't provide feedback")
+    testthat::expect_equal(grade$problem$type, "internal_feedback_error")
+    testthat::expect_match(as.character(grade$problem$error), message)
+  })
+}
+
+expect_warning <- function(...) {
+  suppressWarnings(testthat::expect_warning(...))
 }
 
 expect_result_message <- function(result, expected, ...) {

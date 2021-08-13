@@ -11,9 +11,9 @@ test_that("tbl_check_column() checks classes", {
       "character",
       expected_length = 3,
       actual_length = 26,
-      vector = TRUE,
       column = "a"
-    )
+    ),
+    ignore_attr = "class"
   )
 })
 
@@ -27,9 +27,9 @@ test_that("tbl_check_column() checks the first three values", {
     problem(
       "column_values",
       letters[1:3],
-      vector = TRUE,
       column = "a"
-    )
+    ),
+    ignore_attr = "class"
   )
 })
 
@@ -46,9 +46,9 @@ test_that("tbl_check_column() checks multiple classes", {
       actual = "data.frame",
       expected_length = 1,
       actual_length = 1,
-      vector = TRUE,
       column = "a"
-    )
+    ),
+    ignore_attr = "class"
   )
 })
 
@@ -59,7 +59,8 @@ test_that("tbl_check_column() checks for value differences beyond the first 3", 
   
   expect_equal(
     problem, 
-    problem("column_values", vector = TRUE, column = "a")
+    problem("column_values", column = "a"),
+    ignore_attr = "class"
   )
 })
 
@@ -70,7 +71,8 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_equal(
     problem,
-    problem("column_values", letters[26:22], vector = TRUE, column = "a")
+    problem("column_values", letters[26:22], column = "a"),
+    ignore_attr = "class"
   )
 })
 
@@ -81,7 +83,8 @@ test_that("max_diffs doesn't overflow", {
 
   expect_equal(
     problem,
-    problem("column_values", letters[2:1], vector = TRUE, column = "a")
+    problem("column_values", letters[2:1], column = "a"),
+    ignore_attr = "class"
   )
 })
 
@@ -92,7 +95,8 @@ test_that("checks that columns have the same length", {
   
   expect_equal(
     problem,
-    problem("column_dimensions", 4, 3, vector = TRUE, column = "a")
+    problem("column_dimensions", 4, 3, column = "a"),
+    ignore_attr = "class"
   )
 })
 
@@ -104,6 +108,7 @@ test_that("checks that the column is present in object", {
   expect_equal(
     problem,
     problem("column_missing", "a", column = "a"),
+    ignore_attr = "class"
   )
 })
 
