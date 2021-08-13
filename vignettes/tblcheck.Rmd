@@ -7,16 +7,126 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{css echo=FALSE}
+.alert {
+  padding: 0.5em 1em;
+  margin: 1em 2em;
+  border: 1px #eee solid;
+  border-radius: 5px;
+}
+.alert.alert-success {
+  background-color: #e4f2dc;
+  border-color: #ddedcf;
+}
+.alert.alert-success,
+.alert.alert-success code,
+.alert.alert-success code a:not(.close):not(.btn) {
+  color: #5c9653;
+}
+.alert.alert-danger {
+  background-color: #f2e2e2;
+  border-color: #eed9dc;
+}
+.alert.alert-danger,
+.alert.alert-danger code,
+.alert.alert-danger code a:not(.close):not(.btn) {
+  color: #ad3532;
+}
+.alert code {
+  background-color: #ffffff55;
+}
+```
+
 ```{r, include = FALSE}
 library(gradethis)
 library(knitr)
 library(tblcheck)
 library(tibble)
+`%||%` <- rlang::`%||%`
 
 opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+knitr::knit_hooks$set(chunk_label = function(before, options) {
+  # the original chunk might be indented
+  indent <- options$indent %||% ""
+  in_grade_this <- isTRUE(options$grade_this)
+  is_exercise <- isTRUE(options$is_exercise)
+  
+  code <- 
+    if (before) {
+      c(
+        sprintf(
+          "```{r %s%s}",
+          options$chunk_label,
+          if (is_exercise) ", exercise=TRUE" else ""
+        ),
+        if (in_grade_this) "grade_this({"
+      )
+    } else {
+      c(
+        if (in_grade_this) "})",
+        "```"
+      )
+    }
+  
+  paste0(indent, code, collapse = "\n")
+})
+
+knitr::opts_hooks$set(chunk_label = function(options) {
+  options$eval <- FALSE
+  options
+})
+
+og_source_hook <- knitr::knit_hooks$get("source")
+knitr::knit_hooks$set(source = function(x, options) {
+  if (!is.null(options$chunk_label)) {
+    indent <- options$indent %||% ""
+    in_grade_this <- isTRUE(options$grade_this)
+    paste0(
+      indent, 
+      c("", paste0(if (in_grade_this) "  ", x), ""),
+      collapse = "\n"
+    )
+  } else {
+    og_source_hook(x, options)
+  }
+})
+
+grade_html <- function(grade) {
+  x <- paste0(
+    '<div class="',
+    if (!length(grade$correct)) {
+      "alert" 
+    } else if (isTRUE(grade$correct)) {
+      "alert alert-success"
+    } else {
+      "alert alert-danger"
+    },
+    '">',
+    grade$message,
+    "</div>"
+  )
+  knitr::asis_output(x)
+}
+
+fake_grade_chunks <- function(user, solution, check) {
+  env <- new.env()
+  
+  user <- paste0(".result <- ", knitr::knit_code$get(user))
+  solution <- paste0(".solution <- ", knitr::knit_code$get(solution))
+  check <- knitr::knit_code$get(check)
+  
+  eval(parse(text = user), envir = env)
+  eval(parse(text = solution), envir = env)
+  grade <- tryCatch(
+    eval(parse(text = check), envir = env),
+    gradethis_graded = identity
+  )
+  grade_html(grade)
+}
 ```
 
 `tblcheck` provides a family of functions for creating helpful failure messages when a user's submitted code results in a table different from the intended solution.
@@ -26,12 +136,18 @@ opts_chunk$set(
 In the simplest case, all you need to do to use `tblcheck` is to add `tbl_grade_table()` to your grading code:
 
 ````markdown
-```{r exercise-check}`r ""`
-grade_this({
-  pass_if_equal()
-  tbl_grade_table()
-  fail()
-})
+```{r ex-1-user, chunk_label = "letters", is_exercise = TRUE}
+tibble(dat = 1:10)
+```
+
+```{r ex-1-solution, chunk_label = "letters-solution"}
+tibble(data = letters)
+```
+
+```{r ex-1-check, chunk_label = "letters-check", grade_this = TRUE}
+pass_if_equal()
+tbl_grade_table()
+fail()
 ```
 ````
 
@@ -44,10 +160,15 @@ By default, `tblcheck` functions compare the `gradethis` objects `.result` and `
 .solution <- tibble(data = letters)
 ```
 
-The user's submitted table, `.result`, differs from the correct table, `.solution`, in a lot of ways. `tblcheck` always returns only one problem to the user, and tries to give the most actionable item first.
+The user's submitted table, 
+`` `r knitr::knit_code$get("ex-1-user")` ``, 
+differs from the correct table, 
+`` `r knitr::knit_code$get("ex-1-solution")` ``, 
+in a lot of ways. 
+`tblcheck` always returns only one problem to the user, and tries to give the most actionable item first.
 
-```{r}
-tbl_grade_table()
+```{r echo=FALSE}
+fake_grade_chunks("ex-1-user", "ex-1-solution", "ex-1-check")
 ```
 
 Here, `tbl_grade_table()` first highlighted the difference in the number of rows between the two tables. Let's see what happens when the user fixes this.
