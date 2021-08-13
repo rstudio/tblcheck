@@ -10,9 +10,9 @@ test_that("tbl_check_table() class", {
       c("tbl_df", "tbl", "data.frame"),
       "data.frame",
       expected_length = 2,
-      actual_length = 2,
-      table = TRUE
-    )
+      actual_length = 2
+    ),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = 1:10, b = a)
@@ -26,9 +26,9 @@ test_that("tbl_check_table() class", {
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
       c("tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2,
-      table = TRUE
-    )
+      actual_length = 2
+    ),
+    ignore_attr = "class"
   )
   
   .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
@@ -42,9 +42,9 @@ test_that("tbl_check_table() class", {
       c("tbl_df", "tbl", "data.frame"),
       c("rowwise_df", "tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2,
-      table = TRUE
-    )
+      actual_length = 2
+    ),
+    ignore_attr = "class"
   )
 
   .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
@@ -58,9 +58,9 @@ test_that("tbl_check_table() class", {
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
       c("rowwise_df", "tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2,
-      table = TRUE
-    )
+      actual_length = 2
+    ),
+    ignore_attr = "class"
   )
 })
 
@@ -71,7 +71,8 @@ test_that("tbl_check_table() rows", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(25, 2), c(26, 2), table = TRUE)
+    problem("table_dimensions", c(25, 2), c(26, 2)),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = letters, b = a)
@@ -80,7 +81,8 @@ test_that("tbl_check_table() rows", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(1, 2), c(26, 2), table = TRUE)
+    problem("table_dimensions", c(1, 2), c(26, 2)),
+    ignore_attr = "class"
   )
 })
 
@@ -91,7 +93,8 @@ test_that("tbl_check_table() ncol", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(26, 2), c(26, 3), table = TRUE)
+    problem("table_dimensions", c(26, 2), c(26, 3)),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = letters, b = a, c = a)
@@ -100,7 +103,8 @@ test_that("tbl_check_table() ncol", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(26, 1), c(26, 3), table = TRUE)
+    problem("table_dimensions", c(26, 1), c(26, 3)),
+    ignore_attr = "class"
   )
 })
 
@@ -114,9 +118,9 @@ test_that("tbl_check_table() names", {
     problem(
       "table_names",
       missing = c("x", "y"),
-      unexpected = c("a", "b"),
-      table = TRUE
-    )
+      unexpected = c("a", "b")
+    ),
+    ignore_attr = "class"
   )
 })
 
@@ -127,7 +131,8 @@ test_that("tbl_check_table() columns", {
   
   expect_equal(
     problem,
-    problem("column_values", letters[24:26], vector = TRUE, column = "a")
+    problem("column_values", letters[24:26], column = "a"),
+    ignore_attr = "class"
   )
 })
 
@@ -190,7 +195,8 @@ test_that("tbl_check_table() returns grades with row problems", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(25, 1), c(26, 1), table = TRUE)
+    problem("table_dimensions", c(25, 1), c(26, 1)),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = letters)
@@ -199,7 +205,8 @@ test_that("tbl_check_table() returns grades with row problems", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(1, 1), c(26, 1), table = TRUE)
+    problem("table_dimensions", c(1, 1), c(26, 1)),
+    ignore_attr = "class"
   )
 })
 
@@ -210,7 +217,8 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(26, 2), c(26, 3), table = TRUE)
+    problem("table_dimensions", c(26, 2), c(26, 3)),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = letters, b = letters, c = letters)
@@ -219,7 +227,8 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
   
   expect_equal(
     problem,
-    problem("table_dimensions", c(26, 1), c(26, 3), table = TRUE)
+    problem("table_dimensions", c(26, 1), c(26, 3)),
+    ignore_attr = "class"
   )
 })
 
@@ -233,9 +242,9 @@ test_that("tbl_check_table() returns names feedback to learnr", {
     problem(
       "table_names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d"),
-      table = TRUE
-    )
+      unexpected = c("a", "b", "c", "d")
+    ),
+    ignore_attr = "class"
   )
   
   # ---- with all diffs ---
@@ -248,9 +257,9 @@ test_that("tbl_check_table() returns names feedback to learnr", {
     problem(
       "table_names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d"),
-      table = TRUE
-    )
+      unexpected = c("a", "b", "c", "d")
+    ),
+    ignore_attr = "class"
   )
   
   # ---- with one diff ---
@@ -263,8 +272,8 @@ test_that("tbl_check_table() returns names feedback to learnr", {
     problem(
       "table_names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d"),
-      table = TRUE
-    )
+      unexpected = c("a", "b", "c", "d")
+    ),
+    ignore_attr = "class"
   )
 })

@@ -143,8 +143,8 @@ test_that("checks that the column is present in object", {
 })
 
 test_that("checks that the column is present in expected", {
-  grade <- expect_warning(
-    tblcheck_test_grade({
+  expect_warning(
+    grade <- tblcheck_test_grade({
       .result   <- tibble::tibble(b = letters[1:3])
       .solution <- tibble::tibble(a = letters[1:3])
       tbl_grade_column("b")
