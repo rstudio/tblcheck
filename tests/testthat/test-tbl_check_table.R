@@ -7,8 +7,10 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      structure(c("tbl_df", "tbl", "data.frame"), length = 2),
-      structure("data.frame", length = 2),
+      c("tbl_df", "tbl", "data.frame"),
+      "data.frame",
+      expected_length = 2,
+      actual_length = 2,
       table = TRUE
     )
   )
@@ -21,8 +23,10 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      structure(c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      structure(c("tbl_df", "tbl", "data.frame"), length = 2),
+      c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      c("tbl_df", "tbl", "data.frame"),
+      expected_length = 2,
+      actual_length = 2,
       table = TRUE
     )
   )
@@ -35,8 +39,10 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      structure(c("tbl_df", "tbl", "data.frame"), length = 2),
-      structure(c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
+      c("tbl_df", "tbl", "data.frame"),
+      c("rowwise_df", "tbl_df", "tbl", "data.frame"),
+      expected_length = 2,
+      actual_length = 2,
       table = TRUE
     )
   )
@@ -49,8 +55,10 @@ test_that("tbl_check_table() class", {
     problem,
     problem(
       "table_class",
-      structure(c("grouped_df", "tbl_df", "tbl", "data.frame"), length = 2),
-      structure(c("rowwise_df", "tbl_df", "tbl", "data.frame"), length = 2),
+      c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      c("rowwise_df", "tbl_df", "tbl", "data.frame"),
+      expected_length = 2,
+      actual_length = 2,
       table = TRUE
     )
   )

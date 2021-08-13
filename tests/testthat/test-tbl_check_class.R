@@ -6,8 +6,10 @@ test_that("tbl_check_class()", {
     problem,
     problem(
       type     = "class",
-      expected = structure("numeric", length = 1),
-      actual   = structure("character", length = 1)
+      expected = "numeric",
+      actual   = "character",
+      expected_length = 1,
+      actual_length = 1
     )
   )
 
@@ -18,8 +20,10 @@ test_that("tbl_check_class()", {
     problem,
     problem(
       type     = "class",
-      expected = structure("numeric", length = 2),
-      actual   = structure("character", length = 2)
+      expected = "numeric",
+      actual   = "character",
+      expected_length = 2,
+      actual_length = 2
     )
   )
 
@@ -30,8 +34,10 @@ test_that("tbl_check_class()", {
     problem,
     problem(
       type     = "class",
-      expected = structure(c("POSIXct", "POSIXt"), length = 1),
-      actual   = structure("character", length = 1)
+      expected = c("POSIXct", "POSIXt"),
+      actual   = "character",
+      expected_length = 1,
+      actual_length = 1
     )
   )
 
@@ -42,8 +48,10 @@ test_that("tbl_check_class()", {
     problem,
     problem(
       type     = "class",
-      expected = structure(c("POSIXlt", "POSIXt"), length = 2),
-      actual   = structure("character", length = 2)
+      expected = c("POSIXlt", "POSIXt"),
+      actual   = "character",
+      expected_length = 2,
+      actual_length = 2
     )
   )
 })
@@ -56,8 +64,10 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
     problem,
     problem(
       type     = "class",
-      expected = structure("numeric", length = 1),
-      actual   = structure("integer", length = 1)
+      expected = "numeric",
+      actual   = "integer",
+      expected_length = 1,
+      actual_length = 1
     )
   )
 
@@ -68,8 +78,10 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
     problem,
     problem(
       type     = "class",
-      expected = structure("character", length = 1),
-      actual   = structure(c("glue", "character"), length = 1)
+      expected = "character",
+      actual   = c("glue", "character"),
+      expected_length = 1,
+      actual_length = 1
     )
   )
 
@@ -80,8 +92,10 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
     problem,
     problem(
       type     = "class",
-      expected = structure(c("POSIXlt", "POSIXt"), length = 2),
-      actual   = structure(c("POSIXct", "POSIXt"), length = 2)
+      expected = c("POSIXlt", "POSIXt"),
+      actual   = c("POSIXct", "POSIXt"),
+      expected_length = 2,
+      actual_length = 2
     )
   )
 })
@@ -95,8 +109,10 @@ test_that("tbl_check_class() with multiple classes", {
     problem,
     problem(
       type     = "class",
-      expected = structure(c("test", "class", "integer"), length = 1),
-      actual   = structure("integer", length = 1)
+      expected = c("test", "class", "integer"),
+      actual   = "integer",
+      expected_length = 1,
+      actual_length = 1
     )
   )
 
@@ -108,8 +124,10 @@ test_that("tbl_check_class() with multiple classes", {
     problem,
     problem(
       type     = "class",
-      expected = structure("integer", length = 1),
-      actual   = structure(c("test", "class", "integer"), length = 1)
+      expected = "integer",
+      actual   = c("test", "class", "integer"),
+      expected_length = 1,
+      actual_length = 1
     )
   )
 })

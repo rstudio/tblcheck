@@ -36,10 +36,12 @@ tbl_check_class <- function(
     return(
       problem(
         "class",
-        # Object lengths are stored as attributes so the correct pluralization
+        # Object lengths are stored so the correct pluralization
         # can be applied in tbl_message_class()
-        structure(exp_class, length = length(expected)),
-        structure(obj_class, length = length(object))
+        exp_class,
+        obj_class,
+        expected_length = length(expected),
+        actual_length = length(object)
       )
     )
   }
@@ -71,8 +73,11 @@ tbl_message_class <- function(problem, ...) {
   
   column_name <- problem$column
   
-  friendly_exp_class <- friendly_class(exp_class)
-  friendly_obj_class <- friendly_class(obj_class)
+  exp_length = problem$expected_length
+  obj_length = problem$actual_length
+  
+  friendly_exp_class <- friendly_class(exp_class, exp_length)
+  friendly_obj_class <- friendly_class(obj_class, obj_length)
   
   message <- if (!is.null(column_name)) {
     "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
@@ -147,9 +152,7 @@ hinted_class_message_list <- function() {
   )
 }
 
-friendly_class <- function(class) {
-  length <- attr(class, "length") %||% 2
-  
+friendly_class <- function(class, length) {
   list <- friendly_class_list()
   
   for (i in seq_along(list)) {
