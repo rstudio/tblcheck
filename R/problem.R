@@ -56,3 +56,19 @@ return_if_problem <- function(
     rlang::return_from(envir, problem)
   }
 }
+
+#' @exportS3Method 
+print.tblcheck_problem <- function(x, ...) {
+  problem_list <- x
+  class(problem_list) <- "list"
+  cat(
+    "<tlbcheck problem>\n", format(x, ...), "\n\n",
+    sep = ""
+  )
+  print(problem_list)
+}
+
+#' @exportS3Method 
+format.tblcheck_problem <- function(x, ...) {
+  tbl_message(x, ...)$message
+}
