@@ -35,10 +35,10 @@ tbl_check_class <- function(
     return(
       problem(
         "class",
-        # Object lengths are stored so the correct pluralization
-        # can be applied in tbl_message_class()
         exp_class,
         obj_class,
+        # Object lengths are stored so the correct pluralization
+        # can be applied in tbl_message.class_problem()
         expected_length = length(expected),
         actual_length = length(object)
       )
@@ -56,7 +56,55 @@ tbl_grade_class <- function(
   )
 }
 
-tbl_message_class <- function(problem, ...) {
+tbl_message.class_problem <- function(problem, ...) {
+  exp_class <- problem$expected
+  obj_class <- problem$actual
+  
+  if (!has_meaningful_class_difference(exp_class, obj_class)) {
+    return()
+  }
+  
+  hinted_class_message <- hinted_class_message(obj_class, exp_class)
+  if (!is.null(hinted_class_message)) {
+    return_fail(hinted_class_message, problem = problem)
+  }
+  
+  exp_length <- problem$expected_length
+  obj_length <- problem$actual_length
+  
+  friendly_exp_class <- friendly_class(exp_class, exp_length)
+  friendly_obj_class <- friendly_class(obj_class, obj_length)
+  
+  message <- glue::glue(
+    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  )
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.column_class_problem <- function(problem, ...) {
+  exp_class <- problem$expected
+  obj_class <- problem$actual
+  
+  if (!has_meaningful_class_difference(exp_class, obj_class)) {
+    return()
+  }
+
+  exp_length <- problem$expected_length
+  obj_length <- problem$actual_length
+  
+  friendly_exp_class <- friendly_class(exp_class, exp_length)
+  friendly_obj_class <- friendly_class(obj_class, obj_length)
+  
+  column_name <- problem$column
+  message <- glue::glue(
+    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  )
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.table_class_problem <- function(problem, ...) {
   exp_class <- problem$expected
   obj_class <- problem$actual
   
@@ -71,21 +119,14 @@ tbl_message_class <- function(problem, ...) {
   
   column_name <- problem$column
   
-  exp_length = problem$expected_length
-  obj_length = problem$actual_length
+  friendly_exp_class <- friendly_class(exp_class, 1)
+  friendly_obj_class <- friendly_class(obj_class, 1)
   
-  friendly_exp_class <- friendly_class(exp_class, exp_length)
-  friendly_obj_class <- friendly_class(obj_class, obj_length)
-  
-  message <- if (!is.null(column_name)) {
-    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  } else if (isTRUE(problem$table)) {
+  message <- glue::glue(
     "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  } else {
-    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  }
+  )
   
-  return_fail(glue::glue(message), problem = problem)
+  return_fail(message, problem = problem)
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {

@@ -78,7 +78,7 @@ tbl_check_table <- function(
   if (check_class) {
     return_if_problem(
       tbl_check_class(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   
@@ -86,7 +86,7 @@ tbl_check_table <- function(
   if (check_names) {
     return_if_problem(
       tbl_check_names(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   
@@ -94,7 +94,7 @@ tbl_check_table <- function(
   if (check_dimensions) {
     return_if_problem(
       tbl_check_dimensions(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   
