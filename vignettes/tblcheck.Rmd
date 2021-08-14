@@ -40,14 +40,16 @@ vignette: >
 ```{r, include = FALSE}
 library(gradethis)
 library(knitr)
+library(rlang)
 library(tblcheck)
 library(tibble)
-`%||%` <- rlang::`%||%`
 
 opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+options(max.print = 20)
 
 knitr::knit_hooks$set(chunk_label = function(before, options) {
   # the original chunk might be indented
@@ -112,20 +114,39 @@ grade_html <- function(grade) {
   knitr::asis_output(x)
 }
 
-fake_grade_chunks <- function(user, solution, check) {
-  env <- new.env()
+fake_grade_chunks <- function(
+  user,
+  solution = paste0(user, "-solution"),
+  check = paste0(user, "-check"),
+  setup = paste0(user, "-setup")
+) {
+  setup <- knitr::knit_code$get(setup)
+  if (!is.null(setup)) {
+    suppressMessages(eval(parse(text = setup), envir = .GlobalEnv))
+  }
   
-  user <- paste0(".result <- ", knitr::knit_code$get(user))
-  solution <- paste0(".solution <- ", knitr::knit_code$get(solution))
+  force(solution)
+  force(check)
+  
+  user <- paste0(
+    ".result <- ", paste(knitr::knit_code$get(user), collapse = "")
+  )
+  solution <- paste0(
+    ".solution <- ", paste(knitr::knit_code$get(solution), collapse = "")
+  )
   check <- knitr::knit_code$get(check)
   
+  env <- new.env()
+
   eval(parse(text = user), envir = env)
+  print(env$.result)
   eval(parse(text = solution), envir = env)
   grade <- tryCatch(
     eval(parse(text = check), envir = env),
     gradethis_graded = identity
   )
-  grade_html(grade)
+  if (inherits(grade, "gradethis_graded")) return(grade_html(grade))
+  if (!is.null(grade)) print(grade)
 }
 ```
 
@@ -133,18 +154,10 @@ fake_grade_chunks <- function(user, solution, check) {
 
 # Basic usage
 
-In the simplest case, all you need to do to use `tblcheck` is to add `tbl_grade_table()` to your grading code:
+In the simplest case, all you need to do to use `tblcheck` is to add `tbl_grade_table()` to your grading code, e.g.
 
 ````markdown
-```{r ex-1-user, chunk_label = "letters", is_exercise = TRUE}
-tibble(dat = 1:10)
-```
-
-```{r ex-1-solution, chunk_label = "letters-solution"}
-tibble(data = letters)
-```
-
-```{r ex-1-check, chunk_label = "letters-check", grade_this = TRUE}
+```{r example-check, chunk_label = "example-check", grade_this = TRUE}
 pass_if_equal()
 tbl_grade_table()
 fail()
@@ -155,136 +168,281 @@ By default, `tblcheck` functions compare the `gradethis` objects `.result` and `
 
 ## Example
 
-```{r}
-.result   <- tibble(dat = 1:10)
-.solution <- tibble(data = letters)
+In this exercise, a student is asked to use `stringr::str_extract()` to extract the non-numeric portion of the `clarity` column in the `diamonds` dataset from ggplot2 into a new column names `coarse_clarity`.
+
+````markdown
+```{r clarity-setup, chunk_label = "clarity-setup"}
+library(dplyr)
+library(ggplot2)
+library(stringr)
+diamonds_ <- select(diamonds, carat, cut, color, clarity, price)
 ```
 
-The user's submitted table, 
-`` `r knitr::knit_code$get("ex-1-user")` ``, 
-differs from the correct table, 
-`` `r knitr::knit_code$get("ex-1-solution")` ``, 
-in a lot of ways. 
+```{r clarity, chunk_label = "clarity", is_exercise = TRUE}
+diamonds_ %>% 
+  filter(str_detect(clarity, "\\d+", negate = TRUE)) %>% 
+  mutate(clarity = str_detect(clarity, "\\d+", negate = TRUE))
+```
+
+```{r clarity-solution, chunk_label = "clarity-solution"}
+diamonds_ %>% 
+  mutate(coarse_clarity = str_extract(clarity, "\\D+"))
+```
+````
+
+The user's submitted table differs from the correct table in a lot of ways.
 `tblcheck` always returns only one problem to the user, and tries to give the most actionable item first.
 
+````markdown
+```{r clarity-check, chunk_label = "clarity-check", grade_this = TRUE}
+tbl_grade_table()
+```
+````
+
 ```{r echo=FALSE}
-fake_grade_chunks("ex-1-user", "ex-1-solution", "ex-1-check")
+fake_grade_chunks("clarity")
 ```
 
-Here, `tbl_grade_table()` first highlighted the difference in the number of rows between the two tables. Let's see what happens when the user fixes this.
+Here, `tbl_grade_table()` first highlights the incorrect column name in the user's code, because the user overwrote the existing column instead of creating a new one. Let's see what happens when the user fixes this.
 
-```{r}
-.result <- tibble(dat = 1:26)
+````markdown
+```{r clarity_2, chunk_label = "clarity", is_exercise = TRUE}
+diamonds_ %>% 
+  filter(str_detect(clarity, "\\d+", negate = TRUE)) %>% 
+  mutate(coarse_clarity = str_detect(clarity, "\\d+", negate = TRUE))
+```
+
+```{r clarity_2-check, chunk_label = "clarity-check", grade_this = TRUE}
 tbl_grade_table()
 ```
+````
 
-`tbl_grade_table()` now informs the user that they have an incorrect column name.
+```{r echo=FALSE}
+fake_grade_chunks("clarity_2", solution = "clarity-solution")
+```
 
-```{r}
-.result <- tibble(data = 1:26)
+`tbl_grade_table()` now informs the user that they don't have the right number of rows, because of the unnecessary `filter()` step.
+
+````markdown
+```{r clarity_3, chunk_label = "clarity", is_exercise = TRUE}
+diamonds_ %>% 
+  mutate(coarse_clarity = str_detect(clarity, "\\d+", negate = TRUE))
+```
+
+```{r clarity_3-check, chunk_label = "clarity-check", grade_this = TRUE}
 tbl_grade_table()
 ```
+````
 
-Next, the user finds out their column contains the wrong type of data.
+```{r echo=FALSE}
+fake_grade_chunks("clarity_3", solution = "clarity-solution")
+```
 
-```{r}
-.result <- tibble(data = as.character(1:26))
+Next, the user finds out their column contains the wrong type of data, since they used `str_detect()` instead of `str_extract()`.
+
+````markdown
+```{r clarity_4, chunk_label = "clarity", is_exercise = TRUE}
+diamonds_ %>% 
+  mutate(coarse_clarity = str_extract(clarity, "\\d+"))
+```
+
+```{r clarity_4-check, chunk_label = "clarity-check", grade_this = TRUE}
 tbl_grade_table()
 ```
+````
 
-If all else fails, `tbl_grade_table()` gives a hint as to what the user's values should look like.
+```{r echo=FALSE}
+fake_grade_chunks("clarity_4", solution = "clarity-solution")
+```
 
-```{r}
-.result <- tibble(data = letters)
+If all else fails, `tbl_grade_table()` gives a hint as to what the user's values should look like: they should have extracted the letters, not the numbers.
+
+````markdown
+```{r clarity_5, chunk_label = "clarity", is_exercise = TRUE}
+diamonds_ %>% 
+  mutate(coarse_clarity = str_extract(clarity, "\\D+"))
+```
+
+```{r clarity_5-check, chunk_label = "clarity-check", grade_this = TRUE}
 tbl_grade_table()
 ```
+````
 
-When everything is correct, `tbl_grade_table()` gives no output. It doesn't return a passing grade, in case you would like to apply other checks, so be sure to include a `gradethis` function like `pass()` or `pass_if_equal()` to ensure students can get a passing grade!
-
-# Skipping tests
-
-If there are some tests you would like to skip, `tbl_grade_table()` includes a host of arguments that can be set to `FALSE`. For example:
-
-```{r}
-.result   <- data.frame(data = 1:10)
-.solution <- tibble(data = 1:10)
-
-tbl_grade_table()
+```{r echo=FALSE}
+fake_grade_chunks("clarity_5", solution = "clarity-solution")
 ```
 
-When the user's result is a different class than the expected solution, `tbl_grade_table()` gives a failing grade. If you don't care about the class of the table, you can add `check_class = FALSE`.
-
-```{r}
-tbl_grade_table(check_class = FALSE)
-```
-
-Since there are no other problems, we get no output.
-
-Every test performed by `tbl_grade_table()` can be disabled with an argument. Check the help page `?tbl_grade_table()` for more information.
+When everything is correct, `tbl_grade_table()` gives no output. It doesn't return a passing grade in case you have other checks you'd like to run. Be sure to include a `gradethis` function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
 
 # Grading vectors
 
 For exercises that use vectors rather than tables, `tbl_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
 
-```{r}
-.result   <- 1:10
-.solution <- letters
+````markdown
+```{r vector-setup, chunk_label = "vector-setup"}
+library(dplyr)
+library(ggplot2)
+library(stringr)
+diamonds_ <- diamonds$clarity
+```
+
+```{r vector, chunk_label = "vector", is_exercise = TRUE}
+str_detect(diamonds_, "\\D+")
+```
+
+```{r vector-solution, chunk_label = "vector-solution"}
+str_extract(diamonds_, "\\D+")
+```
+
+```{r vector-check, chunk_label = "vector-check", grade_this = TRUE}
 tbl_grade_vector()
+```
+````
+
+```{r echo=FALSE}
+fake_grade_chunks("vector")
 ```
 
 # Other grading functions
 
-`tbl_grade_table()` calls a number of more specific grading functions internally. You can call these functions directly to perform more specific grading.
+`tbl_grade_table()` and `tbl_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
 
 - `tbl_grade_column()` grades a single column of a table.
 - `tbl_grade_class()` grades the class of an object.
 - `tbl_grade_length()` grades the `length`, `ncol`, or `nrow` of an object.
 - `tbl_grade_names()` grades the names of an object.
 
+# Skipping tests
+
+If there are some tests you would like to skip, `tbl_grade_table()` includes a host of arguments that can be set to `FALSE`. For example:
+
+````markdown
+```{r numbers, chunk_label = "numbers", is_exercise = TRUE}
+data.frame(numbers = 1:5) %>% 
+  mutate(even = numbers %% 2 == 0)
+```
+
+```{r numbers-solution, chunk_label = "clarity-solution"}
+tibble(numbers = 1:5) %>% 
+  mutate(even = numbers %% 2 == 0)
+```
+
+```{r numbers-check, chunk_label = "clarity-check", grade_this = TRUE}
+tbl_grade_table()
+```
+````
+
+```{r echo=FALSE}
+fake_grade_chunks("numbers")
+```
+
+When the user's result is a different class than the expected solution, `tbl_grade_table()` gives a failing grade. If you don't care about the class of the table, you can add `check_class = FALSE`.
+
+````markdown
+```{r numbers_2-check, chunk_label = "clarity-check", grade_this = TRUE}
+tbl_grade_table(check_class = FALSE)
+```
+````
+
+```{r echo=FALSE}
+fake_grade_chunks("numbers", check = "numbers_2-check")
+```
+
+Since there are no other problems, we get no output.
+
+Every test performed by `tbl_grade_table()` or `tbl_grade_vector()` can be disabled with an argument. 
+
 # Custom mistake handling
 
 Sometimes, we want to give special handling to a specific circumstance. For example:
 
-```{r}
+````markdown
+```{r interval-setup, chunk_label = "interval-setup"}
 library(lubridate)
 
-.result   <- tibble(time = ymd(20090210) - ymd(20090201))
-.solution <- tibble(time = interval(ymd(20090201), ymd(20090210)))
+long_weekends <- 
+  tribble(
+    ~holiday, ~start_date, ~end_date,
+    "New Year's Day", "2021-01-01", "2021-01-03",
+    "MLK Day", "2021-01-16", "2021-01-18",
+    "Presidents Day", "2021-02-13", "2021-02-15",
+    "Memorial Day", "2021-05-29", "2021-05-31",
+    "Independence Day", "2021-07-03", "2021-07-05",
+    "Labor Day", "2021-09-04", "2021-09-06",
+    "Thanksgiving Day", "2021-11-25", "2021-11-28",
+    "Christmas Day", "2021-12-24", "2021-12-26",
+  ) %>% 
+  mutate(
+    start_date = as_date(start_date),
+    end_date = as_date(end_date)
+  )
+```
 
+```{r interval, chunk_label = "interval", is_exercise = TRUE}
+long_weekends %>% 
+  mutate(span = end_date - start_date)
+```
+
+```{r interval-solution, chunk_label = "interval-solution"}
+long_weekends %>% 
+  mutate(span = start_date %--% end_date)
+```
+
+```{r interval-check, chunk_label = "interval-check", grade_this = TRUE}
 tbl_grade_table()
+```
+````
+
+```{r echo=FALSE}
+fake_grade_chunks("interval")
 ```
 
 If this is a mistake you expect a lot of students to make, you may want to give it special handling. `tbl_check_table()` returns a problem object that you can inspect in your grading code.
 
-```{r}
+````markdown
+```{r interval_2-check, chunk_label = "interval-check", grade_this = TRUE}
 tbl_check_table()
+```
+````
+
+```{r echo=FALSE}
+fake_grade_chunks("interval", check = "interval_2-check")
 ```
 
 You can use `if` statements to give specific feedback based on the nature of the problem object. To apply the default grading code of `tbl_grade_table()`, you can use `tbl_grade()` on the `problem` object.
 
-```{r}
+````markdown
+```{r interval_3-check, chunk_label = "interval-check", grade_this = TRUE}
 problem <- tbl_check_table()
 
 if (problem$type == "column_class" && problem$actual == "difftime") {
-  fail("I expected you to create a time interval. Did you remember to use `interval()`?")
+  fail("I expected you to create a time interval. Did you remember to use `%--%`?")
 } else {
   tbl_grade(problem)
 }
 ```
+````
+
+::: tip
+You can also use `if` statements to ignore differences that you don't care about in your grading code.
+:::
+
+
+```{r echo=FALSE}
+fake_grade_chunks("interval", check = "interval_3-check")
+```
 
 Applying the same code to a different mistake, we retain the normal `tbl_grade_table()` functionality.
 
-```{r}
-.result   <- tibble(tiem = interval(ymd(20090201), ymd(20090210)))
-.solution <- tibble(time = interval(ymd(20090201), ymd(20090210)))
+````markdown
+```{r interval_4, chunk_label = "interval", is_exercise = TRUE}
+long_weekends %>% 
+  mutate(time_span = start_date %--% end_date)
+```
+````
 
-problem <- tbl_check_table()
-
-if (problem$type == "column_class" && problem$actual == "difftime") {
-  fail("I expected you to create a time interval. Did you remember to use `interval()`?")
-} else {
-  tbl_grade(problem)
-}
+```{r echo=FALSE}
+fake_grade_chunks("interval_4", "interval-solution", "interval_3-check")
 ```
 
 All `tbl_grade_*()` functions have a `tbl_check_*()` equivalent, allowing you to add custom handling for any detected mistake.
