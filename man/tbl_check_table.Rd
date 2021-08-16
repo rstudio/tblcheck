@@ -12,6 +12,7 @@ tbl_check_table(
   check_class = TRUE,
   check_names = TRUE,
   check_dimensions = TRUE,
+  check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
@@ -25,6 +26,7 @@ tbl_grade_table(
   check_class = TRUE,
   check_names = TRUE,
   check_dimensions = TRUE,
+  check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
@@ -51,6 +53,10 @@ Defaults to 3.}
 
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows and columns with \code{\link[=dim]{dim()}}.}
+
+\item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same [\link[dplyr:group_by]{groups}
+with \code{\link[dplyr:group_data]{dplyr::group_vars()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
@@ -86,9 +92,11 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 or is missing names that are expected
 \item \code{table_ncol}: The table doesn't have the expected number of columns
 \item \code{table_nrow}: The table doesn't have the expected number of rows
+\item \code{table_groups}: The table has \link[dplyr:group_by]{groups} that are
+not expected, or is missing groups that are expected.
 }
 
-Additional problems may be produced by \code{\link[=tbl_check_column]{tbl_check_column()}}
+Additional problems may be produced by \code{\link[=tbl_check_column]{tbl_check_column()}}.
 }
 
 \examples{
