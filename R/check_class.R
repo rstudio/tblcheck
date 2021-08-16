@@ -18,6 +18,21 @@
 #'   [gradethis::fail()] message from `tbl_grade_class()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
+#' @examples 
+#' .result <- 1:10
+#' .solution <- as.character(1:10)
+#' tbl_check_class()
+#' tbl_grade_class()
+#' 
+#' .result <- data.frame(a = 1:10)
+#' .solution <- tibble::tibble(a = 1:10)
+#' tbl_check_class()
+#' tbl_grade_class()
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = a %% 2 == 0)
+#' .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a %% 2 == 0), b)
+#' tbl_check_class()
+#' tbl_grade_class()
 tbl_check_class <- function(
   object = .result, expected = .solution, envir = parent.frame()
 ) {
