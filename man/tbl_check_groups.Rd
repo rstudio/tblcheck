@@ -51,3 +51,9 @@ or is missing groups that are expected.
 }
 }
 
+\examples{
+.result <- dplyr::group_by(tibble::tibble(a = 1:10, b = 11:20), a)
+.solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = 11:20), b)
+tbl_check_groups()
+tbl_grade_groups()
+}
