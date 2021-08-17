@@ -118,7 +118,7 @@ tbl_message.dimensions_problem <- function(problem, ...) {
     exp_dim_str <- paste(exp_dim, collapse = " x ")
     
     glue::glue(
-      "Your result should be an arry with dimensions {exp_dim_str}, ",
+      "Your result should be an array with dimensions {exp_dim_str}, ",
       "but it has dimensions {obj_dim_str}."
     )
   }
