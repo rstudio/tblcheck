@@ -126,17 +126,17 @@ tbl_message.values_problem <- function(problem, ...) {
   n_values <- length(problem$expected)
   exp_values <- knitr::combine_words(md_code(problem$expected))
   
-  message <- if (n_values != 0) {
-    ngettext(
-      n_values,
-      "The first value of your result should be {exp_values}.",
-      "The first {n_values} values of your result should be {exp_values}."
+  if (n_values != 0) {
+    glue::glue(
+      ngettext(
+        n_values,
+        "The first value of your result should be {exp_values}.",
+        "The first {n_values} values of your result should be {exp_values}."
+      )
     )
   } else {
     "Your result contains unexpected values."
   }
-  
-  return_fail(glue::glue(message), problem = problem)
 }
 
 tbl_message.column_values_problem <- function(problem, ...) {
@@ -144,15 +144,15 @@ tbl_message.column_values_problem <- function(problem, ...) {
   exp_values <- knitr::combine_words(md_code(problem$expected))
   column_name <- problem$column
   
-  message <- if (n_values != 0) {
-    ngettext(
-      n_values,
-      "The first value of your `{column_name}` column should be {exp_values}.",
-      "The first {n_values} values of your `{column_name}` column should be {exp_values}."
+  if (n_values != 0) {
+    glue::glue(
+      ngettext(
+        n_values,
+        "The first value of your `{column_name}` column should be {exp_values}.",
+        "The first {n_values} values of your `{column_name}` column should be {exp_values}."
+      )
     )
   } else {
-    "Your `{column_name}` column contains unexpected values."
+    glue::glue("Your `{column_name}` column contains unexpected values.")
   }
-  
-  return_fail(glue::glue(message), problem = problem)
 }

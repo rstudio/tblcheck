@@ -15,7 +15,11 @@ tbl_grade <- function(problem, max_diffs = 3) {
     checkmate::assert_number(max_diffs, lower = 1)
   })
   
-  tbl_message(problem, max_diffs = max_diffs)
+  message <- tbl_message(problem, max_diffs = max_diffs)
+  
+  if (!is.null(message)) {
+    return_fail(message, problem = problem)
+  }
 }
 
 tbl_message <- function(problem, ...) {
