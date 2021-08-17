@@ -102,7 +102,7 @@ is_tblcheck_problem <- function(x, type = NULL) {
   )
 }
 
-#' @exportS3Method 
+#' @export
 print.tblcheck_problem <- function(x, ...) {
   problem_list <- x
   class(problem_list) <- "list"
@@ -113,7 +113,7 @@ print.tblcheck_problem <- function(x, ...) {
   print(problem_list)
 }
 
-#' @exportS3Method 
+#' @export
 format.tblcheck_problem <- function(x, ...) {
   tbl_message(x, ...)$message
 }
