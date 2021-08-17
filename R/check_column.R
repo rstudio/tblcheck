@@ -29,6 +29,24 @@
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
+#' 
+#' @examples 
+#' .result <- tibble::tibble(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = letters[1:10], b = letters[11:20])
+#' tbl_check_column("a")
+#' tbl_grade_column("a")
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = 1:11, b = 12:22)
+#' tbl_check_column("a")
+#' tbl_grade_column("a")
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = 11:20, b = 1:10)
+#' tbl_check_column("a")
+#' tbl_grade_column("a")
+#' tbl_grade_column("a", max_diffs = 5)
+#' tbl_grade_column("a", max_diffs = Inf)
 tbl_check_column <- function(
   name,
   object = .result,
