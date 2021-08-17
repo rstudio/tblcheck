@@ -130,8 +130,5 @@ tbl_grade_column <- function(
 
 tbl_message.column_missing_problem <- function(problem, ...) {
   exp_column <- problem$expected
-  
-  message <- glue::glue("Your table should have a column named `{exp_column}`.")
-  
-  return_fail(message, problem = problem)
+  glue::glue("Your table should have a column named `{exp_column}`.")
 }

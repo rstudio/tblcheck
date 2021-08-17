@@ -90,11 +90,9 @@ tbl_message.class_problem <- function(problem, ...) {
   friendly_exp_class <- friendly_class(exp_class, exp_length)
   friendly_obj_class <- friendly_class(obj_class, obj_length)
   
-  message <- glue::glue(
+  glue::glue(
     "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
   )
-  
-  return_fail(message, problem = problem)
 }
 
 tbl_message.column_class_problem <- function(problem, ...) {
@@ -112,11 +110,10 @@ tbl_message.column_class_problem <- function(problem, ...) {
   friendly_obj_class <- friendly_class(obj_class, obj_length)
   
   column_name <- problem$column
-  message <- glue::glue(
+  
+  glue::glue(
     "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
   )
-  
-  return_fail(message, problem = problem)
 }
 
 tbl_message.table_class_problem <- function(problem, ...) {
@@ -137,11 +134,9 @@ tbl_message.table_class_problem <- function(problem, ...) {
   friendly_exp_class <- friendly_class(exp_class, 1)
   friendly_obj_class <- friendly_class(obj_class, 1)
   
-  message <- glue::glue(
+  glue::glue(
     "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
   )
-  
-  return_fail(message, problem = problem)
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {

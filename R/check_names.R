@@ -106,7 +106,7 @@ tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
     ""
   }
   
-  return_fail(glue::glue(missing_msg, unexpected_msg), problem = problem)
+  glue::glue(missing_msg, unexpected_msg)
 }
 
 tbl_message.column_names_problem <- function(problem, max_diffs = 3, ...) {
@@ -138,7 +138,7 @@ tbl_message.column_names_problem <- function(problem, max_diffs = 3, ...) {
     ""
   }
   
-  return_fail(glue::glue(missing_msg, unexpected_msg), problem = problem)
+  glue::glue(missing_msg, unexpected_msg)
 }
 
 tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
@@ -168,7 +168,7 @@ tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
     ""
   }
   
-  return_fail(glue::glue(missing_msg, unexpected_msg), problem = problem)
+  glue::glue(missing_msg, unexpected_msg)
 }
 
 combine_words_with_more <- function(

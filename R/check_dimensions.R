@@ -75,7 +75,7 @@ tbl_message.dimensions_problem <- function(problem, ...) {
   obj_dim     <- problem$actual
   obj_n_dim   <- length(obj_dim)
   
-  message <- if (!identical(obj_n_dim, exp_n_dim)) {
+  if (!identical(obj_n_dim, exp_n_dim)) {
     glue::glue(
       ngettext(
         exp_n_dim,
@@ -143,15 +143,13 @@ tbl_message.dimensions_problem <- function(problem, ...) {
       "but it has dimensions {obj_dim_str}."
     )
   }
-  
-  return_fail(message, problem = problem)
 }
 
 tbl_message.vector_dimensions_problem <- function(problem, ...) {
-  exp_dim     <- problem$expected
-  obj_dim     <- problem$actual
+  exp_dim <- problem$expected
+  obj_dim <- problem$actual
   
-  message <- glue::glue(
+  glue::glue(
     ngettext(
       exp_dim,
       "Your result should contain {exp_dim} value, ",
@@ -163,8 +161,6 @@ tbl_message.vector_dimensions_problem <- function(problem, ...) {
       "but it has {obj_dim} values."
     )
   )
-  
-  return_fail(message, problem = problem)
 }
 
 tbl_message.column_dimensions_problem <- function(problem, ...) {
@@ -172,7 +168,7 @@ tbl_message.column_dimensions_problem <- function(problem, ...) {
   obj_dim     <- problem$actual
   column_name <- problem$column
   
-  message <- glue::glue(
+  glue::glue(
     ngettext(
       exp_dim,
       "Your `{column_name}` column should contain {exp_dim} value, ",
@@ -184,17 +180,15 @@ tbl_message.column_dimensions_problem <- function(problem, ...) {
       "but it has {obj_dim} values."
     )
   )
-  
-  return_fail(message, problem = problem)
 }
 
 tbl_message.table_dimensions_problem <- function(problem, ...) {
-  exp_dim     <- problem$expected
-  exp_n_dim   <- length(exp_dim)
-  obj_dim     <- problem$actual
-  obj_n_dim   <- length(obj_dim)
+  exp_dim   <- problem$expected
+  exp_n_dim <- length(exp_dim)
+  obj_dim   <- problem$actual
+  obj_n_dim <- length(obj_dim)
   
-  message <- if (!identical(obj_n_dim, exp_n_dim)) {
+  if (!identical(obj_n_dim, exp_n_dim)) {
     glue::glue(
       ngettext(
         exp_n_dim,
@@ -249,6 +243,4 @@ tbl_message.table_dimensions_problem <- function(problem, ...) {
       "but it has dimensions {obj_dim_str}."
     )
   }
-  
-  return_fail(message, problem = problem)
 }
