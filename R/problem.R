@@ -26,9 +26,7 @@ problem <- function(
   
   structure(
     purrr::compact(problem),
-    class = c(
-      paste0(type, "_problem"), "tblcheck_problem", "gradethis_problem", "list"
-    )
+    class = c(paste0(type, "_problem"), "tblcheck_problem", "gradethis_problem")
   )
 }
 
