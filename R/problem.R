@@ -104,13 +104,8 @@ is_tblcheck_problem <- function(x, type = NULL) {
 
 #' @export
 print.tblcheck_problem <- function(x, ...) {
-  problem_list <- x
-  class(problem_list) <- "list"
-  cat(
-    "<tblcheck problem>\n", format(x, ...), "\n\n",
-    sep = ""
-  )
-  print(problem_list)
+  cat("<tblcheck problem>", format(x, ...), sep = "\n")
+  str(unclass(x))
 }
 
 #' @export
