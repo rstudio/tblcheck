@@ -69,3 +69,28 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 }
 }
 
+\examples{
+.result <- 1:10
+.solution <- letters[1:10]
+tbl_check_vector()
+tbl_grade_vector()
+
+.result <- 1:10
+.solution <- 1:11
+tbl_check_vector()
+tbl_grade_vector()
+
+.result <- 1:10
+.solution <- rlang::set_names(1:10, letters[1:10])
+tbl_check_vector()
+tbl_grade_vector()
+tbl_grade_vector(max_diffs = 5)
+tbl_grade_vector(max_diffs = Inf)
+
+.result <- 1:10
+.solution <- 11:20
+tbl_check_vector()
+tbl_grade_vector()
+tbl_grade_vector(max_diffs = 5)
+tbl_grade_vector(max_diffs = Inf)
+}
