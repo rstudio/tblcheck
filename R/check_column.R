@@ -57,7 +57,7 @@ tbl_check_column <- function(
   })
   
   if (!name %in% names(expected)) {
-    warning("`", name, "` is not a column in `expected`.")
+    warning(glue::glue("`{name}` is not a column in `expected`."))
     return()
   }
   
@@ -113,7 +113,9 @@ tbl_grade_column <- function(
 tbl_message.column_missing_problem <- function(problem, ...) {
   exp_column <- problem$expected
   
-  message <- glue::glue("Your table should have a column named `{exp_column}`.")
+  message <- glue::glue(
+    gettext("Your table should have a column named `{exp_column}`.")
+  )
   
   return_fail(message, problem = problem)
 }

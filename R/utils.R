@@ -24,9 +24,8 @@ assert_internally <- function(expr, ..., error = internal_error) {
 internal_error <- function(err) {
   message("An error occurred in the grading code: ", err$message)
   gradethis::graded(
-    message = paste(
-      "Uh-oh! We can't provide feedback at this time. Don't worry, it's not", 
-      "your fault! There's an issue behind-the-scenes with this exercise."
+    message = gettext(
+      "Uh-oh! We can't provide feedback at this time. Don't worry, it's not your fault! There's an issue behind-the-scenes with this exercise."
     ),
     correct = logical(0),
     type = "warning",

@@ -133,7 +133,7 @@ tbl_message.values_problem <- function(problem, ...) {
       "The first {n_values} values of your result should be {exp_values}."
     )
   } else {
-    "Your result contains unexpected values."
+    gettext("Your result contains unexpected values.")
   }
   
   return_fail(glue::glue(message), problem = problem)
@@ -151,7 +151,7 @@ tbl_message.column_values_problem <- function(problem, ...) {
       "The first {n_values} values of your `{column_name}` column should be {exp_values}."
     )
   } else {
-    "Your `{column_name}` column contains unexpected values."
+    gettext("Your `{column_name}` column contains unexpected values.")
   }
   
   return_fail(glue::glue(message), problem = problem)
