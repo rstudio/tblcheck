@@ -27,10 +27,8 @@ Imports:
     gradethis (>= 0.2.3.9001),
     knitr,
     magrittr,
-    plu,
     purrr,
-    rlang,
-    utils
+    rlang
 Suggests:
     dplyr,
     learnr,
