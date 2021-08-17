@@ -22,3 +22,9 @@ A \code{\link[gradethis:graded]{gradethis::fail()}} message.
 \description{
 Apply automatic grading to a problem object
 }
+\examples{
+.result <- 1:10
+.solution <- letters[1:10]
+problem <- tbl_check_vector()
+tbl_grade(problem)
+}
