@@ -198,7 +198,7 @@ friendly_class_list <- function() {
     ),
     list(
       class    = "logical",
-      single   = "an TRUE/FALSE value (class `integer`)",
+      single   = "a TRUE/FALSE value (class `integer`)",
       multiple = "a vector of TRUE/FALSE values (class `integer`)"
     ),
     list(
