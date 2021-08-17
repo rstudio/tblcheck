@@ -107,7 +107,7 @@ print.tblcheck_problem <- function(x, ...) {
   problem_list <- x
   class(problem_list) <- "list"
   cat(
-    "<tlbcheck problem>\n", format(x, ...), "\n\n",
+    "<tblcheck problem>\n", format(x, ...), "\n\n",
     sep = ""
   )
   print(problem_list)
