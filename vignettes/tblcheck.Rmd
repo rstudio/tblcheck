@@ -168,25 +168,25 @@ By default, `tblcheck` functions compare the `gradethis` objects `.result` and `
 
 ## Example
 
-In this exercise, a student is asked to use `stringr::str_extract()` to extract the non-numeric portion of the `clarity` column in the `diamonds` dataset from ggplot2 into a new column names `coarse_clarity`.
+In this exercise, a student is asked to use `dplyr::filter()` and `grepl()` to keep only the rows of `dplyr::storms()` where the storm was given a personal name. Then, the student is asked to use `dplyr::mutate()` and `substr()` to add a column `letter` containing the first letter of each storm's name.
 
 ````markdown
-```{r clarity-setup, chunk_label = "clarity-setup"}
+```{r storms-setup, chunk_label = "storms-setup"}
 library(dplyr)
-library(ggplot2)
-library(stringr)
-diamonds_ <- select(diamonds, carat, cut, color, clarity, price)
+storms_ <- select(storms, name, year, month, day, hour, status, category)
 ```
 
-```{r clarity, chunk_label = "clarity", is_exercise = TRUE}
-diamonds_ %>% 
-  filter(str_detect(clarity, "\\d+", negate = TRUE)) %>% 
-  mutate(clarity = str_detect(clarity, "\\d+", negate = TRUE))
+```{r storms, chunk_label = "storms", is_exercise = TRUE}
+storms_ %>% 
+  mutate(named = grepl("[[:alpha:]]", name)) %>% 
+  filter(named) %>% 
+  mutate(name = substr(name, 1, 2))
 ```
 
-```{r clarity-solution, chunk_label = "clarity-solution"}
-diamonds_ %>% 
-  mutate(coarse_clarity = str_extract(clarity, "\\D+"))
+```{r storms-solution, chunk_label = "storms-solution"}
+storms_ %>% 
+  filter(grepl("[[:lower:]]", name)) %>% 
+  mutate(letter = substr(name, 1, 1))
 ```
 ````
 
@@ -194,82 +194,87 @@ The user's submitted table differs from the correct table in a lot of ways.
 `tblcheck` always returns only one problem to the user, and tries to give the most actionable item first.
 
 ````markdown
-```{r clarity-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r storms-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("clarity")
+fake_grade_chunks("storms")
 ```
 
-Here, `tbl_grade_table()` first highlights the incorrect column name in the user's code, because the user overwrote the existing column instead of creating a new one. Let's see what happens when the user fixes this.
+Here, `tbl_grade_table()` first highlights the incorrect column name in the user's code, because the user added an unnecessary column, `named` and overwrote the existing column `name` instead of creating a new `letter` column. Let's see what happens when the user fixes this.
 
 ````markdown
-```{r clarity_2, chunk_label = "clarity", is_exercise = TRUE}
-diamonds_ %>% 
-  filter(str_detect(clarity, "\\d+", negate = TRUE)) %>% 
-  mutate(coarse_clarity = str_detect(clarity, "\\d+", negate = TRUE))
+```{r storms_2, chunk_label = "storms", is_exercise = TRUE}
+storms_ %>% 
+  mutate(name = grepl("[[:alpha:]]", name)) %>% 
+  filter(name) %>% 
+  mutate(letter = substr(name, 1, 2))
 ```
 
-```{r clarity_2-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r storms_2-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("clarity_2", solution = "clarity-solution")
+fake_grade_chunks("storms_2", solution = "storms-solution")
 ```
 
-`tbl_grade_table()` now informs the user that they don't have the right number of rows, because of the unnecessary `filter()` step.
+`tbl_grade_table()` now informs the user that they don't have the right number of rows, because they did not use the correct regex pattern to filter the data.
 
 ````markdown
-```{r clarity_3, chunk_label = "clarity", is_exercise = TRUE}
-diamonds_ %>% 
-  mutate(coarse_clarity = str_detect(clarity, "\\d+", negate = TRUE))
+```{r storms_3, chunk_label = "storms", is_exercise = TRUE}
+storms_ %>% 
+  mutate(name = grepl("[[:lower:]]", name)) %>% 
+  filter(name) %>% 
+  mutate(letter = substr(name, 1, 2))
 ```
 
-```{r clarity_3-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r storms_3-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("clarity_3", solution = "clarity-solution")
+fake_grade_chunks("storms_3", solution = "storms-solution")
 ```
 
-Next, the user finds out their column contains the wrong type of data, since they used `str_detect()` instead of `str_extract()`.
+Next, the user finds out their column contains the wrong type of data, since they overwrote the `name` column.
 
 ````markdown
-```{r clarity_4, chunk_label = "clarity", is_exercise = TRUE}
-diamonds_ %>% 
-  mutate(coarse_clarity = str_extract(clarity, "\\d+"))
+```{r storms_4, chunk_label = "storms", is_exercise = TRUE}
+storms_ %>% 
+  filter(grepl("[[:lower:]]", name)) %>% 
+  mutate(letter = substr(name, 1, 2))
 ```
 
-```{r clarity_4-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r storms_4-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("clarity_4", solution = "clarity-solution")
+fake_grade_chunks("storms_4", solution = "storms-solution")
 ```
 
-If all else fails, `tbl_grade_table()` gives a hint as to what the user's values should look like: they should have extracted the letters, not the numbers.
+If all else fails, `tbl_grade_table()` gives a hint as to what the user's values should look like: they extracted the first two letters of the name instead of the first letter.
 
 ````markdown
-```{r clarity_5, chunk_label = "clarity", is_exercise = TRUE}
-diamonds_ %>% 
-  mutate(coarse_clarity = str_extract(clarity, "\\D+"))
+```{r storms_5, chunk_label = "storms", is_exercise = TRUE}
+storms_ %>% 
+  filter(grepl("[[:lower:]]", name)) %>% 
+  mutate(letter = substr(name, 1, 1))
 ```
 
-```{r clarity_5-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r storms_5-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("clarity_5", solution = "clarity-solution")
+fake_grade_chunks("storms_5", solution = "storms-solution")
 ```
 
 When everything is correct, `tbl_grade_table()` gives no output. It doesn't return a passing grade in case you have other checks you'd like to run. Be sure to include a `gradethis` function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
@@ -281,17 +286,15 @@ For exercises that use vectors rather than tables, `tbl_grade_vector()` allows y
 ````markdown
 ```{r vector-setup, chunk_label = "vector-setup"}
 library(dplyr)
-library(ggplot2)
-library(stringr)
-diamonds_ <- diamonds$clarity
+storm_names <- storms$name
 ```
 
 ```{r vector, chunk_label = "vector", is_exercise = TRUE}
-str_detect(diamonds_, "\\D+")
+grep(storm_names, "[[:lower:]]")
 ```
 
 ```{r vector-solution, chunk_label = "vector-solution"}
-str_extract(diamonds_, "\\D+")
+grepl(storm_names, "[[:lower:]]")
 ```
 
 ```{r vector-check, chunk_label = "vector-check", grade_this = TRUE}
@@ -302,6 +305,8 @@ tbl_grade_vector()
 ```{r echo=FALSE}
 fake_grade_chunks("vector")
 ```
+
+Here, the user gets feedback that their vector is the wrong type, because they used `grep()` instead of `grepl()`.
 
 # Other grading functions
 
@@ -322,12 +327,12 @@ data.frame(numbers = 1:5) %>%
   mutate(even = numbers %% 2 == 0)
 ```
 
-```{r numbers-solution, chunk_label = "clarity-solution"}
+```{r numbers-solution, chunk_label = "storms-solution"}
 tibble(numbers = 1:5) %>% 
   mutate(even = numbers %% 2 == 0)
 ```
 
-```{r numbers-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r numbers-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
@@ -339,7 +344,7 @@ fake_grade_chunks("numbers")
 When the user's result is a different class than the expected solution, `tbl_grade_table()` gives a failing grade. If you don't care about the class of the table, you can add `check_class = FALSE`.
 
 ````markdown
-```{r numbers_2-check, chunk_label = "clarity-check", grade_this = TRUE}
+```{r numbers_2-check, chunk_label = "storms-check", grade_this = TRUE}
 tbl_grade_table(check_class = FALSE)
 ```
 ````
@@ -354,95 +359,71 @@ Every test performed by `tbl_grade_table()` or `tbl_grade_vector()` can be disab
 
 # Custom mistake handling
 
-Sometimes, we want to give special handling to a specific circumstance. For example:
+Sometimes, we want to give special handling to a specific circumstance. For example, in this exercise, a student is instructed to use `dplyr::mutate()`, `paste()`, and `as.Date()` create a new column in the `storms_` data named `date`.
 
 ````markdown
-```{r interval-setup, chunk_label = "interval-setup"}
-library(lubridate)
-
-long_weekends <- 
-  tribble(
-    ~holiday, ~start_date, ~end_date,
-    "New Year's Day", "2021-01-01", "2021-01-03",
-    "MLK Day", "2021-01-16", "2021-01-18",
-    "Presidents Day", "2021-02-13", "2021-02-15",
-    "Memorial Day", "2021-05-29", "2021-05-31",
-    "Independence Day", "2021-07-03", "2021-07-05",
-    "Labor Day", "2021-09-04", "2021-09-06",
-    "Thanksgiving Day", "2021-11-25", "2021-11-28",
-    "Christmas Day", "2021-12-24", "2021-12-26",
-  ) %>% 
-  mutate(
-    start_date = as_date(start_date),
-    end_date = as_date(end_date)
-  )
+```{r date, chunk_label = "date", is_exercise = TRUE}
+storms_ %>% 
+  mutate(date = paste(year, month, day, sep = "-"))
 ```
 
-```{r interval, chunk_label = "interval", is_exercise = TRUE}
-long_weekends %>% 
-  mutate(span = end_date - start_date)
+```{r date-solution, chunk_label = "date-solution"}
+storms_ %>% 
+  mutate(date = as.Date(paste(year, month, day, sep = "-")))
 ```
 
-```{r interval-solution, chunk_label = "interval-solution"}
-long_weekends %>% 
-  mutate(span = start_date %--% end_date)
-```
-
-```{r interval-check, chunk_label = "interval-check", grade_this = TRUE}
+```{r date-check, chunk_label = "date-check", grade_this = TRUE}
 tbl_grade_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("interval")
+fake_grade_chunks("date")
 ```
 
 If this is a mistake you expect a lot of students to make, you may want to give it special handling. `tbl_check_table()` returns a problem object that you can inspect in your grading code.
 
 ````markdown
-```{r interval_2-check, chunk_label = "interval-check", grade_this = TRUE}
+```{r date_2-check, chunk_label = "date-check", grade_this = TRUE}
 tbl_check_table()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("interval", check = "interval_2-check")
+fake_grade_chunks("date", check = "date_2-check")
 ```
 
 You can use `if` statements to give specific feedback based on the nature of the problem object. To apply the default grading code of `tbl_grade_table()`, you can use `tbl_grade()` on the `problem` object.
 
 ````markdown
-```{r interval_3-check, chunk_label = "interval-check", grade_this = TRUE}
+```{r date_3-check, chunk_label = "date-check", grade_this = TRUE}
 problem <- tbl_check_table()
 
-if (problem$type == "column_class" && problem$actual == "difftime") {
-  fail("I expected you to create a time interval. Did you remember to use `%--%`?")
+if (problem$type == "column_class" && problem$actual == "Date") {
+  fail("I expected you to create a Date. Did you remember to use `as.Date`?")
 } else {
   tbl_grade(problem)
 }
 ```
 ````
 
-::: tip
-You can also use `if` statements to ignore differences that you don't care about in your grading code.
-:::
-
-
 ```{r echo=FALSE}
-fake_grade_chunks("interval", check = "interval_3-check")
+fake_grade_chunks("date", check = "date_3-check")
 ```
 
-Applying the same code to a different mistake, we retain the normal `tbl_grade_table()` functionality.
+**Tip**: You can also use `if` statements to ignore differences that you don't care about in your grading code.
+
+Applying the same code to a different mistake, we retain the normal `tbl_grade_table()` functionality, like in this example where the student gave the column the wrong name the day and month:
 
 ````markdown
-```{r interval_4, chunk_label = "interval", is_exercise = TRUE}
-long_weekends %>% 
-  mutate(time_span = start_date %--% end_date)
+```{r date_4, chunk_label = "date", is_exercise = TRUE}
+storms_ %>% 
+  mutate(time = as.Date(paste(year, month, day, sep = "-")))
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("interval_4", "interval-solution", "interval_3-check")
+fake_grade_chunks("date_4", "date-solution", "date_3-check")
 ```
 
 All `tbl_grade_*()` functions have a `tbl_check_*()` equivalent, allowing you to add custom handling for any detected mistake.

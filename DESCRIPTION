@@ -30,14 +30,11 @@ Imports:
     purrr,
     rlang
 Suggests:
-    ggplot2,
     dplyr,
     learnr,
-    lubridate,
     rmarkdown,
     testthat,
-    tibble,
-    stringr
+    tibble
 VignetteBuilder: 
     knitr
 Remotes: 
