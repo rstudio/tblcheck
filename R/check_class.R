@@ -12,7 +12,19 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
+#' @param all_differences If `FALSE`, the default, inconsequential class
+#'   differences will be skipped.
+#'   If `TRUE`, all class differences will be reported.
+#'   See section "Inconsequential differences" for more information.
 #' @inheritParams tbl_check_table
+#' 
+#' @section Inconsequential differences:
+#' Unless `all_differences` is set to `TRUE`, the following class differences
+#' will not generate a problem:
+#' 
+#' - [integer] vs. [numeric]
+#' - [POSIXct] vs. [POSIXlt]
+#' - [glue][glue::glue] vs. [character]
 #'
 #' @return If there are any issues, a [list] from `tbl_check_class()` or a
 #'   [gradethis::fail()] message from `tbl_grade_class()`.
@@ -34,7 +46,10 @@
 #' tbl_check_class()
 #' tbl_grade_class()
 tbl_check_class <- function(
-  object = .result, expected = .solution, envir = parent.frame()
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", envir)
@@ -47,7 +62,14 @@ tbl_check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    problem <- problem(
+    if (
+      !isTRUE(all_differences) &&
+      !has_meaningful_class_difference(obj_class, exp_class)
+    ) {
+      return(invisible())
+    }
+    
+    problem(
       "class",
       exp_class,
       obj_class,
@@ -56,22 +78,19 @@ tbl_check_class <- function(
       expected_length = length(expected),
       actual_length = length(object)
     )
-    
-    if (!has_meaningful_class_difference(obj_class, exp_class)) {
-      problem$message <- FALSE
-    }
-    
-    return(problem)
   }
 }
 
 #' @rdname tbl_check_class
 #' @export
 tbl_grade_class <- function(
-  object = .result, expected = .solution, envir = parent.frame()
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  envir = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(tbl_check_class(object, expected, envir))
+    tbl_grade(tbl_check_class(object, expected, all_differences, envir))
   )
 }
 

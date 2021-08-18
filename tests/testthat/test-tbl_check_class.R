@@ -56,10 +56,12 @@ test_that("tbl_check_class()", {
   )
 })
 
-test_that("tbl_check_class() returns inconsequential mismatches", {
+test_that("tbl_check_class() with inconsequential mismatches", {
   .result   <- 1L
   .solution <- 1
-  problem   <- tbl_check_class()
+  problem <- expect_invisible(tbl_check_class())
+  expect_null(problem)
+  problem <- tbl_check_class(all_differences = TRUE)
   expect_equal(
     problem,
     problem(
@@ -67,14 +69,15 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
       expected = "numeric",
       actual   = "integer",
       expected_length = 1,
-      actual_length = 1,
-      message = FALSE
+      actual_length = 1
     )
   )
 
   .result   <- glue::glue("x")
   .solution <- "x"
-  problem   <- tbl_check_class()
+  problem <- expect_invisible(tbl_check_class())
+  expect_null(problem)
+  problem <- tbl_check_class(all_differences = TRUE)
   expect_equal(
     problem,
     problem(
@@ -82,14 +85,15 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
       expected = "character",
       actual   = c("glue", "character"),
       expected_length = 1,
-      actual_length = 1,
-      message = FALSE
+      actual_length = 1
     )
   )
 
   .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
   .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-  problem   <- tbl_check_class()
+  problem <- expect_invisible(tbl_check_class())
+  expect_null(problem)
+  problem <- tbl_check_class(all_differences = TRUE)
   expect_equal(
     problem,
     problem(
@@ -97,8 +101,7 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
       expected = c("POSIXlt", "POSIXt"),
       actual   = c("POSIXct", "POSIXt"),
       expected_length = 2,
-      actual_length = 2,
-      message = FALSE
+      actual_length = 2
     )
   )
 })

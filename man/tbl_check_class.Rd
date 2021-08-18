@@ -5,14 +5,29 @@
 \alias{tbl_grade_class}
 \title{Checks that two objects have the same classes}
 \usage{
-tbl_check_class(object = .result, expected = .solution, envir = parent.frame())
+tbl_check_class(
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  envir = parent.frame()
+)
 
-tbl_grade_class(object = .result, expected = .solution, envir = parent.frame())
+tbl_grade_class(
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  envir = parent.frame()
+)
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
+
+\item{all_differences}{If \code{FALSE}, the default, inconsequential class
+differences will be skipped.
+If \code{TRUE}, all class differences will be reported.
+See section "Inconsequential differences" for more information.}
 
 \item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
 }
@@ -53,3 +68,14 @@ tbl_grade_class()
 tbl_check_class()
 tbl_grade_class()
 }
+\section{Inconsequential differences}{
+
+Unless \code{all_differences} is set to \code{TRUE}, the following class differences
+will not generate a problem:
+\itemize{
+\item \link{integer} vs. \link{numeric}
+\item \link{POSIXct} vs. \link{POSIXlt}
+\item \link[glue:glue]{glue} vs. \link{character}
+}
+}
+

@@ -32,7 +32,7 @@ tbl_grade.list <- function(problem, max_diffs = 3, ...) {
 #' @rdname tbl_grade
 #' @export
 tbl_grade.tblcheck_problem <- function(problem, max_diffs = 3, ...) {
-  if (is.null(problem) || isFALSE(problem$message)) {
+  if (is.null(problem)) {
     return(invisible())
   }
   
@@ -79,8 +79,4 @@ tbl_message.tblcheck_problem <- function(problem, ...) {
   }
   
   glue::glue(type_msg, exp_msg, obj_msg)
-}
-
-isFALSE <- function(x) {
-  is.logical(x) && length(x) == 1L && !is.na(x) && !x
 }
