@@ -46,7 +46,8 @@ return_if_problem <- function(
         problem_class, c("tblcheck_problem", "gradethis_problem", "list")
       )
       base_class <- custom_classes[length(custom_classes)]
-      class(problem) <- unique(c(paste0(prefix, base_class), problem_class))
+      prefixed_base_class <- paste0(prefix, base_class)
+      class(problem) <- unique(c(prefixed_base_class, problem_class))
       
       problem$type <- gsub("^(.*_)?", prefix, problem$type)
     }
@@ -105,7 +106,8 @@ is_tblcheck_problem <- function(x, type = NULL) {
 #' @export
 print.tblcheck_problem <- function(x, ...) {
   cat("<tblcheck problem>", format(x, ...) %||% "<no message>", sep = "\n")
-  utils::str(unclass(x))
+  str <- utils::capture.output(utils::str(unclass(x)))[-1]
+  cat(sub("^ ", "", str), sep = "\n")
 }
 
 #' @export
