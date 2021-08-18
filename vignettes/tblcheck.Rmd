@@ -373,7 +373,7 @@ Here, the user gets feedback that their vector is the wrong type, because they u
 
 - `tbl_grade_column()` grades a single column of a table.
 - `tbl_grade_class()` grades the class of an object.
-- `tbl_grade_length()` grades the `length`, `ncol`, or `nrow` of an object.
+- `tbl_grade_dimensions()` grades the `length`, `ncol`, or `nrow` of an object.
 - `tbl_grade_names()` grades the names of an object.
 
 ## Skipping tests
