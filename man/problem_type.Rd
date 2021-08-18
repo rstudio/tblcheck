@@ -4,6 +4,7 @@
 \alias{problem_type}
 \alias{is_problem}
 \alias{is_tblcheck_problem}
+\alias{as_problem}
 \title{Problem helper functions}
 \usage{
 problem_type(x)
@@ -11,6 +12,8 @@ problem_type(x)
 is_problem(x, type = NULL)
 
 is_tblcheck_problem(x, type = NULL)
+
+as_problem(x)
 }
 \arguments{
 \item{x}{An object}
@@ -21,6 +24,7 @@ is_tblcheck_problem(x, type = NULL)
 \code{is_problem()} and \code{is_tblcheck_problem()} return a \link{logical}
 of length 1.
 \code{problem_type()} returns a \link{character} of length 1.
+\code{as_problem()} returns a \code{tblcheck_problem}.
 }
 \description{
 \itemize{
@@ -29,6 +33,7 @@ not a problem.
 \item \code{is_problem()} tests whether an object is a \code{gradethis} problem.
 \item \code{is_tblcheck_problem()} tests whether an object is a problem created
 by \code{tblcheck}.
+\item \code{as_problem()} converts a list to a \code{tblcheck_problem}.
 }
 
 If \code{type} is specified, \code{is_problem()} and \code{is_tblcheck_problem()} test

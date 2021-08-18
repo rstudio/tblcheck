@@ -63,6 +63,7 @@ return_if_problem <- function(
 #' - `is_problem()` tests whether an object is a `gradethis` problem.
 #' - `is_tblcheck_problem()` tests whether an object is a problem created
 #'   by `tblcheck`.
+#' - `as_problem()` converts a list to a `tblcheck_problem`.
 #'   
 #' If `type` is specified, `is_problem()` and `is_tblcheck_problem()` test
 #' whether an object is a problem of the specified type.
@@ -73,6 +74,7 @@ return_if_problem <- function(
 #' @return `is_problem()` and `is_tblcheck_problem()` return a [logical]
 #'   of length 1.
 #'   `problem_type()` returns a [character] of length 1.
+#'   `as_problem()` returns a `tblcheck_problem`.
 #' @export
 #'
 #' @examples
@@ -101,6 +103,22 @@ is_tblcheck_problem <- function(x, type = NULL) {
   inherits(x, "tblcheck_problem") && (
     is.null(type) || inherits(x, paste0(type, "_problem"))
   )
+}
+
+#' @rdname problem_type
+#' @export
+as_problem <- function(x) {
+  checkmate::assert_list(x)
+  class(x) <- c("tblcheck_problem", "gradethis_problem")
+  
+  type <- problem_type(x)
+  if (!is.null(type)) {
+    base_type <- gsub("^.*_", "", type)
+    type_classes <- paste0(unique(c(type, base_type)), "_problem")
+    class(x) <- c(type_classes, class(x))
+  }
+  
+  x
 }
 
 #' @export
