@@ -72,70 +72,47 @@ tbl_grade_class <- function(
 }
 
 tbl_message.class_problem <- function(problem, ...) {
-  exp_class <- problem$expected
-  obj_class <- problem$actual
-  
-  if (!has_meaningful_class_difference(exp_class, obj_class)) {
-    return()
-  }
-  
-  hinted_class_message <- hinted_class_message(obj_class, exp_class)
-  if (!is.null(hinted_class_message)) {
-    return_fail(hinted_class_message, problem = problem)
-  }
-  
-  exp_length <- problem$expected_length
-  obj_length <- problem$actual_length
-  
-  friendly_exp_class <- friendly_class(exp_class, exp_length)
-  friendly_obj_class <- friendly_class(obj_class, obj_length)
-  
-  glue::glue(
+  glue::glue_data(
+    build_class_message_list(problem),
     "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
   )
 }
 
 tbl_message.column_class_problem <- function(problem, ...) {
-  exp_class <- problem$expected
-  obj_class <- problem$actual
-  
-  if (!has_meaningful_class_difference(exp_class, obj_class)) {
-    return()
-  }
-
-  exp_length <- problem$expected_length
-  obj_length <- problem$actual_length
-  
-  friendly_exp_class <- friendly_class(exp_class, exp_length)
-  friendly_obj_class <- friendly_class(obj_class, obj_length)
-  
   column_name <- problem$column
   
-  glue::glue(
+  glue::glue_data(
+    build_class_message_list(problem),
     "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
   )
 }
 
 tbl_message.table_class_problem <- function(problem, ...) {
+  glue::glue_data(
+    build_class_message_list(problem),
+    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  )
+}
+
+build_class_message_list <- function(problem, env = parent.frame()) {
   exp_class <- problem$expected
   obj_class <- problem$actual
   
   if (!has_meaningful_class_difference(exp_class, obj_class)) {
-    return()
+    rlang::return_from(env, invisible())
   }
   
   hinted_class_message <- hinted_class_message(obj_class, exp_class)
   if (!is.null(hinted_class_message)) {
-    return_fail(hinted_class_message, problem = problem)
+    rlang::return_from(env, hinted_class_message)
   }
   
-  column_name <- problem$column
+  exp_length <- problem$expected_length
+  obj_length <- problem$actual_length
   
-  friendly_exp_class <- friendly_class(exp_class, 1)
-  friendly_obj_class <- friendly_class(obj_class, 1)
-  
-  glue::glue(
-    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
+  list(
+    friendly_exp_class = friendly_class(exp_class, exp_length),
+    friendly_obj_class = friendly_class(obj_class, obj_length)
   )
 }
 
