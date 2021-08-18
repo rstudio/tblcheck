@@ -28,11 +28,6 @@ tbl_check_groups <- function(
   expected = .solution,
   envir = parent.frame()
 ) {
-  # Early exit if `dplyr` is not installed
-  if (!rlang::is_installed("dplyr")) {
-    return()
-  }
-  
   if (inherits(object, ".result")) {
     object <- get(".result", envir)
   }
@@ -45,8 +40,8 @@ tbl_check_groups <- function(
     checkmate::assert_data_frame(expected)
   })
   
-  groups_exp <- dplyr::group_vars(expected)
-  groups_obj <- dplyr::group_vars(object)
+  groups_exp <- group_vars(expected)
+  groups_obj <- group_vars(object)
   
   if (!identical(groups_exp, groups_obj)) {
     return_if_problem(
@@ -58,6 +53,10 @@ tbl_check_groups <- function(
       prefix = "table"
     )
   }
+}
+
+group_vars <- function(x) {
+  setdiff(names(attr(x, "groups")), ".rows")
 }
 
 #' @rdname tbl_check_groups
