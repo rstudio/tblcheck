@@ -5,6 +5,12 @@
 #'
 #' @return A [gradethis::fail()] message.
 #' @export
+#' 
+#' @examples
+#' .result <- 1:10
+#' .solution <- letters[1:10]
+#' problem <- tbl_check_vector()
+#' tbl_grade(problem)
 tbl_grade <- function(problem, max_diffs = 3) {
   if (is.null(problem)) {
     return(invisible())

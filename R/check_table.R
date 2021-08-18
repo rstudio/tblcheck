@@ -43,6 +43,36 @@
 #'   [gradethis::fail()] message from `tbl_grade_table()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
+#' 
+#' @examples 
+#' .result <- data.frame(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = 1:10, b = 11:20)
+#' tbl_check_table()
+#' tbl_grade_table()
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = a, c = a, d = a, e = a, f = a)
+#' .solution <- tibble::tibble(z = 1:10, y = z, x = z, w = z, v = z, u = z)
+#' tbl_check_table()
+#' tbl_grade_table()
+#' tbl_grade_table(max_diffs = 5)
+#' tbl_grade_table(max_diffs = Inf)
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = 1:11, b = 12:22)
+#' tbl_check_table()
+#' tbl_grade_table()
+#'
+#' .result <- tibble::tibble(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = letters[1:10], b = letters[11:20])
+#' tbl_check_table()
+#' tbl_grade_table()
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = 11:20)
+#' .solution <- tibble::tibble(a = 11:20, b = 1:10)
+#' tbl_check_table()
+#' tbl_grade_table()
+#' tbl_grade_table(max_diffs = 5)
+#' tbl_grade_table(max_diffs = Inf)
 tbl_check_table <- function(
   object = .result,
   expected = .solution,

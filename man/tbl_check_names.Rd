@@ -47,3 +47,16 @@ or is missing names that are expected.
 }
 }
 
+\examples{
+.result <- 1:10
+.solution <- rlang::set_names(1:10, letters[1:10])
+tbl_check_names()
+tbl_grade_names()
+tbl_grade_names(max_diffs = 5)
+tbl_grade_names(max_diffs = Inf)
+
+.result <- tibble::tibble(a = 1:5, b = 6:10, c = 11:15)
+.solution <- tibble::tibble(a = 1:5, x = 6:10, y = 11:15)
+tbl_check_names()
+tbl_grade_names()
+}

@@ -16,6 +16,27 @@
 #'   [gradethis::fail()] message from `tbl_grade_dimensions()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
+#' 
+#' @examples
+#' .result <- 1:10
+#' .solution <- 1:5
+#' tbl_check_dimensions()
+#' tbl_grade_dimensions()
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = 1:10, c = 1:10)
+#' .solution <- tibble::tibble(a = 1:10, b = 1:10)
+#' tbl_check_dimensions()
+#' tbl_grade_dimensions()
+#' 
+#' .result <- tibble::tibble(a = 1:10, b = 1:10)
+#' .solution <- tibble::tibble(a = 1:5, b = 1:5)
+#' tbl_check_dimensions()
+#' tbl_grade_dimensions()
+#' 
+#' .result <- 1:12
+#' .solution <- matrix(1:12, 3)
+#' tbl_check_dimensions()
+#' tbl_grade_dimensions()
 tbl_check_dimensions <- function(
   object = .result,
   expected = .solution,
