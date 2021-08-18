@@ -80,92 +80,74 @@ tbl_grade_names <- function(
 }
 
 tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
-  missing_names <- combine_words_with_more(
-    problem$missing, max_diffs
-  )
-  missing_msg <- if (!is.null(missing_names)) {
-    ngettext(
+  generate_names_message(
+    problem = problem,
+    max_diffs = max_diffs,
+    missing_msg = ngettext(
       length(problem$missing),
       "Your result should have the name {missing_names}. ",
       "Your result should have the names {missing_names}. "
-    )
-  } else {
-    ""
-  }
-  
-  unexpected_names <- combine_words_with_more(
-    problem$unexpected, max_diffs, and = " or "
-  )
-  unexpected_msg <- if (!is.null(unexpected_names)) {
-    ngettext(
+    ),
+    unexpected_msg = ngettext(
       length(problem$unexpected),
       "Your result should not have the name {unexpected_names}.",
       "Your result should not have the names {unexpected_names}."
     )
-  } else {
-    ""
-  }
-  
-  glue::glue(missing_msg, unexpected_msg)
+  )
 }
 
 tbl_message.column_names_problem <- function(problem, max_diffs = 3, ...) {
-  column_name <- problem$column
-  
-  missing_names <- combine_words_with_more(
-    problem$missing, max_diffs
-  )
-  missing_msg <- if (!is.null(missing_names)) {
-    ngettext(
+  generate_names_message(
+    problem = problem,
+    max_diffs = max_diffs,
+    missing_msg = ngettext(
       length(problem$missing),
       "Your `{column_name}` column should have the name {missing_names}. ",
       "Your `{column_name}` column should have the names {missing_names}. "
-    )
-  } else {
-    ""
-  }
-  
-  unexpected_names <- combine_words_with_more(
-    problem$unexpected, max_diffs, and = " or "
-  )
-  unexpected_msg <- if (!is.null(unexpected_names)) {
-    ngettext(
+    ),
+    unexpected_msg = ngettext(
       length(problem$unexpected),
       "Your `{column_name}` column should not have the name {unexpected_names}.",
       "Your `{column_name}` column should not have the names {unexpected_names}."
-    )
-  } else {
-    ""
-  }
-  
-  glue::glue(missing_msg, unexpected_msg)
+    ),
+    column_name = problem$column
+  )
 }
 
 tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
-  missing_names <- combine_words_with_more(
-    problem$missing, max_diffs
-  )
-  missing_msg <- if (!is.null(missing_names)) {
-    ngettext(
+  generate_names_message(
+    problem = problem,
+    max_diffs = max_diffs,
+    missing_msg = ngettext(
       length(problem$missing),
       "Your table should have a column named {missing_names}. ",
       "Your table should have columns named {missing_names}. "
-    )
-  } else {
-    ""
-  }
-  
-  unexpected_names <- combine_words_with_more(
-    problem$unexpected, max_diffs, and = " or "
-  )
-  unexpected_msg <- if (!is.null(unexpected_names)) {
-    ngettext(
+    ),
+    unexpected_msg = ngettext(
       length(problem$unexpected),
       "Your table should not have a column named {unexpected_names}.",
       "Your table should not have columns named {unexpected_names}."
     )
+  )
+}
+
+generate_names_message <- function(
+  problem, max_diffs, missing_msg, unexpected_msg, ...
+) {
+  if (!is.null(problem$missing)) {
+    missing_names <- combine_words_with_more(
+      problem$missing, max_diffs
+    )
   } else {
-    ""
+    missing_msg <- ""
+  }
+  
+  if (!is.null(problem$unexpected)) {
+    unexpected_names <- combine_words_with_more(
+      problem$unexpected, max_diffs, and = " or "
+    )
+  } else {
+    unexpected_msg <- ""
   }
   
   glue::glue(missing_msg, unexpected_msg)
