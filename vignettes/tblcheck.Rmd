@@ -452,7 +452,7 @@ tbl_check_table()
 fake_grade_chunks("date", check = "date_2-check")
 ```
 
-You can use `if` statements to give specific feedback based on the nature of the problem object. To apply the default grading code of `tbl_grade_table()`, you can use `tbl_grade()` on the `problem` object.
+You can use `if` statements to give specific feedback based on the nature of the `problem` object using the standard `gradethis` functions. For problems not handled by your custom grading code, you can pass the problem to `tbl_grade()` to create a grade from the problem using the default feedback provided by `tbl_grade_table()`.
 
 ````markdown
 ```{r date_3-check, chunk_label = "date-check", grade_this = TRUE}
