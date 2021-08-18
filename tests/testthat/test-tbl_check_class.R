@@ -67,7 +67,8 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
       expected = "numeric",
       actual   = "integer",
       expected_length = 1,
-      actual_length = 1
+      actual_length = 1,
+      message = FALSE
     )
   )
 
@@ -81,7 +82,8 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
       expected = "character",
       actual   = c("glue", "character"),
       expected_length = 1,
-      actual_length = 1
+      actual_length = 1,
+      message = FALSE
     )
   )
 
@@ -95,7 +97,8 @@ test_that("tbl_check_class() returns inconsequential mismatches", {
       expected = c("POSIXlt", "POSIXt"),
       actual   = c("POSIXct", "POSIXt"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      message = FALSE
     )
   )
 })

@@ -47,17 +47,21 @@ tbl_check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    return(
-      problem(
-        "class",
-        exp_class,
-        obj_class,
-        # Object lengths are stored so the correct pluralization
-        # can be applied in tbl_message.class_problem()
-        expected_length = length(expected),
-        actual_length = length(object)
-      )
+    problem <- problem(
+      "class",
+      exp_class,
+      obj_class,
+      # Object lengths are stored so the correct pluralization
+      # can be applied in tbl_message.class_problem()
+      expected_length = length(expected),
+      actual_length = length(object)
     )
+    
+    if (!has_meaningful_class_difference(obj_class, exp_class)) {
+      problem$message <- FALSE
+    }
+    
+    return(problem)
   }
 }
 
@@ -97,10 +101,6 @@ tbl_message.table_class_problem <- function(problem, ...) {
 build_class_message_list <- function(problem, env = parent.frame()) {
   exp_class <- problem$expected
   obj_class <- problem$actual
-  
-  if (!has_meaningful_class_difference(exp_class, obj_class)) {
-    rlang::return_from(env, invisible())
-  }
   
   hinted_class_message <- hinted_class_message(obj_class, exp_class)
   if (!is.null(hinted_class_message)) {

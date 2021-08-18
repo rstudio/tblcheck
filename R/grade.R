@@ -12,7 +12,7 @@
 #' problem <- tbl_check_vector()
 #' tbl_grade(problem)
 tbl_grade <- function(problem, max_diffs = 3) {
-  if (is.null(problem)) {
+  if (is.null(problem) || isFALSE(problem$message)) {
     return(invisible())
   }
   
@@ -21,13 +21,16 @@ tbl_grade <- function(problem, max_diffs = 3) {
     checkmate::assert_number(max_diffs, lower = 1)
   })
   
-  message <- tbl_message(problem, max_diffs = max_diffs)
-  
-  if (!is.null(message)) {
-    return_fail(message, problem = problem)
-  }
+  return_fail(
+    tbl_message(problem, max_diffs = max_diffs),
+    problem = problem
+  )
 }
 
 tbl_message <- function(problem, ...) {
   UseMethod("tbl_message")
+}
+
+isFALSE <- function(x) {
+  is.logical(x) && length(x) == 1L && !is.na(x) && !x
 }
