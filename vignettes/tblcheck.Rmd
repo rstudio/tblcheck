@@ -177,7 +177,7 @@ library(tblcheck)
 ```
 ````
 
-# Basic usage
+## Grading tables
 
 By default, `tblcheck` compares the result of the user's input to the result of the `-solution` chunk. To user `tblcheck` in the simplest case, you just need to ensure you have a `-solution` chunk and add add `tbl_grade_table()` to the grading code in you `-check` chunk, e.g.
 
@@ -191,7 +191,7 @@ fail()
 
 By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()`.
 
-## Example
+### Example
 
 In this exercise, a student is asked to use `dplyr::filter()` and `grepl()` to keep only the rows of `dplyr::storms()` where the storm was given a personal name. Then, the student is asked to use `dplyr::mutate()` and `substr()` to add a column `letter` containing the first letter of each storm's name.
 
@@ -304,7 +304,7 @@ fake_grade_chunks("storms_5", solution = "storms-solution")
 
 When everything is correct, `tbl_grade_table()` gives no output. It doesn't return a passing grade in case you have other checks you'd like to run. Be sure to include a `gradethis` function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
 
-# Grading vectors
+## Grading vectors
 
 For exercises that use vectors rather than tables, `tbl_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
 
@@ -333,7 +333,7 @@ fake_grade_chunks("vector")
 
 Here, the user gets feedback that their vector is the wrong type, because they used `grep()` instead of `grepl()`.
 
-# Other grading functions
+## Other grading functions
 
 `tbl_grade_table()` and `tbl_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
 
@@ -342,7 +342,7 @@ Here, the user gets feedback that their vector is the wrong type, because they u
 - `tbl_grade_length()` grades the `length`, `ncol`, or `nrow` of an object.
 - `tbl_grade_names()` grades the names of an object.
 
-# Skipping tests
+## Skipping tests
 
 If there are some tests you would like to skip, `tbl_grade_table()` includes a host of arguments that can be set to `FALSE`. For example:
 
@@ -382,7 +382,7 @@ Since there are no other problems, we get no output.
 
 Every test performed by `tbl_grade_table()` or `tbl_grade_vector()` can be disabled with an argument. 
 
-# Custom mistake handling
+## Custom mistake handling
 
 Sometimes, we want to give special handling to a specific circumstance. For example, in this exercise, a student is instructed to use `dplyr::mutate()`, `paste()`, and `as.Date()` create a new column in the `storms_` data named `date`.
 
