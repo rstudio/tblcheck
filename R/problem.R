@@ -105,7 +105,8 @@ is_tblcheck_problem <- function(x, type = NULL) {
 #' @export
 print.tblcheck_problem <- function(x, ...) {
   cat("<tblcheck problem>", format(x, ...) %||% "<no message>", sep = "\n")
-  utils::str(unclass(x))
+  str <- utils::capture.output(utils::str(unclass(x)))[-1]
+  cat(sub("^ ", "", str), sep = "\n")
 }
 
 #' @export
