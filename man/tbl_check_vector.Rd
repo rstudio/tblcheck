@@ -55,9 +55,20 @@ If there are any issues, a \link{list} from \code{tbl_check_vector()} or a
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
-Check if two vectors have the same class, length, and values.
-If the vectors differ, returns a failure state and an informative
-message with \code{\link[gradethis:graded]{gradethis::fail()}}.
+Checks for differences between \code{object} and \code{expected} in the following order:
+\enumerate{
+\item Check class with \code{\link[=tbl_check_class]{tbl_check_class()}}
+\item Check length with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}
+\item Check vector values are the same
+\item Check names with \code{\link[=tbl_check_names]{tbl_check_names()}}
+}
+
+If the vectors differ
+\itemize{
+\item \code{tbl_check_vector()} returns a list describing the problem
+\item \code{tbl_grade_vector()} returns a failing grade and informative message
+with \code{\link[gradethis:graded]{gradethis::fail()}}
+}
 }
 \section{Problems}{
 

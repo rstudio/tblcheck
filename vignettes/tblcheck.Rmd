@@ -179,7 +179,20 @@ library(tblcheck)
 
 ## Grading tables
 
-By default, `tblcheck` compares the result of the user's input to the result of the `-solution` chunk. To user `tblcheck` in the simplest case, you just need to ensure you have a `-solution` chunk and add add `tbl_grade_table()` to the grading code in you `-check` chunk, e.g.
+`tbl_grade_table()` compares the result of the user's input to the result of the `-solution` chunk. It checks that the user's table
+
+1. is the correct class
+1. has the correct column names
+1. has the correct number of rows and columns
+
+and that each column of the user's table
+
+4. is the correct class
+5. contains the correct values
+
+`tbl_grade_table()` includes options to disable any of these checks. If a check fails, the student will see a single message with the first detected problem, based on the order described above.
+
+To use `tbl_grade_table()`, ensure you have a `-solution` chunk and add `tbl_grade_table()` to the grading code in you `-check` chunk, e.g.
 
 ````markdown
 ```{r example-check, chunk_label = "example-check", grade_this = TRUE}
@@ -306,7 +319,28 @@ When everything is correct, `tbl_grade_table()` gives no output. It doesn't retu
 
 ## Grading vectors
 
-For exercises that use vectors rather than tables, `tbl_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
+For exercises that use vectors rather than tables, `tbl_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. It checks that the user's vector
+
+1. is the correct class
+1. is the correct length
+1. contains the correct values
+1. has the correct names
+
+`tbl_grade_vector()` includes options to disable any of these checks. If a check fails, the student will see a single message with the first detected problem, based on the order described above.
+
+To use `tbl_grade_vector()`, ensure you have a `-solution` chunk and add `tbl_grade_vector()` to the grading code in you `-check` chunk, e.g.
+
+````markdown
+```{r example-check, chunk_label = "example-check", grade_this = TRUE}
+pass_if_equal()
+tbl_grade_vector()
+fail()
+```
+````
+
+By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()`.
+
+### Example
 
 ````markdown
 ```{r vector-setup, chunk_label = "vector-setup"}

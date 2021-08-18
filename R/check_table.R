@@ -1,10 +1,15 @@
 #' Check that the rows and columns of two tables are the same
 #'
-#' Checks if `object` and `expected` have the same number of rows, the same
-#' column names, and the same column contents.
+#' @description
+#' Checks for differences between `object` and `expected` in the following order:
+#' 1. Check table class with [tbl_check_class()]
+#' 1. Check column names with [tbl_check_names()]
+#' 1. Check number of rows and columns with [tbl_check_dimensions()]
+#' 1. Check that each column is the same with [tbl_check_column()]
+#' 
 #' If the tables differ
-#' - `tbl_check_names()` returns a list describing the problem
-#' - `tbl_grade_names()` returns a failing grade and informative message
+#' - `tbl_check_table()` returns a list describing the problem
+#' - `tbl_grade_table()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:
@@ -13,7 +18,7 @@
 #' 2. `table_dimensions`: The table doesn't have the expected number of rows
 #'   and columns
 #' 4. `table_names`: The table has names that are not expected,
-#'   or is missing names that are expected.
+#'   or is missing names that are expected
 #' 
 #' Additional problems may be produced by [tbl_check_column()]
 #'
@@ -26,11 +31,12 @@
 #'   determine the number of mismatched column values to display.
 #'   Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same classes with [class()].
+#'   `expected` have the same classes with [tbl_check_class()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
 #' @param check_dimensions `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same number of rows and columns with [dim()].
+#'   `expected` have the same number of rows and columns
+#'   with [tbl_check_dimensions()].
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [tbl_check_column()].
 #' @param check_column_class `[logical(1)]`\cr Whether to check that each

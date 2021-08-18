@@ -1,8 +1,16 @@
 #' Checks that two vectors are the same
 #'
-#' Check if two vectors have the same class, length, and values.
-#' If the vectors differ, returns a failure state and an informative
-#' message with [gradethis::fail()].
+#' @description
+#' Checks for differences between `object` and `expected` in the following order:
+#' 1. Check class with [tbl_check_class()]
+#' 1. Check length with [tbl_check_dimensions()]
+#' 1. Check vector values are the same
+#' 1. Check names with [tbl_check_names()]
+#' 
+#' If the vectors differ
+#' - `tbl_check_vector()` returns a list describing the problem
+#' - `tbl_grade_vector()` returns a failing grade and informative message
+#' with [gradethis::fail()]
 #' 
 #' @section Problems:
 #' 

@@ -54,9 +54,16 @@ If there are any issues, a \link{list} from \code{tbl_check_column()} or a
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
-Checks if the \code{name} column has the same class and values in \code{object} and
-\code{expected}.
-#' If the columns differ
+Checks for differences between the \code{name} column in \code{object} and in
+\code{expected} in the following order:
+\enumerate{
+\item Check that the \code{name} column exists in \code{object}
+\item Check class with \code{\link[=tbl_check_class]{tbl_check_class()}}
+\item Check length with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}
+\item Check column values with \code{\link[=tbl_check_vector]{tbl_check_vector()}}
+}
+
+If the columns differ
 \itemize{
 \item \code{tbl_check_column()} returns a list describing the problem
 \item \code{tbl_grade_column()} returns a failing grade and informative message

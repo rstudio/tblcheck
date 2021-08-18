@@ -1,8 +1,14 @@
 #' Checks that a column is identical across two tables
 #'
-#' Checks if the `name` column has the same class and values in `object` and
-#' `expected`.
-#' #' If the columns differ
+#' @description
+#' Checks for differences between the `name` column in `object` and in
+#' `expected` in the following order:
+#' 1. Check that the `name` column exists in `object`
+#' 1. Check class with [tbl_check_class()]
+#' 1. Check length with [tbl_check_dimensions()]
+#' 1. Check column values with [tbl_check_vector()]
+#' 
+#' If the columns differ
 #' - `tbl_check_column()` returns a list describing the problem
 #' - `tbl_grade_column()` returns a failing grade and informative message
 #' with [gradethis::fail()]
