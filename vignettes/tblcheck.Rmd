@@ -51,6 +51,8 @@ opts_chunk$set(
 
 options(max.print = 20)
 
+# Add hooks to turn a chunk into an unevaluated verbatim exercise chunk
+# adapted from https://bookdown.org/yihui/rmarkdown-cookbook/show-header.html
 knitr::knit_hooks$set(chunk_label = function(before, options) {
   # the original chunk might be indented
   indent <- options$indent %||% ""
@@ -97,6 +99,7 @@ knitr::knit_hooks$set(source = function(x, options) {
   }
 })
 
+# approximate the appearance of a grade in a learnr tutorial
 grade_html <- function(grade) {
   x <- paste0(
     '<div class="',
