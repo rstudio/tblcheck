@@ -154,7 +154,7 @@ fake_grade_chunks <- function(
 
 # Basic usage
 
-In the simplest case, all you need to do to use `tblcheck` is to add `tbl_grade_table()` to your grading code, e.g.
+By default, `tblcheck` compares the result of the user's input to the result of the `-solution` chunk. To user `tblcheck` in the simplest case, you just need to ensure you have a `-solution` chunk and add add `tbl_grade_table()` to the grading code in you `-check` chunk, e.g.
 
 ````markdown
 ```{r example-check, chunk_label = "example-check", grade_this = TRUE}
