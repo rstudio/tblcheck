@@ -52,6 +52,35 @@ tbl_message <- function(problem, ...) {
   UseMethod("tbl_message")
 }
 
+tbl_message.default <- function(problem, ...) {
+  invisible()
+}
+
+tbl_message.tblcheck_problem <- function(problem, ...) {
+  type_msg <- if (!is.null(problem$type)) {
+    problem_type <- problem$type
+    "Your code resulted in a {problem_type} problem. "
+  } else {
+    ""
+  }
+  
+  exp_msg <- if (!is.null(problem$expected)) {
+    expected <- paste(md_code(problem$expected), collapse = ", ")
+    "I was expecting a value of {expected}. "
+  } else {
+    ""
+  }
+  
+  obj_msg <- if (!is.null(problem$actual)) {
+    actual <- paste(md_code(problem$actual), collapse = ", ")
+    "Your result gave a value of {actual}. "
+  } else {
+    ""
+  }
+  
+  glue::glue(type_msg, exp_msg, obj_msg)
+}
+
 isFALSE <- function(x) {
   is.logical(x) && length(x) == 1L && !is.na(x) && !x
 }
