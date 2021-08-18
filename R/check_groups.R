@@ -76,19 +76,21 @@ tbl_grade_groups <- function(
 }
 
 tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
-  missing_groups <- combine_words_with_more(
-    problem$missing, max_diffs
-  )
-  missing_msg <- if (!is.null(missing_groups)) {
+  missing_msg <- if (!is.null(problem$missing)) {
+    missing_groups <- combine_words_with_more(
+      problem$missing, max_diffs
+    )
+    
     "Your table should be grouped by {missing_groups}. "
   } else {
     ""
   }
   
-  unexpected_groups <- combine_words_with_more(
-    problem$unexpected, max_diffs, and = " or "
-  )
-  unexpected_msg <- if (!is.null(unexpected_groups)) {
+  unexpected_msg <- if (!is.null(problem$unexpected)) {
+    unexpected_groups <- combine_words_with_more(
+      problem$unexpected, max_diffs, and = " or "
+    )
+    
     "Your table should not be grouped by {unexpected_groups}. "
   } else {
     ""
