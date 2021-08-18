@@ -7,6 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+[learnr]: https://rstudio.github.io/learnr/
+[gradethis]: https://pkgs.rstudio.com/gradethis/articles/gradethis.html
+
 ```{css echo=FALSE}
 .alert {
   padding: 0.5em 1em;
@@ -153,7 +156,26 @@ fake_grade_chunks <- function(
 }
 ```
 
-`tblcheck` provides a family of functions for creating helpful failure messages when a user's submitted code results in a table different from the intended solution.
+## Overview
+
+tblcheck works with [gradethis] to help instructors compare students' exercise results with intended solutions in [learnr] tutorials.
+If you are new to grading learnr tutorials, we recommend that you get comfortable with [gradethis] before incorporating tblcheck.
+
+tblcheck provides two grading modalities. You can:
+
+1. Compare student output to model solutions with the [`tbl_grade_table()` function family](#grading-tables), or
+
+1. Write custom grading logic with the [`tbl_check_table()` function family](#custom-mistake-handling).
+
+To use tblcheck in a learnr tutorial, load tblcheck after learnr and gradethis in the `setup` chunk of your tutorial:
+
+````markdown
+```{r setup}`r ''`
+library(learnr)
+library(gradethis)
+library(tblcheck)
+```
+````
 
 # Basic usage
 
