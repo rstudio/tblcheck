@@ -14,6 +14,7 @@ test_that("tbl_check_table() class", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   .result   <- tibble::tibble(a = 1:10, b = a)
   .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
@@ -30,6 +31,7 @@ test_that("tbl_check_table() class", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
   .solution <- tibble::tibble(a = 1:10, b = a)
@@ -46,6 +48,7 @@ test_that("tbl_check_table() class", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 
   .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
   .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
@@ -62,6 +65,7 @@ test_that("tbl_check_table() class", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() rows", {
@@ -74,6 +78,7 @@ test_that("tbl_check_table() rows", {
     problem("table_dimensions", c(25, 2), c(26, 2)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   .result   <- tibble::tibble(a = letters, b = a)
   .solution <- tibble::tibble(a = letters[1], b = a)
@@ -84,6 +89,7 @@ test_that("tbl_check_table() rows", {
     problem("table_dimensions", c(1, 2), c(26, 2)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() ncol", {
@@ -96,6 +102,7 @@ test_that("tbl_check_table() ncol", {
     problem("table_dimensions", c(26, 2), c(26, 3)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   .result   <- tibble::tibble(a = letters, b = a, c = a)
   .solution <- tibble::tibble(a = letters)
@@ -106,6 +113,7 @@ test_that("tbl_check_table() ncol", {
     problem("table_dimensions", c(26, 1), c(26, 3)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() names", {
@@ -122,6 +130,7 @@ test_that("tbl_check_table() names", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() columns", {
@@ -134,6 +143,7 @@ test_that("tbl_check_table() columns", {
     problem("column_values", letters[24:26], column = "a"),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() with no problems returns invisible()", {
@@ -198,6 +208,7 @@ test_that("tbl_check_table() returns grades with row problems", {
     problem("table_dimensions", c(25, 1), c(26, 1)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   .result   <- tibble::tibble(a = letters)
   .solution <- tibble::tibble(a = letters[1])
@@ -208,6 +219,7 @@ test_that("tbl_check_table() returns grades with row problems", {
     problem("table_dimensions", c(1, 1), c(26, 1)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() returns ncol feedback to learnr", {
@@ -220,6 +232,7 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
     problem("table_dimensions", c(26, 2), c(26, 3)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   .result   <- tibble::tibble(a = letters, b = letters, c = letters)
   .solution <- tibble::tibble(a = letters)
@@ -230,6 +243,7 @@ test_that("tbl_check_table() returns ncol feedback to learnr", {
     problem("table_dimensions", c(26, 1), c(26, 3)),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
 
 test_that("tbl_check_table() returns names feedback to learnr", {
@@ -246,6 +260,7 @@ test_that("tbl_check_table() returns names feedback to learnr", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   # ---- with all diffs ---
   .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
@@ -261,6 +276,7 @@ test_that("tbl_check_table() returns names feedback to learnr", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
   
   # ---- with one diff ---
   .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
@@ -276,4 +292,5 @@ test_that("tbl_check_table() returns names feedback to learnr", {
     ),
     ignore_attr = "class"
   )
+  expect_snapshot(tbl_message(problem))
 })
