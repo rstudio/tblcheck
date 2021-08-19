@@ -80,77 +80,69 @@ tbl_grade_names <- function(
 }
 
 tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
-  generate_names_message(
-    problem = problem,
-    max_diffs = max_diffs,
-    missing_msg = ngettext(
+  problem$missing_msg <- problem$missing_msg %||% 
+    ngettext(
       length(problem$missing),
-      "Your result should have the name {missing_names}. ",
-      "Your result should have the names {missing_names}. "
-    ),
-    unexpected_msg = ngettext(
-      length(problem$unexpected),
-      "Your result should not have the name {unexpected_names}.",
-      "Your result should not have the names {unexpected_names}."
+      "Your result should have the name {missing}. ",
+      "Your result should have the names {missing}. "
     )
-  )
+  
+  problem$unexpected_msg  <- problem$unexpected_msg %||% 
+    ngettext(
+      length(problem$unexpected),
+      "Your result should not have the name {unexpected}.",
+      "Your result should not have the names {unexpected}."
+    )
+  
+  if (!is.null(problem[["missing"]])) {
+    problem$missing <- combine_words_with_more(problem$missing, max_diffs)
+  } else {
+    problem$missing_msg <- ""
+  }
+  
+  if (!is.null(problem[["unexpected"]])) {
+    problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
+  } else {
+    problem$unexpected_msg <- ""
+  }
+  
+  glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
 tbl_message.column_names_problem <- function(problem, max_diffs = 3, ...) {
-  generate_names_message(
-    problem = problem,
-    max_diffs = max_diffs,
-    missing_msg = ngettext(
+  problem$missing_msg <- problem$missing_msg %||% 
+    ngettext(
       length(problem$missing),
-      "Your `{column_name}` column should have the name {missing_names}. ",
-      "Your `{column_name}` column should have the names {missing_names}. "
-    ),
-    unexpected_msg = ngettext(
+      "Your `{column}` column should have the name {missing}. ",
+      "Your `{column}` column should have the names {missing}. "
+    )
+  
+  problem$unexpected_msg <- problem$missing_msg %||% 
+    ngettext(
       length(problem$unexpected),
-      "Your `{column_name}` column should not have the name {unexpected_names}.",
-      "Your `{column_name}` column should not have the names {unexpected_names}."
-    ),
-    column_name = problem$column
-  )
+      "Your `{column}` column should not have the name {unexpected}.",
+      "Your `{column}` column should not have the names {unexpected}."
+    )
+  
+  NextMethod()
 }
 
 tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
-  generate_names_message(
-    problem = problem,
-    max_diffs = max_diffs,
-    missing_msg = ngettext(
+  problem$missing_msg <- problem$missing_msg %||% 
+    ngettext(
       length(problem$missing),
-      "Your table should have a column named {missing_names}. ",
-      "Your table should have columns named {missing_names}. "
-    ),
-    unexpected_msg = ngettext(
+      "Your table should have a column named {missing}. ",
+      "Your table should have columns named {missing}. "
+    )
+  
+  problem$unexpected_msg <- problem$unexpected_msg %||%
+    ngettext(
       length(problem$unexpected),
-      "Your table should not have a column named {unexpected_names}.",
-      "Your table should not have columns named {unexpected_names}."
+      "Your table should not have a column named {unexpected}.",
+      "Your table should not have columns named {unexpected}."
     )
-  )
-}
-
-generate_names_message <- function(
-  problem, max_diffs, missing_msg, unexpected_msg, ...
-) {
-  if (!is.null(problem$missing)) {
-    missing_names <- combine_words_with_more(
-      problem$missing, max_diffs
-    )
-  } else {
-    missing_msg <- ""
-  }
   
-  if (!is.null(problem$unexpected)) {
-    unexpected_names <- combine_words_with_more(
-      problem$unexpected, max_diffs, and = " or "
-    )
-  } else {
-    unexpected_msg <- ""
-  }
-  
-  glue::glue(missing_msg, unexpected_msg)
+  NextMethod()
 }
 
 combine_words_with_more <- function(
