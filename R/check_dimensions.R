@@ -174,41 +174,5 @@ tbl_message.column_dimensions_problem <- function(problem, ...) {
 }
 
 tbl_message.table_dimensions_problem <- function(problem, ...) {
-  exp_dim   <- problem$expected
-  exp_n_dim <- length(exp_dim)
-  obj_dim   <- problem$actual
-  obj_n_dim <- length(obj_dim)
-  
-  if (!identical(obj_n_dim, exp_n_dim)) {
-    return(
-      dimension_problem_text(exp_n_dim, obj_n_dim, "dim")
-    )
-  }
-  
-  if (obj_n_dim != 2) {
-    obj_dim_str <- paste(obj_dim, collapse = " x ")
-    exp_dim_str <- paste(exp_dim, collapse = " x ")
-    
-    return(
-      glue::glue(dimension_problem_text(NA, NA, type = "str"))
-    )
-  }
-  
-  obj_cols <- obj_dim[[2]]
-  exp_cols <- exp_dim[[2]]
-  
-  if (!identical(obj_cols, exp_cols)) {
-    return(
-      glue::glue(dimension_problem_text(exp_cols, obj_cols, "col"))
-    )
-  }
-    
-  obj_rows <- obj_dim[[1]]
-  exp_rows <- exp_dim[[1]]
-  
-  if (!identical(obj_rows, exp_rows)) {
-    return(
-      glue::glue(dimension_problem_text(exp_rows, obj_rows, "row"))
-    )
-  }
+  NextMethod()
 }
