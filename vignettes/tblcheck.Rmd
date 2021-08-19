@@ -331,7 +331,7 @@ For exercises that use vectors rather than tables, `tbl_grade_vector()` allows y
 To use `tbl_grade_vector()`, ensure you have a `-solution` chunk and add `tbl_grade_vector()` to the grading code in you `-check` chunk, e.g.
 
 ````markdown
-```{r example-check, chunk_label = "example-check", grade_this = TRUE}
+```{r vector-check, chunk_label = "vector-check", grade_this = TRUE}
 pass_if_equal()
 tbl_grade_vector()
 fail()
@@ -343,26 +343,26 @@ By default, `tblcheck` functions compare the `gradethis` objects `.result` and `
 ### Example
 
 ````markdown
-```{r vector-setup, chunk_label = "vector-setup"}
+```{r storm_names-setup, chunk_label = "storm_names-setup"}
 library(dplyr)
 storm_names <- storms$name
 ```
 
-```{r vector, chunk_label = "vector", is_exercise = TRUE}
+```{r storm_names, chunk_label = "storm_names", is_exercise = TRUE}
 grep(storm_names, "[[:lower:]]")
 ```
 
-```{r vector-solution, chunk_label = "vector-solution"}
+```{r storm_names-solution, chunk_label = "storm_names-solution"}
 grepl(storm_names, "[[:lower:]]")
 ```
 
-```{r vector-check, chunk_label = "vector-check", grade_this = TRUE}
+```{r storm_names-check, chunk_label = "storm_names-check", grade_this = TRUE}
 tbl_grade_vector()
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("vector")
+fake_grade_chunks("storm_names")
 ```
 
 Here, the user gets feedback that their vector is the wrong type, because they used `grep()` instead of `grepl()`.
