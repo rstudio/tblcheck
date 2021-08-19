@@ -440,7 +440,9 @@ tbl_grade_table()
 fake_grade_chunks("date")
 ```
 
-If this is a mistake you expect a lot of students to make, you may want to give it special handling. `tbl_check_table()` returns a problem object that you can inspect in your grading code.
+If this is a mistake you expect a lot of students to make, you may want to give it special handling. All `tbl_grade_*()` functions have a `tbl_check_*()` equivalent, allowing you to add custom handling for any detected mistake.
+
+For example, where `tbl_grade_table()` returns a _grade_, `tbl_check_table()` returns a _problem_ that you can inspect in your grading code.
 
 ````markdown
 ```{r date_2-check, chunk_label = "date-check", grade_this = TRUE}
@@ -485,4 +487,3 @@ storms_ %>%
 fake_grade_chunks("date_4", "date-solution", "date_3-check")
 ```
 
-All `tbl_grade_*()` functions have a `tbl_check_*()` equivalent, allowing you to add custom handling for any detected mistake.
