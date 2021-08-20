@@ -95,44 +95,32 @@ tbl_grade_class <- function(
 }
 
 tbl_message.class_problem <- function(problem, ...) {
-  glue::glue_data(
-    build_class_message_list(problem),
-    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  )
+  problem$msg <- problem$msg %||%
+    "Your result should be {expected}, but it is {actual}."
+  
+  hinted_class_message <- hinted_class_message(problem$actual, problem$expected)
+  if (!is.null(hinted_class_message)) {
+    return(hinted_class_message)
+  }
+  
+  problem$expected <- friendly_class(problem$expected, problem$expected_length)
+  problem$actual   <- friendly_class(problem$actual,   problem$actual_length)
+  
+  glue::glue_data(problem, problem$msg)
 }
 
 tbl_message.column_class_problem <- function(problem, ...) {
-  column_name <- problem$column
+  problem$msg <- problem$msg %||%
+    "Your `{column}` column should be {expected}, but it is {actual}."
   
-  glue::glue_data(
-    build_class_message_list(problem),
-    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  )
+  NextMethod()
 }
 
 tbl_message.table_class_problem <- function(problem, ...) {
-  glue::glue_data(
-    build_class_message_list(problem),
-    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  )
-}
-
-build_class_message_list <- function(problem, env = parent.frame()) {
-  exp_class <- problem$expected
-  obj_class <- problem$actual
+  problem$msg <- problem$msg %||%
+    "Your table should be {expected}, but it is {actual}."
   
-  hinted_class_message <- hinted_class_message(obj_class, exp_class)
-  if (!is.null(hinted_class_message)) {
-    rlang::return_from(env, hinted_class_message)
-  }
-  
-  exp_length <- problem$expected_length
-  obj_length <- problem$actual_length
-  
-  list(
-    friendly_exp_class = friendly_class(exp_class, exp_length),
-    friendly_obj_class = friendly_class(obj_class, obj_length)
-  )
+  NextMethod()
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {
