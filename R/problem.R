@@ -49,7 +49,7 @@ return_if_problem <- function(
       prefixed_base_class <- paste0(prefix, base_class)
       class(problem) <- unique(c(prefixed_base_class, problem_class))
       
-      problem$type <- gsub("^(.*_)?", prefix, problem$type)
+      problem$type <- gsub("^((table|vector|column)_)?", prefix, problem$type)
     }
     
     rlang::return_from(envir, problem)
