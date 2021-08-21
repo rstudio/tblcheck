@@ -206,7 +206,7 @@ tbl_message.nrow_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.table_ncol_problem <- function(problem, ...) {
+tbl_message.table_nrow_problem <- function(problem, ...) {
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
