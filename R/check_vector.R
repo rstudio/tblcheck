@@ -102,7 +102,7 @@ tbl_check_vector <- function(
     first_n_values <- exp_values[seq_len(n_values)]
     
     if (!identical(obj_values[seq_len(n_values)], first_n_values)) {
-      return_if_problem(problem("values", first_n_values), prefix = "vector")
+      return_if_problem(problem("value_diffs", first_n_values), prefix = "vector")
     }
     
     if (!identical(obj_values, exp_values)) {
@@ -147,37 +147,35 @@ tbl_grade_vector <- function(
   )
 }
 
-tbl_message.values_problem <- function(problem, ...) {
-  n_values <- length(problem$expected)
-  exp_values <- knitr::combine_words(md_code(problem$expected))
+tbl_message.value_diffs_problem <- function(problem, ...) {
+  problem$n_values <- length(problem$expected)
+  problem$expected <- knitr::combine_words(md_code(problem$expected))
   
-  if (n_values != 0) {
-    glue::glue(
-      ngettext(
-        n_values,
-        "The first value of your result should be {exp_values}.",
-        "The first {n_values} values of your result should be {exp_values}."
-      )
+  problem$msg <- problem$msg %||%
+    ngettext(
+      problem$n_values,
+      "The first value of your result should be {exp_values}.",
+      "The first {n_values} values of your result should be {exp_values}."
     )
-  } else {
-    "Your result contains unexpected values."
-  }
+    
+  glue::glue_data(problem, problem$msg)
+}
+
+tbl_message.column_value_diffs_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    ngettext(
+      length(problem$expected),
+      "The first value of your `{column}` column should be {expected}.",
+      "The first {n_values} values of your `{column}` column should be {expected}."
+    )
+  
+  NextMethod()
+}
+
+tbl_message.values_problem <- function(problem, ...) {
+  "Your result contains unexpected values."
 }
 
 tbl_message.column_values_problem <- function(problem, ...) {
-  n_values <- length(problem$expected)
-  exp_values <- knitr::combine_words(md_code(problem$expected))
-  column_name <- problem$column
-  
-  if (n_values != 0) {
-    glue::glue(
-      ngettext(
-        n_values,
-        "The first value of your `{column_name}` column should be {exp_values}.",
-        "The first {n_values} values of your `{column_name}` column should be {exp_values}."
-      )
-    )
-  } else {
-    glue::glue("Your `{column_name}` column contains unexpected values.")
-  }
+  glue::glue_data(problem, "Your `{column}` column contains unexpected values.")
 }
