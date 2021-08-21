@@ -154,8 +154,8 @@ tbl_message.value_diffs_problem <- function(problem, ...) {
   problem$msg <- problem$msg %||%
     ngettext(
       problem$n_values,
-      "The first value of your result should be {exp_values}.",
-      "The first {n_values} values of your result should be {exp_values}."
+      "The first value of your result should be {expected}.",
+      "The first {n_values} values of your result should be {expected}."
     )
     
   glue::glue_data(problem, problem$msg)
