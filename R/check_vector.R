@@ -7,7 +7,9 @@
 #' @section Problems:
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
-#' 2. `vector_dimensions`: `object` doesn't have the same length as `expected`
+#' 2. `vector_length`: `object` doesn't have the same length as `expected`
+#' 1. `column_value_diffs`: The first `max_diffs` elements of `object` don't
+#'   contain the same values as `expected`
 #' 3. `vector_values`: `object` doesn't contain the same values as `expected`
 #' 4. `vector_names`: `object` has different `names` than `expected`
 #'

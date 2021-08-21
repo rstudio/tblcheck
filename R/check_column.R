@@ -10,9 +10,11 @@
 #' @section Problems:
 #' 
 #' 1. `column_class`: Any mismatch in the classes of the `name` column
-#' 2. `column_dimensions`: The `name` column doesn't have the expected length
-#' 3. `column_values`: The `name` column doesn't have the expected values
-#' 4. `column`: The `name` column doesn't appear in the `object`
+#' 1. `column_length`: The `name` column doesn't have the expected length
+#' 1. `column_value_diffs`: The first `max_diffs` elements of the `name` column
+#'   don't have the expected values
+#' 1. `column_values`: The `name` column doesn't have the expected values
+#' 1. `column_missing`: The `name` column doesn't appear in the `object`
 #'
 #' @param name `[character(1)]`\cr The name of the column to check.
 #' @inheritParams tbl_check_table
