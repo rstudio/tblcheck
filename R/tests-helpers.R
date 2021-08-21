@@ -27,7 +27,7 @@ expect_grade <- function(grade, message, correct = FALSE, problem = NULL, ...) {
   }
 }
 
-tblcheck_test_grade <- function(expr, return_all = FALSE) {
+tblcheck_test_grade <- function(expr, return_all = FALSE, env = parent.frame()) {
   expr <- rlang::enexpr(expr)
   
   if (identical(expr[[1]], rlang::sym("{"))) {
@@ -45,7 +45,7 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
   }
   
   # Grade returned by check_*(), without calling handlers
-  grade_ret <- rlang::eval_bare(expr)
+  grade_ret <- rlang::eval_bare(expr, env = env)
   
   # Grade returned by check_*(), when using calling handlers
   grade_captured <- 
