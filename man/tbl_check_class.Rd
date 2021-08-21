@@ -24,8 +24,8 @@ tbl_grade_class(
 
 \item{expected}{An object containing the expected result.}
 
-\item{all_differences}{If \code{FALSE}, the default, inconsequential class
-differences will be skipped.
+\item{all_differences}{\verb{[logical(1)]}\cr If \code{FALSE}, the default,
+inconsequential class differences will be skipped.
 If \code{TRUE}, all class differences will be reported.
 See section "Inconsequential differences" for more information.}
 
@@ -52,6 +52,17 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
 }
 
+\section{Inconsequential differences}{
+
+Unless \code{all_differences} is set to \code{TRUE}, the following class differences
+will not generate a problem:
+\itemize{
+\item \link{integer} vs. \link{numeric}
+\item \link{POSIXct} vs. \link{POSIXlt}
+\item \link[glue:glue]{glue} vs. \link{character}
+}
+}
+
 \examples{
 .result <- 1:10
 .solution <- as.character(1:10)
@@ -68,14 +79,3 @@ tbl_grade_class()
 tbl_check_class()
 tbl_grade_class()
 }
-\section{Inconsequential differences}{
-
-Unless \code{all_differences} is set to \code{TRUE}, the following class differences
-will not generate a problem:
-\itemize{
-\item \link{integer} vs. \link{numeric}
-\item \link{POSIXct} vs. \link{POSIXlt}
-\item \link[glue:glue]{glue} vs. \link{character}
-}
-}
-

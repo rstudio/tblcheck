@@ -12,8 +12,8 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
-#' @param all_differences If `FALSE`, the default, inconsequential class
-#'   differences will be skipped.
+#' @param all_differences `[logical(1)]`\cr If `FALSE`, the default,
+#'   inconsequential class differences will be skipped.
 #'   If `TRUE`, all class differences will be reported.
 #'   See section "Inconsequential differences" for more information.
 #' @inheritParams tbl_check_table
@@ -62,10 +62,7 @@ tbl_check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    if (
-      !isTRUE(all_differences) &&
-      !has_meaningful_class_difference(obj_class, exp_class)
-    ) {
+    if (!all_differences && has_inconsequential_class_diff(obj_class, exp_class)) {
       return(invisible())
     }
     
@@ -123,24 +120,24 @@ tbl_message.table_class_problem <- function(problem, ...) {
   NextMethod()
 }
 
-has_meaningful_class_difference <- function(exp_class, obj_class) {
-  differences <- union(setdiff(exp_class, obj_class), setdiff(obj_class, exp_class))
+has_inconsequential_class_diff <- function(exp_class, obj_class) {
+  diff <- union(setdiff(exp_class, obj_class), setdiff(obj_class, exp_class))
   
-  insignificant_class_differences <- list(
+  inconsequential_diff_list <- list(
     c("integer", "numeric"),
     c("glue"),
     c("POSIXct", "POSIXlt")
   )
   
-  # Check that the differences between `exp_class` and `obj_class` is not in the
-  # list of insignificant class differences
-  !any(
-    purrr::map_lgl(
-      insignificant_class_differences,
-      unordered_identical,
-      differences
-    )
-  )
+  # Check if the differences between `exp_class` and `obj_class` is in the
+  # list of inconsequential class differences
+  for (inconsequential_diff in inconsequential_diff_list) {
+    if (unordered_identical(diff, inconsequential_diff)) {
+      return(TRUE)
+    }
+  }
+  
+  FALSE
 }
 
 hinted_class_message <- function(obj_class, exp_class) {
