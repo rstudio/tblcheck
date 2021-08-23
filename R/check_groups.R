@@ -76,25 +76,33 @@ tbl_grade_groups <- function(
 }
 
 tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
-  missing_msg <- if (!is.null(problem$missing)) {
-    missing_groups <- combine_words_with_more(
-      problem$missing, max_diffs
-    )
-    
-    "Your table should be grouped by {missing_groups}. "
+  problem$missing_msg <- problem$missing_msg %||% 
+    "Your result should be grouped by {missing}. "
+  
+  problem$unexpected_msg  <- problem$unexpected_msg %||% 
+    "Your result should not be grouped by {unexpected}. "
+  
+  if (!is.null(problem[["missing"]])) {
+    problem$missing <- combine_words_with_more(problem$missing, max_diffs)
   } else {
-    ""
+    problem$missing_msg <- ""
   }
   
-  unexpected_msg <- if (!is.null(problem$unexpected)) {
-    unexpected_groups <- combine_words_with_more(
-      problem$unexpected, max_diffs, and = " or "
-    )
-    
-    "Your table should not be grouped by {unexpected_groups}. "
+  if (!is.null(problem[["unexpected"]])) {
+    problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
   } else {
-    ""
+    problem$unexpected_msg <- ""
   }
   
-  return_fail(glue::glue(missing_msg, unexpected_msg), problem = problem)
+  glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
+}
+
+tbl_message.table_groups_problem <- function(problem, max_diffs = 3, ...) {
+  problem$missing_msg <- problem$missing_msg %||% 
+    "Your table should be grouped by {missing}. "
+  
+  problem$unexpected_msg <- problem$unexpected_msg %||%
+    "Your table should not be grouped by {unexpected}. "
+  
+  NextMethod()
 }
