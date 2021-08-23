@@ -116,7 +116,7 @@ tbl_message.column_levels_problem <- function(problem, max_diffs = 3, ...) {
       "Your `{column}` column should have the levels {missing}. "
     )
   
-  problem$unexpected_msg <- problem$missing_msg %||% 
+  problem$unexpected_msg <- problem$unexpected_msg %||% 
     ngettext(
       length(problem$unexpected),
       "Your `{column}` column should not have the level {unexpected}.",
@@ -144,11 +144,11 @@ tbl_message.n_levels_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.column_length_problem <- function(problem, ...) {
+tbl_message.column_n_levels_problem <- function(problem, ...) {
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
-      "Your `{column}` column should have {expected} lavel, ",
+      "Your `{column}` column should have {expected} level, ",
       "Your `{column}` column should have {expected} levels, "
     )
   
