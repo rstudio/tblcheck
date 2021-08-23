@@ -37,6 +37,7 @@
 tbl_check_levels <- function(
   object = .result,
   expected = .solution,
+  max_diffs = 3,
   envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -54,11 +55,25 @@ tbl_check_levels <- function(
       return(problem("n_levels", length(levels_exp), length(levels_obj)))
     }
     
-    problem(
-      "levels", 
-      missing = setdiff(levels_exp, levels_obj),
-      unexpected = setdiff(levels_obj, levels_exp)
-    )
+    missing_levels    <- setdiff(levels_exp, levels_obj)
+    unexpected_levels <- setdiff(levels_obj, levels_exp)
+    
+    if (length(missing_levels) || length(unexpected_levels)) {
+      return(
+        problem(
+          "levels", missing = missing_levels, unexpected = unexpected_levels
+        )
+      )
+    }
+    
+    n_levels <- min(length(levels_exp), max_diffs)
+    first_n_levels <- levels_exp[seq_len(n_levels)]
+    
+    if (!identical(levels_obj[seq_len(n_levels)], first_n_levels)) {
+      return(problem("level_order_diffs", first_n_levels))
+    }
+    
+    problem("level_order")
   }
 }
 
@@ -82,15 +97,15 @@ tbl_message.levels_problem <- function(problem, max_diffs = 3, ...) {
   problem$missing_msg <- problem$missing_msg %||% 
     ngettext(
       length(problem$missing),
-      "Your result should have the level {missing}. ",
-      "Your result should have the levels {missing}. "
+      "Your result should have a level named {missing}. ",
+      "Your result should have levels named {missing}. "
     )
   
   problem$unexpected_msg  <- problem$unexpected_msg %||% 
     ngettext(
       length(problem$unexpected),
-      "Your result should not have the level {unexpected}.",
-      "Your result should not have the levels {unexpected}."
+      "Your result should not have a level named {unexpected}.",
+      "Your result should not have levels named {unexpected}."
     )
   
   if (!is.null(problem[["missing"]])) {
@@ -112,15 +127,15 @@ tbl_message.column_levels_problem <- function(problem, max_diffs = 3, ...) {
   problem$missing_msg <- problem$missing_msg %||% 
     ngettext(
       length(problem$missing),
-      "Your `{column}` column should have the level {missing}. ",
-      "Your `{column}` column should have the levels {missing}. "
+      "Your `{column}` column should have a level named {missing}. ",
+      "Your `{column}` column should have levels named {missing}. "
     )
   
   problem$unexpected_msg <- problem$unexpected_msg %||% 
     ngettext(
       length(problem$unexpected),
-      "Your `{column}` column should not have the level {unexpected}.",
-      "Your `{column}` column should not have the levels {unexpected}."
+      "Your `{column}` column should not have a level named {unexpected}.",
+      "Your `{column}` column should not have levels named {unexpected}."
     )
   
   NextMethod()
@@ -153,4 +168,45 @@ tbl_message.column_n_levels_problem <- function(problem, ...) {
     )
   
   NextMethod()
+}
+
+tbl_message.level_order_diffs_problem <- function(problem, ...) {
+  problem$n_levels <- length(problem$expected)
+  problem$expected <- knitr::combine_words(md_code(problem$expected))
+  
+  problem$msg <- problem$msg %||%
+    gettext("Your result's levels were not in the expected order. ")
+  
+  problem$exp_msg <- problem$exp_msg %||%
+    ngettext(
+      problem$n_levels,
+      "The first level of your result should be {expected}.",
+      "The first {n_levels} levels of your result should be {expected}."
+    )
+  
+  glue::glue_data(problem, problem$msg, problem$exp_msg)
+}
+
+tbl_message.column_level_order_diffs_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    gettext("Your `{column}` column's levels were not in the expected order. ")
+  
+  problem$exp_msg <- problem$exp_msg %||%
+    ngettext(
+      length(problem$expected),
+      "The first level of your `{column}` column should be {expected}.",
+      "The first {n_levels} levels of your `{column}` column should be {expected}."
+    )
+  
+  NextMethod()
+}
+
+tbl_message.level_order_problem <- function(problem, ...) {
+  "Your result's levels were not in the expected order."
+}
+
+tbl_message.column_level_order_problem <- function(problem, ...) {
+  glue::glue_data(
+    problem, "Your `{column}` column's levels were not in the expected order."
+  )
 }
