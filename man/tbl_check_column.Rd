@@ -66,12 +66,16 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
+\item \code{column_missing}: The \code{name} column doesn't appear in the \code{object}
 \item \code{column_class}: Any mismatch in the classes of the \code{name} column
 \item \code{column_length}: The \code{name} column doesn't have the expected length
 \item \code{column_value_diffs}: The first \code{max_diffs} elements of the \code{name} column
 don't have the expected values
 \item \code{column_values}: The \code{name} column doesn't have the expected values
-\item \code{column_missing}: The \code{name} column doesn't appear in the \code{object}
+\item \code{column_n_levels}: The \code{name} column doesn't have the expected number of
+\link[=levels]{factor levels}
+\item \code{vector_levels}: The \code{name} column doesn't have the expected
+\link[=levels]{factor levels}
 }
 }
 

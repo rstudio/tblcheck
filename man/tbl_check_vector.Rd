@@ -48,6 +48,9 @@ print. Defaults to 3.}
 \code{expected} have the same names.}
 
 \item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same \link[=levels]{factor levels}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_vector()} or a
@@ -67,7 +70,11 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \item \code{vector_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
 contain the same values as \code{expected}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
-\item \code{vector_names}: \code{object} has different \code{names} than \code{expected}
+\item \code{vector_names}: \code{object} has different \link[=names]{names} than \code{expected}
+\item \code{vector_n_levels}: \code{object} and \code{expected} have a different number of
+\link[=levels]{factor levels}
+\item \code{vector_levels}: \code{object} has different \link[=levels]{factor levels}
+than \code{expected}
 }
 }
 

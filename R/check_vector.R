@@ -11,7 +11,11 @@
 #' 1. `vector_value_diffs`: The first `max_diffs` elements of `object` don't
 #'   contain the same values as `expected`
 #' 1. `vector_values`: `object` doesn't contain the same values as `expected`
-#' 1. `vector_names`: `object` has different `names` than `expected`
+#' 1. `vector_names`: `object` has different [names][names()] than `expected`
+#' 1. `vector_n_levels`: `object` and `expected` have a different number of 
+#'   [factor levels][levels()]
+#' 1. `vector_levels`: `object` has different [factor levels][levels()]
+#'   than `expected`
 #'
 #' @param object A vector to be compared to `expected`.
 #' @param expected A vector containing the expected result.
@@ -25,6 +29,8 @@
 #'   `expected` contain the same values.
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same names.
+#' @param check_levels `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same [factor levels][levels()].
 #' @inheritParams tbl_check_table
 #'
 #' @return If there are any issues, a [list] from `tbl_check_vector()` or a
@@ -115,6 +121,13 @@ tbl_check_vector <- function(
   if (check_names) {
     return_if_problem(
       tbl_check_names(object, expected),
+      prefix = "vector"
+    )
+  }
+  
+  if (check_levels) {
+    return_if_problem(
+      tbl_check_levels(object, expected),
       prefix = "vector"
     )
   }
