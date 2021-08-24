@@ -8,12 +8,10 @@
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
 #' 1. `vector_length`: `object` doesn't have the same length as `expected`
-#' 1. `vector_value_diffs`: The first `max_diffs` elements of `object` don't
+#' 1. `vector_n_levels`, `vector_levels`, `vector_level_order_diffs`,
+#'   `vector_level_order`: See [tbl_check_levels()]
+#' 1. `column_value_diffs`: The first `max_diffs` elements of `object` don't
 #'   contain the same values as `expected`
-#' 1. `vector_n_levels`: `object` and `expected` have a different number of 
-#'   [factor levels][levels()]
-#' 1. `vector_levels`: `object` has different [factor levels][levels()]
-#'   than `expected`
 #' 1. `vector_values`: `object` doesn't contain the same values as `expected`
 #' 1. `vector_names`: `object` has different [names][names()] than `expected`
 #'

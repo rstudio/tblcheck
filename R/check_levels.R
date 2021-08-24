@@ -11,6 +11,10 @@
 #' 1. `n_levels`: `object` and `expected` have a different number of levels.
 #' 1. `levels`: The object has levels that are not expected,
 #'   or is missing names that are expected.
+#' 1. `level_order_diffs`: The first `max_diffs` levels of `object` are not in 
+#'   the same order as `expected`
+#' 1. `level_order`: The levels of `object` are not in the same order
+#'   as `expected`
 #'
 #' @inheritParams tbl_check_class
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or

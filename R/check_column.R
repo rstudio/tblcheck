@@ -12,13 +12,11 @@
 #' 1. `column_missing`: The `name` column doesn't appear in the `object`
 #' 1. `column_class`: Any mismatch in the classes of the `name` column
 #' 1. `column_length`: The `name` column doesn't have the expected length
+#' 1. `column_n_levels`, `column_levels`, `column_level_order_diffs`,
+#'   `column_level_order`: See [tbl_check_levels()]
 #' 1. `column_value_diffs`: The first `max_diffs` elements of the `name` column
 #'   don't have the expected values
 #' 1. `column_values`: The `name` column doesn't have the expected values
-#' 1. `column_n_levels`: The `name` column doesn't have the expected number of
-#'   [factor levels][levels()]
-#' 1. `vector_levels`: The `name` column doesn't have the expected
-#'   [factor levels][levels()]
 #'
 #' @param name `[character(1)]`\cr The name of the column to check.
 #' @inheritParams tbl_check_table
