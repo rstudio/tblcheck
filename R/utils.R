@@ -24,9 +24,8 @@ assert_internally <- function(expr, ..., error = internal_error) {
 internal_error <- function(err) {
   message("An error occurred in the grading code: ", err$message)
   gradethis::graded(
-    message = paste(
-      "Uh-oh! We can't provide feedback at this time. Don't worry, it's not", 
-      "your fault! There's an issue behind-the-scenes with this exercise."
+    message = gettext(
+      "Uh-oh! We can't provide feedback at this time. Don't worry, it's not your fault! There's an issue behind-the-scenes with this exercise."
     ),
     correct = logical(0),
     type = "warning",
@@ -54,22 +53,5 @@ return_fail <- function(..., env = parent.frame()) {
   grade <- gradethis::fail(..., env = env)
   if (getOption("tblcheck.return_first_grade", TRUE)) {
     rlang::return_from(env, grade)
-  }
-}
-
-return_if_problem <- function(problem, ..., envir = parent.frame()) {
-  if (inherits(problem, "tblcheck_problem")) {
-    dots <- list(...)
-    
-    if (length(dots)) {
-      problem_prefix <- paste0(names(dots)[[length(dots)]], "_")
-      assert_internally(checkmate::assert_string(problem_prefix))
-      problem$type <- gsub("^(.*_)?", problem_prefix, problem$type)
-      
-      dots    <- dots[!names(dots) %in% names(problem)]
-      problem <- as.problem(c(problem, dots))
-    }
-    
-    rlang::return_from(envir, problem)
   }
 }

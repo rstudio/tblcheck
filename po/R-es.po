@@ -1,0 +1,259 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tblcheck 0.0.0.9000\n"
+"POT-Creation-Date: 2021-08-17 15:16\n"
+"PO-Revision-Date: 2021-08-17 13:51\n"
+"Last-Translator: Alex Rossell Hayes <alexander@rossellhayes.com>\n"
+"Language-Team: Alex Rossell Hayes <alexander@rossellhayes.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+msgid ""
+"Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
+msgstr ""
+"Su resultado debe ser {friendly_exp_class}, pero es {friendly_obj_class}."
+
+msgid ""
+"Your `{column_name}` column should be {friendly_exp_class}, but it is "
+"{friendly_obj_class}."
+msgstr ""
+"Su columna `{column_name}` debe ser {friendly_exp_class}, pero es "
+"{friendly_obj_class}."
+
+msgid ""
+"Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
+msgstr "Su tabla debe ser {friendly_exp_class}, pero es {friendly_obj_class}."
+
+msgid ""
+"Your table is a rowwise data frame, but I was expecting it to be grouped. "
+"Maybe you need to use `group_by()`?"
+msgstr ""
+
+msgid ""
+"Your table isn't a grouped data frame, but I was expecting it to be grouped. "
+"Maybe you need to use `group_by()`?"
+msgstr ""
+
+msgid ""
+"Your table is a grouped data frame, but I wasn't expecting it to be grouped. "
+"Maybe you need to use `ungroup()`?"
+msgstr ""
+
+msgid ""
+"Your table isn't a rowwise data frame, but I was expecting it to be rowwise. "
+"Maybe you need to use `rowwise()`?"
+msgstr ""
+
+msgid ""
+"Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. "
+"Maybe you need to use `ungroup()`?"
+msgstr ""
+
+msgid "a vector with class {class_str}"
+msgstr "un vector con clase {class_str}"
+
+msgid "a vector with classes {class_str}"
+msgstr "un vector con clases {class_str}"
+
+msgid "an object with class {class_str}"
+msgstr ""
+
+msgid "an object with classes {class_str}"
+msgstr ""
+
+msgid "a text string (class `character`)"
+msgstr "una cadena de texto (clase `character`)"
+
+msgid "a vector of text (class `character`)"
+msgstr "un vector de texto (clase `character`)"
+
+msgid "a number (class `numeric`)"
+msgstr "un número (clase `numeric`)"
+
+msgid "a vector of numbers (class `numeric`)"
+msgstr "un vector de números (clase `numeric`)"
+
+msgid "an integer (class `integer`)"
+msgstr "un número entero (clase `integer`)"
+
+msgid "a vector of integers (class `integer`)"
+msgstr "un vector de números enteros (clase `integer`)"
+
+msgid "a TRUE/FALSE value (class `logical`)"
+msgstr ""
+
+msgid "a vector of TRUE/FALSE values (class `logical`)"
+msgstr ""
+
+msgid "a complex number (class `complex`)"
+msgstr ""
+
+msgid "a vector of complex numbers (class `complex`)"
+msgstr ""
+
+msgid "a raw byte value (class `raw`)"
+msgstr ""
+
+msgid "a vector of raw byte values (class `raw`)"
+msgstr ""
+
+msgid "a factor (class `factor`)"
+msgstr ""
+
+msgid "a vector of factors (class `factor`)"
+msgstr ""
+
+msgid "a date-time (class `POSIXct`)"
+msgstr ""
+
+msgid "a vector of date-times (class `POSIXct`)"
+msgstr ""
+
+msgid "a date-time (class `POSIXlt`)"
+msgstr ""
+
+msgid "a vector of date-times (class `POSIXlt`)"
+msgstr ""
+
+msgid "a tibble (class `tbl_df`)"
+msgstr ""
+
+msgid "a data frame (class `data.frame`)"
+msgstr ""
+
+msgid "a list (class `list`)"
+msgstr ""
+
+msgid "a matrix (class `matrix`)"
+msgstr ""
+
+msgid "an array (class `array`)"
+msgstr ""
+
+msgid "`{name}` is not a column in `expected`."
+msgstr ""
+
+msgid "Your table should have a column named `{exp_column}`."
+msgstr ""
+
+msgid ""
+"Your result should be an array with dimensions {exp_dim_str}, but it has "
+"dimensions {obj_dim_str}."
+msgstr ""
+
+msgid "Your result contains unexpected values."
+msgstr ""
+
+msgid "Your `{column_name}` column contains unexpected values."
+msgstr ""
+
+msgid ""
+"tblcheck_test_grade() expected a tblcheck function as the final expression"
+msgstr ""
+
+msgid "An error occurred in the grading code:"
+msgstr ""
+
+msgid ""
+"Uh-oh! We can't provide feedback at this time. Don't worry, it's not your "
+"fault! There's an issue behind-the-scenes with this exercise."
+msgstr ""
+
+msgid "Your result should have {exp_n_dim} dimension, "
+msgid_plural "Your result should have {exp_n_dim} dimensions, "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "but it has {obj_n_dim} dimension."
+msgid_plural "but it has {obj_n_dim} dimensions."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your result should contain {exp_dim} value, "
+msgid_plural "Your result should contain {exp_dim} values, "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "but it has {obj_dim} value."
+msgid_plural "but it has {obj_dim} values."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your table should have {exp_cols} column, "
+msgid_plural "Your table should have {exp_cols} columns, "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "but it has {obj_cols} column."
+msgid_plural "but it has {obj_cols} columns."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your table should have {exp_rows} row, "
+msgid_plural "Your table should have {exp_rows} rows, "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "but it has {obj_rows} row."
+msgid_plural "but it has {obj_rows} rows."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your `{column_name}` column should contain {exp_dim} value, "
+msgid_plural "Your `{column_name}` column should contain {exp_dim} values, "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your table should have {exp_n_dim} dimension, "
+msgid_plural "Your table should have {exp_n_dim} dimensions, "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your result should have the name {missing_names}. "
+msgid_plural "Your result should have the names {missing_names}. "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your result should not have the name {unexpected_names}."
+msgid_plural "Your result should not have the names {unexpected_names}."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your `{column_name}` column should have the name {missing_names}. "
+msgid_plural ""
+"Your `{column_name}` column should have the names {missing_names}. "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid ""
+"Your `{column_name}` column should not have the name {unexpected_names}."
+msgid_plural ""
+"Your `{column_name}` column should not have the names {unexpected_names}."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your table should have a column named {missing_names}. "
+msgid_plural "Your table should have columns named {missing_names}. "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Your table should not have a column named {unexpected_names}."
+msgid_plural "Your table should not have columns named {unexpected_names}."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The first value of your result should be {exp_values}."
+msgid_plural ""
+"The first {n_values} values of your result should be {exp_values}."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The first value of your `{column_name}` column should be {exp_values}."
+msgid_plural ""
+"The first {n_values} values of your `{column_name}` column should be "
+"{exp_values}."
+msgstr[0] ""
+msgstr[1] ""

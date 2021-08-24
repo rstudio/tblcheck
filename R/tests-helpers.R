@@ -1,9 +1,15 @@
 expect_internal_problem <- function(grade, message) {
-  testthat::expect_message(grade)
-  testthat::expect_equal(grade$correct, logical())
-  testthat::expect_match(grade$message, "can't provide feedback")
-  testthat::expect_equal(grade$problem$type, "internal_feedback_error")
-  testthat::expect_match(as.character(grade$problem$error), message)
+  suppressMessages({
+    testthat::expect_message(grade)
+    testthat::expect_equal(grade$correct, logical())
+    testthat::expect_match(grade$message, "can't provide feedback")
+    testthat::expect_equal(grade$problem$type, "internal_feedback_error")
+    testthat::expect_match(as.character(grade$problem$error), message)
+  })
+}
+
+expect_warning <- function(...) {
+  suppressWarnings(testthat::expect_warning(...))
 }
 
 expect_result_message <- function(result, expected, ...) {
@@ -35,7 +41,7 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
   }
   
   if (!grepl("^tbl_(check|grade)", final_call)) {
-    stop("tblcheck_test_grade() expected a {tblcheck} function as the final expression")
+    stop("tblcheck_test_grade() expected a tblcheck function as the final expression")
   }
   
   # Grade returned by check_*(), without calling handlers

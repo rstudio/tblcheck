@@ -50,10 +50,10 @@ tbl_check_class <- function(
     return(
       problem(
         "class",
-        # Object lengths are stored so the correct pluralization
-        # can be applied in tbl_message_class()
         exp_class,
         obj_class,
+        # Object lengths are stored so the correct pluralization
+        # can be applied in tbl_message.class_problem()
         expected_length = length(expected),
         actual_length = length(object)
       )
@@ -71,7 +71,59 @@ tbl_grade_class <- function(
   )
 }
 
-tbl_message_class <- function(problem, ...) {
+tbl_message.class_problem <- function(problem, ...) {
+  exp_class <- problem$expected
+  obj_class <- problem$actual
+  
+  if (!has_meaningful_class_difference(exp_class, obj_class)) {
+    return()
+  }
+  
+  hinted_class_message <- hinted_class_message(obj_class, exp_class)
+  if (!is.null(hinted_class_message)) {
+    return_fail(hinted_class_message, problem = problem)
+  }
+  
+  exp_length <- problem$expected_length
+  obj_length <- problem$actual_length
+  
+  friendly_exp_class <- friendly_class(exp_class, exp_length)
+  friendly_obj_class <- friendly_class(obj_class, obj_length)
+  
+  message <- glue::glue(
+    gettext(
+      "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
+    )
+  )
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.column_class_problem <- function(problem, ...) {
+  exp_class <- problem$expected
+  obj_class <- problem$actual
+  
+  if (!has_meaningful_class_difference(exp_class, obj_class)) {
+    return()
+  }
+
+  exp_length <- problem$expected_length
+  obj_length <- problem$actual_length
+  
+  friendly_exp_class <- friendly_class(exp_class, exp_length)
+  friendly_obj_class <- friendly_class(obj_class, obj_length)
+  
+  column_name <- problem$column
+  message <- glue::glue(
+    gettext(
+      "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
+    )
+  )
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.table_class_problem <- function(problem, ...) {
   exp_class <- problem$expected
   obj_class <- problem$actual
   
@@ -86,21 +138,16 @@ tbl_message_class <- function(problem, ...) {
   
   column_name <- problem$column
   
-  exp_length = problem$expected_length
-  obj_length = problem$actual_length
+  friendly_exp_class <- friendly_class(exp_class, 1)
+  friendly_obj_class <- friendly_class(obj_class, 1)
   
-  friendly_exp_class <- friendly_class(exp_class, exp_length)
-  friendly_obj_class <- friendly_class(obj_class, obj_length)
+  message <- glue::glue(
+    gettext(
+      "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
+    )
+  )
   
-  message <- if (!is.null(column_name)) {
-    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  } else if (isTRUE(problem$table)) {
-    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  } else {
-    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  }
-  
-  return_fail(glue::glue(message), problem = problem)
+  return_fail(message, problem = problem)
 }
 
 has_meaningful_class_difference <- function(exp_class, obj_class) {
@@ -144,23 +191,33 @@ hinted_class_message_list <- function() {
     list(
       obj_class = "rowwise_df",
       exp_class = "grouped_df",
-      message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message   = gettext(
+        "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      )
     ),
     list(
       exp_class = "grouped_df",
-      message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message   = gettext(
+        "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      )
     ),
     list(
       obj_class = "grouped_df",
-      message   = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+      message   = gettext(
+        "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+      )
     ),
     list(
       exp_class = "rowwise_df",
-      message   = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+      message   = gettext(
+        "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+      )
     ),
     list(
       obj_class = "rowwise_df",
-      message   = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+      message   = gettext(
+        "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+      )
     )
   )
 }
@@ -182,13 +239,13 @@ friendly_class <- function(class, length) {
       length > 1,
       ngettext(
         length(class),
-        "a vector with class {class_str}",
-        "a vector with classes {class_str}"
+        gettext("a vector with class {class_str}"),
+        gettext("a vector with classes {class_str}")
       ),
       ngettext(
         length(class),
-        "an object with class {class_str}",
-        "an object with classes {class_str}"
+        gettext("an object with class {class_str}"),
+        gettext("an object with classes {class_str}")
       )
     )
   )
@@ -198,72 +255,72 @@ friendly_class_list <- function() {
   list(
     list(
       class    = "character",
-      single   = "a text string (class `character`)",
-      multiple = "a vector of text (class `character`)"
+      single   = gettext("a text string (class `character`)"),
+      multiple = gettext("a vector of text (class `character`)")
     ),
     list(
       class    = "numeric",
-      single   = "a number (class `numeric`)",
-      multiple = "a vector of numbers (class `numeric`)"
+      single   = gettext("a number (class `numeric`)"),
+      multiple = gettext("a vector of numbers (class `numeric`)")
     ),
     list(
       class    = "integer",
-      single   = "an integer (class `integer`)",
-      multiple = "a vector of integers (class `integer`)"
+      single   = gettext("an integer (class `integer`)"),
+      multiple = gettext("a vector of integers (class `integer`)")
     ),
     list(
       class    = "logical",
-      single   = "a TRUE/FALSE value (class `logical`)",
-      multiple = "a vector of TRUE/FALSE values (class `logical`)"
+      single   = gettext("a TRUE/FALSE value (class `logical`)"),
+      multiple = gettext("a vector of TRUE/FALSE values (class `logical`)")
     ),
     list(
       class    = "complex",
-      single   = "a complex number (class `complex`)",
-      multiple = "a vector of complex numbers (class `complex`)"
+      single   = gettext("a complex number (class `complex`)"),
+      multiple = gettext("a vector of complex numbers (class `complex`)")
     ),
     list(
       class    = "raw",
-      single   = "a raw byte value (class `raw`)",
-      multiple = "a vector of raw byte values (class `raw`)"
+      single   = gettext("a raw byte value (class `raw`)"),
+      multiple = gettext("a vector of raw byte values (class `raw`)")
     ),
     list(
       class    = "factor",
-      single   = "a factor (class `factor`)",
-      multiple = "a vector of factors (class `factor`)"
+      single   = gettext("a factor (class `factor`)"),
+      multiple = gettext("a vector of factors (class `factor`)")
     ),
     list(
       class    = c("POSIXct", "POSIXt"),
-      single   = "a date-time (class `POSIXct`)",
-      multiple = "a vector of date-times (class `POSIXct`)"
+      single   = gettext("a date-time (class `POSIXct`)"),
+      multiple = gettext("a vector of date-times (class `POSIXct`)")
     ),
     list(
       class    = c("POSIXlt", "POSIXt"),
-      single   = "a date-time (class `POSIXlt`)",
-      multiple = "a vector of date-times (class `POSIXlt`)"
+      single   = gettext("a date-time (class `POSIXlt`)"),
+      multiple = gettext("a vector of date-times (class `POSIXlt`)")
     ),
     list(
       class    = c("tbl_df", "tbl", "data.frame"),
-      single   = "a tibble (class `tbl_df`)"
+      single   = gettext("a tibble (class `tbl_df`)")
     ),
     list(
       class    = "data.frame",
-      single   = "a data frame (class `data.frame`)"
+      single   = gettext("a data frame (class `data.frame`)")
     ),
     list(
       class    = "list",
-      single   = "a list (class `list`)"
+      single   = gettext("a list (class `list`)")
     ),
     list(
       class    = "matrix",
-      single   = "a matrix (class `matrix`)"
+      single   = gettext("a matrix (class `matrix`)")
     ),
     list(
       class    = c("matrix", "array"),
-      single   = "a matrix (class `matrix`)"
+      single   = gettext("a matrix (class `matrix`)")
     ),
     list(
       class    = "array",
-      single   = "an array (class `array`)"
+      single   = gettext("an array (class `array`)")
     )
   )
 }

@@ -5,9 +5,8 @@ test_that("check missing names", {
   
   expect_equal(
     problem,
-    problem(
-      "names", missing = "b", unexpected = character(0), table = TRUE
-    )
+    problem("table_names", missing = "b", unexpected = character(0)),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = letters[1:3])
@@ -16,9 +15,8 @@ test_that("check missing names", {
   
   expect_equal(
     problem,
-    problem(
-      "names", missing = c("b", "c"), unexpected = character(0), table = TRUE
-    )
+    problem("table_names", missing = c("b", "c"), unexpected = character(0)),
+    ignore_attr = "class"
   )
 })
 
@@ -29,9 +27,8 @@ test_that("check unexpected names", {
   
   expect_equal(
     problem,
-    problem(
-      "names", missing = character(0), unexpected = "b", table = TRUE
-    )
+    problem("table_names", missing = character(0), unexpected = "b"),
+    ignore_attr = "class"
   )
   
   .result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
@@ -40,9 +37,8 @@ test_that("check unexpected names", {
   
   expect_equal(
     problem,
-    problem(
-      "names", missing = character(0), unexpected = c("b", "c"), table = TRUE
-    )
+    problem("table_names", missing = character(0), unexpected = c("b", "c")),
+    ignore_attr = "class"
   )
 })
 
@@ -53,9 +49,8 @@ test_that("check missing and unexpected names", {
   
   expect_equal(
     problem,
-    problem(
-      "names", missing = c("x", "y"), unexpected = c("a", "b"), table = TRUE
-    )
+    problem("table_names", missing = c("x", "y"), unexpected = c("a", "b")),
+    ignore_attr = "class"
   )
 })
 

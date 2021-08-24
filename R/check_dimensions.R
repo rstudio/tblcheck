@@ -69,12 +69,11 @@ tbl_grade_dimensions <- function(
   )
 }
 
-tbl_message_dimensions <- function(problem, ...) {
+tbl_message.dimensions_problem <- function(problem, ...) {
   exp_dim     <- problem$expected
   exp_n_dim   <- length(exp_dim)
   obj_dim     <- problem$actual
   obj_n_dim   <- length(obj_dim)
-  column_name <- problem$column
   
   message <- if (!identical(obj_n_dim, exp_n_dim)) {
     glue::glue(
@@ -90,33 +89,18 @@ tbl_message_dimensions <- function(problem, ...) {
       )
     )
   } else if (length(exp_dim) == 1) {
-    if (!is.null(column_name)) {
-      glue::glue(
-        ngettext(
-          exp_dim,
-          "Your `{column_name}` column should contain {exp_dim} value, ",
-          "Your `{column_name}` column should contain {exp_dim} values, "
-        ),
-        ngettext(
-          obj_dim,
-          "but it has {obj_dim} value.",
-          "but it has {obj_dim} values."
-        )
+    glue::glue(
+      ngettext(
+        exp_dim,
+        "Your result should contain {exp_dim} value, ",
+        "Your result should contain {exp_dim} values, "
+      ),
+      ngettext(
+        obj_dim,
+        "but it has {obj_dim} value.",
+        "but it has {obj_dim} values."
       )
-    } else {
-      glue::glue(
-        ngettext(
-          exp_dim,
-          "Your result should contain {exp_dim} value, ",
-          "Your result should contain {exp_dim} values, "
-        ),
-        ngettext(
-          obj_dim,
-          "but it has {obj_dim} value.",
-          "but it has {obj_dim} values."
-        )
-      )
-    }
+    )
   } else if (length(exp_dim) == 2) {
     obj_rows <- obj_dim[[1]]
     exp_rows <- exp_dim[[1]]
@@ -155,8 +139,114 @@ tbl_message_dimensions <- function(problem, ...) {
     exp_dim_str <- paste(exp_dim, collapse = " x ")
     
     glue::glue(
-      "Your table should be an arry with dimensions {exp_dim_str}, ",
-      "but it has dimensions {obj_dim_str}."
+      gettext(
+        "Your result should be an array with dimensions {exp_dim_str}, but it has dimensions {obj_dim_str}."
+      )
+    )
+  }
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.vector_dimensions_problem <- function(problem, ...) {
+  exp_dim     <- problem$expected
+  obj_dim     <- problem$actual
+  
+  message <- glue::glue(
+    ngettext(
+      exp_dim,
+      "Your result should contain {exp_dim} value, ",
+      "Your result should contain {exp_dim} values, "
+    ),
+    ngettext(
+      obj_dim,
+      "but it has {obj_dim} value.",
+      "but it has {obj_dim} values."
+    )
+  )
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.column_dimensions_problem <- function(problem, ...) {
+  exp_dim     <- problem$expected
+  obj_dim     <- problem$actual
+  column_name <- problem$column
+  
+  message <- glue::glue(
+    ngettext(
+      exp_dim,
+      "Your `{column_name}` column should contain {exp_dim} value, ",
+      "Your `{column_name}` column should contain {exp_dim} values, "
+    ),
+    ngettext(
+      obj_dim,
+      "but it has {obj_dim} value.",
+      "but it has {obj_dim} values."
+    )
+  )
+  
+  return_fail(message, problem = problem)
+}
+
+tbl_message.table_dimensions_problem <- function(problem, ...) {
+  exp_dim     <- problem$expected
+  exp_n_dim   <- length(exp_dim)
+  obj_dim     <- problem$actual
+  obj_n_dim   <- length(obj_dim)
+  
+  message <- if (!identical(obj_n_dim, exp_n_dim)) {
+    glue::glue(
+      ngettext(
+        exp_n_dim,
+        "Your table should have {exp_n_dim} dimension, ",
+        "Your table should have {exp_n_dim} dimensions, "
+      ),
+      ngettext(
+        obj_n_dim,
+        "but it has {obj_n_dim} dimension.",
+        "but it has {obj_n_dim} dimensions."
+      )
+    )
+  } else if (length(exp_dim) == 2) {
+    obj_rows <- obj_dim[[1]]
+    exp_rows <- exp_dim[[1]]
+    obj_cols <- obj_dim[[2]]
+    exp_cols <- exp_dim[[2]]
+    
+    if (!identical(obj_cols, exp_cols)) {
+      glue::glue(
+        ngettext(
+          exp_cols,
+          "Your table should have {exp_cols} column, ",
+          "Your table should have {exp_cols} columns, "
+        ),
+        ngettext(
+          obj_cols,
+          "but it has {obj_cols} column.",
+          "but it has {obj_cols} columns."
+        )
+      )
+    } else if (!identical(obj_rows, exp_rows)) {
+      glue::glue(
+        ngettext(
+          exp_rows,
+          "Your table should have {exp_rows} row, ",
+          "Your table should have {exp_rows} rows, "
+        ),
+        ngettext(
+          obj_rows,
+          "but it has {obj_rows} row.",
+          "but it has {obj_rows} rows."
+        )
+      )
+    } 
+  } else {
+    obj_dim_str <- paste(obj_dim, collapse = " x ")
+    exp_dim_str <- paste(exp_dim, collapse = " x ")
+    
+    glue::glue(
+      "Your table should be an arry with dimensions {exp_dim_str}, but it has dimensions {obj_dim_str}."
     )
   }
   
