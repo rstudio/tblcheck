@@ -12,10 +12,6 @@ expect_warning <- function(...) {
   suppressWarnings(testthat::expect_warning(...))
 }
 
-expect_result_message <- function(result, expected, ...) {
-  testthat::expect_match(as.character(result$feedback$message), expected, ...)
-}
-
 expect_grade <- function(grade, message, correct = FALSE, problem = NULL, ...) {
   testthat::expect_s3_class(grade, "gradethis_graded")
   testthat::expect_equal(grade$correct, correct)
