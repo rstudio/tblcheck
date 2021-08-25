@@ -2,12 +2,13 @@ test_that("tbl_grade_vector() checks classes", {
   grade <- tblcheck_test_grade({
     .result   <- letters
     .solution <- 1:3
-    problem   <- tbl_check_vector()
     tbl_grade_vector()
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem(
       "vector_class",
       "integer",
@@ -17,33 +18,21 @@ test_that("tbl_grade_vector() checks classes", {
     ),
     ignore_attr = "class"
   )
-  
-  expect_grade(
-    grade,
-    "Your result should be a vector of integers (class `integer`), but it is a vector of text (class `character`).",
-    problem = problem,
-    fixed = TRUE
-  )
 })
 
 test_that("tbl_grade_vector() checks the first three values", {
   grade <- tblcheck_test_grade({
     .result   <- rev(letters)
     .solution <- letters
-    problem   <- tbl_check_vector()
     tbl_grade_vector()
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem("vector_value_diffs", letters[1:3]),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    "The first 3 values of your result should be `a`, `b`, and `c",
-    problem = problem
   )
 })
 
@@ -52,12 +41,13 @@ test_that("tbl_grade_vector() checks multiple classes", {
     .result   <- 1:10
     .solution <- 1:10
     class(.solution) <- c("test", "class", "integer")
-    problem <- tbl_check_vector()
     tbl_grade_vector()
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem(
       type = "vector_class", 
       expected = c("test", "class", "integer"),
@@ -67,33 +57,21 @@ test_that("tbl_grade_vector() checks multiple classes", {
     ),
     ignore_attr = "class"
   )
-  
-  expect_grade(
-    grade,
-    "Your result should be a vector with classes `test`, `class`, and `integer`, but it is a vector of integers (class `integer`).",
-    problem = problem,
-    fixed = TRUE
-  )
 })
 
 test_that("tbl_grade_vector() checks for value differences beyond the first 3", {
   grade <- tblcheck_test_grade({
     .result   <- c(rep(1, 3), 5:10)
     .solution <- c(rep(1, 3), 10:15)
-    problem   <- tbl_check_vector()
     tbl_grade_vector()
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem("vector_values"),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    "Your result contains unexpected values.",
-    problem = problem
   )
 })
 
@@ -101,20 +79,15 @@ test_that("max_diffs modifies the number of values to print", {
   grade <- tblcheck_test_grade({
     .result   <- letters
     .solution <- rev(letters)
-    problem   <- tbl_check_vector(max_diffs = 5)
     tbl_grade_vector(max_diffs = 5)
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem, 
+    grade$problem,
     problem("vector_value_diffs", letters[26:22]),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    "The first 5 values of your result should be `z`, `y`, `x`, `w`, and `v`",
-    problem = problem
   )
 })
 
@@ -122,20 +95,15 @@ test_that("max_diffs doesn't overflow", {
   grade <- tblcheck_test_grade({
     .result   <- letters[1:2]
     .solution <- letters[2:1]
-    problem   <- tbl_check_vector(max_diffs = 3)
     tbl_grade_vector(max_diffs = 3)
   })
 
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem("vector_value_diffs", letters[2:1]),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    "`b` and `a`.",
-    problem = problem
   )
 })
 
@@ -143,20 +111,15 @@ test_that("checks that vectors have the same length", {
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[1:4]
-    problem   <- tbl_check_vector()
     tbl_grade_vector()
   })
 
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem("vector_length", 4, 3),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    "should contain 4 values",
-    problem = problem
   )
 })
 
@@ -164,23 +127,18 @@ test_that("checks that vectors have the same names", {
   grade <- tblcheck_test_grade({
     .result   <- c(x = 1, y = 2, z = 3)
     .solution <- c(a = 1, b = 2, c = 3)
-    problem   <- tbl_check_vector()
     tbl_grade_vector()
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem, 
+    grade$problem,
     problem(
       "vector_names",
       missing = letters[1:3], unexpected = letters[24:26]
     ),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade, 
-    message = "Your result should have the names `a`, `b`, and `c`. Your result should not have the names `x`, `y`, or `z`.",
-    problem = problem
   )
 })
 
@@ -189,12 +147,10 @@ test_that("tbl_grade_vector() with no problems returns invisible()", {
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      problem   <- expect_invisible(tbl_check_vector())
       tbl_grade_vector()
     })
   )
   
-  expect_null(problem)
   expect_null(grade)
 })
 
