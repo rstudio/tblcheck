@@ -158,7 +158,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_missing_1$problem,
-    problem("table_ncol", 1, 2),
+    problem("table_ncol", 2, 1),
     ignore_attr = "class"
   )
 })
