@@ -222,36 +222,6 @@ test_that("tbl_grade_table() returns grades with row problems", {
   )
 })
 
-test_that("tbl_grade_table() returns ncol feedback to learnr", {
-  grade <- tblcheck_test_grade({
-    .result   <- tibble::tibble(a = letters, b = letters, c = letters)
-    .solution <- tibble::tibble(a = letters, b = letters)
-    tbl_grade_table(check_names = FALSE)
-  })
-  
-  expect_snapshot(grade)
-  
-  expect_equal(
-    grade$problem,
-    problem("table_ncol", 2, 3),
-    ignore_attr = "class"
-  )
-  
-  grade <- tblcheck_test_grade({
-    .result   <- tibble::tibble(a = letters, b = letters, c = letters)
-    .solution <- tibble::tibble(a = letters)
-    tbl_grade_table(check_names = FALSE)
-  })
-  
-  expect_snapshot(grade)
-  
-  expect_equal(
-    grade$problem,
-    problem("table_ncol", 1, 3),
-    ignore_attr = "class"
-  )
-})
-
 test_that("tbl_grade_table() returns names feedback to learnr", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
