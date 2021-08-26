@@ -1,7 +1,7 @@
 # tbl_grade_table() class
 
     Code
-      grade
+      grade_tbl_class_df
     Output
       <gradethis_graded: [Incorrect]
         Your table should be a tibble (class `tbl_df`), but it is a data
@@ -11,7 +11,7 @@
 ---
 
     Code
-      grade
+      grade_tbl_class_grouped
     Output
       <gradethis_graded: [Incorrect]
         Your table isn't a grouped data frame, but I was expecting it to be
@@ -21,7 +21,7 @@
 ---
 
     Code
-      grade
+      grade_tbl_class_rowwise
     Output
       <gradethis_graded: [Incorrect]
         Your table is a rowwise data frame, but I wasn't expecting it to be
@@ -31,7 +31,7 @@
 ---
 
     Code
-      grade
+      grade_tbl_class_grouped_rowwise
     Output
       <gradethis_graded: [Incorrect]
         Your table is a rowwise data frame, but I was expecting it to be
@@ -41,7 +41,7 @@
 # tbl_grade_table() rows
 
     Code
-      grade
+      grade_tbl_rows_missing_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should have 25 rows, but it has 26 rows.
@@ -50,7 +50,7 @@
 ---
 
     Code
-      grade
+      grade_tbl_rows_extra_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should have 1 row, but it has 26 rows.
@@ -59,7 +59,7 @@
 # tbl_grade_table() ncol
 
     Code
-      grade
+      grade_tbl_cols_extra_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should have 2 columns, but it has 3 columns.
@@ -68,10 +68,19 @@
 ---
 
     Code
-      grade
+      grade_tbl_cols_extra_2
     Output
       <gradethis_graded: [Incorrect]
         Your table should have 1 column, but it has 3 columns.
+      >
+
+---
+
+    Code
+      grade_tbl_cols_missing_1
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table should have 2 columns, but it has 1 column.
       >
 
 # tbl_grade_table() names
@@ -96,7 +105,7 @@
 # tbl_grade_table() returns grades with row problems
 
     Code
-      grade
+      grade_rows_extra
     Output
       <gradethis_graded: [Incorrect]
         Your table should have 25 rows, but it has 26 rows.
@@ -105,34 +114,16 @@
 ---
 
     Code
-      grade
+      grade_rows_missing
     Output
       <gradethis_graded: [Incorrect]
         Your table should have 1 row, but it has 26 rows.
       >
 
-# tbl_grade_table() returns ncol feedback to learnr
-
-    Code
-      grade
-    Output
-      <gradethis_graded: [Incorrect]
-        Your table should have 2 columns, but it has 3 columns.
-      >
-
----
-
-    Code
-      grade
-    Output
-      <gradethis_graded: [Incorrect]
-        Your table should have 1 column, but it has 3 columns.
-      >
-
 # tbl_grade_table() returns names feedback to learnr
 
     Code
-      grade
+      grade_tbl_names_3
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `x`, `y`, `z`, and 1 more. Your
@@ -142,7 +133,7 @@
 ---
 
     Code
-      grade
+      grade_tbl_names_inf
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `x`, `y`, `z`, and `w`. Your
@@ -152,7 +143,7 @@
 ---
 
     Code
-      grade
+      grade_tbl_names_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `x` and 3 more. Your table

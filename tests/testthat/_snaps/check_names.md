@@ -1,7 +1,7 @@
 # grade missing names
 
     Code
-      grade
+      grade_missing_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should have a column named `b`.
@@ -10,7 +10,7 @@
 ---
 
     Code
-      grade
+      grade_missing_2
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `b` and `c`.
@@ -19,7 +19,7 @@
 # grade unexpected names
 
     Code
-      grade
+      grade_unexpected_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should not have a column named `b`.
@@ -28,7 +28,7 @@
 ---
 
     Code
-      grade
+      grade_unexpected_2
     Output
       <gradethis_graded: [Incorrect]
         Your table should not have columns named `b` or `c`.
@@ -47,7 +47,7 @@
 # grade names max_diffs()
 
     Code
-      grade
+      grade_max_diffs_3
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `a`, `b`, `c`, and 1 more.
@@ -56,7 +56,7 @@
 ---
 
     Code
-      grade
+      grade_max_diffs_inf
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `a`, `b`, `c`, and `d`.
@@ -65,7 +65,7 @@
 ---
 
     Code
-      grade
+      grade_max_diffs_1
     Output
       <gradethis_graded: [Incorrect]
         Your table should have columns named `a` and 3 more.

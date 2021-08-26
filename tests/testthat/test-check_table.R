@@ -1,14 +1,14 @@
 test_that("tbl_grade_table() class", {
-  grade <- tblcheck_test_grade({
+  grade_tbl_class_df <- tblcheck_test_grade({
     .result   <- data.frame(a = 1:10, b = 1:10)
     .solution <- tibble::tibble(a = 1:10, b = 1:10)
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_class_df)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_class_df$problem,
     problem(
       "table_class",
       c("tbl_df", "tbl", "data.frame"),
@@ -19,16 +19,16 @@ test_that("tbl_grade_table() class", {
     ignore_attr = "class"
   )
   
-  grade <- tblcheck_test_grade({
+  grade_tbl_class_grouped <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = 1:10, b = a)
     .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_class_grouped)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_class_grouped$problem,
     problem(
       "table_class",
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
@@ -39,16 +39,16 @@ test_that("tbl_grade_table() class", {
     ignore_attr = "class"
   )
   
-  grade <- tblcheck_test_grade({
+  grade_tbl_class_rowwise <- tblcheck_test_grade({
     .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
     .solution <- tibble::tibble(a = 1:10, b = a)
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_class_rowwise)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_class_rowwise$problem,
     problem(
       "table_class",
       c("tbl_df", "tbl", "data.frame"),
@@ -59,16 +59,16 @@ test_that("tbl_grade_table() class", {
     ignore_attr = "class"
   )
   
-  grade <- tblcheck_test_grade({
+  grade_tbl_class_grouped_rowwise <- tblcheck_test_grade({
     .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
     .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_class_grouped_rowwise)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_class_grouped_rowwise$problem,
     problem(
       "table_class",
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
@@ -81,61 +81,75 @@ test_that("tbl_grade_table() class", {
 })
 
 test_that("tbl_grade_table() rows", {
-  grade <- tblcheck_test_grade({
+  grade_tbl_rows_missing_1 <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a)
     .solution <- tibble::tibble(a = letters[-1], b = a)
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_rows_missing_1)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_rows_missing_1$problem,
     problem("table_nrow", 25, 26),
     ignore_attr = "class"
   )
   
-  grade <- tblcheck_test_grade({
+  grade_tbl_rows_extra_1 <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a)
     .solution <- tibble::tibble(a = letters[1], b = a)
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_rows_extra_1)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_rows_extra_1$problem,
     problem("table_nrow", 1, 26),
     ignore_attr = "class"
   )
 })
 
 test_that("tbl_grade_table() ncol", {
-  grade <- tblcheck_test_grade({
+  grade_tbl_cols_extra_1 <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a)
     .solution <- tibble::tibble(a = letters, b = a)
     tbl_grade_table(check_names = FALSE)
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_cols_extra_1)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_cols_extra_1$problem,
     problem("table_ncol", 2, 3),
     ignore_attr = "class"
   )
   
-  grade <- tblcheck_test_grade({
+  grade_tbl_cols_extra_2 <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a)
     .solution <- tibble::tibble(a = letters)
     tbl_grade_table(check_names = FALSE)
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_cols_extra_2)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_cols_extra_2$problem,
     problem("table_ncol", 1, 3),
+    ignore_attr = "class"
+  )
+  
+  grade_tbl_cols_missing_1 <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = letters)
+    .solution <- tibble::tibble(a = letters, b = a)
+    tbl_grade_table(check_names = FALSE)
+  })
+  
+  expect_snapshot(grade_tbl_cols_missing_1)
+  
+  expect_equal(
+    grade_tbl_cols_missing_1$problem,
+    problem("table_ncol", 1, 2),
     ignore_attr = "class"
   )
 })
@@ -192,47 +206,47 @@ test_that("tbl_grade_table() with no problems returns invisible()", {
 })
 
 test_that("tbl_grade_table() returns grades with row problems", {
-  grade <- tblcheck_test_grade({
+  grade_rows_extra <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters)
     .solution <- tibble::tibble(a = letters[1:25])
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_rows_extra)
   
   expect_equal(
-    grade$problem,
+    grade_rows_extra$problem,
     problem("table_nrow", 25, 26),
     ignore_attr = "class"
   )
   
-  grade <- tblcheck_test_grade({
+  grade_rows_missing <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters)
     .solution <- tibble::tibble(a = letters[1])
     problem   <- tbl_check_table()
     tbl_grade_table()
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_rows_missing)
   
   expect_equal(
-    grade$problem,
+    grade_rows_missing$problem,
     problem("table_nrow", 1, 26),
     ignore_attr = "class"
   )
 })
 
 test_that("tbl_grade_table() returns names feedback to learnr", {
-  grade <- tblcheck_test_grade({
+  grade_tbl_names_3 <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
-    tbl_grade_table()
+    tbl_grade_table(max_diffs = 3)
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_names_3)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_names_3$problem,
     problem(
       "table_names",
       missing = c("x", "y", "z", "w"),
@@ -242,17 +256,17 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   )
   
   # ---- with all diffs ---
-  grade <- tblcheck_test_grade({
+  grade_tbl_names_inf <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
     problem   <- tbl_check_table(max_diffs = Inf)
     tbl_grade_table(max_diffs = Inf)
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_names_inf)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_names_inf$problem,
     problem(
       "table_names",
       missing = c("x", "y", "z", "w"),
@@ -262,16 +276,16 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   )
   
   # ---- with one diff ---
-  grade <- tblcheck_test_grade({
+  grade_tbl_names_1 <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
     tbl_grade_table(max_diffs = 1)
   })
   
-  expect_snapshot(grade)
+  expect_snapshot(grade_tbl_names_1)
   
   expect_equal(
-    grade$problem,
+    grade_tbl_names_1$problem,
     problem(
       "table_names",
       missing = c("x", "y", "z", "w"),

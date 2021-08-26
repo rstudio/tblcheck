@@ -1,7 +1,7 @@
 # tbl_grade_class()
 
     Code
-      grade
+      grade_num_chr_1
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a number (class `numeric`), but it is a text
@@ -11,7 +11,7 @@
 ---
 
     Code
-      grade
+      grade_num_chr_2
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a vector of numbers (class `numeric`), but it
@@ -21,7 +21,7 @@
 ---
 
     Code
-      grade
+      grade_posixct_1
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a date-time (class `POSIXct`), but it is a text
@@ -31,7 +31,7 @@
 ---
 
     Code
-      grade
+      grade_posixct_2
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a vector of date-times (class `POSIXlt`), but
@@ -41,7 +41,7 @@
 # tbl_grade_class() ignores inconsequential mismatches
 
     Code
-      grade
+      grade_int_dbl_all
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a number (class `numeric`), but it is an
@@ -51,7 +51,7 @@
 ---
 
     Code
-      grade
+      grade_glue_chr_all
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a text string (class `character`), but it is an
@@ -61,7 +61,7 @@
 ---
 
     Code
-      grade
+      grade_posix_ct_lt_all
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a vector of date-times (class `POSIXlt`), but
@@ -71,7 +71,7 @@
 # tbl_grade_class() with multiple classes
 
     Code
-      grade
+      grade_class_solution
     Output
       <gradethis_graded: [Incorrect]
         Your result should be an object with classes `test`, `class`, and
@@ -81,7 +81,7 @@
 ---
 
     Code
-      grade
+      grade_class_result
     Output
       <gradethis_graded: [Incorrect]
         Your result should be an integer (class `integer`), but it is an
