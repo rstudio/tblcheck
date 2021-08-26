@@ -1,9 +1,10 @@
 test_that("tbl_grade_class()", {
-  grade_num_chr_1 <- tblcheck_test_grade({
-    .result   <- "1"
-    .solution <- 1
-    tbl_grade_class()
-  })
+  grade_num_chr_1 <-
+    tblcheck_test_grade({
+      .result   <- "1"
+      .solution <- 1
+      tbl_grade_class()
+    })
   
   expect_snapshot(grade_num_chr_1)
   
@@ -18,11 +19,12 @@ test_that("tbl_grade_class()", {
     )
   )
   
-  grade_num_chr_2 <- tblcheck_test_grade({
-    .result   <- c("1", "2")
-    .solution <- c(1, 2)
-    tbl_grade_class()
-  })
+  grade_num_chr_2 <-
+    tblcheck_test_grade({
+      .result   <- c("1", "2")
+      .solution <- c(1, 2)
+      tbl_grade_class()
+    })
   
   expect_snapshot(grade_num_chr_2)
   
@@ -37,11 +39,12 @@ test_that("tbl_grade_class()", {
     )
   )
   
-  grade_posixct_1 <- tblcheck_test_grade({
-    .result   <- "2021-07-29 10:59:59"
-    .solution <- as.POSIXct("2021-07-29 10:59:59")
-    tbl_grade_class()
-  })
+  grade_posixct_1 <-
+    tblcheck_test_grade({
+      .result   <- "2021-07-29 10:59:59"
+      .solution <- as.POSIXct("2021-07-29 10:59:59")
+      tbl_grade_class()
+    })
   
   expect_snapshot(grade_posixct_1)
   
@@ -56,11 +59,12 @@ test_that("tbl_grade_class()", {
     )
   )
   
-  grade_posixct_2 <- tblcheck_test_grade({
-    .result   <- c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
-    .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-    tbl_grade_class()
-  })
+  grade_posixct_2 <-
+    tblcheck_test_grade({
+      .result   <- c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
+      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      tbl_grade_class()
+    })
   
   expect_snapshot(grade_posixct_2)
   
@@ -77,19 +81,21 @@ test_that("tbl_grade_class()", {
 })
 
 test_that("tbl_grade_class() ignores inconsequential mismatches", {
-  grade_int_dbl <- tblcheck_test_grade({
-    .result   <- 1L
-    .solution <- 1
-    tbl_grade_class()
-  })
+  grade_int_dbl <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class()
+    })
   
   expect_null(grade_int_dbl)
   
-  grade_int_dbl_all <- tblcheck_test_grade({
-    .result   <- 1L
-    .solution <- 1
-    tbl_grade_class(all_differences = TRUE)
-  })
+  grade_int_dbl_all <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class(all_differences = TRUE)
+    })
   
   expect_snapshot(grade_int_dbl_all)
   
@@ -104,19 +110,21 @@ test_that("tbl_grade_class() ignores inconsequential mismatches", {
     )
   )
   
-  grade_glue_chr <- tblcheck_test_grade({
-    .result   <- glue::glue("x")
-    .solution <- "x"
-    tbl_grade_class()
-  })
+  grade_glue_chr <-
+    tblcheck_test_grade({
+      .result   <- glue::glue("x")
+      .solution <- "x"
+      tbl_grade_class()
+    })
   
   expect_null(grade_glue_chr)
   
-  grade_glue_chr_all <- tblcheck_test_grade({
-    .result   <- glue::glue("x")
-    .solution <- "x"
-    tbl_grade_class(all_differences = TRUE)
-  })
+  grade_glue_chr_all <-
+    tblcheck_test_grade({
+      .result   <- glue::glue("x")
+      .solution <- "x"
+      tbl_grade_class(all_differences = TRUE)
+    })
   
   expect_snapshot(grade_glue_chr_all)
   
@@ -131,19 +139,21 @@ test_that("tbl_grade_class() ignores inconsequential mismatches", {
     )
   )
   
-  grade_posix_ct_lt <- tblcheck_test_grade({
-    .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-    .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-    tbl_grade_class()
-  })
+  grade_posix_ct_lt <-
+    tblcheck_test_grade({
+      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      tbl_grade_class()
+    })
   
   expect_null(grade_posix_ct_lt)
   
-  grade_posix_ct_lt_all <- tblcheck_test_grade({
-    .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-    .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-    tbl_grade_class(all_differences = TRUE)
-  })
+  grade_posix_ct_lt_all <-
+    tblcheck_test_grade({
+      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      tbl_grade_class(all_differences = TRUE)
+    })
   
   expect_snapshot(grade_posix_ct_lt_all)
   
@@ -160,12 +170,13 @@ test_that("tbl_grade_class() ignores inconsequential mismatches", {
 })
 
 test_that("tbl_grade_class() with multiple classes", {
-  grade_class_solution <- tblcheck_test_grade({
-    .result   <- 1L
-    .solution <- 1L
-    class(.solution) <- c("test", "class", "integer")
-    tbl_grade_class()
-  })
+  grade_class_solution <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1L
+      class(.solution) <- c("test", "class", "integer")
+      tbl_grade_class()
+    })
   
   expect_snapshot(grade_class_solution)
   
@@ -180,12 +191,13 @@ test_that("tbl_grade_class() with multiple classes", {
     )
   )
   
-  grade_class_result <- tblcheck_test_grade({
-    .result <- 1L
-    class(.result) <- c("test", "class", "integer")
-    .solution <- 1L
-    tbl_grade_class()
-  })
+  grade_class_result <-
+    tblcheck_test_grade({
+      .result <- 1L
+      class(.result) <- c("test", "class", "integer")
+      .solution <- 1L
+      tbl_grade_class()
+    })
   
   expect_snapshot(grade_class_result)
   

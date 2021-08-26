@@ -1,5 +1,6 @@
 test_that("grade missing names", {
-  grade_missing_1 <- tblcheck_test_grade({
+  grade_missing_1 <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters[1:3])
     .solution <- tibble::tibble(a = letters[1:3], b = a)
     tbl_grade_names()
@@ -13,7 +14,8 @@ test_that("grade missing names", {
     ignore_attr = "class"
   )
   
-  grade_missing_2 <- tblcheck_test_grade({
+  grade_missing_2 <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters[1:3])
     .solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
     tbl_grade_names()
@@ -29,7 +31,8 @@ test_that("grade missing names", {
 })
 
 test_that("grade unexpected names", {
-  grade_unexpected_1 <- tblcheck_test_grade({
+  grade_unexpected_1 <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters[1:3], b = a)
     .solution <- tibble::tibble(a = letters[1:3])
     tbl_grade_names()
@@ -43,7 +46,8 @@ test_that("grade unexpected names", {
     ignore_attr = "class"
   )
   
-  grade_unexpected_2 <- tblcheck_test_grade({
+  grade_unexpected_2 <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
     .solution <- tibble::tibble(a = letters[1:3])
     tbl_grade_names()
@@ -75,7 +79,8 @@ test_that("grade missing and unexpected names", {
 })
 
 test_that("grade names max_diffs()", {
-  grade_max_diffs_3 <- tblcheck_test_grade({
+  grade_max_diffs_3 <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble()
     .solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     tbl_grade_names(max_diffs = 3)
@@ -83,7 +88,8 @@ test_that("grade names max_diffs()", {
   
   expect_snapshot(grade_max_diffs_3)
   
-  grade_max_diffs_inf <- tblcheck_test_grade({
+  grade_max_diffs_inf <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble()
     .solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     tbl_grade_names(max_diffs = Inf)
@@ -91,7 +97,8 @@ test_that("grade names max_diffs()", {
   
   expect_snapshot(grade_max_diffs_inf)
   
-  grade_max_diffs_1 <- tblcheck_test_grade({
+  grade_max_diffs_1 <-
+    tblcheck_test_grade({
     .result   <- tibble::tibble()
     .solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
     tbl_grade_names(max_diffs = 1)
