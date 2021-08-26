@@ -12,7 +12,19 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
+#' @param all_differences `[logical(1)]`\cr If `FALSE`, the default,
+#'   inconsequential class differences will be skipped.
+#'   If `TRUE`, all class differences will be reported.
+#'   See section "Inconsequential differences" for more information.
 #' @inheritParams tbl_check_table
+#' 
+#' @section Inconsequential differences:
+#' Unless `all_differences` is set to `TRUE`, the following class differences
+#' will not generate a problem:
+#' 
+#' - [integer] vs. [numeric]
+#' - [POSIXct] vs. [POSIXlt]
+#' - [glue][glue::glue] vs. [character]
 #'
 #' @return If there are any issues, a [list] from `tbl_check_class()` or a
 #'   [gradethis::fail()] message from `tbl_grade_class()`.
@@ -34,7 +46,10 @@
 #' tbl_check_class()
 #' tbl_grade_class()
 tbl_check_class <- function(
-  object = .result, expected = .solution, envir = parent.frame()
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
     object <- get(".result", envir)
@@ -47,16 +62,18 @@ tbl_check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    return(
-      problem(
-        "class",
-        # Object lengths are stored so the correct pluralization
-        # can be applied in tbl_message_class()
-        exp_class,
-        obj_class,
-        expected_length = length(expected),
-        actual_length = length(object)
-      )
+    if (!all_differences && has_inconsequential_class_diff(obj_class, exp_class)) {
+      return(invisible())
+    }
+    
+    problem(
+      "class",
+      exp_class,
+      obj_class,
+      # Object lengths are stored so the correct pluralization
+      # can be applied in tbl_message.class_problem()
+      expected_length = length(expected),
+      actual_length = length(object)
     )
   }
 }
@@ -64,63 +81,63 @@ tbl_check_class <- function(
 #' @rdname tbl_check_class
 #' @export
 tbl_grade_class <- function(
-  object = .result, expected = .solution, envir = parent.frame()
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  envir = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(tbl_check_class(object, expected, envir))
+    tbl_grade(tbl_check_class(object, expected, all_differences, envir))
   )
 }
 
-tbl_message_class <- function(problem, ...) {
-  exp_class <- problem$expected
-  obj_class <- problem$actual
+tbl_message.class_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    "Your result should be {expected}, but it is {actual}."
   
-  if (!has_meaningful_class_difference(exp_class, obj_class)) {
-    return()
-  }
-  
-  hinted_class_message <- hinted_class_message(obj_class, exp_class)
+  hinted_class_message <- hinted_class_message(problem$actual, problem$expected)
   if (!is.null(hinted_class_message)) {
-    return_fail(hinted_class_message, problem = problem)
+    return(hinted_class_message)
   }
   
-  column_name <- problem$column
+  problem$expected <- friendly_class(problem$expected, problem$expected_length)
+  problem$actual   <- friendly_class(problem$actual,   problem$actual_length)
   
-  exp_length = problem$expected_length
-  obj_length = problem$actual_length
-  
-  friendly_exp_class <- friendly_class(exp_class, exp_length)
-  friendly_obj_class <- friendly_class(obj_class, obj_length)
-  
-  message <- if (!is.null(column_name)) {
-    "Your `{column_name}` column should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  } else if (isTRUE(problem$table)) {
-    "Your table should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  } else {
-    "Your result should be {friendly_exp_class}, but it is {friendly_obj_class}."
-  }
-  
-  return_fail(glue::glue(message), problem = problem)
+  glue::glue_data(problem, problem$msg)
 }
 
-has_meaningful_class_difference <- function(exp_class, obj_class) {
-  differences <- union(setdiff(exp_class, obj_class), setdiff(obj_class, exp_class))
+tbl_message.column_class_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    "Your `{column}` column should be {expected}, but it is {actual}."
   
-  insignificant_class_differences <- list(
+  NextMethod()
+}
+
+tbl_message.table_class_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    "Your table should be {expected}, but it is {actual}."
+  
+  NextMethod()
+}
+
+has_inconsequential_class_diff <- function(exp_class, obj_class) {
+  diff <- union(setdiff(exp_class, obj_class), setdiff(obj_class, exp_class))
+  
+  inconsequential_diff_list <- list(
     c("integer", "numeric"),
     c("glue"),
     c("POSIXct", "POSIXlt")
   )
   
-  # Check that the differences between `exp_class` and `obj_class` is not in the
-  # list of insignificant class differences
-  !any(
-    purrr::map_lgl(
-      insignificant_class_differences,
-      unordered_identical,
-      differences
-    )
-  )
+  # Check if the differences between `exp_class` and `obj_class` is in the
+  # list of inconsequential class differences
+  for (inconsequential_diff in inconsequential_diff_list) {
+    if (unordered_identical(diff, inconsequential_diff)) {
+      return(TRUE)
+    }
+  }
+  
+  FALSE
 }
 
 hinted_class_message <- function(obj_class, exp_class) {

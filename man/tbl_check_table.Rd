@@ -82,10 +82,10 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 
 \enumerate{
 \item \code{table_class}: The table does not have the expected classes
-\item \code{table_dimensions}: The table doesn't have the expected number of rows
-and columns
 \item \code{table_names}: The table has names that are not expected,
-or is missing names that are expected.
+or is missing names that are expected
+\item \code{table_ncol}: The table doesn't have the expected number of columns
+\item \code{table_nrow}: The table doesn't have the expected number of rows
 }
 
 Additional problems may be produced by \code{\link[=tbl_check_column]{tbl_check_column()}}

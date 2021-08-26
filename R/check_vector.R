@@ -7,9 +7,11 @@
 #' @section Problems:
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
-#' 2. `vector_dimensions`: `object` doesn't have the same length as `expected`
-#' 3. `vector_values`: `object` doesn't contain the same values as `expected`
-#' 4. `vector_names`: `object` has different `names` than `expected`
+#' 1. `vector_length`: `object` doesn't have the same length as `expected`
+#' 1. `vector_value_diffs`: The first `max_diffs` elements of `object` don't
+#'   contain the same values as `expected`
+#' 1. `vector_values`: `object` doesn't contain the same values as `expected`
+#' 1. `vector_names`: `object` has different `names` than `expected`
 #'
 #' @param object A vector to be compared to `expected`.
 #' @param expected A vector containing the expected result.
@@ -83,14 +85,14 @@ tbl_check_vector <- function(
   if (check_class) {
     return_if_problem(
       tbl_check_class(object, expected),
-      vector = TRUE
+      prefix = "vector"
     )
   }
   
   if (check_length) {
     return_if_problem(
       tbl_check_dimensions(object, expected),
-      vector = TRUE
+      prefix = "vector"
     )
   }
   
@@ -102,18 +104,18 @@ tbl_check_vector <- function(
     first_n_values <- exp_values[seq_len(n_values)]
     
     if (!identical(obj_values[seq_len(n_values)], first_n_values)) {
-      return_if_problem(problem("values", first_n_values), vector = TRUE)
+      return_if_problem(problem("value_diffs", first_n_values), prefix = "vector")
     }
     
     if (!identical(obj_values, exp_values)) {
-      return_if_problem(problem("values"), vector = TRUE)
+      return_if_problem(problem("values"), prefix = "vector")
     }
   }
   
   if (check_names) {
     return_if_problem(
       tbl_check_names(object, expected),
-      vector = TRUE
+      prefix = "vector"
     )
   }
 }
@@ -147,32 +149,35 @@ tbl_grade_vector <- function(
   )
 }
 
-tbl_message_values <- function(problem, ...) {
-  n_values <- length(problem$expected)
-  exp_values <- knitr::combine_words(md_code(problem$expected))
-  column_name <- problem$column
+tbl_message.value_diffs_problem <- function(problem, ...) {
+  problem$n_values <- length(problem$expected)
+  problem$expected <- knitr::combine_words(md_code(problem$expected))
   
-  message <- if (n_values != 0) {
-    if (!is.null(column_name)) {
-      ngettext(
-        n_values,
-        "The first value of your `{column_name}` column should be {exp_values}.",
-        "The first {n_values} values of your `{column_name}` column should be {exp_values}."
-      )
-    } else {
-      ngettext(
-        n_values,
-        "The first value of your result should be {exp_values}.",
-        "The first {n_values} values of your result should be {exp_values}."
-      )
-    }
-  } else {
-    if (!is.null(column_name)) {
-      "Your `{column_name}` column contains unexpected values."
-    } else {
-      "Your result contains unexpected values."
-    }
-  }
+  problem$msg <- problem$msg %||%
+    ngettext(
+      problem$n_values,
+      "The first value of your result should be {expected}.",
+      "The first {n_values} values of your result should be {expected}."
+    )
+    
+  glue::glue_data(problem, problem$msg)
+}
+
+tbl_message.column_value_diffs_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    ngettext(
+      length(problem$expected),
+      "The first value of your `{column}` column should be {expected}.",
+      "The first {n_values} values of your `{column}` column should be {expected}."
+    )
   
-  return_fail(glue::glue(message), problem = problem)
+  NextMethod()
+}
+
+tbl_message.values_problem <- function(problem, ...) {
+  "Your result contains unexpected values."
+}
+
+tbl_message.column_values_problem <- function(problem, ...) {
+  glue::glue_data(problem, "Your `{column}` column contains unexpected values.")
 }

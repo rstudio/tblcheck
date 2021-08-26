@@ -63,7 +63,9 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 
 \enumerate{
 \item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
-\item \code{vector_dimensions}: \code{object} doesn't have the same length as \code{expected}
+\item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
+\item \code{vector_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
+contain the same values as \code{expected}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
 \item \code{vector_names}: \code{object} has different \code{names} than \code{expected}
 }

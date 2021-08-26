@@ -10,10 +10,10 @@
 #' @section Problems:
 #' 
 #' 1. `table_class`: The table does not have the expected classes
-#' 2. `table_dimensions`: The table doesn't have the expected number of rows
-#'   and columns
-#' 4. `table_names`: The table has names that are not expected,
-#'   or is missing names that are expected.
+#' 1. `table_names`: The table has names that are not expected,
+#'   or is missing names that are expected
+#' 1. `table_ncol`: The table doesn't have the expected number of columns
+#' 1. `table_nrow`: The table doesn't have the expected number of rows
 #' 
 #' Additional problems may be produced by [tbl_check_column()]
 #'
@@ -108,7 +108,7 @@ tbl_check_table <- function(
   if (check_class) {
     return_if_problem(
       tbl_check_class(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   
@@ -116,7 +116,7 @@ tbl_check_table <- function(
   if (check_names) {
     return_if_problem(
       tbl_check_names(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   
@@ -124,7 +124,7 @@ tbl_check_table <- function(
   if (check_dimensions) {
     return_if_problem(
       tbl_check_dimensions(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   

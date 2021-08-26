@@ -41,7 +41,16 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{dimensions}: \code{object} and \code{expected} have different dimensions
+\item \code{n_dimensions}: \code{object} and \code{expected} have a different number
+of dimensions
+\item \code{length}: \code{object} and \code{expected} are one-dimensional vectors of
+different lengths
+\item \code{ncol}: \code{object} and \code{expected} are two-dimensional objects with a
+different number of columns
+\item \code{nrow}: \code{object} and \code{expected} are two-dimensional objects with a
+different number of rows
+\item \code{dimensions}: \code{object} and \code{expected} are multi-dimensional arrays with
+different dimensions
 }
 }
 

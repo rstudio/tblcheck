@@ -56,7 +56,7 @@ tbl_check_names <- function(
     )
     
     if (is.data.frame(object) && is.data.frame(expected)) {
-      problem$table <- TRUE
+      return_if_problem(problem, prefix = "table")
     }
     
     return(problem)
@@ -79,67 +79,70 @@ tbl_grade_names <- function(
   )
 }
 
-tbl_message_names <- function(problem, max_diffs = 3, ...) {
-  column_name <- problem$column
+tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
+  problem$missing_msg <- problem$missing_msg %||% 
+    ngettext(
+      length(problem$missing),
+      "Your result should have the name {missing}. ",
+      "Your result should have the names {missing}. "
+    )
   
-  missing_names <- combine_words_with_more(
-    problem$missing, max_diffs
-  )
-  missing_msg <- if (!is.null(missing_names)) {
-    if (!is.null(column_name)) {
-      ngettext(
-        length(problem$missing),
-        "Your `{column_name}` column should have the name {missing_names}. ",
-        "Your `{column_name}` column should have the names {missing_names}. "
-      )
-    } else if (isTRUE(problem$table)) {
-      ngettext(
-        length(problem$missing),
-        "Your table should have a column named {missing_names}. ",
-        "Your table should have columns named {missing_names}. "
-      )
-    } else {
-      ngettext(
-        length(problem$missing),
-        "Your result should have the name {missing_names}. ",
-        "Your result should have the names {missing_names}. "
-      )
-    }
+  problem$unexpected_msg  <- problem$unexpected_msg %||% 
+    ngettext(
+      length(problem$unexpected),
+      "Your result should not have the name {unexpected}.",
+      "Your result should not have the names {unexpected}."
+    )
+  
+  if (!is.null(problem[["missing"]])) {
+    problem$missing <- combine_words_with_more(problem$missing, max_diffs)
   } else {
-    ""
+    problem$missing_msg <- ""
   }
   
-  unexpected_names <- combine_words_with_more(
-    problem$unexpected, max_diffs, and = " or "
-  )
-  unexpected_msg <- if (!is.null(unexpected_names)) {
-    if (!is.null(column_name)) {
-      ngettext(
-        length(problem$unexpected),
-        "Your `{column_name}` column should not have the name {unexpected_names}.",
-        "Your `{column_name}` column should not have the names {unexpected_names}."
-      )
-    } else if (isTRUE(problem$table)) {
-      ngettext(
-        length(problem$unexpected),
-        "Your table should not have a column named {unexpected_names}.",
-        "Your table should not have columns named {unexpected_names}."
-      )
-    } else {
-      ngettext(
-        length(problem$unexpected),
-        "Your result should not have the name {unexpected_names}.",
-        "Your result should not have the names {unexpected_names}."
-      )
-    }
+  if (!is.null(problem[["unexpected"]])) {
+    problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
   } else {
-    ""
+    problem$unexpected_msg <- ""
   }
   
-  return_fail(
-    glue::glue(missing_msg, unexpected_msg),
-    problem = problem
-  )
+  glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
+}
+
+tbl_message.column_names_problem <- function(problem, max_diffs = 3, ...) {
+  problem$missing_msg <- problem$missing_msg %||% 
+    ngettext(
+      length(problem$missing),
+      "Your `{column}` column should have the name {missing}. ",
+      "Your `{column}` column should have the names {missing}. "
+    )
+  
+  problem$unexpected_msg <- problem$missing_msg %||% 
+    ngettext(
+      length(problem$unexpected),
+      "Your `{column}` column should not have the name {unexpected}.",
+      "Your `{column}` column should not have the names {unexpected}."
+    )
+  
+  NextMethod()
+}
+
+tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
+  problem$missing_msg <- problem$missing_msg %||% 
+    ngettext(
+      length(problem$missing),
+      "Your table should have a column named {missing}. ",
+      "Your table should have columns named {missing}. "
+    )
+  
+  problem$unexpected_msg <- problem$unexpected_msg %||%
+    ngettext(
+      length(problem$unexpected),
+      "Your table should not have a column named {unexpected}.",
+      "Your table should not have columns named {unexpected}."
+    )
+  
+  NextMethod()
 }
 
 combine_words_with_more <- function(
