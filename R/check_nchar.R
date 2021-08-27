@@ -24,6 +24,15 @@
 #'   characters as `expected`
 #'   
 #' Additional problems may be produced by [tbl_check_class()]
+#' 
+#' If `column` is specified:
+#' 1. `column_inconsistent_nchar`: every element of the specified column of
+#'   `object` does not have the same number of characters
+#' 1. `nchar`: every element of the specified column of `object` does not have
+#'   the same number of characters as `expected`
+#'   
+#' Additional problems may be produced by [tbl_check_class()]
+#' and [tbl_check_names()]
 #'
 #' @inheritParams tbl_check_class
 #'
@@ -50,6 +59,7 @@
 tbl_check_nchar <- function(
   object = .result,
   expected = .solution,
+  column = NULL,
   envir = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -59,7 +69,25 @@ tbl_check_nchar <- function(
     expected <- get(".solution", envir)
   }
   
-  return_if_problem(tbl_check_class(object, expected, envir = envir))
+  prefix <- NULL
+  
+  if (!is.null(column)) {
+    if (!column %in% names(expected)) {
+      warning("`", column, "` is not a column in `expected`.")
+      return()
+    }
+    
+    return_if_problem(tbl_check_names(object, expected, envir = envir))
+    
+    object   <- object[[column]]
+    expected <- expected[[column]]
+    prefix   <- "column"
+  }
+  
+  return_if_problem(
+    tbl_check_class(object, expected, envir = envir),
+    column = column, prefix = prefix
+  )
   
   obj_nchar <- unique(nchar(object))
   exp_nchar <- unique(nchar(expected))
@@ -74,10 +102,16 @@ tbl_check_nchar <- function(
   }
   
   if (length(obj_nchar) > 1) {
-    return(problem("inconsistent_nchar", exp_nchar))
+    return_if_problem(
+      problem("inconsistent_nchar", exp_nchar),
+      column = column, prefix = prefix
+    )
   }
   
-  return(problem("nchar", exp_nchar, obj_nchar))
+  return_if_problem(
+    problem("nchar", exp_nchar, obj_nchar),
+    column = column, prefix = prefix
+  )
 }
 
 #' @rdname tbl_check_nchar
@@ -85,10 +119,11 @@ tbl_check_nchar <- function(
 tbl_grade_nchar <- function(
   object = .result, 
   expected = .solution,
+  column = NULL,
   envir = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(tbl_check_nchar(object, expected, envir = envir))
+    tbl_grade(tbl_check_nchar(object, expected, column = column, envir = envir))
   )
 }
 
@@ -110,12 +145,37 @@ tbl_message.nchar_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+tbl_message.column_nchar_problem <- function(problem, ...) {
+  problem$exp_msg <- problem$exp_msg %||% 
+    ngettext(
+      problem$expected,
+      "Every element of your `{column}` columns should be {expected} character long, ",
+      "Every element of your `{column}` columns should be {expected} characters long, "
+    )
+  
+  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+}
+
 tbl_message.inconsistent_nchar_problem <- function(problem, ...) {
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
       "Every element of your result should be {expected} character long, ",
       "Every element of your result should be {expected} characters long, "
+    )
+  
+  problem$obj_msg <- problem$obj_msg %||%
+    gettext("but it does not have a consistent character length.")
+  
+  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+}
+
+tbl_message.column_inconsistent_nchar_problem <- function(problem, ...) {
+  problem$exp_msg <- problem$exp_msg %||% 
+    ngettext(
+      problem$expected,
+      "Every element of your `{column}` column should be {expected} character long, ",
+      "Every element of your `{column}` column should be {expected} characters long, "
     )
   
   problem$obj_msg <- problem$obj_msg %||%

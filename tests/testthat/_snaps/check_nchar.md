@@ -8,6 +8,13 @@
         all 1 character long.
       >
 
+---
+
+    Code
+      grade_col
+    Output
+      <gradethis_graded: [Incorrect] >
+
 # grade inconsistent lengths
 
     Code
@@ -16,5 +23,15 @@
       <gradethis_graded: [Incorrect]
         Every element of your result should be 2 characters long, but it does
         not have a consistent character length.
+      >
+
+---
+
+    Code
+      grade_col
+    Output
+      <gradethis_graded: [Incorrect]
+        Every element of your `a` column should be 2 characters long, but it
+        does not have a consistent character length.
       >
 
