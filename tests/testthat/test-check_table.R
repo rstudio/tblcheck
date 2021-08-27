@@ -377,6 +377,22 @@ test_that("level order", {
   )
 })
 
+test_that("tbl_grade_table() groups", {
+  grade <- tblcheck_test_grade({
+    .result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), a)
+    .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+    tbl_grade_table()
+  })
+  
+  expect_snapshot(grade)
+  
+  expect_equal(
+    grade$problem,
+    problem("table_groups", missing = "b", unexpected = "a"),
+    ignore_attr = "class"
+  )
+})
+
 test_that("tbl_grade_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({

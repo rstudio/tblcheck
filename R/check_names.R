@@ -144,21 +144,3 @@ tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
   
   NextMethod()
 }
-
-combine_words_with_more <- function(
-  x, max_length = Inf, transform = md_code, ...
-) {
-  if (!length(x)) {
-    return(NULL)
-  }
-  
-  x_length <- length(x)
-  
-  x_max <- x[seq_len(min(max_length, x_length))]
-  
-  more <- if (x_length > max_length) {
-    paste(x_length - max_length, "more")
-  }
-  
-  knitr::combine_words(c(transform(x_max), more), ...)
-}

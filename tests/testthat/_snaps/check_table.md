@@ -188,3 +188,13 @@
         Your `a` column's levels were not in the expected order.
       >
 
+# tbl_grade_table() groups
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table should be grouped by `b`. Your table should not be grouped
+        by `a`.
+      >
+
