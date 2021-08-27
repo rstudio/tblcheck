@@ -73,3 +73,41 @@
         Your table should have a column named `a`.
       >
 
+# number of levels
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column should have 3 levels, but it has 2 levels.
+      >
+
+# level labels
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column should have levels named `x`, `y`, and `z`. Your `a`
+        column should not have levels named `a`, `b`, or `c`.
+      >
+
+# level order
+
+    Code
+      grade_diffs
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column's levels were not in the expected order. The first 3
+        levels of your `a` column should be `c`, `b`, and `a`.
+      >
+
+---
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column's levels were not in the expected order.
+      >
+

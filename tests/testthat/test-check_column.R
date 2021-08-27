@@ -179,20 +179,15 @@ test_that("number of levels", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "b")))
     .solution <- tibble::tibble(a = as.factor(c("a", "b", "c")))
-    problem   <- tbl_check_column("a")
     tbl_grade_column("a")
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem("column_n_levels", 3, 2, column = "a"),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    message = "Your `a` column should have 3 levels, but it has 2 levels.",
-    problem = problem
   )
 })
 
@@ -200,12 +195,13 @@ test_that("level labels", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     .solution <- tibble::tibble(a = as.factor(c("x", "y", "z")))
-    problem   <- tbl_check_column("a")
     tbl_grade_column("a")
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem(
       "column_levels",
       missing = c("x", "y", "z"),
@@ -214,32 +210,21 @@ test_that("level labels", {
     ),
     ignore_attr = "class"
   )
-  
-  expect_grade(
-    grade,
-    message = "Your `a` column should have levels named `x`, `y`, and `z`. Your `a` column should not have levels named `a`, `b`, or `c`.",
-    problem = problem
-  )
 })
 
 test_that("level order", {
-  grade <- tblcheck_test_grade({
+  grade_diffs <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     .solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
-    problem   <- tbl_check_column("a")
     tbl_grade_column("a")
   })
   
+  expect_snapshot(grade_diffs)
+  
   expect_equal(
-    problem,
+    grade_diffs$problem,
     problem("column_level_order_diffs", c("c", "b", "a"), column = "a"),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    message = "Your `a` column's levels were not in the expected order. The first 3 levels of your `a` column should be `c`, `b`, and `a`.",
-    problem = problem
   )
   
   grade <- tblcheck_test_grade({
@@ -249,16 +234,12 @@ test_that("level order", {
     tbl_grade_column("a")
   })
   
+  expect_snapshot(grade)
+  
   expect_equal(
-    problem,
+    grade$problem,
     problem("column_level_order", column = "a"),
     ignore_attr = "class"
-  )
-  
-  expect_grade(
-    grade,
-    message = "Your `a` column's levels were not in the expected order.",
-    problem = problem
   )
 })
 
