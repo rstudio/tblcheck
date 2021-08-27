@@ -40,7 +40,7 @@ If \code{type} is specified, \code{is_problem()} and \code{is_tblcheck_problem()
 whether an object is a problem of the specified type.
 }
 \examples{
-problem_type(tbl_check_vector(1, "1"))
-is_problem(tbl_check_vector(1, "1"), "vector_class")
-is_tblcheck_problem(tbl_check_vector(1, "1"), "class")
+problem_type(vec_check_vector(1, "1"))
+is_problem(vec_check_vector(1, "1"), "vector_class")
+is_tblcheck_problem(vec_check_vector(1, "1"), "class")
 }

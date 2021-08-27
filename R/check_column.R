@@ -90,7 +90,7 @@ tbl_check_column <- function(
   }
   
   return_if_problem(
-    tbl_check_vector(
+    vec_check_vector(
       object[[name]],
       expected[[name]],
       max_diffs = max_diffs,
