@@ -30,6 +30,13 @@ If the number of characters differ
 \item \code{tbl_grade_nchar()} returns a failing grade and informative message
 with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
+
+Every element of \code{expected} must have the same number of characters.
+If \code{expected} does not have a consistent number of characters, no grade will
+be produced.
+
+If \code{object} and \code{expected} are not both \link{character} vectors, they will be
+passed to \code{\link[=tbl_check_class]{tbl_check_class()}} for grading.
 }
 \section{Problems}{
 
@@ -39,6 +46,8 @@ number of characters
 \item \code{nchar}: every element of \code{object} does not have the same number of
 characters as \code{expected}
 }
+
+Additional problems may be produced by \code{\link[=tbl_check_class]{tbl_check_class()}}
 }
 
 \examples{
@@ -48,6 +57,11 @@ tbl_check_nchar()
 tbl_grade_nchar()
 
 .result <- strrep(letters, 1:26)
+.solution <- strrep(letters, 2)
+tbl_check_nchar()
+tbl_grade_nchar()
+
+.result <- 1:26
 .solution <- strrep(letters, 2)
 tbl_check_nchar()
 tbl_grade_nchar()

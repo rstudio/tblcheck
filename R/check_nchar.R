@@ -42,6 +42,11 @@
 #' .solution <- strrep(letters, 2)
 #' tbl_check_nchar()
 #' tbl_grade_nchar()
+#' 
+#' .result <- 1:26
+#' .solution <- strrep(letters, 2)
+#' tbl_check_nchar()
+#' tbl_grade_nchar()
 tbl_check_nchar <- function(
   object = .result,
   expected = .solution,
