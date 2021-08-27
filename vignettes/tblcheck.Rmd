@@ -103,12 +103,12 @@ Every test performed by `tbl_grade_table()` can be disabled with an argument. Ch
 
 # Grading vectors
 
-For exercises that use vectors rather than tables, `tbl_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
+For exercises that use vectors rather than tables, `vec_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
 
 ```{r}
 .result   <- 1:10
 .solution <- letters
-tbl_grade_vector()
+vec_grade_vector()
 ```
 
 # Other grading functions
