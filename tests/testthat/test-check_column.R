@@ -175,6 +175,74 @@ test_that("tbl_grade_column() with no problems returns invisible()", {
   expect_null(grade)
 })
 
+test_that("number of levels", {
+  grade <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = as.factor(c("a", "b", "b")))
+    .solution <- tibble::tibble(a = as.factor(c("a", "b", "c")))
+    tbl_grade_column("a")
+  })
+  
+  expect_snapshot(grade)
+  
+  expect_equal(
+    grade$problem,
+    problem("column_n_levels", 3, 2, column = "a"),
+    ignore_attr = "class"
+  )
+})
+
+test_that("level labels", {
+  grade <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
+    .solution <- tibble::tibble(a = as.factor(c("x", "y", "z")))
+    tbl_grade_column("a")
+  })
+  
+  expect_snapshot(grade)
+  
+  expect_equal(
+    grade$problem,
+    problem(
+      "column_levels",
+      missing = c("x", "y", "z"),
+      unexpected = c("a", "b", "c"),
+      column = "a"
+    ),
+    ignore_attr = "class"
+  )
+})
+
+test_that("level order", {
+  grade_diffs <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
+    .solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
+    tbl_grade_column("a")
+  })
+  
+  expect_snapshot(grade_diffs)
+  
+  expect_equal(
+    grade_diffs$problem,
+    problem("column_level_order_diffs", c("c", "b", "a"), column = "a"),
+    ignore_attr = "class"
+  )
+  
+  grade <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = as.factor(c("a", "b", "c", "d", "e")))
+    .solution <- tibble::tibble(a = factor(c("a", "b", "c", "d", "e"), levels = c("a", "b", "c", "e", "d")))
+    problem   <- tbl_check_column("a")
+    tbl_grade_column("a")
+  })
+  
+  expect_snapshot(grade)
+  
+  expect_equal(
+    grade$problem,
+    problem("column_level_order", column = "a"),
+    ignore_attr = "class"
+  )
+})
+
 test_that("tbl_grade_column() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({

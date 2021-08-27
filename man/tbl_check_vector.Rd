@@ -11,6 +11,7 @@ tbl_check_vector(
   max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
+  check_levels = TRUE,
   check_values = TRUE,
   check_names = TRUE,
   envir = parent.frame()
@@ -41,6 +42,9 @@ print. Defaults to 3.}
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same length.}
 
+\item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same \link[=levels]{factor levels}.}
+
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}
 
@@ -64,10 +68,12 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \enumerate{
 \item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
 \item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
-\item \code{vector_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
+\item \code{vector_n_levels}, \code{vector_levels}, \code{vector_level_order_diffs},
+\code{vector_level_order}: See \code{\link[=tbl_check_levels]{tbl_check_levels()}}
+\item \code{column_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
 contain the same values as \code{expected}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
-\item \code{vector_names}: \code{object} has different \code{names} than \code{expected}
+\item \code{vector_names}: \code{object} has different \link[=names]{names} than \code{expected}
 }
 }
 

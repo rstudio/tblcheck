@@ -8,10 +8,12 @@
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
 #' 1. `vector_length`: `object` doesn't have the same length as `expected`
-#' 1. `vector_value_diffs`: The first `max_diffs` elements of `object` don't
+#' 1. `vector_n_levels`, `vector_levels`, `vector_level_order_diffs`,
+#'   `vector_level_order`: See [tbl_check_levels()]
+#' 1. `column_value_diffs`: The first `max_diffs` elements of `object` don't
 #'   contain the same values as `expected`
 #' 1. `vector_values`: `object` doesn't contain the same values as `expected`
-#' 1. `vector_names`: `object` has different `names` than `expected`
+#' 1. `vector_names`: `object` has different [names][names()] than `expected`
 #'
 #' @param object A vector to be compared to `expected`.
 #' @param expected A vector containing the expected result.
@@ -21,6 +23,8 @@
 #'   `expected` have the same classes.
 #' @param check_length `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same length.
+#' @param check_levels `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same [factor levels][levels()].
 #' @param check_values `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` contain the same values.
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
@@ -62,6 +66,7 @@ tbl_check_vector <- function(
   max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
+  check_levels = TRUE,
   check_values = TRUE,
   check_names = TRUE,
   envir = parent.frame()
@@ -92,6 +97,13 @@ tbl_check_vector <- function(
   if (check_length) {
     return_if_problem(
       tbl_check_dimensions(object, expected),
+      prefix = "vector"
+    )
+  }
+  
+  if (check_levels) {
+    return_if_problem(
+      tbl_check_levels(object, expected),
       prefix = "vector"
     )
   }
