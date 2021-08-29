@@ -96,7 +96,7 @@ vec_check_vector <- function(
   
   if (check_length) {
     return_if_problem(
-      tbl_check_dimensions(object, expected),
+      vec_check_length(object, expected),
       prefix = "vector"
     )
   }

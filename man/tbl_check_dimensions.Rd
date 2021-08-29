@@ -3,7 +3,7 @@
 \name{tbl_check_dimensions}
 \alias{tbl_check_dimensions}
 \alias{tbl_grade_dimensions}
-\title{Check that the length of two object are the same}
+\title{Check that the dimensions of two object are the same}
 \usage{
 tbl_check_dimensions(
   object = .result,
@@ -31,7 +31,7 @@ Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same \link[=dim]{dimenisons}.
-If the names differ
+If the dimensions differ
 \itemize{
 \item \code{tbl_check_dimensions()} returns a list describing the problem
 \item \code{tbl_grade_dimensions()} returns a failing grade and informative message

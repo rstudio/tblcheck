@@ -1,7 +1,7 @@
-#' Check that the length of two object are the same
+#' Check that the dimensions of two object are the same
 #'
 #' Checks if `object` and `expected` have the same [dimenisons][dim()].
-#' If the names differ
+#' If the dimensions differ
 #' - `tbl_check_dimensions()` returns a list describing the problem
 #' - `tbl_grade_dimensions()` returns a failing grade and informative message
 #' with [gradethis::fail()]
@@ -114,42 +114,6 @@ tbl_message.n_dimensions_problem <- function(problem, ...) {
     )
   
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
-}
-
-tbl_message.length_problem <- function(problem, ...) {
-  problem$exp_msg <- problem$exp_msg %||% 
-    ngettext(
-      problem$expected,
-      "Your result should contain {expected} value, ",
-      "Your result should contain {expected} values, "
-    )
-  
-  problem$obj_msg <- problem$obj_msg %||%
-    ngettext(
-      problem$actual,
-      "but it has {actual} value.",
-      "but it has {actual} values."
-    )
-  
-  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
-}
-
-tbl_message.column_length_problem <- function(problem, ...) {
-  problem$exp_msg <- problem$exp_msg %||% 
-    ngettext(
-      problem$expected,
-      "Your `{column}` column should contain {expected} value, ",
-      "Your `{column}` column should contain {expected} values, "
-    )
-  
-  problem$obj_msg <- problem$obj_msg %||%
-    ngettext(
-      problem$actual,
-      "but it has {actual} value.",
-      "but it has {actual} values."
-    )
-  
-  NextMethod()
 }
 
 tbl_message.ncol_problem <- function(problem, ...) {
