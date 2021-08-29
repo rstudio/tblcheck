@@ -70,7 +70,7 @@ tbl_check_dimensions <- function(
   }
   
   if (length(exp_dim) == 1) {
-    return(problem("length", exp_dim, obj_dim))
+    return_if_problem(vec_check_length(object, expected, envir))
   }
   
   if (length(exp_dim) > 2) {
