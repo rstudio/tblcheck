@@ -36,7 +36,7 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
     final_call <- paste(expr[[1]])
   }
   
-  if (!grepl("^tbl_(check|grade)", final_call)) {
+  if (!grepl("^(tbl|vec)_(check|grade)", final_call)) {
     stop("tblcheck_test_grade() expected a {tblcheck} function as the final expression")
   }
   

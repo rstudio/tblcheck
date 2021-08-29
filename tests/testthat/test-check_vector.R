@@ -1,8 +1,8 @@
-test_that("tbl_grade_vector() checks classes", {
+test_that("vec_grade_vector() checks classes", {
   grade <- tblcheck_test_grade({
     .result   <- letters
     .solution <- 1:3
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -20,11 +20,11 @@ test_that("tbl_grade_vector() checks classes", {
   )
 })
 
-test_that("tbl_grade_vector() checks the first three values", {
+test_that("vec_grade_vector() checks the first three values", {
   grade <- tblcheck_test_grade({
     .result   <- rev(letters)
     .solution <- letters
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -36,12 +36,12 @@ test_that("tbl_grade_vector() checks the first three values", {
   )
 })
 
-test_that("tbl_grade_vector() checks multiple classes", {
+test_that("vec_grade_vector() checks multiple classes", {
   grade <- tblcheck_test_grade({
     .result   <- 1:10
     .solution <- 1:10
     class(.solution) <- c("test", "class", "integer")
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -59,11 +59,11 @@ test_that("tbl_grade_vector() checks multiple classes", {
   )
 })
 
-test_that("tbl_grade_vector() checks for value differences beyond the first 3", {
+test_that("vec_grade_vector() checks for value differences beyond the first 3", {
   grade <- tblcheck_test_grade({
     .result   <- c(rep(1, 3), 5:10)
     .solution <- c(rep(1, 3), 10:15)
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -79,7 +79,7 @@ test_that("max_diffs modifies the number of values to print", {
   grade <- tblcheck_test_grade({
     .result   <- letters
     .solution <- rev(letters)
-    tbl_grade_vector(max_diffs = 5)
+    vec_grade_vector(max_diffs = 5)
   })
   
   expect_snapshot(grade)
@@ -95,7 +95,7 @@ test_that("max_diffs doesn't overflow", {
   grade <- tblcheck_test_grade({
     .result   <- letters[1:2]
     .solution <- letters[2:1]
-    tbl_grade_vector(max_diffs = 3)
+    vec_grade_vector(max_diffs = 3)
   })
 
   expect_snapshot(grade)
@@ -111,7 +111,7 @@ test_that("checks that vectors have the same length", {
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[1:4]
-    tbl_grade_vector()
+    vec_grade_vector()
   })
 
   expect_snapshot(grade)
@@ -127,7 +127,7 @@ test_that("checks that vectors have the same names", {
   grade <- tblcheck_test_grade({
     .result   <- c(x = 1, y = 2, z = 3)
     .solution <- c(a = 1, b = 2, c = 3)
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -146,7 +146,7 @@ test_that("number of levels", {
   grade <- tblcheck_test_grade({
     .result   <- as.factor(c("a", "b", "b"))
     .solution <- as.factor(c("a", "b", "c"))
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -162,7 +162,7 @@ test_that("level labels", {
   grade <- tblcheck_test_grade({
     .result   <- as.factor(c("a", "b", "c"))
     .solution <- as.factor(c("x", "y", "z"))
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -180,8 +180,8 @@ test_that("level order", {
   grade_diffs <- tblcheck_test_grade({
     .result   <- as.factor(c("a", "b", "c"))
     .solution <- factor(.result, levels = rev(levels(.result)))
-    problem   <- tbl_check_vector()
-    tbl_grade_vector()
+    problem   <- vec_check_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade_diffs)
@@ -195,7 +195,7 @@ test_that("level order", {
   grade <- tblcheck_test_grade({
     .result   <- as.factor(c("a", "b", "c", "d", "e"))
     .solution <- factor(.result, levels = c("a", "b", "c", "e", "d"))
-    tbl_grade_vector()
+    vec_grade_vector()
   })
   
   expect_snapshot(grade)
@@ -208,24 +208,24 @@ test_that("level order", {
 })
 
 
-test_that("tbl_grade_vector() with no problems returns invisible()", {
+test_that("vec_grade_vector() with no problems returns invisible()", {
   expect_invisible(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_grade_vector()
+      vec_grade_vector()
     })
   )
   
   expect_null(grade)
 })
 
-test_that("tbl_grade_vector() handles bad user input", {
+test_that("vec_grade_vector() handles bad user input", {
   expect_internal_problem(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_grade_vector(check_class = "yes")
+      vec_grade_vector(check_class = "yes")
     }),
     "check_class"
   )
@@ -234,7 +234,7 @@ test_that("tbl_grade_vector() handles bad user input", {
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_grade_vector(check_length = c(TRUE, TRUE))
+      vec_grade_vector(check_length = c(TRUE, TRUE))
     }),
     "check_length"
   )
@@ -243,7 +243,7 @@ test_that("tbl_grade_vector() handles bad user input", {
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_grade_vector(check_values = NULL)
+      vec_grade_vector(check_values = NULL)
     }),
     "check_values"
   )
@@ -252,7 +252,7 @@ test_that("tbl_grade_vector() handles bad user input", {
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_grade_vector(max_diffs = 1:3)
+      vec_grade_vector(max_diffs = 1:3)
     }),
     "max_diffs"
   )
@@ -261,7 +261,7 @@ test_that("tbl_grade_vector() handles bad user input", {
     grade <- tblcheck_test_grade({
       .result   <- NULL
       .solution <- letters[1:3]
-      tbl_grade_vector()
+      vec_grade_vector()
     }),
     "object"
   )
@@ -270,18 +270,18 @@ test_that("tbl_grade_vector() handles bad user input", {
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- NULL
-      tbl_grade_vector()
+      vec_grade_vector()
     }),
     "expected"
   )
 })
 
-test_that("tbl_check_vector() handles bad user input", {
+test_that("vec_check_vector() handles bad user input", {
   expect_internal_problem(
     {
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_check_vector(check_class = "yes")
+      vec_check_vector(check_class = "yes")
     },
     "check_class"
   )
@@ -290,7 +290,7 @@ test_that("tbl_check_vector() handles bad user input", {
     {
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_check_vector(check_length = c(TRUE, TRUE))
+      vec_check_vector(check_length = c(TRUE, TRUE))
     },
     "check_length"
   )
@@ -299,7 +299,7 @@ test_that("tbl_check_vector() handles bad user input", {
     {
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_check_vector(check_values = NULL)
+      vec_check_vector(check_values = NULL)
     },
     "check_values"
   )
@@ -308,7 +308,7 @@ test_that("tbl_check_vector() handles bad user input", {
     {
       .result   <- letters[1:3]
       .solution <- letters[1:3]
-      tbl_check_vector(max_diffs = 1:3)
+      vec_check_vector(max_diffs = 1:3)
     },
     "max_diffs"
   )
@@ -317,7 +317,7 @@ test_that("tbl_check_vector() handles bad user input", {
     {
       .result   <- NULL
       .solution <- letters[1:3]
-      problem <- tbl_check_vector()
+      problem <- vec_check_vector()
     },
     "object"
   )
@@ -326,7 +326,7 @@ test_that("tbl_check_vector() handles bad user input", {
     {
       .result   <- letters[1:3]
       .solution <- NULL
-      problem <- tbl_check_vector()
+      problem <- vec_check_vector()
     },
     "expected"
   )

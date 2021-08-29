@@ -9,7 +9,7 @@
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
 #' 1. `vector_length`: `object` doesn't have the same length as `expected`
 #' 1. `vector_n_levels`, `vector_levels`, `vector_level_order_diffs`,
-#'   `vector_level_order`: See [tbl_check_levels()]
+#'   `vector_level_order`: See [vec_check_levels()]
 #' 1. `column_value_diffs`: The first `max_diffs` elements of `object` don't
 #'   contain the same values as `expected`
 #' 1. `vector_values`: `object` doesn't contain the same values as `expected`
@@ -31,36 +31,36 @@
 #'   `expected` have the same names.
 #' @inheritParams tbl_check_table
 #'
-#' @return If there are any issues, a [list] from `tbl_check_vector()` or a
-#'   [gradethis::fail()] message from `tbl_grade_vector()`.
+#' @return If there are any issues, a [list] from `vec_check_vector()` or a
+#'   [gradethis::fail()] message from `vec_grade_vector()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples 
 #' .result <- 1:10
 #' .solution <- letters[1:10]
-#' tbl_check_vector()
-#' tbl_grade_vector()
+#' vec_check_vector()
+#' vec_grade_vector()
 #' 
 #' .result <- 1:10
 #' .solution <- 1:11
-#' tbl_check_vector()
-#' tbl_grade_vector()
+#' vec_check_vector()
+#' vec_grade_vector()
 #' 
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
-#' tbl_check_vector()
-#' tbl_grade_vector()
-#' tbl_grade_vector(max_diffs = 5)
-#' tbl_grade_vector(max_diffs = Inf)
+#' vec_check_vector()
+#' vec_grade_vector()
+#' vec_grade_vector(max_diffs = 5)
+#' vec_grade_vector(max_diffs = Inf)
 #' 
 #' .result <- 1:10
 #' .solution <- 11:20
-#' tbl_check_vector()
-#' tbl_grade_vector()
-#' tbl_grade_vector(max_diffs = 5)
-#' tbl_grade_vector(max_diffs = Inf)
-tbl_check_vector <- function(
+#' vec_check_vector()
+#' vec_grade_vector()
+#' vec_grade_vector(max_diffs = 5)
+#' vec_grade_vector(max_diffs = Inf)
+vec_check_vector <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -96,14 +96,14 @@ tbl_check_vector <- function(
   
   if (check_length) {
     return_if_problem(
-      tbl_check_dimensions(object, expected),
+      vec_check_length(object, expected),
       prefix = "vector"
     )
   }
   
   if (check_levels) {
     return_if_problem(
-      tbl_check_levels(object, expected),
+      vec_check_levels(object, expected),
       prefix = "vector"
     )
   }
@@ -132,9 +132,9 @@ tbl_check_vector <- function(
   }
 }
 
-#' @rdname tbl_check_vector
+#' @rdname vec_check_vector
 #' @export
-tbl_grade_vector <- function(
+vec_grade_vector <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -146,7 +146,7 @@ tbl_grade_vector <- function(
 ) {
   return_if_graded(
     tbl_grade(
-      tbl_check_vector(
+      vec_check_vector(
         object = object,
         expected = expected,
         max_diffs = max_diffs,

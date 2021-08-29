@@ -2,8 +2,8 @@
 #'
 #' Checks if `object` and `expected` have the same [levels][levels()].
 #' If the levels differ
-#' - `tbl_check_levels()` returns a list describing the problem
-#' - `tbl_grade_levels()` returns a failing grade and informative message
+#' - `vec_check_levels()` returns a list describing the problem
+#' - `vec_grade_levels()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:
@@ -21,24 +21,24 @@
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
 #'
-#' @return If there are any issues, a [list] from `tbl_check_levels()` or a
-#'   [gradethis::fail()] message from `tbl_grade_levels()`.
+#' @return If there are any issues, a [list] from `vec_check_levels()` or a
+#'   [gradethis::fail()] message from `vec_grade_levels()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples
 #' .result <- as.factor(rep_len(letters[1:3], 6))
 #' .solution <- as.factor(rep_len(letters[1:2], 6))
-#' tbl_check_levels()
-#' tbl_grade_levels()
+#' vec_check_levels()
+#' vec_grade_levels()
 #' 
 #' .result <- as.factor(letters[1:6])
 #' .solution <- as.factor(letters[21:26])
-#' tbl_check_levels()
-#' tbl_grade_levels()
-#' tbl_grade_levels(max_diffs = 5)
-#' tbl_grade_levels(max_diffs = Inf)
-tbl_check_levels <- function(
+#' vec_check_levels()
+#' vec_grade_levels()
+#' vec_grade_levels(max_diffs = 5)
+#' vec_grade_levels(max_diffs = Inf)
+vec_check_levels <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -81,9 +81,9 @@ tbl_check_levels <- function(
   }
 }
 
-#' @rdname tbl_check_levels
+#' @rdname vec_check_levels
 #' @export
-tbl_grade_levels <- function(
+vec_grade_levels <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -91,7 +91,7 @@ tbl_grade_levels <- function(
 ) {
   return_if_graded(
     tbl_grade(
-      tbl_check_levels(object, expected, envir = envir),
+      vec_check_levels(object, expected, envir = envir),
       max_diffs = max_diffs
     )
   )
