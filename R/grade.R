@@ -12,26 +12,30 @@
 #' .solution <- letters[1:10]
 #' problem <- vec_check_vector()
 #' tbl_grade(problem)
-tbl_grade <- function(problem, max_diffs = 3, ...) {
+tbl_grade <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
   UseMethod("tbl_grade")
 }
 
 #' @rdname tbl_grade
 #' @export
-tbl_grade.default <- function(problem, max_diffs = 3, ...) {
+tbl_grade.default <- function(
+  problem, max_diffs = 3, env = parent.frame(), ...
+) {
   invisible()
 }
 
 #' @rdname tbl_grade
 #' @export
-tbl_grade.list <- function(problem, max_diffs = 3, ...) {
+tbl_grade.list <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
   problem <- as_problem(problem)
-  tbl_grade(problem, max_diffs = max_diffs, ...)
+  tbl_grade(problem, max_diffs = max_diffs, env = env, ...)
 }
 
 #' @rdname tbl_grade
 #' @export
-tbl_grade.tblcheck_problem <- function(problem, max_diffs = 3, ...) {
+tbl_grade.tblcheck_problem <- function(
+  problem, max_diffs = 3, env = parent.frame(), ...
+) {
   if (is.null(problem)) {
     return(invisible())
   }
@@ -44,6 +48,7 @@ tbl_grade.tblcheck_problem <- function(problem, max_diffs = 3, ...) {
   return_fail(
     tbl_message(problem, max_diffs = max_diffs),
     problem = problem,
+    env = env,
     ...
   )
 }
