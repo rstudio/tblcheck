@@ -48,6 +48,13 @@ tbl_grade.tblcheck_problem <- function(problem, max_diffs = 3, ...) {
   )
 }
 
+return_fail <- function(..., env = parent.frame()) {
+  grade <- gradethis::fail(..., env = env)
+  if (getOption("tblcheck.return_first_grade", TRUE)) {
+    rlang::return_from(env, grade)
+  }
+}
+
 tbl_message <- function(problem, ...) {
   UseMethod("tbl_message")
 }

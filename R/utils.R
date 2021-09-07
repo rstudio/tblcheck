@@ -50,13 +50,6 @@ return_if_graded <- function(expr, env = parent.frame()) {
   )
 }
 
-return_fail <- function(..., env = parent.frame()) {
-  grade <- gradethis::fail(..., env = env)
-  if (getOption("tblcheck.return_first_grade", TRUE)) {
-    rlang::return_from(env, grade)
-  }
-}
-
 
 combine_words_with_more <- function(
   x, max_length = Inf, transform = md_code, ...
