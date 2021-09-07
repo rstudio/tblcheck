@@ -2,9 +2,10 @@
 #'
 #' Checks if `object` and `expected` have the same [class][class()].
 #' If the classes differ
-#' - `tbl_check_class()` returns a list describing the problem
-#' - `tbl_grade_class()` returns a failing grade and informative message
-#' with [gradethis::fail()]
+#' - `tbl_check_class()` and `vec_check_class()` return a list describing
+#'   the problem
+#' - `tbl_grade_class()` and `vec_grade_class()` return a failing grade and
+#'   informative message with [gradethis::fail()]
 #' 
 #' @section Problems:
 #' 
@@ -26,15 +27,16 @@
 #' - [POSIXct] vs. [POSIXlt]
 #' - [glue][glue::glue] vs. [character]
 #'
-#' @return If there are any issues, a [list] from `tbl_check_class()` or a
-#'   [gradethis::fail()] message from `tbl_grade_class()`.
+#' @return If there are any issues, a [list] from `tbl_check_class()` and
+#'   `vec_check_class()` or a [gradethis::fail()] message from
+#'   `tbl_grade_class()` and `vec_grade_class()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' @examples 
 #' .result <- 1:10
 #' .solution <- as.character(1:10)
-#' tbl_check_class()
-#' tbl_grade_class()
+#' vec_check_class()
+#' vec_grade_class()
 #' 
 #' .result <- data.frame(a = 1:10)
 #' .solution <- tibble::tibble(a = 1:10)
@@ -80,6 +82,10 @@ tbl_check_class <- function(
 
 #' @rdname tbl_check_class
 #' @export
+vec_check_class <- tbl_check_class
+
+#' @rdname tbl_check_class
+#' @export
 tbl_grade_class <- function(
   object = .result,
   expected = .solution,
@@ -90,6 +96,10 @@ tbl_grade_class <- function(
     tbl_grade(tbl_check_class(object, expected, all_differences, envir))
   )
 }
+
+#' @rdname tbl_check_class
+#' @export
+vec_grade_class <- tbl_grade_class
 
 tbl_message.class_problem <- function(problem, ...) {
   problem$msg <- problem$msg %||%
