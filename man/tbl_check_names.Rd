@@ -5,13 +5,13 @@
 \alias{tbl_grade_names}
 \title{Check that the names of two object are the same}
 \usage{
-tbl_check_names(object = .result, expected = .solution, envir = parent.frame())
+tbl_check_names(object = .result, expected = .solution, env = parent.frame())
 
 tbl_grade_names(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -19,7 +19,7 @@ tbl_grade_names(
 
 \item{expected}{An object containing the expected result.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
 unexpected names to include in an informative failure message.

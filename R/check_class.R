@@ -49,13 +49,13 @@ tbl_check_class <- function(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   obj_class <- class(object)
@@ -84,10 +84,10 @@ tbl_grade_class <- function(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(tbl_check_class(object, expected, all_differences, envir))
+    tbl_grade(tbl_check_class(object, expected, all_differences, env))
   )
 }
 

@@ -49,13 +49,13 @@
 tbl_check_dimensions <- function(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   obj_dim <- dim(object) %||% length(object)
@@ -70,7 +70,7 @@ tbl_check_dimensions <- function(
   }
   
   if (length(exp_dim) == 1) {
-    return_if_problem(vec_check_length(object, expected, envir))
+    return_if_problem(vec_check_length(object, expected, env))
   }
   
   if (length(exp_dim) > 2) {
@@ -91,10 +91,10 @@ tbl_check_dimensions <- function(
 tbl_grade_dimensions <- function(
   object = .result, 
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(tbl_check_dimensions(object, expected, envir = envir))
+    tbl_grade(tbl_check_dimensions(object, expected, env = env))
   )
 }
 

@@ -26,13 +26,13 @@
 vec_check_length <- function(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   obj_length <- length(object)
@@ -48,10 +48,10 @@ vec_check_length <- function(
 vec_grade_length <- function(
   object = .result, 
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(vec_check_length(object, expected, envir = envir))
+    tbl_grade(vec_check_length(object, expected, env = env))
   )
 }
 

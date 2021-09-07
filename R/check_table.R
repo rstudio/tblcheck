@@ -42,7 +42,7 @@
 #'   columns has the same class in `object` and `expected`.
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
-#' @param envir The environment in which to find `.result` and `.solution`.
+#' @param env The environment in which to find `.result` and `.solution`.
 #'
 #' @return If there are any issues, a [list] from `tbl_check_table()` or a
 #'   [gradethis::fail()] message from `tbl_grade_table()`.
@@ -89,13 +89,13 @@ tbl_check_table <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   assert_internally({
@@ -174,7 +174,7 @@ tbl_grade_table <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
     tbl_grade(
@@ -189,7 +189,7 @@ tbl_grade_table <- function(
         check_columns = check_columns,
         check_column_class = check_column_class,
         check_column_values = check_column_values,
-        envir = envir
+        env = env
       ),
       max_diffs = max_diffs
     )

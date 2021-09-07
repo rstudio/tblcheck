@@ -14,7 +14,7 @@ vec_check_vector(
   check_levels = TRUE,
   check_values = TRUE,
   check_names = TRUE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 vec_grade_vector(
@@ -25,7 +25,7 @@ vec_grade_vector(
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -51,7 +51,7 @@ print. Defaults to 3.}
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same names.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_vector()} or a

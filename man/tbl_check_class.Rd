@@ -9,14 +9,14 @@ tbl_check_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 tbl_grade_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -29,7 +29,7 @@ inconsequential class differences will be skipped.
 If \code{TRUE}, all class differences will be reported.
 See section "Inconsequential differences" for more information.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_class()} or a
