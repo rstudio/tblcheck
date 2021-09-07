@@ -191,7 +191,8 @@ tbl_grade_table <- function(
         check_column_values = check_column_values,
         env = env
       ),
-      max_diffs = max_diffs
+      max_diffs = max_diffs,
+      env = env
     )
   )
 }

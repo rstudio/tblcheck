@@ -74,7 +74,8 @@ tbl_grade_names <- function(
   return_if_graded(
     tbl_grade(
       tbl_check_names(object, expected, env = env),
-      max_diffs = max_diffs
+      max_diffs = max_diffs,
+      env = env
     )
   )
 }

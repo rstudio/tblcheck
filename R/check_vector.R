@@ -156,7 +156,8 @@ vec_grade_vector <- function(
         check_names = check_names,
         env = env
       ),
-      max_diffs = max_diffs
+      max_diffs = max_diffs,
+      env = env
     )
   )
 }

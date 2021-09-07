@@ -127,7 +127,8 @@ tbl_grade_column <- function(
         check_length = check_length,
         check_values = check_values,
         env = env
-      )
+      ), 
+      env = env
     )
   )
 }

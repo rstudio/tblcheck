@@ -51,7 +51,10 @@ vec_grade_length <- function(
   env = parent.frame()
 ) {
   return_if_graded(
-    tbl_grade(vec_check_length(object, expected, env = env))
+    tbl_grade(
+      vec_check_length(object, expected, env = env),
+      env = env
+    )
   )
 }
 
