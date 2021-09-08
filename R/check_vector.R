@@ -89,7 +89,7 @@ vec_check_vector <- function(
   
   if (check_class) {
     return_if_problem(
-      tbl_check_class(object, expected),
+      vec_check_class(object, expected),
       prefix = "vector"
     )
   }
@@ -126,7 +126,7 @@ vec_check_vector <- function(
   
   if (check_names) {
     return_if_problem(
-      tbl_check_names(object, expected),
+      vec_check_names(object, expected),
       prefix = "vector"
     )
   }
