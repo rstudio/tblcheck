@@ -46,19 +46,12 @@ tbl_grade.tblcheck_problem <- function(
     checkmate::assert_number(max_diffs, lower = 1)
   })
   
-  return_fail(
+  gradethis::fail(
     tbl_message(problem, max_diffs = max_diffs),
     problem = problem,
     env = env,
     ...
   )
-}
-
-return_fail <- function(..., env = parent.frame()) {
-  grade <- gradethis::fail(..., env = env)
-  if (getOption("tblcheck.return_first_grade", TRUE)) {
-    return(grade)
-  }
 }
 
 tbl_message <- function(problem, ...) {
