@@ -70,6 +70,10 @@ jobs:
         run: |
           pkgdown::build_reference_index()
           stopifnot(length(warnings()) == 0)
+        
+      - name: Set environment variable $BRANCH_NAME
+        if: github.event_name == 'push'
+        uses: nelonoel/branch-name@v1.0.1
 
       - name: Deploy to Netlify
         if: github.event_name == 'push'
@@ -77,14 +81,14 @@ jobs:
         uses: nwtgck/actions-netlify@v1.1
         with:
           publish-dir: 'reference'
-          production-branch: master
+          production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message:
             'Deploy from GHA: ${{ github.event.head_commit.message }} (${{ github.sha }})'
           enable-pull-request-comment: false
           enable-commit-comment: false
           enable-commit-status: true
-          alias: deploy-preview-${{ github.event.pull_request.number }}
+          alias: deploy-preview-${BRANCH_NAME}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
