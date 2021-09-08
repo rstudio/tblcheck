@@ -59,13 +59,13 @@ tbl_check_column <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   assert_internally({
@@ -114,7 +114,7 @@ tbl_grade_column <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
     tbl_grade(
@@ -126,8 +126,9 @@ tbl_grade_column <- function(
         check_class = check_class,
         check_length = check_length,
         check_values = check_values,
-        envir = envir
-      )
+        env = env
+      ), 
+      env = env
     )
   )
 }

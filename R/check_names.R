@@ -38,13 +38,13 @@
 tbl_check_names <- function(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   names_exp <- names(expected)
@@ -75,12 +75,13 @@ tbl_grade_names <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
     tbl_grade(
-      tbl_check_names(object, expected, envir = envir),
-      max_diffs = max_diffs
+      tbl_check_names(object, expected, env = env),
+      max_diffs = max_diffs,
+      env = env
     )
   )
 }

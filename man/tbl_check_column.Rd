@@ -13,7 +13,7 @@ tbl_check_column(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 tbl_grade_column(
@@ -24,7 +24,7 @@ tbl_grade_column(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -46,7 +46,7 @@ same length in \code{object} and \code{expected}.}
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
 same values in \code{object} and \code{expected}.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_column()} or a

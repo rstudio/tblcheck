@@ -5,24 +5,16 @@
 \alias{vec_grade_length}
 \title{Check that the length of two object are the same}
 \usage{
-vec_check_length(
-  object = .result,
-  expected = .solution,
-  envir = parent.frame()
-)
+vec_check_length(object = .result, expected = .solution, env = parent.frame())
 
-vec_grade_length(
-  object = .result,
-  expected = .solution,
-  envir = parent.frame()
-)
+vec_grade_length(object = .result, expected = .solution, env = parent.frame())
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_length()} or a

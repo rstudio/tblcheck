@@ -9,14 +9,14 @@ vec_check_levels(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 vec_grade_levels(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -28,7 +28,7 @@ vec_grade_levels(
 unexpected names to include in an informative failure message.
 Defaults to 3.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_levels()} or a

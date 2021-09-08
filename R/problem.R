@@ -31,7 +31,7 @@ problem <- function(
 }
 
 return_if_problem <- function(
-  problem, prefix = NULL, ..., envir = parent.frame()
+  problem, prefix = NULL, ..., env = parent.frame()
 ) {
   if (inherits(problem, "tblcheck_problem")) {
     problem_class <- class(problem)
@@ -52,7 +52,7 @@ return_if_problem <- function(
       problem$type <- gsub("^((table|vector|column)_)?", prefix, problem$type)
     }
     
-    rlang::return_from(envir, problem)
+    rlang::return_from(env, problem)
   }
 }
 

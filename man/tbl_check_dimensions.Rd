@@ -8,13 +8,13 @@
 tbl_check_dimensions(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 tbl_grade_dimensions(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -22,7 +22,7 @@ tbl_grade_dimensions(
 
 \item{expected}{An object containing the expected result.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_dimensions()} or a

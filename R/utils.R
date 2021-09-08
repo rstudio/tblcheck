@@ -38,23 +38,16 @@ internal_error <- function(err) {
 # Wrap any expression that may return a grade in `return_if_graded()` to return
 # the graded condition from the calling function if we don't have another
 # calling handler watching for the `gradethis_graded` condition.
-return_if_graded <- function(expr, envir = parent.frame()) {
+return_if_graded <- function(expr, env = parent.frame()) {
   withCallingHandlers(
     expr,
     gradethis_graded = function(grade) {
       signalCondition(grade)
       if (getOption("tblcheck.return_first_grade", TRUE)) {
-        rlang::return_from(envir, grade)
+        rlang::return_from(env, grade)
       }
     }
   )
-}
-
-return_fail <- function(..., env = parent.frame()) {
-  grade <- gradethis::fail(..., env = env)
-  if (getOption("tblcheck.return_first_grade", TRUE)) {
-    rlang::return_from(env, grade)
-  }
 }
 
 

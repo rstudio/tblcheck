@@ -16,7 +16,7 @@ tbl_check_table(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 tbl_grade_table(
@@ -30,7 +30,7 @@ tbl_grade_table(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -67,7 +67,7 @@ columns has the same class in \code{object} and \code{expected}.}
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_table()} or a

@@ -42,13 +42,13 @@ vec_check_levels <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
   levels_exp <- levels(expected)
@@ -87,12 +87,13 @@ vec_grade_levels <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   return_if_graded(
     tbl_grade(
-      vec_check_levels(object, expected, envir = envir),
-      max_diffs = max_diffs
+      vec_check_levels(object, expected, env = env),
+      max_diffs = max_diffs,
+      env = env
     )
   )
 }
