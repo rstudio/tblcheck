@@ -2,9 +2,10 @@
 #'
 #' Checks if `object` and `expected` have the same [names][names()].
 #' If the names differ
-#' - `tbl_check_names()` returns a list describing the problem
-#' - `tbl_grade_names()` returns a failing grade and informative message
-#' with [gradethis::fail()]
+#' - `tbl_check_names()` and `vec_check_names()` returns a list describing
+#'   the problem
+#' - `tbl_grade_names()` and `vec_grade_names()` returns a failing grade and
+#'   informative message with [gradethis::fail()]
 #' 
 #' @section Problems:
 #' 
@@ -16,18 +17,19 @@
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
 #'
-#' @return If there are any issues, a [list] from `tbl_check_names()` or a
-#'   [gradethis::fail()] message from `tbl_grade_names()`.
+#' @return If there are any issues, a [list] from `tbl_check_names()` and
+#'   `vec_check_names()` or a [gradethis::fail()] message from
+#'   `tbl_grade_names()` and `vec_grade_names()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples
-#' .result <- 1:10
-#' .solution <- rlang::set_names(1:10, letters[1:10])
-#' tbl_check_names()
-#' tbl_grade_names()
-#' tbl_grade_names(max_diffs = 5)
-#' tbl_grade_names(max_diffs = Inf)
+#' .result <- c(1, 2, 3, 4, 5, 6, 7)
+#' .solution <- c(a = 1, b = 2, c = 3, d = 4, e = 5, f = 6, g = 7)
+#' vec_check_names()
+#' vec_grade_names()
+#' vec_grade_names(max_diffs = 5)
+#' vec_grade_names(max_diffs = Inf)
 #' 
 #' .result <- tibble::tibble(a = 1:5, b = 6:10, c = 11:15)
 #' .solution <- tibble::tibble(a = 1:5, x = 6:10, y = 11:15)
@@ -65,6 +67,10 @@ tbl_check_names <- function(
 
 #' @rdname tbl_check_names
 #' @export
+vec_check_names <- tbl_check_names
+
+#' @rdname tbl_check_names
+#' @export
 tbl_grade_names <- function(
   object = .result,
   expected = .solution,
@@ -78,6 +84,10 @@ tbl_grade_names <- function(
     )
   )
 }
+
+#' @rdname tbl_check_names
+#' @export
+vec_grade_names <- tbl_grade_names
 
 tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
   problem$missing_msg <- problem$missing_msg %||% 
