@@ -57,7 +57,7 @@ tbl_grade.tblcheck_problem <- function(
 return_fail <- function(..., env = parent.frame()) {
   grade <- gradethis::fail(..., env = env)
   if (getOption("tblcheck.return_first_grade", TRUE)) {
-    rlang::return_from(env, grade)
+    return(grade)
   }
 }
 
