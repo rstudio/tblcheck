@@ -40,3 +40,4 @@ vignettes/*.pdf
 .Renviron
 .Rproj.user
 inst/doc
+reference
