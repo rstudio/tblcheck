@@ -9,7 +9,7 @@
 \usage{
 tbl_check_names(object = .result, expected = .solution, env = parent.frame())
 
-vec_check_names(object = .result, expected = .solution, envir = parent.frame())
+vec_check_names(object = .result, expected = .solution, env = parent.frame())
 
 tbl_grade_names(
   object = .result,
@@ -22,7 +22,7 @@ vec_grade_names(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{

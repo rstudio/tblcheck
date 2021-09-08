@@ -18,7 +18,7 @@ vec_check_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 tbl_grade_class(
@@ -32,7 +32,7 @@ vec_grade_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
