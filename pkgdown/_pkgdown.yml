@@ -50,13 +50,25 @@ navbar:
     #       href: https://blog.rstudio.com/2017/09/11/announcing-blogdown/
 
 reference:
-- title: Table Checking
+- title: General checks
+  desc: These functions check for multiple problems in a specific type of object
   contents:
-  - starts_with("tbl_check_")
-- title: Vector Checking
+  - tbl_check_table
+  - tbl_check_column
+  - vec_check_vector
+- title: Specific checks
+  desc: These functions check for a specific type of problem
   contents:
-  - starts_with("vec_check_")
+  - tbl_check_class
+  - tbl_check_dimensions
+  - tbl_check_groups
+  - vec_check_length
+  - vec_check_levels
+  - tbl_check_names
 - title: Problems
+  desc: |
+    These functions can be used to inspect the contents of a `problem` from a
+    check function and transform a `problem` into a grade.
   contents:
   - '`tbl_grade`'
   - '`problem_type`'
