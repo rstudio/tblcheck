@@ -51,13 +51,13 @@ navbar:
 
 reference:
 - title: General checks
-  desc: These functions check for multiple problems in a specific type of object
+  desc: Check for multiple problems in a table, column, or vector
   contents:
   - tbl_check_table
   - tbl_check_column
   - vec_check_vector
 - title: Specific checks
-  desc: These functions check for a specific type of problem
+  desc: Check for a specific type of problem in tables or vectors
   contents:
   - tbl_check_class
   - tbl_check_dimensions
@@ -67,8 +67,8 @@ reference:
   - tbl_check_names
 - title: Problems
   desc: |
-    These functions can be used to inspect the contents of a `problem` from a
-    check function and transform a `problem` into a grade.
+    Inspect the contents of a `problem` from a
+    check function or transform a `problem` into a grade.
   contents:
   - '`tbl_grade`'
   - '`problem_type`'
