@@ -12,21 +12,7 @@
 #'   contain the same values as `expected`
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
-#' @param object A vector to be compared to `expected`.
-#' @param expected A vector containing the expected result.
-#' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
-#'   print. Defaults to 3.
-#' @param check_class `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same classes.
-#' @param check_length `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same length.
-#' @param check_levels `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same [factor levels][levels()].
-#' @param check_values `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` contain the same values.
-#' @param check_names `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same names.
-#' @inheritParams tbl_check_table
+#' @inheritParams vec_check_vector
 #'
 #' @return If there are any issues, a [list] from `vec_check_vector()` or a
 #'   [gradethis::fail()] message from `vec_grade_vector()`.

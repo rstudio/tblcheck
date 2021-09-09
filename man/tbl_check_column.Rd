@@ -6,7 +6,7 @@
 \title{Checks that a column is identical across two tables}
 \usage{
 tbl_check_column(
-  name,
+  column,
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -17,7 +17,7 @@ tbl_check_column(
 )
 
 tbl_grade_column(
-  name,
+  column,
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -28,7 +28,7 @@ tbl_grade_column(
 )
 }
 \arguments{
-\item{name}{\verb{[character(1)]}\cr The name of the column to check.}
+\item{column}{\verb{[character(1)]}\cr The name of the column to check.}
 
 \item{object}{A data frame to be compared to \code{expected}.}
 
@@ -37,13 +37,13 @@ tbl_grade_column(
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 print. Defaults to 3.}
 
-\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same class in \code{object} and \code{expected}.}
 
-\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same length in \code{object} and \code{expected}.}
 
-\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same values in \code{object} and \code{expected}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
@@ -54,9 +54,8 @@ If there are any issues, a \link{list} from \code{tbl_check_column()} or a
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
-Checks if the \code{name} column has the same class and values in \code{object} and
-\code{expected}.
-#' If the columns differ
+Checks if \code{column} has the same class and values in \code{object} and \code{expected}.
+If the columns differ
 \itemize{
 \item \code{tbl_check_column()} returns a list describing the problem
 \item \code{tbl_grade_column()} returns a failing grade and informative message
@@ -66,14 +65,14 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{column_missing}: The \code{name} column doesn't appear in the \code{object}
-\item \code{column_class}: Any mismatch in the classes of the \code{name} column
-\item \code{column_length}: The \code{name} column doesn't have the expected length
+\item \code{column_missing}: The \code{column} doesn't appear in the \code{object}
+\item \code{column_class}: Any mismatch in the classes of the \code{column}
+\item \code{column_length}: The \code{column} doesn't have the expected length
 \item \code{column_n_levels}, \code{column_levels}, \code{column_level_order_diffs},
 \code{column_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
-\item \code{column_value_diffs}: The first \code{max_diffs} elements of the \code{name} column
+\item \code{column_value_diffs}: The first \code{max_diffs} elements of the \code{column}
 don't have the expected values
-\item \code{column_values}: The \code{name} column doesn't have the expected values
+\item \code{column_values}: The \code{column} doesn't have the expected values
 }
 }
 
