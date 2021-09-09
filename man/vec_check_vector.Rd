@@ -68,8 +68,8 @@ message with \code{\link[gradethis:graded]{gradethis::fail()}}.
 \enumerate{
 \item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
 \item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
-\item \code{vector_n_levels}, \code{vector_levels}, \code{vector_level_order_diffs},
-\code{vector_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
+\item \code{vector_n_levels}, \code{vector_levels}, \code{vector_reverse_levels},
+\code{vector_level_order_diffs}, \code{vector_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
 \item \code{column_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
 contain the same values as \code{expected}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}

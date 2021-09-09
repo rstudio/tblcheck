@@ -41,7 +41,21 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("level_order_diffs", c("c", "b", "a")),
+    problem("reverse_levels"),
+    ignore_attr = "class"
+  )
+  
+  grade_diffs <- tblcheck_test_grade({
+    .result   <- factor(1:3, c("a", "b", "c"))
+    .solution <- factor(1:3, c("c", "a", "b"))
+    vec_grade_levels()
+  })
+  
+  expect_snapshot(grade_diffs)
+  
+  expect_equal(
+    grade_diffs$problem,
+    problem("level_order_diffs", c("c", "a", "b"), c("a", "b", "c")),
     ignore_attr = "class"
   )
   

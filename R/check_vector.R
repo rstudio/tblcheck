@@ -8,8 +8,8 @@
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
 #' 1. `vector_length`: `object` doesn't have the same length as `expected`
-#' 1. `vector_n_levels`, `vector_levels`, `vector_level_order_diffs`,
-#'   `vector_level_order`: See [vec_check_levels()]
+#' 1. `vector_n_levels`, `vector_levels`, `vector_reverse_levels`,
+#'   `vector_level_order_diffs`, `vector_level_order`: See [vec_check_levels()]
 #' 1. `column_value_diffs`: The first `max_diffs` elements of `object` don't
 #'   contain the same values as `expected`
 #' 1. `vector_values`: `object` doesn't contain the same values as `expected`

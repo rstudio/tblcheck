@@ -49,7 +49,9 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \enumerate{
 \item \code{n_levels}: \code{object} and \code{expected} have a different number of levels.
 \item \code{levels}: The object has levels that are not expected,
-or is missing names that are expected.
+or is missing levels that are expected.
+\item \code{reverse_levels}: The \code{levels} of \code{object} are in the opposite order
+of \code{expected}
 \item \code{level_order_diffs}: The first \code{max_diffs} levels of \code{object} are not in
 the same order as \code{expected}
 \item \code{level_order}: The levels of \code{object} are not in the same order
