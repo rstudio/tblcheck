@@ -34,7 +34,8 @@
     Output
       <gradethis_graded: [Incorrect]
         Your result's levels were not in the expected order. The first 3
-        levels of your result should be `c`, `a`, and `b`.
+        levels of your result should be `c`, `a`, and `b`, but they were `a`,
+        `b`, and `c`.
       >
 
 ---

@@ -371,7 +371,12 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("column_level_order_diffs", c("c", "a", "b"), column = "a"),
+    problem(
+      "column_level_order_diffs",
+      expected = c("c", "a", "b"),
+      actual = c("a", "b", "c"),
+      column = "a"
+    ),
     ignore_attr = "class"
   )
   

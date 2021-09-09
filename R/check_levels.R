@@ -77,10 +77,11 @@ vec_check_levels <- function(
     }
     
     n_levels <- min(length(levels_exp), max_diffs)
-    first_n_levels <- levels_exp[seq_len(n_levels)]
+    n_levels_exp <- levels_exp[seq_len(n_levels)]
+    n_levels_obj <- levels_obj[seq_len(n_levels)]
     
-    if (!identical(levels_obj[seq_len(n_levels)], first_n_levels)) {
-      return(problem("level_order_diffs", first_n_levels))
+    if (!identical(n_levels_obj, n_levels_exp)) {
+      return(problem("level_order_diffs", n_levels_exp, n_levels_obj))
     }
     
     problem("level_order")
@@ -201,6 +202,7 @@ tbl_message.column_reverse_levels_problem <- function(problem, ...) {
 tbl_message.level_order_diffs_problem <- function(problem, ...) {
   problem$n_levels <- length(problem$expected)
   problem$expected <- knitr::combine_words(md_code(problem$expected))
+  problem$actual   <- knitr::combine_words(md_code(problem$actual))
   
   problem$msg <- problem$msg %||%
     gettext("Your result's levels were not in the expected order. ")
@@ -208,8 +210,8 @@ tbl_message.level_order_diffs_problem <- function(problem, ...) {
   problem$exp_msg <- problem$exp_msg %||%
     ngettext(
       problem$n_levels,
-      "The first level of your result should be {expected}.",
-      "The first {n_levels} levels of your result should be {expected}."
+      "The first level of your result should be {expected}, but it was {actual}.",
+      "The first {n_levels} levels of your result should be {expected}, but they were {actual}."
     )
   
   glue::glue_data(problem, problem$msg, problem$exp_msg)
@@ -222,8 +224,8 @@ tbl_message.column_level_order_diffs_problem <- function(problem, ...) {
   problem$exp_msg <- problem$exp_msg %||%
     ngettext(
       length(problem$expected),
-      "The first level of your `{column}` column should be {expected}.",
-      "The first {n_levels} levels of your `{column}` column should be {expected}."
+      "The first level of your `{column}` column should be {expected}, but it was {actual}.",
+      "The first {n_levels} levels of your `{column}` column should be {expected}, but they were {actual}."
     )
   
   NextMethod()

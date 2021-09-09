@@ -201,7 +201,7 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("vector_level_order_diffs", c("c", "a", "b")),
+    problem("vector_level_order_diffs", c("c", "a", "b"), c("a", "b", "c")),
     ignore_attr = "class"
   )
   

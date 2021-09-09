@@ -186,7 +186,8 @@
     Output
       <gradethis_graded: [Incorrect]
         Your `a` column's levels were not in the expected order. The first 3
-        levels of your `a` column should be `c`, `a`, and `b`.
+        levels of your `a` column should be `c`, `a`, and `b`, but they were
+        `a`, `b`, and `c`.
       >
 
 ---
