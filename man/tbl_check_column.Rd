@@ -65,7 +65,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{column_missing}: The \code{column} doesn't appear in the \code{object}
+\item \code{table_names}: \code{object} doesn't contain a column named column
 \item \code{column_class}: Any mismatch in the classes of the \code{column}
 \item \code{column_length}: The \code{column} doesn't have the expected length
 \item \code{column_n_levels}, \code{column_levels}, \code{column_reverse_levels},

@@ -139,7 +139,7 @@ test_that("checks that the column is present in object", {
   
   expect_equal(
     grade$problem,
-    problem("column_missing", "a", column = "a"),
+    problem("table_names", missing = "a"),
     ignore_attr = "class"
   )
 })

@@ -8,7 +8,7 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `column_missing`: The `column` doesn't appear in the `object`
+#' 1. `table_names`: `object` doesn't contain a column named column
 #' 1. `column_class`: Any mismatch in the classes of the `column`
 #' 1. `column_length`: The `column` doesn't have the expected length
 #' 1. `column_n_levels`, `column_levels`, `column_reverse_levels`, 
@@ -83,8 +83,15 @@ tbl_check_column <- function(
   }
   
   return_if_problem(
-    tbl_check_missing(column, object), prefix = "column", column = column
+    tbl_check_names(
+      object[names(object) == column], expected[names(expected) == column]
+    ),
+    prefix = "table"
   )
+  
+  # return_if_problem(
+  #   tbl_check_missing(column, object), prefix = "column", column = column
+  # )
   
   return_if_problem(
     vec_check_vector(
