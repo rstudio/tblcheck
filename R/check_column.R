@@ -82,12 +82,12 @@ tbl_check_column <- function(
     return()
   }
   
-  return_if_problem(
-    tbl_check_names(
-      object[names(object) == column], expected[names(expected) == column]
-    ),
-    prefix = "table"
-  )
+  names_problem <- tbl_check_names(object, expected)
+  if (column %in% names_problem$missing) {
+    names_problem$missing <- column
+    names_problem$unexpected <- NULL
+    return_if_problem(names_problem, prefix = "table")
+  }
   
   return_if_problem(
     vec_check_vector(
