@@ -172,11 +172,21 @@
 # level order
 
     Code
+      grade_reverse
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column's levels were not in the expected order. The order of
+        the levels should be reversed.
+      >
+
+---
+
+    Code
       grade_diffs
     Output
       <gradethis_graded: [Incorrect]
         Your `a` column's levels were not in the expected order. The first 3
-        levels of your `a` column should be `c`, `b`, and `a`.
+        levels of your `a` column should be `c`, `a`, and `b`.
       >
 
 ---

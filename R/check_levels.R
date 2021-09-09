@@ -10,7 +10,9 @@
 #' 
 #' 1. `n_levels`: `object` and `expected` have a different number of levels.
 #' 1. `levels`: The object has levels that are not expected,
-#'   or is missing names that are expected.
+#'   or is missing levels that are expected.
+#' 1. `reverse_levels`: The `levels` of `object` are in the opposite order
+#'   of `expected`
 #' 1. `level_order_diffs`: The first `max_diffs` levels of `object` are not in 
 #'   the same order as `expected`
 #' 1. `level_order`: The levels of `object` are not in the same order
@@ -68,6 +70,10 @@ vec_check_levels <- function(
           "levels", missing = missing_levels, unexpected = unexpected_levels
         )
       )
+    }
+    
+    if (identical(levels_obj, rev(levels_exp))) {
+      return(problem("reverse_levels"))
     }
     
     n_levels <- min(length(levels_exp), max_diffs)
@@ -171,6 +177,23 @@ tbl_message.column_n_levels_problem <- function(problem, ...) {
       "Your `{column}` column should have {expected} level, ",
       "Your `{column}` column should have {expected} levels, "
     )
+  
+  NextMethod()
+}
+
+tbl_message.reverse_levels_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    gettext("Your result's levels were not in the expected order. ")
+  
+  problem$exp_msg <- problem$exp_msg %||%
+    gettext("The order of the levels should be reversed.")
+  
+  glue::glue_data(problem, problem$msg, problem$exp_msg)
+}
+
+tbl_message.column_reverse_levels_problem <- function(problem, ...) {
+  problem$msg <- problem$msg %||%
+    gettext("Your `{column}` column's levels were not in the expected order. ")
   
   NextMethod()
 }

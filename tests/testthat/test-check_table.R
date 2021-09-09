@@ -347,9 +347,23 @@ test_that("level labels", {
 })
 
 test_that("level order", {
-  grade_diffs <- tblcheck_test_grade({
+  grade_reverse <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     .solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
+    tbl_grade_table()
+  })
+  
+  expect_snapshot(grade_reverse)
+  
+  expect_equal(
+    grade_reverse$problem,
+    problem("column_reverse_levels", column = "a"),
+    ignore_attr = "class"
+  )
+  
+  grade_diffs <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = factor(1:3, c("a", "b", "c")))
+    .solution <- tibble::tibble(a = factor(1:3, c("c", "a", "b")))
     tbl_grade_table()
   })
   
@@ -357,7 +371,7 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("column_level_order_diffs", c("c", "b", "a"), column = "a"),
+    problem("column_level_order_diffs", c("c", "a", "b"), column = "a"),
     ignore_attr = "class"
   )
   

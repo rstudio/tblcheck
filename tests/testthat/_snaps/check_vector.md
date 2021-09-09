@@ -94,11 +94,21 @@
 # level order
 
     Code
+      grade_reverse
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result's levels were not in the expected order. The order of the
+        levels should be reversed.
+      >
+
+---
+
+    Code
       grade_diffs
     Output
       <gradethis_graded: [Incorrect]
         Your result's levels were not in the expected order. The first 3
-        levels of your result should be `c`, `b`, and `a`.
+        levels of your result should be `c`, `a`, and `b`.
       >
 
 ---
