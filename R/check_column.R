@@ -11,8 +11,8 @@
 #' 1. `column_missing`: The `column` doesn't appear in the `object`
 #' 1. `column_class`: Any mismatch in the classes of the `column`
 #' 1. `column_length`: The `column` doesn't have the expected length
-#' 1. `column_n_levels`, `column_levels`, `column_level_order_diffs`,
-#'   `column_level_order`: See [vec_check_levels()]
+#' 1. `column_n_levels`, `column_levels`, `column_reverse_levels`, 
+#'   `column_level_order_diffs`, `column_level_order`: See [vec_check_levels()]
 #' 1. `column_value_diffs`: The first `max_diffs` elements of the `column`
 #'   don't have the expected values
 #' 1. `column_values`: The `column` doesn't have the expected values

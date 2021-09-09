@@ -68,8 +68,8 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \item \code{column_missing}: The \code{column} doesn't appear in the \code{object}
 \item \code{column_class}: Any mismatch in the classes of the \code{column}
 \item \code{column_length}: The \code{column} doesn't have the expected length
-\item \code{column_n_levels}, \code{column_levels}, \code{column_level_order_diffs},
-\code{column_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
+\item \code{column_n_levels}, \code{column_levels}, \code{column_reverse_levels},
+\code{column_level_order_diffs}, \code{column_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
 \item \code{column_value_diffs}: The first \code{max_diffs} elements of the \code{column}
 don't have the expected values
 \item \code{column_values}: The \code{column} doesn't have the expected values
