@@ -22,10 +22,7 @@
     Code
       grade_diffs
     Output
-      <gradethis_graded: [Incorrect]
-        Your result's levels were not in the expected order. The order of the
-        levels should be reversed.
-      >
+      <gradethis_graded: [Incorrect] >
 
 ---
 
