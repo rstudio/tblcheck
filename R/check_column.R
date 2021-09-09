@@ -89,10 +89,6 @@ tbl_check_column <- function(
     prefix = "table"
   )
   
-  # return_if_problem(
-  #   tbl_check_missing(column, object), prefix = "column", column = column
-  # )
-  
   return_if_problem(
     vec_check_vector(
       object[[column]],
