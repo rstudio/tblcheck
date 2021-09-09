@@ -249,7 +249,7 @@ test_that("tbl_grade_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       tbl_grade_column(3, object = result, expected = solution)
     }),
-    "name"
+    "column"
   )
 
   expect_internal_problem(
@@ -257,7 +257,7 @@ test_that("tbl_grade_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       tbl_grade_column(c("a", "b"), object = result, expected = solution)
     }),
-    "name"
+    "column"
   )
 
   expect_internal_problem(
@@ -315,7 +315,7 @@ test_that("tbl_check_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       problem <- tbl_check_column(3, object = result, expected = solution)
     },
-    "name"
+    "column"
   )
   
   expect_internal_problem(
@@ -323,7 +323,7 @@ test_that("tbl_check_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       problem <- tbl_check_column(c("a", "b"), object = result, expected = solution)
     },
-    "name"
+    "column"
   )
   
   expect_internal_problem(
