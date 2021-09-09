@@ -80,14 +80,16 @@ vec_check_vector <- function(
     expected <- get(".solution", env)
   }
   
-  assert_internally({
-    checkmate::assert_vector(object)
-    checkmate::assert_vector(expected)
-    checkmate::assert_number(max_diffs, lower = 1)
-    checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
-  })
+  return_if_problem(
+    assert_internally({
+      checkmate::assert_vector(object)
+      checkmate::assert_vector(expected)
+      checkmate::assert_number(max_diffs, lower = 1)
+      checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
+      checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+      checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+    })
+  )
   
   if (check_class) {
     return_if_problem(
@@ -137,20 +139,18 @@ vec_grade_vector <- function(
   check_names = TRUE,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      vec_check_vector(
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        check_class = check_class,
-        check_length = check_length,
-        check_values = check_values,
-        check_names = check_names,
-        env = env
-      ),
+  tbl_grade(
+    vec_check_vector(
+      object = object,
+      expected = expected,
       max_diffs = max_diffs,
+      check_class = check_class,
+      check_length = check_length,
+      check_values = check_values,
+      check_names = check_names,
       env = env
-    )
+    ),
+    max_diffs = max_diffs,
+    env = env
   )
 }

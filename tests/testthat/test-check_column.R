@@ -329,67 +329,47 @@ test_that("tbl_grade_column() handles bad user input", {
 })
 
 test_that("tbl_check_column() handles bad user input", {
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column(3, object = result, expected = solution)
-    },
+  .result <- .solution <- tibble::tibble(b = letters[1:3])
+  
+  expect_message(
+    problem <- tbl_check_column(3),
     "column"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "column")
   
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column(c("a", "b"), object = result, expected = solution)
-    },
+  expect_message(
+    problem <- tbl_check_column(c("a", "b")),
     "column"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "column")
   
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, check_class = "yes")
-    },
+  expect_message(
+    problem <- tbl_check_column("b", check_class = "yes"),
     "check_class"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_class")
   
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, check_length = c(TRUE, TRUE))
-    },
+  expect_message(
+    problem <- tbl_check_column("b", check_length = c(TRUE, TRUE)),
     "check_length"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_length")
   
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, check_values = "yes")
-    },
+  expect_message(
+    problem <- tbl_check_column("b", check_values = NULL),
     "check_values"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_values")
   
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, max_diffs = 1:3)
-    },
+  expect_message(
+    problem <- tbl_check_column("b", max_diffs = 1:3),
     "max_diffs"
   )
-  
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = 12, expected = solution)
-    },
-    "object"
-  )
-  
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = list(a = 1))
-    },
-    "expected"
-  )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "max_diffs")
 })

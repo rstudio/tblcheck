@@ -41,10 +41,11 @@ tbl_grade.tblcheck_problem <- function(
     return(invisible())
   }
   
-  assert_internally({
-    checkmate::assert_class(problem, "tblcheck_problem")
-    checkmate::assert_number(max_diffs, lower = 1)
-  })
+  err <- assert_internally(checkmate::assert_number(max_diffs, lower = 1))
+  
+  if (!is.null(err)) {
+    return(tbl_grade(err))
+  }
   
   gradethis::fail(
     tbl_message(problem, max_diffs = max_diffs),

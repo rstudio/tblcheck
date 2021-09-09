@@ -455,43 +455,40 @@ test_that("tbl_grade_table() handles bad user input", {
 })
 
 test_that("tbl_check_table() handles bad user input", {
-  expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem <- tbl_check_table(check_dimensions = "yes")
-    },
+  .result <- .solution <- tibble::tibble(a = 1:3)
+  
+  expect_message(
+    problem <- tbl_check_table(check_dimensions = "yes"),
     "check_dimensions"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_dimensions")
   
-  expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_names = 5)
-    },
+  expect_message(
+    problem <- tbl_check_table(check_names = 5),
     "check_names"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_names")
   
-  expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_columns = NULL)
-    },
+  expect_message(
+    problem <- tbl_check_table(check_columns = NULL),
     "check_columns"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_columns")
   
-  expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_class = NA)
-    },
+  expect_message(
+    problem <- tbl_check_table(check_class = NA),
     "check_class"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_class")
   
-  expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_column_values = c(TRUE, TRUE))
-    },
+  expect_message(
+    problem <- tbl_check_table(check_column_values = c(TRUE, TRUE)),
     "check_column_values"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_column_values")
 })

@@ -290,57 +290,45 @@ test_that("vec_grade_vector() handles bad user input", {
 })
 
 test_that("vec_check_vector() handles bad user input", {
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(check_class = "yes")
-    },
+  .result <- .solution <- letters[1:3]
+  
+  expect_message(
+    problem <- vec_check_vector(check_class = "yes"),
     "check_class"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_class")
   
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(check_length = c(TRUE, TRUE))
-    },
+  expect_message(
+    problem <- vec_check_vector(check_length = c(TRUE, TRUE)),
     "check_length"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_length")
   
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(check_values = NULL)
-    },
+  expect_message(
+    problem <- vec_check_vector(check_values = NULL),
     "check_values"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "check_values")
   
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(max_diffs = 1:3)
-    },
+  expect_message(
+    problem <- vec_check_vector(max_diffs = 1:3),
     "max_diffs"
   )
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "max_diffs")
   
-  expect_internal_problem(
-    {
-      .result   <- NULL
-      .solution <- letters[1:3]
-      problem <- vec_check_vector()
-    },
-    "object"
-  )
+  .result   <- NULL
+  .solution <- letters[1:3]
+  expect_message(problem <- vec_check_vector(), "object")
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "object")
   
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- NULL
-      problem <- vec_check_vector()
-    },
-    "expected"
-  )
+  .result   <- letters[1:3]
+  .solution <- NULL
+  expect_message(problem <- vec_check_vector(), "expected")
+  testthat::expect_s3_class(problem, "internal_feedback_error_problem")
+  testthat::expect_match(problem$error$message, "expected")
 })

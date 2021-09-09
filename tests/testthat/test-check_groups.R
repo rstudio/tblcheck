@@ -166,32 +166,32 @@ test_that("tbl_grade_groups() with no problems returns invisible()", {
   problem <- expect_invisible(tbl_check_groups())
   expect_null(problem)
 })
-
-test_that("tbl_grade_groups() handles bad user input", {
-  expect_internal_problem(
-    tblcheck_test_grade({
-      .result   <- tibble::tibble(a = letters[1:3], b = a)
-      .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
-      tbl_grade_groups(max_diffs = "a")
-    }),
-    "max_diffs"
-  )
-  
-  expect_internal_problem(
-    tblcheck_test_grade({
-      .result   <- tibble::tibble(a = letters[1:3], b = a)
-      .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
-      tbl_grade_groups(max_diffs = -1)
-    }),
-    "max_diffs"
-  )
-  
-  expect_internal_problem(
-    tblcheck_test_grade({
-      .result   <- tibble::tibble(a = letters[1:3], b = a)
-      .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
-      tbl_grade_groups(max_diffs = 1:2)
-    }),
-    "max_diffs"
-  )
-})
+# 
+# test_that("tbl_grade_groups() handles bad user input", {
+#   expect_internal_problem(
+#     tblcheck_test_grade({
+#       .result   <- tibble::tibble(a = letters[1:3], b = a)
+#       .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+#       tbl_grade_groups(max_diffs = "a")
+#     }),
+#     "max_diffs"
+#   )
+#   
+#   expect_internal_problem(
+#     tblcheck_test_grade({
+#       .result   <- tibble::tibble(a = letters[1:3], b = a)
+#       .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+#       tbl_grade_groups(max_diffs = -1)
+#     }),
+#     "max_diffs"
+#   )
+#   
+#   expect_internal_problem(
+#     tblcheck_test_grade({
+#       .result   <- tibble::tibble(a = letters[1:3], b = a)
+#       .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+#       tbl_grade_groups(max_diffs = 1:2)
+#     }),
+#     "max_diffs"
+#   )
+# })

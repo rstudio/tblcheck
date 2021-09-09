@@ -67,15 +67,17 @@ tbl_check_column <- function(
     expected <- get(".solution", env)
   }
   
-  assert_internally({
-    checkmate::assert_character(column, len = 1, any.missing = FALSE)
-    checkmate::assert_number(max_diffs, lower = 1)
-    checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
-  })
+  return_if_problem(
+    assert_internally({
+      checkmate::assert_character(column, len = 1, any.missing = FALSE)
+      checkmate::assert_number(max_diffs, lower = 1)
+      checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
+      checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+      checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+      checkmate::assert_data_frame(object)
+      checkmate::assert_data_frame(expected)
+    })
+  )
   
   if (!column %in% names(expected)) {
     warning("`", column, "` is not a column in `expected`.")
@@ -116,19 +118,17 @@ tbl_grade_column <- function(
   check_values = TRUE,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_column(
-        column = column,
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        check_class = check_class,
-        check_length = check_length,
-        check_values = check_values,
-        env = env
-      ), 
+  tbl_grade(
+    tbl_check_column(
+      column = column,
+      object = object,
+      expected = expected,
+      max_diffs = max_diffs,
+      check_class = check_class,
+      check_length = check_length,
+      check_values = check_values,
       env = env
-    )
+    ), 
+    env = env
   )
 }
