@@ -96,7 +96,10 @@
     Code
       grade_reverse
     Output
-      <gradethis_graded: [Incorrect] >
+      <gradethis_graded: [Incorrect]
+        The order of the levels in your result are the reverse of the
+        expected order.
+      >
 
 ---
 

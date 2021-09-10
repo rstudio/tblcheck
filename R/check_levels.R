@@ -186,7 +186,7 @@ tbl_message.reverse_levels_problem <- function(problem, ...) {
   problem$msg <- problem$msg %||%
     gettext("The order of the levels in your result are the reverse of the expected order.")
   
-  glue::glue_data(problem, problem$msg, problem$exp_msg)
+  glue::glue_data(problem, problem$msg, problem$exp_msg %||% "")
 }
 
 tbl_message.column_reverse_levels_problem <- function(problem, ...) {
