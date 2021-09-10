@@ -3,11 +3,11 @@ assert_internally <- function(expr, ..., env = parent.frame()) {
   
   if (inherits(err, "error")) {
     message("An error occurred in the grading code: ", err$message)
-    problem("internal_feedback_error", error = err)
+    problem("tblcheck_internal", error = err)
   }
 }
 
-tbl_grade.internal_feedback_error_problem <- function(
+tbl_grade.tblcheck_internal_problem <- function(
   problem, max_diffs = 3, env = parent.frame(), ...
 ) {
   gradethis::graded(
