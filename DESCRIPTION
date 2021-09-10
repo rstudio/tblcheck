@@ -1,5 +1,5 @@
 Package: tblcheck
-Title: Functions that facilitate grading tables
+Title: Grade Tables in Learning Exercises
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Alexander",
