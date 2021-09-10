@@ -29,7 +29,7 @@ tbl_grade.default <- function(
 #' @export
 tbl_grade.list <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
   problem <- as_problem(problem)
-  NextMethod()
+  tbl_grade(problem)
 }
 
 #' @rdname tbl_grade
