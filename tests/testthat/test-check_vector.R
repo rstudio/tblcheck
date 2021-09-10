@@ -177,10 +177,23 @@ test_that("level labels", {
 })
 
 test_that("level order", {
-  grade_diffs <- tblcheck_test_grade({
+  grade_reverse <- tblcheck_test_grade({
     .result   <- as.factor(c("a", "b", "c"))
     .solution <- factor(.result, levels = rev(levels(.result)))
-    problem   <- vec_check_vector()
+    vec_grade_vector()
+  })
+  
+  expect_snapshot(grade_reverse)
+  
+  expect_equal(
+    grade_reverse$problem,
+    problem("vector_reverse_levels"),
+    ignore_attr = "class"
+  )
+  
+  grade_diffs <- tblcheck_test_grade({
+    .result   <- factor(1:3, c("a", "b", "c"))
+    .solution <- factor(1:3, c("c", "a", "b"))
     vec_grade_vector()
   })
   
@@ -188,7 +201,7 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("vector_level_order_diffs", c("c", "b", "a")),
+    problem("vector_level_order_diffs", c("c", "a", "b"), c("a", "b", "c")),
     ignore_attr = "class"
   )
   

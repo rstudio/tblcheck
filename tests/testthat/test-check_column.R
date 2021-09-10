@@ -139,7 +139,7 @@ test_that("checks that the column is present in object", {
   
   expect_equal(
     grade$problem,
-    problem("column_missing", "a", column = "a"),
+    problem("table_names", missing = "a"),
     ignore_attr = "class"
   )
 })
@@ -213,9 +213,23 @@ test_that("level labels", {
 })
 
 test_that("level order", {
-  grade_diffs <- tblcheck_test_grade({
+  grade_reverse <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     .solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
+    tbl_grade_column("a")
+  })
+  
+  expect_snapshot(grade_reverse)
+  
+  expect_equal(
+    grade_reverse$problem,
+    problem("column_reverse_levels", column = "a"),
+    ignore_attr = "class"
+  )
+  
+  grade_diffs <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = factor(1:3, c("a", "b", "c")))
+    .solution <- tibble::tibble(a = factor(1:3, c("c", "a", "b")))
     tbl_grade_column("a")
   })
   
@@ -223,7 +237,12 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("column_level_order_diffs", c("c", "b", "a"), column = "a"),
+    problem(
+      "column_level_order_diffs",
+      expected = c("c", "a", "b"),
+      actual = c("a", "b", "c"),
+      column = "a"
+    ),
     ignore_attr = "class"
   )
   
@@ -249,7 +268,7 @@ test_that("tbl_grade_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       tbl_grade_column(3, object = result, expected = solution)
     }),
-    "name"
+    "column"
   )
 
   expect_internal_problem(
@@ -257,7 +276,7 @@ test_that("tbl_grade_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       tbl_grade_column(c("a", "b"), object = result, expected = solution)
     }),
-    "name"
+    "column"
   )
 
   expect_internal_problem(
@@ -315,7 +334,7 @@ test_that("tbl_check_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       problem <- tbl_check_column(3, object = result, expected = solution)
     },
-    "name"
+    "column"
   )
   
   expect_internal_problem(
@@ -323,7 +342,7 @@ test_that("tbl_check_column() handles bad user input", {
       result <- solution <- tibble::tibble(b = letters[1:3])
       problem <- tbl_check_column(c("a", "b"), object = result, expected = solution)
     },
-    "name"
+    "column"
   )
   
   expect_internal_problem(

@@ -23,8 +23,19 @@
       grade_diffs
     Output
       <gradethis_graded: [Incorrect]
+        The order of the levels in your result are the reverse of the
+        expected order.
+      >
+
+---
+
+    Code
+      grade_diffs
+    Output
+      <gradethis_graded: [Incorrect]
         Your result's levels were not in the expected order. The first 3
-        levels of your result should be `c`, `b`, and `a`.
+        levels of your result should be `c`, `a`, and `b`, but they were `a`,
+        `b`, and `c`.
       >
 
 ---

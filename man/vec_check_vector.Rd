@@ -60,16 +60,20 @@ Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Check if two vectors have the same class, length, and values.
-If the vectors differ, returns a failure state and an informative
-message with \code{\link[gradethis:graded]{gradethis::fail()}}.
+If the vectors differ
+\itemize{
+\item \code{vec_check_vector()} returns a list describing the problem
+\item \code{vec_grade_vector()} returns a failing grade and informative message
+with \code{\link[gradethis:graded]{gradethis::fail()}}
+}
 }
 \section{Problems}{
 
 \enumerate{
 \item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
 \item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
-\item \code{vector_n_levels}, \code{vector_levels}, \code{vector_level_order_diffs},
-\code{vector_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
+\item \code{vector_n_levels}, \code{vector_levels}, \code{vector_reverse_levels},
+\code{vector_level_order_diffs}, \code{vector_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
 \item \code{column_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
 contain the same values as \code{expected}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
