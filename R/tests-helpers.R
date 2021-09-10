@@ -12,17 +12,6 @@ expect_warning <- function(...) {
   suppressWarnings(testthat::expect_warning(...))
 }
 
-expect_grade <- function(grade, message, correct = FALSE, problem = NULL, ...) {
-  testthat::expect_s3_class(grade, "gradethis_graded")
-  testthat::expect_equal(grade$correct, correct)
-  if (!is.null(message)) {
-    testthat::expect_match(grade$message, message, ...)
-  }
-  if (!is.null(problem)) {
-    testthat::expect_equal(grade$problem, problem)
-  }
-}
-
 tblcheck_test_grade <- function(expr, return_all = FALSE) {
   expr <- rlang::enexpr(expr)
   
