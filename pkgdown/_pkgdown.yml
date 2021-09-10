@@ -65,6 +65,7 @@ reference:
   - vec_check_length
   - vec_check_levels
   - tbl_check_names
+  - vec_check_values
 - title: Problems
   desc: |
     Inspect the contents of a `problem` from a

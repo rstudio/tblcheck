@@ -60,8 +60,12 @@ Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Check if two vectors have the same class, length, and values.
-If the vectors differ, returns a failure state and an informative
-message with \code{\link[gradethis:graded]{gradethis::fail()}}.
+If the vectors differ
+\itemize{
+\item \code{vec_check_vector()} returns a list describing the problem
+\item \code{vec_grade_vector()} returns a failing grade and informative message
+with \code{\link[gradethis:graded]{gradethis::fail()}}
+}
 }
 \section{Problems}{
 

@@ -148,7 +148,7 @@ tbl_check_table <- function(
     for (column in names(expected)) {
       return_if_problem(
         tbl_check_column(
-          name = column,
+          column = column,
           object = object,
           expected = expected,
           check_class = check_column_class,
