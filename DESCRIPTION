@@ -1,25 +1,20 @@
 Package: tblcheck
-Title: Functions that facilitate grading dataframes or tibbles
+Title: Functions that facilitate grading tables
 Version: 0.0.0.9000
 Authors@R: 
-    c(person(given = "Garrick",
-             family = "Aden-Buie",
-             role = c("aut", "cre"),
-             email = "garrick@rstudio.com",
-             comment = c(ORCID = "0000-0002-7111-0077")),
-      person(given = "Nischal",
-             family = "Shrestha",
-             role = "aut",
-             email = "nsrocker92@gmail.com",
-             comment = c(ORCID = "0000-0003-3321-1712")),
-      person(given = "Alexander",
+    c(person(given = "Alexander",
              family = "Rossell Hayes",
+             role = c("aut", "cre"),
+             email = "alex.rossellhayes@rstudio.com",
+             comment = c(ORCID = "0000-0001-9412-0457")),
+      person(given = "Garrick",
+             family = "Aden-Buie",
              role = "aut",
-             email = "alexander@rossellhayes.com",
-             comment = c(ORCID = "0000-0001-9412-0457")))
-Description: tblcheck provides functions that inspect dataframe or tibble
-    objects to make it easier for teachers to check that student tables
-    meet expectations.
+             email = "garrick@rstudio.com",
+             comment = c(ORCID = "0000-0002-7111-0077")))
+Description: 'tblcheck' extends 'gradethis' with functions that inspect
+    data frame or tibble objects to make it easier for teachers to check
+    that student tables meet expectations.
 License: MIT + file LICENSE
 Imports:
     checkmate,
