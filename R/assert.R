@@ -1,7 +1,7 @@
 catch_internal_problem <- function(expr, ...) {
   tryCatch(expr, ..., error = function(err) {
     message("An error occurred in the grading code: ", err$message)
-    problem("tblcheck_internal", error = err)
+    problem("tblcheck_internal", error = err$message)
   })
 }
 

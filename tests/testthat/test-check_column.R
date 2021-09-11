@@ -336,40 +336,40 @@ test_that("tbl_check_column() handles bad user input", {
     "column"
   )
   testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error$message, "column")
+  testthat::expect_match(problem$error, "column")
   
   expect_message(
     problem <- tbl_check_column(c("a", "b")),
     "column"
   )
   testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error$message, "column")
+  testthat::expect_match(problem$error, "column")
   
   expect_message(
     problem <- tbl_check_column("b", check_class = "yes"),
     "check_class"
   )
   testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error$message, "check_class")
+  testthat::expect_match(problem$error, "check_class")
   
   expect_message(
     problem <- tbl_check_column("b", check_length = c(TRUE, TRUE)),
     "check_length"
   )
   testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error$message, "check_length")
+  testthat::expect_match(problem$error, "check_length")
   
   expect_message(
     problem <- tbl_check_column("b", check_values = NULL),
     "check_values"
   )
   testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error$message, "check_values")
+  testthat::expect_match(problem$error, "check_values")
   
   expect_message(
     problem <- tbl_check_column("b", max_diffs = 1:3),
     "max_diffs"
   )
   testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error$message, "max_diffs")
+  testthat::expect_match(problem$error, "max_diffs")
 })
