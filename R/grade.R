@@ -41,9 +41,9 @@ tbl_grade.tblcheck_problem <- function(
     return(invisible())
   }
   
-  err <- assert_internally(checkmate::assert_number(max_diffs, lower = 1))
+  err <- catch_internal_problem(checkmate::assert_number(max_diffs, lower = 1))
   
-  if (!is.null(err)) {
+  if (is_problem(err)) {
     return(tbl_grade(err))
   }
   

@@ -67,17 +67,15 @@ tbl_check_column <- function(
     expected <- get(".solution", env)
   }
   
-  return_if_problem(
-    assert_internally({
-      checkmate::assert_character(column, len = 1, any.missing = FALSE)
-      checkmate::assert_number(max_diffs, lower = 1)
-      checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
-      checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
-      checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
-      checkmate::assert_data_frame(object)
-      checkmate::assert_data_frame(expected)
-    })
-  )
+  return_if_internal_problem({
+    checkmate::assert_character(column, len = 1, any.missing = FALSE)
+    checkmate::assert_number(max_diffs, lower = 1)
+    checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
+  })
   
   if (!column %in% names(expected)) {
     warning("`", column, "` is not a column in `expected`.")

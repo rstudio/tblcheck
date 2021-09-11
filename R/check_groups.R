@@ -35,12 +35,10 @@ tbl_check_groups <- function(
     expected <- get(".solution", env)
   }
   
-  return_if_problem(
-    assert_internally({
-      checkmate::assert_data_frame(object)
-      checkmate::assert_data_frame(expected)
-    })
-  )
+  return_if_internal_problem({
+    checkmate::assert_data_frame(object)
+    checkmate::assert_data_frame(expected)
+  })
   
   groups_exp <- group_vars(expected)
   groups_obj <- group_vars(object)

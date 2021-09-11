@@ -56,13 +56,11 @@ vec_check_values <- function(
     expected <- get(".solution", env)
   }
   
-  return_if_problem(
-    assert_internally({
-      checkmate::assert_vector(object)
-      checkmate::assert_vector(expected)
-      checkmate::assert_number(max_diffs, lower = 1)
-    })
-  )
+  return_if_internal_problem({
+    checkmate::assert_vector(object)
+    checkmate::assert_vector(expected)
+    checkmate::assert_number(max_diffs, lower = 1)
+  })
   
   exp_values <- unname(expected)
   obj_values <- unname(object)

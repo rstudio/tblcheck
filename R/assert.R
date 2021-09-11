@@ -1,10 +1,12 @@
-assert_internally <- function(expr, ..., env = parent.frame()) {
-  err <- tryCatch(expr, error = identity, ...)
-  
-  if (inherits(err, "error")) {
+catch_internal_problem <- function(expr, ...) {
+  tryCatch(expr, ..., error = function(err) {
     message("An error occurred in the grading code: ", err$message)
     problem("tblcheck_internal", error = err)
-  }
+  })
+}
+
+return_if_internal_problem <- function(expr, ..., env = parent.frame()) {
+  return_if_problem(catch_internal_problem(expr, ...), env = env)
 }
 
 tbl_grade.tblcheck_internal_problem <- function(
