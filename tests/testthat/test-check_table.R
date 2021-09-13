@@ -461,34 +461,34 @@ test_that("tbl_check_table() handles bad user input", {
     problem <- tbl_check_table(check_dimensions = "yes"),
     "check_dimensions"
   )
-  testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error, "check_dimensions")
+  expect_s3_class(problem, "tblcheck_internal_problem")
+  expect_match(problem$error, "check_dimensions")
   
   expect_message(
     problem <- tbl_check_table(check_names = 5),
     "check_names"
   )
-  testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error, "check_names")
+  expect_s3_class(problem, "tblcheck_internal_problem")
+  expect_match(problem$error, "check_names")
   
   expect_message(
     problem <- tbl_check_table(check_columns = NULL),
     "check_columns"
   )
-  testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error, "check_columns")
+  expect_s3_class(problem, "tblcheck_internal_problem")
+  expect_match(problem$error, "check_columns")
   
   expect_message(
     problem <- tbl_check_table(check_class = NA),
     "check_class"
   )
-  testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error, "check_class")
+  expect_s3_class(problem, "tblcheck_internal_problem")
+  expect_match(problem$error, "check_class")
   
   expect_message(
     problem <- tbl_check_table(check_column_values = c(TRUE, TRUE)),
     "check_column_values"
   )
-  testthat::expect_s3_class(problem, "tblcheck_internal_problem")
-  testthat::expect_match(problem$error, "check_column_values")
+  expect_s3_class(problem, "tblcheck_internal_problem")
+  expect_match(problem$error, "check_column_values")
 })
