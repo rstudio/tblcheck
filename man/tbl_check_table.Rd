@@ -8,7 +8,6 @@
 tbl_check_table(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
   check_dimensions = TRUE,
@@ -38,13 +37,6 @@ tbl_grade_table(
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
-display in an informative failure message.
-Passed to \code{\link[=tbl_check_names]{tbl_check_names()}} to determine the number of mismatched column
-names to display and the \code{n_values} argument of \code{\link[=tbl_check_column]{tbl_check_column()}} to
-determine the number of mismatched column values to display.
-Defaults to 3.}
-
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=class]{class()}}.}
 
@@ -68,6 +60,13 @@ columns has the same class in \code{object} and \code{expected}.}
 column has the same values in \code{object} and \code{expected}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+display in an informative failure message.
+Passed to \code{\link[=tbl_check_names]{tbl_check_names()}} to determine the number of mismatched column
+names to display and the \code{n_values} argument of \code{\link[=tbl_check_column]{tbl_check_column()}} to
+determine the number of mismatched column values to display.
+Defaults to 3.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_table()} or a

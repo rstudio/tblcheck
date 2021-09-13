@@ -11,10 +11,8 @@
 #' 1. `table_names`: `object` doesn't contain a column named column
 #' 1. `column_class`: Any mismatch in the classes of the `column`
 #' 1. `column_length`: The `column` doesn't have the expected length
-#' 1. `column_n_levels`, `column_levels`, `column_reverse_levels`, 
-#'   `column_level_order_diffs`, `column_level_order`: See [vec_check_levels()]
-#' 1. `column_value_diffs`: The first `max_diffs` elements of the `column`
-#'   don't have the expected values
+#' 1. `column_levels_n`, `column_levels`, `column_levels_reversed`, 
+#'   `column_levels_order`: See [vec_check_levels()]
 #' 1. `column_values`: The `column` doesn't have the expected values
 #'
 #' @param column `[character(1)]`\cr The name of the column to check.
@@ -54,7 +52,6 @@ tbl_check_column <- function(
   column,
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
@@ -69,7 +66,6 @@ tbl_check_column <- function(
   
   assert_internally({
     checkmate::assert_character(column, len = 1, any.missing = FALSE)
-    checkmate::assert_number(max_diffs, lower = 1)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
@@ -93,7 +89,6 @@ tbl_check_column <- function(
     vec_check_vector(
       object[[column]],
       expected[[column]],
-      max_diffs = max_diffs,
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
@@ -122,12 +117,12 @@ tbl_grade_column <- function(
         column = column,
         object = object,
         expected = expected,
-        max_diffs = max_diffs,
         check_class = check_class,
         check_length = check_length,
         check_values = check_values,
         env = env
-      ), 
+      ),
+      max_diffs = max_diffs,
       env = env
     )
   )

@@ -77,6 +77,14 @@ tbl_grade_groups <- function(
 }
 
 tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
+  if (inherits(problem, "table_problem")) {
+    problem$missing_msg <- problem$missing_msg %||% 
+      "Your table should be grouped by {missing}. "
+    
+    problem$unexpected_msg <- problem$unexpected_msg %||%
+      "Your table should not be grouped by {unexpected}. "
+  }
+  
   problem$missing_msg <- problem$missing_msg %||% 
     "Your result should be grouped by {missing}. "
   
@@ -96,14 +104,4 @@ tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
   }
   
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
-}
-
-tbl_message.table_groups_problem <- function(problem, max_diffs = 3, ...) {
-  problem$missing_msg <- problem$missing_msg %||% 
-    "Your table should be grouped by {missing}. "
-  
-  problem$unexpected_msg <- problem$unexpected_msg %||%
-    "Your table should not be grouped by {unexpected}. "
-  
-  NextMethod()
 }

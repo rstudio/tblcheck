@@ -10,7 +10,7 @@ test_that("vec_grade_vector() checks classes", {
   expect_equal(
     grade$problem,
     problem(
-      "vector_class",
+      "class",
       "integer",
       "character",
       expected_length = 3,
@@ -31,7 +31,7 @@ test_that("vec_grade_vector() checks the first three values", {
   
   expect_equal(
     grade$problem,
-    problem("vector_value_diffs", letters[1:3]),
+    problem("values", letters, rev(letters)),
     ignore_attr = "class"
   )
 })
@@ -49,7 +49,7 @@ test_that("vec_grade_vector() checks multiple classes", {
   expect_equal(
     grade$problem,
     problem(
-      type = "vector_class", 
+      type = "class", 
       expected = c("test", "class", "integer"),
       actual = "integer",
       expected_length = 10,
@@ -70,7 +70,7 @@ test_that("vec_grade_vector() checks for value differences beyond the first 3", 
   
   expect_equal(
     grade$problem,
-    problem("vector_values"),
+    problem("values", c(rep(1, 3), 10:15), c(rep(1, 3), 5:10)),
     ignore_attr = "class"
   )
 })
@@ -86,7 +86,7 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_equal(
     grade$problem,
-    problem("vector_value_diffs", letters[26:22]),
+    problem("values", rev(letters), letters),
     ignore_attr = "class"
   )
 })
@@ -102,7 +102,7 @@ test_that("max_diffs doesn't overflow", {
   
   expect_equal(
     grade$problem,
-    problem("vector_value_diffs", letters[2:1]),
+    problem("values", letters[2:1], letters[1:2]),
     ignore_attr = "class"
   )
 })
@@ -118,7 +118,7 @@ test_that("checks that vectors have the same length", {
   
   expect_equal(
     grade$problem,
-    problem("vector_length", 4, 3),
+    problem("length", 4, 3),
     ignore_attr = "class"
   )
 })
@@ -135,7 +135,7 @@ test_that("checks that vectors have the same names", {
   expect_equal(
     grade$problem,
     problem(
-      "vector_names",
+      "names",
       missing = letters[1:3], unexpected = letters[24:26]
     ),
     ignore_attr = "class"
@@ -153,7 +153,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("vector_n_levels", 3, 2),
+    problem("levels_n", 3, 2),
     ignore_attr = "class"
   )
 })
@@ -170,7 +170,7 @@ test_that("level labels", {
   expect_equal(
     grade$problem,
     problem(
-      "vector_levels", missing = c("x", "y", "z"), unexpected = c("a", "b", "c")
+      "levels", missing = c("x", "y", "z"), unexpected = c("a", "b", "c")
     ),
     ignore_attr = "class"
   )
@@ -187,7 +187,7 @@ test_that("level order", {
   
   expect_equal(
     grade_reverse$problem,
-    problem("vector_reverse_levels"),
+    problem("levels_reversed"),
     ignore_attr = "class"
   )
   
@@ -201,7 +201,7 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("vector_level_order_diffs", c("c", "a", "b"), c("a", "b", "c")),
+    problem("levels_order", c("c", "a", "b"), c("a", "b", "c")),
     ignore_attr = "class"
   )
   
@@ -215,7 +215,9 @@ test_that("level order", {
   
   expect_equal(
     grade$problem,
-    problem("vector_level_order"),
+    problem(
+      "levels_order", c("a", "b", "c", "e", "d"), c("a", "b", "c", "d", "e")
+    ),
     ignore_attr = "class"
   )
 })
@@ -315,15 +317,6 @@ test_that("vec_check_vector() handles bad user input", {
       vec_check_vector(check_values = NULL)
     },
     "check_values"
-  )
-  
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(max_diffs = 1:3)
-    },
-    "max_diffs"
   )
   
   expect_internal_problem(

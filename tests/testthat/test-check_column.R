@@ -10,7 +10,7 @@ test_that("tbl_grade_column() checks classes", {
   expect_equal(
     grade$problem,
     problem(
-      "column_class",
+      "class",
       "integer", 
       "character",
       expected_length = 3,
@@ -32,11 +32,7 @@ test_that("tbl_grade_column() checks the first three values", {
   
   expect_equal(
     grade$problem,
-    problem(
-      "column_value_diffs",
-      letters[1:3],
-      column = "a"
-    ),
+    problem("values", letters, rev(letters), column = "a"),
     ignore_attr = "class"
   )
 })
@@ -53,7 +49,7 @@ test_that("tbl_grade_column() checks multiple classes", {
   expect_equal(
     grade$problem,
     problem(
-      type = "column_class", 
+      type = "class", 
       expected = c("tbl_df", "tbl", "data.frame"), 
       actual = "data.frame",
       expected_length = 1,
@@ -75,7 +71,7 @@ test_that("tbl_grade_column() checks for value differences beyond the first 3", 
   
   expect_equal(
     grade$problem,
-    problem("column_values", column = "a"),
+    problem("values", c(rep(1, 3), 10:15), c(rep(1, 3), 5:10), column = "a"),
     ignore_attr = "class"
   )
 })
@@ -91,7 +87,7 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_equal(
     grade$problem,
-    problem("column_value_diffs", letters[26:22], column = "a"),
+    problem("values", rev(letters), letters, column = "a"),
     ignore_attr = "class"
   )
 })
@@ -107,7 +103,7 @@ test_that("max_diffs doesn't overflow", {
   
   expect_equal(
     grade$problem,
-    problem("column_value_diffs", letters[2:1], column = "a"),
+    problem("values", letters[2:1], letters[1:2], column = "a"),
     ignore_attr = "class"
   )
 })
@@ -123,7 +119,7 @@ test_that("checks that columns have the same length", {
   
   expect_equal(
     grade$problem,
-    problem("column_length", 4, 3, column = "a"),
+    problem("length", 4, 3, column = "a"),
     ignore_attr = "class"
   )
 })
@@ -139,7 +135,7 @@ test_that("checks that the column is present in object", {
   
   expect_equal(
     grade$problem,
-    problem("table_names", missing = "a"),
+    problem("names", missing = "a"),
     ignore_attr = "class"
   )
 })
@@ -186,7 +182,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("column_n_levels", 3, 2, column = "a"),
+    problem("levels_n", 3, 2, column = "a"),
     ignore_attr = "class"
   )
 })
@@ -203,7 +199,7 @@ test_that("level labels", {
   expect_equal(
     grade$problem,
     problem(
-      "column_levels",
+      "levels",
       missing = c("x", "y", "z"),
       unexpected = c("a", "b", "c"),
       column = "a"
@@ -223,7 +219,7 @@ test_that("level order", {
   
   expect_equal(
     grade_reverse$problem,
-    problem("column_reverse_levels", column = "a"),
+    problem("levels_reversed", column = "a"),
     ignore_attr = "class"
   )
   
@@ -238,7 +234,7 @@ test_that("level order", {
   expect_equal(
     grade_diffs$problem,
     problem(
-      "column_level_order_diffs",
+      "levels_order",
       expected = c("c", "a", "b"),
       actual = c("a", "b", "c"),
       column = "a"
@@ -257,7 +253,7 @@ test_that("level order", {
   
   expect_equal(
     grade$problem,
-    problem("column_level_order", column = "a"),
+    problem("levels_order", c("a", "b", "c", "e", "d"), c("a", "b", "c", "d", "e"), column = "a"),
     ignore_attr = "class"
   )
 })
@@ -367,14 +363,6 @@ test_that("tbl_check_column() handles bad user input", {
       problem <- tbl_check_column("b", object = result, expected = solution, check_values = "yes")
     },
     "check_values"
-  )
-  
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, max_diffs = 1:3)
-    },
-    "max_diffs"
   )
   
   expect_internal_problem(

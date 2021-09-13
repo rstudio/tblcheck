@@ -34,23 +34,17 @@ return_if_problem <- function(
   problem, prefix = NULL, ..., env = parent.frame()
 ) {
   if (inherits(problem, "tblcheck_problem")) {
-    problem_class <- class(problem)
+    if (!is.null(prefix)) {
+      problem_class <- append(
+        class(problem), paste0(prefix, "_problem"), after = 1
+      )
+    } else {
+      problem_class <- class(problem)
+    }
+    
+    # Attributes are dropped by `c()`, so the class must be reintroduced
     problem <- c(problem, ...)
     class(problem) <- problem_class
-    
-    if (!is.null(prefix)) {
-      # Add trailing underscore to prefix if it doesn't already have one
-      prefix <- gsub("_?$", "_", prefix)
-      
-      custom_classes <- setdiff(
-        problem_class, c("tblcheck_problem", "gradethis_problem", "list")
-      )
-      base_class <- custom_classes[length(custom_classes)]
-      prefixed_base_class <- paste0(prefix, base_class)
-      class(problem) <- unique(c(prefixed_base_class, problem_class))
-      
-      problem$type <- gsub("^((table|vector|column)_)?", prefix, problem$type)
-    }
     
     rlang::return_from(env, problem)
   }

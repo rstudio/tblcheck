@@ -8,7 +8,6 @@
 vec_check_vector(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_levels = TRUE,
@@ -33,9 +32,6 @@ vec_grade_vector(
 
 \item{expected}{A vector containing the expected result.}
 
-\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
-print. Defaults to 3.}
-
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes.}
 
@@ -52,6 +48,9 @@ print. Defaults to 3.}
 \code{expected} have the same names.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+print. Defaults to 3.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_vector()} or a
@@ -72,10 +71,8 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \enumerate{
 \item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
 \item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
-\item \code{vector_n_levels}, \code{vector_levels}, \code{vector_reverse_levels},
-\code{vector_level_order_diffs}, \code{vector_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
-\item \code{column_value_diffs}: The first \code{max_diffs} elements of \code{object} don't
-contain the same values as \code{expected}
+\item \code{vector_levels_n}, \code{vector_levels}, \code{vector_levels_reversed},
+\code{vector_levels_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
 \item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
 \item \code{vector_names}: \code{object} has different \link[=names]{names} than \code{expected}
 }
