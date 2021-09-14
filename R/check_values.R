@@ -91,10 +91,15 @@ vec_grade_values <- function(
 }
 
 tbl_message.values_problem <- function(problem, max_diffs = 3, ...) {
+  problem$n_values <- min(
+    max(length(problem$expected), length(problem$actual)),
+    max_diffs
+  )
+  
   if (
     identical(
-      problem$expected[seq_len(max_diffs)],
-      problem$actual[seq_len(max_diffs)]
+      problem$expected[seq_len(problem$n_values)],
+      problem$actual[seq_len(problem$n_values)]
     )
   ) {
     if (!is.null(problem$column)) {
@@ -108,7 +113,6 @@ tbl_message.values_problem <- function(problem, max_diffs = 3, ...) {
     return(glue::glue_data(problem, problem$msg))
   }
   
-  problem$n_values <- min(length(problem$expected), max_diffs)
   problem$expected <- knitr::combine_words(
     md_code(problem$expected[seq_len(problem$n_values)])
   )
