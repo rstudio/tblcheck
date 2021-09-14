@@ -43,9 +43,9 @@ find_tblcheck_call <- function() {
   })
   
   if (!is.null(tblcheck_fn_pattern)) {
-    idx <- grep(paste0("^", tblcheck_fn_pattern), calls)
-    if (length(idx)) {
-      calls[idx[1]]
+    tblcheck_calls <- grep(paste0("^", tblcheck_fn_pattern), calls, value = TRUE)
+    if (length(tblcheck_calls)) {
+      tblcheck_calls[[1]]
     }
   }
 }
