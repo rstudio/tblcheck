@@ -331,45 +331,33 @@ test_that("tbl_grade_column() handles bad user input", {
 test_that("tbl_check_column() handles bad user input", {
   .result <- .solution <- tibble::tibble(b = letters[1:3])
   
-  expect_message(
-    problem <- tbl_check_column(3),
-    "column"
+  expect_internal_problem(
+    tbl_check_column(3),
+    message = "column"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "column")
   
-  expect_message(
-    problem <- tbl_check_column(c("a", "b")),
-    "column"
+  expect_internal_problem(
+    tbl_check_column(c("a", "b")),
+    message = "column"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "column")
   
-  expect_message(
-    problem <- tbl_check_column("b", check_class = "yes"),
-    "check_class"
+  expect_internal_problem(
+    tbl_check_column("b", check_class = "yes"),
+    message = "check_class"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "check_class")
   
-  expect_message(
-    problem <- tbl_check_column("b", check_length = c(TRUE, TRUE)),
-    "check_length"
+  expect_internal_problem(
+    tbl_check_column("b", check_length = c(TRUE, TRUE)),
+    message = "check_length"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "check_length")
   
-  expect_message(
-    problem <- tbl_check_column("b", check_values = NULL),
-    "check_values"
+  expect_internal_problem(
+    tbl_check_column("b", check_values = NULL),
+    message = "check_values"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "check_values")
   
-  expect_message(
-    problem <- tbl_check_column("b", max_diffs = 1:3),
-    "max_diffs"
+  expect_internal_problem(
+    tbl_check_column("b", max_diffs = 1:3),
+    message = "max_diffs"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "max_diffs")
 })

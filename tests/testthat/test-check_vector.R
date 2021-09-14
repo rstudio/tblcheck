@@ -292,43 +292,31 @@ test_that("vec_grade_vector() handles bad user input", {
 test_that("vec_check_vector() handles bad user input", {
   .result <- .solution <- letters[1:3]
   
-  expect_message(
-    problem <- vec_check_vector(check_class = "yes"),
-    "check_class"
+  expect_internal_problem(
+    vec_check_vector(check_class = "yes"),
+    message = "check_class"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "check_class")
   
-  expect_message(
-    problem <- vec_check_vector(check_length = c(TRUE, TRUE)),
-    "check_length"
+  expect_internal_problem(
+    vec_check_vector(check_length = c(TRUE, TRUE)),
+    message = "check_length"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "check_length")
   
-  expect_message(
-    problem <- vec_check_vector(check_values = NULL),
-    "check_values"
+  expect_internal_problem(
+    vec_check_vector(check_values = NULL),
+    message = "check_values"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "check_values")
   
-  expect_message(
-    problem <- vec_check_vector(max_diffs = 1:3),
-    "max_diffs"
+  expect_internal_problem(
+    vec_check_vector(max_diffs = 1:3),
+    message = "max_diffs"
   )
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "max_diffs")
   
   .result   <- NULL
   .solution <- letters[1:3]
-  expect_message(problem <- vec_check_vector(), "object")
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "object")
+  expect_internal_problem(vec_check_vector(), "object")
   
   .result   <- letters[1:3]
   .solution <- NULL
-  expect_message(problem <- vec_check_vector(), "expected")
-  expect_s3_class(problem, "tblcheck_internal_problem")
-  expect_match(problem$error, "expected")
+  expect_internal_problem(vec_check_vector(), "expected")
 })

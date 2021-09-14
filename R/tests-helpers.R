@@ -2,9 +2,15 @@ expect_internal_problem <- function(grade, message) {
   suppressMessages({
     testthat::expect_message(grade)
     testthat::expect_length(grade$correct, 0)
-    testthat::expect_match(grade$message, "can't provide feedback")
-    testthat::expect_equal(grade$problem$type, "tblcheck_internal")
-    testthat::expect_match(as.character(grade$error$message), message)
+    if (is_problem(grade)) {
+      testthat::expect_s3_class(grade, "tblcheck_internal_problem")
+      testthat::expect_equal(grade$type, "tblcheck_internal")
+      testthat::expect_match(as.character(grade$error$message), message)
+    } else {
+      testthat::expect_match(grade$message, "can't provide feedback")
+      testthat::expect_equal(grade$problem$type, "tblcheck_internal")
+      testthat::expect_match(as.character(grade$error$message), message)
+    }
   })
 }
 
