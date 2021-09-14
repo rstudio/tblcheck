@@ -4,7 +4,7 @@ expect_internal_problem <- function(grade, message) {
     testthat::expect_length(grade$correct, 0)
     testthat::expect_match(grade$message, "can't provide feedback")
     testthat::expect_equal(grade$problem$type, "tblcheck_internal")
-    testthat::expect_match(as.character(grade$problem$error), message)
+    testthat::expect_match(as.character(grade$error$message), message)
   })
 }
 
