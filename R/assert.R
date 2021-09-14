@@ -6,8 +6,8 @@ catch_internal_problem <- function(expr, ..., call = NULL) {
   })
 }
 
-return_if_internal_problem <- function(expr, ..., call = NULL, env = parent.frame()) {
-  prob <- catch_internal_problem(expr, ..., call = call)
+return_if_internal_problem <- function(expr, ..., env = parent.frame()) {
+  prob <- catch_internal_problem(expr, ..., call = find_tblcheck_call())
   return_if_problem(prob, env = env)
 }
 

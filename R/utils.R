@@ -35,18 +35,17 @@ combine_words_with_more <- function(
   knitr::combine_words(c(transform(x_max), more), ...)
 }
 
-find_call <- function(starts_with = NULL) {
+find_tblcheck_call <- function() {
+  tblcheck_fn_pattern <- "(tbl|vec)_(check|grade)"
   calls <- sys.calls()
   calls <- vapply(calls, FUN.VALUE = character(1), function(x) {
     paste(rlang::expr_deparse(x), collapse = "\n")
   })
   
-  if (!is.null(starts_with)) {
-    idx <- grep(paste0("^", starts_with), calls)
+  if (!is.null(tblcheck_fn_pattern)) {
+    idx <- grep(paste0("^", tblcheck_fn_pattern), calls)
     if (length(idx)) {
-      return(calls[idx[1]])
+      calls[idx[1]]
     }
   }
-  
-  calls[length(calls) - 1]
 }

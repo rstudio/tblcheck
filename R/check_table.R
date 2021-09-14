@@ -98,7 +98,7 @@ tbl_check_table <- function(
     expected <- get(".solution", env)
   }
   
-  return_if_internal_problem(call = find_call("tbl_.+_table"), {
+  return_if_internal_problem({
     checkmate::assert_number(max_diffs, lower = 1)
     checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
