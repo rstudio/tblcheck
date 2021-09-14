@@ -34,3 +34,19 @@ combine_words_with_more <- function(
   
   knitr::combine_words(c(transform(x_max), more), ...)
 }
+
+find_call <- function(starts_with = NULL) {
+  calls <- sys.calls()
+  calls <- vapply(calls, FUN.VALUE = character(1), function(x) {
+    paste(rlang::expr_deparse(x), collapse = "\n")
+  })
+  
+  if (!is.null(starts_with)) {
+    idx <- grep(paste0("^", starts_with), calls)
+    if (length(idx)) {
+      return(calls[idx[1]])
+    }
+  }
+  
+  calls[length(calls) - 1]
+}
