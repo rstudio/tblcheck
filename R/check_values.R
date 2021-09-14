@@ -78,12 +78,7 @@ vec_grade_values <- function(
 ) {
   return_if_graded(
     tbl_grade(
-      vec_check_vector(
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        env = env
-      ),
+      vec_check_vector(object = object, expected = expected, env = env),
       max_diffs = max_diffs,
       env = env
     )
