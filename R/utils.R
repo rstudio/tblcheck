@@ -36,16 +36,14 @@ combine_words_with_more <- function(
 }
 
 find_tblcheck_call <- function() {
-  tblcheck_fn_pattern <- "(tbl|vec)_(check|grade)"
   calls <- sys.calls()
   calls <- vapply(calls, FUN.VALUE = character(1), function(x) {
     paste(rlang::expr_deparse(x), collapse = "\n")
   })
   
-  if (!is.null(tblcheck_fn_pattern)) {
-    tblcheck_calls <- grep(paste0("^", tblcheck_fn_pattern), calls, value = TRUE)
-    if (length(tblcheck_calls)) {
-      tblcheck_calls[[1]]
-    }
+  tblcheck_fn_pattern <- "^(tbl|vec)_(check|grade)"
+  tblcheck_calls <- grep(tblcheck_fn_pattern, calls, value = TRUE)
+  if (length(tblcheck_calls)) {
+    tblcheck_calls[[1]]
   }
 }
