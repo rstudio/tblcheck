@@ -2,7 +2,7 @@ test_that("vector length", {
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[1:4]
-    tbl_grade_dimensions()
+    vec_grade_dimensions()
   })
   
   expect_snapshot(grade)

@@ -70,7 +70,7 @@ tbl_check_dimensions <- function(
   }
   
   if (length(exp_dim) == 1) {
-    return_if_problem(vec_check_length(object, expected, env))
+    return(problem("length", exp_dim, obj_dim))
   }
   
   if (length(exp_dim) > 2) {
@@ -88,6 +88,10 @@ tbl_check_dimensions <- function(
 
 #' @rdname tbl_check_dimensions
 #' @export
+vec_check_dimensions <- tbl_check_dimensions
+
+#' @rdname tbl_check_dimensions
+#' @export
 tbl_grade_dimensions <- function(
   object = .result, 
   expected = .solution,
@@ -100,6 +104,10 @@ tbl_grade_dimensions <- function(
     )
   )
 }
+
+#' @rdname tbl_check_dimensions
+#' @export
+vec_grade_dimensions <- tbl_grade_dimensions
 
 tbl_message.n_dimensions_problem <- function(problem, ...) {
   problem$exp_msg <- problem$exp_msg %||% 
@@ -117,6 +125,42 @@ tbl_message.n_dimensions_problem <- function(problem, ...) {
     )
   
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+}
+
+tbl_message.length_problem <- function(problem, ...) {
+  problem$exp_msg <- problem$exp_msg %||% 
+    ngettext(
+      problem$expected,
+      "Your result should contain {expected} value, ",
+      "Your result should contain {expected} values, "
+    )
+  
+  problem$obj_msg <- problem$obj_msg %||%
+    ngettext(
+      problem$actual,
+      "but it has {actual} value.",
+      "but it has {actual} values."
+    )
+  
+  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+}
+
+tbl_message.column_length_problem <- function(problem, ...) {
+  problem$exp_msg <- problem$exp_msg %||% 
+    ngettext(
+      problem$expected,
+      "Your `{column}` column should contain {expected} value, ",
+      "Your `{column}` column should contain {expected} values, "
+    )
+  
+  problem$obj_msg <- problem$obj_msg %||%
+    ngettext(
+      problem$actual,
+      "but it has {actual} value.",
+      "but it has {actual} values."
+    )
+  
+  NextMethod()
 }
 
 tbl_message.ncol_problem <- function(problem, ...) {
