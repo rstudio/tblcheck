@@ -105,12 +105,10 @@ tbl_grade_class <- function(
 vec_grade_class <- tbl_grade_class
 
 tbl_message.class_problem <- function(problem, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       "Your `{column}` column should be {expected}, but it is {actual}."
-  }
-  
-  if (inherits(problem, "table_problem")) {
+  } else if (is_problem(problem, "table")) {
     problem$msg <- problem$msg %||%
       "Your table should be {expected}, but it is {actual}."
   }

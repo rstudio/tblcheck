@@ -97,7 +97,7 @@ tbl_message.values_problem <- function(problem, max_diffs = 3, ...) {
       problem$actual[seq_len(problem$n_values)]
     )
   ) {
-    if (!is.null(problem$column)) {
+    if (is_problem(problem, "column")) {
       problem$msg <- problem$msg %||%
         "Your `{column}` column contains unexpected values."
     }
@@ -115,7 +115,7 @@ tbl_message.values_problem <- function(problem, max_diffs = 3, ...) {
     md_code(problem$actual[seq_len(problem$n_values)])
   )
   
-  if (!is.null(problem$column)) {
+  if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       ngettext(
         problem$n_values,

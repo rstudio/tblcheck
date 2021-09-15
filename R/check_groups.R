@@ -77,19 +77,19 @@ tbl_grade_groups <- function(
 }
 
 tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
-  if (inherits(problem, "table_problem")) {
+  if (is_problem(problem, "table")) {
     problem$missing_msg <- problem$missing_msg %||% 
-      "Your table should be grouped by {missing}. "
+      gettext("Your table should be grouped by {missing}. ")
     
     problem$unexpected_msg <- problem$unexpected_msg %||%
-      "Your table should not be grouped by {unexpected}. "
+      gettext("Your table should not be grouped by {unexpected}. ")
   }
   
   problem$missing_msg <- problem$missing_msg %||% 
-    "Your result should be grouped by {missing}. "
+    gettext("Your result should be grouped by {missing}. ")
   
   problem$unexpected_msg  <- problem$unexpected_msg %||% 
-    "Your result should not be grouped by {unexpected}. "
+    gettext("Your result should not be grouped by {unexpected}. ")
   
   if (!is.null(problem[["missing"]])) {
     problem$missing <- combine_words_with_more(problem$missing, max_diffs)

@@ -102,14 +102,14 @@ tbl_grade_dimensions <- function(
 }
 
 tbl_message.dimensions_n_problem <- function(problem, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
         "Your `{column}` column should have {expected} dimension, ",
         "Your `{column}` column should have {expected} dimensions, "
       )
-  } else if (inherits(problem, "table_problem")) {
+  } else if (is_problem(problem, "table")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
@@ -136,14 +136,14 @@ tbl_message.dimensions_n_problem <- function(problem, ...) {
 }
 
 tbl_message.ncol_problem <- function(problem, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
         "Your `{column}` column should have {expected} column, ",
         "Your `{column}` column should have {expected} columns, "
       )
-  } else if (inherits(problem, "table_problem")) {
+  } else if (is_problem(problem, "table")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
@@ -170,14 +170,14 @@ tbl_message.ncol_problem <- function(problem, ...) {
 }
 
 tbl_message.nrow_problem <- function(problem, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
         "Your `{column}` column should have {expected} row, ",
         "Your `{column}` column should have {expected} rows, "
       )
-  } else if (inherits(problem, "table_problem")) {
+  } else if (is_problem(problem, "table")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
@@ -204,10 +204,10 @@ tbl_message.nrow_problem <- function(problem, ...) {
 }
 
 tbl_message.dimensions_problem <- function(problem, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$msg <- problem$exp_msg %||% 
       gettext("Your `{column}` column should be an array with dimensions {expected}, but it has dimensions {actual}.")
-  } else if (inherits(problem, "table_problem")) {
+  } else if (is_problem(problem, "table")) {
     problem$msg <- problem$exp_msg %||% 
       gettext("Your table should be an array with dimensions {expected}, but it has dimensions {actual}.")
   }

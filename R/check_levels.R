@@ -95,7 +95,7 @@ vec_grade_levels <- function(
 }
 
 tbl_message.levels_problem <- function(problem, max_diffs = 3, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||% 
       ngettext(
         length(problem$missing),
@@ -141,7 +141,7 @@ tbl_message.levels_problem <- function(problem, max_diffs = 3, ...) {
 }
 
 tbl_message.levels_n_problem <- function(problem, ...) {
-  if (inherits(problem, "column_problem")) {
+  if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
         problem$expected,
@@ -168,7 +168,7 @@ tbl_message.levels_n_problem <- function(problem, ...) {
 }
 
 tbl_message.levels_reversed_problem <- function(problem, ...) {
-  if (!is.null(problem$column)) {
+  if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       gettext("The order of the levels in your `{column}` column are the reverse of the expected order.")
   }
@@ -180,7 +180,7 @@ tbl_message.levels_reversed_problem <- function(problem, ...) {
 }
 
 tbl_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
-  if (!is.null(problem$column)) {
+  if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       "Your `{column}` column's levels were not in the expected order. "
   }
@@ -205,7 +205,7 @@ tbl_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
     md_code(problem$actual[seq_len(problem$n_levels)])
   )
   
-  if (!is.null(problem$column)) {
+  if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
       ngettext(
         problem$n_levels,

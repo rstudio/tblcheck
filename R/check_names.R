@@ -91,7 +91,7 @@ tbl_grade_names <- function(
 vec_grade_names <- tbl_grade_names
 
 tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
-  if (!is.null(problem$column)) {
+  if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||% 
       ngettext(
         length(problem$missing),
@@ -105,7 +105,7 @@ tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
         "Your `{column}` column should not have the name {unexpected}.",
         "Your `{column}` column should not have the names {unexpected}."
       )
-  } else if (inherits(problem, "table_problem")) {
+  } else if (is_problem(problem, "table")) {
     problem$missing_msg <- problem$missing_msg %||% 
       ngettext(
         length(problem$missing),
