@@ -13,6 +13,8 @@
 #'   or is missing names that are expected.
 #'
 #' @inheritParams tbl_check_class
+#' @param check_order `[logical(1)]`\cr Whether to check that the names of 
+#'   `object` and `expected` are in the same order.
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
@@ -38,6 +40,7 @@
 tbl_check_names <- function(
   object = .result,
   expected = .solution,
+  check_order = TRUE,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -51,6 +54,8 @@ tbl_check_names <- function(
   names_obj <- names(object)
   
   if (!identical(names_exp, names_obj)) {
+    # TODO: Check names order
+    
     problem <- problem(
       "names", 
       missing = setdiff(names_exp, names_obj),
@@ -75,6 +80,7 @@ tbl_grade_names <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
+  check_order = TRUE,
   env = parent.frame()
 ) {
   return_if_graded(
