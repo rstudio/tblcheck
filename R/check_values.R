@@ -56,7 +56,7 @@ vec_check_values <- function(
     expected <- get(".solution", env)
   }
   
-  assert_internally({
+  return_if_internal_problem({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
     checkmate::assert_number(max_diffs, lower = 1)
@@ -85,17 +85,15 @@ vec_grade_values <- function(
   max_diffs = 3,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      vec_check_vector(
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        env = env
-      ),
+  tbl_grade(
+    vec_check_vector(
+      object = object,
+      expected = expected,
       max_diffs = max_diffs,
       env = env
-    )
+    ),
+    max_diffs = max_diffs,
+    env = env
   )
 }
 

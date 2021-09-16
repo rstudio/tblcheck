@@ -98,7 +98,7 @@ tbl_check_table <- function(
     expected <- get(".solution", env)
   }
   
-  assert_internally({
+  return_if_internal_problem({
     checkmate::assert_number(max_diffs, lower = 1)
     checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
@@ -176,23 +176,21 @@ tbl_grade_table <- function(
   check_column_values = check_columns,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_table(
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        check_class = check_class,
-        check_names = check_names,
-        check_dimensions = check_dimensions,
-        check_groups = check_groups,
-        check_columns = check_columns,
-        check_column_class = check_column_class,
-        check_column_values = check_column_values,
-        env = env
-      ),
+  tbl_grade(
+    tbl_check_table(
+      object = object,
+      expected = expected,
       max_diffs = max_diffs,
+      check_class = check_class,
+      check_names = check_names,
+      check_dimensions = check_dimensions,
+      check_groups = check_groups,
+      check_columns = check_columns,
+      check_column_class = check_column_class,
+      check_column_values = check_column_values,
       env = env
-    )
+    ),
+    max_diffs = max_diffs,
+    env = env
   )
 }
