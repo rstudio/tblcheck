@@ -71,3 +71,21 @@
         dimensions 1 x 3 x 4.
       >
 
+# matrices
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should have 3 columns, but it has 4 columns.
+      >
+
+---
+
+    Code
+      grade_n
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should have 2 dimensions, but it has 1 dimension.
+      >
+
