@@ -176,7 +176,7 @@ test_that("tbl_grade_groups() handles bad user input", {
     }),
     "max_diffs"
   )
-  
+
   expect_internal_problem(
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = letters[1:3], b = a)
@@ -185,7 +185,7 @@ test_that("tbl_grade_groups() handles bad user input", {
     }),
     "max_diffs"
   )
-  
+
   expect_internal_problem(
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = letters[1:3], b = a)

@@ -35,7 +35,7 @@ tbl_check_groups <- function(
     expected <- get(".solution", env)
   }
   
-  assert_internally({
+  return_if_internal_problem({
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
@@ -67,12 +67,10 @@ tbl_grade_groups <- function(
   max_diffs = 3,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_groups(object, expected, env = env),
-      max_diffs = max_diffs,
-      env = env
-    )
+  tbl_grade(
+    tbl_check_groups(object, expected, env = env),
+    max_diffs = max_diffs,
+    env = env
   )
 }
 

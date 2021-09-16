@@ -325,59 +325,40 @@ test_that("tbl_grade_column() handles bad user input", {
 })
 
 test_that("tbl_check_column() handles bad user input", {
+  .result <- .solution <- tibble::tibble(b = letters[1:3])
+  
   expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column(3, object = result, expected = solution)
-    },
-    "column"
+    tbl_check_column(3),
+    message = "column"
   )
   
   expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column(c("a", "b"), object = result, expected = solution)
-    },
-    "column"
+    tbl_check_column(c("a", "b")),
+    message = "column"
   )
   
   expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, check_class = "yes")
-    },
-    "check_class"
+    tbl_check_column("b", check_class = "yes"),
+    message = "check_class"
   )
   
   expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, check_length = c(TRUE, TRUE))
-    },
-    "check_length"
-  )
-  
-  expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = solution, check_values = "yes")
-    },
+    tbl_check_column("b", check_values = "yes"),
     "check_values"
   )
   
   expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = 12, expected = solution)
-    },
+    tbl_check_column("b", object = 12),
     "object"
   )
   
   expect_internal_problem(
-    {
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      problem <- tbl_check_column("b", object = result, expected = list(a = 1))
-    },
-    "expected"
+    tbl_check_column("b", check_length = c(TRUE, TRUE)),
+    message = "check_length"
+  )
+  
+  expect_internal_problem(
+    tbl_check_column("b", check_values = NULL),
+    message = "check_values"
   )
 })

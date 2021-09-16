@@ -29,7 +29,7 @@ tbl_grade.default <- function(
 #' @export
 tbl_grade.list <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
   problem <- as_problem(problem)
-  NextMethod()
+  tbl_grade(problem)
 }
 
 #' @rdname tbl_grade
@@ -41,24 +41,21 @@ tbl_grade.tblcheck_problem <- function(
     return(invisible())
   }
   
-  assert_internally({
-    checkmate::assert_class(problem, "tblcheck_problem")
-    checkmate::assert_number(max_diffs, lower = 1)
-  })
+  err <- catch_internal_problem(
+    checkmate::assert_number(max_diffs, lower = 1), 
+    call = find_tblcheck_call()
+  )
   
-  return_fail(
+  if (is_problem(err)) {
+    return(tbl_grade(err))
+  }
+  
+  gradethis::fail(
     tbl_message(problem, max_diffs = max_diffs),
     problem = problem,
     env = env,
     ...
   )
-}
-
-return_fail <- function(..., env = parent.frame()) {
-  grade <- gradethis::fail(..., env = env)
-  if (getOption("tblcheck.return_first_grade", TRUE)) {
-    return(grade)
-  }
 }
 
 tbl_message <- function(problem, ...) {
@@ -71,25 +68,24 @@ tbl_message.default <- function(problem, ...) {
 
 tbl_message.tblcheck_problem <- function(problem, ...) {
   type_msg <- if (!is.null(problem$type)) {
-    problem_type <- problem$type
-    "Your code resulted in a {problem_type} problem. "
+    gettext("Your code resulted in a `{type}` problem. ")
   } else {
     ""
   }
   
   exp_msg <- if (!is.null(problem$expected)) {
     expected <- paste(md_code(problem$expected), collapse = ", ")
-    "I was expecting a value of {expected}. "
+    gettext("I was expecting a value of {expected}. ")
   } else {
     ""
   }
   
   obj_msg <- if (!is.null(problem$actual)) {
     actual <- paste(md_code(problem$actual), collapse = ", ")
-    "Your result gave a value of {actual}. "
+    gettext("Your result gave a value of `{actual}`. ")
   } else {
     ""
   }
   
-  glue::glue(type_msg, exp_msg, obj_msg)
+  glue::glue_data(problem, type_msg, exp_msg, obj_msg)
 }

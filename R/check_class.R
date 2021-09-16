@@ -92,11 +92,9 @@ tbl_grade_class <- function(
   all_differences = FALSE,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_class(object, expected, all_differences, env),
-      env = env
-    )
+  tbl_grade(
+    tbl_check_class(object, expected, all_differences, env),
+    env = env
   )
 }
 

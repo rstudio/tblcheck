@@ -459,43 +459,30 @@ test_that("tbl_grade_table() handles bad user input", {
 })
 
 test_that("tbl_check_table() handles bad user input", {
+  .result <- .solution <- tibble::tibble(a = 1:3)
+  
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem <- tbl_check_table(check_dimensions = "yes")
-    },
-    "check_dimensions"
+    tbl_check_table(check_dimensions = "yes"),
+    message = "check_dimensions"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_names = 5)
-    },
-    "check_names"
+    tbl_check_table(check_names = 5),
+    message = "check_names"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_columns = NULL)
-    },
-    "check_columns"
+    tbl_check_table(check_columns = NULL),
+    message = "check_columns"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_class = NA)
-    },
-    "check_class"
+    tbl_check_table(check_class = NA),
+    message = "check_class"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_column_values = c(TRUE, TRUE))
-    },
-    "check_column_values"
+    tbl_check_table(check_column_values = c(TRUE, TRUE)),
+    message = "check_column_values"
   )
 })

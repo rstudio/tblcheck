@@ -292,48 +292,28 @@ test_that("vec_grade_vector() handles bad user input", {
 })
 
 test_that("vec_check_vector() handles bad user input", {
+  .result <- .solution <- letters[1:3]
+  
   expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(check_class = "yes")
-    },
-    "check_class"
+    vec_check_vector(check_class = "yes"),
+    message = "check_class"
   )
   
   expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(check_length = c(TRUE, TRUE))
-    },
-    "check_length"
+    vec_check_vector(check_length = c(TRUE, TRUE)),
+    message = "check_length"
   )
   
   expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- letters[1:3]
-      vec_check_vector(check_values = NULL)
-    },
-    "check_values"
+    vec_check_vector(check_values = NULL),
+    message = "check_values"
   )
   
-  expect_internal_problem(
-    {
-      .result   <- NULL
-      .solution <- letters[1:3]
-      problem <- vec_check_vector()
-    },
-    "object"
-  )
+  .result   <- NULL
+  .solution <- letters[1:3]
+  expect_internal_problem(vec_check_vector(), "object")
   
-  expect_internal_problem(
-    {
-      .result   <- letters[1:3]
-      .solution <- NULL
-      problem <- vec_check_vector()
-    },
-    "expected"
-  )
+  .result   <- letters[1:3]
+  .solution <- NULL
+  expect_internal_problem(vec_check_vector(), "expected")
 })
