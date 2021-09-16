@@ -2,7 +2,7 @@ test_that("vector length", {
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[1:4]
-    tbl_grade_dimensions()
+    vec_grade_dimensions()
   })
   
   expect_snapshot(grade)
@@ -123,6 +123,38 @@ test_that("multidimensional array", {
   expect_equal(
     grade$problem,
     problem("dimensions", c(2, 2, 3), c(1, 3, 4)),
+    ignore_attr = "class"
+  )
+})
+
+test_that("matrices", {
+  grade <-
+    tblcheck_test_grade({
+      .result   <- matrix(1:12, 3)
+      .solution <- matrix(1:12, 4)
+      tbl_grade_dimensions()
+    })
+  
+  expect_snapshot(grade)
+  
+  expect_equal(
+    grade$problem,
+    problem("ncol", 3, 4),
+    ignore_attr = "class"
+  )
+  
+  grade_n <-
+    tblcheck_test_grade({
+      .result   <- 1:12
+      .solution <- matrix(1:12, 4)
+      tbl_grade_dimensions()
+    })
+  
+  expect_snapshot(grade_n)
+  
+  expect_equal(
+    grade_n$problem,
+    problem("dimensions_n", 2, 1),
     ignore_attr = "class"
   )
 })

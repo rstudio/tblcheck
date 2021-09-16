@@ -94,7 +94,7 @@ vec_check_vector <- function(
   
   if (check_length) {
     return_if_problem(
-      vec_check_length(object, expected),
+      vec_check_dimensions(object, expected),
       prefix = "vector"
     )
   }
