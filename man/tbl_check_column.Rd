@@ -9,7 +9,6 @@ tbl_check_column(
   column,
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
@@ -34,9 +33,6 @@ tbl_grade_column(
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
-print. Defaults to 3.}
-
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same class in \code{object} and \code{expected}.}
 
@@ -47,6 +43,9 @@ same length in \code{object} and \code{expected}.}
 same values in \code{object} and \code{expected}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+print. Defaults to 3.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_column()} or a
@@ -68,10 +67,8 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \item \code{table_names}: \code{object} doesn't contain a column named column
 \item \code{column_class}: Any mismatch in the classes of the \code{column}
 \item \code{column_length}: The \code{column} doesn't have the expected length
-\item \code{column_n_levels}, \code{column_levels}, \code{column_reverse_levels},
-\code{column_level_order_diffs}, \code{column_level_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
-\item \code{column_value_diffs}: The first \code{max_diffs} elements of the \code{column}
-don't have the expected values
+\item \code{column_levels_n}, \code{column_levels}, \code{column_levels_reversed},
+\code{column_levels_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
 \item \code{column_values}: The \code{column} doesn't have the expected values
 }
 }

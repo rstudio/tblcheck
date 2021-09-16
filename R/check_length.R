@@ -57,6 +57,15 @@ vec_grade_length <- function(
 }
 
 tbl_message.length_problem <- function(problem, ...) {
+  if (inherits(problem, "column_problem")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your `{column}` column should contain {expected} value, ",
+        "Your `{column}` column should contain {expected} values, "
+      )
+  }
+  
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
@@ -72,22 +81,4 @@ tbl_message.length_problem <- function(problem, ...) {
     )
   
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
-}
-
-tbl_message.column_length_problem <- function(problem, ...) {
-  problem$exp_msg <- problem$exp_msg %||% 
-    ngettext(
-      problem$expected,
-      "Your `{column}` column should contain {expected} value, ",
-      "Your `{column}` column should contain {expected} values, "
-    )
-  
-  problem$obj_msg <- problem$obj_msg %||%
-    ngettext(
-      problem$actual,
-      "but it has {actual} value.",
-      "but it has {actual} values."
-    )
-  
-  NextMethod()
 }

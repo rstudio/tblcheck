@@ -103,6 +103,14 @@ tbl_grade_class <- function(
 vec_grade_class <- tbl_grade_class
 
 tbl_message.class_problem <- function(problem, ...) {
+  if (is_problem(problem, "column")) {
+    problem$msg <- problem$msg %||%
+      "Your `{column}` column should be {expected}, but it is {actual}."
+  } else if (is_problem(problem, "table")) {
+    problem$msg <- problem$msg %||%
+      "Your table should be {expected}, but it is {actual}."
+  }
+  
   problem$msg <- problem$msg %||%
     "Your result should be {expected}, but it is {actual}."
   
@@ -115,20 +123,6 @@ tbl_message.class_problem <- function(problem, ...) {
   problem$actual   <- friendly_class(problem$actual,   problem$actual_length)
   
   glue::glue_data(problem, problem$msg)
-}
-
-tbl_message.column_class_problem <- function(problem, ...) {
-  problem$msg <- problem$msg %||%
-    "Your `{column}` column should be {expected}, but it is {actual}."
-  
-  NextMethod()
-}
-
-tbl_message.table_class_problem <- function(problem, ...) {
-  problem$msg <- problem$msg %||%
-    "Your table should be {expected}, but it is {actual}."
-  
-  NextMethod()
 }
 
 has_inconsequential_class_diff <- function(exp_class, obj_class) {

@@ -41,7 +41,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{n_dimensions}: \code{object} and \code{expected} have a different number
+\item \code{dimensions_n}: \code{object} and \code{expected} have a different number
 of dimensions
 \item \code{length}: \code{object} and \code{expected} are one-dimensional vectors of
 different lengths

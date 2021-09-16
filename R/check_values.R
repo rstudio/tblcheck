@@ -8,8 +8,6 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `value_diffs`: The first `max_diffs` elements of `object` don't
-#'   contain the same values as `expected`
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
 #' @inheritParams vec_check_vector
@@ -65,15 +63,8 @@ vec_check_values <- function(
   exp_values <- unname(expected)
   obj_values <- unname(object)
   
-  n_values <- min(length(expected), max_diffs)
-  first_n_values <- exp_values[seq_len(n_values)]
-  
-  if (!identical(obj_values[seq_len(n_values)], first_n_values)) {
-    return(problem("value_diffs", first_n_values))
-  }
-  
   if (!identical(obj_values, exp_values)) {
-    return(problem("values"))
+    return(problem("values", exp_values, obj_values))
   }
 }
 
@@ -86,10 +77,9 @@ vec_grade_values <- function(
   env = parent.frame()
 ) {
   tbl_grade(
-    vec_check_vector(
+    vec_check_values(
       object = object,
       expected = expected,
-      max_diffs = max_diffs,
       env = env
     ),
     max_diffs = max_diffs,
@@ -97,9 +87,44 @@ vec_grade_values <- function(
   )
 }
 
-tbl_message.value_diffs_problem <- function(problem, ...) {
-  problem$n_values <- length(problem$expected)
-  problem$expected <- knitr::combine_words(md_code(problem$expected))
+tbl_message.values_problem <- function(problem, max_diffs = 3, ...) {
+  problem$n_values <- min(
+    max(length(problem$expected), length(problem$actual)),
+    max_diffs
+  )
+  
+  if (
+    identical(
+      problem$expected[seq_len(problem$n_values)],
+      problem$actual[seq_len(problem$n_values)]
+    )
+  ) {
+    if (is_problem(problem, "column")) {
+      problem$msg <- problem$msg %||%
+        "Your `{column}` column contains unexpected values."
+    }
+    
+    problem$msg <- problem$msg %||%
+      "Your result contains unexpected values."
+    
+    return(glue::glue_data(problem, problem$msg))
+  }
+  
+  problem$expected <- knitr::combine_words(
+    md_code(problem$expected[seq_len(problem$n_values)])
+  )
+  problem$actual <- knitr::combine_words(
+    md_code(problem$actual[seq_len(problem$n_values)])
+  )
+  
+  if (is_problem(problem, "column")) {
+    problem$msg <- problem$msg %||%
+      ngettext(
+        problem$n_values,
+        "The first value of your `{column}` column should be {expected}.",
+        "The first {n_values} values of your `{column}` column should be {expected}."
+      )
+  }
   
   problem$msg <- problem$msg %||%
     ngettext(
@@ -109,23 +134,4 @@ tbl_message.value_diffs_problem <- function(problem, ...) {
     )
   
   glue::glue_data(problem, problem$msg)
-}
-
-tbl_message.column_value_diffs_problem <- function(problem, ...) {
-  problem$msg <- problem$msg %||%
-    ngettext(
-      length(problem$expected),
-      "The first value of your `{column}` column should be {expected}.",
-      "The first {n_values} values of your `{column}` column should be {expected}."
-    )
-  
-  NextMethod()
-}
-
-tbl_message.values_problem <- function(problem, ...) {
-  "Your result contains unexpected values."
-}
-
-tbl_message.column_values_problem <- function(problem, ...) {
-  glue::glue_data(problem, "Your `{column}` column contains unexpected values.")
 }

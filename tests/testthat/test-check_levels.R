@@ -9,7 +9,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("n_levels", 3, 2),
+    problem("levels_n", 3, 2),
     ignore_attr = "class"
   )
 })
@@ -41,7 +41,7 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("reverse_levels"),
+    problem("levels_reversed"),
     ignore_attr = "class"
   )
   
@@ -55,7 +55,7 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("level_order_diffs", c("c", "a", "b"), c("a", "b", "c")),
+    problem("levels_order", c("c", "a", "b"), c("a", "b", "c")),
     ignore_attr = "class"
   )
   
@@ -69,7 +69,9 @@ test_that("level order", {
   
   expect_equal(
     grade$problem,
-    problem("level_order"),
+    problem(
+      "levels_order", c("a", "b", "c", "e", "d"), c("a", "b", "c", "d", "e")
+    ),
     ignore_attr = "class"
   )
 })
