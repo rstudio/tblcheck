@@ -266,7 +266,7 @@ test_that("vec_grade_vector() handles bad user input", {
   expect_internal_problem(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
-      .solution <- letters[1:3]
+      .solution <- letters[4:6]
       vec_grade_vector(max_diffs = 1:3)
     }),
     "max_diffs"

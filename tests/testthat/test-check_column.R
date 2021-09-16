@@ -301,7 +301,8 @@ test_that("tbl_grade_column() handles bad user input", {
   
   expect_internal_problem(
     tblcheck_test_grade({
-      result <- solution <- tibble::tibble(b = letters[1:3])
+      result <- tibble::tibble(b = letters[1:3])
+      solution <- tibble::tibble(b = letters[4:6])
       tbl_grade_column("b", object = result, expected = solution, max_diffs = 1:3)
     }),
     "max_diffs"
