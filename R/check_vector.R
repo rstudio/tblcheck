@@ -10,10 +10,8 @@
 #' 
 #' 1. `vector_class`: `object` doesn't have the same classes as `expected`
 #' 1. `vector_length`: `object` doesn't have the same length as `expected`
-#' 1. `vector_n_levels`, `vector_levels`, `vector_reverse_levels`,
-#'   `vector_level_order_diffs`, `vector_level_order`: See [vec_check_levels()]
-#' 1. `column_value_diffs`: The first `max_diffs` elements of `object` don't
-#'   contain the same values as `expected`
+#' 1. `vector_levels_n`, `vector_levels`, `vector_levels_reversed`,
+#'   `vector_levels_order`: See [vec_check_levels()]
 #' 1. `vector_values`: `object` doesn't contain the same values as `expected`
 #' 1. `vector_names`: `object` has different [names][names()] than `expected`
 #'
@@ -65,7 +63,6 @@
 vec_check_vector <- function(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_levels = TRUE,
@@ -80,10 +77,9 @@ vec_check_vector <- function(
     expected <- get(".solution", env)
   }
   
-  assert_internally({
+  return_if_internal_problem({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
-    checkmate::assert_number(max_diffs, lower = 1)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
@@ -112,7 +108,7 @@ vec_check_vector <- function(
   
   if (check_values) {
     return_if_problem(
-      vec_check_values(object, expected, max_diffs),
+      vec_check_values(object, expected),
       prefix = "vector"
     )
   }
@@ -137,20 +133,17 @@ vec_grade_vector <- function(
   check_names = TRUE,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      vec_check_vector(
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        check_class = check_class,
-        check_length = check_length,
-        check_values = check_values,
-        check_names = check_names,
-        env = env
-      ),
-      max_diffs = max_diffs,
+  tbl_grade(
+    vec_check_vector(
+      object = object,
+      expected = expected,
+      check_class = check_class,
+      check_length = check_length,
+      check_values = check_values,
+      check_names = check_names,
       env = env
-    )
+    ),
+    max_diffs = max_diffs,
+    env = env
   )
 }

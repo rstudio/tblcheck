@@ -46,8 +46,6 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{value_diffs}: The first \code{max_diffs} elements of \code{object} don't
-contain the same values as \code{expected}
 \item \code{values}: \code{object} doesn't contain the same values as \code{expected}
 }
 }

@@ -105,7 +105,7 @@ test_that("mismatched dimensions", {
   
   expect_equal(
     grade$problem,
-    problem("n_dimensions", 2, 1),
+    problem("dimensions_n", 2, 1),
     ignore_attr = "class"
   )
 })

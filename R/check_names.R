@@ -77,12 +77,10 @@ tbl_grade_names <- function(
   max_diffs = 3,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_names(object, expected, env = env),
-      max_diffs = max_diffs,
-      env = env
-    )
+  tbl_grade(
+    tbl_check_names(object, expected, env = env),
+    max_diffs = max_diffs,
+    env = env
   )
 }
 
@@ -91,6 +89,36 @@ tbl_grade_names <- function(
 vec_grade_names <- tbl_grade_names
 
 tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
+  if (is_problem(problem, "column")) {
+    problem$missing_msg <- problem$missing_msg %||% 
+      ngettext(
+        length(problem$missing),
+        "Your `{column}` column should have the name {missing}. ",
+        "Your `{column}` column should have the names {missing}. "
+      )
+    
+    problem$unexpected_msg <- problem$unexpected_msg %||% 
+      ngettext(
+        length(problem$unexpected),
+        "Your `{column}` column should not have the name {unexpected}.",
+        "Your `{column}` column should not have the names {unexpected}."
+      )
+  } else if (is_problem(problem, "table")) {
+    problem$missing_msg <- problem$missing_msg %||% 
+      ngettext(
+        length(problem$missing),
+        "Your table should have a column named {missing}. ",
+        "Your table should have columns named {missing}. "
+      )
+    
+    problem$unexpected_msg <- problem$unexpected_msg %||%
+      ngettext(
+        length(problem$unexpected),
+        "Your table should not have a column named {unexpected}.",
+        "Your table should not have columns named {unexpected}."
+      )
+  }
+  
   problem$missing_msg <- problem$missing_msg %||% 
     ngettext(
       length(problem$missing),
@@ -118,40 +146,4 @@ tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
   }
   
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
-}
-
-tbl_message.column_names_problem <- function(problem, max_diffs = 3, ...) {
-  problem$missing_msg <- problem$missing_msg %||% 
-    ngettext(
-      length(problem$missing),
-      "Your `{column}` column should have the name {missing}. ",
-      "Your `{column}` column should have the names {missing}. "
-    )
-  
-  problem$unexpected_msg <- problem$unexpected_msg %||% 
-    ngettext(
-      length(problem$unexpected),
-      "Your `{column}` column should not have the name {unexpected}.",
-      "Your `{column}` column should not have the names {unexpected}."
-    )
-  
-  NextMethod()
-}
-
-tbl_message.table_names_problem <- function(problem, max_diffs = 3, ...) {
-  problem$missing_msg <- problem$missing_msg %||% 
-    ngettext(
-      length(problem$missing),
-      "Your table should have a column named {missing}. ",
-      "Your table should have columns named {missing}. "
-    )
-  
-  problem$unexpected_msg <- problem$unexpected_msg %||%
-    ngettext(
-      length(problem$unexpected),
-      "Your table should not have a column named {unexpected}.",
-      "Your table should not have columns named {unexpected}."
-    )
-  
-  NextMethod()
 }

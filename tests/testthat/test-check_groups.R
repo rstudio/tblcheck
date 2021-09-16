@@ -9,7 +9,9 @@ test_that("grade missing groups", {
   
   expect_equal(
     grade_ungrouped$problem,
-    problem("table_groups", missing = "b", unexpected = character(0)),
+    problem(
+      "groups", missing = "b", unexpected = character(0), location = "table"
+    ),
     ignore_attr = "class"
   )
   
@@ -27,7 +29,12 @@ test_that("grade missing groups", {
   
   expect_equal(
     grade_grouped$problem,
-    problem("table_groups", missing = c("b", "c"), unexpected = character(0)),
+    problem(
+      "groups",
+      missing = c("b", "c"),
+      unexpected = character(0),
+      location = "table"
+    ),
     ignore_attr = "class"
   )
 })
@@ -43,7 +50,9 @@ test_that("grade unexpected groups", {
   
   expect_equal(
     grade_single$problem,
-    problem("table_groups", missing = character(0), unexpected = "b"),
+    problem(
+      "groups", missing = character(0), unexpected = "b", location = "table"
+    ),
     ignore_attr = "class"
   )
   
@@ -61,7 +70,12 @@ test_that("grade unexpected groups", {
   
   expect_equal(
     grade_multiple$problem,
-    problem("table_groups", missing = character(0), unexpected = c("b", "c")),
+    problem(
+      "groups",
+      missing = character(0),
+      unexpected = c("b", "c"),
+      location = "table"
+    ),
     ignore_attr = "class"
   )
 })
@@ -73,11 +87,11 @@ test_that("grade missing and unexpected groups", {
     tbl_grade_groups()
   })
   
-  
+  expect_snapshot(grade)
   
   expect_equal(
     grade$problem,
-    problem("table_groups", missing = "b", unexpected = "a"),
+    problem("groups", missing = "b", unexpected = "a", location = "table"),
     ignore_attr = "class"
   )
 })
@@ -176,7 +190,7 @@ test_that("tbl_grade_groups() handles bad user input", {
     }),
     "max_diffs"
   )
-  
+
   expect_internal_problem(
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = letters[1:3], b = a)
@@ -185,7 +199,7 @@ test_that("tbl_grade_groups() handles bad user input", {
     }),
     "max_diffs"
   )
-  
+
   expect_internal_problem(
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = letters[1:3], b = a)
