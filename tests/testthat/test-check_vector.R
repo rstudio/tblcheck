@@ -14,7 +14,8 @@ test_that("vec_grade_vector() checks classes", {
       "integer",
       "character",
       expected_length = 3,
-      actual_length = 26
+      actual_length = 26,
+      location = "vector"
     ),
     ignore_attr = "class"
   )
@@ -31,7 +32,7 @@ test_that("vec_grade_vector() checks the first three values", {
   
   expect_equal(
     grade$problem,
-    problem("values", letters, rev(letters)),
+    problem("values", letters, rev(letters), location = "vector"),
     ignore_attr = "class"
   )
 })
@@ -53,7 +54,8 @@ test_that("vec_grade_vector() checks multiple classes", {
       expected = c("test", "class", "integer"),
       actual = "integer",
       expected_length = 10,
-      actual_length = 10
+      actual_length = 10,
+      location = "vector"
     ),
     ignore_attr = "class"
   )
@@ -70,7 +72,9 @@ test_that("vec_grade_vector() checks for value differences beyond the first 3", 
   
   expect_equal(
     grade$problem,
-    problem("values", c(rep(1, 3), 10:15), c(rep(1, 3), 5:10)),
+    problem(
+      "values", c(rep(1, 3), 10:15), c(rep(1, 3), 5:10), location = "vector"
+    ),
     ignore_attr = "class"
   )
 })
@@ -86,7 +90,7 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_equal(
     grade$problem,
-    problem("values", rev(letters), letters),
+    problem("values", rev(letters), letters, location = "vector"),
     ignore_attr = "class"
   )
 })
@@ -102,7 +106,7 @@ test_that("max_diffs doesn't overflow", {
   
   expect_equal(
     grade$problem,
-    problem("values", letters[2:1], letters[1:2]),
+    problem("values", letters[2:1], letters[1:2], location = "vector"),
     ignore_attr = "class"
   )
 })
@@ -118,7 +122,7 @@ test_that("checks that vectors have the same length", {
   
   expect_equal(
     grade$problem,
-    problem("length", 4, 3),
+    problem("length", 4, 3, location = "vector"),
     ignore_attr = "class"
   )
 })
@@ -136,7 +140,8 @@ test_that("checks that vectors have the same names", {
     grade$problem,
     problem(
       "names",
-      missing = letters[1:3], unexpected = letters[24:26]
+      missing = letters[1:3], unexpected = letters[24:26],
+      location = "vector"
     ),
     ignore_attr = "class"
   )
@@ -153,7 +158,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("levels_n", 3, 2),
+    problem("levels_n", 3, 2, location = "vector"),
     ignore_attr = "class"
   )
 })
@@ -170,7 +175,10 @@ test_that("level labels", {
   expect_equal(
     grade$problem,
     problem(
-      "levels", missing = c("x", "y", "z"), unexpected = c("a", "b", "c")
+      "levels",
+      missing = c("x", "y", "z"),
+      unexpected = c("a", "b", "c"),
+      location = "vector"
     ),
     ignore_attr = "class"
   )
@@ -187,7 +195,7 @@ test_that("level order", {
   
   expect_equal(
     grade_reverse$problem,
-    problem("levels_reversed"),
+    problem("levels_reversed", location = "vector"),
     ignore_attr = "class"
   )
   
@@ -201,7 +209,9 @@ test_that("level order", {
   
   expect_equal(
     grade_diffs$problem,
-    problem("levels_order", c("c", "a", "b"), c("a", "b", "c")),
+    problem(
+      "levels_order", c("c", "a", "b"), c("a", "b", "c"), location = "vector"
+    ),
     ignore_attr = "class"
   )
   
@@ -216,7 +226,10 @@ test_that("level order", {
   expect_equal(
     grade$problem,
     problem(
-      "levels_order", c("a", "b", "c", "e", "d"), c("a", "b", "c", "d", "e")
+      "levels_order",
+      c("a", "b", "c", "e", "d"),
+      c("a", "b", "c", "d", "e"),
+      location = "vector"
     ),
     ignore_attr = "class"
   )

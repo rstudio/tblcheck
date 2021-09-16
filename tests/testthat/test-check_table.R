@@ -15,7 +15,8 @@ test_that("tbl_grade_table() class", {
       c("tbl_df", "tbl", "data.frame"),
       "data.frame",
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -36,7 +37,8 @@ test_that("tbl_grade_table() class", {
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
       c("tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -57,7 +59,8 @@ test_that("tbl_grade_table() class", {
       c("tbl_df", "tbl", "data.frame"),
       c("rowwise_df", "tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -78,7 +81,8 @@ test_that("tbl_grade_table() class", {
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
       c("rowwise_df", "tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -96,7 +100,7 @@ test_that("tbl_grade_table() rows", {
   
   expect_equal(
     grade_tbl_rows_missing_1$problem,
-    problem("nrow", 25, 26),
+    problem("nrow", 25, 26, location = "table"),
     ignore_attr = "class"
   )
   
@@ -111,7 +115,7 @@ test_that("tbl_grade_table() rows", {
   
   expect_equal(
     grade_tbl_rows_extra_1$problem,
-    problem("nrow", 1, 26),
+    problem("nrow", 1, 26, location = "table"),
     ignore_attr = "class"
   )
 })
@@ -128,7 +132,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_extra_1$problem,
-    problem("ncol", 2, 3),
+    problem("ncol", 2, 3, location = "table"),
     ignore_attr = "class"
   )
   
@@ -143,7 +147,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_extra_2$problem,
-    problem("ncol", 1, 3),
+    problem("ncol", 1, 3, location = "table"),
     ignore_attr = "class"
   )
   
@@ -158,7 +162,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_missing_1$problem,
-    problem("ncol", 2, 1),
+    problem("ncol", 2, 1, location = "table"),
     ignore_attr = "class"
   )
 })
@@ -177,7 +181,8 @@ test_that("tbl_grade_table() names", {
     problem(
       "names",
       missing = c("x", "y"),
-      unexpected = c("a", "b")
+      unexpected = c("a", "b"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -194,7 +199,9 @@ test_that("tbl_grade_table() columns", {
   
   expect_equal(
     grade$problem,
-    problem("values", letters[24:26], letters[1:3], column = "a"),
+    problem(
+      "values", letters[24:26], letters[1:3], location = "column", column = "a"
+    ),
     ignore_attr = "class"
   )
 })
@@ -226,7 +233,7 @@ test_that("tbl_grade_table() returns grades with row problems", {
   
   expect_equal(
     grade_rows_extra$problem,
-    problem("nrow", 25, 26),
+    problem("nrow", 25, 26, location = "table"),
     ignore_attr = "class"
   )
   
@@ -242,7 +249,7 @@ test_that("tbl_grade_table() returns grades with row problems", {
   
   expect_equal(
     grade_rows_missing$problem,
-    problem("nrow", 1, 26),
+    problem("nrow", 1, 26, location = "table"),
     ignore_attr = "class"
   )
 })
@@ -262,7 +269,8 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
     problem(
       "names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d")
+      unexpected = c("a", "b", "c", "d"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -282,7 +290,8 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
     problem(
       "names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d")
+      unexpected = c("a", "b", "c", "d"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -302,7 +311,8 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
     problem(
       "names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d")
+      unexpected = c("a", "b", "c", "d"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -319,7 +329,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("levels_n", 3, 2, column = "a"),
+    problem("levels_n", 3, 2, location = "column", column = "a"),
     ignore_attr = "class"
   )
 })
@@ -339,6 +349,7 @@ test_that("level labels", {
       "levels",
       missing = c("x", "y", "z"),
       unexpected = c("a", "b", "c"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -356,7 +367,7 @@ test_that("level order", {
   
   expect_equal(
     grade_reverse$problem,
-    problem("levels_reversed", column = "a"),
+    problem("levels_reversed", location = "column", column = "a"),
     ignore_attr = "class"
   )
   
@@ -374,6 +385,7 @@ test_that("level order", {
       "levels_order",
       expected = c("c", "a", "b"),
       actual = c("a", "b", "c"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -394,6 +406,7 @@ test_that("level order", {
       "levels_order",
       c("a", "b", "c", "e", "d"),
       c("a", "b", "c", "d", "e"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -411,7 +424,7 @@ test_that("tbl_grade_table() groups", {
   
   expect_equal(
     grade$problem,
-    problem("groups", missing = "b", unexpected = "a"),
+    problem("groups", missing = "b", unexpected = "a", location = "table"),
     ignore_attr = "class"
   )
 })

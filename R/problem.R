@@ -35,6 +35,8 @@ return_if_problem <- function(
 ) {
   if (inherits(problem, "tblcheck_problem")) {
     if (!is.null(prefix)) {
+      problem$location <- prefix
+      
       problem_class <- append(
         class(problem), paste0(prefix, "_problem"), after = 1
       )
@@ -44,7 +46,7 @@ return_if_problem <- function(
     
     # Attributes are dropped by `c()`, so the class must be reintroduced
     problem <- c(problem, ...)
-    class(problem) <- problem_class
+    class(problem) <- unique(problem_class)
     
     rlang::return_from(env, problem)
   }
@@ -105,11 +107,12 @@ as_problem <- function(x) {
   checkmate::assert_list(x)
   class(x) <- c("tblcheck_problem", "gradethis_problem")
   
-  type <- problem_type(x)
-  if (!is.null(type)) {
-    base_type <- gsub("^.*_", "", type)
-    type_classes <- paste0(unique(c(type, base_type)), "_problem")
-    class(x) <- c(type_classes, class(x))
+  if (!is.null(x$location)) {
+    class(x) <- c(paste0(x$location, "_problem"), class(x))
+  }
+  
+  if (!is.null(problem_type(x))) {
+    class(x) <- c(paste0(problem_type(x), "_problem"), class(x))
   }
   
   x

@@ -10,7 +10,9 @@ test_that("grade missing names", {
   
   expect_equal(
     grade_missing_1$problem,
-    problem("names", missing = "b", unexpected = character(0)),
+    problem(
+      "names", missing = "b", unexpected = character(0), location = "table"
+    ),
     ignore_attr = "class"
   )
   
@@ -25,7 +27,12 @@ test_that("grade missing names", {
   
   expect_equal(
     grade_missing_2$problem,
-    problem("names", missing = c("b", "c"), unexpected = character(0)),
+    problem(
+      "names", 
+      missing = c("b", "c"), 
+      unexpected = character(0), 
+      location = "table"
+    ),
     ignore_attr = "class"
   )
 })
@@ -42,7 +49,9 @@ test_that("grade unexpected names", {
   
   expect_equal(
     grade_unexpected_1$problem,
-    problem("names", missing = character(0), unexpected = "b"),
+    problem(
+      "names", missing = character(0), unexpected = "b", location = "table"
+    ),
     ignore_attr = "class"
   )
   
@@ -57,7 +66,12 @@ test_that("grade unexpected names", {
   
   expect_equal(
     grade_unexpected_2$problem,
-    problem("names", missing = character(0), unexpected = c("b", "c")),
+    problem(
+      "names", 
+      missing = character(0), 
+      unexpected = c("b", "c"),
+      location = "table"
+    ),
     ignore_attr = "class"
   )
 })
@@ -73,7 +87,12 @@ test_that("grade missing and unexpected names", {
   
   expect_equal(
     grade$problem,
-    problem("names", missing = c("x", "y"), unexpected = c("a", "b")),
+    problem(
+      "names", 
+      missing = c("x", "y"), 
+      unexpected = c("a", "b"), 
+      location = "table"
+    ),
     ignore_attr = "class"
   )
 })

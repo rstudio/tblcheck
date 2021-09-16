@@ -32,6 +32,16 @@
         Your table should not be grouped by `b` or `c`.
       >
 
+# grade missing and unexpected groups
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table should be grouped by `b`. Your table should not be grouped
+        by `a`.
+      >
+
 # grade groups max_diffs()
 
     Code

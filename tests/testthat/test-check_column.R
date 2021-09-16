@@ -15,6 +15,7 @@ test_that("tbl_grade_column() checks classes", {
       "character",
       expected_length = 3,
       actual_length = 26,
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -32,7 +33,7 @@ test_that("tbl_grade_column() checks the first three values", {
   
   expect_equal(
     grade$problem,
-    problem("values", letters, rev(letters), column = "a"),
+    problem("values", letters, rev(letters), location = "column", column = "a"),
     ignore_attr = "class"
   )
 })
@@ -54,6 +55,7 @@ test_that("tbl_grade_column() checks multiple classes", {
       actual = "data.frame",
       expected_length = 1,
       actual_length = 1,
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -71,7 +73,13 @@ test_that("tbl_grade_column() checks for value differences beyond the first 3", 
   
   expect_equal(
     grade$problem,
-    problem("values", c(rep(1, 3), 10:15), c(rep(1, 3), 5:10), column = "a"),
+    problem(
+      "values",
+      c(rep(1, 3), 10:15),
+      c(rep(1, 3), 5:10),
+      location = "column",
+      column = "a"
+    ),
     ignore_attr = "class"
   )
 })
@@ -87,7 +95,7 @@ test_that("max_diffs modifies the number of values to print", {
   
   expect_equal(
     grade$problem,
-    problem("values", rev(letters), letters, column = "a"),
+    problem("values", rev(letters), letters, location = "column", column = "a"),
     ignore_attr = "class"
   )
 })
@@ -103,7 +111,9 @@ test_that("max_diffs doesn't overflow", {
   
   expect_equal(
     grade$problem,
-    problem("values", letters[2:1], letters[1:2], column = "a"),
+    problem(
+      "values", letters[2:1], letters[1:2], location = "column", column = "a"
+    ),
     ignore_attr = "class"
   )
 })
@@ -119,7 +129,7 @@ test_that("checks that columns have the same length", {
   
   expect_equal(
     grade$problem,
-    problem("length", 4, 3, column = "a"),
+    problem("length", 4, 3, location = "column", column = "a"),
     ignore_attr = "class"
   )
 })
@@ -135,7 +145,7 @@ test_that("checks that the column is present in object", {
   
   expect_equal(
     grade$problem,
-    problem("names", missing = "a"),
+    problem("names", missing = "a", location = "table"),
     ignore_attr = "class"
   )
 })
@@ -182,7 +192,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("levels_n", 3, 2, column = "a"),
+    problem("levels_n", 3, 2, location = "column", column = "a"),
     ignore_attr = "class"
   )
 })
@@ -202,6 +212,7 @@ test_that("level labels", {
       "levels",
       missing = c("x", "y", "z"),
       unexpected = c("a", "b", "c"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -219,7 +230,7 @@ test_that("level order", {
   
   expect_equal(
     grade_reverse$problem,
-    problem("levels_reversed", column = "a"),
+    problem("levels_reversed", location = "column", column = "a"),
     ignore_attr = "class"
   )
   
@@ -237,6 +248,7 @@ test_that("level order", {
       "levels_order",
       expected = c("c", "a", "b"),
       actual = c("a", "b", "c"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -253,7 +265,13 @@ test_that("level order", {
   
   expect_equal(
     grade$problem,
-    problem("levels_order", c("a", "b", "c", "e", "d"), c("a", "b", "c", "d", "e"), column = "a"),
+    problem(
+      "levels_order",
+      c("a", "b", "c", "e", "d"),
+      c("a", "b", "c", "d", "e"),
+      location = "column",
+      column = "a"
+    ),
     ignore_attr = "class"
   )
 })
