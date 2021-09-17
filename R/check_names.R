@@ -54,13 +54,15 @@ tbl_check_names <- function(
   names_obj <- names(object)
   
   if (!identical(names_exp, names_obj)) {
-    # TODO: Check names order
-    
-    problem <- problem(
-      "names", 
-      missing = setdiff(names_exp, names_obj),
-      unexpected = setdiff(names_obj, names_exp)
-    )
+    if (identical(sort(names_exp), sort(names_obj))) {
+      problem <- problem("names_order", names_exp, names_obj)
+    } else {
+      problem <- problem(
+        "names", 
+        missing = setdiff(names_exp, names_obj),
+        unexpected = setdiff(names_obj, names_exp)
+      )
+    }
     
     if (is.data.frame(object) && is.data.frame(expected)) {
       return_if_problem(problem, prefix = "table")
