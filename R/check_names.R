@@ -55,6 +55,10 @@ tbl_check_names <- function(
   
   if (!identical(names_exp, names_obj)) {
     if (identical(sort(names_exp), sort(names_obj))) {
+      if (!check_order) {
+        return(invisible())
+      }
+      
       problem <- problem("names_order", names_exp, names_obj)
     } else {
       problem <- problem(
@@ -86,7 +90,7 @@ tbl_grade_names <- function(
   env = parent.frame()
 ) {
   tbl_grade(
-    tbl_check_names(object, expected, env = env),
+    tbl_check_names(object, expected, check_order = check_order, env = env),
     max_diffs = max_diffs,
     env = env
   )

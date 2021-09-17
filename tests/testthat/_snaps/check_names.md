@@ -50,7 +50,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your table's columns were not in the expected order.
+        Your table's columns were not in the expected order. The first 2
+        columns of your table should be `b` and `a`.
       >
 
 # grade names max_diffs()

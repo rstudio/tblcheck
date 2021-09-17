@@ -111,6 +111,14 @@ test_that("grade names in wrong order", {
     problem("names_order", c("b", "a"), c("a", "b"), location = "table"),
     ignore_attr = "class"
   )
+  
+  grade_false <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = letters[1:3], b = a)
+    .solution <- tibble::tibble(b = letters[1:3], a = b)
+    tbl_grade_names(check_order = FALSE)
+  })
+  
+  expect_null(grade_false)
 })
 
 test_that("grade names max_diffs()", {
