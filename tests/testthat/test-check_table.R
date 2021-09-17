@@ -11,11 +11,12 @@ test_that("tbl_grade_table() class", {
   expect_equal(
     grade_tbl_class_df$problem,
     problem(
-      "table_class",
+      "class",
       c("tbl_df", "tbl", "data.frame"),
       "data.frame",
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -32,11 +33,12 @@ test_that("tbl_grade_table() class", {
   expect_equal(
     grade_tbl_class_grouped$problem,
     problem(
-      "table_class",
+      "class",
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
       c("tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -53,11 +55,12 @@ test_that("tbl_grade_table() class", {
   expect_equal(
     grade_tbl_class_rowwise$problem,
     problem(
-      "table_class",
+      "class",
       c("tbl_df", "tbl", "data.frame"),
       c("rowwise_df", "tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -74,11 +77,12 @@ test_that("tbl_grade_table() class", {
   expect_equal(
     grade_tbl_class_grouped_rowwise$problem,
     problem(
-      "table_class",
+      "class",
       c("grouped_df", "tbl_df", "tbl", "data.frame"),
       c("rowwise_df", "tbl_df", "tbl", "data.frame"),
       expected_length = 2,
-      actual_length = 2
+      actual_length = 2,
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -96,7 +100,7 @@ test_that("tbl_grade_table() rows", {
   
   expect_equal(
     grade_tbl_rows_missing_1$problem,
-    problem("table_nrow", 25, 26),
+    problem("nrow", 25, 26, location = "table"),
     ignore_attr = "class"
   )
   
@@ -111,7 +115,7 @@ test_that("tbl_grade_table() rows", {
   
   expect_equal(
     grade_tbl_rows_extra_1$problem,
-    problem("table_nrow", 1, 26),
+    problem("nrow", 1, 26, location = "table"),
     ignore_attr = "class"
   )
 })
@@ -128,7 +132,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_extra_1$problem,
-    problem("table_ncol", 2, 3),
+    problem("ncol", 2, 3, location = "table"),
     ignore_attr = "class"
   )
   
@@ -143,7 +147,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_extra_2$problem,
-    problem("table_ncol", 1, 3),
+    problem("ncol", 1, 3, location = "table"),
     ignore_attr = "class"
   )
   
@@ -158,7 +162,7 @@ test_that("tbl_grade_table() ncol", {
   
   expect_equal(
     grade_tbl_cols_missing_1$problem,
-    problem("table_ncol", 2, 1),
+    problem("ncol", 2, 1, location = "table"),
     ignore_attr = "class"
   )
 })
@@ -175,9 +179,10 @@ test_that("tbl_grade_table() names", {
   expect_equal(
     grade$problem,
     problem(
-      "table_names",
+      "names",
       missing = c("x", "y"),
-      unexpected = c("a", "b")
+      unexpected = c("a", "b"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -194,7 +199,9 @@ test_that("tbl_grade_table() columns", {
   
   expect_equal(
     grade$problem,
-    problem("column_value_diffs", letters[24:26], column = "a"),
+    problem(
+      "values", letters[24:26], letters[1:3], location = "column", column = "a"
+    ),
     ignore_attr = "class"
   )
 })
@@ -226,7 +233,7 @@ test_that("tbl_grade_table() returns grades with row problems", {
   
   expect_equal(
     grade_rows_extra$problem,
-    problem("table_nrow", 25, 26),
+    problem("nrow", 25, 26, location = "table"),
     ignore_attr = "class"
   )
   
@@ -242,7 +249,7 @@ test_that("tbl_grade_table() returns grades with row problems", {
   
   expect_equal(
     grade_rows_missing$problem,
-    problem("table_nrow", 1, 26),
+    problem("nrow", 1, 26, location = "table"),
     ignore_attr = "class"
   )
 })
@@ -260,9 +267,10 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   expect_equal(
     grade_tbl_names_3$problem,
     problem(
-      "table_names",
+      "names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d")
+      unexpected = c("a", "b", "c", "d"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -272,7 +280,6 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
-    problem   <- tbl_check_table(max_diffs = Inf)
     tbl_grade_table(max_diffs = Inf)
   })
   
@@ -281,9 +288,10 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   expect_equal(
     grade_tbl_names_inf$problem,
     problem(
-      "table_names",
+      "names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d")
+      unexpected = c("a", "b", "c", "d"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -301,9 +309,10 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
   expect_equal(
     grade_tbl_names_1$problem,
     problem(
-      "table_names",
+      "names",
       missing = c("x", "y", "z", "w"),
-      unexpected = c("a", "b", "c", "d")
+      unexpected = c("a", "b", "c", "d"),
+      location = "table"
     ),
     ignore_attr = "class"
   )
@@ -320,7 +329,7 @@ test_that("number of levels", {
   
   expect_equal(
     grade$problem,
-    problem("column_n_levels", 3, 2, column = "a"),
+    problem("levels_n", 3, 2, location = "column", column = "a"),
     ignore_attr = "class"
   )
 })
@@ -337,9 +346,10 @@ test_that("level labels", {
   expect_equal(
     grade$problem,
     problem(
-      "column_levels",
+      "levels",
       missing = c("x", "y", "z"),
       unexpected = c("a", "b", "c"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -357,7 +367,7 @@ test_that("level order", {
   
   expect_equal(
     grade_reverse$problem,
-    problem("column_reverse_levels", column = "a"),
+    problem("levels_reversed", location = "column", column = "a"),
     ignore_attr = "class"
   )
   
@@ -372,9 +382,10 @@ test_that("level order", {
   expect_equal(
     grade_diffs$problem,
     problem(
-      "column_level_order_diffs",
+      "levels_order",
       expected = c("c", "a", "b"),
       actual = c("a", "b", "c"),
+      location = "column",
       column = "a"
     ),
     ignore_attr = "class"
@@ -391,7 +402,13 @@ test_that("level order", {
   
   expect_equal(
     grade$problem,
-    problem("column_level_order", column = "a"),
+    problem(
+      "levels_order",
+      c("a", "b", "c", "e", "d"),
+      c("a", "b", "c", "d", "e"),
+      location = "column",
+      column = "a"
+    ),
     ignore_attr = "class"
   )
 })
@@ -407,7 +424,7 @@ test_that("tbl_grade_table() groups", {
   
   expect_equal(
     grade$problem,
-    problem("table_groups", missing = "b", unexpected = "a"),
+    problem("groups", missing = "b", unexpected = "a", location = "table"),
     ignore_attr = "class"
   )
 })
@@ -455,43 +472,30 @@ test_that("tbl_grade_table() handles bad user input", {
 })
 
 test_that("tbl_check_table() handles bad user input", {
+  .result <- .solution <- tibble::tibble(a = 1:3)
+  
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem <- tbl_check_table(check_dimensions = "yes")
-    },
-    "check_dimensions"
+    tbl_check_table(check_dimensions = "yes"),
+    message = "check_dimensions"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_names = 5)
-    },
-    "check_names"
+    tbl_check_table(check_names = 5),
+    message = "check_names"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_columns = NULL)
-    },
-    "check_columns"
+    tbl_check_table(check_columns = NULL),
+    message = "check_columns"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_class = NA)
-    },
-    "check_class"
+    tbl_check_table(check_class = NA),
+    message = "check_class"
   )
   
   expect_internal_problem(
-    {
-      .solution <- .result <- tibble::tibble(a = 1:3)
-      problem   <- tbl_check_table(check_column_values = c(TRUE, TRUE))
-    },
-    "check_column_values"
+    tbl_check_table(check_column_values = c(TRUE, TRUE)),
+    message = "check_column_values"
   )
 })

@@ -2,7 +2,9 @@
 % Please edit documentation in R/check_dimensions.R
 \name{tbl_check_dimensions}
 \alias{tbl_check_dimensions}
+\alias{vec_check_dimensions}
 \alias{tbl_grade_dimensions}
+\alias{vec_grade_dimensions}
 \title{Check that the dimensions of two object are the same}
 \usage{
 tbl_check_dimensions(
@@ -11,7 +13,19 @@ tbl_check_dimensions(
   env = parent.frame()
 )
 
+vec_check_dimensions(
+  object = .result,
+  expected = .solution,
+  env = parent.frame()
+)
+
 tbl_grade_dimensions(
+  object = .result,
+  expected = .solution,
+  env = parent.frame()
+)
+
+vec_grade_dimensions(
   object = .result,
   expected = .solution,
   env = parent.frame()
@@ -41,7 +55,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{n_dimensions}: \code{object} and \code{expected} have a different number
+\item \code{dimensions_n}: \code{object} and \code{expected} have a different number
 of dimensions
 \item \code{length}: \code{object} and \code{expected} are one-dimensional vectors of
 different lengths

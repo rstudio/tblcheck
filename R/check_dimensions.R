@@ -8,7 +8,7 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `n_dimensions`: `object` and `expected` have a different number
+#' 1. `dimensions_n`: `object` and `expected` have a different number
 #'   of dimensions
 #' 1. `length`: `object` and `expected` are one-dimensional vectors of
 #'   different lengths
@@ -66,11 +66,11 @@ tbl_check_dimensions <- function(
   }
   
   if (!identical(length(obj_dim), length(exp_dim))) {
-    return(problem("n_dimensions", length(exp_dim), length(obj_dim)))
+    return(problem("dimensions_n", length(exp_dim), length(obj_dim)))
   }
   
   if (length(exp_dim) == 1) {
-    return_if_problem(vec_check_length(object, expected, env))
+    return(problem("length", exp_dim, obj_dim))
   }
   
   if (length(exp_dim) > 2) {
@@ -88,20 +88,42 @@ tbl_check_dimensions <- function(
 
 #' @rdname tbl_check_dimensions
 #' @export
+vec_check_dimensions <- tbl_check_dimensions
+
+#' @rdname tbl_check_dimensions
+#' @export
 tbl_grade_dimensions <- function(
   object = .result, 
   expected = .solution,
   env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_dimensions(object, expected, env = env),
-      env = env
-    )
+  tbl_grade(
+    tbl_check_dimensions(object, expected, env = env),
+    env = env
   )
 }
 
-tbl_message.n_dimensions_problem <- function(problem, ...) {
+#' @rdname tbl_check_dimensions
+#' @export
+vec_grade_dimensions <- tbl_grade_dimensions
+
+tbl_message.dimensions_n_problem <- function(problem, ...) {
+  if (is_problem(problem, "column")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your `{column}` column should have {expected} dimension, ",
+        "Your `{column}` column should have {expected} dimensions, "
+      )
+  } else if (is_problem(problem, "table")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your table should have {expected} dimension, ",
+        "Your table should have {expected} dimensions, "
+      )
+  }
+  
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
@@ -119,7 +141,50 @@ tbl_message.n_dimensions_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+tbl_message.length_problem <- function(problem, ...) {
+  if (is_problem(problem, "column")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your `{column}` column should contain {expected} value, ",
+        "Your `{column}` column should contain {expected} values, "
+      )
+  }
+  
+  problem$exp_msg <- problem$exp_msg %||% 
+    ngettext(
+      problem$expected,
+      "Your result should contain {expected} value, ",
+      "Your result should contain {expected} values, "
+    )
+  
+  problem$obj_msg <- problem$obj_msg %||%
+    ngettext(
+      problem$actual,
+      "but it has {actual} value.",
+      "but it has {actual} values."
+    )
+  
+  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+}
+
 tbl_message.ncol_problem <- function(problem, ...) {
+  if (is_problem(problem, "column")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your `{column}` column should have {expected} column, ",
+        "Your `{column}` column should have {expected} columns, "
+      )
+  } else if (is_problem(problem, "table")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your table should have {expected} column, ",
+        "Your table should have {expected} columns, "
+      )
+  }
+  
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
@@ -137,25 +202,23 @@ tbl_message.ncol_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.table_ncol_problem <- function(problem, ...) {
-  problem$exp_msg <- problem$exp_msg %||% 
-    ngettext(
-      problem$expected,
-      "Your table should have {expected} column, ",
-      "Your table should have {expected} columns, "
-    )
-  
-  problem$obj_msg <- problem$obj_msg %||%
-    ngettext(
-      problem$actual,
-      "but it has {actual} column.",
-      "but it has {actual} columns."
-    )
-  
-  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
-}
-
 tbl_message.nrow_problem <- function(problem, ...) {
+  if (is_problem(problem, "column")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your `{column}` column should have {expected} row, ",
+        "Your `{column}` column should have {expected} rows, "
+      )
+  } else if (is_problem(problem, "table")) {
+    problem$exp_msg <- problem$exp_msg %||% 
+      ngettext(
+        problem$expected,
+        "Your table should have {expected} row, ",
+        "Your table should have {expected} rows, "
+      )
+  }
+  
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
       problem$expected,
@@ -173,29 +236,17 @@ tbl_message.nrow_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.table_nrow_problem <- function(problem, ...) {
-  problem$exp_msg <- problem$exp_msg %||% 
-    ngettext(
-      problem$expected,
-      "Your table should have {expected} row, ",
-      "Your table should have {expected} rows, "
-    )
-  
-  problem$obj_msg <- problem$obj_msg %||%
-    ngettext(
-      problem$actual,
-      "but it has {actual} row.",
-      "but it has {actual} rows."
-    )
-  
-  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
-}
-
 tbl_message.dimensions_problem <- function(problem, ...) {
+  if (is_problem(problem, "column")) {
+    problem$msg <- problem$exp_msg %||% 
+      gettext("Your `{column}` column should be an array with dimensions {expected}, but it has dimensions {actual}.")
+  } else if (is_problem(problem, "table")) {
+    problem$msg <- problem$exp_msg %||% 
+      gettext("Your table should be an array with dimensions {expected}, but it has dimensions {actual}.")
+  }
+  
   problem$msg <- problem$msg %||%
-    gettext(
-      "Your result should be an array with dimensions {expected}, but it has dimensions {actual}."
-    )
+    gettext("Your result should be an array with dimensions {expected}, but it has dimensions {actual}.")
   
   problem$actual   <- paste(problem$actual, collapse = " x ")
   problem$expected <- paste(problem$expected, collapse = " x ")

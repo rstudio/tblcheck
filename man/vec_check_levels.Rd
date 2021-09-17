@@ -5,12 +5,7 @@
 \alias{vec_grade_levels}
 \title{Check that the levels of two factors are the same}
 \usage{
-vec_check_levels(
-  object = .result,
-  expected = .solution,
-  max_diffs = 3,
-  env = parent.frame()
-)
+vec_check_levels(object = .result, expected = .solution, env = parent.frame())
 
 vec_grade_levels(
   object = .result,
@@ -24,11 +19,11 @@ vec_grade_levels(
 
 \item{expected}{An object containing the expected result.}
 
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
 unexpected names to include in an informative failure message.
 Defaults to 3.}
-
-\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_levels()} or a
@@ -47,13 +42,11 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{n_levels}: \code{object} and \code{expected} have a different number of levels.
+\item \code{levels_n}: \code{object} and \code{expected} have a different number of levels.
 \item \code{levels}: The object has levels that are not expected,
 or is missing levels that are expected.
-\item \code{reverse_levels}: The \code{levels} of \code{object} are in the opposite order
+\item \code{levels_reversed}: The \code{levels} of \code{object} are in the opposite order
 of \code{expected}
-\item \code{level_order_diffs}: The first \code{max_diffs} levels of \code{object} are not in
-the same order as \code{expected}
 \item \code{level_order}: The levels of \code{object} are not in the same order
 as \code{expected}
 }
