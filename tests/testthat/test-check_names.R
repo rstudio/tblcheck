@@ -97,6 +97,22 @@ test_that("grade missing and unexpected names", {
   )
 })
 
+test_that("grade names in wrong order", {
+  grade <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = letters[1:3], b = a)
+    .solution <- tibble::tibble(b = letters[1:3], a = b)
+    tbl_grade_names()
+  })
+  
+  expect_snapshot(grade)
+  
+  expect_equal(
+    grade$problem,
+    problem("names_order", c("b", "a"), c("a", "b"), location = "table"),
+    ignore_attr = "class"
+  )
+})
+
 test_that("grade names max_diffs()", {
   grade_max_diffs_3 <-
     tblcheck_test_grade({

@@ -44,6 +44,15 @@
         not have columns named `a` or `b`.
       >
 
+# grade names in wrong order
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table's columns were not in the expected order.
+      >
+
 # grade names max_diffs()
 
     Code
