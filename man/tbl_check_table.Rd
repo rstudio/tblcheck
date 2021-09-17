@@ -10,6 +10,7 @@ tbl_check_table(
   expected = .solution,
   check_class = TRUE,
   check_names = TRUE,
+  check_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -24,6 +25,7 @@ tbl_grade_table(
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -42,6 +44,9 @@ tbl_grade_table(
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
+
+\item{check_order}{\verb{[logical(1)]}\cr Whether to check that the columns of
+\code{object} are in the same order as \code{expected} with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
 
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows and columns with \code{\link[=dim]{dim()}}.}
