@@ -155,3 +155,62 @@ tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
   
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
+
+tbl_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
+  problem$n_values <- min(
+    max(length(problem$expected), length(problem$actual)),
+    max_diffs
+  )
+  
+  if (is_problem(problem, "column")) {
+    problem$msg <- problem$msg %||%
+      "Your `{column}` column's names were not in the expected order. "
+  } else if (is_problem(problem, "table")) {
+    problem$msg <- problem$msg %||%
+      "Your table's columns were not in the expected order. "
+  }
+  
+  problem$msg <- problem$msg %||%
+    "Your result's names were not in the expected order. "
+  
+  if (
+    identical(
+      problem$expected[seq_len(problem$n_values)],
+      problem$actual[seq_len(problem$n_values)]
+    )
+  ) {
+    return(glue::glue_data(problem, problem$msg))
+  }
+  
+  problem$expected <- knitr::combine_words(
+    md_code(problem$expected[seq_len(problem$n_values)])
+  )
+  problem$actual <- knitr::combine_words(
+    md_code(problem$actual[seq_len(problem$n_values)])
+  )
+  
+  if (is_problem(problem, "column")) {
+    problem$exp_msg <- problem$exp_msg %||%
+      ngettext(
+        problem$n_values,
+        "The first name of your `{column}` column should be {expected}.",
+        "The first {n_values} names of your `{column}` column should be {expected}."
+      )
+  } else if (is_problem(problem, "table")) {
+    problem$exp_msg <- problem$exp_msg %||%
+      ngettext(
+        problem$n_values,
+        "The first column of your table should be {expected}.",
+        "The first {n_values} columns of your table should be {expected}."
+      )
+  }
+  
+  problem$exp_msg <- problem$exp_msg %||%
+    ngettext(
+      problem$n_values,
+      "The first name of your result should be {expected}.",
+      "The first {n_values} names of your result should be {expected}."
+    )
+  
+  glue::glue_data(problem, problem$msg, problem$exp_msg)
+}
