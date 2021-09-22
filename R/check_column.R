@@ -25,6 +25,11 @@
 #'   same length in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
 #'   same values in `object` and `expected`.
+#' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
+#'   same values in `object` and `expected`.
+#' @param check_names `[logical(1)]`\cr Whether to check that `column` has the
+#'   same [names][names()] in `object` and `expected`.
+#'   Defaults to `FALSE`.
 #'
 #' @return If there are any issues, a [list] from `tbl_check_column()` or a
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
@@ -55,6 +60,7 @@ tbl_check_column <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
+  check_names = FALSE,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -92,7 +98,7 @@ tbl_check_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
-      check_names = FALSE
+      check_names = check_names
     ),
     prefix = "column",
     column = column
@@ -109,6 +115,7 @@ tbl_grade_column <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
+  check_names = FALSE,
   env = parent.frame()
 ) {
   tbl_grade(
@@ -119,6 +126,7 @@ tbl_grade_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
+      check_names = check_names,
       env = env
     ),
     max_diffs = max_diffs,
