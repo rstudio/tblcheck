@@ -55,27 +55,32 @@ tbl_check_names <- function(
   names_exp <- names(expected)
   names_obj <- names(object)
   
-  if (!identical(names_exp, names_obj)) {
-    if (identical(sort(names_exp), sort(names_obj))) {
-      if (!check_order) {
-        return(invisible())
-      }
-      
-      problem <- problem("names_order", names_exp, names_obj)
+  same_when_sorted <- identical(sort(names_exp), sort(names_obj))
+  
+  if (!check_order && same_when_sorted) {
+    return(invisible())
+  }
+  
+  if (identical(names_exp, names_obj)) {
+    return(invisible())
+  }
+  
+  problem <- 
+    if (same_when_sorted) {
+      problem("names_order", names_exp, names_obj)
     } else {
-      problem <- problem(
+      problem(
         "names", 
         missing = setdiff(names_exp, names_obj),
         unexpected = setdiff(names_obj, names_exp)
       )
     }
     
-    if (is.data.frame(object) && is.data.frame(expected)) {
-      return_if_problem(problem, prefix = "table")
-    }
-    
-    return(problem)
+  if (is.data.frame(object) && is.data.frame(expected)) {
+    return_if_problem(problem, prefix = "table")
   }
+  
+  return(problem)
 }
 
 #' @rdname tbl_check_names
