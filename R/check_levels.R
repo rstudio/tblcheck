@@ -12,9 +12,9 @@
 #' 1. `levels`: The object has levels that are not expected,
 #'   or is missing levels that are expected.
 #' 1. `levels_reversed`: The `levels` of `object` are in the opposite order
-#'   of `expected`
+#'   of `expected`.
 #' 1. `level_order`: The levels of `object` are not in the same order
-#'   as `expected`
+#'   as `expected`.
 #'
 #' @inheritParams tbl_check_class
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
@@ -186,16 +186,20 @@ tbl_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
   problem$msg <- problem$msg %||%
     "Your result's levels were not in the expected order. "
   
+  problem$n_levels <- min(
+    max(length(problem$expected), length(problem$actual)),
+    max_diffs
+  )
+  
   if (
     identical(
-      problem$expected[seq_len(max_diffs)],
-      problem$actual[seq_len(max_diffs)]
+      problem$expected[seq_len(problem$n_levels)],
+      problem$actual[seq_len(problem$n_levels)]
     )
   ) {
     return(glue::glue_data(problem, problem$msg))
   }
-  
-  problem$n_levels <- min(length(problem$expected), max_diffs)
+
   problem$expected <- knitr::combine_words(
     md_code(problem$expected[seq_len(problem$n_levels)])
   )

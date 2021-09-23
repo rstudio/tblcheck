@@ -9,12 +9,14 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `table_class`: The table does not have the expected classes
-#' 1. `table_names`: The table has names that are not expected,
-#'   or is missing names that are expected
-#' 1. `table_ncol`: The table doesn't have the expected number of columns
-#' 1. `table_nrow`: The table doesn't have the expected number of rows
-#' 1. `table_groups`: The table has [groups][dplyr::group_by()] that are
+#' 1. `class`: The table does not have the expected classes.
+#' 1. `names`: The table has column names that are not expected,
+#'   or is missing names that are expected.
+#' 1. `names_order`: The table has the same column names as expected,
+#'   but in a different order. 
+#' 1. `ncol`: The table doesn't have the expected number of columns.
+#' 1. `nrow`: The table doesn't have the expected number of rows.
+#' 1. `groups`: The table has [groups][dplyr::group_by()] that are
 #'   not expected, or is missing groups that are expected.
 #' 
 #' Additional problems may be produced by [tbl_check_column()].
@@ -31,6 +33,9 @@
 #'   `expected` have the same classes with [class()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
+#' @param check_column_order `[logical(1)]`\cr Whether to check that the columns
+#'   of  `object` are in the same order as `expected` with [tbl_check_names()].
+#'   Defaults to `FALSE`.
 #' @param check_dimensions `[logical(1)]`\cr Whether to check that `object` and 
 #'   `expected` have the same number of rows and columns with [dim()].
 #' @param check_groups `[logical(1)]`\cr Whether to check that `object` and
@@ -83,6 +88,7 @@ tbl_check_table <- function(
   expected = .solution,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -120,7 +126,7 @@ tbl_check_table <- function(
   # check column names ----
   if (check_names) {
     return_if_problem(
-      tbl_check_names(object, expected),
+      tbl_check_names(object, expected, check_order = check_column_order),
       prefix = "table"
     )
   }
@@ -166,6 +172,7 @@ tbl_grade_table <- function(
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -179,6 +186,7 @@ tbl_grade_table <- function(
       expected = expected,
       check_class = check_class,
       check_names = check_names,
+      check_column_order = check_column_order,
       check_dimensions = check_dimensions,
       check_groups = check_groups,
       check_columns = check_columns,

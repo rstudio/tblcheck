@@ -10,6 +10,7 @@ tbl_check_table(
   expected = .solution,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -24,6 +25,7 @@ tbl_grade_table(
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -42,6 +44,10 @@ tbl_grade_table(
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
+
+\item{check_column_order}{\verb{[logical(1)]}\cr Whether to check that the columns
+of  \code{object} are in the same order as \code{expected} with \code{\link[=tbl_check_names]{tbl_check_names()}}.
+Defaults to \code{FALSE}.}
 
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows and columns with \code{\link[=dim]{dim()}}.}
@@ -86,12 +92,14 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{table_class}: The table does not have the expected classes
-\item \code{table_names}: The table has names that are not expected,
-or is missing names that are expected
-\item \code{table_ncol}: The table doesn't have the expected number of columns
-\item \code{table_nrow}: The table doesn't have the expected number of rows
-\item \code{table_groups}: The table has \link[dplyr:group_by]{groups} that are
+\item \code{class}: The table does not have the expected classes.
+\item \code{names}: The table has column names that are not expected,
+or is missing names that are expected.
+\item \code{names_order}: The table has the same column names as expected,
+but in a different order.
+\item \code{ncol}: The table doesn't have the expected number of columns.
+\item \code{nrow}: The table doesn't have the expected number of rows.
+\item \code{groups}: The table has \link[dplyr:group_by]{groups} that are
 not expected, or is missing groups that are expected.
 }
 

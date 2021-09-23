@@ -8,12 +8,16 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `table_names`: `object` doesn't contain a column named column
-#' 1. `column_class`: Any mismatch in the classes of the `column`
-#' 1. `column_length`: The `column` doesn't have the expected length
-#' 1. `column_levels_n`, `column_levels`, `column_levels_reversed`, 
-#'   `column_levels_order`: See [vec_check_levels()]
-#' 1. `column_values`: The `column` doesn't have the expected values
+#' 1. `names` (`table_problem`): `object` doesn't contain a column named column.
+#' 1. `class`: Any mismatch in the classes of the `column`.
+#' 1. `length`: The `column` doesn't have the expected length.
+#' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
+#'   See [vec_check_levels()].
+#' 1. `values`: The `column` doesn't have the expected values.
+#' 1. `names` (`column_problem`): The `column` has different [names][names()]
+#'   than expected.
+#' 1. `names_order`: The `column` has the same [names][names()] as expected,
+#'   but in a different order.
 #'
 #' @param column `[character(1)]`\cr The name of the column to check.
 #' @inheritParams tbl_check_table
@@ -25,6 +29,11 @@
 #'   same length in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
 #'   same values in `object` and `expected`.
+#' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
+#'   same values in `object` and `expected`.
+#' @param check_names `[logical(1)]`\cr Whether to check that `column` has the
+#'   same [names][names()] in `object` and `expected`.
+#'   Defaults to `FALSE`.
 #'
 #' @return If there are any issues, a [list] from `tbl_check_column()` or a
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
@@ -55,6 +64,7 @@ tbl_check_column <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
+  check_names = FALSE,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -92,7 +102,7 @@ tbl_check_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
-      check_names = FALSE
+      check_names = check_names
     ),
     prefix = "column",
     column = column
@@ -109,6 +119,7 @@ tbl_grade_column <- function(
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
+  check_names = FALSE,
   env = parent.frame()
 ) {
   tbl_grade(
@@ -119,6 +130,7 @@ tbl_grade_column <- function(
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
+      check_names = check_names,
       env = env
     ),
     max_diffs = max_diffs,

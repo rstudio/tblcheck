@@ -7,14 +7,25 @@
 \alias{vec_grade_names}
 \title{Check that the names of two object are the same}
 \usage{
-tbl_check_names(object = .result, expected = .solution, env = parent.frame())
+tbl_check_names(
+  object = .result,
+  expected = .solution,
+  check_order = TRUE,
+  env = parent.frame()
+)
 
-vec_check_names(object = .result, expected = .solution, env = parent.frame())
+vec_check_names(
+  object = .result,
+  expected = .solution,
+  check_order = TRUE,
+  env = parent.frame()
+)
 
 tbl_grade_names(
   object = .result,
   expected = .solution,
   max_diffs = 3,
+  check_order = TRUE,
   env = parent.frame()
 )
 
@@ -22,6 +33,7 @@ vec_grade_names(
   object = .result,
   expected = .solution,
   max_diffs = 3,
+  check_order = TRUE,
   env = parent.frame()
 )
 }
@@ -29,6 +41,9 @@ vec_grade_names(
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
+
+\item{check_order}{\verb{[logical(1)]}\cr Whether to check that the names of
+\code{object} and \code{expected} are in the same order.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 
@@ -57,6 +72,8 @@ informative message with \code{\link[gradethis:graded]{gradethis::fail()}}
 \enumerate{
 \item \code{names}: The object has names that are not expected,
 or is missing names that are expected.
+\item \code{names_order}: The object has the same names as expected,
+but in a different order.
 }
 }
 

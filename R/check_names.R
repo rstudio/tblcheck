@@ -11,8 +11,12 @@
 #' 
 #' 1. `names`: The object has names that are not expected,
 #'   or is missing names that are expected.
+#' 1. `names_order`: The object has the same names as expected,
+#'   but in a different order.
 #'
 #' @inheritParams tbl_check_class
+#' @param check_order `[logical(1)]`\cr Whether to check that the names of 
+#'   `object` and `expected` are in the same order.
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
@@ -38,6 +42,7 @@
 tbl_check_names <- function(
   object = .result,
   expected = .solution,
+  check_order = TRUE,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -50,19 +55,32 @@ tbl_check_names <- function(
   names_exp <- names(expected)
   names_obj <- names(object)
   
-  if (!identical(names_exp, names_obj)) {
-    problem <- problem(
-      "names", 
-      missing = setdiff(names_exp, names_obj),
-      unexpected = setdiff(names_obj, names_exp)
-    )
-    
-    if (is.data.frame(object) && is.data.frame(expected)) {
-      return_if_problem(problem, prefix = "table")
+  same_when_sorted <- identical(sort(names_exp), sort(names_obj))
+  
+  if (!check_order && same_when_sorted) {
+    return(invisible())
+  }
+  
+  if (identical(names_exp, names_obj)) {
+    return(invisible())
+  }
+  
+  problem <- 
+    if (same_when_sorted) {
+      problem("names_order", names_exp, names_obj)
+    } else {
+      problem(
+        "names", 
+        missing = setdiff(names_exp, names_obj),
+        unexpected = setdiff(names_obj, names_exp)
+      )
     }
     
-    return(problem)
+  if (is.data.frame(object) && is.data.frame(expected)) {
+    return_if_problem(problem, prefix = "table")
   }
+  
+  return(problem)
 }
 
 #' @rdname tbl_check_names
@@ -75,10 +93,11 @@ tbl_grade_names <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
+  check_order = TRUE,
   env = parent.frame()
 ) {
   tbl_grade(
-    tbl_check_names(object, expected, env = env),
+    tbl_check_names(object, expected, check_order = check_order, env = env),
     max_diffs = max_diffs,
     env = env
   )
@@ -146,4 +165,63 @@ tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
   }
   
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
+}
+
+tbl_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
+  problem$n_values <- min(
+    max(length(problem$expected), length(problem$actual)),
+    max_diffs
+  )
+  
+  if (is_problem(problem, "column")) {
+    problem$msg <- problem$msg %||%
+      "Your `{column}` column's names were not in the expected order. "
+  } else if (is_problem(problem, "table")) {
+    problem$msg <- problem$msg %||%
+      "Your table's columns were not in the expected order. "
+  }
+  
+  problem$msg <- problem$msg %||%
+    "Your result's names were not in the expected order. "
+  
+  if (
+    identical(
+      problem$expected[seq_len(problem$n_values)],
+      problem$actual[seq_len(problem$n_values)]
+    )
+  ) {
+    return(glue::glue_data(problem, problem$msg))
+  }
+  
+  problem$expected <- knitr::combine_words(
+    md_code(problem$expected[seq_len(problem$n_values)])
+  )
+  problem$actual <- knitr::combine_words(
+    md_code(problem$actual[seq_len(problem$n_values)])
+  )
+  
+  if (is_problem(problem, "column")) {
+    problem$exp_msg <- problem$exp_msg %||%
+      ngettext(
+        problem$n_values,
+        "The first name of your `{column}` column should be {expected}.",
+        "The first {n_values} names of your `{column}` column should be {expected}."
+      )
+  } else if (is_problem(problem, "table")) {
+    problem$exp_msg <- problem$exp_msg %||%
+      ngettext(
+        problem$n_values,
+        "The first column of your table should be {expected}.",
+        "The first {n_values} columns of your table should be {expected}."
+      )
+  }
+  
+  problem$exp_msg <- problem$exp_msg %||%
+    ngettext(
+      problem$n_values,
+      "The first name of your result should be {expected}.",
+      "The first {n_values} names of your result should be {expected}."
+    )
+  
+  glue::glue_data(problem, problem$msg, problem$exp_msg)
 }

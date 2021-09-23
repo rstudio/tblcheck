@@ -8,12 +8,14 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `vector_class`: `object` doesn't have the same classes as `expected`
-#' 1. `vector_length`: `object` doesn't have the same length as `expected`
-#' 1. `vector_levels_n`, `vector_levels`, `vector_levels_reversed`,
-#'   `vector_levels_order`: See [vec_check_levels()]
-#' 1. `vector_values`: `object` doesn't contain the same values as `expected`
-#' 1. `vector_names`: `object` has different [names][names()] than `expected`
+#' 1. `class`: `object` doesn't have the same classes as `expected`.
+#' 1. `length`: `object` doesn't have the same length as `expected`.
+#' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
+#'   See [vec_check_levels()].
+#' 1. `values`: `object` doesn't contain the same values as `expected`.
+#' 1. `names`: `object` has different [names][names()] than `expected`.
+#' 1. `names_order`: `object` has the same [names][names()] as `expected`,
+#'   but in a different order.
 #'
 #' @param object A vector to be compared to `expected`.
 #' @param expected A vector containing the expected result.
