@@ -46,9 +46,9 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \item \code{levels}: The object has levels that are not expected,
 or is missing levels that are expected.
 \item \code{levels_reversed}: The \code{levels} of \code{object} are in the opposite order
-of \code{expected}
+of \code{expected}.
 \item \code{level_order}: The levels of \code{object} are not in the same order
-as \code{expected}
+as \code{expected}.
 }
 }
 

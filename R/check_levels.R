@@ -12,9 +12,9 @@
 #' 1. `levels`: The object has levels that are not expected,
 #'   or is missing levels that are expected.
 #' 1. `levels_reversed`: The `levels` of `object` are in the opposite order
-#'   of `expected`
+#'   of `expected`.
 #' 1. `level_order`: The levels of `object` are not in the same order
-#'   as `expected`
+#'   as `expected`.
 #'
 #' @inheritParams tbl_check_class
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or

@@ -8,12 +8,16 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `table_names`: `object` doesn't contain a column named column
-#' 1. `column_class`: Any mismatch in the classes of the `column`
-#' 1. `column_length`: The `column` doesn't have the expected length
-#' 1. `column_levels_n`, `column_levels`, `column_levels_reversed`, 
-#'   `column_levels_order`: See [vec_check_levels()]
-#' 1. `column_values`: The `column` doesn't have the expected values
+#' 1. `names` (`table_problem`): `object` doesn't contain a column named column.
+#' 1. `class`: Any mismatch in the classes of the `column`.
+#' 1. `length`: The `column` doesn't have the expected length.
+#' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
+#'   See [vec_check_levels()].
+#' 1. `values`: The `column` doesn't have the expected values.
+#' 1. `names` (`column_problem`): The `column` has different [names][names()]
+#'   than expected.
+#' 1. `names_order`: The `column` has the same [names][names()] as expected,
+#'   but in a different order.
 #'
 #' @param column `[character(1)]`\cr The name of the column to check.
 #' @inheritParams tbl_check_table

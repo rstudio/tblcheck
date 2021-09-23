@@ -72,6 +72,8 @@ informative message with \code{\link[gradethis:graded]{gradethis::fail()}}
 \enumerate{
 \item \code{names}: The object has names that are not expected,
 or is missing names that are expected.
+\item \code{names_order}: The object has the same names as expected,
+but in a different order.
 }
 }
 

@@ -11,6 +11,8 @@
 #' 
 #' 1. `names`: The object has names that are not expected,
 #'   or is missing names that are expected.
+#' 1. `names_order`: The object has the same names as expected,
+#'   but in a different order.
 #'
 #' @inheritParams tbl_check_class
 #' @param check_order `[logical(1)]`\cr Whether to check that the names of 

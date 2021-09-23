@@ -69,12 +69,14 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{vector_class}: \code{object} doesn't have the same classes as \code{expected}
-\item \code{vector_length}: \code{object} doesn't have the same length as \code{expected}
-\item \code{vector_levels_n}, \code{vector_levels}, \code{vector_levels_reversed},
-\code{vector_levels_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
-\item \code{vector_values}: \code{object} doesn't contain the same values as \code{expected}
-\item \code{vector_names}: \code{object} has different \link[=names]{names} than \code{expected}
+\item \code{class}: \code{object} doesn't have the same classes as \code{expected}.
+\item \code{length}: \code{object} doesn't have the same length as \code{expected}.
+\item \code{levels_n}, \code{levels}, \code{levels_reversed}, \code{levels_order}:
+See \code{\link[=vec_check_levels]{vec_check_levels()}}.
+\item \code{values}: \code{object} doesn't contain the same values as \code{expected}.
+\item \code{names}: \code{object} has different \link[=names]{names} than \code{expected}.
+\item \code{names_order}: \code{object} has the same \link[=names]{names} as \code{expected},
+but in a different order.
 }
 }
 

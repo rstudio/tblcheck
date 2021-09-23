@@ -70,12 +70,16 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{table_names}: \code{object} doesn't contain a column named column
-\item \code{column_class}: Any mismatch in the classes of the \code{column}
-\item \code{column_length}: The \code{column} doesn't have the expected length
-\item \code{column_levels_n}, \code{column_levels}, \code{column_levels_reversed},
-\code{column_levels_order}: See \code{\link[=vec_check_levels]{vec_check_levels()}}
-\item \code{column_values}: The \code{column} doesn't have the expected values
+\item \code{names} (\code{table_problem}): \code{object} doesn't contain a column named column.
+\item \code{class}: Any mismatch in the classes of the \code{column}.
+\item \code{length}: The \code{column} doesn't have the expected length.
+\item \code{levels_n}, \code{levels}, \code{levels_reversed}, \code{levels_order}:
+See \code{\link[=vec_check_levels]{vec_check_levels()}}.
+\item \code{values}: The \code{column} doesn't have the expected values.
+\item \code{names} (\code{column_problem}): The \code{column} has different \link[=names]{names}
+than expected.
+\item \code{names_order}: The \code{column} has the same \link[=names]{names} as expected,
+but in a different order.
 }
 }
 

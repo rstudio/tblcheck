@@ -92,12 +92,14 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{table_class}: The table does not have the expected classes
-\item \code{table_names}: The table has names that are not expected,
-or is missing names that are expected
-\item \code{table_ncol}: The table doesn't have the expected number of columns
-\item \code{table_nrow}: The table doesn't have the expected number of rows
-\item \code{table_groups}: The table has \link[dplyr:group_by]{groups} that are
+\item \code{class}: The table does not have the expected classes.
+\item \code{names}: The table has column names that are not expected,
+or is missing names that are expected.
+\item \code{names_order}: The table has the same column names as expected,
+but in a different order.
+\item \code{ncol}: The table doesn't have the expected number of columns.
+\item \code{nrow}: The table doesn't have the expected number of rows.
+\item \code{groups}: The table has \link[dplyr:group_by]{groups} that are
 not expected, or is missing groups that are expected.
 }
 

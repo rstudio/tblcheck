@@ -9,12 +9,14 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `table_class`: The table does not have the expected classes
-#' 1. `table_names`: The table has names that are not expected,
-#'   or is missing names that are expected
-#' 1. `table_ncol`: The table doesn't have the expected number of columns
-#' 1. `table_nrow`: The table doesn't have the expected number of rows
-#' 1. `table_groups`: The table has [groups][dplyr::group_by()] that are
+#' 1. `class`: The table does not have the expected classes.
+#' 1. `names`: The table has column names that are not expected,
+#'   or is missing names that are expected.
+#' 1. `names_order`: The table has the same column names as expected,
+#'   but in a different order. 
+#' 1. `ncol`: The table doesn't have the expected number of columns.
+#' 1. `nrow`: The table doesn't have the expected number of rows.
+#' 1. `groups`: The table has [groups][dplyr::group_by()] that are
 #'   not expected, or is missing groups that are expected.
 #' 
 #' Additional problems may be produced by [tbl_check_column()].
