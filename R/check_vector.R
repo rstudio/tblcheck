@@ -8,8 +8,8 @@
 #' 1. Check names with [tbl_check_names()]
 #' 
 #' If the vectors differ
-#' - `tbl_check_vector()` returns a list describing the problem
-#' - `tbl_grade_vector()` returns a failing grade and informative message
+#' - `vec_check_vector()` returns a list describing the problem
+#' - `vec_grade_vector()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:

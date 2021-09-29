@@ -68,8 +68,8 @@ Checks for differences between \code{object} and \code{expected} in the followin
 
 If the vectors differ
 \itemize{
-\item \code{tbl_check_vector()} returns a list describing the problem
-\item \code{tbl_grade_vector()} returns a failing grade and informative message
+\item \code{vec_check_vector()} returns a list describing the problem
+\item \code{vec_grade_vector()} returns a failing grade and informative message
 with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
 }
