@@ -14,13 +14,17 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `table_class`: The table does not have the expected classes
-#' 2. `table_dimensions`: The table doesn't have the expected number of rows
-#'   and columns
-#' 4. `table_names`: The table has names that are not expected,
-#'   or is missing names that are expected
+#' 1. `class`: The table does not have the expected classes.
+#' 1. `names`: The table has column names that are not expected,
+#'   or is missing names that are expected.
+#' 1. `names_order`: The table has the same column names as expected,
+#'   but in a different order. 
+#' 1. `ncol`: The table doesn't have the expected number of columns.
+#' 1. `nrow`: The table doesn't have the expected number of rows.
+#' 1. `groups`: The table has [groups][dplyr::group_by()] that are
+#'   not expected, or is missing groups that are expected.
 #' 
-#' Additional problems may be produced by [tbl_check_column()]
+#' Additional problems may be produced by [tbl_check_column()].
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
@@ -34,16 +38,22 @@
 #'   `expected` have the same classes with [tbl_check_class()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
+#' @param check_column_order `[logical(1)]`\cr Whether to check that the columns
+#'   of  `object` are in the same order as `expected` with [tbl_check_names()].
+#'   Defaults to `FALSE`.
 #' @param check_dimensions `[logical(1)]`\cr Whether to check that `object` and 
 #'   `expected` have the same number of rows and columns
 #'   with [tbl_check_dimensions()].
+#' @param check_groups `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same [[groups][dplyr::group_by()]
+#'   with [dplyr::group_vars()].
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [tbl_check_column()].
 #' @param check_column_class `[logical(1)]`\cr Whether to check that each
 #'   columns has the same class in `object` and `expected`.
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
-#' @param envir The environment in which to find `.result` and `.solution`.
+#' @param env The environment in which to find `.result` and `.solution`.
 #'
 #' @return If there are any issues, a [list] from `tbl_check_table()` or a
 #'   [gradethis::fail()] message from `tbl_grade_table()`.
@@ -82,27 +92,28 @@
 tbl_check_table <- function(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
+  check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
-  assert_internally({
-    checkmate::assert_number(max_diffs, lower = 1)
+  return_if_internal_problem({
     checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_dimensions,    any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_groups,        any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
@@ -114,15 +125,15 @@ tbl_check_table <- function(
   if (check_class) {
     return_if_problem(
       tbl_check_class(object, expected),
-      table = TRUE
+      prefix = "table"
     )
   }
   
   # check column names ----
   if (check_names) {
     return_if_problem(
-      tbl_check_names(object, expected),
-      table = TRUE
+      tbl_check_names(object, expected, check_order = check_column_order),
+      prefix = "table"
     )
   }
   
@@ -130,7 +141,15 @@ tbl_check_table <- function(
   if (check_dimensions) {
     return_if_problem(
       tbl_check_dimensions(object, expected),
-      table = TRUE
+      prefix = "table"
+    )
+  }
+  
+  # check groups ----
+  if (check_groups) {
+    return_if_problem(
+      tbl_check_groups(object, expected),
+      prefix = "table"
     )
   }
   
@@ -139,13 +158,12 @@ tbl_check_table <- function(
     for (column in names(expected)) {
       return_if_problem(
         tbl_check_column(
-          name = column,
+          column = column,
           object = object,
           expected = expected,
           check_class = check_column_class,
           check_values = check_column_values,
-          check_length = FALSE,
-          max_diffs = max_diffs
+          check_length = FALSE
         )
       )
     }
@@ -160,27 +178,29 @@ tbl_grade_table <- function(
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
+  check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_table(
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        check_class = check_class,
-        check_names = check_names,
-        check_dimensions = check_dimensions,
-        check_columns = check_columns,
-        check_column_class = check_column_class,
-        check_column_values = check_column_values,
-        envir = envir
-      ),
-      max_diffs = max_diffs
-    )
+  tbl_grade(
+    tbl_check_table(
+      object = object,
+      expected = expected,
+      check_class = check_class,
+      check_names = check_names,
+      check_column_order = check_column_order,
+      check_dimensions = check_dimensions,
+      check_groups = check_groups,
+      check_columns = check_columns,
+      check_column_class = check_column_class,
+      check_column_values = check_column_values,
+      env = env
+    ),
+    max_diffs = max_diffs,
+    env = env
   )
 }

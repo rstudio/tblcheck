@@ -15,21 +15,32 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `column_class`: Any mismatch in the classes of the `name` column
-#' 2. `column_dimensions`: The `name` column doesn't have the expected length
-#' 3. `column_values`: The `name` column doesn't have the expected values
-#' 4. `column`: The `name` column doesn't appear in the `object`
+#' 1. `names` (`table_problem`): `object` doesn't contain a column named column.
+#' 1. `class`: Any mismatch in the classes of the `column`.
+#' 1. `length`: The `column` doesn't have the expected length.
+#' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
+#'   See [vec_check_levels()].
+#' 1. `values`: The `column` doesn't have the expected values.
+#' 1. `names` (`column_problem`): The `column` has different [names][names()]
+#'   than expected.
+#' 1. `names_order`: The `column` has the same [names][names()] as expected,
+#'   but in a different order.
 #'
-#' @param name `[character(1)]`\cr The name of the column to check.
+#' @param column `[character(1)]`\cr The name of the column to check.
 #' @inheritParams tbl_check_table
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
 #'   print. Defaults to 3.
-#' @param check_class `[logical(1)]`\cr Whether to check that `name` has the
+#' @param check_class `[logical(1)]`\cr Whether to check that `column` has the
 #'   same class in `object` and `expected`.
-#' @param check_length `[logical(1)]`\cr Whether to check that `name` has the
+#' @param check_length `[logical(1)]`\cr Whether to check that `column` has the
 #'   same length in `object` and `expected`.
-#' @param check_values `[logical(1)]`\cr Whether to check that `name` has the
+#' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
 #'   same values in `object` and `expected`.
+#' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
+#'   same values in `object` and `expected`.
+#' @param check_names `[logical(1)]`\cr Whether to check that `column` has the
+#'   same [names][names()] in `object` and `expected`.
+#'   Defaults to `FALSE`.
 #'
 #' @return If there are any issues, a [list] from `tbl_check_column()` or a
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
@@ -54,25 +65,24 @@
 #' tbl_grade_column("a", max_diffs = 5)
 #' tbl_grade_column("a", max_diffs = Inf)
 tbl_check_column <- function(
-  name,
+  column,
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  check_names = FALSE,
+  env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
-    object <- get(".result", envir)
+    object <- get(".result", env)
   }
   if (inherits(expected, ".solution")) {
-    expected <- get(".solution", envir)
+    expected <- get(".solution", env)
   }
   
-  assert_internally({
-    checkmate::assert_character(name, len = 1, any.missing = FALSE)
-    checkmate::assert_number(max_diffs, lower = 1)
+  return_if_internal_problem({
+    checkmate::assert_character(column, len = 1, any.missing = FALSE)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
@@ -80,61 +90,57 @@ tbl_check_column <- function(
     checkmate::assert_data_frame(expected)
   })
   
-  if (!name %in% names(expected)) {
-    warning("`", name, "` is not a column in `expected`.")
+  if (!column %in% names(expected)) {
+    warning("`", column, "` is not a column in `expected`.")
     return()
   }
   
-  if (!name %in% names(object)) {
-    return_if_problem(problem("missing", name), column = name)
+  names_problem <- tbl_check_names(object, expected)
+  if (column %in% names_problem$missing) {
+    names_problem$missing <- column
+    names_problem$unexpected <- NULL
+    return_if_problem(names_problem, prefix = "table")
   }
   
   return_if_problem(
-    tbl_check_vector(
-      object[[name]],
-      expected[[name]],
-      max_diffs = max_diffs,
+    vec_check_vector(
+      object[[column]],
+      expected[[column]],
       check_class = check_class,
       check_length = check_length,
       check_values = check_values,
-      check_names = FALSE
+      check_names = check_names
     ),
-    column = name
+    prefix = "column",
+    column = column
   )
 }
 
 #' @rdname tbl_check_column
 #' @export
 tbl_grade_column <- function(
-  name,
+  column,
   object = .result,
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  check_names = FALSE,
+  env = parent.frame()
 ) {
-  return_if_graded(
-    tbl_grade(
-      tbl_check_column(
-        name = name,
-        object = object,
-        expected = expected,
-        max_diffs = max_diffs,
-        check_class = check_class,
-        check_length = check_length,
-        check_values = check_values,
-        envir = envir
-      )
-    )
+  tbl_grade(
+    tbl_check_column(
+      column = column,
+      object = object,
+      expected = expected,
+      check_class = check_class,
+      check_length = check_length,
+      check_values = check_values,
+      check_names = check_names,
+      env = env
+    ),
+    max_diffs = max_diffs,
+    env = env
   )
-}
-
-tbl_message_missing <- function(problem, ...) {
-  exp_column <- problem$expected
-  
-  message <- glue::glue("Your table should have a column named `{exp_column}`.")
-  
-  return_fail(message, problem = problem)
 }

@@ -2,32 +2,65 @@
 % Please edit documentation in R/check_class.R
 \name{tbl_check_class}
 \alias{tbl_check_class}
+\alias{vec_check_class}
 \alias{tbl_grade_class}
+\alias{vec_grade_class}
 \title{Checks that two objects have the same classes}
 \usage{
-tbl_check_class(object = .result, expected = .solution, envir = parent.frame())
+tbl_check_class(
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  env = parent.frame()
+)
 
-tbl_grade_class(object = .result, expected = .solution, envir = parent.frame())
+vec_check_class(
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  env = parent.frame()
+)
+
+tbl_grade_class(
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  env = parent.frame()
+)
+
+vec_grade_class(
+  object = .result,
+  expected = .solution,
+  all_differences = FALSE,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{all_differences}{\verb{[logical(1)]}\cr If \code{FALSE}, the default,
+inconsequential class differences will be skipped.
+If \code{TRUE}, all class differences will be reported.
+See section "Inconsequential differences" for more information.}
+
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
-If there are any issues, a \link{list} from \code{tbl_check_class()} or a
-\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{tbl_grade_class()}.
+If there are any issues, a \link{list} from \code{tbl_check_class()} and
+\code{vec_check_class()} or a \code{\link[gradethis:graded]{gradethis::fail()}} message from
+\code{tbl_grade_class()} and \code{vec_grade_class()}.
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same \link[=class]{class}.
 If the classes differ
 \itemize{
-\item \code{tbl_check_class()} returns a list describing the problem
-\item \code{tbl_grade_class()} returns a failing grade and informative message
-with \code{\link[gradethis:graded]{gradethis::fail()}}
+\item \code{tbl_check_class()} and \code{vec_check_class()} return a list describing
+the problem
+\item \code{tbl_grade_class()} and \code{vec_grade_class()} return a failing grade and
+informative message with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
 }
 \section{Problems}{
@@ -37,11 +70,22 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
 }
 
+\section{Inconsequential differences}{
+
+Unless \code{all_differences} is set to \code{TRUE}, the following class differences
+will not generate a problem:
+\itemize{
+\item \link{integer} vs. \link{numeric}
+\item \link{POSIXct} vs. \link{POSIXlt}
+\item \link[glue:glue]{glue} vs. \link{character}
+}
+}
+
 \examples{
 .result <- 1:10
 .solution <- as.character(1:10)
-tbl_check_class()
-tbl_grade_class()
+vec_check_class()
+vec_grade_class()
 
 .result <- data.frame(a = 1:10)
 .solution <- tibble::tibble(a = 1:10)

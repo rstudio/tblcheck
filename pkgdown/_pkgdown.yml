@@ -1,0 +1,74 @@
+destination: reference
+
+template:
+  package: quillt
+  opengraph:
+    # image:
+    #   src: https://github.com/rstudio/gradethis/raw/master/man/figures/logo.png
+    #   alt: "gradethis package"
+    twitter:
+      creator: "@rstudio"
+      card: summary
+
+development:
+  version_tooltip: "auto"
+
+home:
+  strip_header: false
+
+navbar:
+  title: ~
+  type: default
+  structure:
+    left:  [intro, examples, articles]
+    right: [reference, news, github]
+  components:
+    home: ~
+    # examples:
+    #   text: Examples
+    #   href: articles/articles/examples.html
+    # articles:
+    #   text: Articles
+    #   menu:
+    #     - text: "No vignettes"
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/rstudio/tblcheck
+    # news:
+    #   text: News
+    #   menu:
+    #     - text: "Changelog"
+    #       href: news/index.html
+    #     - text: "------------------"
+    #     - text: "Blog posts"
+    #     - text: "Version 1.0"
+    #       href: https://blog.rstudio.com/2021/01/18/blogdown-v1.0/
+    #     - text: "Version 0.1"
+    #       href: https://blog.rstudio.com/2017/09/11/announcing-blogdown/
+
+reference:
+- title: General checks
+  desc: Check for multiple problems in a table, column, or vector
+  contents:
+  - tbl_check_table
+  - tbl_check_column
+  - vec_check_vector
+- title: Specific checks
+  desc: Check for a specific type of problem in tables or vectors
+  contents:
+  - tbl_check_class
+  - tbl_check_dimensions
+  - tbl_check_groups
+  - vec_check_levels
+  - tbl_check_names
+  - vec_check_values
+- title: Problems
+  desc: |
+    Inspect the contents of a `problem` from a
+    check function or transform a `problem` into a grade.
+  contents:
+  - '`tbl_grade`'
+  - '`problem_type`'

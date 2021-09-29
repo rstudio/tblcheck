@@ -1,24 +1,21 @@
 expect_internal_problem <- function(grade, message) {
-  testthat::expect_message(grade)
-  testthat::expect_equal(grade$correct, logical())
-  testthat::expect_match(grade$message, "can't provide feedback")
-  testthat::expect_equal(grade$problem$type, "internal_feedback_error")
-  testthat::expect_match(as.character(grade$problem$error), message)
+  suppressMessages({
+    testthat::expect_message(grade)
+    testthat::expect_length(grade$correct, 0)
+    if (is_problem(grade)) {
+      testthat::expect_s3_class(grade, "tblcheck_internal_problem")
+      testthat::expect_equal(grade$type, "tblcheck_internal")
+      testthat::expect_match(as.character(grade$error$message), message)
+    } else {
+      testthat::expect_match(grade$message, "can't provide feedback")
+      testthat::expect_equal(grade$problem$type, "tblcheck_internal")
+      testthat::expect_match(as.character(grade$error$message), message)
+    }
+  })
 }
 
-expect_result_message <- function(result, expected, ...) {
-  testthat::expect_match(as.character(result$feedback$message), expected, ...)
-}
-
-expect_grade <- function(grade, message, correct = FALSE, problem = NULL, ...) {
-  testthat::expect_s3_class(grade, "gradethis_graded")
-  testthat::expect_equal(grade$correct, correct)
-  if (!is.null(message)) {
-    testthat::expect_match(grade$message, message, ...)
-  }
-  if (!is.null(problem)) {
-    testthat::expect_equal(grade$problem, problem)
-  }
+expect_warning <- function(...) {
+  suppressWarnings(testthat::expect_warning(...))
 }
 
 tblcheck_test_grade <- function(expr, return_all = FALSE) {
@@ -34,7 +31,7 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
     final_call <- paste(expr[[1]])
   }
   
-  if (!grepl("^tbl_(check|grade)", final_call)) {
+  if (!grepl("^(tbl|vec)_(check|grade)", final_call)) {
     stop("tblcheck_test_grade() expected a {tblcheck} function as the final expression")
   }
   

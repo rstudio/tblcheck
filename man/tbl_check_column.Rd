@@ -6,47 +6,52 @@
 \title{Checks that a column is identical across two tables}
 \usage{
 tbl_check_column(
-  name,
+  column,
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  check_names = FALSE,
+  env = parent.frame()
 )
 
 tbl_grade_column(
-  name,
+  column,
   object = .result,
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
   check_length = TRUE,
   check_values = TRUE,
-  envir = parent.frame()
+  check_names = FALSE,
+  env = parent.frame()
 )
 }
 \arguments{
-\item{name}{\verb{[character(1)]}\cr The name of the column to check.}
+\item{column}{\verb{[character(1)]}\cr The name of the column to check.}
 
 \item{object}{A data frame to be compared to \code{expected}.}
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
-print. Defaults to 3.}
-
-\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+\item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same class in \code{object} and \code{expected}.}
 
-\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same length in \code{object} and \code{expected}.}
 
-\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{name} has the
+\item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same values in \code{object} and \code{expected}.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
+same \link[=names]{names} in \code{object} and \code{expected}.
+Defaults to \code{FALSE}.}
+
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+print. Defaults to 3.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_column()} or a
@@ -73,10 +78,16 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{column_class}: Any mismatch in the classes of the \code{name} column
-\item \code{column_dimensions}: The \code{name} column doesn't have the expected length
-\item \code{column_values}: The \code{name} column doesn't have the expected values
-\item \code{column}: The \code{name} column doesn't appear in the \code{object}
+\item \code{names} (\code{table_problem}): \code{object} doesn't contain a column named column.
+\item \code{class}: Any mismatch in the classes of the \code{column}.
+\item \code{length}: The \code{column} doesn't have the expected length.
+\item \code{levels_n}, \code{levels}, \code{levels_reversed}, \code{levels_order}:
+See \code{\link[=vec_check_levels]{vec_check_levels()}}.
+\item \code{values}: The \code{column} doesn't have the expected values.
+\item \code{names} (\code{column_problem}): The \code{column} has different \link[=names]{names}
+than expected.
+\item \code{names_order}: The \code{column} has the same \link[=names]{names} as expected,
+but in a different order.
 }
 }
 

@@ -8,14 +8,15 @@
 tbl_check_table(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
+  check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 )
 
 tbl_grade_table(
@@ -24,11 +25,13 @@ tbl_grade_table(
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
+  check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  envir = parent.frame()
+  env = parent.frame()
 )
 }
 \arguments{
@@ -36,22 +39,23 @@ tbl_grade_table(
 
 \item{expected}{A data frame containing the expected result.}
 
-\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
-display in an informative failure message.
-Passed to \code{\link[=tbl_check_names]{tbl_check_names()}} to determine the number of mismatched column
-names to display and the \code{n_values} argument of \code{\link[=tbl_check_column]{tbl_check_column()}} to
-determine the number of mismatched column values to display.
-Defaults to 3.}
-
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
 
+\item{check_column_order}{\verb{[logical(1)]}\cr Whether to check that the columns
+of  \code{object} are in the same order as \code{expected} with \code{\link[=tbl_check_names]{tbl_check_names()}}.
+Defaults to \code{FALSE}.}
+
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows and columns
 with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}.}
+
+\item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same [\link[dplyr:group_by]{groups}
+with \code{\link[dplyr:group_data]{dplyr::group_vars()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
@@ -62,7 +66,14 @@ columns has the same class in \code{object} and \code{expected}.}
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
+display in an informative failure message.
+Passed to \code{\link[=tbl_check_names]{tbl_check_names()}} to determine the number of mismatched column
+names to display and the \code{n_values} argument of \code{\link[=tbl_check_column]{tbl_check_column()}} to
+determine the number of mismatched column values to display.
+Defaults to 3.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_table()} or a
@@ -88,14 +99,18 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{table_class}: The table does not have the expected classes
-\item \code{table_dimensions}: The table doesn't have the expected number of rows
-and columns
-\item \code{table_names}: The table has names that are not expected,
-or is missing names that are expected
+\item \code{class}: The table does not have the expected classes.
+\item \code{names}: The table has column names that are not expected,
+or is missing names that are expected.
+\item \code{names_order}: The table has the same column names as expected,
+but in a different order.
+\item \code{ncol}: The table doesn't have the expected number of columns.
+\item \code{nrow}: The table doesn't have the expected number of rows.
+\item \code{groups}: The table has \link[dplyr:group_by]{groups} that are
+not expected, or is missing groups that are expected.
 }
 
-Additional problems may be produced by \code{\link[=tbl_check_column]{tbl_check_column()}}
+Additional problems may be produced by \code{\link[=tbl_check_column]{tbl_check_column()}}.
 }
 
 \examples{

@@ -361,10 +361,6 @@ tbl_grade_vector()
 ```
 ````
 
-```{r echo=FALSE}
-fake_grade_chunks("storm_names")
-```
-
 Here, the user gets feedback that their vector is the wrong type, because they used `grep()` instead of `grepl()`.
 
 ## Other grading functions

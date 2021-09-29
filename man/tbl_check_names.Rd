@@ -2,16 +2,39 @@
 % Please edit documentation in R/check_names.R
 \name{tbl_check_names}
 \alias{tbl_check_names}
+\alias{vec_check_names}
 \alias{tbl_grade_names}
+\alias{vec_grade_names}
 \title{Check that the names of two object are the same}
 \usage{
-tbl_check_names(object = .result, expected = .solution, envir = parent.frame())
+tbl_check_names(
+  object = .result,
+  expected = .solution,
+  check_order = TRUE,
+  env = parent.frame()
+)
+
+vec_check_names(
+  object = .result,
+  expected = .solution,
+  check_order = TRUE,
+  env = parent.frame()
+)
 
 tbl_grade_names(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  envir = parent.frame()
+  check_order = TRUE,
+  env = parent.frame()
+)
+
+vec_grade_names(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_order = TRUE,
+  env = parent.frame()
 )
 }
 \arguments{
@@ -19,24 +42,29 @@ tbl_grade_names(
 
 \item{expected}{An object containing the expected result.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{check_order}{\verb{[logical(1)]}\cr Whether to check that the names of
+\code{object} and \code{expected} are in the same order.}
+
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
 unexpected names to include in an informative failure message.
 Defaults to 3.}
 }
 \value{
-If there are any issues, a \link{list} from \code{tbl_check_names()} or a
-\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{tbl_grade_names()}.
+If there are any issues, a \link{list} from \code{tbl_check_names()} and
+\code{vec_check_names()} or a \code{\link[gradethis:graded]{gradethis::fail()}} message from
+\code{tbl_grade_names()} and \code{vec_grade_names()}.
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same \link[=names]{names}.
 If the names differ
 \itemize{
-\item \code{tbl_check_names()} returns a list describing the problem
-\item \code{tbl_grade_names()} returns a failing grade and informative message
-with \code{\link[gradethis:graded]{gradethis::fail()}}
+\item \code{tbl_check_names()} and \code{vec_check_names()} returns a list describing
+the problem
+\item \code{tbl_grade_names()} and \code{vec_grade_names()} returns a failing grade and
+informative message with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
 }
 \section{Problems}{
@@ -44,16 +72,18 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \enumerate{
 \item \code{names}: The object has names that are not expected,
 or is missing names that are expected.
+\item \code{names_order}: The object has the same names as expected,
+but in a different order.
 }
 }
 
 \examples{
-.result <- 1:10
-.solution <- rlang::set_names(1:10, letters[1:10])
-tbl_check_names()
-tbl_grade_names()
-tbl_grade_names(max_diffs = 5)
-tbl_grade_names(max_diffs = Inf)
+.result <- c(1, 2, 3, 4, 5, 6, 7)
+.solution <- c(a = 1, b = 2, c = 3, d = 4, e = 5, f = 6, g = 7)
+vec_check_names()
+vec_grade_names()
+vec_grade_names(max_diffs = 5)
+vec_grade_names(max_diffs = Inf)
 
 .result <- tibble::tibble(a = 1:5, b = 6:10, c = 11:15)
 .solution <- tibble::tibble(a = 1:5, x = 6:10, y = 11:15)

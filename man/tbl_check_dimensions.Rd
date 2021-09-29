@@ -2,19 +2,33 @@
 % Please edit documentation in R/check_dimensions.R
 \name{tbl_check_dimensions}
 \alias{tbl_check_dimensions}
+\alias{vec_check_dimensions}
 \alias{tbl_grade_dimensions}
-\title{Check that the length of two object are the same}
+\alias{vec_grade_dimensions}
+\title{Check that the dimensions of two object are the same}
 \usage{
 tbl_check_dimensions(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
+)
+
+vec_check_dimensions(
+  object = .result,
+  expected = .solution,
+  env = parent.frame()
 )
 
 tbl_grade_dimensions(
   object = .result,
   expected = .solution,
-  envir = parent.frame()
+  env = parent.frame()
+)
+
+vec_grade_dimensions(
+  object = .result,
+  expected = .solution,
+  env = parent.frame()
 )
 }
 \arguments{
@@ -22,7 +36,7 @@ tbl_grade_dimensions(
 
 \item{expected}{An object containing the expected result.}
 
-\item{envir}{The environment in which to find \code{.result} and \code{.solution}.}
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_dimensions()} or a
@@ -31,7 +45,7 @@ Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
 Checks if \code{object} and \code{expected} have the same \link[=dim]{dimenisons}.
-If the names differ
+If the dimensions differ
 \itemize{
 \item \code{tbl_check_dimensions()} returns a list describing the problem
 \item \code{tbl_grade_dimensions()} returns a failing grade and informative message
@@ -41,7 +55,16 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{dimensions}: \code{object} and \code{expected} have different dimensions
+\item \code{dimensions_n}: \code{object} and \code{expected} have a different number
+of dimensions
+\item \code{length}: \code{object} and \code{expected} are one-dimensional vectors of
+different lengths
+\item \code{ncol}: \code{object} and \code{expected} are two-dimensional objects with a
+different number of columns
+\item \code{nrow}: \code{object} and \code{expected} are two-dimensional objects with a
+different number of rows
+\item \code{dimensions}: \code{object} and \code{expected} are multi-dimensional arrays with
+different dimensions
 }
 }
 
