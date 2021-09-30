@@ -85,7 +85,8 @@ to the `.solution` generated in the `exercise-solution` chunk.
 -   If no differences are detected, `tbl_grade_table()` does not produce
     any output, so it works well as a first line of checks.
 
-Learn more about the various tblcheck functions in vignette(“tblcheck”).
+Learn more about the various tblcheck functions in
+`vignette("tblcheck")`.
 
 ## Code of Conduct
 
