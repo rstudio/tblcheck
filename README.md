@@ -25,15 +25,7 @@ tblcheck. You can learn more with the [gradethis package
 documentation](https://pkgs.rstudio.com/gradethis/) and the [learnr
 package documentation](https://rstudio.github.io/learnr/).
 
-![A screenshot of the tblcheck package in action. An exercise starts
-with the following instructions: ‘Create a tibble with two columns. The
-first column should be called “fruit” and contain the value “tomato”.
-The second column should be called “color” and contain the value “red”.’
-The student has entered the following code: ‘tibble(vegetable =
-“tomato”, color = “red”)’. The tblcheck package generates the following
-message: ‘Your table should have a column named “fruit”. Your table
-should not have a column named “vegetable”. Please try
-again.’](man/figures/screenshot.png)
+<img src="man/figures/screenshot.png" alt="A screenshot of the tblcheck package in action. An exercise starts with the following instructions: 'Create a tibble with two columns. The first column should be called &quot;fruit&quot; and contain the value &quot;tomato&quot;. The second column should be called &quot;color&quot; and contain the value &quot;red&quot;.' The student has entered the following code: 'tibble(vegetable = &quot;tomato&quot;, color = &quot;red&quot;)'. The tblcheck package generates the following message: 'Your table should have a column named &quot;fruit&quot;. Your table should not have a column named &quot;vegetable&quot;. Please try again.'" style="border: 1px solid black; box-shadow: 5px 5px 5px #eee; max-width: 66%; display: block; margin: 1em auto;">
 
 ## Installation
 
