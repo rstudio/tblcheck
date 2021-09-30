@@ -69,7 +69,7 @@ grade_this({
 ```
 ````
 
-Learn more about the various tblcheck functions in vignette("tblcheck").
+Learn more about the various tblcheck functions in `vignette("tblcheck")`.
 
 ## Code of Conduct
   
