@@ -603,7 +603,7 @@ vec_check_vector()
 fake_grade_chunks("storms", check = "storms-2-check")
 ```
 
-You can use `if` statements to give specific feedback based on the nature of the `problem` object using the standard `gradethis` functions. For problems not handled by your custom grading code, you can pass the problem to `tbl_grade()` to create a grade from the problem using the default feedback provided by tblchecks' `grade` functions.
+You can use `if` statements to give specific feedback based on the nature of the `problem` object using the standard `gradethis` functions. For problems not handled by your custom grading code, you can pass the problem to `tbl_grade()` to create a grade from the problem using the default feedback provided by tblchecks' `grade` functions. (If there are no problems, `tbl_grade(problem)` wont return anything.)
 
 ````markdown
 ```{r storms-3-check, chunk_label = "storms-check", grade_this = TRUE}
@@ -611,9 +611,9 @@ problem <- vec_check_vector()
 
 if (problem$type == "class" && problem$actual == "integer") {
   fail("Did you use `grep()` instead of `grepl()`?")
-} else {
-  tbl_grade(problem)
 }
+
+tbl_grade(problem)
 ```
 ````
 
