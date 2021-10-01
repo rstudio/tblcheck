@@ -511,7 +511,9 @@ vec_grade_vector()
 fake_grade_chunks("vector-2")
 ```
 
-## Skipping tests
+## Choosing checked properties
+
+### Skipping tests
 
 If there are some tests you would like to skip, `tbl_grade_table()` and `vec_grade_vector()` include a host of arguments that can be set to `FALSE`. For example:
 
@@ -551,7 +553,7 @@ Since there are no other problems, we get no output.
 
 Every test performed by `tbl_grade_table()` or `vec_grade_vector()` can be disabled with an argument.
 
-## Other grading functions
+### Other grading functions
 
 `tbl_grade_table()` and `vec_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
 
