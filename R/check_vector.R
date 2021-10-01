@@ -2,10 +2,11 @@
 #'
 #' @description
 #' Checks for differences between `object` and `expected` in the following order:
-#' 1. Check class with [tbl_check_class()]
-#' 1. Check length with [tbl_check_dimensions()]
-#' 1. Check vector values are the same
-#' 1. Check names with [tbl_check_names()]
+#' 1. Check class with [vec_check_class()]
+#' 1. Check length with [vec_check_dimensions()]
+#' 1. If the vector is a factor, check factor levels are the same with [vec_check_levels()]
+#' 1. Check vector values are the same with [vec_check_values()]
+#' 1. Check names with [vec_check_names()]
 #' 
 #' If the vectors differ
 #' - `vec_check_vector()` returns a list describing the problem

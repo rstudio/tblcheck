@@ -4,9 +4,10 @@
 #' Checks for differences between the `name` column in `object` and in
 #' `expected` in the following order:
 #' 1. Check that the `name` column exists in `object`
-#' 1. Check class with [tbl_check_class()]
-#' 1. Check length with [tbl_check_dimensions()]
-#' 1. Check column values with [tbl_check_vector()]
+#' 1. Check class with [vec_check_class()]
+#' 1. Check length with [vec_check_dimensions()]
+#' 1. If the column is a factor, check factor levels with [vec_check_levels()]
+#' 1. Check column values with [vec_check_values()]
 #' 
 #' If the columns differ
 #' - `tbl_check_column()` returns a list describing the problem

@@ -86,6 +86,7 @@ Checks for differences between \code{object} and \code{expected} in the followin
 \item Check table class with \code{\link[=tbl_check_class]{tbl_check_class()}}
 \item Check column names with \code{\link[=tbl_check_names]{tbl_check_names()}}
 \item Check number of rows and columns with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}
+\item Check \link[dplyr:group_by]{groups} with \code{\link[=tbl_check_groups]{tbl_check_groups()}}
 \item Check that each column is the same with \code{\link[=tbl_check_column]{tbl_check_column()}}
 }
 

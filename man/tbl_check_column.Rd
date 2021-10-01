@@ -63,9 +63,10 @@ Checks for differences between the \code{name} column in \code{object} and in
 \code{expected} in the following order:
 \enumerate{
 \item Check that the \code{name} column exists in \code{object}
-\item Check class with \code{\link[=tbl_check_class]{tbl_check_class()}}
-\item Check length with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}
-\item Check column values with \code{\link[=tbl_check_vector]{tbl_check_vector()}}
+\item Check class with \code{\link[=vec_check_class]{vec_check_class()}}
+\item Check length with \code{\link[=vec_check_dimensions]{vec_check_dimensions()}}
+\item If the column is a factor, check factor levels with \code{\link[=vec_check_levels]{vec_check_levels()}}
+\item Check column values with \code{\link[=vec_check_values]{vec_check_values()}}
 }
 
 If the columns differ

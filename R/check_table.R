@@ -5,6 +5,7 @@
 #' 1. Check table class with [tbl_check_class()]
 #' 1. Check column names with [tbl_check_names()]
 #' 1. Check number of rows and columns with [tbl_check_dimensions()]
+#' 1. Check [groups][dplyr::group_by()] with [tbl_check_groups()]
 #' 1. Check that each column is the same with [tbl_check_column()]
 #' 
 #' If the tables differ
