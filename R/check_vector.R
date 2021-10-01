@@ -86,7 +86,6 @@ vec_check_vector <- function(
   }
   
   return_if_internal_problem({
-    checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
