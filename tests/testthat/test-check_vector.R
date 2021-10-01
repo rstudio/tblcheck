@@ -287,15 +287,6 @@ test_that("vec_grade_vector() handles bad user input", {
   
   expect_internal_problem(
     grade <- tblcheck_test_grade({
-      .result   <- NULL
-      .solution <- letters[1:3]
-      vec_grade_vector()
-    }),
-    "object"
-  )
-  
-  expect_internal_problem(
-    grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
       .solution <- NULL
       vec_grade_vector()
@@ -321,10 +312,6 @@ test_that("vec_check_vector() handles bad user input", {
     vec_check_vector(check_values = NULL),
     message = "check_values"
   )
-  
-  .result   <- NULL
-  .solution <- letters[1:3]
-  expect_internal_problem(vec_check_vector(), "object")
   
   .result   <- letters[1:3]
   .solution <- NULL
