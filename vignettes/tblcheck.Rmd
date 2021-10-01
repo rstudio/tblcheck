@@ -649,7 +649,13 @@ grepl("(.)\\1", names)
 ```
 
 ```{r storms-4-check, chunk_label = "storms-check", grade_this = TRUE}
-vec_grade_vector()
+problem <- vec_check_vector()
+
+if (problem$type == "class" && problem$actual == "integer") {
+  fail("Did you use `grep()` instead of `grepl()`?")
+}
+
+tbl_grade(problem)
 ```
 ````
 
