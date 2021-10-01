@@ -515,7 +515,9 @@ fake_grade_chunks("vector-2")
 
 ### Skipping tests
 
-If there are some tests you would like to skip, `tbl_grade_table()` and `vec_grade_vector()` include a host of arguments that can be set to `FALSE`. For example:
+If there are some tests you would like to skip, `tbl_grade_table()` and `vec_grade_vector()` include a host of arguments that can be set to `FALSE`.
+
+In this example, the student will receive a failing grade because they have created a `data.frame` when the exercise expects a `tibble`.
 
 ````markdown
 ```{r numbers, chunk_label = "numbers", is_exercise = TRUE}
@@ -537,19 +539,29 @@ tbl_grade_table()
 fake_grade_chunks("numbers")
 ```
 
-When the user's result is a different class than the expected solution, `tbl_grade_table()` gives a failing grade. If you don't care about the class of the table, you can add `check_class = FALSE`.
+If you don't care about the class of the table, you can add `check_class = FALSE` to `tbl_grade_table()`. This will skip checking the table's class, but still run all other tests.
 
 ````markdown
-```{r numbers_2-check, chunk_label = "numbers-check", grade_this = TRUE}
+```{r numbers-2, chunk_label = "numbers", is_exercise = TRUE}
+data.frame(numbers = 1:5) %>%
+  mutate(even = numbers %% 2 == 0)
+```
+
+```{r numbers-2-solution, chunk_label = "numbers-solution"}
+tibble(numbers = 1:5) %>%
+  mutate(even = numbers %% 2 == 0)
+```
+
+```{r numbers-2-check, chunk_label = "numbers-check", grade_this = TRUE}
 tbl_grade_table(check_class = FALSE)
 ```
 ````
 
 ```{r echo=FALSE}
-fake_grade_chunks("numbers", check = "numbers_2-check")
+fake_grade_chunks("numbers-2")
 ```
 
-Since there are no other problems, we get no output.
+Since the only problem with the student's submission was the class of the table, this new check code gives no output.
 
 Every test performed by `tbl_grade_table()` or `vec_grade_vector()` can be disabled with an argument.
 
