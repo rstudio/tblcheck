@@ -511,18 +511,6 @@ vec_grade_vector()
 fake_grade_chunks("vector-2")
 ```
 
-## Other grading functions
-
-`tbl_grade_table()` and `vec_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
-
-- `tbl_grade_column()` applies the tests in `vec_grade_vector()` to a single column of a table.
-- `tbl_grade_class()` and `vec_grade_class()` grade the class of an object.
-- `tbl_grade_dimensions()` and `vec_grade_dimensions()` grade the length and dimensions of an object.
-- `tbl_grade_names()` and `vec_grade_names()` grade the names of an object.
-- `tbl_grade_groups()` grades the groups of a table.
-- `vec_grade_levels()` grades the levels of a factor.
-- `vec_grade_values()` grades the values of a vector.
-
 ## Skipping tests
 
 If there are some tests you would like to skip, `tbl_grade_table()` and `vec_grade_vector()` include a host of arguments that can be set to `FALSE`. For example:
@@ -562,6 +550,18 @@ fake_grade_chunks("numbers", check = "numbers_2-check")
 Since there are no other problems, we get no output.
 
 Every test performed by `tbl_grade_table()` or `vec_grade_vector()` can be disabled with an argument.
+
+## Other grading functions
+
+`tbl_grade_table()` and `vec_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
+
+- `tbl_grade_column()` applies the tests in `vec_grade_vector()` to a single column of a table.
+- `tbl_grade_class()` and `vec_grade_class()` grade the class of an object.
+- `tbl_grade_dimensions()` and `vec_grade_dimensions()` grade the length and dimensions of an object.
+- `tbl_grade_names()` and `vec_grade_names()` grade the names of an object.
+- `tbl_grade_groups()` grades the groups of a table.
+- `vec_grade_levels()` grades the levels of a factor.
+- `vec_grade_values()` grades the values of a vector.
 
 ## Custom mistake handling
 
