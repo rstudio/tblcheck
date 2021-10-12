@@ -160,7 +160,7 @@ fake_grade_chunks <- function(
 ## Overview
 
 tblcheck works with [gradethis] to help instructors compare students' exercise results with intended solutions in [learnr] tutorials.
-If you are new to grading learnr tutorials, we recommend that you get comfortable with [gradethis] before incorporating tblcheck.
+If you are new to grading learnr tutorials, we recommend that you get comfortable with [gradethis] before incorporating tblcheck into your tutorials.
 
 tblcheck provides two grading modalities. You can:
 
@@ -180,7 +180,9 @@ library(tblcheck)
 
 ## Grading tables
 
-`tbl_grade_table()` compares the result of the user's input to the result of the `-solution` chunk. It checks that the user's table
+`tbl_grade_table()` compares the result of the user's input to the result of the `-solution` chunk, automatically returning targeted feedback to the user if any problems are discovered.
+
+`tbl_grade_table()` checks that the user's table
 
 1. is the correct class
 1. has the correct column names
@@ -191,9 +193,9 @@ and that each column of the user's table
 4. is the correct class
 5. contains the correct values
 
-`tbl_grade_table()` includes options to disable any of these checks. If a check fails, the student will see a single message with the first detected problem, based on the order described above.
+If any of these checks detect a problem in the submitted code, the student will see a single message with the first detected issue, based on the order described above.
 
-To use `tbl_grade_table()`, ensure you have a `-solution` chunk and add `tbl_grade_table()` to the grading code in you `-check` chunk, e.g.
+To use `tbl_grade_table()`, ensure you have a `-solution` chunk and add `tbl_grade_table()` to the grading code in your `-check` chunk, e.g.
 
 ````markdown
 ```{r example-check, chunk_label = "example-check", grade_this = TRUE}
@@ -231,7 +233,9 @@ tibble(
 ```
 
 ```{r blank-check, chunk_label = "food-check", grade_this = TRUE}
+pass_if_equal()
 tbl_grade_table()
+fail()
 ```
 ````
 
