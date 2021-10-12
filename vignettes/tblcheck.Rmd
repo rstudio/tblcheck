@@ -112,11 +112,12 @@ library(tblcheck)
 library(tibble)
 
 opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>"
 )
 
-options(max.print = 20)
+Sys.setenv(NO_COLORS = "FALSE")
+options(max.print = 20, pillar.bold = FALSE, crayon.enabled = FALSE)
 
 # Add hooks to turn a chunk into an unevaluated verbatim exercise chunk
 # adapted from https://bookdown.org/yihui/rmarkdown-cookbook/show-header.html
@@ -213,7 +214,6 @@ fake_grade_chunks <- function(
     eval(parse(text = check), envir = env),
     gradethis_graded = identity
   )
-  print(env$.result)
   if (inherits(grade, "gradethis_graded")) return(grade_html(grade))
   if (!is.null(grade)) print(grade)
 }
@@ -321,7 +321,7 @@ In real-world usage, students are likely to only encounter one or two of the pro
 First, `tbl_grade_table()` ensures that the class of the student's submission matches the class of the expected solution.
 Here, the student attempts to store the data in the table as a list rather than by using `tibble()`.
 
-```{r exercise-2, eval = FALSE}
+```{r exercise-2}
 list(
   food = "lettuce",
   fruit = "TRUE",
@@ -340,7 +340,7 @@ Based on this advice, the student revises their solution to use `tibble()` inste
 Next, the code checks that the student used the correct column names, and they haven't missed any columns or included any unexpected columns.
 Here, `tbl_grade_table()` notices that the student has an unexpected column named `fruit`.
 
-```{r exercise-3, eval = FALSE}
+```{r exercise-3}
 tibble(
   food = "lettuce",
   fruit = "TRUE",
@@ -358,7 +358,7 @@ Based on this advice, the student revises their solution to name the second colu
 
 Next, `tbl_grade_table()` checks that the student has submitted the correct number of rows, and in this case notices that the student has only included one row.
 
-```{r exercise-4, eval = FALSE}
+```{r exercise-4}
 tibble(
   food = "lettuce",
   vegetable = "TRUE",
@@ -378,7 +378,7 @@ They go back to the example table and add the second row to their submission.
 Next, `tbl_grade_table()` checks that each individual column contains the correct type of data.
 Here, the student has stored the values of the `vegetable` column as a string, but we were expecting them to be logical values.
 
-```{r exercise-5, eval = FALSE}
+```{r exercise-5}
 tibble(
   food = c("lettuce", "tomato"),
   vegetable = c("TRUE", "TRUE"),
@@ -397,7 +397,7 @@ Based on this advice, the student removes the `"` around the values in the `vege
 Finally, `tbl_grade_table()` gives a hint as to what the values in each column should look like.
 Here, the student made a mistake during their transcription of the `vegetable` column.
 
-```{r exercise-6, eval = FALSE}
+```{r exercise-6}
 tibble(
   food = c("lettuce", "tomato"),
   vegetable = c(TRUE, TRUE),
@@ -412,7 +412,7 @@ fake_grade_chunks("exercise-6", solution = "ex-food-solution", check = "ex-food-
 Based on this advice, the student revises their submission, changing the second value of the `vegetable` column from `TRUE` to `FALSE`.
 
 
-```{r exercise-7, eval = FALSE}
+```{r exercise-7}
 tibble(
   food = c("lettuce", "tomato"),
   vegetable = c(TRUE, FALSE),
