@@ -8,7 +8,8 @@ vignette: >
 ---
 
 [learnr]: https://rstudio.github.io/learnr/
-[gradethis]: https://pkgs.rstudio.com/gradethis/articles/gradethis.html
+[gradethis-get-started]: https://pkgs.rstudio.com/gradethis/articles/gradethis.html
+[gradethis]: https://pkgs.rstudio.com/gradethis/
 
 ```{css echo=FALSE}
 .alert {
@@ -38,11 +39,73 @@ vignette: >
 .alert code {
   background-color: #ffffff55;
 }
+
+.callout {
+  padding: 1.5rem 1.5rem 1.5rem 80px;
+  margin: 1em 0;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 20px 1.5em;
+  min-height: 80px;
+  position: relative;
+  border: 2px solid;
+}
+
+.callout::before {
+  content: "!";
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  transform: translate(20px, 20px) scale(1);
+  transition: transform 0.15s linear, background-color 0.2s linear;
+  font-weight: bold;
+  font-size: 2em;
+  background-color: #486181;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.callout:first-child {
+  margin-top: 0;
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+.callout {
+  border-color: #b5c1d2;
+}
+
+.callout p, .callout ol, .callout ul {
+  color: #486181;
+}
+
+.callout h3, .callout h4 {
+  color: #294263;
+}
+
+.callout p code, .callout ol code, .callout ul code, .callout h3 code, .callout h4 code {
+  background-color: #e9f2fd;
+  color: #294263;
+}
+
+.callout blockquote {
+  border-color: #b5c1d1;
+}
 ```
 
 ```{r, include = FALSE}
 library(dplyr)
 library(gradethis)
+gradethis_setup(fail.hint = FALSE, fail.encourage = FALSE)
 library(knitr)
 library(rlang)
 library(tblcheck)
@@ -76,6 +139,7 @@ knitr::knit_hooks$set(chunk_label = function(before, options) {
     } else {
       c(
         if (in_grade_this) "})",
+        if (!nzchar(options$code)) "\n",
         "```"
       )
     }
@@ -135,23 +199,21 @@ fake_grade_chunks <- function(
   force(solution)
   force(check)
   
-  user <- paste0(
-    ".result <- ", paste(knitr::knit_code$get(user), collapse = "")
-  )
-  solution <- paste0(
-    ".solution <- ", paste(knitr::knit_code$get(solution), collapse = "")
-  )
+  user <- paste(knitr::knit_code$get(user), collapse = "")
+  solution <- paste(knitr::knit_code$get(solution), collapse = "")
   check <- knitr::knit_code$get(check)
   
   env <- new.env()
 
-  eval(parse(text = user), envir = env)
-  print(env$.result)
-  eval(parse(text = solution), envir = env)
+  assign(".result", eval(parse(text = user), envir = env), envir = env)
+  assign(".solution", eval(parse(text = solution), envir = env), envir = env)
+  assign(".user_code", user, envir = env)
+  assign(".solution_code", solution, envir = env)
   grade <- tryCatch(
     eval(parse(text = check), envir = env),
     gradethis_graded = identity
   )
+  print(env$.result)
   if (inherits(grade, "gradethis_graded")) return(grade_html(grade))
   if (!is.null(grade)) print(grade)
 }
@@ -160,7 +222,7 @@ fake_grade_chunks <- function(
 ## Overview
 
 tblcheck works with [gradethis] to help instructors compare students' exercise results with intended solutions in [learnr] tutorials.
-If you are new to grading learnr tutorials, we recommend that you get comfortable with [gradethis] before incorporating tblcheck into your tutorials.
+If you are new to grading learnr tutorials, we recommend that you [get comfortable with gradethis][gradethis-get-started] before incorporating tblcheck into your tutorials.
 
 tblcheck provides two grading modalities. You can:
 
@@ -184,14 +246,12 @@ library(tblcheck)
 
 `tbl_grade_table()` checks that the user's table
 
-1. is the correct class
-1. has the correct column names
-1. has the correct number of rows and columns
-
-and that each column of the user's table
-
-4. is the correct class
-5. contains the correct values
+1. is the correct class,
+1. has the correct column names,
+1. has the correct number of rows and columns,
+1. and that each column of the user's table
+    1. is the correct class and
+    1. contains the correct values.
 
 If any of these checks detect a problem in the submitted code, the student will see a single message with the first detected issue, based on the order described above.
 
@@ -205,26 +265,39 @@ fail()
 ```
 ````
 
-By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()`.
+By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()` and `gradethis::fail_if_equal()`.
 
-### Example
+::: callout
+Be sure to include a function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
 
-In this exercise, a student is asked to create the following table:
+`tbl_grade_table()` only returns feedback to the student if it discovers a problem; if the student gives the correct answer, it produces no output.
+This lets you quickly check for simple problems, following up with more detailed checking with other `gradethis` functions.
+:::
 
-```{r}
-tibble(
+### Finding problems
+
+If the user's submitted table differs from the correct table, `tbl_grade_table()` returns a failing grade and a message with an explanation for what went wrong. 
+If there are multiple problems with a student's submission, `tbl_grade_table()` tries to give the most actionable item first.
+
+We'll demonstrate how this works for a simple exercise that asks students to create the following table using `tibble()`.
+
+```{r example-table-prompt, echo=FALSE}
+solution_table <- tibble(
   food = c("lettuce", "tomato"),
   vegetable = c(TRUE, FALSE),
   color = c("green", "red")
 )
+knitr::kable(solution_table)
 ```
+
+In the R Markdown source of the learnr tutorial, we use an exercise chunk labelled `food`, with a `food-solution` chunk with the expected solution and a `food-check` chunk with the exercise checking code using [gradethis] and tblcheck.
 
 ````markdown
-```{r blank, chunk_label = "food", is_exercise = TRUE}
-# student code will go here
+```{r ex-food, chunk_label = "food", is_exercise = TRUE}
+
 ```
 
-```{r blank-solution, chunk_label = "food-solution"}
+```{r ex-food-solution, chunk_label = "food-solution"}
 tibble(
   food = c("lettuce", "tomato"),
   vegetable = c(TRUE, FALSE),
@@ -232,173 +305,99 @@ tibble(
 )
 ```
 
-```{r blank-check, chunk_label = "food-check", grade_this = TRUE}
+```{r ex-food-check, chunk_label = "food-check", grade_this = TRUE}
 pass_if_equal()
 tbl_grade_table()
 fail()
 ```
 ````
 
-### Checking the correct answer
-
-If the student gives the correct answer, `tbl_grade_table()` produces no output. This let's you hand off checking to other `gradethis` functions. Be sure to include a function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
-
-````markdown
-```{r exercise, chunk_label = "food", is_exercise = TRUE}
-tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
-)
-```
-
-```{r exercise-solution, chunk_label = "food-solution"}
-tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
-)
-```
-
-```{r exercise-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table()
-```
-````
-
-```{r echo=FALSE}
-fake_grade_chunks("exercise")
-```
-
-### Finding problems
-
-If the user's submitted table differs from the correct table, `tbl_grade_table()` returns a failing grade and a message with an explanation for what went wrong. If there are multiple problems with a student's submission, `tbl_grade_table()` tries to give the most actionable item first.
+We'll use this example throughout the sections that follow to demonstrate how tblcheck will respond to various types of errors that students may make.
+Keep in mind this is a contrived example designed for this vignette.
+In real-world usage, students are likely to only encounter one or two of the problems `tbl_grade_table()` is designed to find.
 
 #### Checking class
 
 First, `tbl_grade_table()` ensures that the class of the student's submission matches the class of the expected solution.
+Here, the student attempts to store the data in the table as a list rather than by using `tibble()`.
 
-````markdown
-```{r exercise-2, chunk_label = "food", is_exercise = TRUE}
+```{r exercise-2, eval = FALSE}
 list(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
+  food = "lettuce",
+  fruit = "TRUE",
+  color = "green"
 )
 ```
-
-```{r exercise-2-solution, chunk_label = "food-solution"}
-tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
-)
-```
-
-```{r exercise-2-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table()
-```
-````
 
 ```{r echo=FALSE}
-fake_grade_chunks("exercise-2")
+fake_grade_chunks("exercise-2", solution = "ex-food-solution", check = "ex-food-check")
 ```
+
+Based on this advice, the student revises their solution to use `tibble()` instead of `list()`.
 
 #### Checking column names
 
-Next, the code checks that the student used the correct column names, and hasn't missed any columns or included any unexpected columns.
+Next, the code checks that the student used the correct column names, and they haven't missed any columns or included any unexpected columns.
+Here, `tbl_grade_table()` notices that the student has an unexpected column named `fruit`.
 
-````markdown
-```{r exercise-3, chunk_label = "food", is_exercise = TRUE}
+```{r exercise-3, eval = FALSE}
 tibble(
-  food = c("lettuce", "tomato"),
-  fruit = c(TRUE, FALSE),
-  color = c("green", "red")
+  food = "lettuce",
+  fruit = "TRUE",
+  color = "green"
 )
 ```
-
-```{r exercise-3-solution, chunk_label = "food-solution"}
-tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
-)
-```
-
-```{r exercise-3-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table()
-```
-````
 
 ```{r echo=FALSE}
-fake_grade_chunks("exercise-3")
+fake_grade_chunks("exercise-3", solution = "ex-food-solution", check = "ex-food-check")
 ```
+
+Based on this advice, the student revises their solution to name the second column `vegetable` instead of `fruit`.
 
 #### Checking length
 
-Next, `tbl_grade_table()` checks that the student has submitted the correct number of rows.
+Next, `tbl_grade_table()` checks that the student has submitted the correct number of rows, and in this case notices that the student has only included one row.
 
-````markdown
-```{r exercise-4, chunk_label = "food", is_exercise = TRUE}
+```{r exercise-4, eval = FALSE}
 tibble(
-  food = "tomato",
-  vegetable = FALSE,
-  color = "red"
+  food = "lettuce",
+  vegetable = "TRUE",
+  color = "green"
 )
 ```
-
-```{r exercise-4-solution, chunk_label = "food-solution"}
-tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
-)
-```
-
-```{r exercise-4-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table()
-```
-````
 
 ```{r echo=FALSE}
-fake_grade_chunks("exercise-4")
+fake_grade_chunks("exercise-4", solution = "ex-food-solution", check = "ex-food-check")
 ```
+
+Based on this advice, the student realizes they've only entered the first row of the table.
+They go back to the example table and add the second row to their submission.
 
 #### Checking column classes
 
 Next, `tbl_grade_table()` checks that each individual column contains the correct type of data.
+Here, the student has stored the values of the `vegetable` column as a string, but we were expecting them to be logical values.
 
-````markdown
-```{r exercise-5, chunk_label = "food", is_exercise = TRUE}
+```{r exercise-5, eval = FALSE}
 tibble(
   food = c("lettuce", "tomato"),
-  vegetable = c(1, 0),
+  vegetable = c("TRUE", "TRUE"),
   color = c("green", "red")
 )
 ```
-
-```{r exercise-5-solution, chunk_label = "food-solution"}
-tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
-)
-```
-
-```{r exercise-5-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table()
-```
-````
 
 ```{r echo=FALSE}
-fake_grade_chunks("exercise-5")
+fake_grade_chunks("exercise-5", solution = "ex-food-solution", check = "ex-food-check")
 ```
+
+Based on this advice, the student removes the `"` around the values in the `vegetable` column to use R's logical `TRUE`.
 
 #### Checking column values
 
 Finally, `tbl_grade_table()` gives a hint as to what the values in each column should look like.
+Here, the student made a mistake during their transcription of the `vegetable` column.
 
-````markdown
-```{r exercise-6, chunk_label = "food", is_exercise = TRUE}
+```{r exercise-6, eval = FALSE}
 tibble(
   food = c("lettuce", "tomato"),
   vegetable = c(TRUE, TRUE),
@@ -406,7 +405,14 @@ tibble(
 )
 ```
 
-```{r exercise-6-solution, chunk_label = "food-solution"}
+```{r echo=FALSE}
+fake_grade_chunks("exercise-6", solution = "ex-food-solution", check = "ex-food-check")
+```
+
+Based on this advice, the student revises their submission, changing the second value of the `vegetable` column from `TRUE` to `FALSE`.
+
+
+```{r exercise-7, eval = FALSE}
 tibble(
   food = c("lettuce", "tomato"),
   vegetable = c(TRUE, FALSE),
@@ -414,14 +420,10 @@ tibble(
 )
 ```
 
-```{r exercise-6-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table()
-```
-````
-
 ```{r echo=FALSE}
-fake_grade_chunks("exercise-6")
+fake_grade_chunks("exercise-7", solution = "ex-food-solution", check = "ex-food-check")
 ```
+
 
 ## Grading vectors
 
