@@ -142,7 +142,7 @@ knitr::knit_hooks$set(chunk_label = function(before, options) {
     } else {
       c(
         if (in_grade_this) "})",
-        if (!nzchar(options$code)) "\n",
+        if (!nzchar(trimws(paste(options$code, collapse = "\n")))) "\n",
         "```"
       )
     }
@@ -195,19 +195,19 @@ fake_grade_chunks <- function(
   setup = paste0(user, "-setup")
 ) {
   setup <- knitr::knit_code$get(setup)
-  if (!is.null(setup)) {
-    suppressMessages(eval(parse(text = setup), envir = .GlobalEnv))
-  }
   
   force(solution)
   force(check)
   
-  user <- paste(knitr::knit_code$get(user), collapse = "")
-  solution <- paste(knitr::knit_code$get(solution), collapse = "")
+  user <- knitr::knit_code$get(user)
+  solution <- knitr::knit_code$get(solution)
   check <- knitr::knit_code$get(check)
   
   env <- new.env()
 
+  if (!is.null(setup)) {
+    suppressMessages(eval(parse(text = setup), envir = env))
+  }
   assign(".result", eval(parse(text = user), envir = env), envir = env)
   assign(".solution", eval(parse(text = solution), envir = env), envir = env)
   assign(".user_code", user, envir = env)
