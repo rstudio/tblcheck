@@ -433,7 +433,12 @@ fake_grade_chunks("exercise-7", solution = "ex-food-solution", check = "ex-food-
 
 ## Grading vectors
 
-For exercises that use vectors rather than tables, `vec_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. It checks that the user's vector
+### Automated vector checking
+
+Many of the table-grading tests that apply to the _columns_ of tables can also be applied to vectors — after all, data frame columns in R are _vectors_.
+
+When your exercise uses vectors rather than tables, `vec_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table to a vector.
+It checks that the user's vector
 
 1. is the correct class
 1. is the correct length
@@ -441,9 +446,11 @@ For exercises that use vectors rather than tables, `vec_grade_vector()` allows y
 1. contains the correct values
 1. has the correct names (if the vector has names)
 
-`vec_grade_vector()` includes options to disable any of these checks. If a check fails, the student will see a single message with the first detected problem, based on the order described above.
+Like `tbl_grade_table()`, if a problem is detected by any of these checks, the student will see a single message with the first detected problem, based on the order described above.
 
-To use `vec_grade_vector()`, ensure you have a `-solution` chunk and add `vec_grade_vector()` to the grading code in you `-check` chunk, e.g.
+### Usage
+
+To use `vec_grade_vector()`, ensure you have a `-solution` chunk and add `vec_grade_vector()` to the grading code in your `-check` chunk, e.g.
 
 ````markdown
 ```{r vector-example-check, chunk_label = "vector-check", grade_this = TRUE}
@@ -453,50 +460,55 @@ fail()
 ```
 ````
 
-By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()`.
+Just like `tbl_grade_table()` and other tblcheck functions, `vec_grade_vector()` automatically compares the user's `.result` to the `.solution` when used in `gradethis::grade_this()`.
+Note that `vec_grade_vector()` only returns feedback when a problem is detected, so be sure to include `gradethis::pass()` or `gradethis::pass_if_equal()` to ensure that students can get a passing grade.
 
-### Example
+### Finding problems
 
-In this exercise, a student is asked to create the following vector:
+If the user's submitted vector differs from the correct vector, `vec_grade_vector()` returns a failing grade and a message with an explanation for what went wrong. If there are multiple problems with a student's submission, `vec_grade_vector()` tries to give the most actionable item first.
+
+Suppose an exercise asks a student to create a factor of the sandwich toppings — _lettuce_, _tomato_, _avocado_.
 
 ```{r}
 factor(c("lettuce", "tomato", "avocado"))
 ```
 
+In the R Markdown source of the learnr tutorial, we use an exercise chunk labelled `toppings`, with a `toppings-solution` chunk with the expected solution and a `toppings-check` chunk with the exercise checking code using [gradethis] and tblcheck.
+
 ````markdown
-```{r blank-vector, chunk_label = "food", is_exercise = TRUE}
-# student code will go here
+```{r ex-vector, chunk_label = "toppings", is_exercise = TRUE}
+
 ```
 
-```{r blank-vector-solution, chunk_label = "food-solution"}
+```{r ex-vector-solution, chunk_label = "toppings-solution"}
 factor(c("lettuce", "tomato", "avocado"))
 ```
 
-```{r blank-vector-check, chunk_label = "food-check", grade_this = TRUE}
+```{r ex-vector-check, chunk_label = "toppings-check", grade_this = TRUE}
+pass_if_equal()
 vec_grade_vector()
+fail()
 ```
 ````
 
-### Checking the correct answer
+For example, if the student submits a vector of the wrong class, that will be the first message returned by `vec_grade_vector()`.
 
-If the student gives the correct answer, `vec_grade_vector()` produces no output. This let's you hand off checking to other `gradethis` functions. Be sure to include a function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
-
-````markdown
-```{r vector, chunk_label = "food", is_exercise = TRUE}
-factor(c("lettuce", "tomato", "avocado"))
+```{r vector-1}
+c("lettuce", "tomato", "avocado")
 ```
-
-```{r vector-solution, chunk_label = "food-solution"}
-factor(c("lettuce", "tomato", "avocado"))
-```
-
-```{r vector-check, chunk_label = "food-check", grade_this = TRUE}
-vec_grade_vector()
-```
-````
 
 ```{r echo=FALSE}
-fake_grade_chunks("vector")
+fake_grade_chunks("vector-1", "ex-vector-solution", "ex-vector-check")
+```
+
+If the student submits a factor with the wrong factor levels, `vec_grade_vector()` will warn the student about their mistake.
+
+```{r vector-2}
+factor(c("lettuce", "tomato", "avocado"), c("lettuce", "tomato", "avocado"))
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("vector-2", "ex-vector-solution", "ex-vector-check")
 ```
 
 ### Finding problems
