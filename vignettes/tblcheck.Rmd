@@ -112,12 +112,11 @@ library(tblcheck)
 library(tibble)
 
 opts_chunk$set(
-  collapse = FALSE,
+  collapse = TRUE,
   comment = "#>"
 )
 
-Sys.setenv(NO_COLORS = "FALSE")
-options(max.print = 20, pillar.bold = FALSE, crayon.enabled = FALSE)
+options(max.print = 20)
 
 # Add hooks to turn a chunk into an unevaluated verbatim exercise chunk
 # adapted from https://bookdown.org/yihui/rmarkdown-cookbook/show-header.html
