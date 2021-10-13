@@ -18,6 +18,7 @@
 #'   If `TRUE`, all class differences will be reported.
 #'   See section "Inconsequential differences" for more information.
 #' @inheritParams tbl_check_table
+#' @inheritParams tbl_grade
 #' 
 #' @section Inconsequential differences:
 #' Unless `all_differences` is set to `TRUE`, the following class differences
@@ -90,11 +91,13 @@ tbl_grade_class <- function(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tbl_grade(
     tbl_check_class(object, expected, all_differences, env),
-    env = env
+    env = env,
+    ...
   )
 }
 

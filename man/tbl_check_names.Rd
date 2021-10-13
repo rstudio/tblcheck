@@ -26,7 +26,8 @@ tbl_grade_names(
   expected = .solution,
   max_diffs = 3,
   check_order = TRUE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 
 vec_grade_names(
@@ -34,7 +35,8 @@ vec_grade_names(
   expected = .solution,
   max_diffs = 3,
   check_order = TRUE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -50,6 +52,8 @@ vec_grade_names(
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
 unexpected names to include in an informative failure message.
 Defaults to 3.}
+
+\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_names()} and

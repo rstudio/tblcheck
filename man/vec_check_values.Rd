@@ -16,7 +16,8 @@ vec_grade_values(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ vec_grade_values(
 print. Defaults to 3.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_vector()} or a

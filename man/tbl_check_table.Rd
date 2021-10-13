@@ -31,7 +31,8 @@ tbl_grade_table(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -73,6 +74,8 @@ Passed to \code{\link[=tbl_check_names]{tbl_check_names()}} to determine the num
 names to display and the \code{n_values} argument of \code{\link[=tbl_check_column]{tbl_check_column()}} to
 determine the number of mismatched column values to display.
 Defaults to 3.}
+
+\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_table()} or a

@@ -11,6 +11,7 @@
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
 #' @inheritParams vec_check_vector
+#' @inheritParams tbl_grade
 #'
 #' @return If there are any issues, a [list] from `vec_check_vector()` or a
 #'   [gradethis::fail()] message from `vec_grade_vector()`.
@@ -74,7 +75,8 @@ vec_grade_values <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tbl_grade(
     vec_check_values(
@@ -83,7 +85,8 @@ vec_grade_values <- function(
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
 

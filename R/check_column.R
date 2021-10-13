@@ -34,6 +34,7 @@
 #' @param check_names `[logical(1)]`\cr Whether to check that `column` has the
 #'   same [names][names()] in `object` and `expected`.
 #'   Defaults to `FALSE`.
+#' @inheritParams tbl_grade
 #'
 #' @return If there are any issues, a [list] from `tbl_check_column()` or a
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
@@ -120,7 +121,8 @@ tbl_grade_column <- function(
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tbl_grade(
     tbl_check_column(
@@ -134,6 +136,7 @@ tbl_grade_column <- function(
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }

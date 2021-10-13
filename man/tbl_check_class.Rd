@@ -25,14 +25,16 @@ tbl_grade_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 
 vec_grade_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -46,6 +48,8 @@ If \code{TRUE}, all class differences will be reported.
 See section "Inconsequential differences" for more information.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_class()} and

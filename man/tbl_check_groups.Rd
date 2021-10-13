@@ -11,7 +11,8 @@ tbl_grade_groups(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -24,6 +25,8 @@ tbl_grade_groups(
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of missing and/or
 unexpected names to include in an informative failure message.
 Defaults to 3.}
+
+\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_groups()} or a

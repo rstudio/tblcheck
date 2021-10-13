@@ -24,7 +24,8 @@ vec_grade_vector(
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -51,6 +52,8 @@ vec_grade_vector(
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 print. Defaults to 3.}
+
+\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_vector()} or a
