@@ -224,9 +224,9 @@ fake_grade_chunks <- function(
 tblcheck works with [gradethis] to help instructors compare students' exercise results with intended solutions in [learnr] tutorials.
 If you are new to grading learnr tutorials, we recommend that you [get comfortable with gradethis][gradethis-get-started] before incorporating tblcheck into your tutorials.
 
-tblcheck provides two grading modalities. You can:
+tblcheck provides two grading modalities to compare the output of the student's code with a model solution:
 
-1. Compare student output to model solutions with the [`grade` function family](#grading-tables), or
+1. Produce automatic feedback for common problems using the [`grade` function family](#grading-tables), or
 
 1. Write custom grading logic with the [`check` function family](#custom-mistake-handling).
 
