@@ -63,7 +63,7 @@ vec_check_values <- function(
   exp_values <- unname(expected)
   obj_values <- unname(object)
   
-  if (!identical(obj_values, exp_values)) {
+  if (!isTRUE(all.equal(obj_values, exp_values))) {
     return(problem("values", exp_values, obj_values))
   }
 }
