@@ -244,6 +244,8 @@ library(tblcheck)
 
 ## Grading tables
 
+### Automated table checking
+
 `tbl_grade_table()` compares the result of the user's input to the result of the `-solution` chunk, automatically returning targeted feedback to the user if any problems are discovered.
 
 `tbl_grade_table()` checks that the user's table
@@ -256,6 +258,8 @@ library(tblcheck)
     1. contains the correct values.
 
 If any of these checks detect a problem in the submitted code, the student will see a single message with the first detected issue, based on the order described above.
+
+### Usage
 
 To use `tbl_grade_table()`, ensure you have a `-solution` chunk and add `tbl_grade_table()` to the grading code in your `-check` chunk, e.g.
 
