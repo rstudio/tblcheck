@@ -1,6 +1,8 @@
 ---
 title: "tblcheck"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{tblcheck}
   %\VignetteEngine{knitr::rmarkdown}
@@ -116,7 +118,8 @@ opts_chunk$set(
   comment = "#>"
 )
 
-options(max.print = 20)
+set.seed(424341)
+options(max.print = 20, width = 70)
 
 # Add hooks to turn a chunk into an unevaluated verbatim exercise chunk
 # adapted from https://bookdown.org/yihui/rmarkdown-cookbook/show-header.html
