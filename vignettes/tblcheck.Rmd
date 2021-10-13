@@ -109,7 +109,7 @@ library(knitr)
 library(dplyr)
 library(gradethis)
 library(tblcheck)
-library(rlang, include.only = "%||%")
+`%||%` <- rlang::`%||%`
 
 opts_chunk$set(
   collapse = TRUE,
