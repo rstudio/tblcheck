@@ -226,9 +226,9 @@ If you are new to grading learnr tutorials, we recommend that you [get comfortab
 
 tblcheck provides two grading modalities to compare the output of the student's code with a model solution:
 
-1. Produce automatic feedback for common problems using the [`grade` function family](#grading-tables), or
+1. Produce automatic feedback for common problems using the [`grade` function family](#grading-tables) for [tables](#grading-tables) or [vectors](#grading-vectors), or
 
-1. Write custom grading logic with the [`check` function family](#custom-mistake-handling).
+1. Write custom grading logic with the [`check` function family](#checking-for-problems-with-custom-feedback).
 
 To use tblcheck in a learnr tutorial, load tblcheck after learnr and gradethis in the `setup` chunk of your tutorial:
 
