@@ -104,14 +104,12 @@ vignette: >
 }
 ```
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
+library(knitr)
 library(dplyr)
 library(gradethis)
-gradethis_setup(fail.hint = FALSE, fail.encourage = FALSE)
-library(knitr)
-library(rlang)
 library(tblcheck)
-library(tibble)
+library(rlang, include.only = "%||%")
 
 opts_chunk$set(
   collapse = TRUE,
