@@ -9,9 +9,9 @@
 #' @section Problems:
 #' 
 #' 1. `class`: `object` doesn't have the same classes as `expected`.
+#' 1. `length`: `object` doesn't have the same length as `expected`.
 #' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
 #'   See [vec_check_levels()].
-#' 1. `length`: `object` doesn't have the same length as `expected`.
 #' 1. `values`: `object` doesn't contain the same values as `expected`.
 #' 1. `names`: `object` has different [names][names()] than `expected`.
 #' 1. `names_order`: `object` has the same [names][names()] as `expected`,
@@ -23,6 +23,8 @@
 #'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same classes.
+#' @param check_length `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same length.
 #' @param check_levels `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same [factor levels][levels()].
 #' @param check_values `[logical(1)]`\cr Whether to check that `object` and
@@ -64,6 +66,7 @@ vec_check_vector <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  check_length = TRUE,
   check_levels = TRUE,
   check_values = TRUE,
   check_names = TRUE,
@@ -81,11 +84,19 @@ vec_check_vector <- function(
     checkmate::assert_vector(expected)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
   })
   
   if (check_class) {
     return_if_problem(
       vec_check_class(object, expected),
+      prefix = "vector"
+    )
+  }
+  
+  if (check_length) {
+    return_if_problem(
+      vec_check_dimensions(object, expected),
       prefix = "vector"
     )
   }
@@ -119,6 +130,7 @@ vec_grade_vector <- function(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
+  check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
   env = parent.frame()
@@ -128,6 +140,7 @@ vec_grade_vector <- function(
       object = object,
       expected = expected,
       check_class = check_class,
+      check_length = check_length,
       check_values = check_values,
       check_names = check_names,
       env = env

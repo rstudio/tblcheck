@@ -25,6 +25,8 @@
 #'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `column` has the
 #'   same class in `object` and `expected`.
+#' @param check_length `[logical(1)]`\cr Whether to check that `column` has the
+#'   same length in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
 #'   same values in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
@@ -60,6 +62,7 @@ tbl_check_column <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
   env = parent.frame()
@@ -75,6 +78,7 @@ tbl_check_column <- function(
     checkmate::assert_character(column, len = 1, any.missing = FALSE)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
@@ -96,6 +100,7 @@ tbl_check_column <- function(
       object[[column]],
       expected[[column]],
       check_class = check_class,
+      check_length = check_length,
       check_values = check_values,
       check_names = check_names
     ),
@@ -112,6 +117,7 @@ tbl_grade_column <- function(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
+  check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
   env = parent.frame()
@@ -122,6 +128,7 @@ tbl_grade_column <- function(
       object = object,
       expected = expected,
       check_class = check_class,
+      check_length = check_length,
       check_values = check_values,
       check_names = check_names,
       env = env

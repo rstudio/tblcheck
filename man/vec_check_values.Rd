@@ -5,7 +5,12 @@
 \alias{vec_grade_values}
 \title{Checks that two vectors are contain the same values}
 \usage{
-vec_check_values(object = .result, expected = .solution, env = parent.frame())
+vec_check_values(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  env = parent.frame()
+)
 
 vec_grade_values(
   object = .result,
@@ -19,10 +24,10 @@ vec_grade_values(
 
 \item{expected}{A vector containing the expected result.}
 
-\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
-
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 print. Defaults to 3.}
+
+\item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
 If there are any issues, a \link{list} from \code{vec_check_vector()} or a
@@ -41,8 +46,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{length}: \code{object} doesn't have the same length as \code{expected}.
-\item \code{values}: \code{object} doesn't contain the same values as \code{expected}.
+\item \code{values}: \code{object} doesn't contain the same values as \code{expected}
 }
 }
 
