@@ -571,7 +571,7 @@ Notice that we changed the grading code slightly to `pass()` any answer that als
 
 
 Suppose we modified our `food` example, telling students that we have 3 tomatoes and 5 heads of lettuce.
-We'd like the students to create a fourth column `count` containing the number of each food item in our posession.
+We'd like the students to create a fourth column `count` containing the number of each food item in our possession.
 
 ````markdown
 ```{r ex-specific-setup, chunk_label = "food-count-setup"}
@@ -642,7 +642,7 @@ Every problem object contains at least three items:
    The help pages for every check function contain a section named **Problems**
    where the problem types detected by the check function are enumerated.
    
-   - **Exercise:** What types of problems are discovered by `tbl_check_column()`?
+   - **Your Turn:** What types of problems are discovered by `tbl_check_column()`?
      Use the help pages to find out.
    
 1. `actual` contains the value returned by the user's code and inspected by the check function.
@@ -658,7 +658,7 @@ tblcheck includes a helper function, `is_problem()` that you can use to detect a
 is_problem(problem)
 ```
 
-We can use the `type` argumnt of  `is_problem()` to differentiate between the problem types detected by `tbl_check_column()`.
+We can use the `type` argument of  `is_problem()` to differentiate between the problem types detected by `tbl_check_column()`.
 
 ```{r custom-problem-ex-2}
 is_problem(problem, type = "length")
@@ -721,7 +721,7 @@ would receive our custom feedback.
 fake_grade_chunks("ex-specific", check = "custom-problem-check")
 ```
 
-By following our specific advice, the student revises their code to correct create the `count` column.
+By following our specific advice, the student revises their code to correctly create the `count` column.
 
 ```{r ex-specific-correct}
 foods %>% 
