@@ -11,17 +11,14 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-
-library(badger)
 ```
 
 # tblcheck
 
 <!-- badges: start -->
-`r badge_cran_release(color = "red") # Change color to "green" when released`
-`r badge_github_actions()`
-`r badge_codecov()`
-`r badge_cran_download(color = "blue")`
+[![CRAN status](https://www.r-pkg.org/badges/version/tblcheck)](https://CRAN.R-project.org/package=tblcheck)
+[![R-CMD-check](https://github.com/rstudio/tblcheck/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/tblcheck/actions)
+<!-- [![](http://cranlogs.r-pkg.org/badges/last-month/tblcheck?color=blue)](https://cran.r-project.org/package=tblcheck) -->
 <!-- badges: end -->
 
 tblcheck provides functions for grading tibbles, data frames, and vectors with [gradethis](https://pkgs.rstudio.com/gradethis/). 

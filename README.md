@@ -5,11 +5,10 @@
 
 <!-- badges: start -->
 
-[![](https://www.r-pkg.org/badges/version/tblcheck?color=red)](https://cran.r-project.org/package=tblcheck)
-[![R build
-status](https://github.com/rstudio/tblcheck/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/tblcheck/actions)
-[![](https://codecov.io/gh/rstudio/tblcheck/branch/main/graph/badge.svg)](https://codecov.io/gh/rstudio/tblcheck)
-[![](http://cranlogs.r-pkg.org/badges/last-month/tblcheck?color=blue)](https://cran.r-project.org/package=tblcheck)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tblcheck)](https://CRAN.R-project.org/package=tblcheck)
+[![R-CMD-check](https://github.com/rstudio/tblcheck/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/tblcheck/actions)
+<!-- [![](http://cranlogs.r-pkg.org/badges/last-month/tblcheck?color=blue)](https://cran.r-project.org/package=tblcheck) -->
 <!-- badges: end -->
 
 tblcheck provides functions for grading tibbles, data frames, and
