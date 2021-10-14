@@ -29,9 +29,6 @@ Defaults to 3.}
 \item{...}{
   Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
   \describe{
-    \item{\code{message}}{A character string of the message to be displayed. In all
-grading helper functions other than \code{\link[gradethis:graded]{graded()}}, \code{message} is a template
-string that will be processed with \code{\link[glue:glue]{glue::glue()}}.}
     \item{\code{hint}}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
 added using the default options of \code{\link[gradethis:code_feedback]{give_code_feedback()}} and

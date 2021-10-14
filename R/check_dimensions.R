@@ -20,7 +20,7 @@
 #'   different dimensions
 #'
 #' @inheritParams tbl_check_class
-#' @inheritDotParams gradethis::fail
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_dimensions()` or a
 #'   [gradethis::fail()] message from `tbl_grade_dimensions()`.

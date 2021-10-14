@@ -20,7 +20,7 @@
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
-#' @inheritDotParams gradethis::fail
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `vec_check_levels()` or a
 #'   [gradethis::fail()] message from `vec_grade_levels()`.

@@ -32,7 +32,7 @@
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same names.
 #' @inheritParams tbl_check_table
-#' @inheritDotParams gradethis::fail
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `vec_check_vector()` or a
 #'   [gradethis::fail()] message from `vec_grade_vector()`.

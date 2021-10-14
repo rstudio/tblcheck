@@ -12,7 +12,7 @@
 #'   or is missing groups that are expected.
 #'
 #' @inheritParams tbl_check_names
-#' @inheritDotParams gradethis::fail
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_groups()` or a
 #'   [gradethis::fail()] message from `tbl_grade_groups()`.
