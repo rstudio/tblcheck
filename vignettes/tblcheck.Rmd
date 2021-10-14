@@ -559,15 +559,15 @@ Notice that we changed the grading code slightly to `pass()` any answer that als
 
 `tbl_grade_table()` and `vec_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
 
-|Function                                             |Grades                                                         |
-|-----------------------------------------------------|---------------------------------------------------------------|
-|`tbl_grade_class()` and `vec_grade_class()`          |the class of an object                                         |
-|`tbl_grade_column()`                                 |the tests in `vec_grade_vector()` to a single column of a table|
-|`tbl_grade_dimensions()` and `vec_grade_dimensions()`|the length and dimensions of an object                         |
-|`tbl_grade_groups()`                                 |the groups of a table                                          |
-|`tbl_grade_names()` and `vec_grade_names()`          |the names of an object                                         |
-|`vec_grade_levels()`                                 |the levels of a factor                                         |
-|`vec_grade_values()`                                 |the values of a vector                                         |
+|Function                                         |Grades                                                         |
+|-------------------------------------------------|---------------------------------------------------------------|
+|`tbl_grade_class()` `vec_grade_class()`          |the class of an object                                         |
+|`tbl_grade_column()`                             |the tests in `vec_grade_vector()` to a single column of a table|
+|`tbl_grade_dimensions()` `vec_grade_dimensions()`|the length and dimensions of an object                         |
+|`tbl_grade_groups()`                             |the groups of a table                                          |
+|`tbl_grade_names()` `vec_grade_names()`          |the names of an object                                         |
+|`vec_grade_levels()`                             |the levels of a factor                                         |
+|`vec_grade_values()`                             |the values of a vector                                         |
 
 
 Suppose we modified our `food` example, telling students that we have 3 tomatoes and 5 heads of lettuce.
