@@ -40,7 +40,7 @@ tbl_grade_table(
 \item{expected}{A data frame containing the expected result.}
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same classes with \code{\link[=class]{class()}}.}
+\code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
@@ -50,7 +50,8 @@ of  \code{object} are in the same order as \code{expected} with \code{\link[=tbl
 Defaults to \code{FALSE}.}
 
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same number of rows and columns with \code{\link[=dim]{dim()}}.}
+\code{expected} have the same number of rows and columns
+with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}.}
 
 \item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same [\link[dplyr:group_by]{groups}
@@ -80,12 +81,19 @@ If there are any issues, a \link{list} from \code{tbl_check_table()} or a
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
-Checks if \code{object} and \code{expected} have the same number of rows, the same
-column names, and the same column contents.
+Checks for differences between \code{object} and \code{expected} in the following order:
+\enumerate{
+\item Check table class with \code{\link[=tbl_check_class]{tbl_check_class()}}
+\item Check column names with \code{\link[=tbl_check_names]{tbl_check_names()}}
+\item Check number of rows and columns with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}
+\item Check \link[dplyr:group_by]{groups} with \code{\link[=tbl_check_groups]{tbl_check_groups()}}
+\item Check that each column is the same with \code{\link[=tbl_check_column]{tbl_check_column()}}
+}
+
 If the tables differ
 \itemize{
-\item \code{tbl_check_names()} returns a list describing the problem
-\item \code{tbl_grade_names()} returns a failing grade and informative message
+\item \code{tbl_check_table()} returns a list describing the problem
+\item \code{tbl_grade_table()} returns a failing grade and informative message
 with \code{\link[gradethis:graded]{gradethis::fail()}}
 }
 }
