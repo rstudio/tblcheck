@@ -1,10 +1,16 @@
 #' Check that the rows and columns of two tables are the same
 #'
-#' Checks if `object` and `expected` have the same number of rows, the same
-#' column names, and the same column contents.
+#' @description
+#' Checks for differences between `object` and `expected` in the following order:
+#' 1. Check table class with [tbl_check_class()]
+#' 1. Check column names with [tbl_check_names()]
+#' 1. Check number of rows and columns with [tbl_check_dimensions()]
+#' 1. Check [groups][dplyr::group_by()] with [tbl_check_groups()]
+#' 1. Check that each column is the same with [tbl_check_column()]
+#' 
 #' If the tables differ
-#' - `tbl_check_names()` returns a list describing the problem
-#' - `tbl_grade_names()` returns a failing grade and informative message
+#' - `tbl_check_table()` returns a list describing the problem
+#' - `tbl_grade_table()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:
@@ -30,14 +36,15 @@
 #'   determine the number of mismatched column values to display.
 #'   Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same classes with [class()].
+#'   `expected` have the same classes with [tbl_check_class()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
 #' @param check_column_order `[logical(1)]`\cr Whether to check that the columns
 #'   of  `object` are in the same order as `expected` with [tbl_check_names()].
 #'   Defaults to `FALSE`.
 #' @param check_dimensions `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same number of rows and columns with [dim()].
+#'   `expected` have the same number of rows and columns
+#'   with [tbl_check_dimensions()].
 #' @param check_groups `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same [[groups][dplyr::group_by()]
 #'   with [dplyr::group_vars()].
@@ -111,7 +118,6 @@ tbl_check_table <- function(
     checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
-    checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
   

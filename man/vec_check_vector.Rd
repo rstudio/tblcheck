@@ -58,7 +58,15 @@ If there are any issues, a \link{list} from \code{vec_check_vector()} or a
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
-Check if two vectors have the same class, length, and values.
+Checks for differences between \code{object} and \code{expected} in the following order:
+\enumerate{
+\item Check class with \code{\link[=vec_check_class]{vec_check_class()}}
+\item Check length with \code{\link[=vec_check_dimensions]{vec_check_dimensions()}}
+\item If the vector is a factor, check factor levels are the same with \code{\link[=vec_check_levels]{vec_check_levels()}}
+\item Check vector values are the same with \code{\link[=vec_check_values]{vec_check_values()}}
+\item Check names with \code{\link[=vec_check_names]{vec_check_names()}}
+}
+
 If the vectors differ
 \itemize{
 \item \code{vec_check_vector()} returns a list describing the problem
