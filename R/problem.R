@@ -127,5 +127,5 @@ print.tblcheck_problem <- function(x, ...) {
 
 #' @export
 format.tblcheck_problem <- function(x, ...) {
-  tbl_message(x, ...)
+  tblcheck_message(x, ...)
 }

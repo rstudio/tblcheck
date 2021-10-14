@@ -53,22 +53,22 @@ tblcheck_grade.tblcheck_problem <- function(
   }
   
   gradethis::fail(
-    tbl_message(problem, max_diffs = max_diffs),
+    tblcheck_message(problem, max_diffs = max_diffs),
     problem = problem,
     env = env,
     ...
   )
 }
 
-tbl_message <- function(problem, ...) {
-  UseMethod("tbl_message")
+tblcheck_message <- function(problem, ...) {
+  UseMethod("tblcheck_message")
 }
 
-tbl_message.default <- function(problem, ...) {
+tblcheck_message.default <- function(problem, ...) {
   invisible()
 }
 
-tbl_message.tblcheck_problem <- function(problem, ...) {
+tblcheck_message.tblcheck_problem <- function(problem, ...) {
   type_msg <- if (!is.null(problem$type)) {
     gettext("Your code resulted in a `{type}` problem. ")
   } else {

@@ -73,7 +73,7 @@ tbl_check_class <- function(
       exp_class,
       obj_class,
       # Object lengths are stored so the correct pluralization
-      # can be applied in tbl_message.class_problem()
+      # can be applied in tblcheck_message.class_problem()
       expected_length = length(expected),
       actual_length = length(object)
     )
@@ -102,7 +102,7 @@ tbl_grade_class <- function(
 #' @export
 vec_grade_class <- tbl_grade_class
 
-tbl_message.class_problem <- function(problem, ...) {
+tblcheck_message.class_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       "Your `{column}` column should be {expected}, but it is {actual}."
