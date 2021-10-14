@@ -1,6 +1,6 @@
 Package: tblcheck
 Title: Grade Tables in Learning Exercises
-Version: 0.1.0
+Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Alexander",
              family = "Rossell Hayes",
@@ -16,8 +16,6 @@ Description: 'tblcheck' extends 'gradethis' with functions that inspect
     data frame or tibble objects to make it easier for teachers to check
     that student tables meet expectations.
 License: MIT + file LICENSE
-URL: https://github.com/rstudio/tblcheck
-BugReports: https://github.com/rstudio/tblcheck/issues
 Imports:
     checkmate,
     glue,
