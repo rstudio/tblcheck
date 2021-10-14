@@ -20,6 +20,7 @@
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of missing and/or
 #'   unexpected names to include in an informative failure message.
 #'   Defaults to 3.
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_names()` and
 #'   `vec_check_names()` or a [gradethis::fail()] message from
@@ -94,12 +95,14 @@ tbl_grade_names <- function(
   expected = .solution,
   max_diffs = 3,
   check_order = TRUE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tblcheck_grade(
     tbl_check_names(object, expected, check_order = check_order, env = env),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
 

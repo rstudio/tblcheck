@@ -27,7 +27,18 @@ Defaults to 3.}
 
 \item{env}{The environment used for grading.}
 
-\item{...}{Additional arguments passed to \code{\link[gradethis:graded]{gradethis::fail()}}.}
+\item{...}{
+  Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
+  \describe{
+    \item{\code{hint}}{Include a code feedback hint with the failing message? This
+argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
+added using the default options of \code{\link[gradethis:code_feedback]{give_code_feedback()}} and
+\code{\link[gradethis:code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
+\code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.hint} option.}
+    \item{\code{encourage}}{Incude a random encouraging phrase with
+\code{\link[gradethis:praise]{random_encouragement()}}? The default value of \code{encourage} can be set
+using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.encourage} option.}
+  }}
 }
 \value{
 A \code{\link[gradethis:graded]{gradethis::fail()}} message or \code{NULL} invisibly.

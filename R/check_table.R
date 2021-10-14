@@ -55,6 +55,7 @@
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
 #' @param env The environment in which to find `.result` and `.solution`.
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check()` or a
 #'   [gradethis::fail()] message from `tbl_grade()`.
@@ -188,7 +189,8 @@ tbl_grade <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tblcheck_grade(
     tbl_check(
@@ -205,7 +207,8 @@ tbl_grade <- function(
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
 

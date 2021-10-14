@@ -25,7 +25,8 @@ tbl_grade_column(
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -52,6 +53,19 @@ Defaults to \code{FALSE}.}
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 print. Defaults to 3.}
+
+\item{...}{
+  Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
+  \describe{
+    \item{\code{hint}}{Include a code feedback hint with the failing message? This
+argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
+added using the default options of \code{\link[gradethis:code_feedback]{give_code_feedback()}} and
+\code{\link[gradethis:code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
+\code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.hint} option.}
+    \item{\code{encourage}}{Incude a random encouraging phrase with
+\code{\link[gradethis:praise]{random_encouragement()}}? The default value of \code{encourage} can be set
+using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.encourage} option.}
+  }}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_column()} or a

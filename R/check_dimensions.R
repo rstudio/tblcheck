@@ -20,6 +20,7 @@
 #'   different dimensions
 #'
 #' @inheritParams tbl_check_class
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_dimensions()` or a
 #'   [gradethis::fail()] message from `tbl_grade_dimensions()`.
@@ -95,11 +96,13 @@ vec_check_dimensions <- tbl_check_dimensions
 tbl_grade_dimensions <- function(
   object = .result, 
   expected = .solution,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tblcheck_grade(
     tbl_check_dimensions(object, expected, env = env),
-    env = env
+    env = env,
+    ...
   )
 }
 

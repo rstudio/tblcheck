@@ -25,14 +25,16 @@ tbl_grade_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 
 vec_grade_class(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 )
 }
 \arguments{
@@ -46,6 +48,19 @@ If \code{TRUE}, all class differences will be reported.
 See section "Inconsequential differences" for more information.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
+
+\item{...}{
+  Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
+  \describe{
+    \item{\code{hint}}{Include a code feedback hint with the failing message? This
+argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
+added using the default options of \code{\link[gradethis:code_feedback]{give_code_feedback()}} and
+\code{\link[gradethis:code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
+\code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.hint} option.}
+    \item{\code{encourage}}{Incude a random encouraging phrase with
+\code{\link[gradethis:praise]{random_encouragement()}}? The default value of \code{encourage} can be set
+using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.encourage} option.}
+  }}
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_class()} and

@@ -39,6 +39,7 @@
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same names.
 #' @inheritParams tbl_check
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `vec_check()` or a
 #'   [gradethis::fail()] message from `vec_grade()`.
@@ -143,7 +144,8 @@ vec_grade <- function(
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
   tblcheck_grade(
     vec_check(
@@ -156,7 +158,8 @@ vec_grade <- function(
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
 
