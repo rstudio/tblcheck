@@ -44,7 +44,6 @@
 vec_check_values <- function(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -57,7 +56,6 @@ vec_check_values <- function(
   return_if_internal_problem({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
-    checkmate::assert_number(max_diffs, lower = 1)
   })
   
   exp_values <- unname(expected)
