@@ -58,6 +58,8 @@ vec_check_values <- function(
     checkmate::assert_vector(expected)
   })
   
+  return_if_problem(vec_check_dimensions(object, expected))
+  
   exp_values <- unname(expected)
   obj_values <- unname(object)
   
