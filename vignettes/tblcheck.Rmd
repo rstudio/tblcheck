@@ -102,6 +102,18 @@ vignette: >
 .callout blockquote {
   border-color: #b5c1d1;
 }
+
+@media only screen and (max-width: 400px) {
+  .callout::before {
+    transform: translate(-10px, -15px) scale(0.9);
+  }
+  .callout {
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
 ```
 
 ```{r setup, include = FALSE}
@@ -230,7 +242,7 @@ tblcheck produces automatic feedback for [common problems in tables](#grading-ta
 Because the columns of data frames in R are vectors, tblcheck can also provide feedback for [common problems in vectors](#grading-vectors) with `vec_grade_vector()`.
 
 These all-in-one grading functions check for a set of possible problems, or differences, between the exercise solution and the student's table or vector.
-You can control which [checks are applied](#skipping-tests) with the arguments of these functions, or you can [directly call individual grading functions](#specific-grading-functions).
+You can [control which checks are applied](#skipping-tests) with the arguments of these functions, or you can [directly call individual grading functions](#specific-grading-functions).
 The table grading functions are prefixed with `tbl_grade_` and the vector grading functions prefixed with `vec_grade_`.
 
 For complete control over the feedback presented to users, each `tbl_grade_` or `vec_grade_` function is paired with a `tbl_check_` or `vec_check_` counterpart that finds problems and returns an object that you can use to [create custom feedback](#custom-mistake-handling).
