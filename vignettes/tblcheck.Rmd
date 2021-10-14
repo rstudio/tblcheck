@@ -477,8 +477,10 @@ fail()
 ```
 ````
 
+::: callout
 Just like `tbl_grade_table()` and other tblcheck functions, `vec_grade_vector()` automatically compares the user's `.result` to the `.solution` when used in `gradethis::grade_this()`.
 Note that `vec_grade_vector()` only returns feedback when a problem is detected, so be sure to include `gradethis::pass()` or `gradethis::pass_if_equal()` to ensure that students can get a passing grade.
+:::
 
 ### Finding problems
 
