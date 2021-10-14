@@ -18,7 +18,7 @@
 #'   If `TRUE`, all class differences will be reported.
 #'   See section "Inconsequential differences" for more information.
 #' @inheritParams tbl_check_table
-#' @inheritParams tbl_grade
+#' @inheritDotParams gradethis::fail
 #' 
 #' @section Inconsequential differences:
 #' Unless `all_differences` is set to `TRUE`, the following class differences

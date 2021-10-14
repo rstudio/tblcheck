@@ -48,7 +48,7 @@
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
 #' @param env The environment in which to find `.result` and `.solution`.
-#' @inheritParams tbl_grade
+#' @inheritDotParams gradethis::fail
 #'
 #' @return If there are any issues, a [list] from `tbl_check_table()` or a
 #'   [gradethis::fail()] message from `tbl_grade_table()`.

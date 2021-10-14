@@ -11,7 +11,7 @@
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
 #' @inheritParams vec_check_vector
-#' @inheritParams tbl_grade
+#' @inheritDotParams gradethis::fail
 #'
 #' @return If there are any issues, a [list] from `vec_check_vector()` or a
 #'   [gradethis::fail()] message from `vec_grade_vector()`.

@@ -34,7 +34,7 @@
 #' @param check_names `[logical(1)]`\cr Whether to check that `column` has the
 #'   same [names][names()] in `object` and `expected`.
 #'   Defaults to `FALSE`.
-#' @inheritParams tbl_grade
+#' @inheritDotParams gradethis::fail
 #'
 #' @return If there are any issues, a [list] from `tbl_check_column()` or a
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
