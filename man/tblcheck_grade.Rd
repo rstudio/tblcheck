@@ -38,6 +38,6 @@ Apply automatic grading to a problem object
 \examples{
 .result <- 1:10
 .solution <- letters[1:10]
-problem <- vec_check_vector()
+problem <- vec_check()
 tblcheck_grade(problem)
 }

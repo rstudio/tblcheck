@@ -30,8 +30,8 @@ print. Defaults to 3.}
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 }
 \value{
-If there are any issues, a \link{list} from \code{vec_check_vector()} or a
-\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{vec_grade_vector()}.
+If there are any issues, a \link{list} from \code{vec_check_values()} or a
+\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{vec_grade_values()}.
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
@@ -53,25 +53,25 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \examples{
 .result <- 1:10
 .solution <- letters[1:10]
-vec_check_vector()
-vec_grade_vector()
+vec_check_values()
+vec_grade_values()
 
 .result <- 1:10
 .solution <- 1:11
-vec_check_vector()
-vec_grade_vector()
+vec_check_values()
+vec_grade_values()
 
 .result <- 1:10
 .solution <- rlang::set_names(1:10, letters[1:10])
-vec_check_vector()
-vec_grade_vector()
-vec_grade_vector(max_diffs = 5)
-vec_grade_vector(max_diffs = Inf)
+vec_check_values()
+vec_grade_values()
+vec_grade_values(max_diffs = 5)
+vec_grade_values(max_diffs = Inf)
 
 .result <- 1:10
 .solution <- 11:20
-vec_check_vector()
-vec_grade_vector()
-vec_grade_vector(max_diffs = 5)
-vec_grade_vector(max_diffs = Inf)
+vec_check_values()
+vec_grade_values()
+vec_grade_values(max_diffs = 5)
+vec_grade_values(max_diffs = Inf)
 }

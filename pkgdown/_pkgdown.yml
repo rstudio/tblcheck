@@ -53,9 +53,9 @@ reference:
 - title: General checks
   desc: Check for multiple problems in a table, column, or vector
   contents:
-  - tbl_check_table
+  - tbl_check
   - tbl_check_column
-  - vec_check_vector
+  - vec_check
 - title: Specific checks
   desc: Check for a specific type of problem in tables or vectors
   contents:

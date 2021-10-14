@@ -1,4 +1,4 @@
-# tbl_grade_table() class
+# tbl_grade() class
 
     Code
       grade_tbl_class_df
@@ -38,7 +38,7 @@
         grouped. Maybe you need to use `group_by()`?
       >
 
-# tbl_grade_table() rows
+# tbl_grade() rows
 
     Code
       grade_tbl_rows_missing_1
@@ -56,7 +56,7 @@
         Your table should have 1 row, but it has 26 rows.
       >
 
-# tbl_grade_table() ncol
+# tbl_grade() ncol
 
     Code
       grade_tbl_cols_extra_1
@@ -83,7 +83,7 @@
         Your table should have 2 columns, but it has 1 column.
       >
 
-# tbl_grade_table() names
+# tbl_grade() names
 
     Code
       grade
@@ -93,7 +93,7 @@
         not have columns named `a` or `b`.
       >
 
-# tbl_grade_table() columns
+# tbl_grade() columns
 
     Code
       grade
@@ -102,7 +102,7 @@
         The first 3 values of your `a` column should be `x`, `y`, and `z`.
       >
 
-# tbl_grade_table() returns grades with row problems
+# tbl_grade() returns grades with row problems
 
     Code
       grade_rows_extra
@@ -120,7 +120,7 @@
         Your table should have 1 row, but it has 26 rows.
       >
 
-# tbl_grade_table() returns names feedback to learnr
+# tbl_grade() returns names feedback to learnr
 
     Code
       grade_tbl_names_3
@@ -199,7 +199,7 @@
         Your `a` column's levels were not in the expected order.
       >
 
-# tbl_grade_table() groups
+# tbl_grade() groups
 
     Code
       grade

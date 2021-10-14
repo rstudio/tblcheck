@@ -238,8 +238,8 @@ fake_grade_chunks <- function(
 tblcheck works with [gradethis] to help instructors compare students' exercise results with intended solutions in [learnr] tutorials.
 If you are new to grading learnr tutorials, we recommend that you [get comfortable with gradethis][gradethis-get-started] before incorporating tblcheck into your tutorials.
 
-tblcheck produces automatic feedback for [common problems in tables](#grading-tables) with `tbl_grade_table()`.
-Because the columns of data frames in R are vectors, tblcheck can also provide feedback for [common problems in vectors](#grading-vectors) with `vec_grade_vector()`.
+tblcheck produces automatic feedback for [common problems in tables](#grading-tables) with `tbl_grade()`.
+Because the columns of data frames in R are vectors, tblcheck can also provide feedback for [common problems in vectors](#grading-vectors) with `vec_grade()`.
 
 These all-in-one grading functions check for a set of possible problems, or differences, between the exercise solution and the student's table or vector.
 You can [control which checks are applied](#skipping-tests) with the arguments of these functions, or you can [directly call individual grading functions](#specific-grading-functions).
@@ -263,9 +263,9 @@ library(tblcheck)
 
 ### Automated table checking
 
-`tbl_grade_table()` compares the result of the user's input to the result of the `-solution` chunk, automatically returning targeted feedback to the user if any problems are discovered.
+`tbl_grade()` compares the result of the user's input to the result of the `-solution` chunk, automatically returning targeted feedback to the user if any problems are discovered.
 
-`tbl_grade_table()` checks that the user's table
+`tbl_grade()` checks that the user's table
 
 1. is the correct class,
 1. has the correct column names,
@@ -278,12 +278,12 @@ If any of these checks detect a problem in the submitted code, the student will 
 
 ### Usage
 
-To use `tbl_grade_table()`, ensure you have a `-solution` chunk and add `tbl_grade_table()` to the grading code in your `-check` chunk, e.g.
+To use `tbl_grade()`, ensure you have a `-solution` chunk and add `tbl_grade()` to the grading code in your `-check` chunk, e.g.
 
 ````markdown
 ```{r example-check, chunk_label = "example-check", grade_this = TRUE}
 pass_if_equal()
-tbl_grade_table()
+tbl_grade()
 fail()
 ```
 ````
@@ -293,14 +293,14 @@ By default, `tblcheck` functions compare the `gradethis` objects `.result` and `
 ::: callout
 Be sure to include a function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
 
-`tbl_grade_table()` only returns feedback to the student if it discovers a problem; if the student gives the correct answer, it produces no output.
+`tbl_grade()` only returns feedback to the student if it discovers a problem; if the student gives the correct answer, it produces no output.
 This lets you quickly check for simple problems, following up with more detailed checking with other `gradethis` functions.
 :::
 
 ### Finding problems
 
-If the user's submitted table differs from the correct table, `tbl_grade_table()` returns a failing grade and a message with an explanation for what went wrong. 
-If there are multiple problems with a student's submission, `tbl_grade_table()` tries to give the most actionable item first.
+If the user's submitted table differs from the correct table, `tbl_grade()` returns a failing grade and a message with an explanation for what went wrong. 
+If there are multiple problems with a student's submission, `tbl_grade()` tries to give the most actionable item first.
 
 We'll demonstrate how this works for a simple exercise that asks students to create the following table using `tibble()`.
 
@@ -330,18 +330,18 @@ tibble(
 
 ```{r ex-food-check, chunk_label = "food-check", grade_this = TRUE}
 pass_if_equal()
-tbl_grade_table()
+tbl_grade()
 fail()
 ```
 ````
 
 We'll use this example throughout the sections that follow to demonstrate how tblcheck will respond to various types of errors that students may make.
 Keep in mind this is a contrived example designed for this vignette.
-In real-world usage, students are likely to only encounter one or two of the problems `tbl_grade_table()` is designed to find.
+In real-world usage, students are likely to only encounter one or two of the problems `tbl_grade()` is designed to find.
 
 #### Checking class
 
-First, `tbl_grade_table()` ensures that the class of the student's submission matches the class of the expected solution.
+First, `tbl_grade()` ensures that the class of the student's submission matches the class of the expected solution.
 Here, the student attempts to store the data in the table as a list rather than by using `tibble()`.
 
 ```{r exercise-2}
@@ -361,7 +361,7 @@ Based on this advice, the student revises their solution to use `tibble()` inste
 #### Checking column names
 
 Next, the code checks that the student used the correct column names, and they haven't missed any columns or included any unexpected columns.
-Here, `tbl_grade_table()` notices that the student has an unexpected column named `fruit`.
+Here, `tbl_grade()` notices that the student has an unexpected column named `fruit`.
 
 ```{r exercise-3}
 tibble(
@@ -379,7 +379,7 @@ Based on this advice, the student revises their solution to name the second colu
 
 #### Checking length
 
-Next, `tbl_grade_table()` checks that the student has submitted the correct number of rows, and in this case notices that the student has only included one row.
+Next, `tbl_grade()` checks that the student has submitted the correct number of rows, and in this case notices that the student has only included one row.
 
 ```{r exercise-4}
 tibble(
@@ -398,7 +398,7 @@ They go back to the example table and add the second row to their submission.
 
 #### Checking column classes
 
-Next, `tbl_grade_table()` checks that each individual column contains the correct type of data.
+Next, `tbl_grade()` checks that each individual column contains the correct type of data.
 Here, the student has stored the values of the `vegetable` column as a string, but we were expecting them to be logical values.
 
 ```{r exercise-5}
@@ -417,7 +417,7 @@ Based on this advice, the student removes the `"` around the values in the `vege
 
 #### Checking column values
 
-Finally, `tbl_grade_table()` gives a hint as to what the values in each column should look like.
+Finally, `tbl_grade()` gives a hint as to what the values in each column should look like.
 Here, the student made a mistake during their transcription of the `vegetable` column.
 
 ```{r exercise-6}
@@ -454,7 +454,7 @@ fake_grade_chunks("exercise-7", solution = "ex-food-solution", check = "ex-food-
 
 Many of the table-grading tests that apply to the _columns_ of tables can also be applied to vectors — after all, data frame columns in R are _vectors_.
 
-When your exercise uses vectors rather than tables, `vec_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table to a vector.
+When your exercise uses vectors rather than tables, `vec_grade()` allows you to apply the same tests that are normally applied to the columns of a table to a vector.
 It checks that the user's vector
 
 1. is the correct class
@@ -463,28 +463,28 @@ It checks that the user's vector
 1. contains the correct values
 1. has the correct names (if the vector has names)
 
-Like `tbl_grade_table()`, if a problem is detected by any of these checks, the student will see a single message with the first detected problem, based on the order described above.
+Like `tbl_grade()`, if a problem is detected by any of these checks, the student will see a single message with the first detected problem, based on the order described above.
 
 ### Usage
 
-To use `vec_grade_vector()`, ensure you have a `-solution` chunk and add `vec_grade_vector()` to the grading code in your `-check` chunk, e.g.
+To use `vec_grade()`, ensure you have a `-solution` chunk and add `vec_grade()` to the grading code in your `-check` chunk, e.g.
 
 ````markdown
 ```{r vector-example-check, chunk_label = "vector-check", grade_this = TRUE}
 pass_if_equal()
-vec_grade_vector()
+vec_grade()
 fail()
 ```
 ````
 
 ::: callout
-Just like `tbl_grade_table()` and other tblcheck functions, `vec_grade_vector()` automatically compares the user's `.result` to the `.solution` when used in `gradethis::grade_this()`.
-Note that `vec_grade_vector()` only returns feedback when a problem is detected, so be sure to include `gradethis::pass()` or `gradethis::pass_if_equal()` to ensure that students can get a passing grade.
+Just like `tbl_grade()` and other tblcheck functions, `vec_grade()` automatically compares the user's `.result` to the `.solution` when used in `gradethis::grade_this()`.
+Note that `vec_grade()` only returns feedback when a problem is detected, so be sure to include `gradethis::pass()` or `gradethis::pass_if_equal()` to ensure that students can get a passing grade.
 :::
 
 ### Finding problems
 
-If the user's submitted vector differs from the correct vector, `vec_grade_vector()` returns a failing grade and a message with an explanation for what went wrong. If there are multiple problems with a student's submission, `vec_grade_vector()` tries to give the most actionable item first.
+If the user's submitted vector differs from the correct vector, `vec_grade()` returns a failing grade and a message with an explanation for what went wrong. If there are multiple problems with a student's submission, `vec_grade()` tries to give the most actionable item first.
 
 Suppose an exercise asks a student to create a factor of the sandwich toppings — _lettuce_, _tomato_, _avocado_.
 
@@ -505,12 +505,12 @@ factor(c("lettuce", "tomato", "avocado"))
 
 ```{r ex-vector-check, chunk_label = "toppings-check", grade_this = TRUE}
 pass_if_equal()
-vec_grade_vector()
+vec_grade()
 fail()
 ```
 ````
 
-For example, if the student submits a vector of the wrong class, that will be the first message returned by `vec_grade_vector()`.
+For example, if the student submits a vector of the wrong class, that will be the first message returned by `vec_grade()`.
 
 ```{r vector-1}
 c("lettuce", "tomato", "avocado")
@@ -520,7 +520,7 @@ c("lettuce", "tomato", "avocado")
 fake_grade_chunks("vector-1", "ex-vector-solution", "ex-vector-check")
 ```
 
-If the student submits a factor with the wrong factor levels, `vec_grade_vector()` will warn the student about their mistake.
+If the student submits a factor with the wrong factor levels, `vec_grade()` will warn the student about their mistake.
 
 ```{r vector-2}
 factor(c("lettuce", "tomato", "avocado"), c("lettuce", "tomato", "avocado"))
@@ -534,15 +534,15 @@ fake_grade_chunks("vector-2", "ex-vector-solution", "ex-vector-check")
 
 There are a number of ways to control which mistakes are detected and how the feedback is given to the students.
 
-- The first is to [enable or disable specific checks](#skipping-tests) using the `check_*` arguments of `tbl_grade_table()` and `vec_grade_vector()`.
+- The first is to [enable or disable specific checks](#skipping-tests) using the `check_*` arguments of `tbl_grade()` and `vec_grade()`.
 
-- You may also choose to [call specific grading functions](#specific-grading-functions) associated with the checks underlying `tbl_grade_table()` and `vec_grade_vector()`.
+- You may also choose to [call specific grading functions](#specific-grading-functions) associated with the checks underlying `tbl_grade()` and `vec_grade()`.
 
 - Or you can [`check` rather than `grade` for specific problems](#checking-for-problems-with-custom-feedback) to obtain a `problem` object, i.e. a description of the problem found by tblcheck. You can then use the problem object to construct a feedback message using `gradethis::fail()`.
 
 ### Skipping tests
 
-Every test performed by `tbl_grade_table()` or `vec_grade_vector()` can be enabled or disabled with an argument.
+Every test performed by `tbl_grade()` or `vec_grade()` can be enabled or disabled with an argument.
 The argument names are prefixed with `check_` — such as `check_class` or `check_groups` — and each take a `TRUE` or `FALSE` value.
 
 For example, suppose a student answering our `food` exercise used a `data.frame` when the exercise expects a `tibble`.
@@ -560,11 +560,11 @@ data.frame(
 fake_grade_chunks("skip-check-class", solution = "ex-food-solution", check = "ex-food-check")
 ```
 
-If you don't care about the class of the table, you can add `check_class = FALSE` to `tbl_grade_table()`. This will skip checking the table's class, but still run all other tests.
+If you don't care about the class of the table, you can add `check_class = FALSE` to `tbl_grade()`. This will skip checking the table's class, but still run all other tests.
 
 ````markdown
 ```{r skip-check-class-check, chunk_label = "food-check", grade_this = TRUE}
-tbl_grade_table(check_class = FALSE)
+tbl_grade(check_class = FALSE)
 pass()
 ```
 ````
@@ -573,17 +573,17 @@ pass()
 fake_grade_chunks("skip-check-class", solution = "ex-food-solution", check = "skip-check-class-check")
 ```
 
-Since the only problem with the student's submission was the class of the table, `tbl_grade_table()` doesn't directly return any feedback.
-Notice that we changed the grading code slightly to `pass()` any answer that also passes the `tbl_grade_table()` checks.
+Since the only problem with the student's submission was the class of the table, `tbl_grade()` doesn't directly return any feedback.
+Notice that we changed the grading code slightly to `pass()` any answer that also passes the `tbl_grade()` checks.
 
 ### Specific grading functions
 
-`tbl_grade_table()` and `vec_grade_vector()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
+`tbl_grade()` and `vec_grade()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
 
 |Function                                         |Grades                                                         |
 |-------------------------------------------------|---------------------------------------------------------------|
 |`tbl_grade_class()` `vec_grade_class()`          |the class of an object                                         |
-|`tbl_grade_column()`                             |the tests in `vec_grade_vector()` to a single column of a table|
+|`tbl_grade_column()`                             |the tests in `vec_grade()` to a single column of a table|
 |`tbl_grade_dimensions()` `vec_grade_dimensions()`|the length and dimensions of an object                         |
 |`tbl_grade_groups()`                             |the groups of a table                                          |
 |`tbl_grade_names()` `vec_grade_names()`          |the names of an object                                         |

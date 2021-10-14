@@ -74,9 +74,9 @@ return_if_problem <- function(
 #' @export
 #'
 #' @examples
-#' problem_type(vec_check_vector(1, "1"))
-#' is_problem(vec_check_vector(1, "1"), "vector_class")
-#' is_tblcheck_problem(vec_check_vector(1, "1"), "class")
+#' problem_type(vec_check(1, "1"))
+#' is_problem(vec_check(1, "1"), "vector_class")
+#' is_tblcheck_problem(vec_check(1, "1"), "class")
 problem_type <- function(x) {
   if (is_problem(x)) {
     return(x$type)

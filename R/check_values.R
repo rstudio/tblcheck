@@ -10,37 +10,37 @@
 #' 
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
-#' @inheritParams vec_check_vector
+#' @inheritParams vec_check
 #'
-#' @return If there are any issues, a [list] from `vec_check_vector()` or a
-#'   [gradethis::fail()] message from `vec_grade_vector()`.
+#' @return If there are any issues, a [list] from `vec_check_values()` or a
+#'   [gradethis::fail()] message from `vec_grade_values()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples 
 #' .result <- 1:10
 #' .solution <- letters[1:10]
-#' vec_check_vector()
-#' vec_grade_vector()
+#' vec_check_values()
+#' vec_grade_values()
 #' 
 #' .result <- 1:10
 #' .solution <- 1:11
-#' vec_check_vector()
-#' vec_grade_vector()
+#' vec_check_values()
+#' vec_grade_values()
 #' 
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
-#' vec_check_vector()
-#' vec_grade_vector()
-#' vec_grade_vector(max_diffs = 5)
-#' vec_grade_vector(max_diffs = Inf)
+#' vec_check_values()
+#' vec_grade_values()
+#' vec_grade_values(max_diffs = 5)
+#' vec_grade_values(max_diffs = Inf)
 #' 
 #' .result <- 1:10
 #' .solution <- 11:20
-#' vec_check_vector()
-#' vec_grade_vector()
-#' vec_grade_vector(max_diffs = 5)
-#' vec_grade_vector(max_diffs = Inf)
+#' vec_check_values()
+#' vec_grade_values()
+#' vec_grade_values(max_diffs = 5)
+#' vec_grade_values(max_diffs = Inf)
 vec_check_values <- function(
   object = .result,
   expected = .solution,

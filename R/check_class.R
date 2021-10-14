@@ -17,7 +17,7 @@
 #'   inconsequential class differences will be skipped.
 #'   If `TRUE`, all class differences will be reported.
 #'   See section "Inconsequential differences" for more information.
-#' @inheritParams tbl_check_table
+#' @inheritParams tbl_check
 #' 
 #' @section Inconsequential differences:
 #' Unless `all_differences` is set to `TRUE`, the following class differences
