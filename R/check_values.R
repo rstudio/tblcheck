@@ -60,7 +60,7 @@ vec_check_values <- function(
   
   return_if_problem(vec_check_dimensions(object, expected))
   
-  if (!all(vctrs::vec_equal(obj_values, exp_values))) {
+  if (!all(vctrs::vec_equal(object, expected))) {
     return(problem("values", expected, object))
   }
 }
