@@ -156,8 +156,7 @@ tbl_check_table <- function(
           object = object,
           expected = expected,
           check_class = check_column_class,
-          check_values = check_column_values,
-          check_length = FALSE
+          check_values = check_column_values
         )
       )
     }

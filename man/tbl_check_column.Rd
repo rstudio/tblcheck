@@ -10,7 +10,6 @@ tbl_check_column(
   object = .result,
   expected = .solution,
   check_class = TRUE,
-  check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
   env = parent.frame()
@@ -22,7 +21,6 @@ tbl_grade_column(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
-  check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
   env = parent.frame()
@@ -37,9 +35,6 @@ tbl_grade_column(
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same class in \code{object} and \code{expected}.}
-
-\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
-same length in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same values in \code{object} and \code{expected}.}

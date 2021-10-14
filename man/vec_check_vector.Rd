@@ -9,7 +9,6 @@ vec_check_vector(
   object = .result,
   expected = .solution,
   check_class = TRUE,
-  check_length = TRUE,
   check_levels = TRUE,
   check_values = TRUE,
   check_names = TRUE,
@@ -21,7 +20,6 @@ vec_grade_vector(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
-  check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
   env = parent.frame()
@@ -34,9 +32,6 @@ vec_grade_vector(
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes.}
-
-\item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same length.}
 
 \item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same \link[=levels]{factor levels}.}
@@ -70,9 +65,9 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 
 \enumerate{
 \item \code{class}: \code{object} doesn't have the same classes as \code{expected}.
-\item \code{length}: \code{object} doesn't have the same length as \code{expected}.
 \item \code{levels_n}, \code{levels}, \code{levels_reversed}, \code{levels_order}:
 See \code{\link[=vec_check_levels]{vec_check_levels()}}.
+\item \code{length}: \code{object} doesn't have the same length as \code{expected}.
 \item \code{values}: \code{object} doesn't contain the same values as \code{expected}.
 \item \code{names}: \code{object} has different \link[=names]{names} than \code{expected}.
 \item \code{names_order}: \code{object} has the same \link[=names]{names} as \code{expected},

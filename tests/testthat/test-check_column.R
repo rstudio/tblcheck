@@ -300,14 +300,6 @@ test_that("tbl_grade_column() handles bad user input", {
     }),
     "check_class"
   )
-  
-  expect_internal_problem(
-    tblcheck_test_grade({
-      result <- solution <- tibble::tibble(b = letters[1:3])
-      tbl_grade_column("b", object = result, expected = solution, check_length = c(TRUE, TRUE))
-    }),
-    "check_length"
-  )
 
   expect_internal_problem(
     tblcheck_test_grade({
@@ -369,11 +361,6 @@ test_that("tbl_check_column() handles bad user input", {
   expect_internal_problem(
     tbl_check_column("b", object = 12),
     "object"
-  )
-  
-  expect_internal_problem(
-    tbl_check_column("b", check_length = c(TRUE, TRUE)),
-    message = "check_length"
   )
   
   expect_internal_problem(

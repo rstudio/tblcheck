@@ -8,7 +8,8 @@
 #' 
 #' @section Problems:
 #' 
-#' 1. `values`: `object` doesn't contain the same values as `expected`
+#' 1. `length`: `object` doesn't have the same length as `expected`.
+#' 1. `values`: `object` doesn't contain the same values as `expected`.
 #'
 #' @inheritParams vec_check_vector
 #'
