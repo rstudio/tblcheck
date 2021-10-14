@@ -509,7 +509,7 @@ factor(c("lettuce", "tomato", "avocado"), c("lettuce", "tomato", "avocado"))
 fake_grade_chunks("vector-2", "ex-vector-solution", "ex-vector-check")
 ```
 
-## Customizing mistake handling
+## Custom Grading
 
 There are a number of ways to control which mistakes are detected and how the feedback is given to the students.
 
@@ -619,7 +619,7 @@ foods %>%
 fake_grade_chunks("ex-specific")
 ```
 
-### Checking for problems with custom feedback
+### Custom mistake handling
 
 Sometimes, we want to handle specific circumstance in a special way.
 Every `tbl_grade_` and `vec_grade_` function includes a `tbl_check_` or `vec_check_` counterpart that returns the detected **problem** rather than converting the problem into feedback for the user (a **grade** in gradethis terms).
