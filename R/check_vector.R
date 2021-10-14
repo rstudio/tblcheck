@@ -141,7 +141,7 @@ vec_grade_vector <- function(
   check_names = TRUE,
   env = parent.frame()
 ) {
-  tbl_grade(
+  tblcheck_grade(
     vec_check_vector(
       object = object,
       expected = expected,

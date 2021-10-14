@@ -85,7 +85,7 @@ vec_grade_levels <- function(
   max_diffs = 3,
   env = parent.frame()
 ) {
-  tbl_grade(
+  tblcheck_grade(
     vec_check_levels(object, expected, env = env),
     max_diffs = max_diffs,
     env = env

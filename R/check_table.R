@@ -186,7 +186,7 @@ tbl_grade_table <- function(
   check_column_values = check_columns,
   env = parent.frame()
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_table(
       object = object,
       expected = expected,

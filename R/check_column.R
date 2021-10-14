@@ -130,7 +130,7 @@ tbl_grade_column <- function(
   check_names = FALSE,
   env = parent.frame()
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_column(
       column = column,
       object = object,
