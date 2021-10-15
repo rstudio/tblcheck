@@ -87,7 +87,7 @@ vec_grade_levels <- function(
   env = parent.frame(),
   ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     vec_check_levels(object, expected, env = env),
     max_diffs = max_diffs,
     env = env,
@@ -95,7 +95,7 @@ vec_grade_levels <- function(
   )
 }
 
-tbl_message.levels_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.levels_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||% 
       ngettext(
@@ -141,7 +141,7 @@ tbl_message.levels_problem <- function(problem, max_diffs = 3, ...) {
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
-tbl_message.levels_n_problem <- function(problem, ...) {
+tblcheck_message.levels_n_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
@@ -168,7 +168,7 @@ tbl_message.levels_n_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.levels_reversed_problem <- function(problem, ...) {
+tblcheck_message.levels_reversed_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       gettext("The order of the levels in your `{column}` column are the reverse of the expected order.")
@@ -180,7 +180,7 @@ tbl_message.levels_reversed_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$msg, problem$exp_msg %||% "")
 }
 
-tbl_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       "Your `{column}` column's levels were not in the expected order. "

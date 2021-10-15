@@ -99,7 +99,7 @@ tbl_grade_dimensions <- function(
   env = parent.frame(),
   ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_dimensions(object, expected, env = env),
     env = env,
     ...
@@ -110,7 +110,7 @@ tbl_grade_dimensions <- function(
 #' @export
 vec_grade_dimensions <- tbl_grade_dimensions
 
-tbl_message.dimensions_n_problem <- function(problem, ...) {
+tblcheck_message.dimensions_n_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
@@ -144,7 +144,7 @@ tbl_message.dimensions_n_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.length_problem <- function(problem, ...) {
+tblcheck_message.length_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
@@ -171,7 +171,7 @@ tbl_message.length_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.ncol_problem <- function(problem, ...) {
+tblcheck_message.ncol_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
@@ -205,7 +205,7 @@ tbl_message.ncol_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.nrow_problem <- function(problem, ...) {
+tblcheck_message.nrow_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
@@ -239,7 +239,7 @@ tbl_message.nrow_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
-tbl_message.dimensions_problem <- function(problem, ...) {
+tblcheck_message.dimensions_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$exp_msg %||% 
       gettext("Your `{column}` column should be an array with dimensions {expected}, but it has dimensions {actual}.")

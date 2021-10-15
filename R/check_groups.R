@@ -69,7 +69,7 @@ tbl_grade_groups <- function(
   env = parent.frame(),
   ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_groups(object, expected, env = env),
     max_diffs = max_diffs,
     env = env,
@@ -77,7 +77,7 @@ tbl_grade_groups <- function(
   )
 }
 
-tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.groups_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "table")) {
     problem$missing_msg <- problem$missing_msg %||% 
       gettext("Your table should be grouped by {missing}. ")

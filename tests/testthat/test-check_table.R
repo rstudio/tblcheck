@@ -1,9 +1,9 @@
-test_that("tbl_grade_table() class", {
+test_that("tbl_grade() class", {
   grade_tbl_class_df <-
     tblcheck_test_grade({
     .result   <- data.frame(a = 1:10, b = 1:10)
     .solution <- tibble::tibble(a = 1:10, b = 1:10)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_tbl_class_df)
@@ -25,7 +25,7 @@ test_that("tbl_grade_table() class", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = 1:10, b = a)
     .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_tbl_class_grouped)
@@ -47,7 +47,7 @@ test_that("tbl_grade_table() class", {
     tblcheck_test_grade({
     .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
     .solution <- tibble::tibble(a = 1:10, b = a)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_tbl_class_rowwise)
@@ -69,7 +69,7 @@ test_that("tbl_grade_table() class", {
     tblcheck_test_grade({
     .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
     .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_tbl_class_grouped_rowwise)
@@ -88,12 +88,12 @@ test_that("tbl_grade_table() class", {
   )
 })
 
-test_that("tbl_grade_table() rows", {
+test_that("tbl_grade() rows", {
   grade_tbl_rows_missing_1 <-
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a)
     .solution <- tibble::tibble(a = letters[-1], b = a)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_tbl_rows_missing_1)
@@ -108,7 +108,7 @@ test_that("tbl_grade_table() rows", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a)
     .solution <- tibble::tibble(a = letters[1], b = a)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_tbl_rows_extra_1)
@@ -120,12 +120,12 @@ test_that("tbl_grade_table() rows", {
   )
 })
 
-test_that("tbl_grade_table() ncol", {
+test_that("tbl_grade() ncol", {
   grade_tbl_cols_extra_1 <-
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a)
     .solution <- tibble::tibble(a = letters, b = a)
-    tbl_grade_table(check_names = FALSE)
+    tbl_grade(check_names = FALSE)
   })
   
   expect_snapshot(grade_tbl_cols_extra_1)
@@ -140,7 +140,7 @@ test_that("tbl_grade_table() ncol", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a)
     .solution <- tibble::tibble(a = letters)
-    tbl_grade_table(check_names = FALSE)
+    tbl_grade(check_names = FALSE)
   })
   
   expect_snapshot(grade_tbl_cols_extra_2)
@@ -155,7 +155,7 @@ test_that("tbl_grade_table() ncol", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters)
     .solution <- tibble::tibble(a = letters, b = a)
-    tbl_grade_table(check_names = FALSE)
+    tbl_grade(check_names = FALSE)
   })
   
   expect_snapshot(grade_tbl_cols_missing_1)
@@ -167,11 +167,11 @@ test_that("tbl_grade_table() ncol", {
   )
 })
 
-test_that("tbl_grade_table() names", {
+test_that("tbl_grade() names", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters[1:3], b = a)
     .solution <- tibble::tibble(x = letters[1:3], y = x)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade)
@@ -188,11 +188,11 @@ test_that("tbl_grade_table() names", {
   )
 })
 
-test_that("tbl_grade_table() columns", {
+test_that("tbl_grade() columns", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters[1:3])
     .solution <- tibble::tibble(a = letters[24:26])
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade)
@@ -206,27 +206,27 @@ test_that("tbl_grade_table() columns", {
   )
 })
 
-test_that("tbl_grade_table() with no problems returns invisible()", {
+test_that("tbl_grade() with no problems returns invisible()", {
   .solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
   
   problem <- expect_invisible(
-    tbl_check_table(object = .solution, expected = .solution)
+    tbl_check(object = .solution, expected = .solution)
   )
   
   grade <- expect_invisible(
-    tbl_grade_table(object = .solution, expected = .solution)
+    tbl_grade(object = .solution, expected = .solution)
   )
   
   expect_null(problem)
   expect_null(grade)
 })
 
-test_that("tbl_grade_table() returns grades with row problems", {
+test_that("tbl_grade() returns grades with row problems", {
   grade_rows_extra <-
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters)
     .solution <- tibble::tibble(a = letters[1:25])
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_rows_extra)
@@ -241,8 +241,8 @@ test_that("tbl_grade_table() returns grades with row problems", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters)
     .solution <- tibble::tibble(a = letters[1])
-    problem   <- tbl_check_table()
-    tbl_grade_table()
+    problem   <- tbl_check()
+    tbl_grade()
   })
   
   expect_snapshot(grade_rows_missing)
@@ -254,12 +254,12 @@ test_that("tbl_grade_table() returns grades with row problems", {
   )
 })
 
-test_that("tbl_grade_table() returns names feedback to learnr", {
+test_that("tbl_grade() returns names feedback to learnr", {
   grade_tbl_names_3 <-
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
-    tbl_grade_table(max_diffs = 3)
+    tbl_grade(max_diffs = 3)
   })
   
   expect_snapshot(grade_tbl_names_3)
@@ -280,7 +280,7 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
-    tbl_grade_table(max_diffs = Inf)
+    tbl_grade(max_diffs = Inf)
   })
   
   expect_snapshot(grade_tbl_names_inf)
@@ -301,7 +301,7 @@ test_that("tbl_grade_table() returns names feedback to learnr", {
     tblcheck_test_grade({
     .result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
     .solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
-    tbl_grade_table(max_diffs = 1)
+    tbl_grade(max_diffs = 1)
   })
   
   expect_snapshot(grade_tbl_names_1)
@@ -322,7 +322,7 @@ test_that("number of levels", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "b")))
     .solution <- tibble::tibble(a = as.factor(c("a", "b", "c")))
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade)
@@ -338,7 +338,7 @@ test_that("level labels", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     .solution <- tibble::tibble(a = as.factor(c("x", "y", "z")))
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade)
@@ -360,7 +360,7 @@ test_that("level order", {
   grade_reverse <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     .solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_reverse)
@@ -374,7 +374,7 @@ test_that("level order", {
   grade_diffs <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = factor(1:3, c("a", "b", "c")))
     .solution <- tibble::tibble(a = factor(1:3, c("c", "a", "b")))
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade_diffs)
@@ -394,8 +394,8 @@ test_that("level order", {
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c", "d", "e")))
     .solution <- tibble::tibble(a = factor(c("a", "b", "c", "d", "e"), levels = c("a", "b", "c", "e", "d")))
-    problem   <- tbl_check_table()
-    tbl_grade_table()
+    problem   <- tbl_check()
+    tbl_grade()
   })
   
   expect_snapshot(grade)
@@ -413,11 +413,11 @@ test_that("level order", {
   )
 })
 
-test_that("tbl_grade_table() groups", {
+test_that("tbl_grade() groups", {
   grade <- tblcheck_test_grade({
     .result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), a)
     .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
-    tbl_grade_table()
+    tbl_grade()
   })
   
   expect_snapshot(grade)
@@ -429,11 +429,11 @@ test_that("tbl_grade_table() groups", {
   )
 })
 
-test_that("tbl_grade_table() handles bad user input", {
+test_that("tbl_grade() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_dimensions = "yes")
+      tbl_grade(object = result, expected = solution, check_dimensions = "yes")
     }),
     "check_dimensions"
   )
@@ -441,7 +441,7 @@ test_that("tbl_grade_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_names = 5)
+      tbl_grade(object = result, expected = solution, check_names = 5)
     }),
     "check_names"
   )
@@ -449,7 +449,7 @@ test_that("tbl_grade_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_columns = NULL)
+      tbl_grade(object = result, expected = solution, check_columns = NULL)
     }),
     "check_columns"
   )
@@ -457,7 +457,7 @@ test_that("tbl_grade_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_class = NA)
+      tbl_grade(object = result, expected = solution, check_class = NA)
     }),
     "check_class"
   )
@@ -465,37 +465,37 @@ test_that("tbl_grade_table() handles bad user input", {
   expect_internal_problem(
     tblcheck_test_grade({
       solution <- result <- tibble::tibble(a = 1:3)
-      tbl_grade_table(object = result, expected = solution, check_column_values = c(TRUE, TRUE))
+      tbl_grade(object = result, expected = solution, check_column_values = c(TRUE, TRUE))
     }),
     "check_column_values"
   )
 })
 
-test_that("tbl_check_table() handles bad user input", {
+test_that("tbl_check() handles bad user input", {
   .result <- .solution <- tibble::tibble(a = 1:3)
   
   expect_internal_problem(
-    tbl_check_table(check_dimensions = "yes"),
+    tbl_check(check_dimensions = "yes"),
     message = "check_dimensions"
   )
   
   expect_internal_problem(
-    tbl_check_table(check_names = 5),
+    tbl_check(check_names = 5),
     message = "check_names"
   )
   
   expect_internal_problem(
-    tbl_check_table(check_columns = NULL),
+    tbl_check(check_columns = NULL),
     message = "check_columns"
   )
   
   expect_internal_problem(
-    tbl_check_table(check_class = NA),
+    tbl_check(check_class = NA),
     message = "check_class"
   )
   
   expect_internal_problem(
-    tbl_check_table(check_column_values = c(TRUE, TRUE)),
+    tbl_check(check_column_values = c(TRUE, TRUE)),
     message = "check_column_values"
   )
 })

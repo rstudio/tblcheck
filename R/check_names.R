@@ -98,7 +98,7 @@ tbl_grade_names <- function(
   env = parent.frame(),
   ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_names(object, expected, check_order = check_order, env = env),
     max_diffs = max_diffs,
     env = env,
@@ -110,7 +110,7 @@ tbl_grade_names <- function(
 #' @export
 vec_grade_names <- tbl_grade_names
 
-tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.names_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||% 
       ngettext(
@@ -170,7 +170,7 @@ tbl_message.names_problem <- function(problem, max_diffs = 3, ...) {
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
-tbl_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
   problem$n_values <- min(
     max(length(problem$expected), length(problem$actual)),
     max_diffs

@@ -9,8 +9,8 @@
 #' 1. Check that each column is the same with [tbl_check_column()]
 #' 
 #' If the tables differ
-#' - `tbl_check_table()` returns a list describing the problem
-#' - `tbl_grade_table()` returns a failing grade and informative message
+#' - `tbl_check()` returns a list describing the problem
+#' - `tbl_grade()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:
@@ -57,41 +57,41 @@
 #' @param env The environment in which to find `.result` and `.solution`.
 #' @inheritDotParams gradethis::fail -message
 #'
-#' @return If there are any issues, a [list] from `tbl_check_table()` or a
-#'   [gradethis::fail()] message from `tbl_grade_table()`.
+#' @return If there are any issues, a [list] from `tbl_check()` or a
+#'   [gradethis::fail()] message from `tbl_grade()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples 
 #' .result <- data.frame(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 1:10, b = 11:20)
-#' tbl_check_table()
-#' tbl_grade_table()
+#' tbl_check()
+#' tbl_grade()
 #' 
 #' .result <- tibble::tibble(a = 1:10, b = a, c = a, d = a, e = a, f = a)
 #' .solution <- tibble::tibble(z = 1:10, y = z, x = z, w = z, v = z, u = z)
-#' tbl_check_table()
-#' tbl_grade_table()
-#' tbl_grade_table(max_diffs = 5)
-#' tbl_grade_table(max_diffs = Inf)
+#' tbl_check()
+#' tbl_grade()
+#' tbl_grade(max_diffs = 5)
+#' tbl_grade(max_diffs = Inf)
 #' 
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 1:11, b = 12:22)
-#' tbl_check_table()
-#' tbl_grade_table()
+#' tbl_check()
+#' tbl_grade()
 #'
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = letters[1:10], b = letters[11:20])
-#' tbl_check_table()
-#' tbl_grade_table()
+#' tbl_check()
+#' tbl_grade()
 #' 
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 11:20, b = 1:10)
-#' tbl_check_table()
-#' tbl_grade_table()
-#' tbl_grade_table(max_diffs = 5)
-#' tbl_grade_table(max_diffs = Inf)
-tbl_check_table <- function(
+#' tbl_check()
+#' tbl_grade()
+#' tbl_grade(max_diffs = 5)
+#' tbl_grade(max_diffs = Inf)
+tbl_check <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
@@ -171,9 +171,9 @@ tbl_check_table <- function(
   }
 }
 
-#' @rdname tbl_check_table
+#' @rdname tbl_check
 #' @export
-tbl_grade_table <- function(
+tbl_grade <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -188,8 +188,8 @@ tbl_grade_table <- function(
   env = parent.frame(),
   ...
 ) {
-  tbl_grade(
-    tbl_check_table(
+  tblcheck_grade(
+    tbl_check(
       object = object,
       expected = expected,
       check_class = check_class,

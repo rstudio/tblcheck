@@ -1,4 +1,4 @@
-# vec_grade_vector() checks classes
+# vec_grade() checks classes
 
     Code
       grade
@@ -8,7 +8,7 @@
         is a vector of text (class `character`).
       >
 
-# vec_grade_vector() checks the first three values
+# vec_grade() checks the first three values
 
     Code
       grade
@@ -17,7 +17,7 @@
         The first 3 values of your result should be `a`, `b`, and `c`.
       >
 
-# vec_grade_vector() checks multiple classes
+# vec_grade() checks multiple classes
 
     Code
       grade
@@ -27,7 +27,7 @@
         `integer`, but it is a vector of integers (class `integer`).
       >
 
-# vec_grade_vector() checks for value differences beyond the first 3
+# vec_grade() checks for value differences beyond the first 3
 
     Code
       grade

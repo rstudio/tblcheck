@@ -9,8 +9,8 @@
 #' 1. Check names with [vec_check_names()]
 #' 
 #' If the vectors differ
-#' - `vec_check_vector()` returns a list describing the problem
-#' - `vec_grade_vector()` returns a failing grade and informative message
+#' - `vec_check()` returns a list describing the problem
+#' - `vec_grade()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:
@@ -38,39 +38,39 @@
 #'   `expected` contain the same values.
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same names.
-#' @inheritParams tbl_check_table
+#' @inheritParams tbl_check
 #' @inheritDotParams gradethis::fail -message
 #'
-#' @return If there are any issues, a [list] from `vec_check_vector()` or a
-#'   [gradethis::fail()] message from `vec_grade_vector()`.
+#' @return If there are any issues, a [list] from `vec_check()` or a
+#'   [gradethis::fail()] message from `vec_grade()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples 
 #' .result <- 1:10
 #' .solution <- letters[1:10]
-#' vec_check_vector()
-#' vec_grade_vector()
+#' vec_check()
+#' vec_grade()
 #' 
 #' .result <- 1:10
 #' .solution <- 1:11
-#' vec_check_vector()
-#' vec_grade_vector()
+#' vec_check()
+#' vec_grade()
 #' 
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
-#' vec_check_vector()
-#' vec_grade_vector()
-#' vec_grade_vector(max_diffs = 5)
-#' vec_grade_vector(max_diffs = Inf)
+#' vec_check()
+#' vec_grade()
+#' vec_grade(max_diffs = 5)
+#' vec_grade(max_diffs = Inf)
 #' 
 #' .result <- 1:10
 #' .solution <- 11:20
-#' vec_check_vector()
-#' vec_grade_vector()
-#' vec_grade_vector(max_diffs = 5)
-#' vec_grade_vector(max_diffs = Inf)
-vec_check_vector <- function(
+#' vec_check()
+#' vec_grade()
+#' vec_grade(max_diffs = 5)
+#' vec_grade(max_diffs = Inf)
+vec_check <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
@@ -130,9 +130,9 @@ vec_check_vector <- function(
   }
 }
 
-#' @rdname vec_check_vector
+#' @rdname vec_check
 #' @export
-vec_grade_vector <- function(
+vec_grade <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -143,8 +143,8 @@ vec_grade_vector <- function(
   env = parent.frame(),
   ...
 ) {
-  tbl_grade(
-    vec_check_vector(
+  tblcheck_grade(
+    vec_check(
       object = object,
       expected = expected,
       check_class = check_class,
