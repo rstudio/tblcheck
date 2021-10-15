@@ -70,5 +70,5 @@ reference:
     Inspect the contents of a `problem` from a
     check function or transform a `problem` into a grade.
   contents:
-  - '`tbl_grade`'
+  - '`tblcheck_grade`'
   - '`problem_type`'
