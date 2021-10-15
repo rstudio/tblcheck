@@ -28,7 +28,7 @@
 #'   but in a different order.
 #'
 #' @param column `[character(1)]`\cr The name of the column to check.
-#' @inheritParams tbl_check_table
+#' @inheritParams tbl_check
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
 #'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `column` has the
@@ -42,6 +42,7 @@
 #' @param check_names `[logical(1)]`\cr Whether to check that `column` has the
 #'   same [names][names()] in `object` and `expected`.
 #'   Defaults to `FALSE`.
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_column()` or a
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
@@ -104,7 +105,7 @@ tbl_check_column <- function(
   }
   
   return_if_problem(
-    vec_check_vector(
+    vec_check(
       object[[column]],
       expected[[column]],
       check_class = check_class,
@@ -128,9 +129,10 @@ tbl_grade_column <- function(
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_column(
       column = column,
       object = object,
@@ -142,6 +144,7 @@ tbl_grade_column <- function(
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }

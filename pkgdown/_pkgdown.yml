@@ -53,9 +53,9 @@ reference:
 - title: General checks
   desc: Check for multiple problems in a table, column, or vector
   contents:
-  - tbl_check_table
+  - tbl_check
   - tbl_check_column
-  - vec_check_vector
+  - vec_check
 - title: Specific checks
   desc: Check for a specific type of problem in tables or vectors
   contents:
@@ -70,5 +70,5 @@ reference:
     Inspect the contents of a `problem` from a
     check function or transform a `problem` into a grade.
   contents:
-  - '`tbl_grade`'
+  - '`tblcheck_grade`'
   - '`problem_type`'

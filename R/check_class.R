@@ -17,7 +17,8 @@
 #'   inconsequential class differences will be skipped.
 #'   If `TRUE`, all class differences will be reported.
 #'   See section "Inconsequential differences" for more information.
-#' @inheritParams tbl_check_table
+#' @inheritParams tbl_check
+#' @inheritDotParams gradethis::fail -message
 #' 
 #' @section Inconsequential differences:
 #' Unless `all_differences` is set to `TRUE`, the following class differences
@@ -73,7 +74,7 @@ tbl_check_class <- function(
       exp_class,
       obj_class,
       # Object lengths are stored so the correct pluralization
-      # can be applied in tbl_message.class_problem()
+      # can be applied in tblcheck_message.class_problem()
       expected_length = length(expected),
       actual_length = length(object)
     )
@@ -90,11 +91,13 @@ tbl_grade_class <- function(
   object = .result,
   expected = .solution,
   all_differences = FALSE,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_class(object, expected, all_differences, env),
-    env = env
+    env = env,
+    ...
   )
 }
 
@@ -102,7 +105,7 @@ tbl_grade_class <- function(
 #' @export
 vec_grade_class <- tbl_grade_class
 
-tbl_message.class_problem <- function(problem, ...) {
+tblcheck_message.class_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       "Your `{column}` column should be {expected}, but it is {actual}."
