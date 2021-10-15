@@ -2,9 +2,7 @@
 % Please edit documentation in R/check_table.R
 \name{tbl_check}
 \alias{tbl_check}
-\alias{tbl_check_table}
 \alias{tbl_grade}
-\alias{tbl_grade_table}
 \title{Check that the rows and columns of two tables are the same}
 \usage{
 tbl_check(
@@ -21,37 +19,7 @@ tbl_check(
   env = parent.frame()
 )
 
-tbl_check_table(
-  object = .result,
-  expected = .solution,
-  check_class = TRUE,
-  check_names = TRUE,
-  check_column_order = FALSE,
-  check_dimensions = TRUE,
-  check_groups = TRUE,
-  check_columns = TRUE,
-  check_column_class = check_columns,
-  check_column_values = check_columns,
-  env = parent.frame()
-)
-
 tbl_grade(
-  object = .result,
-  expected = .solution,
-  max_diffs = 3,
-  check_class = TRUE,
-  check_names = TRUE,
-  check_column_order = FALSE,
-  check_dimensions = TRUE,
-  check_groups = TRUE,
-  check_columns = TRUE,
-  check_column_class = check_columns,
-  check_column_values = check_columns,
-  env = parent.frame(),
-  ...
-)
-
-tbl_grade_table(
   object = .result,
   expected = .solution,
   max_diffs = 3,

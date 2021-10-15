@@ -21,6 +21,7 @@ Imports:
     glue,
     gradethis (>= 0.2.3.9001),
     knitr,
+    lifecycle,
     magrittr,
     purrr,
     rlang,

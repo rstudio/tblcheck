@@ -132,10 +132,6 @@ vec_check <- function(
 
 #' @rdname vec_check
 #' @export
-vec_check_vector <- vec_check
-
-#' @rdname vec_check
-#' @export
 vec_grade <- function(
   object = .result,
   expected = .solution,
@@ -163,6 +159,63 @@ vec_grade <- function(
   )
 }
 
-#' @rdname vec_check
+#' Check that the rows and columns of two tables are the same
+#' 
+#' @description 
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' `vec_check_vector()` and `vec_grade_vector()` were renamed to [vec_check()]
+#' and [vec_grade()].
+#' 
+#' @keywords internal
 #' @export
-vec_grade_vector <- vec_grade
+vec_check_vector <- function(
+  object = .result,
+  expected = .solution,
+  check_class = TRUE,
+  check_length = TRUE,
+  check_levels = TRUE,
+  check_values = TRUE,
+  check_names = TRUE,
+  env = parent.frame()
+) {
+  lifecycle::deprecate_warn("0.1.0", "vec_check_vector()", "vec_check()")
+  
+  vec_check(
+    object = object,
+    expected = expected,
+    check_class = check_class,
+    check_length = check_length,
+    check_values = check_values,
+    check_names = check_names,
+    env = env
+  )
+}
+
+#' @rdname vec_check_vector
+#' @export
+vec_grade_vector <- function(
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  check_length = TRUE,
+  check_values = TRUE,
+  check_names = TRUE,
+  env = parent.frame(),
+  ...
+) {
+  lifecycle::deprecate_warn("0.1.0", "vec_check_vector()", "vec_check()")
+  
+  vec_grade(
+    object = object,
+    expected = expected,
+    max_diffs = max_diffs,
+    check_class = check_class,
+    check_length = check_length,
+    check_values = check_values,
+    check_names = check_names,
+    env = env,
+    ...
+  )
+}
