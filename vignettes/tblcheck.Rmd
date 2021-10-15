@@ -583,7 +583,7 @@ Notice that we changed the grading code slightly to `pass()` any answer that als
 |Function                                         |Grades                                                         |
 |-------------------------------------------------|---------------------------------------------------------------|
 |`tbl_grade_class()` `vec_grade_class()`          |the class of an object                                         |
-|`tbl_grade_column()`                             |the tests in `vec_grade()` to a single column of a table|
+|`tbl_grade_column()`                             |applies the tests in `vec_grade()` to a single column of a table|
 |`tbl_grade_dimensions()` `vec_grade_dimensions()`|the length and dimensions of an object                         |
 |`tbl_grade_groups()`                             |the groups of a table                                          |
 |`tbl_grade_names()` `vec_grade_names()`          |the names of an object                                         |
