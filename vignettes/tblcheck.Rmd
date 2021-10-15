@@ -1,169 +1,754 @@
 ---
 title: "tblcheck"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{tblcheck}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-library(gradethis)
+[learnr]: https://rstudio.github.io/learnr/
+[gradethis-get-started]: https://pkgs.rstudio.com/gradethis/articles/gradethis.html
+[gradethis]: https://pkgs.rstudio.com/gradethis/
+
+```{css echo=FALSE}
+.alert {
+  padding: 0.5em 1em;
+  margin: 1em 2em;
+  border: 1px #eee solid;
+  border-radius: 5px;
+}
+.alert.alert-success {
+  background-color: #e4f2dc;
+  border-color: #ddedcf;
+}
+.alert.alert-success,
+.alert.alert-success code,
+.alert.alert-success code a:not(.close):not(.btn) {
+  color: #5c9653;
+}
+.alert.alert-danger {
+  background-color: #f2e2e2;
+  border-color: #eed9dc;
+}
+.alert.alert-danger,
+.alert.alert-danger code,
+.alert.alert-danger code a:not(.close):not(.btn) {
+  color: #ad3532;
+}
+.alert code {
+  background-color: #ffffff55;
+}
+
+.callout {
+  padding: 1.5rem 1.5rem 1.5rem 80px;
+  margin: 1em 0;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: 20px 1.5em;
+  min-height: 80px;
+  position: relative;
+  border: 2px solid;
+}
+
+.callout::before {
+  content: "!";
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  transform: translate(20px, 20px) scale(1);
+  transition: transform 0.15s linear, background-color 0.2s linear;
+  font-weight: bold;
+  font-size: 2em;
+  background-color: #486181;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.callout:first-child {
+  margin-top: 0;
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+.callout {
+  border-color: #b5c1d2;
+}
+
+.callout p, .callout ol, .callout ul {
+  color: #486181;
+}
+
+.callout h3, .callout h4 {
+  color: #294263;
+}
+
+.callout p code, .callout ol code, .callout ul code, .callout h3 code, .callout h4 code {
+  background-color: #e9f2fd;
+  color: #294263;
+}
+
+.callout blockquote {
+  border-color: #b5c1d1;
+}
+
+@media only screen and (max-width: 400px) {
+  .callout::before {
+    transform: translate(-10px, -15px) scale(0.9);
+  }
+  .callout {
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+```
+
+```{r setup, include = FALSE}
 library(knitr)
+library(dplyr)
+library(gradethis)
 library(tblcheck)
-library(tibble)
+`%||%` <- rlang::`%||%`
 
 opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+set.seed(424341)
+options(max.print = 20, width = 70)
+
+# Add hooks to turn a chunk into an unevaluated verbatim exercise chunk
+# adapted from https://bookdown.org/yihui/rmarkdown-cookbook/show-header.html
+knitr::knit_hooks$set(chunk_label = function(before, options) {
+  # the original chunk might be indented
+  indent <- options$indent %||% ""
+  in_grade_this <- isTRUE(options$grade_this)
+  is_exercise <- isTRUE(options$is_exercise)
+  
+  code <- 
+    if (before) {
+      c(
+        sprintf(
+          "```{r %s%s}",
+          options$chunk_label,
+          if (is_exercise) ", exercise=TRUE" else ""
+        ),
+        if (in_grade_this) "grade_this({"
+      )
+    } else {
+      c(
+        if (in_grade_this) "})",
+        if (!nzchar(trimws(paste(options$code, collapse = "\n")))) "\n",
+        "```"
+      )
+    }
+  
+  paste0(indent, code, collapse = "\n")
+})
+
+knitr::opts_hooks$set(chunk_label = function(options) {
+  options$eval <- FALSE
+  options
+})
+
+og_source_hook <- knitr::knit_hooks$get("source")
+knitr::knit_hooks$set(source = function(x, options) {
+  if (!is.null(options$chunk_label)) {
+    indent <- options$indent %||% ""
+    in_grade_this <- isTRUE(options$grade_this)
+    paste0(
+      indent, 
+      c("", paste0(if (in_grade_this) "  ", x), ""),
+      collapse = "\n"
+    )
+  } else {
+    og_source_hook(x, options)
+  }
+})
+
+# approximate the appearance of a grade in a learnr tutorial
+grade_html <- function(grade) {
+  x <- paste0(
+    '<div class="',
+    if (!length(grade$correct)) {
+      "alert" 
+    } else if (isTRUE(grade$correct)) {
+      "alert alert-success"
+    } else {
+      "alert alert-danger"
+    },
+    '">',
+    grade$message,
+    "</div>"
+  )
+  knitr::asis_output(x)
+}
+
+fake_grade_chunks <- function(
+  user,
+  solution = paste0(user, "-solution"),
+  check = paste0(user, "-check"),
+  setup = paste0(user, "-setup")
+) {
+  setup <- knitr::knit_code$get(setup)
+  
+  force(solution)
+  force(check)
+  
+  user <- knitr::knit_code$get(user)
+  solution <- knitr::knit_code$get(solution)
+  check <- knitr::knit_code$get(check)
+  
+  env <- new.env()
+
+  if (!is.null(setup)) {
+    suppressMessages(eval(parse(text = setup), envir = env))
+  }
+  assign(".result", eval(parse(text = user), envir = env), envir = env)
+  assign(".solution", eval(parse(text = solution), envir = env), envir = env)
+  assign(".user_code", user, envir = env)
+  assign(".solution_code", solution, envir = env)
+  grade <- tryCatch(
+    eval(parse(text = check), envir = env),
+    gradethis_graded = identity
+  )
+  if (inherits(grade, "gradethis_graded")) return(grade_html(grade))
+  if (!is.null(grade)) print(grade)
+}
 ```
 
-`tblcheck` provides a family of functions for creating helpful failure messages when a user's submitted code results in a table different from the intended solution.
+## Overview
 
-# Basic usage
+### Introducing tblcheck
 
-In the simplest case, all you need to do to use `tblcheck` is to add `tbl_grade_table()` to your grading code:
+tblcheck works with [gradethis] to help instructors compare students' exercise results with intended solutions in [learnr] tutorials.
+If you are new to grading learnr tutorials, we recommend that you [get comfortable with gradethis][gradethis-get-started] before incorporating tblcheck into your tutorials.
+
+tblcheck produces automatic feedback for [common problems in tables](#grading-tables) with `tbl_grade()`.
+Because the columns of data frames in R are vectors, tblcheck can also provide feedback for [common problems in vectors](#grading-vectors) with `vec_grade()`.
+
+These all-in-one grading functions check for a set of possible problems, or differences, between the exercise solution and the student's table or vector.
+You can [control which checks are applied](#skipping-tests) with the arguments of these functions, or you can [directly call individual grading functions](#specific-grading-functions).
+The table grading functions are prefixed with `tbl_grade_` and the vector grading functions prefixed with `vec_grade_`.
+
+For complete control over the feedback presented to users, each `tbl_grade_` or `vec_grade_` function is paired with a `tbl_check_` or `vec_check_` counterpart that finds problems and returns an object that you can use to [create custom feedback](#custom-mistake-handling).
+
+### Usage
+
+To use tblcheck in a learnr tutorial, load tblcheck after learnr and gradethis in the `setup` chunk of your tutorial:
 
 ````markdown
-```{r exercise-check}`r ""`
-grade_this({
-  pass_if_equal()
-  tbl_grade_table()
-  fail()
-})
+```{r setup}`r ''`
+library(learnr)
+library(gradethis)
+library(tblcheck)
 ```
 ````
 
-By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()`.
+## Grading tables
 
-## Example
+### Automated table checking
 
-```{r}
-.result   <- tibble(dat = 1:10)
-.solution <- tibble(data = letters)
+`tbl_grade()` compares the result of the user's input to the result of the `-solution` chunk, automatically returning targeted feedback to the user if any problems are discovered.
+
+`tbl_grade()` checks that the user's table
+
+1. is the correct class,
+1. has the correct column names,
+1. has the correct number of rows and columns,
+1. and that each column of the user's table
+    1. is the correct class and
+    1. contains the correct values.
+
+If any of these checks detect a problem in the submitted code, the student will see a single message with the first detected issue, based on the order described above.
+
+### Usage
+
+To use `tbl_grade()`, ensure you have a `-solution` chunk and add `tbl_grade()` to the grading code in your `-check` chunk, e.g.
+
+````markdown
+```{r example-check, chunk_label = "example-check", grade_this = TRUE}
+pass_if_equal()
+tbl_grade()
+fail()
+```
+````
+
+By default, `tblcheck` functions compare the `gradethis` objects `.result` and `.solution`, just like `gradethis::pass_if_equal()` and `gradethis::fail_if_equal()`.
+
+::: callout
+Be sure to include a function like `pass()` or `pass_if_equal()` in your checking code to ensure students can get a passing grade!
+
+`tbl_grade()` only returns feedback to the student if it discovers a problem; if the student gives the correct answer, it produces no output.
+This lets you quickly check for simple problems, following up with more detailed checking with other `gradethis` functions.
+:::
+
+### Finding problems
+
+If the user's submitted table differs from the correct table, `tbl_grade()` returns a failing grade and a message with an explanation for what went wrong. 
+If there are multiple problems with a student's submission, `tbl_grade()` tries to give the most actionable item first.
+
+We'll demonstrate how this works for a simple exercise that asks students to create the following table using `tibble()`.
+
+```{r example-table-prompt, echo=FALSE}
+solution_table <- tibble(
+  food = c("lettuce", "tomato"),
+  vegetable = c(TRUE, FALSE),
+  color = c("green", "red")
+)
+knitr::kable(solution_table)
 ```
 
-The user's submitted table, `.result`, differs from the correct table, `.solution`, in a lot of ways. `tblcheck` always returns only one problem to the user, and tries to give the most actionable item first.
+In the R Markdown source of the learnr tutorial, we use an exercise chunk labelled `food`, with a `food-solution` chunk with the expected solution and a `food-check` chunk with the exercise checking code using [gradethis] and tblcheck.
 
-```{r}
-tbl_grade_table()
+````markdown
+```{r ex-food, chunk_label = "food", is_exercise = TRUE}
+
 ```
 
-Here, `tbl_grade_table()` first highlighted the difference in the number of rows between the two tables. Let's see what happens when the user fixes this.
-
-```{r}
-.result <- tibble(dat = 1:26)
-tbl_grade_table()
+```{r ex-food-solution, chunk_label = "food-solution"}
+tibble(
+  food = c("lettuce", "tomato"),
+  vegetable = c(TRUE, FALSE),
+  color = c("green", "red")
+)
 ```
 
-`tbl_grade_table()` now informs the user that they have an incorrect column name.
+```{r ex-food-check, chunk_label = "food-check", grade_this = TRUE}
+pass_if_equal()
+tbl_grade()
+fail()
+```
+````
 
-```{r}
-.result <- tibble(data = 1:26)
-tbl_grade_table()
+We'll use this example throughout the sections that follow to demonstrate how tblcheck will respond to various types of errors that students may make.
+Keep in mind this is a contrived example designed for this vignette.
+In real-world usage, students are likely to only encounter one or two of the problems `tbl_grade()` is designed to find.
+
+#### Checking class
+
+First, `tbl_grade()` ensures that the class of the student's submission matches the class of the expected solution.
+Here, the student attempts to store the data in the table as a list rather than by using `tibble()`.
+
+```{r exercise-2}
+list(
+  food = "lettuce",
+  fruit = "TRUE",
+  color = "green"
+)
 ```
 
-Next, the user finds out their column contains the wrong type of data.
-
-```{r}
-.result <- tibble(data = as.character(1:26))
-tbl_grade_table()
+```{r echo=FALSE}
+fake_grade_chunks("exercise-2", solution = "ex-food-solution", check = "ex-food-check")
 ```
 
-If all else fails, `tbl_grade_table()` gives a hint as to what the user's values should look like.
+Based on this advice, the student revises their solution to use `tibble()` instead of `list()`.
 
-```{r}
-.result <- tibble(data = letters)
-tbl_grade_table()
+#### Checking column names
+
+Next, the code checks that the student used the correct column names, and they haven't missed any columns or included any unexpected columns.
+Here, `tbl_grade()` notices that the student has an unexpected column named `fruit`.
+
+```{r exercise-3}
+tibble(
+  food = "lettuce",
+  fruit = "TRUE",
+  color = "green"
+)
 ```
 
-When everything is correct, `tbl_grade_table()` gives no output. It doesn't return a passing grade, in case you would like to apply other checks, so be sure to include a `gradethis` function like `pass()` or `pass_if_equal()` to ensure students can get a passing grade!
-
-# Skipping tests
-
-If there are some tests you would like to skip, `tbl_grade_table()` includes a host of arguments that can be set to `FALSE`. For example:
-
-```{r}
-.result   <- data.frame(data = 1:10)
-.solution <- tibble(data = 1:10)
-
-tbl_grade_table()
+```{r echo=FALSE}
+fake_grade_chunks("exercise-3", solution = "ex-food-solution", check = "ex-food-check")
 ```
 
-When the user's result is a different class than the expected solution, `tbl_grade_table()` gives a failing grade. If you don't care about the class of the table, you can add `check_class = FALSE`.
+Based on this advice, the student revises their solution to name the second column `vegetable` instead of `fruit`.
 
-```{r}
-tbl_grade_table(check_class = FALSE)
+#### Checking length
+
+Next, `tbl_grade()` checks that the student has submitted the correct number of rows, and in this case notices that the student has only included one row.
+
+```{r exercise-4}
+tibble(
+  food = "lettuce",
+  vegetable = "TRUE",
+  color = "green"
+)
 ```
 
-Since there are no other problems, we get no output.
-
-Every test performed by `tbl_grade_table()` can be disabled with an argument. Check the help page `?tbl_grade_table()` for more information.
-
-# Grading vectors
-
-For exercises that use vectors rather than tables, `vec_grade_vector()` allows you to apply the same tests that are normally applied to the columns of a table. For example:
-
-```{r}
-.result   <- 1:10
-.solution <- letters
-vec_grade_vector()
+```{r echo=FALSE}
+fake_grade_chunks("exercise-4", solution = "ex-food-solution", check = "ex-food-check")
 ```
 
-# Other grading functions
+Based on this advice, the student realizes they've only entered the first row of the table.
+They go back to the example table and add the second row to their submission.
 
-`tbl_grade_table()` calls a number of more specific grading functions internally. You can call these functions directly to perform more specific grading.
+#### Checking column classes
 
-- `tbl_grade_column()` grades a single column of a table.
-- `tbl_grade_class()` grades the class of an object.
-- `tbl_grade_length()` grades the `length`, `ncol`, or `nrow` of an object.
-- `tbl_grade_names()` grades the names of an object.
+Next, `tbl_grade()` checks that each individual column contains the correct type of data.
+Here, the student has stored the values of the `vegetable` column as a string, but we were expecting them to be logical values.
 
-# Custom mistake handling
-
-Sometimes, we want to give special handling to a specific circumstance. For example:
-
-```{r}
-library(lubridate)
-
-.result   <- tibble(time = ymd(20090210) - ymd(20090201))
-.solution <- tibble(time = interval(ymd(20090201), ymd(20090210)))
-
-tbl_grade_table()
+```{r exercise-5}
+tibble(
+  food = c("lettuce", "tomato"),
+  vegetable = c("TRUE", "TRUE"),
+  color = c("green", "red")
+)
 ```
 
-If this is a mistake you expect a lot of students to make, you may want to give it special handling. `tbl_check_table()` returns a problem object that you can inspect in your grading code.
-
-```{r}
-tbl_check_table()
+```{r echo=FALSE}
+fake_grade_chunks("exercise-5", solution = "ex-food-solution", check = "ex-food-check")
 ```
 
-You can use `if` statements to give specific feedback based on the nature of the problem object. To apply the default grading code of `tbl_grade_table()`, you can use `tbl_grade()` on the `problem` object.
+Based on this advice, the student removes the `"` around the values in the `vegetable` column to use R's logical `TRUE`.
+
+#### Checking column values
+
+Finally, `tbl_grade()` gives a hint as to what the values in each column should look like.
+Here, the student made a mistake during their transcription of the `vegetable` column.
+
+```{r exercise-6}
+tibble(
+  food = c("lettuce", "tomato"),
+  vegetable = c(TRUE, TRUE),
+  color = c("green", "red")
+)
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("exercise-6", solution = "ex-food-solution", check = "ex-food-check")
+```
+
+Based on this advice, the student revises their submission, changing the second value of the `vegetable` column from `TRUE` to `FALSE`.
+
+
+```{r exercise-7}
+tibble(
+  food = c("lettuce", "tomato"),
+  vegetable = c(TRUE, FALSE),
+  color = c("green", "red")
+)
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("exercise-7", solution = "ex-food-solution", check = "ex-food-check")
+```
+
+
+## Grading vectors
+
+### Automated vector checking
+
+Many of the table-grading tests that apply to the _columns_ of tables can also be applied to vectors — after all, data frame columns in R are _vectors_.
+
+When your exercise uses vectors rather than tables, `vec_grade()` allows you to apply the same tests that are normally applied to the columns of a table to a vector.
+It checks that the user's vector
+
+1. is the correct class
+1. is the correct length
+1. has the correct factor levels (if the vector is a factor)
+1. contains the correct values
+1. has the correct names (if the vector has names)
+
+Like `tbl_grade()`, if a problem is detected by any of these checks, the student will see a single message with the first detected problem, based on the order described above.
+
+### Usage
+
+To use `vec_grade()`, ensure you have a `-solution` chunk and add `vec_grade()` to the grading code in your `-check` chunk, e.g.
+
+````markdown
+```{r vector-example-check, chunk_label = "vector-check", grade_this = TRUE}
+pass_if_equal()
+vec_grade()
+fail()
+```
+````
+
+::: callout
+Just like `tbl_grade()` and other tblcheck functions, `vec_grade()` automatically compares the user's `.result` to the `.solution` when used in `gradethis::grade_this()`.
+Note that `vec_grade()` only returns feedback when a problem is detected, so be sure to include `gradethis::pass()` or `gradethis::pass_if_equal()` to ensure that students can get a passing grade.
+:::
+
+### Finding problems
+
+If the user's submitted vector differs from the correct vector, `vec_grade()` returns a failing grade and a message with an explanation for what went wrong. If there are multiple problems with a student's submission, `vec_grade()` tries to give the most actionable item first.
+
+Suppose an exercise asks a student to create a factor of the sandwich toppings — _lettuce_, _tomato_, _avocado_.
 
 ```{r}
-problem <- tbl_check_table()
+factor(c("lettuce", "tomato", "avocado"))
+```
 
-if (problem$type == "column_class" && problem$actual == "difftime") {
-  fail("I expected you to create a time interval. Did you remember to use `interval()`?")
-} else {
-  tbl_grade(problem)
+In the R Markdown source of the learnr tutorial, we use an exercise chunk labelled `toppings`, with a `toppings-solution` chunk with the expected solution and a `toppings-check` chunk with the exercise checking code using [gradethis] and tblcheck.
+
+````markdown
+```{r ex-vector, chunk_label = "toppings", is_exercise = TRUE}
+
+```
+
+```{r ex-vector-solution, chunk_label = "toppings-solution"}
+factor(c("lettuce", "tomato", "avocado"))
+```
+
+```{r ex-vector-check, chunk_label = "toppings-check", grade_this = TRUE}
+pass_if_equal()
+vec_grade()
+fail()
+```
+````
+
+For example, if the student submits a vector of the wrong class, that will be the first message returned by `vec_grade()`.
+
+```{r vector-1}
+c("lettuce", "tomato", "avocado")
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("vector-1", "ex-vector-solution", "ex-vector-check")
+```
+
+If the student submits a factor with the wrong factor levels, `vec_grade()` will warn the student about their mistake.
+
+```{r vector-2}
+factor(c("lettuce", "tomato", "avocado"), c("lettuce", "tomato", "avocado"))
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("vector-2", "ex-vector-solution", "ex-vector-check")
+```
+
+## Custom Grading
+
+There are a number of ways to control which mistakes are detected and how the feedback is given to the students.
+
+- The first is to [enable or disable specific checks](#skipping-tests) using the `check_*` arguments of `tbl_grade()` and `vec_grade()`.
+
+- You may also choose to [call specific grading functions](#specific-grading-functions) associated with the checks underlying `tbl_grade()` and `vec_grade()`.
+
+- Or you can [`check` rather than `grade` for specific problems](#checking-for-problems-with-custom-feedback) to obtain a `problem` object, i.e. a description of the problem found by tblcheck. You can then use the problem object to construct a feedback message using `gradethis::fail()`.
+
+### Skipping tests
+
+Every test performed by `tbl_grade()` or `vec_grade()` can be enabled or disabled with an argument.
+The argument names are prefixed with `check_` — such as `check_class` or `check_groups` — and each take a `TRUE` or `FALSE` value.
+
+For example, suppose a student answering our `food` exercise used a `data.frame` when the exercise expects a `tibble`.
+
+```{r skip-check-class}
+data.frame(
+  food = c("lettuce", "tomato"),
+  vegetable = c(TRUE, FALSE),
+  color = c("green", "red"),
+  stringsAsFactors = FALSE
+)
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("skip-check-class", solution = "ex-food-solution", check = "ex-food-check")
+```
+
+If you don't care about the class of the table, you can add `check_class = FALSE` to `tbl_grade()`. This will skip checking the table's class, but still run all other tests.
+
+````markdown
+```{r skip-check-class-check, chunk_label = "food-check", grade_this = TRUE}
+tbl_grade(check_class = FALSE)
+pass()
+```
+````
+
+```{r echo=FALSE}
+fake_grade_chunks("skip-check-class", solution = "ex-food-solution", check = "skip-check-class-check")
+```
+
+Since the only problem with the student's submission was the class of the table, `tbl_grade()` doesn't directly return any feedback.
+Notice that we changed the grading code slightly to `pass()` any answer that also passes the `tbl_grade()` checks.
+
+### Specific grading functions
+
+`tbl_grade()` and `vec_grade()` calls a number of grading functions internally. You can call these functions directly to perform more specific grading.
+
+|Function                                         |Grades                                                         |
+|-------------------------------------------------|---------------------------------------------------------------|
+|`tbl_grade_class()` `vec_grade_class()`          |the class of an object                                         |
+|`tbl_grade_column()`                             |applies the tests in `vec_grade()` to a single column of a table|
+|`tbl_grade_dimensions()` `vec_grade_dimensions()`|the length and dimensions of an object                         |
+|`tbl_grade_groups()`                             |the groups of a table                                          |
+|`tbl_grade_names()` `vec_grade_names()`          |the names of an object                                         |
+|`vec_grade_levels()`                             |the levels of a factor                                         |
+|`vec_grade_values()`                             |the values of a vector                                         |
+
+
+Suppose we modified our `food` example, telling students that we have 3 tomatoes and 5 heads of lettuce.
+We'd like the students to create a fourth column `count` containing the number of each food item in our possession.
+
+````markdown
+```{r ex-specific-setup, chunk_label = "food-count-setup"}
+library(dplyr)
+
+foods <- tibble(
+  food = c("lettuce", "tomato"),
+  vegetable = c(TRUE, FALSE),
+  color = c("green", "red")
+)
+```
+
+
+```{r ex-specific-prompt, chunk_label = "food-count", is_exercise = TRUE}
+
+```
+
+```{r ex-specific-solution, chunk_label = "food-count-solution"}
+foods %>% 
+  mutate(count = c(5, 3))
+```
+````
+
+In our grading code, we may choose to grade only the `count` column of `foods` using `tbl_grade_column()`, ignoring the other columns since they were provided by our setup code.
+
+````markdown
+```{r ex-specific-check, chunk_label = "food-count-check", grade_this = TRUE}
+tbl_grade_column("count")
+pass_if_equal()
+fail()
+```
+````
+
+A student who quickly scanned the exercise prompt might reverse the expected order of the values in the `count` column.
+
+```{r ref.label="ex-specific-setup", include=FALSE}
+```
+
+```{r ex-specific}
+foods %>% 
+  mutate(count = c(3, 5))
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("ex-specific")
+```
+
+### Custom mistake handling
+
+Sometimes, we want to handle specific circumstance in a special way.
+Every `tbl_grade_` and `vec_grade_` function includes a `tbl_check_` or `vec_check_` counterpart that returns the detected **problem** rather than converting the problem into feedback for the user (a **grade** in gradethis terms).
+
+If we replace `tbl_grade_column()` with `tbl_check_column()`, we can store and inspect the problem detected by the column checking function.
+We'll experiment in our local R console before writing our final exercise checking code.
+
+```{r custom-checking-local}
+solution <- foods %>% mutate(count = c(5, 3))
+user <- foods %>% mutate(count = c(3, 5))
+
+problem <- tbl_check_column("count", object = user, expected = solution)
+
+problem
+```
+
+Every problem object contains at least three items:
+
+1. The problem `type` describes the issue discovered by the checking function.
+   The help pages for every check function contain a section named **Problems**
+   where the problem types detected by the check function are enumerated.
+   
+   - **Your Turn:** What types of problems are discovered by `tbl_check_column()`?
+     Use the help pages to find out.
+   
+1. `actual` contains the value returned by the user's code and inspected by the check function.
+
+1. `expected` contains the value returned by the solution code and inspected by the check function.
+
+Problems also include additional information depending on the problem type.
+In the case of a `values` problem detected by `tbl_check_column()`, the problem object also includes the `column` name.
+
+tblcheck includes a helper function, `is_problem()` that you can use to detect and differentiate between different problem types.
+
+```{r custom-problem-ex-1}
+is_problem(problem)
+```
+
+We can use the `type` argument of  `is_problem()` to differentiate between the problem types detected by `tbl_check_column()`.
+
+```{r custom-problem-ex-2}
+is_problem(problem, type = "length")
+is_problem(problem, type = "values")
+```
+
+In this exercise, we know in advance that our wording is likely to trip up students, so we may want to create feedback specifically for the case where a student has reversed the food counts.
+We can use `is_problem()` together with `all.equal()` to isolate this specific case.
+
+```{r custom-problem-ex-feedback}
+if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
+  feedback <- paste(
+    "Make sure that the values in `count` are ordered", 
+    "to match their respective `food`.",
+    "Remember, we have **3** tomatoes and **5** heads of lettuce."
+  )
+  fail(feedback)
 }
 ```
 
-Applying the same code to a different mistake, we retain the normal `tbl_grade_table()` functionality.
+For problems not handled by your custom grading code, you can pass the problem to `tbl_grade()` to create a grade with the default feedback provided by tblcheck's `grade` functions.
+If there are no problems, `tblcheck_grade(problem)` won't return anything.
 
-```{r}
-.result   <- tibble(tiem = interval(ymd(20090201), ymd(20090210)))
-.solution <- tibble(time = interval(ymd(20090201), ymd(20090210)))
+Here's the default feedback `tbl_grade_column()` _would have returned_ without our custom grading code.
 
-problem <- tbl_check_table()
-
-if (problem$type == "column_class" && problem$actual == "difftime") {
-  fail("I expected you to create a time interval. Did you remember to use `interval()`?")
-} else {
-  tbl_grade(problem)
-}
+```{r custom-problem-ex-fallback}
+tblcheck_grade(problem)
 ```
 
-All `tbl_grade_*()` functions have a `tbl_check_*()` equivalent, allowing you to add custom handling for any detected mistake.
+**Tip**: You can also use `if` statements to ignore differences that you don't care about in your grading code.
+
+Putting everything together into our grading `food-count-check` chunk, our grading code for this exercise would look like this:
+
+````markdown
+```{r custom-problem-check, chunk_label = "food-count-check", grade_this = TRUE}
+problem <- tbl_check_column("count")
+
+if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
+  feedback <- paste(
+    "Make sure that the values in `count` are ordered", 
+    "to match their respective `food`.",
+    "Remember, we have **3** tomatoes and **5** heads of lettuce."
+  )
+  fail(feedback)
+}
+
+tblcheck_grade(problem)
+pass("Great job!")
+```
+````
+
+And the student who reversed the `count` column values
+
+```{r ref.label="ex-specific"}
+```
+
+would receive our custom feedback.
+
+```{r echo=FALSE}
+fake_grade_chunks("ex-specific", check = "custom-problem-check")
+```
+
+By following our specific advice, the student revises their code to correctly create the `count` column.
+
+```{r ex-specific-correct}
+foods %>% 
+  mutate(count = c(5, 3))
+```
+
+```{r echo=FALSE}
+fake_grade_chunks("ex-specific-correct", check = "custom-problem-check", solution = "ex-specific-solution", setup = "ex-specific-setup")
+```

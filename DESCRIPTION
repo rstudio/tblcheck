@@ -21,6 +21,7 @@ Imports:
     glue,
     gradethis (>= 0.2.3.9001),
     knitr,
+    lifecycle,
     magrittr,
     purrr,
     rlang,
@@ -29,7 +30,6 @@ Imports:
 Suggests:
     dplyr,
     learnr,
-    lubridate,
     rmarkdown,
     testthat (>= 3.0.0),
     tibble

@@ -10,37 +10,38 @@
 #' 
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
-#' @inheritParams vec_check_vector
+#' @inheritParams vec_check
+#' @inheritDotParams gradethis::fail -message
 #'
-#' @return If there are any issues, a [list] from `vec_check_vector()` or a
-#'   [gradethis::fail()] message from `vec_grade_vector()`.
+#' @return If there are any issues, a [list] from `vec_check_values()` or a
+#'   [gradethis::fail()] message from `vec_grade_values()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples 
 #' .result <- 1:10
 #' .solution <- letters[1:10]
-#' vec_check_vector()
-#' vec_grade_vector()
+#' vec_check_values()
+#' vec_grade_values()
 #' 
 #' .result <- 1:10
 #' .solution <- 1:11
-#' vec_check_vector()
-#' vec_grade_vector()
+#' vec_check_values()
+#' vec_grade_values()
 #' 
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
-#' vec_check_vector()
-#' vec_grade_vector()
-#' vec_grade_vector(max_diffs = 5)
-#' vec_grade_vector(max_diffs = Inf)
+#' vec_check_values()
+#' vec_grade_values()
+#' vec_grade_values(max_diffs = 5)
+#' vec_grade_values(max_diffs = Inf)
 #' 
 #' .result <- 1:10
 #' .solution <- 11:20
-#' vec_check_vector()
-#' vec_grade_vector()
-#' vec_grade_vector(max_diffs = 5)
-#' vec_grade_vector(max_diffs = Inf)
+#' vec_check_values()
+#' vec_grade_values()
+#' vec_grade_values(max_diffs = 5)
+#' vec_grade_values(max_diffs = Inf)
 vec_check_values <- function(
   object = .result,
   expected = .solution,
@@ -84,20 +85,22 @@ vec_grade_values <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     vec_check_values(
       object = object,
       expected = expected,
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
 
-tbl_message.values_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
   problem$n_values <- min(
     max(length(problem$expected), length(problem$actual)),
     max_diffs

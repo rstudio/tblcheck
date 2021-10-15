@@ -41,7 +41,7 @@ find_tblcheck_call <- function() {
     paste(rlang::expr_deparse(x), collapse = "\n")
   })
   
-  tblcheck_fn_pattern <- "^(tbl|vec)_(check|grade)"
+  tblcheck_fn_pattern <- "^(tbl|vec|tblcheck)_(check|grade)"
   tblcheck_calls <- grep(tblcheck_fn_pattern, calls, value = TRUE)
   if (length(tblcheck_calls)) {
     tblcheck_calls[[1]]

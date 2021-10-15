@@ -12,6 +12,7 @@
 #'   or is missing groups that are expected.
 #'
 #' @inheritParams tbl_check_names
+#' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_groups()` or a
 #'   [gradethis::fail()] message from `tbl_grade_groups()`.
@@ -65,16 +66,18 @@ tbl_grade_groups <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
-  tbl_grade(
+  tblcheck_grade(
     tbl_check_groups(object, expected, env = env),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
 
-tbl_message.groups_problem <- function(problem, max_diffs = 3, ...) {
+tblcheck_message.groups_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "table")) {
     problem$missing_msg <- problem$missing_msg %||% 
       gettext("Your table should be grouped by {missing}. ")

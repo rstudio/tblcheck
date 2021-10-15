@@ -1,10 +1,16 @@
 #' Check that the rows and columns of two tables are the same
 #'
-#' Checks if `object` and `expected` have the same number of rows, the same
-#' column names, and the same column contents.
+#' @description
+#' Checks for differences between `object` and `expected` in the following order:
+#' 1. Check table class with [tbl_check_class()]
+#' 1. Check column names with [tbl_check_names()]
+#' 1. Check number of rows and columns with [tbl_check_dimensions()]
+#' 1. Check [groups][dplyr::group_by()] with [tbl_check_groups()]
+#' 1. Check that each column is the same with [tbl_check_column()]
+#' 
 #' If the tables differ
-#' - `tbl_check_names()` returns a list describing the problem
-#' - `tbl_grade_names()` returns a failing grade and informative message
+#' - `tbl_check()` returns a list describing the problem
+#' - `tbl_grade()` returns a failing grade and informative message
 #' with [gradethis::fail()]
 #' 
 #' @section Problems:
@@ -30,14 +36,15 @@
 #'   determine the number of mismatched column values to display.
 #'   Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same classes with [class()].
+#'   `expected` have the same classes with [tbl_check_class()].
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
 #' @param check_column_order `[logical(1)]`\cr Whether to check that the columns
 #'   of  `object` are in the same order as `expected` with [tbl_check_names()].
 #'   Defaults to `FALSE`.
 #' @param check_dimensions `[logical(1)]`\cr Whether to check that `object` and 
-#'   `expected` have the same number of rows and columns with [dim()].
+#'   `expected` have the same number of rows and columns
+#'   with [tbl_check_dimensions()].
 #' @param check_groups `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same [[groups][dplyr::group_by()]
 #'   with [dplyr::group_vars()].
@@ -48,42 +55,43 @@
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
 #' @param env The environment in which to find `.result` and `.solution`.
+#' @inheritDotParams gradethis::fail -message
 #'
-#' @return If there are any issues, a [list] from `tbl_check_table()` or a
-#'   [gradethis::fail()] message from `tbl_grade_table()`.
+#' @return If there are any issues, a [list] from `tbl_check()` or a
+#'   [gradethis::fail()] message from `tbl_grade()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 #' 
 #' @examples 
 #' .result <- data.frame(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 1:10, b = 11:20)
-#' tbl_check_table()
-#' tbl_grade_table()
+#' tbl_check()
+#' tbl_grade()
 #' 
 #' .result <- tibble::tibble(a = 1:10, b = a, c = a, d = a, e = a, f = a)
 #' .solution <- tibble::tibble(z = 1:10, y = z, x = z, w = z, v = z, u = z)
-#' tbl_check_table()
-#' tbl_grade_table()
-#' tbl_grade_table(max_diffs = 5)
-#' tbl_grade_table(max_diffs = Inf)
+#' tbl_check()
+#' tbl_grade()
+#' tbl_grade(max_diffs = 5)
+#' tbl_grade(max_diffs = Inf)
 #' 
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 1:11, b = 12:22)
-#' tbl_check_table()
-#' tbl_grade_table()
+#' tbl_check()
+#' tbl_grade()
 #'
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = letters[1:10], b = letters[11:20])
-#' tbl_check_table()
-#' tbl_grade_table()
+#' tbl_check()
+#' tbl_grade()
 #' 
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 11:20, b = 1:10)
-#' tbl_check_table()
-#' tbl_grade_table()
-#' tbl_grade_table(max_diffs = 5)
-#' tbl_grade_table(max_diffs = Inf)
-tbl_check_table <- function(
+#' tbl_check()
+#' tbl_grade()
+#' tbl_grade(max_diffs = 5)
+#' tbl_grade(max_diffs = Inf)
+tbl_check <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
@@ -111,7 +119,6 @@ tbl_check_table <- function(
     checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
-    checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
   
@@ -164,9 +171,9 @@ tbl_check_table <- function(
   }
 }
 
-#' @rdname tbl_check_table
+#' @rdname tbl_check
 #' @export
-tbl_grade_table <- function(
+tbl_grade <- function(
   object = .result,
   expected = .solution,
   max_diffs = 3,
@@ -178,10 +185,11 @@ tbl_grade_table <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
-  env = parent.frame()
+  env = parent.frame(),
+  ...
 ) {
-  tbl_grade(
-    tbl_check_table(
+  tblcheck_grade(
+    tbl_check(
       object = object,
       expected = expected,
       check_class = check_class,
@@ -195,6 +203,7 @@ tbl_grade_table <- function(
       env = env
     ),
     max_diffs = max_diffs,
-    env = env
+    env = env,
+    ...
   )
 }
