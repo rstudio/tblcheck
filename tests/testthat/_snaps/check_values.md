@@ -36,3 +36,10 @@
         `15`, `16`, `17`, `18`, `19`, and `20`.
       >
 
+# vec_grade_values() failures
+
+    Code
+      grade_attr
+    Output
+      <gradethis_graded: [Incorrect] Your result contains unexpected values.>
+
