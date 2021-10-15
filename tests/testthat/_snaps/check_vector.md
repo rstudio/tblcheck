@@ -59,7 +59,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your result should contain 4 values, but it has 3 values.
+        Your result should contain 4 values, but it has 3 values. I expected
+        your result to include the value `d`.
       >
 
 # checks that vectors have the same names

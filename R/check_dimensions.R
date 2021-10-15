@@ -71,7 +71,13 @@ tbl_check_dimensions <- function(
   }
   
   if (length(exp_dim) == 1) {
-    return(problem("length", exp_dim, obj_dim))
+    return(
+      problem(
+        "length", expected, object,
+        expected_length = exp_dim,
+        actual_length = obj_dim
+      )
+    )
   }
   
   if (length(exp_dim) > 2) {
@@ -145,30 +151,52 @@ tblcheck_message.dimensions_n_problem <- function(problem, ...) {
 }
 
 tblcheck_message.length_problem <- function(problem, ...) {
+  problem$value_msg <- ""
+  
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||% 
       ngettext(
-        problem$expected,
-        "Your `{column}` column should contain {expected} value, ",
-        "Your `{column}` column should contain {expected} values, "
+        problem$expected_length,
+        "Your `{column}` column should contain {expected_length} value, ",
+        "Your `{column}` column should contain {expected_length} values, "
       )
   }
   
   problem$exp_msg <- problem$exp_msg %||% 
     ngettext(
-      problem$expected,
-      "Your result should contain {expected} value, ",
-      "Your result should contain {expected} values, "
+      problem$expected_length,
+      "Your result should contain {expected_length} value, ",
+      "Your result should contain {expected_length} values, "
     )
   
   problem$obj_msg <- problem$obj_msg %||%
     ngettext(
-      problem$actual,
-      "but it has {actual} value.",
-      "but it has {actual} values."
+      problem$actual_length,
+      "but it has {actual_length} value.",
+      "but it has {actual_length} values."
     )
   
-  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+  if ((problem$actual_length - problem$expected_length) %in% 1:2) {
+    problem$value <- setdiff(problem$actual, problem$expected)
+    
+    if (length(problem$value) <= 2) {
+      problem$value <- problem$value[[1]]
+      
+      problem$value_msg <-
+        " I didn't expect your result to include the value `{value}`."
+    }
+  } else if ((problem$expected_length - problem$actual_length) %in% 1:2) {
+    problem$value <- setdiff(problem$expected, problem$actual)
+    
+    if (length(problem$value) <= 2) {
+      problem$value <- problem$value[[1]]
+      
+      problem$value_msg <-
+        " I expected your result to include the value `{value}`."
+    }
+  }
+  
+  glue::glue_data(problem, problem$exp_msg, problem$obj_msg, problem$value_msg)
 }
 
 tblcheck_message.ncol_problem <- function(problem, ...) {

@@ -129,7 +129,10 @@ test_that("checks that columns have the same length", {
   
   expect_equal(
     grade$problem,
-    problem("length", 4, 3, location = "column", column = "a"),
+    problem(
+      "length", letters[1:4], letters[1:3],
+      expected_length = 4, actual_length = 3, location = "column", column = "a"
+    ),
     ignore_attr = "class"
   )
 })

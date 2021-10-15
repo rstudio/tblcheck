@@ -61,7 +61,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your `a` column should contain 4 values, but it has 3 values.
+        Your `a` column should contain 4 values, but it has 3 values. I
+        expected your result to include the value `d`.
       >
 
 # checks that the column is present in object
