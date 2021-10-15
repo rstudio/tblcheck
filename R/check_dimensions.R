@@ -99,6 +99,10 @@ vec_check_dimensions <- tbl_check_dimensions
 
 #' @rdname tbl_check_dimensions
 #' @export
+vec_check_length <- tbl_check_dimensions
+
+#' @rdname tbl_check_dimensions
+#' @export
 tbl_grade_dimensions <- function(
   object = .result, 
   expected = .solution,
@@ -115,6 +119,10 @@ tbl_grade_dimensions <- function(
 #' @rdname tbl_check_dimensions
 #' @export
 vec_grade_dimensions <- tbl_grade_dimensions
+
+#' @rdname tbl_check_dimensions
+#' @export
+vec_grade_length <- tbl_grade_dimensions
 
 tblcheck_message.dimensions_n_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
