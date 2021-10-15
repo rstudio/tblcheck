@@ -58,8 +58,21 @@ vec_check_values <- function(
     checkmate::assert_vector(expected)
   })
   
+  # Check if values are comparable types
+  if (
+    rlang::is_error(
+      rlang::catch_cnd(vctrs::vec_ptype_common(object, expected))
+    )
+  ) {
+    return_if_problem(vec_check_class(object, expected))
+    
+    return(problem("values"))
+  }
+  
+  # Check if values are the same length
   return_if_problem(vec_check_dimensions(object, expected))
   
+  # Check if values are the same
   if (!all(vctrs::vec_equal(object, expected))) {
     return(problem("values", expected, object))
   }
