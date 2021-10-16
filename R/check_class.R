@@ -13,20 +13,8 @@
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
-#' @param all_differences `[logical(1)]`\cr If `FALSE`, the default,
-#'   inconsequential class differences will be skipped.
-#'   If `TRUE`, all class differences will be reported.
-#'   See section "Inconsequential differences" for more information.
 #' @inheritParams tbl_check
 #' @inheritDotParams gradethis::fail -message
-#' 
-#' @section Inconsequential differences:
-#' Unless `all_differences` is set to `TRUE`, the following class differences
-#' will not generate a problem:
-#' 
-#' - [integer] vs. [numeric]
-#' - [POSIXct] vs. [POSIXlt]
-#' - [glue][glue::glue] vs. [character]
 #'
 #' @return If there are any issues, a [list] from `tbl_check_class()` and
 #'   `vec_check_class()` or a [gradethis::fail()] message from
@@ -51,7 +39,6 @@
 tbl_check_class <- function(
   object = .result,
   expected = .solution,
-  all_differences = FALSE,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -65,10 +52,6 @@ tbl_check_class <- function(
   exp_class <- class(expected)
   
   if (!identical(obj_class, exp_class)) {
-    if (!all_differences && has_inconsequential_class_diff(obj_class, exp_class)) {
-      return(invisible())
-    }
-    
     problem(
       "class",
       exp_class,
@@ -90,12 +73,11 @@ vec_check_class <- tbl_check_class
 tbl_grade_class <- function(
   object = .result,
   expected = .solution,
-  all_differences = FALSE,
   env = parent.frame(),
   ...
 ) {
   tblcheck_grade(
-    tbl_check_class(object, expected, all_differences, env),
+    tbl_check_class(object, expected, env),
     env = env,
     ...
   )
@@ -126,26 +108,6 @@ tblcheck_message.class_problem <- function(problem, ...) {
   problem$actual   <- friendly_class(problem$actual,   problem$actual_length)
   
   glue::glue_data(problem, problem$msg)
-}
-
-has_inconsequential_class_diff <- function(exp_class, obj_class) {
-  diff <- union(setdiff(exp_class, obj_class), setdiff(obj_class, exp_class))
-  
-  inconsequential_diff_list <- list(
-    c("integer", "numeric"),
-    c("glue"),
-    c("POSIXct", "POSIXlt")
-  )
-  
-  # Check if the differences between `exp_class` and `obj_class` is in the
-  # list of inconsequential class differences
-  for (inconsequential_diff in inconsequential_diff_list) {
-    if (unordered_identical(diff, inconsequential_diff)) {
-      return(TRUE)
-    }
-  }
-  
-  FALSE
 }
 
 hinted_class_message <- function(obj_class, exp_class) {
