@@ -80,7 +80,6 @@
 #'      `fail.message`, `fail.hint` and `fail.encourage`.
 #' 
 #' @name tblcheck_grade_this
-#' @export
 NULL
 
 #' @describeIn tblcheck_grade_this Grade a table using [tbl_grade()]
@@ -204,11 +203,11 @@ call2_tblcheck_grade_this <- function(
   # add the tblcheck grader to the arg list
   args$tblcheck_grader <- rlang::enexpr(tblcheck_grader)
   
-  # and construct the call to the general purpose `tblcheck_grade_this()`
-  rlang::call2("tblcheck_grade_this", !!!args)
+  # and construct the call to the general purpose `tblcheck_grade_this_impl()`
+  rlang::call2(tblcheck_grade_this_impl, !!!args)
 }
 
-tblcheck_grade_this <- function(
+tblcheck_grade_this_impl <- function(
   tblcheck_grader = tbl_grade,
   ...,
   correct = NULL,
@@ -275,7 +274,7 @@ tblcheck_grade_this <- function(
       }
       
       # finally, worst case scenario, fail()
-      fail(
+      gradethis::fail(
         message = get(".__fail.message"),
         hint = get(".__fail.hint"),
         encourage = get(".__fail.encourage")
