@@ -169,16 +169,32 @@ grade_this_vector <- function(
   rlang::eval_bare(grader)
 }
 
-call2_tblcheck_grade_this <- function(
-  tblcheck_grader = tbl_grade,
-  call_frame = NULL
-) {
-  call_frame <- call_frame %||% rlang::call_frame(n = 2)
+rlang_call_match <- function(n = 2) {
+  # match/standardize the call of the caller of this functions caller (usually)
+  call <- sys.call(sys.parent(n = n))
+  fn <- sys.function(sys.parent(n = n))
   
-  # take args of the function calling this one (or the one in the call frame)
-  call <- call_frame$expr
-  call <- rlang::call_match(call, fn = rlang::call_fn(call), defaults = TRUE)
-  args <- rlang::call_args(call_frame$expr)
+  if (has_rlang_version("0.4.12.9002")) {
+    # call_match() is preferred but will be part of rlang 1.0
+    rlang::call_match(call, fn, defaults = TRUE)
+  } else {
+    # replicate the relevant parts of call_match()
+    call <- match.call(fn, call, expand.dots = FALSE, envir = parent.frame(n + 1))
+    fmls <- rlang::fn_fmls(fn)
+    names <- names(fmls)
+    missing <- !names %in% names(call)
+    args <- c(as.list(call[-1]), fmls[missing])
+    args <- args[names]
+    rlang::call2(call[[1]], !!!args)
+  }
+}
+
+call2_tblcheck_grade_this <- function(
+  tblcheck_grader = tbl_grade
+) {
+  # take args of the function calling this one 
+  call <- rlang_call_match()
+  args <- rlang::call_args(call)
   
   if ("..." %in% names(args)) {
     # drop the `...` that shouldn't have been used anyway

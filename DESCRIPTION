@@ -28,6 +28,7 @@ Imports:
     rlang,
     utils
 Suggests:
+    mockery,
     dplyr,
     learnr,
     rmarkdown,

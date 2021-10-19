@@ -47,3 +47,7 @@ find_tblcheck_call <- function() {
     tblcheck_calls[[1]]
   }
 }
+
+has_rlang_version <- function(minimum = "0.4.12.9001") {
+  utils::packageVersion("rlang") >= package_version(minimum)
+}
