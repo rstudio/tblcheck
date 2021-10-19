@@ -174,8 +174,9 @@ rlang_call_match <- function(n = 2) {
   fn <- sys.function(sys.parent(n = n))
   
   if (has_rlang_version("0.4.12.9002")) {
+    # TODO: Require rlang 1.0 when released
     # call_match() is preferred but will be part of rlang 1.0
-    rlang::call_match(call, fn, defaults = TRUE)
+    getFromNamespace("call_match", "rlang")(call, fn, defaults = TRUE)
   } else {
     # replicate the relevant parts of call_match()
     call <- match.call(fn, call, expand.dots = FALSE, envir = parent.frame(n + 1))
