@@ -47,3 +47,12 @@ find_tblcheck_call <- function() {
     tblcheck_calls[[1]]
   }
 }
+
+has_common_ptype <- function(x, y) {
+  tryCatch({
+    vctrs::vec_ptype_common(x, y)
+    TRUE
+  }, error = function(err) {
+    FALSE
+  })
+}

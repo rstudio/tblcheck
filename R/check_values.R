@@ -60,12 +60,7 @@ vec_check_values <- function(
   })
   
   # Check if values are comparable types
-  if (
-    inherits(
-      rlang::catch_cnd(vctrs::vec_ptype_common(object, expected)),
-      "error"
-    )
-  ) {
+  if (!has_common_ptype(object, expected)) {
     return_if_problem(vec_check_class(object, expected))
     
     return(problem("values"))
