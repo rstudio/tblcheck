@@ -18,6 +18,7 @@ Description: 'tblcheck' extends 'gradethis' with functions that inspect
 License: MIT + file LICENSE
 Imports:
     checkmate,
+    ellipsis,
     glue,
     gradethis (>= 0.2.3.9001),
     knitr,
