@@ -5,7 +5,7 @@
 #'   
 #' @examples
 #  <!-- TODO: improve these examples --> 
-#' ex <- mock_this_exercise(
+#' ex <- gradethis::mock_this_exercise(
 #'   .solution_code = tibble(x = 1:3, y = letters[x]),
 #'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
 #' )
@@ -47,8 +47,11 @@
 #'   `FALSE`, you will need to include your own call to [gradethis::pass()] in
 #'   either `pre_check` or `post_check` for the student to be able to receive a
 #'   passing grade.
+#' @param fail.message The feedback `message` used by the final, fallback
+#'   [gradethis::fail()].
 #' @inheritParams tbl_grade
 #' @inheritParams vec_grade
+#' @inheritParams tbl_grade_column
 #' @inheritParams gradethis::fail
 #' @inheritParams gradethis::gradethis_setup
 #' 

@@ -134,6 +134,9 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
 phrase should be automatically prepended to any \code{\link[gradethis:graded]{pass()}} or
 \code{\link[gradethis:pass_if_equal]{pass_if_equal()}} messages. Sets the \code{gradethis.pass.praise} option.}
 
+\item{fail.message}{The feedback \code{message} used by the final, fallback
+\code{\link[gradethis:graded]{gradethis::fail()}}.}
+
 \item{fail.hint}{Logical \code{TRUE} or \code{FALSE} to determine whether an automated
 code feedback hint should be shown with a \code{\link[gradethis:graded]{fail()}} or \code{\link[gradethis:pass_if_equal]{fail_if_equal()}}
 message. Sets the \code{gradethis.fail.hint} option.}
@@ -141,6 +144,8 @@ message. Sets the \code{gradethis.fail.hint} option.}
 \item{fail.encourage}{Logical \code{TRUE} or \code{FALSE} to determine whether an
 encouraging phrase should be automatically appended to any \code{\link[gradethis:graded]{fail()}} or
 \code{\link[gradethis:pass_if_equal]{fail_if_equal()}} messages. Sets the \code{gradethis.fail.encourage} option.}
+
+\item{column}{\verb{[character(1)]}\cr The name of the column to check.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same length.}
@@ -191,7 +196,7 @@ author's solution as a reference.
 }}
 
 \examples{
-ex <- mock_this_exercise(
+ex <- gradethis::mock_this_exercise(
   .solution_code = tibble(x = 1:3, y = letters[x]),
   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
 )
@@ -210,7 +215,7 @@ gradethis::grade_this({
 grade_this_column("y")(ex)
 
 ## Grading Vectors ----
-# Here we use `pre_check` to modify `.result` and `.solution`
+# Here we use `pre_check` to modify `.result` and
 grade_this_vector(
   pre_check = {
     .result <- .result$y
