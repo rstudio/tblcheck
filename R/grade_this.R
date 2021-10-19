@@ -49,6 +49,8 @@
 #'   passing grade.
 #' @param fail.message The feedback `message` used by the final, fallback
 #'   [gradethis::fail()].
+#' @param check_names `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same names with [tbl_check_names()].
 #' @inheritParams tbl_grade
 #' @inheritParams vec_grade
 #' @inheritParams tbl_grade_column

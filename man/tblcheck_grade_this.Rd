@@ -101,7 +101,7 @@ Defaults to 3.}
 \code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
-\code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
+\code{expected} have the same names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
 
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows and columns
