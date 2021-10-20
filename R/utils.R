@@ -23,15 +23,15 @@ combine_words_with_more <- function(
   if (!length(x)) {
     return(NULL)
   }
-  
+
   x_length <- length(x)
-  
+
   x_max <- x[seq_len(min(max_length, x_length))]
-  
+
   more <- if (x_length > max_length) {
     paste(x_length - max_length, "more")
   }
-  
+
   knitr::combine_words(c(transform(x_max), more), ...)
 }
 
@@ -40,7 +40,7 @@ find_tblcheck_call <- function() {
   calls <- vapply(calls, FUN.VALUE = character(1), function(x) {
     paste(rlang::expr_deparse(x), collapse = "\n")
   })
-  
+
   tblcheck_fn_pattern <- "^(tbl|vec|tblcheck)_(check|grade)"
   tblcheck_calls <- grep(tblcheck_fn_pattern, calls, value = TRUE)
   if (length(tblcheck_calls)) {

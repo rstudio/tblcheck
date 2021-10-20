@@ -5,9 +5,9 @@ test_that("tbl_grade_class()", {
       .solution <- 1
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_num_chr_1)
-  
+
   expect_equal(
     grade_num_chr_1$problem,
     problem(
@@ -18,16 +18,16 @@ test_that("tbl_grade_class()", {
       actual_length = 1
     )
   )
-  
+
   grade_num_chr_2 <-
     tblcheck_test_grade({
       .result   <- c("1", "2")
       .solution <- c(1, 2)
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_num_chr_2)
-  
+
   expect_equal(
     grade_num_chr_2$problem,
     problem(
@@ -38,16 +38,16 @@ test_that("tbl_grade_class()", {
       actual_length = 2
     )
   )
-  
+
   grade_posixct_1 <-
     tblcheck_test_grade({
       .result   <- "2021-07-29 10:59:59"
       .solution <- as.POSIXct("2021-07-29 10:59:59")
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_posixct_1)
-  
+
   expect_equal(
     grade_posixct_1$problem,
     problem(
@@ -58,16 +58,16 @@ test_that("tbl_grade_class()", {
       actual_length = 1
     )
   )
-  
+
   grade_posixct_2 <-
     tblcheck_test_grade({
       .result   <- c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
       .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_posixct_2)
-  
+
   expect_equal(
     grade_posixct_2$problem,
     problem(
@@ -87,9 +87,9 @@ test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches
       .solution <- 1
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_int_dbl)
-  
+
   expect_equal(
     grade_int_dbl$problem,
     problem(
@@ -100,16 +100,16 @@ test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches
       actual_length = 1
     )
   )
-  
+
   grade_glue_chr <-
     tblcheck_test_grade({
       .result   <- glue::glue("x")
       .solution <- "x"
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_glue_chr)
-  
+
   expect_equal(
     grade_glue_chr$problem,
     problem(
@@ -120,16 +120,16 @@ test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches
       actual_length = 1
     )
   )
-  
+
   grade_posix_ct_lt <-
     tblcheck_test_grade({
       .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
       .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_posix_ct_lt)
-  
+
   expect_equal(
     grade_posix_ct_lt$problem,
     problem(
@@ -150,9 +150,9 @@ test_that("tbl_grade_class() with multiple classes", {
       class(.solution) <- c("test", "class", "integer")
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_class_solution)
-  
+
   expect_equal(
     grade_class_solution$problem,
     problem(
@@ -163,7 +163,7 @@ test_that("tbl_grade_class() with multiple classes", {
       actual_length = 1
     )
   )
-  
+
   grade_class_result <-
     tblcheck_test_grade({
       .result <- 1L
@@ -171,9 +171,9 @@ test_that("tbl_grade_class() with multiple classes", {
       .solution <- 1L
       tbl_grade_class()
     })
-  
+
   expect_snapshot(grade_class_result)
-  
+
   expect_equal(
     grade_class_result$problem,
     problem(

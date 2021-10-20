@@ -8,14 +8,14 @@
 #' 1. Check length with [vec_check_dimensions()]
 #' 1. If the column is a factor, check factor levels with [vec_check_levels()]
 #' 1. Check column values with [vec_check_values()]
-#' 
+#'
 #' If the columns differ
 #' - `tbl_check_column()` returns a list describing the problem
 #' - `tbl_grade_column()` returns a failing grade and informative message
 #' with [gradethis::fail()]
-#' 
+#'
 #' @section Problems:
-#' 
+#'
 #' 1. `names` (`table_problem`): `object` doesn't contain a column named column.
 #' 1. `class`: Any mismatch in the classes of the `column`.
 #' 1. `length`: The `column` doesn't have the expected length.
@@ -48,18 +48,18 @@
 #'   [gradethis::fail()] message from `tbl_grade_column()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-#' 
-#' @examples 
+#'
+#' @examples
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = letters[1:10], b = letters[11:20])
 #' tbl_check_column("a")
 #' tbl_grade_column("a")
-#' 
+#'
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 1:11, b = 12:22)
 #' tbl_check_column("a")
 #' tbl_grade_column("a")
-#' 
+#'
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 11:20, b = 1:10)
 #' tbl_check_column("a")
@@ -82,7 +82,7 @@ tbl_check_column <- function(
   if (inherits(expected, ".solution")) {
     expected <- get(".solution", env)
   }
-  
+
   return_if_internal_problem({
     checkmate::assert_character(column, len = 1, any.missing = FALSE)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
@@ -91,19 +91,19 @@ tbl_check_column <- function(
     checkmate::assert_data_frame(object)
     checkmate::assert_data_frame(expected)
   })
-  
+
   if (!column %in% names(expected)) {
     warning("`", column, "` is not a column in `expected`.")
     return()
   }
-  
+
   names_problem <- tbl_check_names(object, expected)
   if (column %in% names_problem$missing) {
     names_problem$missing <- column
     names_problem$unexpected <- NULL
     return_if_problem(names_problem, prefix = "table")
   }
-  
+
   return_if_problem(
     vec_check(
       object[[column]],
