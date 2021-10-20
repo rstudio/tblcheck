@@ -31,7 +31,7 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
     final_call <- paste(expr[[1]])
   }
 
-  
+
   if (
     !grepl(
       "^(tbl|vec|tblcheck)_(check|grade)|^grade_this_(table|column|vector)",

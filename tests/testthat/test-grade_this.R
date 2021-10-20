@@ -53,11 +53,11 @@ test_that("grade_this_table()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass)
   expect_true(grade_pass$correct)
   expect_null(grade_pass$problem)
-  
+
   grade_class <-
     tblcheck_test_grade({
       grade_this_table()(
@@ -67,9 +67,9 @@ test_that("grade_this_table()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_class)
-  
+
   expect_equal(
     grade_class$problem,
     problem(
@@ -82,7 +82,7 @@ test_that("grade_this_table()", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade_fail <-
     tblcheck_test_grade({
       grade_this_table(check_class = FALSE)(
@@ -92,7 +92,7 @@ test_that("grade_this_table()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_fail)
   expect_false(grade_fail$correct)
   expect_null(grade_fail$problem)
@@ -108,11 +108,11 @@ test_that("grade_this_column()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass)
   expect_true(grade_pass$correct)
   expect_null(grade_pass$problem)
-  
+
   grade_class <-
     tblcheck_test_grade({
       grade_this_column(column = "b")(
@@ -122,9 +122,9 @@ test_that("grade_this_column()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_class)
-  
+
   expect_equal(
     grade_class$problem,
     problem(
@@ -138,7 +138,7 @@ test_that("grade_this_column()", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade_fail <-
     tblcheck_test_grade({
       grade_this_column(
@@ -150,7 +150,7 @@ test_that("grade_this_column()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_fail)
   expect_false(grade_fail$correct)
   expect_null(grade_fail$problem)
@@ -165,11 +165,11 @@ test_that("grade_this_vector()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass)
   expect_true(grade_pass$correct)
   expect_null(grade_pass$problem)
-  
+
   grade_class <-
     tblcheck_test_grade({
       grade_this_vector()(
@@ -178,9 +178,9 @@ test_that("grade_this_vector()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_class)
-  
+
   expect_equal(
     grade_class$problem,
     problem(
@@ -193,7 +193,7 @@ test_that("grade_this_vector()", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade_fail <-
     tblcheck_test_grade({
       grade_this_vector(check_class = FALSE, check_values = FALSE)(
@@ -202,7 +202,7 @@ test_that("grade_this_vector()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_fail)
   expect_false(grade_fail$correct)
   expect_null(grade_fail$problem)
@@ -221,11 +221,11 @@ test_that("pre_check setup", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass)
   expect_true(grade_pass$correct)
   expect_null(grade_pass$problem)
-  
+
   grade_class <-
     tblcheck_test_grade({
       grade_this_vector(
@@ -237,9 +237,9 @@ test_that("pre_check setup", {
         )
       )
     })
-  
+
   expect_snapshot(grade_class)
-  
+
   expect_equal(
     grade_class$problem,
     problem(
@@ -252,7 +252,7 @@ test_that("pre_check setup", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade_fail <-
     tblcheck_test_grade({
       grade_this_vector(
@@ -265,7 +265,7 @@ test_that("pre_check setup", {
         )
       )
     })
-  
+
   expect_snapshot(grade_fail)
   expect_false(grade_fail$correct)
   expect_null(grade_fail$problem)
@@ -283,7 +283,7 @@ test_that("pre_check test", {
         )
       )
     })
-  
+
   expect_snapshot(grade_fail)
   expect_false(grade_fail$correct)
   expect_null(grade_fail$problem)
@@ -302,11 +302,11 @@ test_that("post_check test", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass)
   expect_true(grade_pass$correct)
   expect_null(grade_pass$problem)
-  
+
   grade_fail <-
     tblcheck_test_grade({
       grade_this_table(
@@ -320,7 +320,7 @@ test_that("post_check test", {
         )
       )
     })
-  
+
   expect_snapshot(grade_fail)
   expect_false(grade_fail$correct)
   expect_null(grade_fail$problem)
