@@ -1,7 +1,8 @@
 #' Grade This Table or Vector
 #' 
-#' Automatically grade a table or vector resulting from student code, using the
-#' author's solution as a reference.
+#' Automatically grade a table or vector resulting from student code using
+#' [gradethis::grade_this()] and \pkg{tblcheck} grading functions to compare the
+#' student's result with the author's solution.
 #'   
 #' @examples
 #  <!-- TODO: improve these examples --> 
