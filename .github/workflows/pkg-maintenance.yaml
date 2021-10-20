@@ -1,0 +1,129 @@
+# Workflow inspired by: 
+#   - https://github.com/rstudio/shinycoreci/blob/master/.github/workflows/call-rituals.yaml
+#   - https://github.com/r-lib/actions/blob/master/examples/lint.yaml
+#   - https://github.com/r-lib/actions/blob/master/examples/render-rmarkdown.yaml
+
+on:
+  pull_request:
+  push:
+    branches: main
+
+name: Package Maintenance
+
+jobs:
+  pkg-maintenance:
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # only add lintr annotations
+      LINTR_COMMENT_BOT: false
+
+    steps:
+      - uses: actions/checkout@v2
+      
+        # Make sure the PR branch is checked out for pull requests
+      - name: Git Pull (PR)
+        if: github.event_name == 'pull_request'
+        uses: r-lib/actions/pr-fetch@v1
+        with:
+          repo-token: ${{ github.token }}
+
+      - name: Git Config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: |
+            lintr
+            styler
+            devtools
+            rmarkdown
+
+      - name: Whitespace - Fix indents and trailing
+        run: |
+          # tabs to spaces and remove trailing whitespace
+          transform_indent_two_spaces <- styler::create_style_guide(
+            style_guide_name = "Indent with two spaces",
+            style_guide_version = "1.0.0",
+            indention = local({
+              ts <- styler::tidyverse_style()$indention
+              ts$unindent_fun_dec <- NULL
+              ts$update_indention_ref_fun_dec <- NULL
+              ts
+            }),
+            reindention = styler::specify_reindention(indention = 2, comments_only = FALSE)
+          )
+          
+          styler::style_pkg(transformers = transform_indent_two_spaces)
+        shell: Rscript {0}
+
+      - name: Whitespace - Commit
+        run: |
+          git add -u && git commit -m 'Fix whitespace (GitHub Actions)' || echo 'No whitespace changes to commit'
+
+      - name: Url redirects
+        if: github.event_name == 'push'
+        run: |
+          Rscript -e 'pak::pkg_install("r-lib/urlchecker"); urlchecker::url_update()'
+          git add . && git commit -m 'Update links (GitHub Actions)' || echo "No link changes to commit"
+      
+      - name: Document
+        run: | 
+          Rscript -e 'roxygen2::roxygenise()'
+          git add man/\* NAMESPACE && git commit -m 'Document (GitHub Actions)' || echo "No documentation changes to commit"
+
+      - name: Build README
+        run: |
+          if [ -f "README.Rmd" ]; then
+            Rscript -e 'devtools::build_readme(quiet = FALSE)'
+            git commit README.md -m 'Re-build README.Rmd (GitHub Actions)' || echo "No readme changes to commit"
+          else
+            echo "No README.Rmd to build"
+          fi
+
+        # When pushing to main cause package maintenance, create a pull request
+      - name: Create Pull Request
+        # ... don't run on forks, though
+        if: github.event_name == 'push' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: main
+          commit-message: "Package maintenance (Github Actions)"
+          title: "Automated package maintenance"
+          body: >
+            Automated package maintenance changes from
+            <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}>
+      
+      - name: Verify no un-pushed commits in forked repo
+        if: github.event_name == 'push' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          # Do not push to main branch
+          if [ -n "`git cherry origin/HEAD`" ]; then
+            echo "Un-pushed commits:"
+            git cherry -v origin/HEAD
+            echo "::error:: Package maintenance is required. Please make a PR to the source repo."
+            exit 1
+          fi
+
+        # If we're in a PR, then push back to the PR branch
+      - name: Git Push (PR)
+        uses: r-lib/actions/pr-push@v1
+        if: github.event_name == 'pull_request'
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Lint Package
+        if: github.event_name == 'pull_request'
+        run: |
+          Sys.setlocale(locale = "C")
+          lintr::lint_package(cache = FALSE)
+        shell: Rscript {0}
