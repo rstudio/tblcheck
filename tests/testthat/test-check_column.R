@@ -4,14 +4,14 @@ test_that("tbl_grade_column() checks classes", {
     .solution <- tibble::tibble(a = 1:3)
     tbl_grade_column("a", .result, .solution)
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
       "class",
-      "integer", 
+      "integer",
       "character",
       expected_length = 3,
       actual_length = 26,
@@ -28,9 +28,9 @@ test_that("tbl_grade_column() checks the first three values", {
     .solution <- tibble::tibble(a = letters)
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("values", letters, rev(letters), location = "column", column = "a"),
@@ -44,14 +44,14 @@ test_that("tbl_grade_column() checks multiple classes", {
     .solution <- tibble::tibble(a = tibble::tibble(x = 1))
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
-      type = "class", 
-      expected = c("tbl_df", "tbl", "data.frame"), 
+      type = "class",
+      expected = c("tbl_df", "tbl", "data.frame"),
       actual = "data.frame",
       expected_length = 1,
       actual_length = 1,
@@ -68,9 +68,9 @@ test_that("tbl_grade_column() checks for value differences beyond the first 3", 
     .solution <- tibble::tibble(a = c(rep(1, 3), 10:15))
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -90,9 +90,9 @@ test_that("max_diffs modifies the number of values to print", {
     .solution <- tibble::tibble(a = rev(letters))
     tbl_grade_column("a", max_diffs = 5)
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("values", rev(letters), letters, location = "column", column = "a"),
@@ -106,9 +106,9 @@ test_that("max_diffs doesn't overflow", {
     .solution <- tibble::tibble(a = letters[2:1])
     tbl_grade_column("a", max_diffs = 3)
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -124,9 +124,9 @@ test_that("checks that columns have the same length", {
     .solution <- tibble::tibble(a = letters[1:4])
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("length", 4, 3, location = "column", column = "a"),
@@ -140,9 +140,9 @@ test_that("checks that the column is present in object", {
     .solution <- tibble::tibble(a = letters[1:3])
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("names", missing = "a", location = "table"),
@@ -161,7 +161,7 @@ test_that("checks that the column is present in expected", {
     },
     "`b` is not a column in `expected`"
   )
-  
+
   expect_null(grade)
 })
 
@@ -171,9 +171,9 @@ test_that("tbl_grade_column() with no problems returns invisible()", {
     .solution <- tibble::tibble(a = letters[1:3])
     tbl_grade_column("a")
   })
-  
+
   expect_null(grade)
-  
+
   expect_invisible(
     tbl_grade_column("a", tibble::tibble(a = 1), tibble::tibble(a = 1))
   )
@@ -187,9 +187,9 @@ test_that("number of levels", {
     .solution <- tibble::tibble(a = as.factor(c("a", "b", "c")))
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("levels_n", 3, 2, location = "column", column = "a"),
@@ -203,9 +203,9 @@ test_that("level labels", {
     .solution <- tibble::tibble(a = as.factor(c("x", "y", "z")))
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -225,23 +225,23 @@ test_that("level order", {
     .solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade_reverse)
-  
+
   expect_equal(
     grade_reverse$problem,
     problem("levels_reversed", location = "column", column = "a"),
     ignore_attr = "class"
   )
-  
+
   grade_diffs <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = factor(1:3, c("a", "b", "c")))
     .solution <- tibble::tibble(a = factor(1:3, c("c", "a", "b")))
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade_diffs)
-  
+
   expect_equal(
     grade_diffs$problem,
     problem(
@@ -253,16 +253,16 @@ test_that("level order", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = as.factor(c("a", "b", "c", "d", "e")))
     .solution <- tibble::tibble(a = factor(c("a", "b", "c", "d", "e"), levels = c("a", "b", "c", "e", "d")))
     problem   <- tbl_check_column("a")
     tbl_grade_column("a")
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -300,7 +300,7 @@ test_that("tbl_grade_column() handles bad user input", {
     }),
     "check_class"
   )
-  
+
   expect_internal_problem(
     tblcheck_test_grade({
       result <- solution <- tibble::tibble(b = letters[1:3])
@@ -316,7 +316,7 @@ test_that("tbl_grade_column() handles bad user input", {
     }),
     "check_values"
   )
-  
+
   expect_internal_problem(
     tblcheck_test_grade({
       result <- tibble::tibble(b = letters[1:3])
@@ -345,37 +345,37 @@ test_that("tbl_grade_column() handles bad user input", {
 
 test_that("tbl_check_column() handles bad user input", {
   .result <- .solution <- tibble::tibble(b = letters[1:3])
-  
+
   expect_internal_problem(
     tbl_check_column(3),
     message = "column"
   )
-  
+
   expect_internal_problem(
     tbl_check_column(c("a", "b")),
     message = "column"
   )
-  
+
   expect_internal_problem(
     tbl_check_column("b", check_class = "yes"),
     message = "check_class"
   )
-  
+
   expect_internal_problem(
     tbl_check_column("b", check_values = "yes"),
     "check_values"
   )
-  
+
   expect_internal_problem(
     tbl_check_column("b", object = 12),
     "object"
   )
-  
+
   expect_internal_problem(
     tbl_check_column("b", check_length = c(TRUE, TRUE)),
     message = "check_length"
   )
-  
+
   expect_internal_problem(
     tbl_check_column("b", check_values = NULL),
     message = "check_values"
