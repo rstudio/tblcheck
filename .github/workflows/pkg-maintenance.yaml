@@ -121,6 +121,7 @@ jobs:
         run: |
           # lint package and add notice-style file annotations
           Sys.setlocale(locale = "C")
+          Sys.setenv(R_CLI_NUM_COLORS = 1)
           lints <- lintr::lint_package(cache = FALSE)
           informal_linters <- c(
             "closed_curly_linter",
@@ -147,7 +148,8 @@ jobs:
               lint$ranges[[1]][[1]],
               lint$ranges[[1]][[2]],
               paste("lintr", lint$type, lint$linter, sep = " - "),
-              lint$message
+              # print lintr message as GHA-compatible multiline log message
+              paste(capture.output(print(lint)), collapse = "%0A")
             )
             cat(msg)
           }
