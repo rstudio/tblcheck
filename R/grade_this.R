@@ -20,10 +20,9 @@
 #'   tbl_grade()
 #'   gradethis::fail()
 #' })(ex)
-#' 
 #' @family graders
 #' @seealso [tbl_grade()]
-#' 
+#'
 #' @inheritParams tbl_grade
 #' @param correct `[character(1)]`\cr The message shown to the student when
 #'   their `.result` matches the exercise `.solution`, if `pass_if_equal` is
@@ -112,22 +111,21 @@ grade_this_table <- function(
 #' )
 #'
 #' grade_this_column("y")(ex)
-#' 
+#'
 #' # Roughly equivalent to...
 #' gradethis::grade_this({
 #'   gradethis::pass_if_equal()
 #'   tbl_grade_column("y")
 #'   gradethis::fail()
 #' })(ex)
-#' 
 #' @family graders
 #' @seealso [tbl_grade_column()]
-#' 
+#'
 #' @inheritParams tbl_grade_column
 #' @inheritParams grade_this_table
 #'
 #' @inherit grade_this_table return
-#' 
+#'
 #' @export
 grade_this_column <- function(
   column,
@@ -176,7 +174,7 @@ grade_this_column <- function(
 #'     .solution <- .solution$y
 #'   }
 #' )(ex)
-#' 
+#'
 #' # Roughly equivalent to...
 #' gradethis::grade_this({
 #'   .result <- .result$y
@@ -185,15 +183,14 @@ grade_this_column <- function(
 #'   vec_grade()
 #'   gradethis::fail()
 #' })(ex)
-#' 
 #' @family graders
 #' @seealso [vec_grade()]
-#' 
+#'
 #' @inheritParams vec_grade
 #' @inheritParams grade_this_table
 #'
 #' @inherit grade_this_table return
-#' 
+#'
 #' @export
 grade_this_vector <- function(
   correct = NULL,
