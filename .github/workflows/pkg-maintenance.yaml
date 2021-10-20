@@ -92,15 +92,22 @@ jobs:
 
         # When pushing to main causes package maintenance, create a pull request
       - name: Create Pull Request
+        id: create-pull-request
         if: github.event_name == 'push'
         uses: peter-evans/create-pull-request@v3
         with:
           base: main
+          branch: auto-pkg-maintenance
           commit-message: "Package maintenance (Github Actions)"
           title: "Automated package maintenance"
           body: >
             Automated package maintenance changes from
             <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}>
+            
+      - name: Notify Pull Request
+        if: contains(['opened', 'created'], steps.create-pull-request.outputs.pull-request-operation)
+        run: |
+          echo "::notice title='Package Maintenance':: Pull request #${{ steps.create-pull-request.outputs.pull-request-number }} ${{ steps.create-pull-request.outputs.pull-request-operation }}: ${{ steps.create-pull-request.outputs.pull-request-url }}"
 
         # If we're in a PR, then push back to the PR branch
       - name: Git Push (PR)
