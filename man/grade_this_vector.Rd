@@ -148,7 +148,6 @@ gradethis::grade_this({
   vec_grade()
   gradethis::fail()
 })(ex)
-
 }
 \seealso{
 \code{\link[=vec_grade]{vec_grade()}}

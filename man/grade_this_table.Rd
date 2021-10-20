@@ -151,7 +151,6 @@ gradethis::grade_this({
   tbl_grade()
   gradethis::fail()
 })(ex)
-
 }
 \seealso{
 \code{\link[=tbl_grade]{tbl_grade()}}

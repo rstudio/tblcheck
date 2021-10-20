@@ -143,7 +143,6 @@ gradethis::grade_this({
   tbl_grade_column("y")
   gradethis::fail()
 })(ex)
-
 }
 \seealso{
 \code{\link[=tbl_grade_column]{tbl_grade_column()}}
