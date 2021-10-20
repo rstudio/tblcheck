@@ -7,14 +7,14 @@
 #' 1. If the vector is a factor, check factor levels are the same with [vec_check_levels()]
 #' 1. Check vector values are the same with [vec_check_values()]
 #' 1. Check names with [vec_check_names()]
-#' 
+#'
 #' If the vectors differ
 #' - `vec_check()` returns a list describing the problem
 #' - `vec_grade()` returns a failing grade and informative message
 #' with [gradethis::fail()]
-#' 
+#'
 #' @section Problems:
-#' 
+#'
 #' 1. `class`: `object` doesn't have the same classes as `expected`.
 #' 1. `length`: `object` doesn't have the same length as `expected`.
 #' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
@@ -45,25 +45,25 @@
 #'   [gradethis::fail()] message from `vec_grade()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-#' 
-#' @examples 
+#'
+#' @examples
 #' .result <- 1:10
 #' .solution <- letters[1:10]
 #' vec_check()
 #' vec_grade()
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- 1:11
 #' vec_check()
 #' vec_grade()
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
 #' vec_check()
 #' vec_grade()
 #' vec_grade(max_diffs = 5)
 #' vec_grade(max_diffs = Inf)
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- 11:20
 #' vec_check()
@@ -86,42 +86,42 @@ vec_check <- function(
   if (inherits(expected, ".solution")) {
     expected <- get(".solution", env)
   }
-  
+
   return_if_internal_problem({
     checkmate::assert_vector(expected)
     checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
   })
-  
+
   if (check_class) {
     return_if_problem(
       vec_check_class(object, expected),
       prefix = "vector"
     )
   }
-  
+
   if (check_length) {
     return_if_problem(
       vec_check_dimensions(object, expected),
       prefix = "vector"
     )
   }
-  
+
   if (check_levels) {
     return_if_problem(
       vec_check_levels(object, expected),
       prefix = "vector"
     )
   }
-  
+
   if (check_values) {
     return_if_problem(
       vec_check_values(object, expected),
       prefix = "vector"
     )
   }
-  
+
   if (check_names) {
     return_if_problem(
       vec_check_names(object, expected),
