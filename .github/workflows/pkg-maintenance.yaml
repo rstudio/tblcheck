@@ -119,6 +119,19 @@ jobs:
       - name: Lint Package
         if: github.event_name == 'pull_request'
         run: |
+          # lint package and add notice-style file annotations
           Sys.setlocale(locale = "C")
-          lintr::lint_package(cache = FALSE)
+          lints <- lintr::lint_package(cache = FALSE)
+          for (lint in lints) {
+            msg <- sprintf(
+              "\n::notice file=%s,line=%d,col=%d,endColumn=%d,title=%s::%s",
+              lint$filename,
+              lint$line_number,
+              lint$ranges[[1]][[1]],
+              lint$ranges[[1]][[2]],
+              paste("lintr", lint$type, lint$linter, sep = " - "),
+              lint$message
+            )
+            cat(msg)
+          }
         shell: Rscript {0}
