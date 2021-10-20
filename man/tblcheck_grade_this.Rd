@@ -182,8 +182,9 @@ their equivalents is returned.
 }
 }
 \description{
-Automatically grade a table or vector resulting from student code, using the
-author's solution as a reference.
+Automatically grade a table or vector resulting from student code using
+\code{\link[gradethis:grade_this]{gradethis::grade_this()}} and \pkg{tblcheck} grading functions to compare the
+student's result with the author's solution.
 }
 \section{Functions}{
 \itemize{
@@ -222,5 +223,4 @@ grade_this_vector(
     .solution <- .solution$y
   }
 )(ex)
-
 }
