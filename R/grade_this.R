@@ -1,7 +1,7 @@
-#' Grade This Table or Vector
+#' Grade this table
 #'
-#' Automatically grade a table or vector resulting from student code using
-#' [gradethis::grade_this()] and \pkg{tblcheck} grading functions to compare the
+#' Automatically grade a table resulting from student code using
+#' [gradethis::grade_this()] and [tbl_grade()] to compare the
 #' student's result with the author's solution.
 #'
 #' @examples
@@ -20,18 +20,11 @@
 #'   tbl_grade()
 #'   gradethis::fail()
 #' })(ex)
-#'
-#' ## Grading Columns in Tables ----
-#' grade_this_column("y")(ex)
-#'
-#' ## Grading Vectors ----
-#' # Here we use `pre_check` to modify `.result` and
-#' grade_this_vector(
-#'   pre_check = {
-#'     .result <- .result$y
-#'     .solution <- .solution$y
-#'   }
-#' )(ex)
+#' 
+#' @family graders
+#' @seealso [tbl_grade()]
+#' 
+#' @inheritParams tbl_grade
 #' @param correct `[character(1)]`\cr The message shown to the student when
 #'   their `.result` matches the exercise `.solution`, if `pass_if_equal` is
 #'   `TRUE`.
@@ -49,11 +42,6 @@
 #'   passing grade.
 #' @param fail.message The feedback `message` used by the final, fallback
 #'   [gradethis::fail()].
-#' @param check_names `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same names with [tbl_check_names()].
-#' @inheritParams tbl_grade
-#' @inheritParams vec_grade
-#' @inheritParams tbl_grade_column
 #' @inheritParams gradethis::fail
 #' @inheritParams gradethis::gradethis_setup
 #'
@@ -81,10 +69,6 @@
 #'      [gradethis::fail()] is provided to the student, using the options
 #'      `fail.message`, `fail.hint` and `fail.encourage`.
 #'
-#' @name tblcheck_grade_this
-NULL
-
-#' @describeIn tblcheck_grade_this Grade a table using [tbl_grade()]
 #' @export
 grade_this_table <- function(
   correct = NULL,
@@ -114,8 +98,36 @@ grade_this_table <- function(
   rlang::eval_bare(grader)
 }
 
-#' @describeIn tblcheck_grade_this Grade a column in a table using
-#'   [tbl_grade_column()]
+#' Grade this column
+#'
+#' Automatically grade a column of a table resulting from student code using
+#' [gradethis::grade_this()] and [tbl_grade_column()] to compare the
+#' student's result with the author's solution.
+#'
+#' @examples
+#  <!-- TODO: improve these examples -->
+#' ex <- gradethis::mock_this_exercise(
+#'   .solution_code = tibble(x = 1:3, y = letters[x]),
+#'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
+#' )
+#'
+#' grade_this_column("y")(ex)
+#' 
+#' # Roughly equivalent to...
+#' gradethis::grade_this({
+#'   gradethis::pass_if_equal()
+#'   tbl_grade_column("y")
+#'   gradethis::fail()
+#' })(ex)
+#' 
+#' @family graders
+#' @seealso [tbl_grade_column()]
+#' 
+#' @inheritParams tbl_grade_column
+#' @inheritParams grade_this_table
+#'
+#' @inherit grade_this_table return
+#' 
 #' @export
 grade_this_column <- function(
   column,
@@ -143,7 +155,45 @@ grade_this_column <- function(
   rlang::eval_bare(grader)
 }
 
-#' @describeIn tblcheck_grade_this Grade a vector using [vec_grade()]
+#' Grade this vector
+#'
+#' Automatically grade a vector resulting from student code using
+#' [gradethis::grade_this()] and [vec_grade()] to compare the
+#' student's result with the author's solution.
+#'
+#' @examples
+#  <!-- TODO: improve these examples -->
+#' ex <- gradethis::mock_this_exercise(
+#'   .solution_code = tibble(x = 1:3, y = letters[x]),
+#'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
+#' )
+#'
+#' #' ## Grading Vectors ----
+#' # Here we use `pre_check` to modify `.result` and
+#' grade_this_vector(
+#'   pre_check = {
+#'     .result <- .result$y
+#'     .solution <- .solution$y
+#'   }
+#' )(ex)
+#' 
+#' # Roughly equivalent to...
+#' gradethis::grade_this({
+#'   .result <- .result$y
+#'   .solution <- .solution$y
+#'   gradethis::pass_if_equal()
+#'   vec_grade()
+#'   gradethis::fail()
+#' })(ex)
+#' 
+#' @family graders
+#' @seealso [vec_grade()]
+#' 
+#' @inheritParams vec_grade
+#' @inheritParams grade_this_table
+#'
+#' @inherit grade_this_table return
+#' 
 #' @export
 grade_this_vector <- function(
   correct = NULL,
