@@ -105,7 +105,7 @@ jobs:
             <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}>
             
       - name: Notify Pull Request
-        if: contains(['opened', 'created'], steps.create-pull-request.outputs.pull-request-operation)
+        if: contains('opened created', steps.create-pull-request.outputs.pull-request-operation)
         run: |
           echo "::notice title='Package Maintenance':: Pull request #${{ steps.create-pull-request.outputs.pull-request-number }} ${{ steps.create-pull-request.outputs.pull-request-operation }}: ${{ steps.create-pull-request.outputs.pull-request-url }}"
 
