@@ -70,11 +70,11 @@ jobs:
         run: |
           git add -u && git commit -m 'Fix whitespace (GitHub Actions)' || echo 'No whitespace changes to commit'
 
-      - name: Url redirects
+      - name: URL redirects
         if: github.event_name == 'push'
         run: |
           Rscript -e 'pak::pkg_install("r-lib/urlchecker"); urlchecker::url_update()'
-          git add . && git commit -m 'Update links (GitHub Actions)' || echo "No link changes to commit"
+          git add -u && git commit -m 'Update links (GitHub Actions)' || echo "No link changes to commit"
       
       - name: Document
         run: | 
