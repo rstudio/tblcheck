@@ -1,29 +1,29 @@
 #' Grade This Table or Vector
-#' 
+#'
 #' Automatically grade a table or vector resulting from student code using
 #' [gradethis::grade_this()] and \pkg{tblcheck} grading functions to compare the
 #' student's result with the author's solution.
-#'   
+#'
 #' @examples
-#  <!-- TODO: improve these examples --> 
+#  <!-- TODO: improve these examples -->
 #' ex <- gradethis::mock_this_exercise(
 #'   .solution_code = tibble(x = 1:3, y = letters[x]),
 #'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
 #' )
-#' 
+#'
 #' ## Grading Tables ----
 #' grade_this_table()(ex)
-#' 
+#'
 #' # Roughly equivalent to...
 #' gradethis::grade_this({
 #'   gradethis::pass_if_equal()
 #'   tbl_grade()
 #'   gradethis::fail()
 #' })(ex)
-#' 
+#'
 #' ## Grading Columns in Tables ----
 #' grade_this_column("y")(ex)
-#' 
+#'
 #' ## Grading Vectors ----
 #' # Here we use `pre_check` to modify `.result` and
 #' grade_this_vector(
@@ -32,7 +32,6 @@
 #'     .solution <- .solution$y
 #'   }
 #' )(ex)
-#' 
 #' @param correct `[character(1)]`\cr The message shown to the student when
 #'   their `.result` matches the exercise `.solution`, if `pass_if_equal` is
 #'   `TRUE`.
@@ -57,17 +56,17 @@
 #' @inheritParams tbl_grade_column
 #' @inheritParams gradethis::fail
 #' @inheritParams gradethis::gradethis_setup
-#' 
+#'
 #' @return The returned feedback is equivalent to \pkg{gradethis} grading code
-#'   using [`grade_this()`][gradethis::grade_this] with the following 
+#'   using [`grade_this()`][gradethis::grade_this] with the following
 #'   components:
-#'   
+#'
 #'   1. First the `pre_check` code, if any, is evaluated. If this code calls
 #'      [`pass()`][gradethis::graded], [`fail()`][gradethis::graded], or their
 #'      equivalents, that feedback is provided immediately.
-#'   2. If `pass_if_equal` is `TRUE`, then 
+#'   2. If `pass_if_equal` is `TRUE`, then
 #'      [`pass_if_equal()`][gradethis::pass_if_equal] is called to compare the
-#'      [`.result`][gradethis::grade_this-objects] to the 
+#'      [`.result`][gradethis::grade_this-objects] to the
 #'      [`.solution`][gradethis::grade_this-objects]. The message in `correct`
 #'      is used for the feedback.
 #'   3. The appropriate \pkg{tblcheck} grading function is called, returning
@@ -76,12 +75,12 @@
 #'       2. `grade_this_column()` returns the results from [tbl_grade_column()]
 #'       3. `grade_this_vector()` returns the results from [vec_grade()]
 #'   4. The `post_check` code, if any, is evaluated and any feedback from a call
-#'      to [`pass()`][gradethis::graded], [`fail()`][gradethis::graded], or 
+#'      to [`pass()`][gradethis::graded], [`fail()`][gradethis::graded], or
 #'      their equivalents is returned.
-#'   5. Finally, if no other feedback is returned, the feedback from 
+#'   5. Finally, if no other feedback is returned, the feedback from
 #'      [gradethis::fail()] is provided to the student, using the options
 #'      `fail.message`, `fail.hint` and `fail.encourage`.
-#' 
+#'
 #' @name tblcheck_grade_this
 NULL
 
@@ -107,7 +106,7 @@ grade_this_table <- function(
   # gradethis pass/fail options
   pass.praise = NULL,
   fail.message = NULL,
-  fail.hint = hint, 
+  fail.hint = hint,
   fail.encourage = encourage
 ) {
   ellipsis::check_dots_empty()
@@ -136,7 +135,7 @@ grade_this_column <- function(
   # gradethis pass/fail options
   pass.praise = NULL,
   fail.message = NULL,
-  fail.hint = hint, 
+  fail.hint = hint,
   fail.encourage = encourage
 )  {
   ellipsis::check_dots_empty()
@@ -163,7 +162,7 @@ grade_this_vector <- function(
   # gradethis pass/fail options
   pass.praise = NULL,
   fail.message = NULL,
-  fail.hint = hint, 
+  fail.hint = hint,
   fail.encourage = encourage
 ) {
   ellipsis::check_dots_empty()
@@ -175,7 +174,7 @@ rlang_call_match <- function(n = 2) {
   # match/standardize the call of the caller of this functions caller (usually)
   call <- sys.call(sys.parent(n = n))
   fn <- sys.function(sys.parent(n = n))
-  
+
   if (has_rlang_version("0.4.12.9002")) {
     # TODO: Require rlang 1.0 when released
     # call_match() is preferred but will be part of rlang 1.0
@@ -195,18 +194,18 @@ rlang_call_match <- function(n = 2) {
 call2_tblcheck_grade_this <- function(
   tblcheck_grader = tbl_grade
 ) {
-  # take args of the function calling this one 
+  # take args of the function calling this one
   call <- rlang_call_match()
   args <- rlang::call_args(call)
-  
+
   if ("..." %in% names(args)) {
     # drop the `...` that shouldn't have been used anyway
     args <- args[setdiff(names(args), "...")]
   }
-  
+
   # add the tblcheck grader to the arg list
   args$tblcheck_grader <- rlang::enexpr(tblcheck_grader)
-  
+
   # and construct the call to the general purpose `tblcheck_grade_this_impl()`
   rlang::call2(tblcheck_grade_this_impl, !!!args)
 }
@@ -223,12 +222,12 @@ tblcheck_grade_this_impl <- function(
   # gradethis pass/fail options
   pass.praise = NULL,
   fail.message = NULL,
-  fail.hint = hint, 
+  fail.hint = hint,
   fail.encourage = encourage
 ) {
   pre_check  <- rlang::enexpr(pre_check)
   post_check <- rlang::enexpr(post_check)
-  
+
   tblcheck_grader_args <- list(
     object = .result,
     expected = .solution,
@@ -236,7 +235,7 @@ tblcheck_grade_this_impl <- function(
     encourage = encourage,
     ...
   )
-  
+
   function(check_env) {
     check_env_pre <- rlang::new_environment(
       list(
@@ -255,28 +254,28 @@ tblcheck_grade_this_impl <- function(
     )
     # insert the pre-check env one level above check_env
     rlang::env_poke_parent(check_env, check_env_pre)
-    
+
     grade <- gradethis::grade_this({
       # Evaluate pre-check code
       pre_check <- get0(".__pre_check")
       if (!is.null(pre_check)) {
         rlang::eval_bare(pre_check)
       }
-      
+
       if (isTRUE(get0(".__pass_if_equal", inherits = TRUE, ifnotfound = FALSE))) {
         # pass immediately if they're _exactly_ the same
         gradethis::pass_if_equal(message = get(".__correct"), praise = get(".__pass.praise"))
       }
-      
+
       # call the tblcheck grader
       do.call(get(".__tblcheck_grader"), get(".__tblcheck_grader_args"))
-      
+
       # evaluate post check or extra check code
       post_check <- get0(".__post_check")
       if (!is.null(post_check)) {
         rlang::eval_bare(post_check)
       }
-      
+
       # finally, worst case scenario, fail()
       gradethis::fail(
         message = get(".__fail.message"),
@@ -284,7 +283,7 @@ tblcheck_grade_this_impl <- function(
         encourage = get(".__fail.encourage")
       )
     })(check_env)
-    
+
     class(grade) <- c("tblcheck_graded", class(grade))
     grade
   }

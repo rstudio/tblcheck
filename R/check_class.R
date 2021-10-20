@@ -6,9 +6,9 @@
 #'   the problem
 #' - `tbl_grade_class()` and `vec_grade_class()` return a failing grade and
 #'   informative message with [gradethis::fail()]
-#' 
+#'
 #' @section Problems:
-#' 
+#'
 #' 1. `class`: The object does not have the expected classes
 #'
 #' @param object An object to be compared to `expected`.
@@ -21,17 +21,17 @@
 #'   `tbl_grade_class()` and `vec_grade_class()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-#' @examples 
+#' @examples
 #' .result <- 1:10
 #' .solution <- as.character(1:10)
 #' vec_check_class()
 #' vec_grade_class()
-#' 
+#'
 #' .result <- data.frame(a = 1:10)
 #' .solution <- tibble::tibble(a = 1:10)
 #' tbl_check_class()
 #' tbl_grade_class()
-#' 
+#'
 #' .result <- tibble::tibble(a = 1:10, b = a %% 2 == 0)
 #' .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a %% 2 == 0), b)
 #' tbl_check_class()
@@ -47,10 +47,10 @@ tbl_check_class <- function(
   if (inherits(expected, ".solution")) {
     expected <- get(".solution", env)
   }
-  
+
   obj_class <- class(object)
   exp_class <- class(expected)
-  
+
   if (!identical(obj_class, exp_class)) {
     problem(
       "class",
@@ -95,33 +95,33 @@ tblcheck_message.class_problem <- function(problem, ...) {
     problem$msg <- problem$msg %||%
       "Your table should be {expected}, but it is {actual}."
   }
-  
+
   problem$msg <- problem$msg %||%
     "Your result should be {expected}, but it is {actual}."
-  
+
   hinted_class_message <- hinted_class_message(problem$actual, problem$expected)
   if (!is.null(hinted_class_message)) {
     return(hinted_class_message)
   }
-  
+
   problem$expected <- friendly_class(problem$expected, problem$expected_length)
   problem$actual   <- friendly_class(problem$actual,   problem$actual_length)
-  
+
   glue::glue_data(problem, problem$msg)
 }
 
 hinted_class_message <- function(obj_class, exp_class) {
   list <- hinted_class_message_list()
-  
+
   for (i in seq_along(list)) {
     if (
       all(list[[i]]$obj_class %in% obj_class) &&
-      all(list[[i]]$exp_class %in% exp_class)
+        all(list[[i]]$exp_class %in% exp_class)
     ) {
       return(list[[i]]$message)
     }
   }
-  
+
   invisible()
 }
 
@@ -154,16 +154,16 @@ hinted_class_message_list <- function() {
 
 friendly_class <- function(class, length) {
   list <- friendly_class_list()
-  
+
   for (i in seq_along(list)) {
     if (unordered_identical(list[[i]]$class, class)) {
       if (length > 1) return(list[[i]]$multiple %||% list[[i]]$single)
       return(list[[i]]$single)
     }
   }
-  
+
   class_str <- knitr::combine_words(md_code(class))
-  
+
   glue::glue(
     ifelse(
       length > 1,
