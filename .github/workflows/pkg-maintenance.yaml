@@ -90,10 +90,9 @@ jobs:
             echo "No README.Rmd to build"
           fi
 
-        # When pushing to main cause package maintenance, create a pull request
+        # When pushing to main causes package maintenance, create a pull request
       - name: Create Pull Request
-        # ... don't run on forks, though
-        if: github.event_name == 'push' && github.event.pull_request.head.repo.full_name == github.repository
+        if: github.event_name == 'push'
         uses: peter-evans/create-pull-request@v3
         with:
           base: main
@@ -102,17 +101,6 @@ jobs:
           body: >
             Automated package maintenance changes from
             <${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}>
-      
-      - name: Verify no un-pushed commits in forked repo
-        if: github.event_name == 'push' && github.event.pull_request.head.repo.full_name != github.repository
-        run: |
-          # Do not push to main branch
-          if [ -n "`git cherry origin/HEAD`" ]; then
-            echo "Un-pushed commits:"
-            git cherry -v origin/HEAD
-            echo "::error:: Package maintenance is required. Please make a PR to the source repo."
-            exit 1
-          fi
 
         # If we're in a PR, then push back to the PR branch
       - name: Git Push (PR)
