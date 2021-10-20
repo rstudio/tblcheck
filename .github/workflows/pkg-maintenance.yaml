@@ -107,7 +107,7 @@ jobs:
       - name: Notify Pull Request
         if: contains('opened created', steps.create-pull-request.outputs.pull-request-operation)
         run: |
-          echo "::notice title='Package Maintenance':: Pull request #${{ steps.create-pull-request.outputs.pull-request-number }} ${{ steps.create-pull-request.outputs.pull-request-operation }}: ${{ steps.create-pull-request.outputs.pull-request-url }}"
+          echo "::notice title=Package Maintenance:: Pull request #${{ steps.create-pull-request.outputs.pull-request-number }} ${{ steps.create-pull-request.outputs.pull-request-operation }}: ${{ steps.create-pull-request.outputs.pull-request-url }}"
 
         # If we're in a PR, then push back to the PR branch
       - name: Git Push (PR)
