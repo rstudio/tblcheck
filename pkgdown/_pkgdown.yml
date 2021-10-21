@@ -50,6 +50,14 @@ navbar:
     #       href: https://blog.rstudio.com/2017/09/11/announcing-blogdown/
 
 reference:
+- title: Exercise Checking Functions
+  description: |
+    Fully automated table, column or vector checking. Choose one of these
+    functions to use in the `*-check` chunk of your exercise.
+  contents:
+  - grade_this_table
+  - grade_this_column
+  - grade_this_vector
 - title: General checks
   desc: Check for multiple problems in a table, column, or vector
   contents:
