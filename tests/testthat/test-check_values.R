@@ -38,3 +38,35 @@ test_that("value differences", {
   expect_snapshot(grade_Inf)
   expect_equal(grade_Inf$problem, grade_default$problem)
 })
+
+test_that("vec_grade_values() failures", {
+  grade_length <- tblcheck_test_grade({
+    .result   <- 1:9
+    .solution <- 1:10
+    vec_grade_values()
+  })
+
+  expect_equal(grade_length, vec_grade_dimensions(1:9, 1:10))
+
+  grade_class <- tblcheck_test_grade({
+    .result   <- 1:10
+    .solution <- letters[1:10]
+    vec_grade_values()
+  })
+
+  expect_equal(grade_class, vec_grade_class(1:10, letters[1:10]))
+
+  grade_attr <- tblcheck_test_grade({
+    .result   <- structure(1, class = "test", attr = "not a")
+    .solution <- structure(1, class = "test", attr = "match")
+    vec_grade_values()
+  })
+
+  expect_snapshot(grade_attr)
+
+  expect_equal(
+    grade_attr$problem,
+    problem("values"),
+    ignore_attr = "class"
+  )
+})

@@ -45,7 +45,6 @@
 vec_check_values <- function(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -58,14 +57,21 @@ vec_check_values <- function(
   return_if_internal_problem({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
-    checkmate::assert_number(max_diffs, lower = 1)
   })
 
-  exp_values <- unname(expected)
-  obj_values <- unname(object)
+  # Check if values are comparable types
+  if (!has_common_ptype(object, expected)) {
+    return_if_problem(vec_check_class(object, expected))
 
-  if (!identical(obj_values, exp_values)) {
-    return(problem("values", exp_values, obj_values))
+    return(problem("values"))
+  }
+
+  # Check if values are the same length
+  return_if_problem(vec_check_dimensions(object, expected))
+
+  # Check if values are the same
+  if (!all(vctrs::vec_equal(object, expected))) {
+    return(problem("values", expected, object))
   }
 }
 

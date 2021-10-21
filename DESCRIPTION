@@ -27,7 +27,8 @@ Imports:
     magrittr,
     purrr,
     rlang,
-    utils
+    utils,
+    vctrs
 Suggests:
     dplyr,
     learnr,
