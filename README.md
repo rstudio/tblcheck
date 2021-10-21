@@ -55,13 +55,14 @@ learnr and gradethis in the `setup` chunk of your tutorial:
 library(learnr)
 library(gradethis)
 library(tblcheck)
+library(tibble)
 ```
 ````
 
 Then include one of the tblcheck functions in your gradethis code:
 
 ```` markdown
-```{r exercise}
+```{r exercise, exercise = TRUE}
 
 ```
 
