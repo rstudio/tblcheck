@@ -14,7 +14,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        The first 3 values of your `a` column should be `a`, `b`, and `c`.
+        The first 3 values of your `a` column should be `a`, `b`, and `c`,
+        not `z`, `y`, and `x`.
       >
 
 # tbl_grade_column() checks multiple classes
@@ -33,7 +34,7 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your `a` column contains unexpected values.
+        I didn't expect your result to include the values `5`, `6`, and `7`.
       >
 
 # max_diffs modifies the number of values to print
@@ -43,7 +44,7 @@
     Output
       <gradethis_graded: [Incorrect]
         The first 5 values of your `a` column should be `z`, `y`, `x`, `w`,
-        and `v`.
+        and `v`, not `a`, `b`, `c`, `d`, and `e`.
       >
 
 # max_diffs doesn't overflow
@@ -52,7 +53,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        The first 2 values of your `a` column should be `b` and `a`.
+        The first 2 values of your `a` column should be `b` and `a`, not `a`
+        and `b`.
       >
 
 # checks that columns have the same length

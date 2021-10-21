@@ -99,7 +99,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        The first 3 values of your `a` column should be `x`, `y`, and `z`.
+        The first 3 values of your `a` column should be `x`, `y`, and `z`,
+        not `a`, `b`, and `c`.
       >
 
 # tbl_grade() returns grades with row problems
