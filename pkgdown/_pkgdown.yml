@@ -61,7 +61,6 @@ reference:
 - title: General checks
   desc: Check for multiple problems in a table, column, or vector
   contents:
-  - tblcheck_grade_this
   - tbl_check
   - tbl_check_column
   - vec_check
