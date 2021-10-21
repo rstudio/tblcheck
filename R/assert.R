@@ -17,10 +17,10 @@ tblcheck_grade.tblcheck_internal_problem <- function(
   # move error up to top-level of grade
   error <- problem$error
   problem$error <- NULL
-  
+
   gradethis::graded(
     message = paste(
-      "Uh-oh! We can't provide feedback at this time. Don't worry, it's not", 
+      "Uh-oh! We can't provide feedback at this time. Don't worry, it's not",
       "your fault! There's an issue behind-the-scenes with this exercise."
     ),
     correct = logical(0),

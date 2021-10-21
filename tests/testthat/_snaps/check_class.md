@@ -38,10 +38,10 @@
         it is a vector of text (class `character`).
       >
 
-# tbl_grade_class() ignores inconsequential mismatches
+# tbl_grade_class() does not ignore formerly inconsequential mismatches
 
     Code
-      grade_int_dbl_all
+      grade_int_dbl
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a number (class `numeric`), but it is an
@@ -51,7 +51,7 @@
 ---
 
     Code
-      grade_glue_chr_all
+      grade_glue_chr
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a text string (class `character`), but it is an
@@ -61,7 +61,7 @@
 ---
 
     Code
-      grade_posix_ct_lt_all
+      grade_posix_ct_lt
     Output
       <gradethis_graded: [Incorrect]
         Your result should be a vector of date-times (class `POSIXlt`), but

@@ -5,9 +5,9 @@
 #' - `vec_check_values()` returns a list describing the problem
 #' - `vec_grade_values()` returns a failing grade and informative message
 #' with [gradethis::fail()]
-#' 
+#'
 #' @section Problems:
-#' 
+#'
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
 #' @inheritParams vec_check
@@ -17,25 +17,25 @@
 #'   [gradethis::fail()] message from `vec_grade_values()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-#' 
-#' @examples 
+#'
+#' @examples
 #' .result <- 1:10
 #' .solution <- letters[1:10]
 #' vec_check_values()
 #' vec_grade_values()
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- 1:11
 #' vec_check_values()
 #' vec_grade_values()
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
 #' vec_check_values()
 #' vec_grade_values()
 #' vec_grade_values(max_diffs = 5)
 #' vec_grade_values(max_diffs = Inf)
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- 11:20
 #' vec_check_values()
@@ -53,22 +53,22 @@ vec_check_values <- function(
   if (inherits(expected, ".solution")) {
     expected <- get(".solution", env)
   }
-  
+
   return_if_internal_problem({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
   })
-  
+
   # Check if values are comparable types
   if (!has_common_ptype(object, expected)) {
     return_if_problem(vec_check_class(object, expected))
-    
+
     return(problem("values"))
   }
-  
+
   # Check if values are the same length
   return_if_problem(vec_check_dimensions(object, expected))
-  
+
   # Check if values are the same
   if (!all(vctrs::vec_equal(object, expected))) {
     return(problem("values", expected, object))
@@ -101,7 +101,7 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     max(length(problem$expected), length(problem$actual)),
     max_diffs
   )
-  
+
   if (
     identical(
       problem$expected[seq_len(problem$n_values)],
@@ -112,20 +112,20 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
       problem$msg <- problem$msg %||%
         "Your `{column}` column contains unexpected values."
     }
-    
+
     problem$msg <- problem$msg %||%
       "Your result contains unexpected values."
-    
+
     return(glue::glue_data(problem, problem$msg))
   }
-  
+
   problem$expected <- knitr::combine_words(
     md_code(problem$expected[seq_len(problem$n_values)])
   )
   problem$actual <- knitr::combine_words(
     md_code(problem$actual[seq_len(problem$n_values)])
   )
-  
+
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       ngettext(
@@ -134,13 +134,13 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
         "The first {n_values} values of your `{column}` column should be {expected}."
       )
   }
-  
+
   problem$msg <- problem$msg %||%
     ngettext(
       problem$n_values,
       "The first value of your result should be {expected}.",
       "The first {n_values} values of your result should be {expected}."
     )
-  
+
   glue::glue_data(problem, problem$msg)
 }
