@@ -110,6 +110,7 @@ tbl_grade_names <- function(
 #' @export
 vec_grade_names <- tbl_grade_names
 
+#' @export
 tblcheck_message.names_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||%
@@ -170,6 +171,7 @@ tblcheck_message.names_problem <- function(problem, max_diffs = 3, ...) {
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
+#' @export
 tblcheck_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
   problem$n_values <- min(
     max(length(problem$expected), length(problem$actual)),

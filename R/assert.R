@@ -11,6 +11,7 @@ return_if_internal_problem <- function(expr, ..., env = parent.frame()) {
   return_if_problem(prob, env = env)
 }
 
+#' @export
 tblcheck_grade.tblcheck_internal_problem <- function(
   problem, max_diffs = 3, env = parent.frame(), ...
 ) {
