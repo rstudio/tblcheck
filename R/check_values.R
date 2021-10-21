@@ -96,6 +96,7 @@ vec_grade_values <- function(
   )
 }
 
+#' @export
 tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
   problem$n_values <- min(
     max(length(problem$expected), length(problem$actual)),
