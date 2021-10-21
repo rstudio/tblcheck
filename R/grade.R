@@ -7,7 +7,7 @@
 #'
 #' @return A [gradethis::fail()] message or `NULL` invisibly.
 #' @export
-#' 
+#'
 #' @examples
 #' .result <- 1:10
 #' .solution <- letters[1:10]
@@ -42,16 +42,16 @@ tblcheck_grade.tblcheck_problem <- function(
   if (is.null(problem)) {
     return(invisible())
   }
-  
+
   err <- catch_internal_problem(
-    checkmate::assert_number(max_diffs, lower = 1), 
+    checkmate::assert_number(max_diffs, lower = 1),
     call = find_tblcheck_call()
   )
-  
+
   if (is_problem(err)) {
     return(tblcheck_grade(err))
   }
-  
+
   gradethis::fail(
     tblcheck_message(problem, max_diffs = max_diffs),
     problem = problem,
@@ -64,30 +64,32 @@ tblcheck_message <- function(problem, ...) {
   UseMethod("tblcheck_message")
 }
 
+#' @export
 tblcheck_message.default <- function(problem, ...) {
   invisible()
 }
 
+#' @export
 tblcheck_message.tblcheck_problem <- function(problem, ...) {
   type_msg <- if (!is.null(problem$type)) {
     gettext("Your code resulted in a `{type}` problem. ")
   } else {
     ""
   }
-  
+
   exp_msg <- if (!is.null(problem$expected)) {
     expected <- paste(md_code(problem$expected), collapse = ", ")
     gettext("I was expecting a value of {expected}. ")
   } else {
     ""
   }
-  
+
   obj_msg <- if (!is.null(problem$actual)) {
     actual <- paste(md_code(problem$actual), collapse = ", ")
     gettext("Your result gave a value of `{actual}`. ")
   } else {
     ""
   }
-  
+
   glue::glue_data(problem, type_msg, exp_msg, obj_msg)
 }

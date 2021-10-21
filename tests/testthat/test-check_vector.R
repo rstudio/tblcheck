@@ -4,9 +4,9 @@ test_that("vec_grade() checks classes", {
     .solution <- 1:3
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -27,9 +27,9 @@ test_that("vec_grade() checks the first three values", {
     .solution <- letters
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("values", letters, rev(letters), location = "vector"),
@@ -44,13 +44,13 @@ test_that("vec_grade() checks multiple classes", {
     class(.solution) <- c("test", "class", "integer")
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
-      type = "class", 
+      type = "class",
       expected = c("test", "class", "integer"),
       actual = "integer",
       expected_length = 10,
@@ -67,9 +67,9 @@ test_that("vec_grade() checks for value differences beyond the first 3", {
     .solution <- c(rep(1, 3), 10:15)
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -85,9 +85,9 @@ test_that("max_diffs modifies the number of values to print", {
     .solution <- rev(letters)
     vec_grade(max_diffs = 5)
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("values", rev(letters), letters, location = "vector"),
@@ -103,7 +103,7 @@ test_that("max_diffs doesn't overflow", {
   })
 
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("values", letters[2:1], letters[1:2], location = "vector"),
@@ -119,7 +119,7 @@ test_that("checks that vectors have the same length", {
   })
 
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -136,9 +136,9 @@ test_that("checks that vectors have the same names", {
     .solution <- c(a = 1, b = 2, c = 3)
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -156,9 +156,9 @@ test_that("number of levels", {
     .solution <- as.factor(c("a", "b", "c"))
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem("levels_n", 3, 2, location = "vector"),
@@ -172,9 +172,9 @@ test_that("level labels", {
     .solution <- as.factor(c("x", "y", "z"))
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -193,23 +193,23 @@ test_that("level order", {
     .solution <- factor(.result, levels = rev(levels(.result)))
     vec_grade()
   })
-  
+
   expect_snapshot(grade_reverse)
-  
+
   expect_equal(
     grade_reverse$problem,
     problem("levels_reversed", location = "vector"),
     ignore_attr = "class"
   )
-  
+
   grade_diffs <- tblcheck_test_grade({
     .result   <- factor(1:3, c("a", "b", "c"))
     .solution <- factor(1:3, c("c", "a", "b"))
     vec_grade()
   })
-  
+
   expect_snapshot(grade_diffs)
-  
+
   expect_equal(
     grade_diffs$problem,
     problem(
@@ -217,15 +217,15 @@ test_that("level order", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade <- tblcheck_test_grade({
     .result   <- as.factor(c("a", "b", "c", "d", "e"))
     .solution <- factor(.result, levels = c("a", "b", "c", "e", "d"))
     vec_grade()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -247,7 +247,7 @@ test_that("vec_grade() with no problems returns invisible()", {
       vec_grade()
     })
   )
-  
+
   expect_null(grade)
 })
 
@@ -260,7 +260,7 @@ test_that("vec_grade() handles bad user input", {
     }),
     "check_class"
   )
-  
+
   expect_internal_problem(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
@@ -269,7 +269,7 @@ test_that("vec_grade() handles bad user input", {
     }),
     "check_length"
   )
-  
+
   expect_internal_problem(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
@@ -278,7 +278,7 @@ test_that("vec_grade() handles bad user input", {
     }),
     "check_values"
   )
-  
+
   expect_internal_problem(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
@@ -287,7 +287,7 @@ test_that("vec_grade() handles bad user input", {
     }),
     "max_diffs"
   )
-  
+
   expect_internal_problem(
     grade <- tblcheck_test_grade({
       .result   <- letters[1:3]
@@ -300,22 +300,22 @@ test_that("vec_grade() handles bad user input", {
 
 test_that("vec_check() handles bad user input", {
   .result <- .solution <- letters[1:3]
-  
+
   expect_internal_problem(
     vec_check(check_class = "yes"),
     message = "check_class"
   )
-  
+
   expect_internal_problem(
     vec_check(check_length = c(TRUE, TRUE)),
     message = "check_length"
   )
-  
+
   expect_internal_problem(
     vec_check(check_values = NULL),
     message = "check_values"
   )
-  
+
   .result   <- letters[1:3]
   .solution <- NULL
   expect_internal_problem(vec_check(), "expected")

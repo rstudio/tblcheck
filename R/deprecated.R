@@ -1,11 +1,11 @@
 #' Check that the rows and columns of two tables are the same
-#' 
-#' @description 
+#'
+#' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' `tbl_check_table()` and `tbl_grade_table()` were renamed to [tbl_check()]
 #' and [tbl_grade()].
-#' 
+#'
 #' @keywords internal
 #' @export
 tbl_check_table <- function(
@@ -22,7 +22,7 @@ tbl_check_table <- function(
   env = parent.frame()
 ) {
   lifecycle::deprecate_warn("0.1.0", "tbl_check_table()", "tbl_check()")
-  
+
   tbl_check(
     object = object,
     expected = expected,
@@ -56,7 +56,7 @@ tbl_grade_table <- function(
   ...
 ) {
   lifecycle::deprecate_warn("0.1.0", "tbl_grade_table()", "tbl_grade()")
-  
+
   tbl_grade(
     object = object,
     expected = expected,
@@ -75,13 +75,13 @@ tbl_grade_table <- function(
 }
 
 #' Check that the rows and columns of two tables are the same
-#' 
-#' @description 
+#'
+#' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' `vec_check_vector()` and `vec_grade_vector()` were renamed to [vec_check()]
 #' and [vec_grade()].
-#' 
+#'
 #' @keywords internal
 #' @export
 vec_check_vector <- function(
@@ -95,7 +95,7 @@ vec_check_vector <- function(
   env = parent.frame()
 ) {
   lifecycle::deprecate_warn("0.1.0", "vec_check_vector()", "vec_check()")
-  
+
   vec_check(
     object = object,
     expected = expected,
@@ -121,7 +121,7 @@ vec_grade_vector <- function(
   ...
 ) {
   lifecycle::deprecate_warn("0.1.0", "vec_check_vector()", "vec_check()")
-  
+
   vec_grade(
     object = object,
     expected = expected,

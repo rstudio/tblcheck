@@ -35,7 +35,8 @@ not a problem.
 by \code{tblcheck}.
 \item \code{as_problem()} converts a list to a \code{tblcheck_problem}.
 }
-
+}
+\details{
 If \code{type} is specified, \code{is_problem()} and \code{is_tblcheck_problem()} test
 whether an object is a problem of the specified type.
 }

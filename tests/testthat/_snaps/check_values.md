@@ -38,3 +38,10 @@
         `6`, `7`, `8`, `9`, and `10`.
       >
 
+# vec_grade_values() failures
+
+    Code
+      grade_attr
+    Output
+      <gradethis_graded: [Incorrect] Your result contains unexpected values.>
+

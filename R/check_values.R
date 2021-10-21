@@ -5,9 +5,9 @@
 #' - `vec_check_values()` returns a list describing the problem
 #' - `vec_grade_values()` returns a failing grade and informative message
 #' with [gradethis::fail()]
-#' 
+#'
 #' @section Problems:
-#' 
+#'
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
 #' @inheritParams vec_check
@@ -17,25 +17,25 @@
 #'   [gradethis::fail()] message from `vec_grade_values()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-#' 
-#' @examples 
+#'
+#' @examples
 #' .result <- 1:10
 #' .solution <- letters[1:10]
 #' vec_check_values()
 #' vec_grade_values()
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- 1:11
 #' vec_check_values()
 #' vec_grade_values()
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- rlang::set_names(1:10, letters[1:10])
 #' vec_check_values()
 #' vec_grade_values()
 #' vec_grade_values(max_diffs = 5)
 #' vec_grade_values(max_diffs = Inf)
-#' 
+#'
 #' .result <- 1:10
 #' .solution <- 11:20
 #' vec_check_values()
@@ -45,7 +45,6 @@
 vec_check_values <- function(
   object = .result,
   expected = .solution,
-  max_diffs = 3,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -54,18 +53,25 @@ vec_check_values <- function(
   if (inherits(expected, ".solution")) {
     expected <- get(".solution", env)
   }
-  
+
   return_if_internal_problem({
     checkmate::assert_vector(object)
     checkmate::assert_vector(expected)
-    checkmate::assert_number(max_diffs, lower = 1)
   })
-  
-  exp_values <- unname(expected)
-  obj_values <- unname(object)
-  
-  if (!identical(obj_values, exp_values)) {
-    return(problem("values", exp_values, obj_values))
+
+  # Check if values are comparable types
+  if (!has_common_ptype(object, expected)) {
+    return_if_problem(vec_check_class(object, expected))
+
+    return(problem("values"))
+  }
+
+  # Check if values are the same length
+  return_if_problem(vec_check_dimensions(object, expected))
+
+  # Check if values are the same
+  if (!all(vctrs::vec_equal(object, expected))) {
+    return(problem("values", expected, object))
   }
 }
 
@@ -90,6 +96,7 @@ vec_grade_values <- function(
   )
 }
 
+#' @export
 tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
   # If values problem is empty, return vague message
   if (is.null(problem$actual) && is.null(problem$expected)) {
@@ -109,7 +116,7 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     max(length(problem$expected), length(problem$actual)),
     max_diffs
   )
-  
+
   if (
     !all(
       vctrs::vec_equal(
