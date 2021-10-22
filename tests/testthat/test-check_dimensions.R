@@ -4,9 +4,9 @@ test_that("vector length", {
     .solution <- letters[1:6]
     vec_grade_dimensions()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -15,15 +15,15 @@ test_that("vector length", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[1:5]
     vec_grade_dimensions()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
@@ -32,7 +32,7 @@ test_that("vector length", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[1:4]
@@ -49,15 +49,15 @@ test_that("vector length", {
     ),
     ignore_attr = "class"
   )
-  
+
   grade <- tblcheck_test_grade({
     .result   <- letters[1:3]
     .solution <- letters[4:7]
     vec_grade_dimensions()
   })
-  
+
   expect_snapshot(grade)
-  
+
   expect_equal(
     grade$problem,
     problem(
