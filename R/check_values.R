@@ -108,7 +108,7 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     problem$msg <- problem$msg %||%
       "Your result contains unexpected values."
 
-    glue::glue_data(problem, problem$msg)
+    return(glue::glue_data(problem, problem$msg))
   }
 
   # First, alert the user if the first `n` values do not match
