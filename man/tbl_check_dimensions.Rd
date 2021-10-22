@@ -37,7 +37,12 @@ vec_grade_dimensions(
   ...
 )
 
-vec_grade_length(object = .result, expected = .solution, env = parent.frame())
+vec_grade_length(
+  object = .result,
+  expected = .solution,
+  env = parent.frame(),
+  ...
+)
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}.}
