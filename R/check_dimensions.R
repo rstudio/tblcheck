@@ -185,7 +185,6 @@ tblcheck_message.length_problem <- function(problem, ...) {
       "but it has {actual_length} value.",
       "but it has {actual_length} values."
     )
-<<<<<<< ours
 
   if ((problem$actual_length - problem$expected_length) %in% 1:2) {
     problem$value <- setdiff(problem$actual, problem$expected)
@@ -208,10 +207,6 @@ tblcheck_message.length_problem <- function(problem, ...) {
   }
 
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg, problem$value_msg)
-=======
-
-  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
->>>>>>> theirs
 }
 
 #' @export
