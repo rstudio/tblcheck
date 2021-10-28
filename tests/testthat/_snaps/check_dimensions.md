@@ -4,7 +4,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your result should contain 6 values, but it has 3 values.
+        Your result should contain 6 values, but it has 3 values. I expected
+        your result to include the values `d`, `e`, and `f`.
       >
 
 ---
@@ -14,7 +15,7 @@
     Output
       <gradethis_graded: [Incorrect]
         Your result should contain 5 values, but it has 3 values. I expected
-        your result to include the value `d`.
+        your result to include the values `d` and `e`.
       >
 
 ---

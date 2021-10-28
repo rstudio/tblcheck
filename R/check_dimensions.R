@@ -189,30 +189,26 @@ tblcheck_message.length_problem <- function(problem, ...) {
   if ((problem$actual_length - problem$expected_length) %in% 1:3) {
     problem$value <- setdiff(problem$actual, problem$expected)
 
-    if (length(problem$value) == 1) {
-      problem$value <- md_code(problem$value)
-
-      problem$value_msg <-
-        " I didn't expect your result to include the value {value}."
-    } else if (length(problem$value) <= 3) {
-      problem$value <- knitr::combine_words(md_code(problem$value))
-
-      problem$value_msg <-
+    if (length(problem$value) <= 3) {
+      problem$value_msg <- ngettext(
+        length(problem$value),
+        " I didn't expect your result to include the value {value}.",
         " I didn't expect your result to include the values {value}."
+      )
+
+      problem$value <- knitr::combine_words(md_code(problem$value))
     }
   } else if ((problem$expected_length - problem$actual_length) %in% 1:3) {
     problem$value <- setdiff(problem$expected, problem$actual)
 
-    if (length(problem$value) == 1) {
-      problem$value <- md_code(problem$value)
-
-      problem$value_msg <-
-        " I expected your result to include the value {value}."
-    } else if (length(problem$value) <= 3) {
-      problem$value <- knitr::combine_words(md_code(problem$value))
-
-      problem$value_msg <-
+    if (length(problem$value) <= 3) {
+      problem$value_msg <- ngettext(
+        length(problem$value),
+        " I expected your result to include the value {value}.",
         " I expected your result to include the values {value}."
+      )
+
+      problem$value <- knitr::combine_words(md_code(problem$value))
     }
   }
 
