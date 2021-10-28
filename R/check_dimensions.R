@@ -186,23 +186,33 @@ tblcheck_message.length_problem <- function(problem, ...) {
       "but it has {actual_length} values."
     )
 
-  if ((problem$actual_length - problem$expected_length) %in% 1:2) {
+  if ((problem$actual_length - problem$expected_length) %in% 1:3) {
     problem$value <- setdiff(problem$actual, problem$expected)
 
-    if (length(problem$value) <= 2) {
-      problem$value <- problem$value[[1]]
+    if (length(problem$value) == 1) {
+      problem$value <- md_code(problem$value)
 
       problem$value_msg <-
-        " I didn't expect your result to include the value `{value}`."
+        " I didn't expect your result to include the value {value}."
+    } else if (length(problem$value) <= 3) {
+      problem$value <- knitr::combine_words(md_code(problem$value))
+
+      problem$value_msg <-
+        " I didn't expect your result to include the values {value}."
     }
-  } else if ((problem$expected_length - problem$actual_length) %in% 1:2) {
+  } else if ((problem$expected_length - problem$actual_length) %in% 1:3) {
     problem$value <- setdiff(problem$expected, problem$actual)
 
-    if (length(problem$value) <= 2) {
-      problem$value <- problem$value[[1]]
+    if (length(problem$value) == 1) {
+      problem$value <- md_code(problem$value)
 
       problem$value_msg <-
-        " I expected your result to include the value `{value}`."
+        " I expected your result to include the value {value}."
+    } else if (length(problem$value) <= 3) {
+      problem$value <- knitr::combine_words(md_code(problem$value))
+
+      problem$value_msg <-
+        " I expected your result to include the values {value}."
     }
   }
 
