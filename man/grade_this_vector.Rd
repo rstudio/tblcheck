@@ -153,7 +153,6 @@ gradethis::grade_this({
 \code{\link[=vec_grade]{vec_grade()}}
 
 Other graders: 
-\code{\link{grade_this_column}()},
 \code{\link{grade_this_table}()}
 }
 \concept{graders}

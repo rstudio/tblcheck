@@ -98,64 +98,6 @@ test_that("grade_this_table()", {
   expect_null(grade_fail$problem)
 })
 
-test_that("grade_this_column()", {
-  grade_pass <-
-    tblcheck_test_grade({
-      grade_this_column(column = "b", correct = "Correct")(
-        gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = 1:10)",
-          .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
-        )
-      )
-    })
-
-  expect_snapshot(grade_pass)
-  expect_true(grade_pass$correct)
-  expect_null(grade_pass$problem)
-
-  grade_class <-
-    tblcheck_test_grade({
-      grade_this_column(column = "b")(
-        gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
-          .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
-        )
-      )
-    })
-
-  expect_snapshot(grade_class)
-
-  expect_equal(
-    grade_class$problem,
-    problem(
-      "class",
-      "integer",
-      "numeric",
-      expected_length = 10,
-      actual_length = 10,
-      location = "column",
-      column = "b"
-    ),
-    ignore_attr = "class"
-  )
-
-  grade_fail <-
-    tblcheck_test_grade({
-      grade_this_column(
-        column = "b", check_class = FALSE, check_values = FALSE
-      )(
-        gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
-          .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
-        )
-      )
-    })
-
-  expect_snapshot(grade_fail)
-  expect_false(grade_fail$correct)
-  expect_null(grade_fail$problem)
-})
-
 test_that("grade_this_vector()", {
   grade_pass <-
     tblcheck_test_grade({

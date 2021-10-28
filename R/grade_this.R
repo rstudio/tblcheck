@@ -97,62 +97,6 @@ grade_this_table <- function(
   rlang::eval_bare(grader)
 }
 
-#' Grade this column
-#'
-#' Automatically grade a column of a table resulting from student code using
-#' [gradethis::grade_this()] and [tbl_grade_column()] to compare the
-#' student's result with the author's solution.
-#'
-#' @examples
-#  <!-- TODO: improve these examples -->
-#' ex <- gradethis::mock_this_exercise(
-#'   .solution_code = tibble(x = 1:3, y = letters[x]),
-#'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
-#' )
-#'
-#' grade_this_column("y")(ex)
-#'
-#' # Roughly equivalent to...
-#' gradethis::grade_this({
-#'   gradethis::pass_if_equal()
-#'   tbl_grade_column("y")
-#'   gradethis::fail()
-#' })(ex)
-#' @family graders
-#' @seealso [tbl_grade_column()]
-#'
-#' @inheritParams tbl_grade_column
-#' @inheritParams grade_this_table
-#'
-#' @inherit grade_this_table return
-#'
-#' @export
-grade_this_column <- function(
-  column,
-  correct = NULL,
-  pre_check = NULL,
-  post_check = NULL,
-  pass_if_equal = TRUE,
-  ...,
-  # all the arguments from tbl_grade_column() except object/expected
-  max_diffs = 3,
-  check_class = TRUE,
-  check_length = TRUE,
-  check_values = TRUE,
-  check_names = FALSE,
-  hint = getOption("gradethis.fail.hint", FALSE),
-  encourage = getOption("gradethis.fail.encourage", FALSE),
-  # gradethis pass/fail options
-  pass.praise = NULL,
-  fail.message = NULL,
-  fail.hint = hint,
-  fail.encourage = encourage
-)  {
-  ellipsis::check_dots_empty()
-  grader <- call2_tblcheck_grade_this(tbl_grade_column)
-  rlang::eval_bare(grader)
-}
-
 #' Grade this vector
 #'
 #' Automatically grade a vector resulting from student code using

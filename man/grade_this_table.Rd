@@ -156,7 +156,6 @@ gradethis::grade_this({
 \code{\link[=tbl_grade]{tbl_grade()}}
 
 Other graders: 
-\code{\link{grade_this_column}()},
 \code{\link{grade_this_vector}()}
 }
 \concept{graders}

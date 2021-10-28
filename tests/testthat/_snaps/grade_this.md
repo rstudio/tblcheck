@@ -22,30 +22,6 @@
     Output
       <tblcheck_graded: [Incorrect] >
 
-# grade_this_column()
-
-    Code
-      grade_pass
-    Output
-      <tblcheck_graded: [Correct] Correct>
-
----
-
-    Code
-      grade_class
-    Output
-      <tblcheck_graded: [Incorrect]
-        Your `b` column should be a vector of integers (class `integer`), but
-        it is a vector of numbers (class `numeric`).
-      >
-
----
-
-    Code
-      grade_fail
-    Output
-      <tblcheck_graded: [Incorrect] >
-
 # grade_this_vector()
 
     Code
