@@ -88,9 +88,6 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
 \item{pass.praise}{Logical \code{TRUE} or \code{FALSE} to determine whether a praising
 phrase should be automatically prepended to any \code{\link[gradethis:graded]{pass()}} or
 \code{\link[gradethis:pass_if_equal]{pass_if_equal()}} messages. Sets the \code{gradethis.pass.praise} option.}
-
-\item{fail.message}{The feedback \code{message} used by the final, fallback
-\code{\link[gradethis:graded]{gradethis::fail()}}.}
 }
 \value{
 The returned feedback is equivalent to \pkg{gradethis} grading code
