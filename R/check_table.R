@@ -46,7 +46,7 @@
 #'   `expected` have the same number of rows and columns
 #'   with [tbl_check_dimensions()].
 #' @param check_groups `[logical(1)]`\cr Whether to check that `object` and
-#'   `expected` have the same [[groups][dplyr::group_by()]
+#'   `expected` have the same [groups][dplyr::group_by()]
 #'   with [dplyr::group_vars()].
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [tbl_check_column()].

@@ -56,3 +56,7 @@ has_common_ptype <- function(x, y) {
     FALSE
   })
 }
+
+has_rlang_version <- function(minimum = "0.4.12.9001") {
+  utils::packageVersion("rlang") >= package_version(minimum)
+}

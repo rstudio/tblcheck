@@ -24,14 +24,20 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
   if (identical(expr[[1]], rlang::sym("{"))) {
     expr_setup <- expr[-length(expr)]
     expr_check <- expr[[length(expr)]]
-    final_call <- paste(expr[[length(expr)]][[1]])
+    final_call <- paste(extract_first(expr[[length(expr)]]))
   } else {
     expr_setup <- NULL
     expr_check <- expr
     final_call <- paste(expr[[1]])
   }
 
-  if (!grepl("^(tbl|vec|tblcheck)_(check|grade)", final_call)) {
+
+  if (
+    !grepl(
+      "^(tbl|vec|tblcheck)_(check|grade)|^grade_this_(table|column|vector)",
+      final_call
+    )
+  ) {
     stop("tblcheck_test_grade() expected a {tblcheck} function as the final expression")
   }
 
@@ -64,4 +70,10 @@ tblcheck_test_grade <- function(expr, return_all = FALSE) {
   }
 
   rlang::dots_list(grade_ret, grade_captured, grade_gradethis, .named = TRUE)
+}
+
+extract_first <- function(x) {
+  x <- x[[1]]
+  if (length(x) > 1) {x <- extract_first(x)}
+  x
 }
