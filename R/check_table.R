@@ -119,7 +119,6 @@ tbl_check <- function(
     checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
-    checkmate::assert_data_frame(expected)
   })
 
   # check table class ----
@@ -128,7 +127,12 @@ tbl_check <- function(
       tbl_check_class(object, expected),
       prefix = "table"
     )
-  }
+  } else (
+    return_if_problem(
+      tbl_check_is_table(object),
+      prefix = "table"
+    )
+  )
 
   # check column names ----
   if (check_names) {
