@@ -92,7 +92,7 @@ test_that("grade_this_table()", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass_default)
   expect_true(grade_pass_default$correct)
   expect_match(grade_pass_default$message, "PASS", fixed = TRUE)
@@ -210,7 +210,7 @@ test_that("pre_check setup", {
         )
       )
     })
-  
+
   expect_snapshot(grade_pass_default)
   expect_true(grade_pass_default$correct)
   expect_match(grade_pass_default$message, "PASS", fixed = TRUE)
