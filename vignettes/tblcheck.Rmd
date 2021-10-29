@@ -744,7 +744,7 @@ Knowing that we don't mind the additional column, we can use the `pre_check` arg
 ````markdown
 ```{r ex-additional-check-1, eval=FALSE}
 grade_this_table(pre_check = {
-  gradethis::fail_if(!inherits(.result, "data.frame"))
+  tbl_grade_is_table(.result)
   .result <- .result[intersect(names(.result), names(.solution))]
 })
 ```
