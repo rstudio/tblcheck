@@ -60,4 +60,5 @@ tbl_grade_is_table()
 .result <- list(a = 1:10)
 tbl_check_is_table()
 tbl_grade_is_table()
+
 }
