@@ -52,11 +52,10 @@ navbar:
 reference:
 - title: Exercise Checking Functions
   description: |
-    Fully automated table, column or vector checking. Choose one of these
+    Fully automated table or vector checking. Choose one of these
     functions to use in the `*-check` chunk of your exercise.
   contents:
   - grade_this_table
-  - grade_this_column
   - grade_this_vector
 - title: General checks
   desc: Check for multiple problems in a table, column, or vector
