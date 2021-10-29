@@ -22,7 +22,6 @@
 #' .result <- list(a = 1:10)
 #' tbl_check_is_table()
 #' tbl_grade_is_table()
-#'
 #' @param object An object to be compared to `expected`.
 #' @inheritParams tbl_check
 #' @inheritDotParams gradethis::fail -message
