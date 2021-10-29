@@ -20,9 +20,7 @@ grade_this_table(
   check_column_values = check_columns,
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
-  pass.praise = NULL,
-  fail.message = NULL,
-  fail.encourage = encourage
+  pass.praise = NULL
 )
 }
 \arguments{
@@ -93,10 +91,6 @@ phrase should be automatically prepended to any \code{\link[gradethis:graded]{pa
 
 \item{fail.message}{The feedback \code{message} used by the final, fallback
 \code{\link[gradethis:graded]{gradethis::fail()}}.}
-
-\item{fail.encourage}{Logical \code{TRUE} or \code{FALSE} to determine whether an
-encouraging phrase should be automatically appended to any \code{\link[gradethis:graded]{fail()}} or
-\code{\link[gradethis:pass_if_equal]{fail_if_equal()}} messages. Sets the \code{gradethis.fail.encourage} option.}
 }
 \value{
 The returned feedback is equivalent to \pkg{gradethis} grading code

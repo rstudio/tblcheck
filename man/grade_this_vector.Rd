@@ -17,9 +17,7 @@ grade_this_vector(
   check_names = TRUE,
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
-  pass.praise = NULL,
-  fail.message = NULL,
-  fail.encourage = encourage
+  pass.praise = NULL
 )
 }
 \arguments{
@@ -79,13 +77,6 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
 \item{pass.praise}{Logical \code{TRUE} or \code{FALSE} to determine whether a praising
 phrase should be automatically prepended to any \code{\link[gradethis:graded]{pass()}} or
 \code{\link[gradethis:pass_if_equal]{pass_if_equal()}} messages. Sets the \code{gradethis.pass.praise} option.}
-
-\item{fail.message}{The feedback \code{message} used by the final, fallback
-\code{\link[gradethis:graded]{gradethis::fail()}}.}
-
-\item{fail.encourage}{Logical \code{TRUE} or \code{FALSE} to determine whether an
-encouraging phrase should be automatically appended to any \code{\link[gradethis:graded]{fail()}} or
-\code{\link[gradethis:pass_if_equal]{fail_if_equal()}} messages. Sets the \code{gradethis.fail.encourage} option.}
 }
 \value{
 The returned feedback is equivalent to \pkg{gradethis} grading code
