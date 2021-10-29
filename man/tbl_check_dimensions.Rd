@@ -23,7 +23,12 @@ vec_check_dimensions(
   env = parent.frame()
 )
 
-vec_check_length(object = .result, expected = .solution, env = parent.frame())
+vec_check_length(
+  object = .result,
+  expected = .solution,
+  check_ncol = TRUE,
+  env = parent.frame()
+)
 
 tbl_grade_dimensions(
   object = .result,
@@ -44,6 +49,7 @@ vec_grade_dimensions(
 vec_grade_length(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame(),
   ...
 )
