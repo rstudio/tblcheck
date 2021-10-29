@@ -64,10 +64,12 @@ tblcheck_message <- function(problem, ...) {
   UseMethod("tblcheck_message")
 }
 
+#' @export
 tblcheck_message.default <- function(problem, ...) {
   invisible()
 }
 
+#' @export
 tblcheck_message.tblcheck_problem <- function(problem, ...) {
   type_msg <- if (!is.null(problem$type)) {
     gettext("Your code resulted in a `{type}` problem. ")

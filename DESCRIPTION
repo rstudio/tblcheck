@@ -11,7 +11,9 @@ Authors@R:
              family = "Aden-Buie",
              role = "aut",
              email = "garrick@rstudio.com",
-             comment = c(ORCID = "0000-0002-7111-0077")))
+             comment = c(ORCID = "0000-0002-7111-0077")),
+      person(family = "RStudio, PBC",
+             role = c("cph", "fnd")))
 Description: 'tblcheck' extends 'gradethis' with functions that inspect
     data frame or tibble objects to make it easier for teachers to check
     that student tables meet expectations.
@@ -26,7 +28,8 @@ Imports:
     magrittr,
     purrr,
     rlang,
-    utils
+    utils,
+    vctrs
 Suggests:
     mockery,
     dplyr,

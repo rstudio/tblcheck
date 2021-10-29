@@ -87,6 +87,7 @@ tbl_grade_class <- function(
 #' @export
 vec_grade_class <- tbl_grade_class
 
+#' @export
 tblcheck_message.class_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%

@@ -110,6 +110,7 @@ tbl_grade_dimensions <- function(
 #' @export
 vec_grade_dimensions <- tbl_grade_dimensions
 
+#' @export
 tblcheck_message.dimensions_n_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
@@ -144,6 +145,7 @@ tblcheck_message.dimensions_n_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+#' @export
 tblcheck_message.length_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
@@ -171,6 +173,7 @@ tblcheck_message.length_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+#' @export
 tblcheck_message.ncol_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
@@ -205,6 +208,7 @@ tblcheck_message.ncol_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+#' @export
 tblcheck_message.nrow_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
@@ -239,6 +243,7 @@ tblcheck_message.nrow_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+#' @export
 tblcheck_message.dimensions_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$exp_msg %||%

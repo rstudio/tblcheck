@@ -95,6 +95,7 @@ vec_grade_levels <- function(
   )
 }
 
+#' @export
 tblcheck_message.levels_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||%
@@ -141,6 +142,7 @@ tblcheck_message.levels_problem <- function(problem, max_diffs = 3, ...) {
   glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
+#' @export
 tblcheck_message.levels_n_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
@@ -168,6 +170,7 @@ tblcheck_message.levels_n_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
+#' @export
 tblcheck_message.levels_reversed_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
@@ -180,6 +183,7 @@ tblcheck_message.levels_reversed_problem <- function(problem, ...) {
   glue::glue_data(problem, problem$msg, problem$exp_msg %||% "")
 }
 
+#' @export
 tblcheck_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
