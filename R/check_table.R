@@ -128,7 +128,12 @@ tbl_check <- function(
       tbl_check_class(object, expected),
       prefix = "table"
     )
-  }
+  } else (
+    return_if_problem(
+      tbl_check_is_table(object),
+      prefix = "table"
+    )
+  )
 
   # check column names ----
   if (check_names) {

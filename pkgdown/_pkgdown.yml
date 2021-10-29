@@ -70,6 +70,7 @@ reference:
   - tbl_check_class
   - tbl_check_dimensions
   - tbl_check_groups
+  - tbl_check_is_table
   - vec_check_levels
   - tbl_check_names
   - vec_check_values
