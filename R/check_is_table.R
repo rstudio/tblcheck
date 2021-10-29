@@ -10,14 +10,6 @@
 #'
 #' 1. `not_table`: The object is not a table
 #'
-#' @param object An object to be compared to `expected`.
-#' @inheritParams tbl_check
-#' @inheritDotParams gradethis::fail -message
-#'
-#' @return If there are any issues, a [list] from `tbl_check_is_table()` or a
-#'   [gradethis::fail()] message from `tbl_grade_is_table()`.
-#'   Otherwise, invisibly returns [`NULL`].
-#' @export
 #' @examples
 #' .result <- data.frame(a = 1:10)
 #' tbl_check_is_table()
@@ -30,6 +22,15 @@
 #' .result <- list(a = 1:10)
 #' tbl_check_is_table()
 #' tbl_grade_is_table()
+#'
+#' @param object An object to be compared to `expected`.
+#' @inheritParams tbl_check
+#' @inheritDotParams gradethis::fail -message
+#'
+#' @return If there are any issues, a [list] from `tbl_check_is_table()` or a
+#'   [gradethis::fail()] message from `tbl_grade_is_table()`.
+#'   Otherwise, invisibly returns [`NULL`].
+#' @export
 tbl_check_is_table <- function(
   object = .result,
   env = parent.frame()
