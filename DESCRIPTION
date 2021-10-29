@@ -1,23 +1,19 @@
 Package: tblcheck
 Title: Grade Tables in Learning Exercises
 Version: 0.0.0.9000
-Authors@R: 
-    c(person(given = "Alexander",
-             family = "Rossell Hayes",
-             role = c("aut", "cre"),
-             email = "alex.rossellhayes@rstudio.com",
-             comment = c(ORCID = "0000-0001-9412-0457")),
-      person(given = "Garrick",
-             family = "Aden-Buie",
-             role = "aut",
-             email = "garrick@rstudio.com",
-             comment = c(ORCID = "0000-0002-7111-0077")),
-      person(family = "RStudio, PBC",
-             role = c("cph", "fnd")))
+Authors@R: c(
+    person("Alexander", "Rossell Hayes", , "alex.rossellhayes@rstudio.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-9412-0457")),
+    person("Garrick", "Aden-Buie", , "garrick@rstudio.com", role = "aut",
+           comment = c(ORCID = "0000-0002-7111-0077")),
+    person(, "RStudio, PBC", role = c("cph", "fnd"))
+  )
 Description: 'tblcheck' extends 'gradethis' with functions that inspect
     data frame or tibble objects to make it easier for teachers to check
     that student tables meet expectations.
 License: MIT + file LICENSE
+URL: https://pkgs.rstudio.com/tblcheck, https://github.com/rstudio/tblcheck
+BugReports: https://github.com/rstudio/tblcheck/issues
 Imports:
     checkmate,
     ellipsis,
@@ -31,9 +27,9 @@ Imports:
     utils,
     vctrs
 Suggests:
-    mockery,
     dplyr,
     learnr,
+    mockery,
     rmarkdown,
     testthat (>= 3.0.0),
     tibble
