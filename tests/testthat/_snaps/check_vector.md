@@ -14,7 +14,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        The first 3 values of your result should be `a`, `b`, and `c`.
+        The first 3 values of your result should be `a`, `b`, and `c`, not
+        `z`, `y`, and `x`.
       >
 
 # vec_grade() checks multiple classes
@@ -32,7 +33,9 @@
     Code
       grade
     Output
-      <gradethis_graded: [Incorrect] Your result contains unexpected values.>
+      <gradethis_graded: [Incorrect]
+        I didn't expect your result to include the values `5`, `6`, and `7`.
+      >
 
 # max_diffs modifies the number of values to print
 
@@ -41,7 +44,7 @@
     Output
       <gradethis_graded: [Incorrect]
         The first 5 values of your result should be `z`, `y`, `x`, `w`, and
-        `v`.
+        `v`, not `a`, `b`, `c`, `d`, and `e`.
       >
 
 # max_diffs doesn't overflow
@@ -50,7 +53,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        The first 2 values of your result should be `b` and `a`.
+        The first 2 values of your result should be `b` and `a`, not `a` and
+        `b`.
       >
 
 # checks that vectors have the same length
@@ -59,7 +63,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your result should contain 4 values, but it has 3 values.
+        Your result should contain 4 values, but it has 3 values. I expected
+        your result to include the value `d`.
       >
 
 # checks that vectors have the same names

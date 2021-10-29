@@ -122,7 +122,10 @@ test_that("checks that vectors have the same length", {
 
   expect_equal(
     grade$problem,
-    problem("length", 4, 3, location = "vector"),
+    problem(
+      "length", letters[1:4], letters[1:3],
+      expected_length = 4, actual_length = 3, location = "vector"
+    ),
     ignore_attr = "class"
   )
 })
