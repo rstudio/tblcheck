@@ -10,6 +10,13 @@ template:
       creator: "@rstudio"
       card: summary
 
+authors:
+  Garrick Aden-Buie:
+    href: https://www.garrickadenbuie.com
+  "RStudio, PBC":
+    href: https://www.rstudio.com
+    html: <img src="https://www.tidyverse.org/rstudio-logo.svg" height="24" />
+
 development:
   version_tooltip: "auto"
 
