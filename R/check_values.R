@@ -98,17 +98,8 @@ vec_grade_values <- function(
 
 #' @export
 tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
-  problem$n_values <- min(
-    max(length(problem$expected), length(problem$actual)),
-    max_diffs
-  )
-
-  if (
-    identical(
-      problem$expected[seq_len(problem$n_values)],
-      problem$actual[seq_len(problem$n_values)]
-    )
-  ) {
+  # If values problem is empty, return vague message
+  if (is.null(problem$actual) && is.null(problem$expected)) {
     if (is_problem(problem, "column")) {
       problem$msg <- problem$msg %||%
         "Your `{column}` column contains unexpected values."
@@ -120,28 +111,105 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     return(glue::glue_data(problem, problem$msg))
   }
 
-  problem$expected <- knitr::combine_words(
-    md_code(problem$expected[seq_len(problem$n_values)])
-  )
-  problem$actual <- knitr::combine_words(
-    md_code(problem$actual[seq_len(problem$n_values)])
+  # First, alert the user if the first `n` values do not match
+  problem$n_values <- min(
+    max(length(problem$expected), length(problem$actual)),
+    max_diffs
   )
 
-  if (is_problem(problem, "column")) {
-    problem$msg <- problem$msg %||%
-      ngettext(
-        problem$n_values,
-        "The first value of your `{column}` column should be {expected}.",
-        "The first {n_values} values of your `{column}` column should be {expected}."
+  if (
+    !all(
+      vctrs::vec_equal(
+        problem$expected[seq_len(problem$n_values)],
+        problem$actual[seq_len(problem$n_values)]
       )
-  }
-
-  problem$msg <- problem$msg %||%
-    ngettext(
-      problem$n_values,
-      "The first value of your result should be {expected}.",
-      "The first {n_values} values of your result should be {expected}."
+    )
+  ) {
+    problem$expected <- knitr::combine_words(
+      md_code(problem$expected[seq_len(problem$n_values)])
+    )
+    problem$actual <- knitr::combine_words(
+      md_code(problem$actual[seq_len(problem$n_values)])
     )
 
-  glue::glue_data(problem, problem$msg)
+    if (is_problem(problem, "column")) {
+      problem$expected_msg <- problem$expected_msg %||%
+        ngettext(
+          problem$n_values,
+          "The first value of your `{column}` column should be {expected}, not {actual},",
+          "The first {n_values} values of your `{column}` column should be {expected},"
+        )
+    }
+
+    problem$expected_msg <- problem$expected_msg %||%
+      ngettext(
+        problem$n_values,
+        "The first value of your result should be {expected},",
+        "The first {n_values} values of your result should be {expected},"
+      )
+
+    problem$actual_message <- problem$actual_message %||%
+      " not {actual}."
+
+    return(
+      glue::glue_data(problem, problem$expected_msg, problem$actual_message)
+    )
+  }
+
+  # Next, alert if there are values in `actual` that aren't in `expected`
+  problem$unexpected <- setdiff(problem$actual, problem$expected)
+
+  if (length(problem$unexpected)) {
+    problem$unexpected <- problem$unexpected[
+      seq_len(min(max_diffs, length(problem$unexpected)))
+    ]
+
+    if (is_problem(problem, "column")) {
+      problem$msg <- ngettext(
+        length(problem$unexpected),
+        "I didn't expect your `{column}` column to include the value {unexpected}.",
+        "I didn't expect your `{column}` column to include the values {unexpected}."
+      )
+    }
+
+    problem$msg <- ngettext(
+      length(problem$unexpected),
+      "I didn't expect your result to include the value {unexpected}.",
+      "I didn't expect your result to include the values {unexpected}."
+    )
+
+    problem$unexpected <- knitr::combine_words(md_code(problem$unexpected))
+
+    return(glue::glue_data(problem, problem$msg))
+  }
+
+  # Next, alert if there are values in `expected` that aren't in `actual`
+  problem$missing <- setdiff(problem$expected, problem$actual)
+
+  if (length(problem$missing)) {
+    problem$missing <- problem$missing[
+      seq_len(min(max_diffs, length(problem$missing)))
+    ]
+
+    if (is_problem(problem, "column")) {
+      problem$msg <- ngettext(
+        length(problem$missing),
+        "I expected your `{column}` column to include the value {missing}.",
+        "I expected your `{column}` column to include the values {missing}."
+      )
+    }
+
+    problem$msg <- ngettext(
+      length(problem$missing),
+      "I expected your result to include the value {missing}.",
+      "I expected your result to include the values {missing}."
+    )
+
+    problem$missing <- knitr::combine_words(md_code(problem$missing))
+
+    return(glue::glue_data(problem, problem$msg))
+  }
+
+  # If all else fails, return vague message
+  tblcheck_message(problem("values"))
 }

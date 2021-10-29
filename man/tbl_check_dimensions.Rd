@@ -3,8 +3,10 @@
 \name{tbl_check_dimensions}
 \alias{tbl_check_dimensions}
 \alias{vec_check_dimensions}
+\alias{vec_check_length}
 \alias{tbl_grade_dimensions}
 \alias{vec_grade_dimensions}
+\alias{vec_grade_length}
 \title{Check that the dimensions of two object are the same}
 \usage{
 tbl_check_dimensions(
@@ -19,6 +21,8 @@ vec_check_dimensions(
   env = parent.frame()
 )
 
+vec_check_length(object = .result, expected = .solution, env = parent.frame())
+
 tbl_grade_dimensions(
   object = .result,
   expected = .solution,
@@ -27,6 +31,13 @@ tbl_grade_dimensions(
 )
 
 vec_grade_dimensions(
+  object = .result,
+  expected = .solution,
+  env = parent.frame(),
+  ...
+)
+
+vec_grade_length(
   object = .result,
   expected = .solution,
   env = parent.frame(),
