@@ -83,19 +83,20 @@ test_that("grade_this_table()", {
     ignore_attr = "class"
   )
 
-  grade_fail <-
+  grade_pass_default <-
     tblcheck_test_grade({
-      grade_this_table(check_class = FALSE)(
+      grade_this_table(check_class = FALSE, correct = "PASS")(
         gradethis::mock_this_exercise(
           .user_code     = "data.frame(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
     })
-
-  expect_snapshot(grade_fail)
-  expect_false(grade_fail$correct)
-  expect_null(grade_fail$problem)
+  
+  expect_snapshot(grade_pass_default)
+  expect_true(grade_pass_default$correct)
+  expect_match(grade_pass_default$message, "PASS", fixed = TRUE)
+  expect_null(grade_pass_default$problem)
 })
 
 test_that("grade_this_vector()", {
@@ -136,18 +137,19 @@ test_that("grade_this_vector()", {
     ignore_attr = "class"
   )
 
-  grade_fail <-
+  grade_pass_default <-
     tblcheck_test_grade({
-      grade_this_vector(check_class = FALSE, check_values = FALSE)(
+      grade_this_vector(check_class = FALSE, check_values = FALSE, correct = "PASS")(
         gradethis::mock_this_exercise(
           .user_code = "as.numeric(1:10)", .solution_code = "1:10"
         )
       )
     })
 
-  expect_snapshot(grade_fail)
-  expect_false(grade_fail$correct)
-  expect_null(grade_fail$problem)
+  expect_snapshot(grade_pass_default)
+  expect_true(grade_pass_default$correct)
+  expect_match(grade_pass_default$message, "PASS", fixed = TRUE)
+  expect_null(grade_pass_default$problem)
 })
 
 test_that("pre_check setup", {
@@ -195,11 +197,12 @@ test_that("pre_check setup", {
     ignore_attr = "class"
   )
 
-  grade_fail <-
+  grade_pass_default <-
     tblcheck_test_grade({
       grade_this_vector(
         pre_check = {.result <- .result$b; .solution <- .solution$b},
-        check_class = FALSE, check_values = FALSE
+        check_class = FALSE, check_values = FALSE,
+        correct = "PASS"
       )(
         gradethis::mock_this_exercise(
           .user_code     = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
@@ -207,10 +210,11 @@ test_that("pre_check setup", {
         )
       )
     })
-
-  expect_snapshot(grade_fail)
-  expect_false(grade_fail$correct)
-  expect_null(grade_fail$problem)
+  
+  expect_snapshot(grade_pass_default)
+  expect_true(grade_pass_default$correct)
+  expect_match(grade_pass_default$message, "PASS", fixed = TRUE)
+  expect_null(grade_pass_default$problem)
 })
 
 test_that("pre_check test", {
@@ -253,8 +257,7 @@ test_that("post_check test", {
     tblcheck_test_grade({
       grade_this_table(
         post_check = {fail_if(is.integer(.result$b), "Incorrect")},
-        check_class = FALSE,
-        fail.encourage = FALSE
+        check_class = FALSE
       )(
         gradethis::mock_this_exercise(
           .user_code     = "data.frame(a = 1:10, b = 1:10)",

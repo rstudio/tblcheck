@@ -18,9 +18,9 @@
 ---
 
     Code
-      grade_fail
+      grade_pass_default
     Output
-      <tblcheck_graded: [Incorrect] >
+      <tblcheck_graded: [Correct] PASS>
 
 # grade_this_vector()
 
@@ -42,9 +42,9 @@
 ---
 
     Code
-      grade_fail
+      grade_pass_default
     Output
-      <tblcheck_graded: [Incorrect] >
+      <tblcheck_graded: [Correct] PASS>
 
 # pre_check setup
 
@@ -66,9 +66,9 @@
 ---
 
     Code
-      grade_fail
+      grade_pass_default
     Output
-      <tblcheck_graded: [Incorrect] >
+      <tblcheck_graded: [Correct] PASS>
 
 # pre_check test
 

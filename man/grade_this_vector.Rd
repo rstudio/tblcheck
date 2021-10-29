@@ -19,7 +19,6 @@ grade_this_vector(
   encourage = getOption("gradethis.fail.encourage", FALSE),
   pass.praise = NULL,
   fail.message = NULL,
-  fail.hint = hint,
   fail.encourage = encourage
 )
 }
@@ -83,10 +82,6 @@ phrase should be automatically prepended to any \code{\link[gradethis:graded]{pa
 
 \item{fail.message}{The feedback \code{message} used by the final, fallback
 \code{\link[gradethis:graded]{gradethis::fail()}}.}
-
-\item{fail.hint}{Logical \code{TRUE} or \code{FALSE} to determine whether an automated
-code feedback hint should be shown with a \code{\link[gradethis:graded]{fail()}} or \code{\link[gradethis:pass_if_equal]{fail_if_equal()}}
-message. Sets the \code{gradethis.fail.hint} option.}
 
 \item{fail.encourage}{Logical \code{TRUE} or \code{FALSE} to determine whether an
 encouraging phrase should be automatically appended to any \code{\link[gradethis:graded]{fail()}} or

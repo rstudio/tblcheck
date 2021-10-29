@@ -87,10 +87,7 @@ grade_this_table <- function(
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
   # gradethis pass/fail options
-  pass.praise = NULL,
-  fail.message = NULL,
-  fail.hint = hint,
-  fail.encourage = encourage
+  pass.praise = NULL
 ) {
   ellipsis::check_dots_empty()
   grader <- call2_tblcheck_grade_this(tbl_grade)
@@ -151,10 +148,7 @@ grade_this_vector <- function(
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
   # gradethis pass/fail options
-  pass.praise = NULL,
-  fail.message = NULL,
-  fail.hint = hint,
-  fail.encourage = encourage
+  pass.praise = NULL
 ) {
   ellipsis::check_dots_empty()
   grader <- call2_tblcheck_grade_this(vec_grade)
@@ -211,10 +205,7 @@ tblcheck_grade_this_impl <- function(
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
   # gradethis pass/fail options
-  pass.praise = NULL,
-  fail.message = NULL,
-  fail.hint = hint,
-  fail.encourage = encourage
+  pass.praise = NULL
 ) {
   pre_check  <- rlang::enexpr(pre_check)
   post_check <- rlang::enexpr(post_check)
@@ -236,10 +227,7 @@ tblcheck_grade_this_impl <- function(
         ".__post_check"      = post_check,
         ".__pass_if_equal"   = pass_if_equal,
         ".__correct"         = correct        %||% getOption("gradethis.pass"),
-        ".__pass.praise"     = pass.praise    %||% getOption("gradethis.pass.praise", FALSE),
-        ".__fail.message"    = fail.message   %||% getOption("gradethis.fail.message"),
-        ".__fail.hint"       = fail.hint      %||% getOption("gradethis.fail.hint", FALSE),
-        ".__fail.encourage"  = fail.encourage %||% getOption("gradethis.fail.encourage", FALSE)
+        ".__pass.praise"     = pass.praise    %||% getOption("gradethis.pass.praise", FALSE)
       ),
       parent = rlang::env_parent(check_env)
     )
@@ -267,12 +255,8 @@ tblcheck_grade_this_impl <- function(
         rlang::eval_bare(post_check)
       }
 
-      # finally, worst case scenario, fail()
-      gradethis::fail(
-        message = get(".__fail.message"),
-        hint = get(".__fail.hint"),
-        encourage = get(".__fail.encourage")
-      )
+      # pass, possibly with code feedback
+      gradethis::pass(message = get(".__correct"), praise = get(".__pass.praise"))
     })(check_env)
 
     class(grade) <- c("tblcheck_graded", class(grade))
