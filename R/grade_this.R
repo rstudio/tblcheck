@@ -39,8 +39,6 @@
 #'   `FALSE`, you will need to include your own call to [gradethis::pass()] in
 #'   either `pre_check` or `post_check` for the student to be able to receive a
 #'   passing grade.
-#' @param fail.message The feedback `message` used by the final, fallback
-#'   [gradethis::fail()].
 #' @inheritParams gradethis::fail
 #' @inheritParams gradethis::gradethis_setup
 #'
