@@ -30,10 +30,9 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
-#' @param cols <[`tidy-select`][tidyselect::language]> A selection of columns to
-#'   compare between `object` and `expected`.
-#'   Differences in other columns will be ignored.
-#'   If [`NULL`], the default, all columns will be checked.
+#' @param cols [[`tidy-select`][tidyselect::language]]\cr A selection of columns
+#'   to compare between `object` and `expected`. Differences in other columns
+#'   will be ignored. If [`NULL`], the default, all columns will be checked.
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
 #'   display in an informative failure message.
 #'   Passed to [tbl_check_names()] to determine the number of mismatched column
