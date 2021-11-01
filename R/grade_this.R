@@ -5,7 +5,6 @@
 #' student's result with the author's solution.
 #'
 #' @examples
-#  <!-- TODO: improve these examples -->
 #' ex <- gradethis::mock_this_exercise(
 #'   .solution_code = tibble(x = 1:3, y = letters[x]),
 #'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
@@ -57,8 +56,7 @@
 #'   3. The appropriate \pkg{tblcheck} grading function is called, returning
 #'      any feedback:
 #'       1. `grade_this_table()` returns the results from [tbl_grade()]
-#'       2. `grade_this_column()` returns the results from [tbl_grade_column()]
-#'       3. `grade_this_vector()` returns the results from [vec_grade()]
+#'       1. `grade_this_vector()` returns the results from [vec_grade()]
 #'   4. The `post_check` code, if any, is evaluated and any feedback from a call
 #'      to [`pass()`][gradethis::graded], [`fail()`][gradethis::graded], or
 #'      their equivalents is returned.
@@ -99,7 +97,6 @@ grade_this_table <- function(
 #' student's result with the author's solution.
 #'
 #' @examples
-#  <!-- TODO: improve these examples -->
 #' ex <- gradethis::mock_this_exercise(
 #'   .solution_code = tibble(x = 1:3, y = letters[x]),
 #'   .user_code = tibble(x = 1:3, y = c("A", "b", "c"))

@@ -106,7 +106,6 @@ is used for the feedback.
 any feedback:
 \enumerate{
 \item \code{grade_this_table()} returns the results from \code{\link[=tbl_grade]{tbl_grade()}}
-\item \code{grade_this_column()} returns the results from \code{\link[=tbl_grade_column]{tbl_grade_column()}}
 \item \code{grade_this_vector()} returns the results from \code{\link[=vec_grade]{vec_grade()}}
 }
 \item The \code{post_check} code, if any, is evaluated and any feedback from a call

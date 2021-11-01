@@ -248,8 +248,8 @@ If you are new to grading learnr tutorials, we recommend that you [get comfortab
 tblcheck provides four levels of grading:
 
 1. For fully automatic grading as a drop-in replacement for `gradethis::grade_this()`,
-use `grade_this_table()`, `grade_this_column()` or `grade_this_vector()`.
-2. To integrate tblcheck into existing grading code, you can use `tbl_grade()`, `tbl_grade_column()` or `vec_grade()` for specific automated checks.
+use `grade_this_table()` or `grade_this_vector()`.
+2. To integrate tblcheck into existing grading code, you can use `tbl_grade()` or `vec_grade()` for specific automated checks.
 3. You can directly call the [specialized individual grading functions](#specific-grading-functions) that power the higher-level functions.
 4. Finally, you can check for table and vector problems to [create your own custom feedback](#custom-mistake-handling).
 
