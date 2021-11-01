@@ -146,12 +146,8 @@ tbl_check <- function(
     )
   )
 
-  # If `cols` is not an <expression>, wrap it in an expression with `enexpr()`.
-  # `cols` will be an <expression> if it was passed by `tbl_grade()`, in which
-  # case we do not want to wrap it in another expression.
-  if (!tryCatch(rlang::is_expression(cols), error = function(e) FALSE)) {
-    cols <- rlang::enexpr(cols)
-  }
+  # filter columns in object and expected ----
+  cols <- rlang::enexpr(cols)
 
   if (!is.null(cols)) {
     object <- object[tidyselect::eval_select(cols, object)]
@@ -226,7 +222,7 @@ tbl_grade <- function(
     tbl_check(
       object = object,
       expected = expected,
-      cols = rlang::enexpr(cols),
+      cols = !!rlang::enexpr(cols),
       check_class = check_class,
       check_names = check_names,
       check_column_order = check_column_order,
