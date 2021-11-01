@@ -12,20 +12,28 @@
 tbl_check_dimensions(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame()
 )
 
 vec_check_dimensions(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame()
 )
 
-vec_check_length(object = .result, expected = .solution, env = parent.frame())
+vec_check_length(
+  object = .result,
+  expected = .solution,
+  check_ncol = TRUE,
+  env = parent.frame()
+)
 
 tbl_grade_dimensions(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame(),
   ...
 )
@@ -33,6 +41,7 @@ tbl_grade_dimensions(
 vec_grade_dimensions(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame(),
   ...
 )
@@ -40,6 +49,7 @@ vec_grade_dimensions(
 vec_grade_length(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame(),
   ...
 )
@@ -48,6 +58,9 @@ vec_grade_length(
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
+
+\item{check_ncol}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same number of columns.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 

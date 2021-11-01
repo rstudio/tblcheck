@@ -16,6 +16,7 @@
 #' @section Problems:
 #'
 #' 1. `class`: The table does not have the expected classes.
+#' 1. `not_table`: `object` does not inherit the [data.frame] class.
 #' 1. `names`: The table has column names that are not expected,
 #'   or is missing names that are expected.
 #' 1. `names_order`: The table has the same column names as expected,
@@ -29,6 +30,9 @@
 #'
 #' @param object A data frame to be compared to `expected`.
 #' @param expected A data frame containing the expected result.
+#' @param cols [[`tidy-select`][tidyselect::language]]\cr A selection of columns
+#'   to compare between `object` and `expected`. Differences in other columns
+#'   will be ignored. If [`NULL`], the default, all columns will be checked.
 #' @param max_diffs `[numeric(1)]`\cr The maximum number of mismatched values to
 #'   display in an informative failure message.
 #'   Passed to [tbl_check_names()] to determine the number of mismatched column
@@ -85,6 +89,11 @@
 #' tbl_check()
 #' tbl_grade()
 #'
+#' .result <- tibble::tibble(a = 1:10, intermediate = 6:15, b = 11:20)
+#' .solution <- tibble::tibble(a = 1:10, b = 11:20)
+#' tbl_check(cols = any_of(names(.solution)))
+#' tbl_grade(cols = any_of(names(.solution)))
+#'
 #' .result <- tibble::tibble(a = 1:10, b = 11:20)
 #' .solution <- tibble::tibble(a = 11:20, b = 1:10)
 #' tbl_check()
@@ -94,6 +103,7 @@
 tbl_check <- function(
   object = .result,
   expected = .solution,
+  cols = NULL,
   check_class = TRUE,
   check_names = TRUE,
   check_column_order = FALSE,
@@ -135,6 +145,14 @@ tbl_check <- function(
     )
   )
 
+  # filter columns in object and expected ----
+  cols <- rlang::enexpr(cols)
+
+  if (!is.null(cols)) {
+    object <- object[tidyselect::eval_select(cols, object)]
+    expected <- expected[tidyselect::eval_select(cols, expected)]
+  }
+
   # check column names ----
   if (check_names) {
     return_if_problem(
@@ -146,7 +164,12 @@ tbl_check <- function(
   # check dimensions ----
   if (check_dimensions) {
     return_if_problem(
-      tbl_check_dimensions(object, expected),
+      tbl_check_dimensions(
+        object, expected,
+        # Don't check number of columns if a subset of columns was specified
+        # or if names were already checked
+        check_ncol = is.null(cols) && !check_names
+      ),
       prefix = "table"
     )
   }
@@ -181,6 +204,7 @@ tbl_check <- function(
 tbl_grade <- function(
   object = .result,
   expected = .solution,
+  cols = NULL,
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
@@ -197,6 +221,7 @@ tbl_grade <- function(
     tbl_check(
       object = object,
       expected = expected,
+      cols = !!rlang::enexpr(cols),
       check_class = check_class,
       check_names = check_names,
       check_column_order = check_column_order,

@@ -8,6 +8,7 @@
 tbl_check(
   object = .result,
   expected = .solution,
+  cols = NULL,
   check_class = TRUE,
   check_names = TRUE,
   check_column_order = FALSE,
@@ -22,6 +23,7 @@ tbl_check(
 tbl_grade(
   object = .result,
   expected = .solution,
+  cols = NULL,
   max_diffs = 3,
   check_class = TRUE,
   check_names = TRUE,
@@ -39,6 +41,10 @@ tbl_grade(
 \item{object}{A data frame to be compared to \code{expected}.}
 
 \item{expected}{A data frame containing the expected result.}
+
+\item{cols}{[\code{\link[tidyselect:language]{tidy-select}}]\cr A selection of columns
+to compare between \code{object} and \code{expected}. Differences in other columns
+will be ignored. If \code{\link{NULL}}, the default, all columns will be checked.}
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
@@ -115,6 +121,7 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 
 \enumerate{
 \item \code{class}: The table does not have the expected classes.
+\item \code{not_table}: \code{object} does not inherit the \link{data.frame} class.
 \item \code{names}: The table has column names that are not expected,
 or is missing names that are expected.
 \item \code{names_order}: The table has the same column names as expected,
@@ -150,6 +157,11 @@ tbl_grade()
 .solution <- tibble::tibble(a = letters[1:10], b = letters[11:20])
 tbl_check()
 tbl_grade()
+
+.result <- tibble::tibble(a = 1:10, intermediate = 6:15, b = 11:20)
+.solution <- tibble::tibble(a = 1:10, b = 11:20)
+tbl_check(cols = any_of(names(.solution)))
+tbl_grade(cols = any_of(names(.solution)))
 
 .result <- tibble::tibble(a = 1:10, b = 11:20)
 .solution <- tibble::tibble(a = 11:20, b = 1:10)

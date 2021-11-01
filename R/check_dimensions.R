@@ -20,6 +20,8 @@
 #'   different dimensions
 #'
 #' @inheritParams tbl_check_class
+#' @param check_ncol `[logical(1)]`\cr Whether to check that `object` and
+#'   `expected` have the same number of columns.
 #' @inheritDotParams gradethis::fail -message
 #'
 #' @return If there are any issues, a [list] from `tbl_check_dimensions()` or a
@@ -50,6 +52,7 @@
 tbl_check_dimensions <- function(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -106,11 +109,12 @@ vec_check_length <- tbl_check_dimensions
 tbl_grade_dimensions <- function(
   object = .result,
   expected = .solution,
+  check_ncol = TRUE,
   env = parent.frame(),
   ...
 ) {
   tblcheck_grade(
-    tbl_check_dimensions(object, expected, env = env),
+    tbl_check_dimensions(object, expected, check_ncol = check_ncol, env = env),
     env = env,
     ...
   )

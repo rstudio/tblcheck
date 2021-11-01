@@ -103,6 +103,15 @@
         not `a`, `b`, and `c`.
       >
 
+# tbl_grade() cols
+
+    Code
+      grade
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table should not have a column named `intermediate`.
+      >
+
 # tbl_grade() returns grades with row problems
 
     Code

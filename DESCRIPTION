@@ -24,6 +24,7 @@ Imports:
     magrittr,
     purrr,
     rlang,
+    tidyselect,
     utils,
     vctrs
 Suggests:

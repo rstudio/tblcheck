@@ -206,6 +206,58 @@ test_that("tbl_grade() columns", {
   )
 })
 
+test_that("tbl_grade() cols", {
+  grade <- tblcheck_test_grade({
+    .result <- tibble::tibble(a = 1:10, intermediate = 6:15, b = 11:20)
+    .solution <- tibble::tibble(a = 1:10, b = 11:20)
+    tbl_grade()
+  })
+
+  expect_snapshot(grade)
+
+  expect_equal(
+    grade$problem,
+    problem(
+      "names",
+      unexpected = "intermediate",
+      location = "table"
+    ),
+    ignore_attr = "class"
+  )
+
+  check <- tblcheck_test_grade({
+    .result <- tibble::tibble(a = 1:10, intermediate = 6:15, b = 11:20)
+    .solution <- tibble::tibble(a = 1:10, b = 11:20)
+    tbl_check()
+  })
+
+  expect_equal(
+    check,
+    problem(
+      "names",
+      unexpected = "intermediate",
+      location = "table"
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_cols <- tblcheck_test_grade({
+    .result <- tibble::tibble(a = 1:10, intermediate = 6:15, b = 11:20)
+    .solution <- tibble::tibble(a = 1:10, b = 11:20)
+    tbl_grade(cols = any_of(names(.solution)))
+  })
+
+  expect_null(grade_cols)
+
+  check_cols <- tblcheck_test_grade({
+    .result <- tibble::tibble(a = 1:10, intermediate = 6:15, b = 11:20)
+    .solution <- tibble::tibble(a = 1:10, b = 11:20)
+    tbl_check(cols = any_of(names(.solution)))
+  })
+
+  expect_null(grade_cols)
+})
+
 test_that("tbl_grade() with no problems returns invisible()", {
   .solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
 
