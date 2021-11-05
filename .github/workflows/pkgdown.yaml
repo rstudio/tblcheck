@@ -23,54 +23,48 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v1
         id: install-r
+        with:
+          use-public-rspm: true
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Install pak and query dependencies
-        run: |
-          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
-          saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        # with:
+        #   needs: website
+
+      # TODO: remove this when https://github.com/r-lib/actions/issues/386 is fixed
+      - name: Install website dependencies
         shell: Rscript {0}
-
-      - name: Cache R packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ steps.install-r.outputs.installed-r-version }}-pkgdown-1-${{ hashFiles('.github/r-depends.rds') }}
-          restore-keys: ${{ runner.os }}-${{ steps.install-r.outputs.installed-r-version }}-pkgdown-1-
-
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
         run: |
-          pak::local_system_requirements(execute = TRUE)
-          pak::pkg_system_requirements("pkgdown", execute = TRUE)
-          # pak::pkg_system_requirements("rsconnect", execute = TRUE)
-        shell: Rscript {0}
-
-      - name: Install package and dependencies
-        run: |
-          pak::local_install_dev_deps(upgrade = TRUE)
-          # pak::pkg_install("rsconnect")
-          pak::pkg_install("r-lib/pkgdown")
-          pak::pkg_install("rstudio/quillt")
-        shell: Rscript {0}
-
-      - name: Install package
-        run: R CMD INSTALL .
+          needs <- pak::local_dev_deps(dependencies = "Config/Needs/website")[["ref"]]
+          for (dep in needs) {
+            pak::pkg_system_requirements(dep, execute = TRUE)
+          }
+          pak::pkg_install(needs)
 
       - name: Build Site
         shell: Rscript {0}
         run: |
           pkgdown::build_site(new_process = FALSE)
 
-      # Must validate after. Otherwise files are saved and `pkgdown::build_site()` gets mad
       - name: Validate all topics exist (PR)
         if: github.event_name != 'push'
         shell: Rscript {0}
+        env:
+          R_CLI_NUM_COLORS: 1
         run: |
           pkgdown::build_reference_index()
-          stopifnot(length(warnings()) == 0)
-        
+          if (length(warnings()) > 0) {
+            cat(
+              "::warning title=pkgdown reference index::",
+              paste(capture.output(warnings()), collapse = "%0A"),
+              sep = ""
+            )
+            if ("${{ github.event_name }}" != "push") {
+              stop("pkgdown reference index is missing topics")
+            }
+          }
+
       - name: Set environment variable $GIT_BRANCH_NAME
         id: git-branch-name
         uses: EthanSK/git-branch-name-action@v1
@@ -92,3 +86,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+

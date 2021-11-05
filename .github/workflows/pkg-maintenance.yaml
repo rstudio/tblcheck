@@ -48,25 +48,36 @@ jobs:
             devtools
             rmarkdown
 
-      - name: URL redirects
-        if: github.event_name == 'push'
+      - name: Tidy Description
         run: |
-          Rscript -e 'pak::pkg_install("r-lib/urlchecker"); urlchecker::url_update()'
-          git add -u && git commit -m 'Update links (GitHub Actions)' || echo "No link changes to commit"
+          Rscript -e 'usethis::use_tidy_description()'
+          git add -u && git commit -m 'Tidy DESCRIPTION (GitHub Actions)' || echo "No DESCRIPTION changes to commit"
 
       - name: Document
         run: |
           Rscript -e 'roxygen2::roxygenise()'
           git add man/\* NAMESPACE && git commit -m 'Document (GitHub Actions)' || echo "No documentation changes to commit"
 
-      - name: Build README
+      - name: Build README and index
         run: |
+          if [ -f "index.Rmd" ]; then
+            Rscript -e 'rmarkdown::render("index.Rmd", quiet = FALSE, output_options = list(html_preview = FALSE))'
+            git add index.md && git commit -m 'Re-build index.Rmd (GitHub Actions)' || echo "No index.Rmd changes to commit"
+          else
+            echo "No index.Rmd to build"
+          fi
           if [ -f "README.Rmd" ]; then
             Rscript -e 'devtools::build_readme(quiet = FALSE)'
-            git commit README.md -m 'Re-build README.Rmd (GitHub Actions)' || echo "No readme changes to commit"
+            git add man/figures/README\* README.md && git commit -m 'Re-build README.Rmd (GitHub Actions)' || echo "No readme changes to commit"
           else
             echo "No README.Rmd to build"
           fi
+
+      - name: URL redirects
+        if: github.event_name == 'push'
+        run: |
+          Rscript -e 'pak::pkg_install("r-lib/urlchecker"); urlchecker::url_update()'
+          git add -u && git commit -m 'Update links (GitHub Actions)' || echo "No link changes to commit"
 
       - name: Whitespace - Fix indents and trailing
         run: |
