@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tblcheck
+# tblcheck <img alt="tblcheck hex logo" src='man/figures/logo.png' align="right" height="120" />
 
 <!-- badges: start -->
 
