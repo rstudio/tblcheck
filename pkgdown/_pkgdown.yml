@@ -1,6 +1,6 @@
 destination: reference
 
-url: https://pkgs.rstudio.com/quillt/
+url: https://pkgs.rstudio.com/tblcheck/
 
 template:
   package: tidytemplate
