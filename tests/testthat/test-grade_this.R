@@ -43,6 +43,24 @@ test_that("rlang_call_match() with {rlang} <= 0.4.12", {
   )
 })
 
+test_that("grade_this_table() arguments overlap tbl_grade()", {
+  tbl_grade_args_exclude <- c("object", "expected", "env", "...")
+  tbl_grade_args <- setdiff(names(formals(tbl_grade)), tbl_grade_args_exclude)
+  expect_equal(
+    intersect(tbl_grade_args, names(formals(grade_this_table))),
+    tbl_grade_args
+  )
+})
+
+test_that("grade_this_vector() arguments overlap vec_grade()", {
+  vec_grade_args_exclude <- c("object", "expected", "env", "...")
+  vec_grade_args <- setdiff(names(formals(vec_grade)), vec_grade_args_exclude)
+  expect_equal(
+    intersect(vec_grade_args, names(formals(grade_this_vector))),
+    vec_grade_args
+  )
+})
+
 test_that("grade_this_table()", {
   grade_pass <-
     tblcheck_test_grade({
