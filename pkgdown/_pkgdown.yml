@@ -34,11 +34,17 @@ authors:
 
 navbar:
   structure:
-    left:  [intro, articles, reference, news]
+    left:  [intro, examples, articles, reference, news]
   components:
     examples:
       text: Examples
-      href: articles/articles/examples.html
+      href: articles/examples.html
+
+articles:
+  - title: All vignettes
+    desc: ~
+    contents:
+    - '`tblcheck`'
 
 # custom footer for rmarkdown ecosystem
 footer:
