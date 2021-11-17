@@ -73,8 +73,10 @@ grade_this_table <- function(
   ...,
   # all the arguments from tbl_grade_table() except object/expected
   max_diffs = 3,
+  cols = NULL,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,

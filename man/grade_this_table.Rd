@@ -11,8 +11,10 @@ grade_this_table(
   pass_if_equal = TRUE,
   ...,
   max_diffs = 3,
+  cols = NULL,
   check_class = TRUE,
   check_names = TRUE,
+  check_column_order = FALSE,
   check_dimensions = TRUE,
   check_groups = TRUE,
   check_columns = TRUE,
@@ -52,11 +54,19 @@ names to display and the \code{n_values} argument of \code{\link[=tbl_check_colu
 determine the number of mismatched column values to display.
 Defaults to 3.}
 
+\item{cols}{[\code{\link[tidyselect:language]{tidy-select}}]\cr A selection of columns
+to compare between \code{object} and \code{expected}. Differences in other columns
+will be ignored. If \code{\link{NULL}}, the default, all columns will be checked.}
+
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
+
+\item{check_column_order}{\verb{[logical(1)]}\cr Whether to check that the columns
+of  \code{object} are in the same order as \code{expected} with \code{\link[=tbl_check_names]{tbl_check_names()}}.
+Defaults to \code{FALSE}.}
 
 \item{check_dimensions}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same number of rows and columns
