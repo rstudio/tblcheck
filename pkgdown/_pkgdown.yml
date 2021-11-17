@@ -34,7 +34,7 @@ authors:
 
 navbar:
   structure:
-    left:  [intro, examples, articles, reference, news]
+    left:  [intro, examples, reference, news]
   components:
     examples:
       text: Examples
@@ -45,6 +45,7 @@ articles:
     desc: ~
     contents:
     - '`tblcheck`'
+    - '`examples`'
 
 # custom footer for rmarkdown ecosystem
 footer:
