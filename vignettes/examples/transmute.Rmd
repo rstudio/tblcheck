@@ -1,0 +1,45 @@
+```{block starwars-prompt}
+Consider the `starwars` dataset. Use `transmute()` to turn convert `height` into
+inches and `mass` into pounds, keeping only those columns.
+```
+
+```{r starwars-setup, include=FALSE}
+library(dplyr)
+```
+
+```{r starwars, exercise = TRUE}
+
+```
+
+```{r starwars-solution}
+starwars %>%
+  transmute(height = height / 2.54, mass = mass * 2.205)
+```
+
+```{r starwars-check}
+grade_this_table(check_column_order = TRUE)
+```
+
+```{r starwars-wrong-mutate}
+# "names" problem (too many)
+starwars %>%
+  mutate(height = height / 2.54, mass = mass * 2.205)
+```
+
+```{r starwars-wrong-columns}
+# "names" problem (wrong order)
+starwars %>%
+  transmute(mass = mass * 2.205, height = height / 2.54)
+```
+
+```{r starwars-wrong-class}
+# "class" problem
+starwars %>%
+  transmute(mass = as.integer(mass * 2.205), height = as.integer(height / 2.54))
+```
+
+```{r starwars-wrong-values}
+# "values" problem
+starwars %>%
+  transmute(height = height, mass = mass)
+```

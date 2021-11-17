@@ -1,0 +1,35 @@
+```{block string-prompt}
+Consider the `fruit` dataset. Use `str_subset()` to create a vector containing only the fruits with a space in their names.
+```
+
+```{r string-setup}
+library(dplyr)
+library(stringr)
+```
+
+```{r string, exercise = TRUE}
+
+```
+
+```{r string-solution}
+str_subset(fruit, " ")
+```
+
+```{r string-check}
+grade_this_vector()
+```
+
+```{r string-wrong-which}
+# "class" problem
+str_which(fruit, " ")
+```
+
+```{r string-wrong-extract}
+# "values" problem
+str_extract(fruit, " ")
+```
+
+```{r string-wrong-subset}
+# "length" problem
+str_subset(fruit, "\\b")
+```
