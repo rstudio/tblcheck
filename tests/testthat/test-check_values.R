@@ -39,6 +39,30 @@ test_that("value differences", {
   expect_equal(grade_Inf$problem, grade_default$problem)
 })
 
+test_that("NA values", {
+  grade_na <- tblcheck_test_grade({
+    .result   <- c(TRUE, TRUE, NA)
+    .solution <- c(TRUE, TRUE, TRUE)
+    vec_grade_values()
+  })
+
+  expect_snapshot(grade_na)
+
+  expect_equal(
+    grade_na$problem,
+    problem("values", c(TRUE, TRUE, TRUE), c(TRUE, TRUE, NA)),
+    ignore_attr = "class"
+  )
+
+  grade_na_match <- tblcheck_test_grade({
+    .result   <- c(TRUE, TRUE, NA)
+    .solution <- c(TRUE, TRUE, NA)
+    vec_grade_values()
+  })
+
+  expect_null(grade_na_match)
+})
+
 test_that("vec_grade_values() failures", {
   grade_length <- tblcheck_test_grade({
     .result   <- 1:9
