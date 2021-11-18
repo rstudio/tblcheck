@@ -41,6 +41,7 @@ jobs:
             pak::pkg_system_requirements(dep, execute = TRUE)
           }
           pak::pkg_install(needs)
+          pak::pak("gadenbuie/pkgdown@tabset-allow-html")
 
       - name: Build Site
         shell: Rscript {0}
