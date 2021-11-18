@@ -549,7 +549,7 @@ fake_grade_chunks("factor-solution", solution = "factor-solution", check = "fact
 ### `r icons$wrong` Wrong Function
 
 Here the student forgets about the `forcats::fct_reorder()` function
-and tries to use `order()` to set the order of the factor levels in the `martial` column.
+and tries to use `order()` to set the order of the factor levels in the `marital` column.
 
 ```{r factor-wrong-class}
 marital_age %>%
