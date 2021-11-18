@@ -12,6 +12,8 @@ vignette: >
 [learnr]: https://rstudio.github.io/learnr/
 [gradethis-get-started]: https://pkgs.rstudio.com/gradethis/articles/gradethis.html
 [gradethis]: https://pkgs.rstudio.com/gradethis/
+[forcats]: https://forcats.tidyverse.org
+[stringr]: https://stringr.tidyverse.org
 
 ```{css alert, echo = FALSE, eval = !identical(Sys.getenv("IN_PKGDOWN", "false"), "true")}
 .alert {
@@ -336,7 +338,7 @@ to transform the `starwars` dataset.
 
 > **Prompt**  
 > Consider the `starwars` dataset.
-> Use `transmute()` to turn convert `height` into inches and `mass` into pounds, keeping only those columns.
+> Use `transmute()` to turn convert `height` from centimeters into inches and `mass` from kilgrams into pounds, keeping only those columns.
 
 ### `r icons$code` Exercise Code
 
@@ -367,6 +369,12 @@ grade_this_table(check_column_order = TRUE)
 ```
 
 ### `r icons$correct` Correct Answer
+
+The correct answer uses `dplyr::transmute()` 
+to divide the `height` column by `2.54` (to convert height from *cm* to *in*)
+and to multiply the `mass` column by `2.205` (to convert *kg* to *lb*).
+Note that `transmute()` keeps only the columns named in its calculations,
+so our final table has only two columns.
 
 ```{r ref.label = "starwars-solution"}
 
@@ -460,10 +468,18 @@ fake_grade_example("starwars-wrong-values")
 
 ## Transform a Factor Column {.tabset}
 
+This example comes from a lesson on `factors` in R.
+Students have just learned about functions from the [forcats package][forcats],
+and are now asked to practice using `forcats::fct_reorder()`.
+
+> **Prompt**  
 > Consider the `marital_age` dataset.
 > Use `fct_reorder()` to turn the `marital` column into a factor with levels ordered based on `avg_age`.
 
 ### `r icons$code` Exercise Code
+
+We created a new table specifically for this exercise in the `factor-setup`  chunk,
+drawing from the data provided in `forcats::gss_cat`.
 
 ````markdown
 ```{r factor-setup, chunk_label = TRUE}
@@ -478,7 +494,7 @@ marital_age <- gss_cat %>%
 ```
 
 ```{r factor, is_exercise = TRUE, chunk_label = TRUE}
-
+marital_age
 ```
 
 ```{r factor-solution, chunk_label = TRUE}
@@ -492,6 +508,14 @@ grade_this_table()
 ````
 
 ```{r ref.label = "factor-setup", include=FALSE}
+
+```
+
+Since students aren't familiar with the `marital_age` table,
+we've included the starter code so they can see the initial state of the table
+when they start the exercise.
+
+```{r ref.label = "factor"}
 
 ```
 
@@ -556,10 +580,25 @@ fake_grade_chunks("factor-wrong-subset", solution = "factor-solution", check = "
 
 ## Subset a Vector with stringr {.tabset}
 
-> Consider the `fruit` dataset. Use `str_subset()` to create a vector
-> containing only the fruits with a space in their names.
+In addition to table-checking functions,
+tblcheck includes [functions for checking vectors](tblcheck.html#grading-vectors) —
+after all, columns in a table are vectors!
+
+Here's an example exercise from a tutorial on string transformations with the [stringr package][stringr].
+Students are asked to practice concepts they just discovered in the tutorial:
+
+> **Prompt**  
+> Consider the `fruit` data. Use a function from [stringr] to create a vector
+> containing only the fruits with more than one word in their name.
+>
+> _Hint: a fruit named with more than one word also has at least one space in its name._
 
 ### `r icons$code` Exercise Code
+
+In the exercise markdown,
+we call `grade_this_vector()` in the `string-check` chunk
+to automatically compare the result of the student's submission
+with our `string-solution`.
 
 ````markdown
 ```{r string-setup, chunk_label = TRUE}
@@ -584,7 +623,22 @@ grade_this_vector()
 
 ```
 
+Note that `fruit` is from `stringr::fruit`, 
+a vector containing
+`r length(stringr::fruit)` fruit names.
+
+```{r fruit}
+head(stringr::fruit, 20)
+```
+
 ### `r icons$correct` Correct Answer
+
+`r length(stringr::str_subset(stringr::fruit, " "))`
+of the
+`r length(stringr::fruit)`
+fruits have more than one word.
+What's your favorite two-worded fruit name?
+(Mine is the [purple mangosteen](https://en.wikipedia.org/wiki/Mangosteen).)
 
 ```{r ref.label = "string-solution"}
 
@@ -594,7 +648,13 @@ grade_this_vector()
 fake_grade_example("string-solution")
 ```
 
-### `r icons$wrong` Wrong Function
+### `r icons$wrong` Wrong Class
+
+This student submission makes a potentially common mistake
+of hoping that `stringr::str_which()` will return the `fruit` which have `pattern`.
+Instead, `str_which()` follows the base R function `which()`,
+and returns an `integer` index indicating the items in `fruit` 
+where the `pattern` is matched.
 
 ```{r string-wrong-which}
 str_which(fruit, " ")
@@ -604,7 +664,13 @@ str_which(fruit, " ")
 fake_grade_example("string-wrong-which")
 ```
 
-### `r icons$wrong` Wrong Function (2)
+### `r icons$wrong` Wrong Length
+
+In another mistake example,
+this student probably expected `stringr::str_extract()`
+to _extract_ elements from the vector.
+However, `str_extract()` instead extracts the pattern from each item,
+so it returns a vector with the same length as the input.
 
 ```{r string-wrong-extract}
 str_extract(fruit, " ")
@@ -616,8 +682,11 @@ fake_grade_example("string-wrong-extract")
 
 ### `r icons$wrong` Wrong Subset
 
+Finally, a student might have chosen the right function,
+but they missed our hint and came up with a pattern that's too clever.
+
 ```{r string-wrong-subset}
-str_subset(fruit, "\\b")
+str_subset(fruit, " (berry|pepper|melon|fruit)")
 ```
 
 ```{r echo=FALSE}
