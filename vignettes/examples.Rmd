@@ -49,6 +49,12 @@ vignette: >
 .alert > :last-child {
   margin-bottom: 0;
 }
+.alert code {
+  background-blend-mode: lighten;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: none;
+  color: inherit;
+}
 /* tab button colors */
 button[id^="correct"][role="tab"] > svg {
   fill: var(--bs-success);
