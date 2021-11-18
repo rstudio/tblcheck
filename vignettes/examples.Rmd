@@ -690,9 +690,10 @@ fake_grade_example("string-wrong-extract")
 
 Finally, a student might have chosen the right function,
 but they missed our hint and came up with a pattern that's too clever.
+Here the student probably looked at the first 20 fruit names and took a guess at the answer.
 
 ```{r string-wrong-subset}
-str_subset(fruit, " (berry|pepper|melon|fruit)")
+str_subset(fruit, " (pepper|orange|melon|fruit)")
 ```
 
 ```{r echo=FALSE}
