@@ -70,7 +70,7 @@ vec_check_values <- function(
   return_if_problem(vec_check_dimensions(object, expected))
 
   # Check if values are the same
-  if (!all(vctrs::vec_equal(object, expected))) {
+  if (!all(vctrs::vec_equal(object, expected, na_equal = TRUE))) {
     return(problem("values", expected, object))
   }
 }
@@ -121,7 +121,8 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     !all(
       vctrs::vec_equal(
         problem$expected[seq_len(problem$n_values)],
-        problem$actual[seq_len(problem$n_values)]
+        problem$actual[seq_len(problem$n_values)],
+        na_equal = TRUE
       )
     )
   ) {
