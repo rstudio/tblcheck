@@ -58,7 +58,7 @@ grade_html <- function(grade) {
   x <- paste0(
     '<div class="',
     if (!length(grade$correct)) {
-      "alert"
+      sprintf("alert alert-%s", grade$type)
     } else if (isTRUE(grade$correct)) {
       "alert alert-success"
     } else {
