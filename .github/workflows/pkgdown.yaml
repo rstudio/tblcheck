@@ -36,12 +36,12 @@ jobs:
       - name: Install website dependencies
         shell: Rscript {0}
         run: |
-          pak::pak("gadenbuie/pkgdown@tabset-allow-html")
           needs <- pak::local_dev_deps(dependencies = "Config/Needs/website")[["ref"]]
           for (dep in needs) {
             pak::pkg_system_requirements(dep, execute = TRUE)
           }
           pak::pkg_install(needs)
+          pak::pak("gadenbuie/pkgdown@tabset-allow-html")
 
       - name: Build Site
         shell: Rscript {0}
