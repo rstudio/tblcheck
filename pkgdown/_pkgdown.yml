@@ -19,6 +19,10 @@ template:
       card: summary
 
 home:
+  title: Grade Tables in Learning Exercises
+  description: >
+    Grade tibbles, data frames, and vectors with gradethis or in interactive
+    tutorials with learnr and gradethis.
   links:
   - text: Learn more about learnr
     href: "https://rstudio.github.io/learnr"

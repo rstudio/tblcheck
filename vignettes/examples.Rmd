@@ -1,5 +1,8 @@
 ---
-title: "Examples"
+title: "Examples of tblcheck in action"
+description: >
+  Example exercises that demonstrate tblcheck in action. Preview the feedback
+  provided for several sample student submissions for each example.
 output:
   rmarkdown::html_vignette:
     toc: true

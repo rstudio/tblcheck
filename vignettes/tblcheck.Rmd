@@ -1,5 +1,8 @@
 ---
-title: "tblcheck"
+title: "Get started with tblcheck"
+description: >
+  An introduction to using the tblcheck package for automatic feedback for
+  grading common problems in tables.
 output:
   rmarkdown::html_vignette:
     toc: true
