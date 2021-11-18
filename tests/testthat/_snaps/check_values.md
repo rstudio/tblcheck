@@ -38,6 +38,16 @@
         `6`, `7`, `8`, `9`, and `10`.
       >
 
+# NA values
+
+    Code
+      grade_na
+    Output
+      <gradethis_graded: [Incorrect]
+        The first 3 values of your result should be `TRUE`, `TRUE`, and
+        `TRUE`, not `TRUE`, `TRUE`, and `NA`.
+      >
+
 # vec_grade_values() failures
 
     Code
