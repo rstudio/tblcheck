@@ -133,8 +133,8 @@ student's result with the author's solution.
 }
 \examples{
 ex <- gradethis::mock_this_exercise(
-  .solution_code = tibble(x = 1:3, y = letters[x]),
-  .user_code = tibble(x = 1:3, y = c("A", "b", "c"))
+  .solution_code = tibble::tibble(x = 1:3, y = letters[x]),
+  .user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
 )
 
 ## Grading Tables ----
