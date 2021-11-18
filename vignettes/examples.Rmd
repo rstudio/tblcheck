@@ -16,6 +16,7 @@ vignette: >
 [stringr]: https://stringr.tidyverse.org
 
 ```{css alert, echo = FALSE, eval = !identical(Sys.getenv("IN_PKGDOWN", "false"), "true")}
+/* alerts for standard vignettes (not pkgdown with BS5) */
 .alert {
   padding: 0.5em 1em;
   margin: 1em 2em;
@@ -45,22 +46,27 @@ vignette: >
 }
 ```
 
-```{css echo=FALSE}
-.alert > :last-child {
-  margin-bottom: 0;
-}
+```{css echo=FALSE, eval = identical(Sys.getenv("IN_PKGDOWN", "false"), "true")}
+/* tweak alert code colors for pkgdown */
 .alert code {
   background-blend-mode: lighten;
   background-color: rgba(255, 255, 255, 0.5);
   background-image: none;
   color: inherit;
 }
-/* tab button colors */
-button[id^="correct"][role="tab"] > svg {
-  fill: var(--bs-success);
+```
+
+```{css echo=FALSE}
+/* tweak alerts for both pkgdown and standard vignettes */
+.alert > :last-child {
+  margin-bottom: 0;
 }
-button[id^="wrong"][role="tab"] > svg {
-  fill: var(--bs-danger);
+/* tab button colors */
+[id^="correct"] svg {
+  fill: var(--bs-success, #5c9653);
+}
+[id^="wrong"] svg {
+  fill: var(--bs-danger, #ad3532);
 }
 button[role="tab"] > svg {
   margin-right: 3px;
