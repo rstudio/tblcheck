@@ -1,5 +1,13 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tblcheck 0.1.1
+
+* Fixed the messages for values problems originating in columns to mention the problematic column (#100).
+* A new vignette with exercise examples demonstrates the types of feedback `grade_this_table()` and `grade_this_vector()` provide (#95).
+* `vec_grade_values()` now treats `NA` values in the same position of the `object` and `expected` vectors as equal (#96).
+* `grade_this_table()` was updated to include the `cols` and `check_column_order` arguments that were recently added to `tbl_grade()` (#92).
+
+
 # tblcheck 0.1.0
 
 - New package for inspecting data frames and vectors for grading with `gradethis`.
