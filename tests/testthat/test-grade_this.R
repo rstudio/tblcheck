@@ -239,7 +239,7 @@ test_that("pre_check test", {
   grade_fail <-
     tblcheck_test_grade({
       grade_this_table(
-        pre_check = {fail_if(is.integer(.result$b), "Incorrect")}
+        pre_check = {gradethis::fail_if(is.integer(.result$b), "Incorrect")}
       )(
         gradethis::mock_this_exercise(
           .user_code     = "tibble::tibble(a = 1:10, b = 1:10)",
@@ -257,7 +257,7 @@ test_that("post_check test", {
   grade_pass <-
     tblcheck_test_grade({
       grade_this_table(
-        post_check = {fail_if(is.integer(.result$b), "Incorrect")},
+        post_check = {gradethis::fail_if(is.integer(.result$b), "Incorrect")},
         correct = "Correct"
       )(
         gradethis::mock_this_exercise(
@@ -274,7 +274,7 @@ test_that("post_check test", {
   grade_fail <-
     tblcheck_test_grade({
       grade_this_table(
-        post_check = {fail_if(is.integer(.result$b), "Incorrect")},
+        post_check = {gradethis::fail_if(is.integer(.result$b), "Incorrect")},
         check_class = FALSE
       )(
         gradethis::mock_this_exercise(
