@@ -117,15 +117,14 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     max_diffs
   )
 
-  if (
-    !all(
-      vctrs::vec_equal(
-        problem$expected[seq_len(problem$n_values)],
-        problem$actual[seq_len(problem$n_values)],
-        na_equal = TRUE
-      )
+  first_n_values_are_equal <-
+    vctrs::vec_equal(
+      problem$expected[seq_len(problem$n_values)],
+      problem$actual[seq_len(problem$n_values)],
+      na_equal = TRUE
     )
-  ) {
+
+  if (!all(first_n_values_are_equal)) {
     problem$expected <- knitr::combine_words(
       md_code(problem$expected[seq_len(problem$n_values)])
     )
