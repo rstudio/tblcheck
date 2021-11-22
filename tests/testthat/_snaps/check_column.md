@@ -34,7 +34,8 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        I didn't expect your result to include the values `5`, `6`, and `7`.
+        I didn't expect your `a` column to include the values `5`, `6`, and
+        `7`.
       >
 
 # max_diffs modifies the number of values to print

@@ -94,3 +94,27 @@ test_that("vec_grade_values() failures", {
     ignore_attr = "class"
   )
 })
+
+test_that("column values problem messages are created correctly", {
+  grade_column <- tblcheck_test_grade({
+    set.seed(4231)
+    .result <- tibble::tibble(x = c(1:5, runif(5)))
+    .solution <- tibble::tibble(x = c(1:5, runif(5)))
+    tbl_grade_column("x")
+  })
+
+  expect_snapshot(grade_column)
+
+  expect_match(grade_column$message, "your `x` column")
+
+  grade_tbl <- tblcheck_test_grade({
+    set.seed(4231)
+    .result <- tibble::tibble(x = c(1:5, runif(5)))
+    .solution <- tibble::tibble(x = c(1:5, runif(5)))
+    tbl_grade()
+  })
+
+  expect_snapshot(grade_tbl)
+
+  expect_match(grade_tbl$message, "your `x` column")
+})
