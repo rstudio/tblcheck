@@ -133,21 +133,20 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
       md_code(problem$actual[seq_len(problem$n_values)])
     )
 
-    if (is_problem(problem, "column")) {
-      problem$expected_msg <- problem$expected_msg %||%
+    problem$expected_msg <- problem$expected_msg %||%
+      if (is_problem(problem, "column")) {
         ngettext(
           problem$n_values,
           "The first value of your `{column}` column should be {expected}, not {actual},",
           "The first {n_values} values of your `{column}` column should be {expected},"
         )
-    }
-
-    problem$expected_msg <- problem$expected_msg %||%
-      ngettext(
-        problem$n_values,
-        "The first value of your result should be {expected},",
-        "The first {n_values} values of your result should be {expected},"
-      )
+      } else {
+        ngettext(
+          problem$n_values,
+          "The first value of your result should be {expected},",
+          "The first {n_values} values of your result should be {expected},"
+        )
+      }
 
     problem$actual_message <- problem$actual_message %||%
       " not {actual}."
@@ -165,19 +164,20 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
       seq_len(min(max_diffs, length(problem$unexpected)))
     ]
 
-    if (is_problem(problem, "column")) {
-      problem$msg <- ngettext(
-        length(problem$unexpected),
-        "I didn't expect your `{column}` column to include the value {unexpected}.",
-        "I didn't expect your `{column}` column to include the values {unexpected}."
-      )
-    }
-
-    problem$msg <- ngettext(
-      length(problem$unexpected),
-      "I didn't expect your result to include the value {unexpected}.",
-      "I didn't expect your result to include the values {unexpected}."
-    )
+    problem$msg <-
+      if (is_problem(problem, "column")) {
+        ngettext(
+          length(problem$unexpected),
+          "I didn't expect your `{column}` column to include the value {unexpected}.",
+          "I didn't expect your `{column}` column to include the values {unexpected}."
+        )
+      } else {
+        ngettext(
+          length(problem$unexpected),
+          "I didn't expect your result to include the value {unexpected}.",
+          "I didn't expect your result to include the values {unexpected}."
+        )
+      }
 
     problem$unexpected <- knitr::combine_words(md_code(problem$unexpected))
 
@@ -191,20 +191,20 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
     problem$missing <- problem$missing[
       seq_len(min(max_diffs, length(problem$missing)))
     ]
-
-    if (is_problem(problem, "column")) {
-      problem$msg <- ngettext(
-        length(problem$missing),
-        "I expected your `{column}` column to include the value {missing}.",
-        "I expected your `{column}` column to include the values {missing}."
-      )
-    }
-
-    problem$msg <- ngettext(
-      length(problem$missing),
-      "I expected your result to include the value {missing}.",
-      "I expected your result to include the values {missing}."
-    )
+    problem$msg <-
+      if (is_problem(problem, "column")) {
+        ngettext(
+          length(problem$missing),
+          "I expected your `{column}` column to include the value {missing}.",
+          "I expected your `{column}` column to include the values {missing}."
+        )
+      } else {
+        ngettext(
+          length(problem$missing),
+          "I expected your result to include the value {missing}.",
+          "I expected your result to include the values {missing}."
+        )
+      }
 
     problem$missing <- knitr::combine_words(md_code(problem$missing))
 

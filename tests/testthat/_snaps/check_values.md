@@ -55,3 +55,23 @@
     Output
       <gradethis_graded: [Incorrect] Your result contains unexpected values.>
 
+# column values problem messages are created correctly
+
+    Code
+      grade_column
+    Output
+      <gradethis_graded: [Incorrect]
+        I didn't expect your `x` column to include the values `0.551`,
+        `0.879`, and `0.790`.
+      >
+
+---
+
+    Code
+      grade_tbl
+    Output
+      <gradethis_graded: [Incorrect]
+        I didn't expect your `x` column to include the values `0.551`,
+        `0.879`, and `0.790`.
+      >
+
