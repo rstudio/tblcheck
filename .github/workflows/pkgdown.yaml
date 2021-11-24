@@ -45,6 +45,7 @@ jobs:
       - name: Build Site
         shell: Rscript {0}
         run: |
+          options(downlit.attached = c("learnr", "gradethis", "tibble", "dplyr", "stringr", "forcats"))
           pkgdown::build_site(new_process = FALSE)
 
       - name: Set environment variable $GIT_BRANCH_NAME
