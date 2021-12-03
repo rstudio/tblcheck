@@ -216,6 +216,10 @@ tblcheck_message.length_problem <- function(problem, ...) {
     }
   }
 
+  if (!length(problem$value)) {
+    return(glue::glue_data(problem, problem$exp_msg, problem$obj_msg))
+  }
+
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg, problem$value_msg)
 }
 

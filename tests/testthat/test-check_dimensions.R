@@ -66,6 +66,23 @@ test_that("vector length", {
     ),
     ignore_attr = "class"
   )
+
+  grade_no_unique <- tblcheck_test_grade({
+    .result   <- rep("a", 3)
+    .solution <- rep("a", 4)
+    vec_grade_dimensions()
+  })
+
+  expect_snapshot(grade_no_unique)
+
+  expect_equal(
+    grade_no_unique$problem,
+    problem(
+      "length",
+      rep("a", 4), rep("a", 3), expected_length = 4, actual_length = 3
+    ),
+    ignore_attr = "class"
+  )
 })
 
 test_that("table rows", {
