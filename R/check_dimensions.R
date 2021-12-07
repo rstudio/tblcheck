@@ -217,7 +217,8 @@ tblcheck_message.length_problem <- function(problem, ...) {
   }
 
   if (!length(problem$value)) {
-    return(glue::glue_data(problem, problem$exp_msg, problem$obj_msg))
+    # remove values message: obj and exp have the same values but different length
+    problem$value_msg <- ""
   }
 
   glue::glue_data(problem, problem$exp_msg, problem$obj_msg, problem$value_msg)
