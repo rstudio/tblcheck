@@ -37,6 +37,15 @@
         Your result should contain 4 values, but it has 3 values.
       >
 
+---
+
+    Code
+      grade_no_unique
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should contain 4 values, but it has 3 values.
+      >
+
 # table rows
 
     Code
