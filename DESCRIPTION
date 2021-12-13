@@ -42,8 +42,7 @@ VignetteBuilder:
 Remotes: 
     rstudio/gradethis
 Config/Needs/learnr: rstudio/learnr, rstudio/gradethis
-Config/Needs/website: r-lib/pkgdown, tidyverse/tidytemplate,
-    rstudio/quillt@tidytemplate, forcats, stringr
+Config/Needs/website: pkgdown, tidyverse/tidytemplate, forcats, stringr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
