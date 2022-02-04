@@ -38,7 +38,7 @@
         it is a vector of text (class `character`).
       >
 
-# tbl_grade_class() does not ignore formerly inconsequential mismatches
+# tbl_grade_class() ignore classes
 
     Code
       grade_int_dbl
@@ -66,6 +66,16 @@
       <gradethis_graded: [Incorrect]
         Your result should be a vector of date-times (class `POSIXlt`), but
         it is a vector of date-times (class `POSIXct`).
+      >
+
+---
+
+    Code
+      grade_tbl_df
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a tibble (class `tbl_df`), but it is a data
+        frame (class `data.frame`).
       >
 
 # tbl_grade_class() with multiple classes

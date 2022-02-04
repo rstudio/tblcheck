@@ -7,13 +7,24 @@
 \alias{vec_grade_class}
 \title{Checks that two objects have the same classes}
 \usage{
-tbl_check_class(object = .result, expected = .solution, env = parent.frame())
+tbl_check_class(
+  object = .result,
+  expected = .solution,
+  ignore_class = NULL,
+  env = parent.frame()
+)
 
-vec_check_class(object = .result, expected = .solution, env = parent.frame())
+vec_check_class(
+  object = .result,
+  expected = .solution,
+  ignore_class = NULL,
+  env = parent.frame()
+)
 
 tbl_grade_class(
   object = .result,
   expected = .solution,
+  ignore_class = NULL,
   env = parent.frame(),
   ...
 )
@@ -21,6 +32,7 @@ tbl_grade_class(
 vec_grade_class(
   object = .result,
   expected = .solution,
+  ignore_class = NULL,
   env = parent.frame(),
   ...
 )
@@ -29,6 +41,9 @@ vec_grade_class(
 \item{object}{An object to be compared to \code{expected}.}
 
 \item{expected}{An object containing the expected result.}
+
+\item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
+finding differences between \code{object} and \code{expected}. See examples.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 
@@ -83,4 +98,17 @@ tbl_grade_class()
 .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a \%\% 2 == 0), b)
 tbl_check_class()
 tbl_grade_class()
+
+# Ignore the difference between tibble and data frame
+.result <- data.frame(a = 1:10)
+.solution <- tibble::tibble(a = 1:10)
+tbl_check_class(ignore_class = c("tbl_df", "tbl"))
+tbl_grade_class(ignore_class = c("tbl_df", "tbl"))
+
+# Ignore the difference between integer and double
+.result <- 1L
+.solution <- 1
+vec_check_class(ignore_class = c("integer", "numeric"))
+vec_grade_class(ignore_class = c("integer", "numeric"))
+
 }

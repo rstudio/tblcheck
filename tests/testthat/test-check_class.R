@@ -80,7 +80,7 @@ test_that("tbl_grade_class()", {
   )
 })
 
-test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches", {
+test_that("tbl_grade_class() ignore classes", {
   grade_int_dbl <-
     tblcheck_test_grade({
       .result   <- 1L
@@ -100,6 +100,15 @@ test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches
       actual_length = 1
     )
   )
+
+  grade_int_dbl_ignore <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class(ignore_class = c("integer", "numeric"))
+    })
+
+  expect_null(grade_int_dbl_ignore)
 
   grade_glue_chr <-
     tblcheck_test_grade({
@@ -121,6 +130,15 @@ test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches
     )
   )
 
+  grade_glue_chr_ignore <-
+    tblcheck_test_grade({
+      .result   <- glue::glue("x")
+      .solution <- "x"
+      tbl_grade_class(ignore_class = "glue")
+    })
+
+  expect_null(grade_glue_chr_ignore)
+
   grade_posix_ct_lt <-
     tblcheck_test_grade({
       .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
@@ -140,6 +158,44 @@ test_that("tbl_grade_class() does not ignore formerly inconsequential mismatches
       actual_length = 2
     )
   )
+
+  grade_posix_ct_lt_ignore <-
+    tblcheck_test_grade({
+      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      tbl_grade_class(ignore_class = c("POSIXct", "POSIXlt"))
+    })
+
+  expect_null(grade_posix_ct_lt_ignore)
+
+  grade_tbl_df <-
+    tblcheck_test_grade({
+      .result   <- data.frame(a = 1, b = 2)
+      .solution <- tibble::tibble(a = 1, b = 2)
+      tbl_grade_class()
+    })
+
+  expect_snapshot(grade_tbl_df)
+
+  expect_equal(
+    grade_tbl_df$problem,
+    problem(
+      type     = "class",
+      expected = c("tbl_df", "tbl", "data.frame"),
+      actual   = c("data.frame"),
+      expected_length = 2,
+      actual_length = 2
+    )
+  )
+
+  grade_tbl_df_ignore <-
+    tblcheck_test_grade({
+      .result   <- data.frame(a = 1, b = 2)
+      .solution <- tibble::tibble(a = 1, b = 2)
+      tbl_grade_class(ignore_class = c("tbl_df", "tbl"))
+    })
+
+  expect_null(grade_tbl_df_ignore)
 })
 
 test_that("tbl_grade_class() with multiple classes", {
