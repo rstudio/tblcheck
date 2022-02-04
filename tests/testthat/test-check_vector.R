@@ -19,6 +19,35 @@ test_that("vec_grade() checks classes", {
     ),
     ignore_attr = "class"
   )
+
+  grade_int <- tblcheck_test_grade({
+    .result   <- c(1, 2, 3)
+    .solution <- 1:3
+    vec_grade()
+  })
+
+  expect_snapshot(grade_int)
+
+  expect_equal(
+    grade_int$problem,
+    problem(
+      "class",
+      "integer",
+      "numeric",
+      expected_length = 3,
+      actual_length = 3,
+      location = "vector"
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_int_ignore <- tblcheck_test_grade({
+    .result   <- c(1, 2, 3)
+    .solution <- 1:3
+    vec_grade(ignore_class = c("integer", "numeric"))
+  })
+
+  expect_null(grade_int_ignore)
 })
 
 test_that("vec_grade() checks the first three values", {

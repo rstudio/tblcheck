@@ -8,6 +8,16 @@
         it is a vector of text (class `character`).
       >
 
+---
+
+    Code
+      grade_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column should be a vector of integers (class `integer`), but
+        it is a vector of numbers (class `numeric`).
+      >
+
 # tbl_grade_column() checks the first three values
 
     Code

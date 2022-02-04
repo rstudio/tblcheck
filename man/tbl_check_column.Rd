@@ -10,6 +10,7 @@ tbl_check_column(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
@@ -22,6 +23,7 @@ tbl_grade_column(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
@@ -38,6 +40,9 @@ tbl_grade_column(
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same class in \code{object} and \code{expected}.}
+
+\item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
+finding differences between \code{object} and \code{expected}. See examples.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same length in \code{object} and \code{expected}.}

@@ -140,6 +140,7 @@ grade_this_vector <- function(
   # all the arguments from tbl_grade_table() except object/expected
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,

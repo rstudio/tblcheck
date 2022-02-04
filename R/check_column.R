@@ -33,6 +33,7 @@
 #'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `column` has the
 #'   same class in `object` and `expected`.
+#' @inheritParams tbl_check_class
 #' @param check_length `[logical(1)]`\cr Whether to check that `column` has the
 #'   same length in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
@@ -71,6 +72,7 @@ tbl_check_column <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
@@ -109,6 +111,7 @@ tbl_check_column <- function(
       object[[column]],
       expected[[column]],
       check_class = check_class,
+      ignore_class = ignore_class,
       check_length = check_length,
       check_values = check_values,
       check_names = check_names
@@ -126,6 +129,7 @@ tbl_grade_column <- function(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = FALSE,
@@ -138,6 +142,7 @@ tbl_grade_column <- function(
       object = object,
       expected = expected,
       check_class = check_class,
+      ignore_class = ignore_class,
       check_length = check_length,
       check_values = check_values,
       check_names = check_names,
