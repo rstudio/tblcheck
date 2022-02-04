@@ -13,6 +13,7 @@ grade_this_table(
   max_diffs = 3,
   cols = NULL,
   check_class = TRUE,
+  ignore_class = NULL,
   check_names = TRUE,
   check_column_order = FALSE,
   check_dimensions = TRUE,
@@ -60,6 +61,9 @@ will be ignored. If \code{\link{NULL}}, the default, all columns will be checked
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
+
+\item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
+finding differences between \code{object} and \code{expected}. See examples.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}

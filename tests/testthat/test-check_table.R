@@ -21,6 +21,15 @@ test_that("tbl_grade() class", {
     ignore_attr = "class"
   )
 
+  grade_tbl_class_df_ignore <-
+    tblcheck_test_grade({
+      .result   <- data.frame(a = 1:10, b = 1:10)
+      .solution <- tibble::tibble(a = 1:10, b = 1:10)
+      tbl_grade(ignore_class = c("tbl_df", "tbl"))
+    })
+
+  expect_null(grade_tbl_class_df_ignore)
+
   grade_tbl_class_grouped <-
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = 1:10, b = a)

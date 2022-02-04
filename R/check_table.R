@@ -41,6 +41,7 @@
 #'   Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same classes with [tbl_check_class()].
+#' @inheritParams tbl_check_class
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same column names with [tbl_check_names()].
 #' @param check_column_order `[logical(1)]`\cr Whether to check that the columns
@@ -105,6 +106,7 @@ tbl_check <- function(
   expected = .solution,
   cols = NULL,
   check_class = TRUE,
+  ignore_class = NULL,
   check_names = TRUE,
   check_column_order = FALSE,
   check_dimensions = TRUE,
@@ -135,7 +137,7 @@ tbl_check <- function(
   # check table class ----
   if (check_class) {
     return_if_problem(
-      tbl_check_class(object, expected),
+      tbl_check_class(object, expected, ignore_class),
       prefix = "table"
     )
   } else (
@@ -207,6 +209,7 @@ tbl_grade <- function(
   cols = NULL,
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_names = TRUE,
   check_column_order = FALSE,
   check_dimensions = TRUE,
@@ -223,6 +226,7 @@ tbl_grade <- function(
       expected = expected,
       cols = !!rlang::enexpr(cols),
       check_class = check_class,
+      ignore_class = ignore_class,
       check_names = check_names,
       check_column_order = check_column_order,
       check_dimensions = check_dimensions,
