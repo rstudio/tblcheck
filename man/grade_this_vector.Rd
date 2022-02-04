@@ -12,6 +12,7 @@ grade_this_vector(
   ...,
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
@@ -54,6 +55,9 @@ print. Defaults to 3.}
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes.}
+
+\item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
+finding differences between \code{object} and \code{expected}. See examples.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same length.}
