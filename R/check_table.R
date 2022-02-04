@@ -101,6 +101,12 @@
 #' tbl_grade()
 #' tbl_grade(max_diffs = 5)
 #' tbl_grade(max_diffs = Inf)
+#'
+#' .result <- tibble::tibble(a = 1:10, b = rep(1:2, 5))
+#' .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = rep(1:2, 5)), b)
+#' tbl_check()
+#' tbl_grade()
+#' tbl_grade(check_groups = FALSE)
 tbl_check <- function(
   object = .result,
   expected = .solution,
@@ -136,6 +142,10 @@ tbl_check <- function(
 
   # check table class ----
   if (check_class) {
+    if (!check_groups) {
+      ignore_class <- c(ignore_class, "grouped_df")
+    }
+
     return_if_problem(
       tbl_check_class(object, expected, ignore_class),
       prefix = "table"

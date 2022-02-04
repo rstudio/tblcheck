@@ -52,6 +52,15 @@ test_that("tbl_grade() class", {
     ignore_attr = "class"
   )
 
+  grade_tbl_class_grouped_ignore <-
+    tblcheck_test_grade({
+      .result   <- tibble::tibble(a = 1:10, b = a)
+      .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
+      tbl_grade(check_groups = FALSE)
+    })
+
+  expect_null(grade_tbl_class_grouped_ignore)
+
   grade_tbl_class_rowwise <-
     tblcheck_test_grade({
       .result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))

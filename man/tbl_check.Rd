@@ -174,4 +174,10 @@ tbl_check()
 tbl_grade()
 tbl_grade(max_diffs = 5)
 tbl_grade(max_diffs = Inf)
+
+.result <- tibble::tibble(a = 1:10, b = rep(1:2, 5))
+.solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = rep(1:2, 5)), b)
+tbl_check()
+tbl_grade()
+tbl_grade(check_groups = FALSE)
 }
