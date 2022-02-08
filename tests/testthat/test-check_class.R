@@ -241,3 +241,16 @@ test_that("tbl_grade_class() with multiple classes", {
     )
   )
 })
+
+test_that("tbl_grade_class() with classes in different orders", {
+  grade <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1L
+      class(.result)   <- c("test", "class", "integer")
+      class(.solution) <- c("class", "test", "integer")
+      tbl_grade_class()
+    })
+
+  expect_null(grade)
+})

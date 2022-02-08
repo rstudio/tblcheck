@@ -71,6 +71,7 @@ tbl_check_class <- function(
   exp_class_ignored <- setdiff(exp_class, ignore_class)
 
   if (!identical(obj_class_ignored, exp_class_ignored)) {
+  if (!setequal(obj_class_ignored, exp_class_ignored)) {
     problem(
       "class",
       exp_class,
