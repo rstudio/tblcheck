@@ -44,7 +44,7 @@ test_that("vec_grade() checks classes", {
   grade_int_ignore <- tblcheck_test_grade({
     .result   <- c(1, 2, 3)
     .solution <- 1:3
-    vec_grade(ignore_class = c("integer", "numeric"))
+    vec_grade(ignore_class = c("integer" = "numeric"))
   })
 
   expect_null(grade_int_ignore)

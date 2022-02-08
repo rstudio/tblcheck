@@ -248,7 +248,7 @@ test_that("tbl_grade() columns", {
   grade_int_ignore <- tblcheck_test_grade({
     .result   <- tibble::tibble(a = c(1, 2, 3))
     .solution <- tibble::tibble(a = 1:3)
-    tbl_grade(ignore_class = c("integer", "numeric"))
+    tbl_grade(ignore_class = c("integer" = "numeric"))
   })
 
   expect_null(grade_int_ignore)

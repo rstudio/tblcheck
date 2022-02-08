@@ -39,7 +39,13 @@ vec_grade(
 \code{expected} have the same classes.}
 
 \item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
-finding differences between \code{object} and \code{expected}. See examples.}
+finding differences between \code{object} and \code{expected}.
+
+If an element is named, differences will only be ignored between the pair
+of the element and its name.
+For example, \code{ignore_class = c("integer" = "numeric")} will ignore class
+differences only if \code{object} has class \link{integer} and \code{expected} has class
+\link{numeric}, or vice versa.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same length.}

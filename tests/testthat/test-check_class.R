@@ -81,35 +81,6 @@ test_that("tbl_grade_class()", {
 })
 
 test_that("tbl_grade_class() ignore classes", {
-  grade_int_dbl <-
-    tblcheck_test_grade({
-      .result   <- 1L
-      .solution <- 1
-      tbl_grade_class()
-    })
-
-  expect_snapshot(grade_int_dbl)
-
-  expect_equal(
-    grade_int_dbl$problem,
-    problem(
-      type     = "class",
-      expected = "numeric",
-      actual   = "integer",
-      expected_length = 1,
-      actual_length = 1
-    )
-  )
-
-  grade_int_dbl_ignore <-
-    tblcheck_test_grade({
-      .result   <- 1L
-      .solution <- 1
-      tbl_grade_class(ignore_class = c("integer", "numeric"))
-    })
-
-  expect_null(grade_int_dbl_ignore)
-
   grade_glue_chr <-
     tblcheck_test_grade({
       .result   <- glue::glue("x")
@@ -139,35 +110,6 @@ test_that("tbl_grade_class() ignore classes", {
 
   expect_null(grade_glue_chr_ignore)
 
-  grade_posix_ct_lt <-
-    tblcheck_test_grade({
-      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-      tbl_grade_class()
-    })
-
-  expect_snapshot(grade_posix_ct_lt)
-
-  expect_equal(
-    grade_posix_ct_lt$problem,
-    problem(
-      type     = "class",
-      expected = c("POSIXlt", "POSIXt"),
-      actual   = c("POSIXct", "POSIXt"),
-      expected_length = 2,
-      actual_length = 2
-    )
-  )
-
-  grade_posix_ct_lt_ignore <-
-    tblcheck_test_grade({
-      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-      tbl_grade_class(ignore_class = c("POSIXct", "POSIXlt"))
-    })
-
-  expect_null(grade_posix_ct_lt_ignore)
-
   grade_tbl_df <-
     tblcheck_test_grade({
       .result   <- data.frame(a = 1, b = 2)
@@ -196,6 +138,86 @@ test_that("tbl_grade_class() ignore classes", {
     })
 
   expect_null(grade_tbl_df_ignore)
+})
+
+test_that("tbl_grade_class() with paired ignore_class", {
+  grade_int_dbl <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class()
+    })
+
+  expect_snapshot(grade_int_dbl)
+
+  expect_equal(
+    grade_int_dbl$problem,
+    problem(
+      type     = "class",
+      expected = "numeric",
+      actual   = "integer",
+      expected_length = 1,
+      actual_length = 1
+    )
+  )
+
+  grade_int_dbl_ignore <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class(ignore_class = c("integer" = "numeric"))
+    })
+
+  expect_null(grade_int_dbl_ignore)
+
+  grade_int_chr_wrong_ignore <-
+    tblcheck_test_grade({
+      .result   <- "1"
+      .solution <- 1
+      tbl_grade_class(ignore_class = c("integer" = "numeric"))
+    })
+
+  expect_snapshot(grade_int_chr_wrong_ignore)
+
+  expect_equal(
+    grade_int_chr_wrong_ignore$problem,
+    problem(
+      type     = "class",
+      expected = "numeric",
+      actual   = "character",
+      expected_length = 1,
+      actual_length = 1
+    )
+  )
+
+  grade_posix_ct_lt <-
+    tblcheck_test_grade({
+      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      tbl_grade_class()
+    })
+
+  expect_snapshot(grade_posix_ct_lt)
+
+  expect_equal(
+    grade_posix_ct_lt$problem,
+    problem(
+      type     = "class",
+      expected = c("POSIXlt", "POSIXt"),
+      actual   = c("POSIXct", "POSIXt"),
+      expected_length = 2,
+      actual_length = 2
+    )
+  )
+
+  grade_posix_ct_lt_ignore <-
+    tblcheck_test_grade({
+      .result   <- as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      .solution <- as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
+      tbl_grade_class(ignore_class = c("POSIXct" = "POSIXlt"))
+    })
+
+  expect_null(grade_posix_ct_lt_ignore)
 })
 
 test_that("tbl_grade_class() with multiple classes", {

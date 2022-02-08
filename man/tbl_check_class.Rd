@@ -43,7 +43,13 @@ vec_grade_class(
 \item{expected}{An object containing the expected result.}
 
 \item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
-finding differences between \code{object} and \code{expected}. See examples.}
+finding differences between \code{object} and \code{expected}.
+
+If an element is named, differences will only be ignored between the pair
+of the element and its name.
+For example, \code{ignore_class = c("integer" = "numeric")} will ignore class
+differences only if \code{object} has class \link{integer} and \code{expected} has class
+\link{numeric}, or vice versa.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 
@@ -108,7 +114,7 @@ tbl_grade_class(ignore_class = c("tbl_df", "tbl"))
 # Ignore the difference between integer and double
 .result <- 1L
 .solution <- 1
-vec_check_class(ignore_class = c("integer", "numeric"))
-vec_grade_class(ignore_class = c("integer", "numeric"))
+vec_check_class(ignore_class = c("integer" = "numeric"))
+vec_grade_class(ignore_class = c("integer" = "numeric"))
 
 }

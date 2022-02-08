@@ -47,7 +47,7 @@ test_that("tbl_grade_column() checks classes", {
     .result   <- tibble::tibble(a = c(1, 2, 3))
     .solution <- tibble::tibble(a = 1:3)
     tbl_grade_column(
-      "a", .result, .solution, ignore_class = c("integer", "numeric")
+      "a", .result, .solution, ignore_class = c("integer" = "numeric")
     )
   })
 

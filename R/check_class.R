@@ -36,13 +36,19 @@
 #' # Ignore the difference between integer and double
 #' .result <- 1L
 #' .solution <- 1
-#' vec_check_class(ignore_class = c("integer", "numeric"))
-#' vec_grade_class(ignore_class = c("integer", "numeric"))
+#' vec_check_class(ignore_class = c("integer" = "numeric"))
+#' vec_grade_class(ignore_class = c("integer" = "numeric"))
 #'
 #' @param object An object to be compared to `expected`.
 #' @param expected An object containing the expected result.
 #' @param ignore_class `[character()]`\cr A vector of classes to ignore when
-#'   finding differences between `object` and `expected`. See examples.
+#'   finding differences between `object` and `expected`.
+#'
+#'   If an element is named, differences will only be ignored between the pair
+#'   of the element and its name.
+#'   For example, `ignore_class = c("integer" = "numeric")` will ignore class
+#'   differences only if `object` has class [integer] and `expected` has class
+#'   [numeric], or vice versa.
 #' @inheritParams tbl_check
 #' @inheritDotParams gradethis::fail -message
 #'
@@ -67,10 +73,23 @@ tbl_check_class <- function(
   obj_class <- class(object)
   exp_class <- class(expected)
 
-  obj_class_ignored <- setdiff(obj_class, ignore_class)
-  exp_class_ignored <- setdiff(exp_class, ignore_class)
+  paired <- rlang::names2(ignore_class) != ""
 
-  if (!identical(obj_class_ignored, exp_class_ignored)) {
+  obj_class_ignored <- setdiff(obj_class, ignore_class[!paired])
+  exp_class_ignored <- setdiff(exp_class, ignore_class[!paired])
+
+  # Replace classes that match named elements of `ignore_class` with the
+  # element's name. This allows us to ignore differences between the element
+  # class and the name class.
+  obj_class_ignored[obj_class_ignored %in% ignore_class[paired]] <-
+    names(ignore_class[paired])[
+      na.omit(match(obj_class_ignored, ignore_class[paired]))
+    ]
+  exp_class_ignored[exp_class_ignored %in% ignore_class[paired]] <-
+    names(ignore_class[paired])[
+      na.omit(match(exp_class_ignored, ignore_class[paired]))
+    ]
+
   if (!setequal(obj_class_ignored, exp_class_ignored)) {
     problem(
       "class",
