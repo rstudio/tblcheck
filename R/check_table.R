@@ -203,6 +203,7 @@ tbl_check <- function(
           object = object,
           expected = expected,
           check_class = check_column_class,
+          ignore_class = ignore_class,
           check_values = check_column_values,
           check_length = FALSE
         )

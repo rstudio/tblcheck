@@ -103,6 +103,16 @@
         not `a`, `b`, and `c`.
       >
 
+---
+
+    Code
+      grade_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `a` column should be a vector of integers (class `integer`), but
+        it is a vector of numbers (class `numeric`).
+      >
+
 # tbl_grade() cols
 
     Code
