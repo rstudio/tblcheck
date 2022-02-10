@@ -233,6 +233,35 @@ test_that("tbl_grade_class() with multiple paired ignore_class", {
   expect_null(grade_int_dbl_ignore)
 })
 
+test_that("tbl_grade_class() with ignore_class leaving NULL solution class", {
+  grade_int_dbl_ignore <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class(ignore_class = c("numeric"))
+    })
+
+  expect_null(grade_int_dbl_ignore)
+
+  grade_chr_dbl_ignore <-
+    tblcheck_test_grade({
+      .result   <- "1"
+      .solution <- 1
+      tbl_grade_class(ignore_class = c("numeric"))
+    })
+
+  expect_null(grade_int_dbl_ignore)
+
+  grade_tbl_dbl_ignore <-
+    tblcheck_test_grade({
+      .result   <- tibble::tibble(a = 1)
+      .solution <- 1
+      tbl_grade_class(ignore_class = c("numeric"))
+    })
+
+  expect_null(grade_int_dbl_ignore)
+})
+
 test_that("tbl_grade_class() with multiple classes", {
   grade_class_solution <-
     tblcheck_test_grade({

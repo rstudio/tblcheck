@@ -49,6 +49,9 @@
 #'   For example, `ignore_class = c("integer" = "numeric")` will ignore class
 #'   differences only if `object` has class [integer] and `expected` has class
 #'   [numeric], or vice versa.
+#'
+#'   If all the classes of `expected` are included in `ignore_class`,
+#'   a `class` problem will never be returned.
 #' @inheritParams tbl_check
 #' @inheritDotParams gradethis::fail -message
 #'
@@ -77,6 +80,10 @@ tbl_check_class <- function(
 
   obj_class_ignored <- setdiff(obj_class, ignore_class[!paired])
   exp_class_ignored <- setdiff(exp_class, ignore_class[!paired])
+
+  if (length(exp_class_ignored) == 0) {
+    return(invisible())
+  }
 
   # Replace classes that match named elements of `ignore_class` with the
   # element's name. This allows us to ignore differences between the element

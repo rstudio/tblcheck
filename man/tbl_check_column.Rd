@@ -48,7 +48,10 @@ If an element is named, differences will only be ignored between the pair
 of the element and its name.
 For example, \code{ignore_class = c("integer" = "numeric")} will ignore class
 differences only if \code{object} has class \link{integer} and \code{expected} has class
-\link{numeric}, or vice versa.}
+\link{numeric}, or vice versa.
+
+If all the classes of \code{expected} are included in \code{ignore_class},
+a \code{class} problem will never be returned.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same length in \code{object} and \code{expected}.}
