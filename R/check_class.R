@@ -81,14 +81,12 @@ tbl_check_class <- function(
   # Replace classes that match named elements of `ignore_class` with the
   # element's name. This allows us to ignore differences between the element
   # class and the name class.
-  obj_class_ignored[obj_class_ignored %in% ignore_class[paired]] <-
-    names(ignore_class[paired])[
-      na.omit(match(obj_class_ignored, ignore_class[paired]))
-    ]
-  exp_class_ignored[exp_class_ignored %in% ignore_class[paired]] <-
-    names(ignore_class[paired])[
-      na.omit(match(exp_class_ignored, ignore_class[paired]))
-    ]
+  for (i in seq_along(ignore_class[paired])) {
+    obj_class_ignored[obj_class_ignored == ignore_class[paired][[i]]] <-
+      names(ignore_class[paired])[[i]]
+    exp_class_ignored[exp_class_ignored == ignore_class[paired][[i]]] <-
+      names(ignore_class[paired])[[i]]
+  }
 
   if (!setequal(obj_class_ignored, exp_class_ignored)) {
     problem(

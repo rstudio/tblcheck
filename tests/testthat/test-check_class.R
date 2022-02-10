@@ -220,6 +220,19 @@ test_that("tbl_grade_class() with paired ignore_class", {
   expect_null(grade_posix_ct_lt_ignore)
 })
 
+test_that("tbl_grade_class() with multiple paired ignore_class", {
+  grade_int_dbl_ignore <-
+    tblcheck_test_grade({
+      .result   <- 1L
+      .solution <- 1
+      tbl_grade_class(
+        ignore_class = c("numeric" = "integer", "character" = "numeric")
+      )
+    })
+
+  expect_null(grade_int_dbl_ignore)
+})
+
 test_that("tbl_grade_class() with multiple classes", {
   grade_class_solution <-
     tblcheck_test_grade({
