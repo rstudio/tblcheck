@@ -21,6 +21,15 @@ test_that("tbl_grade() class", {
     ignore_attr = "class"
   )
 
+  grade_tbl_class_df_ignore <-
+    tblcheck_test_grade({
+      .result   <- data.frame(a = 1:10, b = 1:10)
+      .solution <- tibble::tibble(a = 1:10, b = 1:10)
+      tbl_grade(ignore_class = c("tbl_df", "tbl"))
+    })
+
+  expect_null(grade_tbl_class_df_ignore)
+
   grade_tbl_class_grouped <-
     tblcheck_test_grade({
       .result   <- tibble::tibble(a = 1:10, b = a)
@@ -42,6 +51,15 @@ test_that("tbl_grade() class", {
     ),
     ignore_attr = "class"
   )
+
+  grade_tbl_class_grouped_ignore <-
+    tblcheck_test_grade({
+      .result   <- tibble::tibble(a = 1:10, b = a)
+      .solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
+      tbl_grade(check_groups = FALSE)
+    })
+
+  expect_null(grade_tbl_class_grouped_ignore)
 
   grade_tbl_class_rowwise <-
     tblcheck_test_grade({
@@ -204,6 +222,36 @@ test_that("tbl_grade() columns", {
     ),
     ignore_attr = "class"
   )
+
+  grade_int <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = c(1, 2, 3))
+    .solution <- tibble::tibble(a = 1:3)
+    tbl_grade()
+  })
+
+  expect_snapshot(grade_int)
+
+  expect_equal(
+    grade_int$problem,
+    problem(
+      "class",
+      "integer",
+      "numeric",
+      expected_length = 3,
+      actual_length = 3,
+      location = "column",
+      column = "a"
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_int_ignore <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = c(1, 2, 3))
+    .solution <- tibble::tibble(a = 1:3)
+    tbl_grade(ignore_class = c("integer" = "numeric"))
+  })
+
+  expect_null(grade_int_ignore)
 })
 
 test_that("tbl_grade() cols", {

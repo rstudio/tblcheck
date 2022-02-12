@@ -10,6 +10,7 @@ tbl_check(
   expected = .solution,
   cols = NULL,
   check_class = TRUE,
+  ignore_class = NULL,
   check_names = TRUE,
   check_column_order = FALSE,
   check_dimensions = TRUE,
@@ -26,6 +27,7 @@ tbl_grade(
   cols = NULL,
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_names = TRUE,
   check_column_order = FALSE,
   check_dimensions = TRUE,
@@ -48,6 +50,18 @@ will be ignored. If \code{\link{NULL}}, the default, all columns will be checked
 
 \item{check_class}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same classes with \code{\link[=tbl_check_class]{tbl_check_class()}}.}
+
+\item{ignore_class}{\verb{[character()]}\cr A vector of classes to ignore when
+finding differences between \code{object} and \code{expected}.
+
+If an element is named, differences will only be ignored between the pair
+of the element and its name.
+For example, \code{ignore_class = c("integer" = "numeric")} will ignore class
+differences only if \code{object} has class \link{integer} and \code{expected} has class
+\link{numeric}, or vice versa.
+
+If all the classes of \code{expected} are included in \code{ignore_class},
+a \code{class} problem will never be returned.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same column names with \code{\link[=tbl_check_names]{tbl_check_names()}}.}
@@ -169,4 +183,10 @@ tbl_check()
 tbl_grade()
 tbl_grade(max_diffs = 5)
 tbl_grade(max_diffs = Inf)
+
+.result <- tibble::tibble(a = 1:10, b = rep(1:2, 5))
+.solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = rep(1:2, 5)), b)
+tbl_check()
+tbl_grade()
+tbl_grade(check_groups = FALSE)
 }

@@ -20,6 +20,38 @@ test_that("tbl_grade_column() checks classes", {
     ),
     ignore_attr = "class"
   )
+
+  grade_int <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = c(1, 2, 3))
+    .solution <- tibble::tibble(a = 1:3)
+    tbl_grade_column("a", .result, .solution)
+  })
+
+  expect_snapshot(grade_int)
+
+  expect_equal(
+    grade_int$problem,
+    problem(
+      "class",
+      "integer",
+      "numeric",
+      expected_length = 3,
+      actual_length = 3,
+      location = "column",
+      column = "a"
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_int_ignore <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = c(1, 2, 3))
+    .solution <- tibble::tibble(a = 1:3)
+    tbl_grade_column(
+      "a", .result, .solution, ignore_class = c("integer" = "numeric")
+    )
+  })
+
+  expect_null(grade_int_ignore)
 })
 
 test_that("tbl_grade_column() checks the first three values", {

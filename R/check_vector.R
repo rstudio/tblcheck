@@ -30,6 +30,7 @@
 #'   print. Defaults to 3.
 #' @param check_class `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same classes.
+#' @inheritParams tbl_check_class
 #' @param check_length `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same length.
 #' @param check_levels `[logical(1)]`\cr Whether to check that `object` and
@@ -74,6 +75,7 @@ vec_check <- function(
   object = .result,
   expected = .solution,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_levels = TRUE,
   check_values = TRUE,
@@ -96,7 +98,7 @@ vec_check <- function(
 
   if (check_class) {
     return_if_problem(
-      vec_check_class(object, expected),
+      vec_check_class(object, expected, ignore_class),
       prefix = "vector"
     )
   }
@@ -137,6 +139,7 @@ vec_grade <- function(
   expected = .solution,
   max_diffs = 3,
   check_class = TRUE,
+  ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
   check_names = TRUE,
@@ -148,6 +151,7 @@ vec_grade <- function(
       object = object,
       expected = expected,
       check_class = check_class,
+      ignore_class = ignore_class,
       check_length = check_length,
       check_values = check_values,
       check_names = check_names,

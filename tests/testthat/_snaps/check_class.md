@@ -38,7 +38,27 @@
         it is a vector of text (class `character`).
       >
 
-# tbl_grade_class() does not ignore formerly inconsequential mismatches
+# tbl_grade_class() ignore classes
+
+    Code
+      grade_glue_chr
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a text string (class `character`), but it is an
+        object with classes `glue` and `character`.
+      >
+
+---
+
+    Code
+      grade_tbl_df
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a tibble (class `tbl_df`), but it is a data
+        frame (class `data.frame`).
+      >
+
+# tbl_grade_class() with paired ignore_class
 
     Code
       grade_int_dbl
@@ -51,11 +71,11 @@
 ---
 
     Code
-      grade_glue_chr
+      grade_int_chr_wrong_ignore
     Output
       <gradethis_graded: [Incorrect]
-        Your result should be a text string (class `character`), but it is an
-        object with classes `glue` and `character`.
+        Your result should be a number (class `numeric`), but it is a text
+        string (class `character`).
       >
 
 ---
