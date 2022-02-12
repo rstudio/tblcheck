@@ -104,7 +104,7 @@ added using the default options of \code{\link[gradethis:code_feedback]{give_cod
 \code{\link[gradethis:code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
 \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.hint} option.}
 
-\item{encourage}{Incude a random encouraging phrase with
+\item{encourage}{Include a random encouraging phrase with
 \code{\link[gradethis:praise]{random_encouragement()}}? The default value of \code{encourage} can be set
 using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.encourage} option.}
 
