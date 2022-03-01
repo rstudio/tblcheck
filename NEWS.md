@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tblcheck 0.1.2
+
+* Adds argument `ignore_class` to class checks (and passed by `table`, `vector`, and `column` checks), specifying class differences to ignore (#109).
+* Table checking now ignores the `grouped_df` class if `check_groups = FALSE` (#109).
+* Classes are now checked with `setequal()` instead of `identical()`, so objects with the same classes in different orders will not trigger a `class` problem (#109).
+* Fixed a bug where a message would not be generated for a values problem where two vectors were different but were made up of the same unique values (e.g. `c(1, 2, 3)` and `c(2, 1, 3, 2)`) (#104).
+
 # tblcheck 0.1.1
 
 * Fixed the messages for values problems originating in columns to mention the problematic column (#100).
