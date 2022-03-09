@@ -15,6 +15,7 @@ grade_this_vector(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
@@ -47,8 +48,8 @@ is compared to the \code{.solution} with \code{\link[gradethis:pass_if_equal]{gr
 either \code{pre_check} or \code{post_check} for the student to be able to receive a
 passing grade.}
 
-\item{...}{Additional arguments passed to \code{graded()} or additional data to be
-included in the feedback object.}
+\item{...}{further arguments for different methods, notably the
+    following two, for numerical comparison:}
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 print. Defaults to 3.}
@@ -73,6 +74,10 @@ a \code{class} problem will never be returned.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}
+
+\item{tolerance}{numeric \eqn{\ge} 0.  Differences smaller than
+    \code{tolerance} are not reported.  The default value is close to
+    \code{1.5e-8}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same names.}

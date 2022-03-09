@@ -13,6 +13,7 @@ vec_check(
   check_length = TRUE,
   check_levels = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   env = parent.frame()
 )
@@ -25,6 +26,7 @@ vec_grade(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   env = parent.frame(),
   ...

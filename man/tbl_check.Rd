@@ -18,6 +18,7 @@ tbl_check(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
+  tolerance = sqrt(.Machine$double.eps),
   env = parent.frame()
 )
 
@@ -35,6 +36,7 @@ tbl_grade(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
+  tolerance = sqrt(.Machine$double.eps),
   env = parent.frame(),
   ...
 )
@@ -86,6 +88,10 @@ columns has the same class in \code{object} and \code{expected}.}
 
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}
+
+\item{tolerance}{numeric \eqn{\ge} 0.  Differences smaller than
+    \code{tolerance} are not reported.  The default value is close to
+    \code{1.5e-8}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 

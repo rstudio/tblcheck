@@ -15,6 +15,7 @@ vec_check_values(
 vec_grade_values(
   object = .result,
   expected = .solution,
+  tolerance = sqrt(.Machine$double.eps),
   max_diffs = 3,
   env = parent.frame(),
   ...
