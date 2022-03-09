@@ -37,6 +37,7 @@
 #'   `expected` have the same [factor levels][levels()].
 #' @param check_values `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` contain the same values.
+#' @inheritParams vec_check_values
 #' @param check_names `[logical(1)]`\cr Whether to check that `object` and
 #'   `expected` have the same names.
 #' @inheritParams tbl_check
@@ -79,6 +80,7 @@ vec_check <- function(
   check_length = TRUE,
   check_levels = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   env = parent.frame()
 ) {
@@ -119,7 +121,7 @@ vec_check <- function(
 
   if (check_values) {
     return_if_problem(
-      vec_check_values(object, expected),
+      vec_check_values(object, expected, tolerance = tolerance),
       prefix = "vector"
     )
   }
@@ -142,6 +144,7 @@ vec_grade <- function(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   env = parent.frame(),
   ...
@@ -154,6 +157,7 @@ vec_grade <- function(
       ignore_class = ignore_class,
       check_length = check_length,
       check_values = check_values,
+      tolerance = tolerance,
       check_names = check_names,
       env = env
     ),

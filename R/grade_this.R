@@ -83,6 +83,7 @@ grade_this_table <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
+  tolerance = sqrt(.Machine$double.eps),
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
   # gradethis pass/fail options
@@ -143,6 +144,7 @@ grade_this_vector <- function(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),

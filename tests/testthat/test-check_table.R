@@ -252,6 +252,28 @@ test_that("tbl_grade() columns", {
   })
 
   expect_null(grade_int_ignore)
+
+  grade_tolerant <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = sqrt(2) ^ 2)
+    .solution <- tibble::tibble(a = 2)
+    tbl_grade()
+  })
+
+  expect_null(grade_tolerant)
+
+  grade_intolerant <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = sqrt(2) ^ 2)
+    .solution <- tibble::tibble(a = 2)
+    tbl_grade(tolerance = 0)
+  })
+
+  expect_snapshot(grade_intolerant)
+
+  expect_equal(
+    grade_intolerant$problem,
+    problem("values", 2, sqrt(2) ^ 2, location = "column", column = "a"),
+    ignore_attr = "class"
+  )
 })
 
 test_that("tbl_grade() cols", {

@@ -113,6 +113,15 @@
         it is a vector of numbers (class `numeric`).
       >
 
+---
+
+    Code
+      grade_intolerant
+    Output
+      <gradethis_graded: [Incorrect]
+        The first value of your `a` column should be `2`, not `2`, not `2`.
+      >
+
 # tbl_grade() cols
 
     Code
