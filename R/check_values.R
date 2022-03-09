@@ -10,14 +10,6 @@
 #'
 #' 1. `values`: `object` doesn't contain the same values as `expected`
 #'
-#' @inheritParams vec_check
-#' @inheritDotParams gradethis::fail -message
-#'
-#' @return If there are any issues, a [list] from `vec_check_values()` or a
-#'   [gradethis::fail()] message from `vec_grade_values()`.
-#'   Otherwise, invisibly returns [`NULL`].
-#' @export
-#'
 #' @examples
 #' .result <- 1:10
 #' .solution <- letters[1:10]
@@ -42,9 +34,19 @@
 #' vec_grade_values()
 #' vec_grade_values(max_diffs = 5)
 #' vec_grade_values(max_diffs = Inf)
+#' @inheritParams vec_check
+#' @inheritDotParams gradethis::fail -message
+#' @inheritParams base::all.equal
+#'
+#' @return If there are any issues, a [list] from `vec_check_values()` or a
+#'   [gradethis::fail()] message from `vec_grade_values()`.
+#'   Otherwise, invisibly returns [`NULL`].
+#' @export
+#' @importFrom zeallot %<-%
 vec_check_values <- function(
   object = .result,
   expected = .solution,
+  tolerance = sqrt(.Machine$double.eps),
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -69,8 +71,15 @@ vec_check_values <- function(
   # Check if values are the same length
   return_if_problem(vec_check_dimensions(object, expected))
 
+  c(object, expected) %<-% vctrs::vec_cast_common(object, expected)
+
   # Check if values are the same
-  if (!all(vctrs::vec_equal(object, expected, na_equal = TRUE))) {
+  if (
+    !isTRUE(all.equal(
+      object, expected,
+      tolerance = tolerance, check.attributes = FALSE, check.names = FALSE
+    ))
+  ) {
     return(problem("values", expected, object))
   }
 }
@@ -80,6 +89,7 @@ vec_check_values <- function(
 vec_grade_values <- function(
   object = .result,
   expected = .solution,
+  tolerance = sqrt(.Machine$double.eps),
   max_diffs = 3,
   env = parent.frame(),
   ...
@@ -88,6 +98,7 @@ vec_grade_values <- function(
     vec_check_values(
       object = object,
       expected = expected,
+      tolerance = tolerance,
       env = env
     ),
     max_diffs = max_diffs,

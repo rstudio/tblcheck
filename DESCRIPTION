@@ -29,7 +29,8 @@ Imports:
     rlang,
     tidyselect,
     utils,
-    vctrs
+    vctrs,
+    zeallot
 Suggests:
     dplyr,
     learnr,
