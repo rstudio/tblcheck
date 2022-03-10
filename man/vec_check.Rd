@@ -61,6 +61,9 @@ a \code{class} problem will never be returned.}
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}
 
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
+
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same names.}
 

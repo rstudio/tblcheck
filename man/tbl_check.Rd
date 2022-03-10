@@ -89,9 +89,8 @@ columns has the same class in \code{object} and \code{expected}.}
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}
 
-\item{tolerance}{numeric \eqn{\ge} 0.  Differences smaller than
-    \code{tolerance} are not reported.  The default value is close to
-    \code{1.5e-8}.}
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 

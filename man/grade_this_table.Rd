@@ -46,8 +46,8 @@ is compared to the \code{.solution} with \code{\link[gradethis:pass_if_equal]{gr
 either \code{pre_check} or \code{post_check} for the student to be able to receive a
 passing grade.}
 
-\item{...}{further arguments for different methods, notably the
-    following two, for numerical comparison:}
+\item{...}{Additional arguments passed to \code{graded()} or additional data to be
+included in the feedback object.}
 
 \item{max_diffs}{\verb{[numeric(1)]}\cr The maximum number of mismatched values to
 display in an informative failure message.
@@ -99,9 +99,8 @@ columns has the same class in \code{object} and \code{expected}.}
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}
 
-\item{tolerance}{numeric \eqn{\ge} 0.  Differences smaller than
-    \code{tolerance} are not reported.  The default value is close to
-    \code{1.5e-8}.}
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{hint}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is

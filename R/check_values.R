@@ -36,7 +36,8 @@
 #' vec_grade_values(max_diffs = Inf)
 #' @inheritParams vec_check
 #' @inheritDotParams gradethis::fail -message
-#' @inheritParams base::all.equal
+#' @param tolerance `[numeric(1) ≥ 0]`\cr `values` differences smaller than
+#'   `tolerance` are ignored. The default value is close to `1.5e-8`.
 #'
 #' @return If there are any issues, a [list] from `vec_check_values()` or a
 #'   [gradethis::fail()] message from `vec_grade_values()`.
