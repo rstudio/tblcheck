@@ -71,15 +71,8 @@ vec_check_values <- function(
   # Check if values are the same length
   return_if_problem(vec_check_dimensions(object, expected))
 
-  c(object, expected) %<-% vctrs::vec_cast_common(object, expected)
-
   # Check if values are the same
-  if (
-    !isTRUE(all.equal(
-      object, expected,
-      tolerance = tolerance, check.attributes = FALSE, check.names = FALSE
-    ))
-  ) {
+  if (!is_all_equal(object, expected, tolerance = tolerance)) {
     return(problem("values", expected, object))
   }
 }
