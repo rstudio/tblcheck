@@ -43,7 +43,6 @@
 #'   [gradethis::fail()] message from `vec_grade_values()`.
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
-#' @importFrom zeallot %<-%
 vec_check_values <- function(
   object = .result,
   expected = .solution,
