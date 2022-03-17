@@ -5,11 +5,17 @@
 \alias{vec_grade_values}
 \title{Checks that two vectors are contain the same values}
 \usage{
-vec_check_values(object = .result, expected = .solution, env = parent.frame())
+vec_check_values(
+  object = .result,
+  expected = .solution,
+  tolerance = sqrt(.Machine$double.eps),
+  env = parent.frame()
+)
 
 vec_grade_values(
   object = .result,
   expected = .solution,
+  tolerance = sqrt(.Machine$double.eps),
   max_diffs = 3,
   env = parent.frame(),
   ...
@@ -19,6 +25,9 @@ vec_grade_values(
 \item{object}{A vector to be compared to \code{expected}.}
 
 \item{expected}{A vector containing the expected result.}
+
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
 

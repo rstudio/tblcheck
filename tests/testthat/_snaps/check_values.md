@@ -75,3 +75,12 @@
         `0.879`, and `0.790`.
       >
 
+# floating point differences are ignored by default
+
+    Code
+      grade_intolerant
+    Output
+      <gradethis_graded: [Incorrect]
+        The first value of your result should be `2`, not `2`.
+      >
+

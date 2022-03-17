@@ -13,6 +13,7 @@ vec_check(
   check_length = TRUE,
   check_levels = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   env = parent.frame()
 )
@@ -25,6 +26,7 @@ vec_grade(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
   env = parent.frame(),
   ...
@@ -58,6 +60,9 @@ a \code{class} problem will never be returned.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}
+
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same names.}

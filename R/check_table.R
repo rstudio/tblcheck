@@ -59,6 +59,7 @@
 #'   columns has the same class in `object` and `expected`.
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
+#' @inheritParams vec_check_values
 #' @param env The environment in which to find `.result` and `.solution`.
 #' @inheritDotParams gradethis::fail -message
 #'
@@ -120,6 +121,7 @@ tbl_check <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
+  tolerance = sqrt(.Machine$double.eps),
   env = parent.frame()
 ) {
   if (inherits(object, ".result")) {
@@ -205,6 +207,7 @@ tbl_check <- function(
           check_class = check_column_class,
           ignore_class = ignore_class,
           check_values = check_column_values,
+          tolerance = tolerance,
           check_length = FALSE
         )
       )
@@ -228,6 +231,7 @@ tbl_grade <- function(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
+  tolerance = sqrt(.Machine$double.eps),
   env = parent.frame(),
   ...
 ) {
@@ -245,6 +249,7 @@ tbl_grade <- function(
       check_columns = check_columns,
       check_column_class = check_column_class,
       check_column_values = check_column_values,
+      tolerance = tolerance,
       env = env
     ),
     max_diffs = max_diffs,

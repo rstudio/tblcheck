@@ -118,3 +118,27 @@ test_that("column values problem messages are created correctly", {
 
   expect_match(grade_tbl$message, "your `x` column")
 })
+
+test_that("floating point differences are ignored by default", {
+  grade_tolerant <- tblcheck_test_grade({
+    .result   <- sqrt(2) ^ 2
+    .solution <- 2
+    vec_grade_values()
+  })
+
+  expect_null(grade_tolerant)
+
+  grade_intolerant <- tblcheck_test_grade({
+    .result   <- sqrt(2) ^ 2
+    .solution <- 2
+    vec_grade_values(tolerance = 0)
+  })
+
+  expect_snapshot(grade_intolerant)
+
+  expect_equal(
+    grade_intolerant$problem,
+    problem("values", 2, sqrt(2) ^ 2),
+    ignore_attr = "class"
+  )
+})

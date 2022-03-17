@@ -21,6 +21,7 @@ grade_this_table(
   check_columns = TRUE,
   check_column_class = check_columns,
   check_column_values = check_columns,
+  tolerance = sqrt(.Machine$double.eps),
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
   pass.praise = NULL
@@ -97,6 +98,9 @@ columns has the same class in \code{object} and \code{expected}.}
 
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}
+
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{hint}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is

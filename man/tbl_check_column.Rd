@@ -13,6 +13,7 @@ tbl_check_column(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = FALSE,
   env = parent.frame()
 )
@@ -26,6 +27,7 @@ tbl_grade_column(
   ignore_class = NULL,
   check_length = TRUE,
   check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
   check_names = FALSE,
   env = parent.frame(),
   ...
@@ -58,6 +60,9 @@ same length in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same values in \code{object} and \code{expected}.}
+
+\item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
+\code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same \link[=names]{names} in \code{object} and \code{expected}.

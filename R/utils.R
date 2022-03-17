@@ -60,3 +60,21 @@ has_common_ptype <- function(x, y) {
 has_rlang_version <- function(minimum = "0.4.12.9001") {
   utils::packageVersion("rlang") >= package_version(minimum)
 }
+
+is_all_equal <- function(
+  x, y,
+  tolerance = sqrt(.Machine$double.eps),
+  check.attributes = FALSE,
+  check.names = FALSE
+) {
+  objects <- vctrs::vec_cast_common(x, y)
+
+  equal <- all.equal(
+    objects[[1]], objects[[2]],
+    tolerance = tolerance,
+    check.attributes = check.attributes,
+    check.names = check.names
+  )
+
+  isTRUE(equal)
+}

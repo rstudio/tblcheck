@@ -21,7 +21,7 @@ Imports:
     checkmate,
     ellipsis,
     glue,
-    gradethis (>= 0.2.3.9001),
+    gradethis (>= 0.2.7.9000),
     knitr,
     lifecycle,
     magrittr,
