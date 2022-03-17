@@ -244,7 +244,12 @@ tblcheck_grade_this_impl <- function(
 
       if (isTRUE(get0(".__pass_if_equal", inherits = TRUE, ifnotfound = FALSE))) {
         # pass immediately if they're _exactly_ the same
-        gradethis::pass_if_equal(message = get(".__correct"), praise = get(".__pass.praise"))
+        gradethis::pass_if_equal(
+          message = get(".__correct"),
+          praise = get(".__pass.praise"),
+          # use strict pass_if_equal, tblcheck will handle numeric tolerance
+          tolerance = NULL
+        )
       }
 
       # call the tblcheck grader
