@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tblcheck 0.1.3
+
+* Add `tolerance` argument to `vec_*_values()` (#111).
+
 # tblcheck 0.1.2
 
 * Adds argument `ignore_class` to class checks (and passed by `table`, `vector`, and `column` checks), specifying class differences to ignore (#109).

@@ -1,6 +1,6 @@
 Package: tblcheck
 Title: Grade Tables in Learning Exercises
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(
     person("Alexander", "Rossell Hayes", , "alex.rossellhayes@rstudio.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9412-0457")),
