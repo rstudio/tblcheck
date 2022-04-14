@@ -78,7 +78,7 @@ with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}.}
 
 \item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same \link[dplyr:group_by]{groups}
-with \code{\link[dplyr:group_data]{dplyr::group_vars()}}.}
+with \code{\link[dplyr:group_vars]{dplyr::group_vars()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
