@@ -149,7 +149,7 @@ tblcheck_message.names_problem <- function(problem, max_diffs = 3, ...) {
 			"Your result should have the names {missing}. "
 		)
 
-	problem$unexpected_msg  <- problem$unexpected_msg %||%
+	problem$unexpected_msg <- problem$unexpected_msg %||%
 		ngettext(
 			length(problem$unexpected),
 			"Your result should not have the name {unexpected}.",

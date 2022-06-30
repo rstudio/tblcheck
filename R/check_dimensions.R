@@ -307,7 +307,7 @@ tblcheck_message.dimensions_problem <- function(problem, ...) {
 	problem$msg <- problem$msg %||%
 		gettext("Your result should be an array with dimensions {expected}, but it has dimensions {actual}.")
 
-	problem$actual   <- paste(problem$actual, collapse = " x ")
+	problem$actual <- paste(problem$actual, collapse = " x ")
 	problem$expected <- paste(problem$expected, collapse = " x ")
 
 	glue::glue_data(problem, problem$msg)

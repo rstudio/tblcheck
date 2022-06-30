@@ -208,7 +208,7 @@ tblcheck_grade_this_impl <- function(
 	# gradethis pass/fail options
 	pass.praise = NULL
 ) {
-	pre_check  <- rlang::enexpr(pre_check)
+	pre_check <- rlang::enexpr(pre_check)
 	post_check <- rlang::enexpr(post_check)
 
 	tblcheck_grader_args <- list(
@@ -224,11 +224,11 @@ tblcheck_grade_this_impl <- function(
 			list(
 				".__tblcheck_grader_args" = tblcheck_grader_args,
 				".__tblcheck_grader" = tblcheck_grader,
-				".__pre_check"       = pre_check,
-				".__post_check"      = post_check,
-				".__pass_if_equal"   = pass_if_equal,
-				".__correct"         = correct        %||% getOption("gradethis.pass"),
-				".__pass.praise"     = pass.praise    %||% getOption("gradethis.pass.praise", FALSE)
+				".__pre_check" = pre_check,
+				".__post_check" = post_check,
+				".__pass_if_equal" = pass_if_equal,
+				".__correct" = correct %||% getOption("gradethis.pass"),
+				".__pass.praise" = pass.praise %||% getOption("gradethis.pass.praise", FALSE)
 			),
 			parent = rlang::env_parent(check_env)
 		)

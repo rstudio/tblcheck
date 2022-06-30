@@ -1,7 +1,7 @@
 test_that("grade missing names", {
 	grade_missing_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3])
+			.result <- tibble::tibble(a = letters[1:3])
 			.solution <- tibble::tibble(a = letters[1:3], b = a)
 			tbl_grade_names()
 		})
@@ -18,7 +18,7 @@ test_that("grade missing names", {
 
 	grade_missing_2 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3])
+			.result <- tibble::tibble(a = letters[1:3])
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
 			tbl_grade_names()
 		})
@@ -40,7 +40,7 @@ test_that("grade missing names", {
 test_that("grade unexpected names", {
 	grade_unexpected_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3], b = a)
+			.result <- tibble::tibble(a = letters[1:3], b = a)
 			.solution <- tibble::tibble(a = letters[1:3])
 			tbl_grade_names()
 		})
@@ -57,7 +57,7 @@ test_that("grade unexpected names", {
 
 	grade_unexpected_2 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
+			.result <- tibble::tibble(a = letters[1:3], b = a, c = a)
 			.solution <- tibble::tibble(a = letters[1:3])
 			tbl_grade_names()
 		})
@@ -78,7 +78,7 @@ test_that("grade unexpected names", {
 
 test_that("grade missing and unexpected names", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a)
 		.solution <- tibble::tibble(x = letters[1:3], y = x)
 		tbl_grade_names()
 	})
@@ -99,7 +99,7 @@ test_that("grade missing and unexpected names", {
 
 test_that("grade names in wrong order", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a)
 		.solution <- tibble::tibble(b = letters[1:3], a = b)
 		tbl_grade_names()
 	})
@@ -113,7 +113,7 @@ test_that("grade names in wrong order", {
 	)
 
 	grade_false <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a)
 		.solution <- tibble::tibble(b = letters[1:3], a = b)
 		tbl_grade_names(check_order = FALSE)
 	})
@@ -124,7 +124,7 @@ test_that("grade names in wrong order", {
 test_that("grade names max_diffs()", {
 	grade_max_diffs_3 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble()
+			.result <- tibble::tibble()
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 			tbl_grade_names(max_diffs = 3)
 		})
@@ -133,7 +133,7 @@ test_that("grade names max_diffs()", {
 
 	grade_max_diffs_inf <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble()
+			.result <- tibble::tibble()
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 			tbl_grade_names(max_diffs = Inf)
 		})
@@ -142,7 +142,7 @@ test_that("grade names max_diffs()", {
 
 	grade_max_diffs_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble()
+			.result <- tibble::tibble()
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 			tbl_grade_names(max_diffs = 1)
 		})
@@ -151,7 +151,7 @@ test_that("grade names max_diffs()", {
 })
 
 test_that("tbl_grade_names() with no problems returns invisible()", {
-	.result   <- tibble::tibble(a = letters[1:3], b = a, c = a)
+	.result <- tibble::tibble(a = letters[1:3], b = a, c = a)
 	.solution <- tibble::tibble(a = letters[1:3], b = a, c = a)
 
 	problem <- expect_invisible(tbl_check_names())
@@ -164,7 +164,7 @@ test_that("tbl_grade_names() with no problems returns invisible()", {
 test_that("tbl_grade_names() handles bad user input", {
 	expect_internal_problem(
 		tblcheck_test_grade({
-			.result   <- tibble::tibble()
+			.result <- tibble::tibble()
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 			tbl_grade_names(max_diffs = "a")
 		}),
@@ -173,7 +173,7 @@ test_that("tbl_grade_names() handles bad user input", {
 
 	expect_internal_problem(
 		tblcheck_test_grade({
-			.result   <- tibble::tibble()
+			.result <- tibble::tibble()
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 			tbl_grade_names(max_diffs = -1)
 		}),
@@ -182,7 +182,7 @@ test_that("tbl_grade_names() handles bad user input", {
 
 	expect_internal_problem(
 		tblcheck_test_grade({
-			.result   <- tibble::tibble()
+			.result <- tibble::tibble()
 			.solution <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 			tbl_grade_names(max_diffs = 1:2)
 		}),

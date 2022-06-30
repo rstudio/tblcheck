@@ -1,6 +1,6 @@
 test_that("grade missing groups", {
 	grade_ungrouped <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a)
 		.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 		tbl_grade_groups()
 	})
@@ -41,7 +41,7 @@ test_that("grade missing groups", {
 
 test_that("grade unexpected groups", {
 	grade_single <- tblcheck_test_grade({
-		.result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+		.result <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 		.solution <- tibble::tibble(a = letters[1:3], b = a)
 		tbl_grade_groups()
 	})
@@ -82,7 +82,7 @@ test_that("grade unexpected groups", {
 
 test_that("grade missing and unexpected groups", {
 	grade <- tblcheck_test_grade({
-		.result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), a)
+		.result <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), a)
 		.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 		tbl_grade_groups()
 	})
@@ -98,7 +98,7 @@ test_that("grade missing and unexpected groups", {
 
 test_that("grade groups max_diffs()", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 		.solution <- dplyr::group_by(
 			tibble::tibble(a = letters[1:3], b = a, c = a, d = a), a, b, c, d
 		)
@@ -119,7 +119,7 @@ test_that("grade groups max_diffs()", {
 	)
 
 	grade_inf <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 		.solution <- dplyr::group_by(
 			tibble::tibble(a = letters[1:3], b = a, c = a, d = a), a, b, c, d
 		)
@@ -140,7 +140,7 @@ test_that("grade groups max_diffs()", {
 	)
 
 	grade_one <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a, c = a, d = a)
 		.solution <- dplyr::group_by(
 			tibble::tibble(a = letters[1:3], b = a, c = a, d = a), a, b, c, d
 		)
@@ -162,7 +162,7 @@ test_that("grade groups max_diffs()", {
 })
 
 test_that("tbl_grade_groups() with no problems returns invisible()", {
-	.result   <- tibble::tibble(a = letters[1:3], b = a)
+	.result <- tibble::tibble(a = letters[1:3], b = a)
 	.solution <- tibble::tibble(a = letters[1:3], b = a)
 
 	grade <- expect_invisible(tbl_grade_groups())
@@ -171,7 +171,7 @@ test_that("tbl_grade_groups() with no problems returns invisible()", {
 	problem <- expect_invisible(tbl_check_groups())
 	expect_null(problem)
 
-	.result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+	.result <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 	.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 
 	grade <- expect_invisible(tbl_grade_groups())
@@ -184,7 +184,7 @@ test_that("tbl_grade_groups() with no problems returns invisible()", {
 test_that("tbl_grade_groups() handles bad user input", {
 	expect_internal_problem(
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3], b = a)
+			.result <- tibble::tibble(a = letters[1:3], b = a)
 			.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 			tbl_grade_groups(max_diffs = "a")
 		}),
@@ -193,7 +193,7 @@ test_that("tbl_grade_groups() handles bad user input", {
 
 	expect_internal_problem(
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3], b = a)
+			.result <- tibble::tibble(a = letters[1:3], b = a)
 			.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 			tbl_grade_groups(max_diffs = -1)
 		}),
@@ -202,7 +202,7 @@ test_that("tbl_grade_groups() handles bad user input", {
 
 	expect_internal_problem(
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters[1:3], b = a)
+			.result <- tibble::tibble(a = letters[1:3], b = a)
 			.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 			tbl_grade_groups(max_diffs = 1:2)
 		}),

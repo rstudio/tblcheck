@@ -1,7 +1,7 @@
 test_that("tbl_grade() class", {
 	grade_tbl_class_df <-
 		tblcheck_test_grade({
-			.result   <- data.frame(a = 1:10, b = 1:10)
+			.result <- data.frame(a = 1:10, b = 1:10)
 			.solution <- tibble::tibble(a = 1:10, b = 1:10)
 			tbl_grade()
 		})
@@ -23,7 +23,7 @@ test_that("tbl_grade() class", {
 
 	grade_tbl_class_df_ignore <-
 		tblcheck_test_grade({
-			.result   <- data.frame(a = 1:10, b = 1:10)
+			.result <- data.frame(a = 1:10, b = 1:10)
 			.solution <- tibble::tibble(a = 1:10, b = 1:10)
 			tbl_grade(ignore_class = c("tbl_df", "tbl"))
 		})
@@ -32,7 +32,7 @@ test_that("tbl_grade() class", {
 
 	grade_tbl_class_grouped <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = 1:10, b = a)
+			.result <- tibble::tibble(a = 1:10, b = a)
 			.solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
 			tbl_grade()
 		})
@@ -54,7 +54,7 @@ test_that("tbl_grade() class", {
 
 	grade_tbl_class_grouped_ignore <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = 1:10, b = a)
+			.result <- tibble::tibble(a = 1:10, b = a)
 			.solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
 			tbl_grade(check_groups = FALSE)
 		})
@@ -63,7 +63,7 @@ test_that("tbl_grade() class", {
 
 	grade_tbl_class_rowwise <-
 		tblcheck_test_grade({
-			.result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
+			.result <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
 			.solution <- tibble::tibble(a = 1:10, b = a)
 			tbl_grade()
 		})
@@ -85,7 +85,7 @@ test_that("tbl_grade() class", {
 
 	grade_tbl_class_grouped_rowwise <-
 		tblcheck_test_grade({
-			.result   <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
+			.result <- dplyr::rowwise(tibble::tibble(a = 1:10, b = a))
 			.solution <- dplyr::group_by(tibble::tibble(a = 1:10, b = a), a)
 			tbl_grade()
 		})
@@ -109,7 +109,7 @@ test_that("tbl_grade() class", {
 test_that("tbl_grade() rows", {
 	grade_tbl_rows_missing_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a)
+			.result <- tibble::tibble(a = letters, b = a)
 			.solution <- tibble::tibble(a = letters[-1], b = a)
 			tbl_grade()
 		})
@@ -124,7 +124,7 @@ test_that("tbl_grade() rows", {
 
 	grade_tbl_rows_extra_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a)
+			.result <- tibble::tibble(a = letters, b = a)
 			.solution <- tibble::tibble(a = letters[1], b = a)
 			tbl_grade()
 		})
@@ -141,7 +141,7 @@ test_that("tbl_grade() rows", {
 test_that("tbl_grade() ncol", {
 	grade_tbl_cols_extra_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a, c = a)
+			.result <- tibble::tibble(a = letters, b = a, c = a)
 			.solution <- tibble::tibble(a = letters, b = a)
 			tbl_grade(check_names = FALSE)
 		})
@@ -156,7 +156,7 @@ test_that("tbl_grade() ncol", {
 
 	grade_tbl_cols_extra_2 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a, c = a)
+			.result <- tibble::tibble(a = letters, b = a, c = a)
 			.solution <- tibble::tibble(a = letters)
 			tbl_grade(check_names = FALSE)
 		})
@@ -171,7 +171,7 @@ test_that("tbl_grade() ncol", {
 
 	grade_tbl_cols_missing_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters)
+			.result <- tibble::tibble(a = letters)
 			.solution <- tibble::tibble(a = letters, b = a)
 			tbl_grade(check_names = FALSE)
 		})
@@ -187,7 +187,7 @@ test_that("tbl_grade() ncol", {
 
 test_that("tbl_grade() names", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3], b = a)
+		.result <- tibble::tibble(a = letters[1:3], b = a)
 		.solution <- tibble::tibble(x = letters[1:3], y = x)
 		tbl_grade()
 	})
@@ -208,7 +208,7 @@ test_that("tbl_grade() names", {
 
 test_that("tbl_grade() columns", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = letters[1:3])
+		.result <- tibble::tibble(a = letters[1:3])
 		.solution <- tibble::tibble(a = letters[24:26])
 		tbl_grade()
 	})
@@ -224,7 +224,7 @@ test_that("tbl_grade() columns", {
 	)
 
 	grade_int <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = c(1, 2, 3))
+		.result <- tibble::tibble(a = c(1, 2, 3))
 		.solution <- tibble::tibble(a = 1:3)
 		tbl_grade()
 	})
@@ -246,7 +246,7 @@ test_that("tbl_grade() columns", {
 	)
 
 	grade_int_ignore <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = c(1, 2, 3))
+		.result <- tibble::tibble(a = c(1, 2, 3))
 		.solution <- tibble::tibble(a = 1:3)
 		tbl_grade(ignore_class = c("integer" = "numeric"))
 	})
@@ -254,7 +254,7 @@ test_that("tbl_grade() columns", {
 	expect_null(grade_int_ignore)
 
 	grade_tolerant <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = sqrt(2) ^ 2)
+		.result <- tibble::tibble(a = sqrt(2) ^ 2)
 		.solution <- tibble::tibble(a = 2)
 		tbl_grade()
 	})
@@ -262,7 +262,7 @@ test_that("tbl_grade() columns", {
 	expect_null(grade_tolerant)
 
 	grade_intolerant <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = sqrt(2) ^ 2)
+		.result <- tibble::tibble(a = sqrt(2) ^ 2)
 		.solution <- tibble::tibble(a = 2)
 		tbl_grade(tolerance = 0)
 	})
@@ -346,7 +346,7 @@ test_that("tbl_grade() with no problems returns invisible()", {
 test_that("tbl_grade() returns grades with row problems", {
 	grade_rows_extra <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters)
+			.result <- tibble::tibble(a = letters)
 			.solution <- tibble::tibble(a = letters[1:25])
 			tbl_grade()
 		})
@@ -361,9 +361,9 @@ test_that("tbl_grade() returns grades with row problems", {
 
 	grade_rows_missing <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters)
+			.result <- tibble::tibble(a = letters)
 			.solution <- tibble::tibble(a = letters[1])
-			problem   <- tbl_check()
+			problem <- tbl_check()
 			tbl_grade()
 		})
 
@@ -379,7 +379,7 @@ test_that("tbl_grade() returns grades with row problems", {
 test_that("tbl_grade() returns names feedback to learnr", {
 	grade_tbl_names_3 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
+			.result <- tibble::tibble(a = letters, b = a, c = a, d = a)
 			.solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
 			tbl_grade(max_diffs = 3)
 		})
@@ -400,7 +400,7 @@ test_that("tbl_grade() returns names feedback to learnr", {
 	# ---- with all diffs ---
 	grade_tbl_names_inf <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
+			.result <- tibble::tibble(a = letters, b = a, c = a, d = a)
 			.solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
 			tbl_grade(max_diffs = Inf)
 		})
@@ -421,7 +421,7 @@ test_that("tbl_grade() returns names feedback to learnr", {
 	# ---- with one diff ---
 	grade_tbl_names_1 <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = letters, b = a, c = a, d = a)
+			.result <- tibble::tibble(a = letters, b = a, c = a, d = a)
 			.solution <- tibble::tibble(x = letters, y = x, z = x, w = x)
 			tbl_grade(max_diffs = 1)
 		})
@@ -442,7 +442,7 @@ test_that("tbl_grade() returns names feedback to learnr", {
 
 test_that("number of levels", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = as.factor(c("a", "b", "b")))
+		.result <- tibble::tibble(a = as.factor(c("a", "b", "b")))
 		.solution <- tibble::tibble(a = as.factor(c("a", "b", "c")))
 		tbl_grade()
 	})
@@ -458,7 +458,7 @@ test_that("number of levels", {
 
 test_that("level labels", {
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
+		.result <- tibble::tibble(a = as.factor(c("a", "b", "c")))
 		.solution <- tibble::tibble(a = as.factor(c("x", "y", "z")))
 		tbl_grade()
 	})
@@ -480,7 +480,7 @@ test_that("level labels", {
 
 test_that("level order", {
 	grade_reverse <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = as.factor(c("a", "b", "c")))
+		.result <- tibble::tibble(a = as.factor(c("a", "b", "c")))
 		.solution <- tibble::tibble(a = factor(c("a", "b", "c"), levels = c("c", "b", "a")))
 		tbl_grade()
 	})
@@ -494,7 +494,7 @@ test_that("level order", {
 	)
 
 	grade_diffs <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = factor(1:3, c("a", "b", "c")))
+		.result <- tibble::tibble(a = factor(1:3, c("a", "b", "c")))
 		.solution <- tibble::tibble(a = factor(1:3, c("c", "a", "b")))
 		tbl_grade()
 	})
@@ -514,9 +514,9 @@ test_that("level order", {
 	)
 
 	grade <- tblcheck_test_grade({
-		.result   <- tibble::tibble(a = as.factor(c("a", "b", "c", "d", "e")))
+		.result <- tibble::tibble(a = as.factor(c("a", "b", "c", "d", "e")))
 		.solution <- tibble::tibble(a = factor(c("a", "b", "c", "d", "e"), levels = c("a", "b", "c", "e", "d")))
-		problem   <- tbl_check()
+		problem <- tbl_check()
 		tbl_grade()
 	})
 
@@ -537,7 +537,7 @@ test_that("level order", {
 
 test_that("tbl_grade() groups", {
 	grade <- tblcheck_test_grade({
-		.result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), a)
+		.result <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), a)
 		.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 		tbl_grade()
 	})

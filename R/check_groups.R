@@ -90,7 +90,7 @@ tblcheck_message.groups_problem <- function(problem, max_diffs = 3, ...) {
 	problem$missing_msg <- problem$missing_msg %||%
 		gettext("Your result should be grouped by {missing}. ")
 
-	problem$unexpected_msg  <- problem$unexpected_msg %||%
+	problem$unexpected_msg <- problem$unexpected_msg %||%
 		gettext("Your result should not be grouped by {unexpected}. ")
 
 	if (!is.null(problem[["missing"]])) {
