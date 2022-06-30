@@ -73,96 +73,96 @@
 #' vec_grade(max_diffs = 5)
 #' vec_grade(max_diffs = Inf)
 vec_check <- function(
-	object = .result,
-	expected = .solution,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_levels = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = TRUE,
-	env = parent.frame()
+  object = .result,
+  expected = .solution,
+  check_class = TRUE,
+  ignore_class = NULL,
+  check_length = TRUE,
+  check_levels = TRUE,
+  check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
+  check_names = TRUE,
+  env = parent.frame()
 ) {
-	if (inherits(object, ".result")) {
-		object <- get(".result", env)
-	}
-	if (inherits(expected, ".solution")) {
-		expected <- get(".solution", env)
-	}
+  if (inherits(object, ".result")) {
+    object <- get(".result", env)
+  }
+  if (inherits(expected, ".solution")) {
+    expected <- get(".solution", env)
+  }
 
-	return_if_internal_problem({
-		checkmate::assert_vector(expected)
-		checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
-		checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
-		checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
-	})
+  return_if_internal_problem({
+    checkmate::assert_vector(expected)
+    checkmate::assert_logical(check_class,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+  })
 
-	if (check_class) {
-		return_if_problem(
-			vec_check_class(object, expected, ignore_class),
-			prefix = "vector"
-		)
-	}
+  if (check_class) {
+    return_if_problem(
+      vec_check_class(object, expected, ignore_class),
+      prefix = "vector"
+    )
+  }
 
-	if (check_length) {
-		return_if_problem(
-			vec_check_dimensions(object, expected),
-			prefix = "vector"
-		)
-	}
+  if (check_length) {
+    return_if_problem(
+      vec_check_dimensions(object, expected),
+      prefix = "vector"
+    )
+  }
 
-	if (check_levels) {
-		return_if_problem(
-			vec_check_levels(object, expected),
-			prefix = "vector"
-		)
-	}
+  if (check_levels) {
+    return_if_problem(
+      vec_check_levels(object, expected),
+      prefix = "vector"
+    )
+  }
 
-	if (check_values) {
-		return_if_problem(
-			vec_check_values(object, expected, tolerance = tolerance),
-			prefix = "vector"
-		)
-	}
+  if (check_values) {
+    return_if_problem(
+      vec_check_values(object, expected, tolerance = tolerance),
+      prefix = "vector"
+    )
+  }
 
-	if (check_names) {
-		return_if_problem(
-			vec_check_names(object, expected),
-			prefix = "vector"
-		)
-	}
+  if (check_names) {
+    return_if_problem(
+      vec_check_names(object, expected),
+      prefix = "vector"
+    )
+  }
 }
 
 #' @rdname vec_check
 #' @export
 vec_grade <- function(
-	object = .result,
-	expected = .solution,
-	max_diffs = 3,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = TRUE,
-	env = parent.frame(),
-	...
+  object = .result,
+  expected = .solution,
+  max_diffs = 3,
+  check_class = TRUE,
+  ignore_class = NULL,
+  check_length = TRUE,
+  check_values = TRUE,
+  tolerance = sqrt(.Machine$double.eps),
+  check_names = TRUE,
+  env = parent.frame(),
+  ...
 ) {
-	tblcheck_grade(
-		vec_check(
-			object = object,
-			expected = expected,
-			check_class = check_class,
-			ignore_class = ignore_class,
-			check_length = check_length,
-			check_values = check_values,
-			tolerance = tolerance,
-			check_names = check_names,
-			env = env
-		),
-		max_diffs = max_diffs,
-		env = env,
-		...
-	)
+  tblcheck_grade(
+    vec_check(
+      object = object,
+      expected = expected,
+      check_class = check_class,
+      ignore_class = ignore_class,
+      check_length = check_length,
+      check_values = check_values,
+      tolerance = tolerance,
+      check_names = check_names,
+      env = env
+    ),
+    max_diffs = max_diffs,
+    env = env,
+    ...
+  )
 }
