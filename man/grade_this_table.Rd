@@ -104,16 +104,16 @@ column has the same values in \code{object} and \code{expected}.}
 
 \item{hint}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
-added using the default options of \code{\link[gradethis:code_feedback]{give_code_feedback()}} and
-\code{\link[gradethis:code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
+added using the default options of \code{\link[gradethis:give_code_feedback]{give_code_feedback()}} and
+\code{\link[gradethis:maybe_code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
 \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.hint} option.}
 
 \item{encourage}{Include a random encouraging phrase with
-\code{\link[gradethis:praise]{random_encouragement()}}? The default value of \code{encourage} can be set
+\code{\link[gradethis:random_encouragement]{random_encouragement()}}? The default value of \code{encourage} can be set
 using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.encourage} option.}
 
 \item{pass.praise}{Logical \code{TRUE} or \code{FALSE} to determine whether a praising
-phrase should be automatically prepended to any \code{\link[gradethis:graded]{pass()}} or
+phrase should be automatically prepended to any \code{\link[gradethis:pass]{pass()}} or
 \code{\link[gradethis:pass_if_equal]{pass_if_equal()}} messages. Sets the \code{gradethis.pass.praise} option.}
 }
 \value{
@@ -150,8 +150,8 @@ student's result with the author's solution.
 }
 \examples{
 ex <- gradethis::mock_this_exercise(
-  .solution_code = tibble::tibble(x = 1:3, y = letters[x]),
-  .user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
+	.solution_code = tibble::tibble(x = 1:3, y = letters[x]),
+	.user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
 )
 
 ## Grading Tables ----
@@ -159,9 +159,9 @@ grade_this_table()(ex)
 
 # Roughly equivalent to...
 gradethis::grade_this({
-  gradethis::pass_if_equal()
-  tbl_grade()
-  gradethis::fail()
+	gradethis::pass_if_equal()
+	tbl_grade()
+	gradethis::fail()
 })(ex)
 }
 \seealso{
