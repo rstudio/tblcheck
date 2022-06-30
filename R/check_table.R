@@ -109,151 +109,151 @@
 #' tbl_grade()
 #' tbl_grade(check_groups = FALSE)
 tbl_check <- function(
-  object = .result,
-  expected = .solution,
-  cols = NULL,
-  check_class = TRUE,
-  ignore_class = NULL,
-  check_names = TRUE,
-  check_column_order = FALSE,
-  check_dimensions = TRUE,
-  check_groups = TRUE,
-  check_columns = TRUE,
-  check_column_class = check_columns,
-  check_column_values = check_columns,
-  tolerance = sqrt(.Machine$double.eps),
-  env = parent.frame()
+	object = .result,
+	expected = .solution,
+	cols = NULL,
+	check_class = TRUE,
+	ignore_class = NULL,
+	check_names = TRUE,
+	check_column_order = FALSE,
+	check_dimensions = TRUE,
+	check_groups = TRUE,
+	check_columns = TRUE,
+	check_column_class = check_columns,
+	check_column_values = check_columns,
+	tolerance = sqrt(.Machine$double.eps),
+	env = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", env)
-  }
-  if (inherits(expected, ".solution")) {
-    expected <- get(".solution", env)
-  }
+	if (inherits(object, ".result")) {
+		object <- get(".result", env)
+	}
+	if (inherits(expected, ".solution")) {
+		expected <- get(".solution", env)
+	}
 
-  return_if_internal_problem({
-    checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_dimensions,    any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_groups,        any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
-    checkmate::assert_data_frame(expected)
-  })
+	return_if_internal_problem({
+		checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_dimensions,    any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_groups,        any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
+		checkmate::assert_data_frame(expected)
+	})
 
-  # check table class ----
-  if (check_class) {
-    if (!check_groups) {
-      ignore_class <- c(ignore_class, "grouped_df")
-    }
+	# check table class ----
+	if (check_class) {
+		if (!check_groups) {
+			ignore_class <- c(ignore_class, "grouped_df")
+		}
 
-    return_if_problem(
-      tbl_check_class(object, expected, ignore_class),
-      prefix = "table"
-    )
-  } else (
-    return_if_problem(
-      tbl_check_is_table(object),
-      prefix = "table"
-    )
-  )
+		return_if_problem(
+			tbl_check_class(object, expected, ignore_class),
+			prefix = "table"
+		)
+	} else (
+		return_if_problem(
+			tbl_check_is_table(object),
+			prefix = "table"
+		)
+	)
 
-  # filter columns in object and expected ----
-  cols <- rlang::enexpr(cols)
+	# filter columns in object and expected ----
+	cols <- rlang::enexpr(cols)
 
-  if (!is.null(cols)) {
-    object <- object[tidyselect::eval_select(cols, object)]
-    expected <- expected[tidyselect::eval_select(cols, expected)]
-  }
+	if (!is.null(cols)) {
+		object <- object[tidyselect::eval_select(cols, object)]
+		expected <- expected[tidyselect::eval_select(cols, expected)]
+	}
 
-  # check column names ----
-  if (check_names) {
-    return_if_problem(
-      tbl_check_names(object, expected, check_order = check_column_order),
-      prefix = "table"
-    )
-  }
+	# check column names ----
+	if (check_names) {
+		return_if_problem(
+			tbl_check_names(object, expected, check_order = check_column_order),
+			prefix = "table"
+		)
+	}
 
-  # check dimensions ----
-  if (check_dimensions) {
-    return_if_problem(
-      tbl_check_dimensions(
-        object, expected,
-        # Don't check number of columns if a subset of columns was specified
-        # or if names were already checked
-        check_ncol = is.null(cols) && !check_names
-      ),
-      prefix = "table"
-    )
-  }
+	# check dimensions ----
+	if (check_dimensions) {
+		return_if_problem(
+			tbl_check_dimensions(
+				object, expected,
+				# Don't check number of columns if a subset of columns was specified
+				# or if names were already checked
+				check_ncol = is.null(cols) && !check_names
+			),
+			prefix = "table"
+		)
+	}
 
-  # check groups ----
-  if (check_groups) {
-    return_if_problem(
-      tbl_check_groups(object, expected),
-      prefix = "table"
-    )
-  }
+	# check groups ----
+	if (check_groups) {
+		return_if_problem(
+			tbl_check_groups(object, expected),
+			prefix = "table"
+		)
+	}
 
-  # check column contents ----
-  if (check_columns) {
-    for (column in names(expected)) {
-      return_if_problem(
-        tbl_check_column(
-          column = column,
-          object = object,
-          expected = expected,
-          check_class = check_column_class,
-          ignore_class = ignore_class,
-          check_values = check_column_values,
-          tolerance = tolerance,
-          check_length = FALSE
-        )
-      )
-    }
-  }
+	# check column contents ----
+	if (check_columns) {
+		for (column in names(expected)) {
+			return_if_problem(
+				tbl_check_column(
+					column = column,
+					object = object,
+					expected = expected,
+					check_class = check_column_class,
+					ignore_class = ignore_class,
+					check_values = check_column_values,
+					tolerance = tolerance,
+					check_length = FALSE
+				)
+			)
+		}
+	}
 }
 
 #' @rdname tbl_check
 #' @export
 tbl_grade <- function(
-  object = .result,
-  expected = .solution,
-  cols = NULL,
-  max_diffs = 3,
-  check_class = TRUE,
-  ignore_class = NULL,
-  check_names = TRUE,
-  check_column_order = FALSE,
-  check_dimensions = TRUE,
-  check_groups = TRUE,
-  check_columns = TRUE,
-  check_column_class = check_columns,
-  check_column_values = check_columns,
-  tolerance = sqrt(.Machine$double.eps),
-  env = parent.frame(),
-  ...
+	object = .result,
+	expected = .solution,
+	cols = NULL,
+	max_diffs = 3,
+	check_class = TRUE,
+	ignore_class = NULL,
+	check_names = TRUE,
+	check_column_order = FALSE,
+	check_dimensions = TRUE,
+	check_groups = TRUE,
+	check_columns = TRUE,
+	check_column_class = check_columns,
+	check_column_values = check_columns,
+	tolerance = sqrt(.Machine$double.eps),
+	env = parent.frame(),
+	...
 ) {
-  tblcheck_grade(
-    tbl_check(
-      object = object,
-      expected = expected,
-      cols = !!rlang::enexpr(cols),
-      check_class = check_class,
-      ignore_class = ignore_class,
-      check_names = check_names,
-      check_column_order = check_column_order,
-      check_dimensions = check_dimensions,
-      check_groups = check_groups,
-      check_columns = check_columns,
-      check_column_class = check_column_class,
-      check_column_values = check_column_values,
-      tolerance = tolerance,
-      env = env
-    ),
-    max_diffs = max_diffs,
-    env = env,
-    ...
-  )
+	tblcheck_grade(
+		tbl_check(
+			object = object,
+			expected = expected,
+			cols = !!rlang::enexpr(cols),
+			check_class = check_class,
+			ignore_class = ignore_class,
+			check_names = check_names,
+			check_column_order = check_column_order,
+			check_dimensions = check_dimensions,
+			check_groups = check_groups,
+			check_columns = check_columns,
+			check_column_class = check_column_class,
+			check_column_values = check_column_values,
+			tolerance = tolerance,
+			env = env
+		),
+		max_diffs = max_diffs,
+		env = env,
+		...
+	)
 }

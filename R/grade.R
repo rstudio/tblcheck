@@ -14,82 +14,82 @@
 #' problem <- vec_check()
 #' tblcheck_grade(problem)
 tblcheck_grade <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
-  UseMethod("tblcheck_grade")
+	UseMethod("tblcheck_grade")
 }
 
 #' @rdname tblcheck_grade
 #' @export
 tblcheck_grade.default <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  invisible()
+	invisible()
 }
 
 #' @rdname tblcheck_grade
 #' @export
 tblcheck_grade.list <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  problem <- as_problem(problem)
-  tblcheck_grade(problem, max_diffs = max_diffs, env = env, ...)
+	problem <- as_problem(problem)
+	tblcheck_grade(problem, max_diffs = max_diffs, env = env, ...)
 }
 
 #' @rdname tblcheck_grade
 #' @export
 tblcheck_grade.tblcheck_problem <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  if (is.null(problem)) {
-    return(invisible())
-  }
+	if (is.null(problem)) {
+		return(invisible())
+	}
 
-  err <- catch_internal_problem(
-    checkmate::assert_number(max_diffs, lower = 1),
-    call = find_tblcheck_call()
-  )
+	err <- catch_internal_problem(
+		checkmate::assert_number(max_diffs, lower = 1),
+		call = find_tblcheck_call()
+	)
 
-  if (is_problem(err)) {
-    return(tblcheck_grade(err))
-  }
+	if (is_problem(err)) {
+		return(tblcheck_grade(err))
+	}
 
-  gradethis::fail(
-    tblcheck_message(problem, max_diffs = max_diffs),
-    problem = problem,
-    env = env,
-    ...
-  )
+	gradethis::fail(
+		tblcheck_message(problem, max_diffs = max_diffs),
+		problem = problem,
+		env = env,
+		...
+	)
 }
 
 tblcheck_message <- function(problem, ...) {
-  UseMethod("tblcheck_message")
+	UseMethod("tblcheck_message")
 }
 
 #' @export
 tblcheck_message.default <- function(problem, ...) {
-  invisible()
+	invisible()
 }
 
 #' @export
 tblcheck_message.tblcheck_problem <- function(problem, ...) {
-  type_msg <- if (!is.null(problem$type)) {
-    gettext("Your code resulted in a `{type}` problem. ")
-  } else {
-    ""
-  }
+	type_msg <- if (!is.null(problem$type)) {
+		gettext("Your code resulted in a `{type}` problem. ")
+	} else {
+		""
+	}
 
-  exp_msg <- if (!is.null(problem$expected)) {
-    expected <- paste(md_code(problem$expected), collapse = ", ")
-    gettext("I was expecting a value of {expected}. ")
-  } else {
-    ""
-  }
+	exp_msg <- if (!is.null(problem$expected)) {
+		expected <- paste(md_code(problem$expected), collapse = ", ")
+		gettext("I was expecting a value of {expected}. ")
+	} else {
+		""
+	}
 
-  obj_msg <- if (!is.null(problem$actual)) {
-    actual <- paste(md_code(problem$actual), collapse = ", ")
-    gettext("Your result gave a value of `{actual}`. ")
-  } else {
-    ""
-  }
+	obj_msg <- if (!is.null(problem$actual)) {
+		actual <- paste(md_code(problem$actual), collapse = ", ")
+		gettext("Your result gave a value of `{actual}`. ")
+	} else {
+		""
+	}
 
-  glue::glue_data(problem, type_msg, exp_msg, obj_msg)
+	glue::glue_data(problem, type_msg, exp_msg, obj_msg)
 }

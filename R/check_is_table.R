@@ -31,43 +31,43 @@
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 tbl_check_is_table <- function(
-  object = .result,
-  env = parent.frame()
+	object = .result,
+	env = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", env)
-  }
+	if (inherits(object, ".result")) {
+		object <- get(".result", env)
+	}
 
-  if (!inherits(object, "data.frame")) {
-    problem(
-      "not_table",
-      expected = "data.frame",
-      actual = class(object),
-      actual_length = length(object)
-    )
-  }
+	if (!inherits(object, "data.frame")) {
+		problem(
+			"not_table",
+			expected = "data.frame",
+			actual = class(object),
+			actual_length = length(object)
+		)
+	}
 }
 
 #' @rdname tbl_check_is_table
 #' @export
 tbl_grade_is_table <- function(
-  object = .result,
-  env = parent.frame(),
-  ...
+	object = .result,
+	env = parent.frame(),
+	...
 ) {
-  tblcheck_grade(
-    tbl_check_is_table(object, env),
-    env = env,
-    ...
-  )
+	tblcheck_grade(
+		tbl_check_is_table(object, env),
+		env = env,
+		...
+	)
 }
 
 #' @export
 tblcheck_message.not_table_problem <- function(problem, ...) {
-  problem$msg <- problem$msg %||%
-    "Your result should be a table, but it is {actual}."
+	problem$msg <- problem$msg %||%
+		"Your result should be a table, but it is {actual}."
 
-  problem$actual <- friendly_class(problem$actual, problem$actual_length)
+	problem$actual <- friendly_class(problem$actual, problem$actual_length)
 
-  glue::glue_data(problem, problem$msg)
+	glue::glue_data(problem, problem$msg)
 }
