@@ -10,9 +10,9 @@ test_that("tbl_grade_is_table() with non-tables", {
   expect_equal(
     grade_list$problem,
     problem(
-      type     = "not_table",
+      type = "not_table",
       expected = "data.frame",
-      actual   = "list",
+      actual = "list",
       actual_length = 1
     )
   )
@@ -28,9 +28,9 @@ test_that("tbl_grade_is_table() with non-tables", {
   expect_equal(
     grade_vector$problem,
     problem(
-      type     = "not_table",
+      type = "not_table",
       expected = "data.frame",
-      actual   = "integer",
+      actual = "integer",
       actual_length = 10
     )
   )

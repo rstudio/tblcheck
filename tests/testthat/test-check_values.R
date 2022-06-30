@@ -1,6 +1,6 @@
 test_that("value differences", {
   grade_default <- tblcheck_test_grade({
-    .result   <- 1:10
+    .result <- 1:10
     .solution <- 11:20
     vec_grade_values()
   })
@@ -12,7 +12,7 @@ test_that("value differences", {
   )
 
   grade_1 <- tblcheck_test_grade({
-    .result   <- 1:10
+    .result <- 1:10
     .solution <- 11:20
     vec_grade_values(max_diffs = 1)
   })
@@ -21,7 +21,7 @@ test_that("value differences", {
   expect_equal(grade_1$problem, grade_default$problem)
 
   grade_5 <- tblcheck_test_grade({
-    .result   <- 1:10
+    .result <- 1:10
     .solution <- 11:20
     vec_grade_values(max_diffs = 5)
   })
@@ -30,7 +30,7 @@ test_that("value differences", {
   expect_equal(grade_5$problem, grade_default$problem)
 
   grade_Inf <- tblcheck_test_grade({
-    .result   <- 1:10
+    .result <- 1:10
     .solution <- 11:20
     vec_grade_values(max_diffs = Inf)
   })
@@ -41,7 +41,7 @@ test_that("value differences", {
 
 test_that("NA values", {
   grade_na <- tblcheck_test_grade({
-    .result   <- c(TRUE, TRUE, NA)
+    .result <- c(TRUE, TRUE, NA)
     .solution <- c(TRUE, TRUE, TRUE)
     vec_grade_values()
   })
@@ -55,7 +55,7 @@ test_that("NA values", {
   )
 
   grade_na_match <- tblcheck_test_grade({
-    .result   <- c(TRUE, TRUE, NA)
+    .result <- c(TRUE, TRUE, NA)
     .solution <- c(TRUE, TRUE, NA)
     vec_grade_values()
   })
@@ -65,7 +65,7 @@ test_that("NA values", {
 
 test_that("vec_grade_values() failures", {
   grade_length <- tblcheck_test_grade({
-    .result   <- 1:9
+    .result <- 1:9
     .solution <- 1:10
     vec_grade_values()
   })
@@ -73,7 +73,7 @@ test_that("vec_grade_values() failures", {
   expect_equal(grade_length, vec_grade_dimensions(1:9, 1:10))
 
   grade_class <- tblcheck_test_grade({
-    .result   <- 1:10
+    .result <- 1:10
     .solution <- letters[1:10]
     vec_grade_values()
   })
@@ -81,7 +81,7 @@ test_that("vec_grade_values() failures", {
   expect_equal(grade_class, vec_grade_class(1:10, letters[1:10]))
 
   grade_attr <- tblcheck_test_grade({
-    .result   <- structure(1, class = "test", attr = "not a")
+    .result <- structure(1, class = "test", attr = "not a")
     .solution <- structure(1, class = "test", attr = "match")
     vec_grade_values()
   })
@@ -121,7 +121,7 @@ test_that("column values problem messages are created correctly", {
 
 test_that("floating point differences are ignored by default", {
   grade_tolerant <- tblcheck_test_grade({
-    .result   <- sqrt(2) ^ 2
+    .result <- sqrt(2) ^ 2
     .solution <- 2
     vec_grade_values()
   })
@@ -129,7 +129,7 @@ test_that("floating point differences are ignored by default", {
   expect_null(grade_tolerant)
 
   grade_intolerant <- tblcheck_test_grade({
-    .result   <- sqrt(2) ^ 2
+    .result <- sqrt(2) ^ 2
     .solution <- 2
     vec_grade_values(tolerance = 0)
   })

@@ -132,12 +132,12 @@ tbl_check <- function(
   }
 
   return_if_internal_problem({
-    checkmate::assert_logical(check_class,         any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_names,         any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_dimensions,    any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_groups,        any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_columns,       any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_column_class,  any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_class, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_names, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_dimensions, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_groups, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_columns, any.missing = FALSE, len = 1)
+    checkmate::assert_logical(check_column_class, any.missing = FALSE, len = 1)
     checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
     checkmate::assert_data_frame(expected)
   })

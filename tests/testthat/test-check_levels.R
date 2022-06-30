@@ -1,6 +1,6 @@
 test_that("number of levels", {
   grade <- tblcheck_test_grade({
-    .result   <- as.factor(c("a", "b", "b"))
+    .result <- as.factor(c("a", "b", "b"))
     .solution <- as.factor(c("a", "b", "c"))
     vec_grade_levels()
   })
@@ -16,7 +16,7 @@ test_that("number of levels", {
 
 test_that("level labels", {
   grade <- tblcheck_test_grade({
-    .result   <- as.factor(c("a", "b", "c"))
+    .result <- as.factor(c("a", "b", "c"))
     .solution <- as.factor(c("x", "y", "z"))
     vec_grade_levels()
   })
@@ -32,7 +32,7 @@ test_that("level labels", {
 
 test_that("level order", {
   grade_diffs <- tblcheck_test_grade({
-    .result   <- as.factor(c("a", "b", "c"))
+    .result <- as.factor(c("a", "b", "c"))
     .solution <- factor(.result, levels = rev(levels(.result)))
     vec_grade_levels()
   })
@@ -46,7 +46,7 @@ test_that("level order", {
   )
 
   grade_diffs <- tblcheck_test_grade({
-    .result   <- factor(1:3, c("a", "b", "c"))
+    .result <- factor(1:3, c("a", "b", "c"))
     .solution <- factor(1:3, c("c", "a", "b"))
     vec_grade_levels()
   })
@@ -60,7 +60,7 @@ test_that("level order", {
   )
 
   grade <- tblcheck_test_grade({
-    .result   <- as.factor(c("a", "b", "c", "d", "e"))
+    .result <- as.factor(c("a", "b", "c", "d", "e"))
     .solution <- factor(.result, levels = c("a", "b", "c", "e", "d"))
     vec_grade_levels()
   })
