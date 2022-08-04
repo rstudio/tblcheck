@@ -130,6 +130,56 @@ test_that("tbl_grade_class() ignore classes", {
     )
   )
 
+  grade_py_tbl_df <-
+    tblcheck_test_grade({
+      .result   <- tibble::tibble(a = c(1, 2), b = c(3, 4))
+      class(.result) <- c("py_tbl_df", class(.result))
+      .solution   <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
+        dplyr::group_by(a)
+      class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
+      tbl_grade_class()
+    })
+
+  expect_snapshot(grade_py_tbl_df)
+
+  expect_equal(
+    grade_py_tbl_df$problem,
+    problem(
+      type     = "class",
+      expected = c(
+        "py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"
+      ),
+      actual   = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
+      expected_length = 2,
+      actual_length = 2
+    )
+  )
+
+  grade_py_tbl_df_grouped <-
+    tblcheck_test_grade({
+      .result   <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
+        dplyr::group_by(a)
+      class(.result) <- c("py_grouped_df", "py_tbl_df", class(.result))
+      .solution   <- tibble::tibble(a = c(1, 2), b = c(3, 4))
+      class(.solution) <- c("py_tbl_df", class(.solution))
+      tbl_grade_class()
+    })
+
+  expect_snapshot(grade_py_tbl_df_grouped)
+
+  expect_equal(
+    grade_py_tbl_df_grouped$problem,
+    problem(
+      type     = "class",
+      expected   = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
+      actual = c(
+        "py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"
+      ),
+      expected_length = 2,
+      actual_length = 2
+    )
+  )
+
   grade_tbl_df_ignore <-
     tblcheck_test_grade({
       .result   <- data.frame(a = 1, b = 2)

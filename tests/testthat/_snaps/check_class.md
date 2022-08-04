@@ -58,6 +58,28 @@
         frame (class `data.frame`).
       >
 
+---
+
+    Code
+      grade_py_tbl_df
+    Output
+      <gradethis_graded: [Incorrect]
+        I was only expecting 1 value for each grouping in the table, but you
+        have multiple values per grouping. Maybe you are missing a .groupby()
+        call?
+      >
+
+---
+
+    Code
+      grade_py_tbl_df_grouped
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table rows are grouped, and not a numbered sequence. You can
+        tell by the extra spacing around the column names. You can fix this
+        with .reset_index()
+      >
+
 # tbl_grade_class() with paired ignore_class
 
     Code
