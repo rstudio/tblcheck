@@ -185,7 +185,7 @@ hinted_class_message_list <- function() {
     ),
     list(
       obj_class = "py_grouped_df",
-      message   = "Your table rows are grouped, and not a numbered sequence. You can tell by the extra spacing around the column names. You can fix this with .reset_index()"
+      message   = "Your table rows (i.e. index) are not a numbered sequence. You can tell by the extra spacing around the column names. You can fix this with .reset_index()"
     ),
     list(
       exp_class = "grouped_df",
