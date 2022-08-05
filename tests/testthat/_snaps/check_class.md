@@ -75,9 +75,9 @@
       grade_py_tbl_df_grouped
     Output
       <gradethis_graded: [Incorrect]
-        Your table rows (i.e. index) are not a numbered sequence. You can
-        tell by the extra spacing around the column names. You can fix this
-        with .reset_index()
+        Your table row labels (i.e. index) are not a numbered sequence. You
+        can tell by the extra spacing around the column names. You can fix
+        this with .reset_index()
       >
 
 # tbl_grade_class() with paired ignore_class

@@ -185,7 +185,7 @@ hinted_class_message_list <- function() {
     ),
     list(
       obj_class = "py_grouped_df",
-      message   = "Your table rows (i.e. index) are not a numbered sequence. You can tell by the extra spacing around the column names. You can fix this with .reset_index()"
+      message   = "Your table row labels (i.e. index) are not a numbered sequence. You can tell by the extra spacing around the column names. You can fix this with .reset_index()"
     ),
     list(
       exp_class = "grouped_df",
@@ -285,10 +285,6 @@ friendly_class_list <- function() {
     list(
       class    = c("tbl_df", "tbl", "data.frame"),
       single   = "a tibble (class `tbl_df`)"
-    ),
-    list(
-      class    = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
-      single   = "a DataFrame"
     ),
     list(
       class    = "data.frame",
