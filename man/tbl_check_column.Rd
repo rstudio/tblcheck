@@ -78,11 +78,11 @@ print. Defaults to 3.}
   \describe{
     \item{\code{hint}}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
-added using the default options of \code{\link[gradethis:code_feedback]{give_code_feedback()}} and
-\code{\link[gradethis:code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
+added using the default options of \code{\link[gradethis:give_code_feedback]{give_code_feedback()}} and
+\code{\link[gradethis:maybe_code_feedback]{maybe_code_feedback()}}. The default value of \code{hint} can be set using
 \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.hint} option.}
     \item{\code{encourage}}{Include a random encouraging phrase with
-\code{\link[gradethis:praise]{random_encouragement()}}? The default value of \code{encourage} can be set
+\code{\link[gradethis:random_encouragement]{random_encouragement()}}? The default value of \code{encourage} can be set
 using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gradethis.fail.encourage} option.}
   }}
 }
