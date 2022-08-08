@@ -177,19 +177,23 @@ hinted_class_message_list <- function() {
       message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
+      obj_class = "data.frame",
       exp_class = "grouped_df",
       message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "grouped_df",
+      exp_class = "data.frame",
       message   = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
     ),
     list(
+      obj_class = "data.frame",
       exp_class = "rowwise_df",
       message   = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
     ),
     list(
       obj_class = "rowwise_df",
+      exp_class = "data.frame",
       message   = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
     )
   )
