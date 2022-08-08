@@ -157,18 +157,15 @@ tblcheck_message.class_problem <- function(problem, ...) {
 }
 
 hinted_class_message <- function(obj_class, exp_class) {
-  list <- hinted_class_message_list()
-
-  for (i in seq_along(list)) {
+  for (query in hinted_class_message_list()) {
     if (
-      all(list[[i]]$obj_class %in% obj_class) &&
-        all(list[[i]]$exp_class %in% exp_class)
+      # If `query$obj_class()` or `query$exp_class()` are empty,
+      # any class will match because `all(logical(0)) == TRUE`
+      all(query$obj_class %in% obj_class) && all(query$exp_class %in% exp_class)
     ) {
-      return(list[[i]]$message)
+      return(query$message)
     }
   }
-
-  invisible()
 }
 
 hinted_class_message_list <- function() {
