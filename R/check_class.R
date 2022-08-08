@@ -280,6 +280,14 @@ friendly_class_list <- function() {
       single   = "a tibble (class `tbl_df`)"
     ),
     list(
+      class    = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a grouped tibble (class `grouped_df`)"
+    ),
+    list(
+      class    = c("rowwise_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a rowwise tibble (class `rowwise_df`)"
+    ),
+    list(
       class    = "data.frame",
       single   = "a data frame (class `data.frame`)"
     ),
