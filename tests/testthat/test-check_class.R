@@ -318,3 +318,85 @@ test_that("tbl_grade_class() with classes in different orders", {
 
   expect_null(grade)
 })
+
+test_that("tbl_grade_class() with hinted messages", {
+  grade_ungrouped <- tblcheck_test_grade({
+    .result   <- tibble::tibble(a = letters[1:3], b = a)
+    .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+    tbl_grade_class()
+  })
+
+  expect_snapshot(grade_ungrouped)
+
+  expect_equal(
+    grade_ungrouped$problem,
+    problem(
+      "class",
+      expected = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      actual = c("tbl_df", "tbl", "data.frame"),
+      expected_length = 2,
+      actual_length = 2
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_grouped <- tblcheck_test_grade({
+    .result   <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+    .solution <- tibble::tibble(a = letters[1:3], b = a)
+    tbl_grade_class()
+  })
+
+  expect_snapshot(grade_grouped)
+
+  expect_equal(
+    grade_grouped$problem,
+    problem(
+      "class",
+      expected = c("tbl_df", "tbl", "data.frame"),
+      actual = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      expected_length = 2,
+      actual_length = 2
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_ungrouped_int <- tblcheck_test_grade({
+    .result   <- 1:2
+    .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+    tbl_grade_class()
+  })
+
+  expect_snapshot(grade_ungrouped_int)
+
+  expect_equal(
+    grade_ungrouped_int$problem,
+    problem(
+      "class",
+      expected = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      actual = "integer",
+      expected_length = 2,
+      actual_length = 2
+    ),
+    ignore_attr = "class"
+  )
+
+  grade_unrowwise_int <- tblcheck_test_grade({
+    .result   <- 1:2
+    .solution <- dplyr::rowwise(tibble::tibble(a = letters[1:3], b = a))
+    tbl_grade_class()
+  })
+
+  expect_snapshot(grade_unrowwise_int)
+
+  expect_equal(
+    grade_unrowwise_int$problem,
+    problem(
+      "class",
+      expected = c("rowwise_df", "tbl_df", "tbl", "data.frame"),
+      actual = "integer",
+      expected_length = 2,
+      actual_length = 2
+    ),
+    ignore_attr = "class"
+  )
+})

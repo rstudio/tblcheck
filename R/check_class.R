@@ -157,18 +157,15 @@ tblcheck_message.class_problem <- function(problem, ...) {
 }
 
 hinted_class_message <- function(obj_class, exp_class) {
-  list <- hinted_class_message_list()
-
-  for (i in seq_along(list)) {
+  for (query in hinted_class_message_list()) {
     if (
-      all(list[[i]]$obj_class %in% obj_class) &&
-        all(list[[i]]$exp_class %in% exp_class)
+      # If `query$obj_class()` or `query$exp_class()` are empty,
+      # any class will match because `all(logical(0)) == TRUE`
+      all(query$obj_class %in% obj_class) && all(query$exp_class %in% exp_class)
     ) {
-      return(list[[i]]$message)
+      return(query$message)
     }
   }
-
-  invisible()
 }
 
 hinted_class_message_list <- function() {
@@ -180,19 +177,23 @@ hinted_class_message_list <- function() {
       message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
+      obj_class = "data.frame",
       exp_class = "grouped_df",
       message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "grouped_df",
+      exp_class = "data.frame",
       message   = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
     ),
     list(
+      obj_class = "data.frame",
       exp_class = "rowwise_df",
       message   = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
     ),
     list(
       obj_class = "rowwise_df",
+      exp_class = "data.frame",
       message   = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
     )
   )
@@ -277,6 +278,14 @@ friendly_class_list <- function() {
     list(
       class    = c("tbl_df", "tbl", "data.frame"),
       single   = "a tibble (class `tbl_df`)"
+    ),
+    list(
+      class    = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a grouped tibble (class `grouped_df`)"
+    ),
+    list(
+      class    = c("rowwise_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a rowwise tibble (class `rowwise_df`)"
     ),
     list(
       class    = "data.frame",
