@@ -12,7 +12,7 @@ vec_check() returns a list describing the problem
 vec_grade() returns a failing grade and informative message
 with gradethis::fail()
 
-"><title>Checks that two vectors are the same — vec_check • tblcheck</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.1/font.css" rel="stylesheet"><link href="../deps/_Source%20Code%20Pro-0.4.1/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Checks that two vectors are the same — vec_check"><meta property="og:description" content="Checks for differences between object and expected in the following order:
+"><title>Checks that two vectors are the same — vec_check • tblcheck</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Checks that two vectors are the same — vec_check"><meta property="og:description" content="Checks for differences between object and expected in the following order:
 Check class with vec_check_class()
 Check length with vec_check_dimensions()
 If the vector is a factor, check factor levels are the same with vec_check_levels()
@@ -90,43 +90,49 @@ with <code><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" cl
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">vec_check</span><span class="op">(</span>
-  object <span class="op">=</span> <span class="va">.result</span>,
-  expected <span class="op">=</span> <span class="va">.solution</span>,
-  check_class <span class="op">=</span> <span class="cn">TRUE</span>,
-  ignore_class <span class="op">=</span> <span class="cn">NULL</span>,
-  check_length <span class="op">=</span> <span class="cn">TRUE</span>,
-  check_levels <span class="op">=</span> <span class="cn">TRUE</span>,
-  check_values <span class="op">=</span> <span class="cn">TRUE</span>,
-  tolerance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span>,
-  check_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">vec_grade</span><span class="op">(</span>
-  object <span class="op">=</span> <span class="va">.result</span>,
-  expected <span class="op">=</span> <span class="va">.solution</span>,
-  max_diffs <span class="op">=</span> <span class="fl">3</span>,
-  check_class <span class="op">=</span> <span class="cn">TRUE</span>,
-  ignore_class <span class="op">=</span> <span class="cn">NULL</span>,
-  check_length <span class="op">=</span> <span class="cn">TRUE</span>,
-  check_values <span class="op">=</span> <span class="cn">TRUE</span>,
-  tolerance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span>,
-  check_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vec_check</span><span class="op">(</span></span>
+<span>  object <span class="op">=</span> <span class="va">.result</span>,</span>
+<span>  expected <span class="op">=</span> <span class="va">.solution</span>,</span>
+<span>  check_class <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ignore_class <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  check_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_levels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_values <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  tolerance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span>,</span>
+<span>  check_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">vec_grade</span><span class="op">(</span></span>
+<span>  object <span class="op">=</span> <span class="va">.result</span>,</span>
+<span>  expected <span class="op">=</span> <span class="va">.solution</span>,</span>
+<span>  max_diffs <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  check_class <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ignore_class <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  check_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_values <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  tolerance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span>,</span>
+<span>  check_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>object</dt>
 <dd><p>A vector to be compared to <code>expected</code>.</p></dd>
+
+
 <dt>expected</dt>
 <dd><p>A vector containing the expected result.</p></dd>
+
+
 <dt>check_class</dt>
 <dd><p><code>[logical(1)]</code><br> Whether to check that <code>object</code> and
 <code>expected</code> have the same classes.</p></dd>
+
+
 <dt>ignore_class</dt>
 <dd><p><code>[character()]</code><br> A vector of classes to ignore when
 finding differences between <code>object</code> and <code>expected</code>.</p>
@@ -137,26 +143,42 @@ differences only if <code>object</code> has class <a href="https://rdrr.io/r/bas
 <a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a>, or vice versa.</p>
 <p>If all the classes of <code>expected</code> are included in <code>ignore_class</code>,
 a <code>class</code> problem will never be returned.</p></dd>
+
+
 <dt>check_length</dt>
 <dd><p><code>[logical(1)]</code><br> Whether to check that <code>object</code> and
 <code>expected</code> have the same length.</p></dd>
+
+
 <dt>check_levels</dt>
 <dd><p><code>[logical(1)]</code><br> Whether to check that <code>object</code> and
 <code>expected</code> have the same <a href="https://rdrr.io/r/base/levels.html" class="external-link">factor levels</a>.</p></dd>
+
+
 <dt>check_values</dt>
 <dd><p><code>[logical(1)]</code><br> Whether to check that <code>object</code> and
 <code>expected</code> contain the same values.</p></dd>
+
+
 <dt>tolerance</dt>
 <dd><p><code>[numeric(1) ≥ 0]</code><br><code>values</code> differences smaller than
 <code>tolerance</code> are ignored. The default value is close to <code>1.5e-8</code>.</p></dd>
+
+
 <dt>check_names</dt>
 <dd><p><code>[logical(1)]</code><br> Whether to check that <code>object</code> and
 <code>expected</code> have the same names.</p></dd>
+
+
 <dt>env</dt>
 <dd><p>The environment in which to find <code>.result</code> and <code>.solution</code>.</p></dd>
+
+
 <dt>max_diffs</dt>
 <dd><p><code>[numeric(1)]</code><br> The maximum number of mismatched values to
 print. Defaults to 3.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed on to <code><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" class="external-link">gradethis::fail</a></code></p><dl><dt><code>hint</code></dt>
 <dd><p>Include a code feedback hint with the failing message? This
@@ -172,10 +194,13 @@ using <code><a href="https://pkgs.rstudio.com/gradethis/reference/gradethis_setu
 
   
 </dl></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>If there are any issues, a <a href="https://rdrr.io/r/base/list.html" class="external-link">list</a> from <code>vec_check()</code> or a
+    
+
+<p>If there are any issues, a <a href="https://rdrr.io/r/base/list.html" class="external-link">list</a> from <code>vec_check()</code> or a
 <code><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" class="external-link">gradethis::fail()</a></code> message from <code>vec_grade()</code>.
 Otherwise, invisibly returns <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a></code>.</p>
     </div>
@@ -195,9 +220,9 @@ but in a different order.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span class="r-in"><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Your result should be a vector of text (class `character`), but it is a vector of integers (class `integer`).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type           : chr "class"</span>
@@ -206,15 +231,15 @@ but in a different order.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ expected_length: int 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ actual_length  : int 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ location       : chr "vector"</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Your result should be a vector of text (class `character`), but</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   it is a vector of integers (class `integer`).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span class="r-in"><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">11</span></span>
-<span class="r-in"><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">11</span></span></span>
+<span class="r-in"><span><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Your result should contain 11 values, but it has 10 values. I expected your result to include the value `11`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type           : chr "length"</span>
@@ -223,55 +248,55 @@ but in a different order.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ expected_length: int 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ actual_length  : int 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ location       : chr "vector"</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Your result should contain 11 values, but it has 10 values. I</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   expected your result to include the value `11`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span class="r-in"><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Your result should have the names `a`, `b`, `c`, and 7 more. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "names"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ missing : chr [1:10] "a" "b" "c" "d" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ location: chr "vector"</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Your result should have the names `a`, `b`, `c`, and 7 more.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Your result should have the names `a`, `b`, `c`, `d`, `e`, and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   5 more.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Your result should have the names `a`, `b`, `c`, `d`, `e`, `f`,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `g`, `h`, `i`, and `j`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span class="r-in"><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span></span>
-<span class="r-in"><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span></span></span>
+<span class="r-in"><span><span class="fu">vec_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The first 3 values of your result should be `11`, `12`, and `13`, not `1`, `2`, and `3`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "values"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ expected: int [1:10] 11 12 13 14 15 16 17 18 19 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ actual  : int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ location: chr "vector"</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   The first 3 values of your result should be `11`, `12`, and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `13`, not `1`, `2`, and `3`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   The first 5 values of your result should be `11`, `12`, `13`,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `14`, and `15`, not `1`, `2`, `3`, `4`, and `5`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
-<span class="r-in"><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">vec_grade</span><span class="op">(</span>max_diffs <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   The first 10 values of your result should be `11`, `12`, `13`,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `14`, `15`, `16`, `17`, `18`, `19`, and `20`, not `1`, `2`,</span>
@@ -286,11 +311,13 @@ but in a different order.</p></li>
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p><p>tblcheck is built for use with <a href="https://rstudio.github.io/learnr" class="external-link">learnr</a> interactive tutorials.</p><p>learnr is a part of the <strong>R Markdown</strong> ecosystem of packages for creating computational documents in R. Learn more at <a href="https://rmarkdown.rstudio.com/" class="external-link">rmarkdown.rstudio.com</a>.</p>
+  <p></p><p>tblcheck is built for use with <a href="https://rstudio.github.io/learnr" class="external-link">learnr</a> interactive tutorials.</p>
+<p>learnr is a part of the <strong>R Markdown</strong> ecosystem of packages for creating computational documents in R. Learn more at <a href="https://rmarkdown.rstudio.com/" class="external-link">rmarkdown.rstudio.com</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Developed by Alexander Rossell Hayes, <a href="https://www.garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, RStudio, PBC.</p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Developed by Alexander Rossell Hayes, <a href="https://www.garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, RStudio, PBC.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
   </div></footer></body></html>

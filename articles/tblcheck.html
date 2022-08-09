@@ -15,9 +15,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.1/font.css" rel="stylesheet">
-<link href="../deps/_Source%20Code%20Pro-0.4.1/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -86,7 +86,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get started with tblcheck</h1>
             
       
@@ -348,19 +348,19 @@
 </h4>
 <p>First, <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> ensures that the class of the student’s submission matches the class of the expected solution. Here, the student attempts to store the data in the table as a list rather than by using <code>tibble()</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  food <span class="op">=</span> <span class="st">"lettuce"</span>,
-  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,
-  color <span class="op">=</span> <span class="st">"green"</span>
-<span class="op">)</span>
-<span class="co">#&gt; $food</span>
-<span class="co">#&gt; [1] "lettuce"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fruit</span>
-<span class="co">#&gt; [1] "TRUE"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $color</span>
-<span class="co">#&gt; [1] "green"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $food</span></span>
+<span><span class="co">#&gt; [1] "lettuce"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $fruit</span></span>
+<span><span class="co">#&gt; [1] "TRUE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $color</span></span>
+<span><span class="co">#&gt; [1] "green"</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your table should be a tibble (class <code>tbl_df</code>), but it is a list (class <code>list</code>).
 </div>
@@ -371,15 +371,15 @@ Your table should be a tibble (class <code>tbl_df</code>), but it is a list (cla
 </h4>
 <p>Next, the code checks that the student used the correct column names, and they haven’t missed any columns or included any unexpected columns. Here, <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> notices that the student has an unexpected column named <code>fruit</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="st">"lettuce"</span>,
-  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,
-  color <span class="op">=</span> <span class="st">"green"</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;   food    fruit color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE  green</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   food    fruit color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE  green</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your table should have a column named <code>vegetable</code>. Your table should not have a column named <code>fruit</code>.
 </div>
@@ -390,15 +390,15 @@ Your table should have a column named <code>vegetable</code>. Your table should 
 </h4>
 <p>Next, <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> checks that the student has submitted the correct number of rows, and in this case notices that the student has only included one row.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="st">"lettuce"</span>,
-  vegetable <span class="op">=</span> <span class="st">"TRUE"</span>,
-  color <span class="op">=</span> <span class="st">"green"</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your table should have 2 rows, but it has 1 row.
 </div>
@@ -409,16 +409,16 @@ Your table should have 2 rows, but it has 1 row.
 </h4>
 <p>Next, <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> checks that each individual column contains the correct type of data. Here, the student has stored the values of the <code>vegetable</code> column as a string, but we were expecting them to be logical values.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>, <span class="st">"TRUE"</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>, <span class="st">"TRUE"</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your <code>vegetable</code> column should be a vector of TRUE/FALSE values (class <code>logical</code>), but it is a vector of text (class <code>character</code>).
 </div>
@@ -429,31 +429,31 @@ Your <code>vegetable</code> column should be a vector of TRUE/FALSE values (clas
 </h4>
 <p>Finally, <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> gives a hint as to what the values in each column should look like. Here, the student made a mistake during their transcription of the <code>vegetable</code> column.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></span></code></pre></div>
 <div class="alert alert-danger">
 The first 2 values of your <code>vegetable</code> column should be <code>TRUE</code> and <code>FALSE</code>, not <code>TRUE</code> and <code>TRUE</code>.
 </div>
 <p>Based on this advice, the student revises their submission, changing the second value of the <code>vegetable</code> column from <code>TRUE</code> to <code>FALSE</code>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red</span></span></code></pre></div>
 <div class="alert alert-success">
 That’s a first-class answer! Correct!
 </div>
@@ -503,9 +503,9 @@ That’s a first-class answer! Correct!
 <p>If the user’s submitted vector differs from the correct vector, <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> returns a failing grade and a message with an explanation for what went wrong. If there are multiple problems with a student’s submission, <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> tries to give the most actionable item first.</p>
 <p>Suppose an exercise asks a student to create a factor of the sandwich toppings — <em>lettuce</em>, <em>tomato</em>, <em>avocado</em>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] lettuce tomato  avocado</span>
-<span class="co">#&gt; Levels: avocado lettuce tomato</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] lettuce tomato  avocado</span></span>
+<span><span class="co">#&gt; Levels: avocado lettuce tomato</span></span></code></pre></div>
 <p>In the R Markdown source of the learnr tutorial, we use an exercise chunk labelled <code>toppings</code>, with a <code>toppings-solution</code> chunk with the expected solution and a <code>toppings-check</code> chunk with the exercise checking code using <a href="https://pkgs.rstudio.com/gradethis/" class="external-link">gradethis</a> and tblcheck.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r toppings, exercise=TRUE}</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -520,16 +520,16 @@ That’s a first-class answer! Correct!
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>For example, if the student submits a vector of the wrong class, that will be the first message returned by <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "lettuce" "tomato"  "avocado"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "lettuce" "tomato"  "avocado"</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your result should be a vector of factors (class <code>factor</code>), but it is a vector of text (class <code>character</code>).
 </div>
 <p>If the student submits a factor with the wrong factor levels, <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> will warn the student about their mistake.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] lettuce tomato  avocado</span>
-<span class="co">#&gt; Levels: lettuce tomato avocado</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span>, <span class="st">"avocado"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] lettuce tomato  avocado</span></span>
+<span><span class="co">#&gt; Levels: lettuce tomato avocado</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your result’s levels were not in the expected order. The first 3 levels of your result should be <code>avocado</code>, <code>lettuce</code>, and <code>tomato</code>, but they were <code>lettuce</code>, <code>tomato</code>, and <code>avocado</code>.
 </div>
@@ -551,15 +551,15 @@ Your result’s levels were not in the expected order. The first 3 levels of you
 <p>Every test performed by <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> and <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> (or <code><a href="../reference/tbl_check.html">tbl_grade()</a></code> and <code><a href="../reference/vec_check.html">vec_grade()</a></code>) can be enabled or disabled with an argument. The argument names are prefixed with <code>check_</code> — such as <code>check_class</code> or <code>check_groups</code> — and each take a <code>TRUE</code> or <code>FALSE</code> value.</p>
 <p>For example, suppose a student answering our <code>food</code> exercise used a <code>data.frame</code> when the exercise expects a <code>tibble</code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>,
-  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-<span class="co">#&gt;      food vegetable color</span>
-<span class="co">#&gt; 1 lettuce      TRUE green</span>
-<span class="co">#&gt; 2  tomato     FALSE   red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;      food vegetable color</span></span>
+<span><span class="co">#&gt; 1 lettuce      TRUE green</span></span>
+<span><span class="co">#&gt; 2  tomato     FALSE   red</span></span></code></pre></div>
 <div class="alert alert-danger">
 Your table should be a tibble (class <code>tbl_df</code>), but it is a data frame (class <code>data.frame</code>).
 </div>
@@ -578,19 +578,19 @@ Super job! Correct!
 <p>Both <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> and <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> provide two additional arguments, <code>pre_check</code> and <code>post_check</code>, that allow you to add additional checks or modify the <code>.result</code> or <code>.solution</code>.</p>
 <p>For both functions, the <code><a href="https://pkgs.rstudio.com/gradethis/reference/grade_this.html" class="external-link">gradethis::grade_this()</a></code> flow is roughly equivalent to the following code sketch:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">grade_this</span><span class="op">(</span><span class="op">{</span>
-  <span class="co"># ... pre_check ...</span>
-  
-  <span class="co"># if requested</span>
-  <span class="fu">pass_if_equal</span><span class="op">(</span><span class="op">)</span>
-  
-  <span class="co"># grade the table or vector</span>
-  <span class="fu"><a href="../reference/tbl_check.html">tbl_grade</a></span><span class="op">(</span><span class="op">)</span>
-  
-  <span class="co"># ... post_check ...</span>
-  
-  <span class="fu">pass</span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">grade_this</span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="co"># ... pre_check ...</span></span>
+<span>  </span>
+<span>  <span class="co"># if requested</span></span>
+<span>  <span class="fu">pass_if_equal</span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># grade the table or vector</span></span>
+<span>  <span class="fu"><a href="../reference/tbl_check.html">tbl_grade</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># ... post_check ...</span></span>
+<span>  </span>
+<span>  <span class="fu">pass</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Two examples of reasons why you might want to use these arguments are to limit the table grading checks to specific columns only, or to include additional checks after <code><a href="../reference/tbl_check.html">tbl_grade()</a></code> or <code><a href="../reference/vec_check.html">vec_grade()</a></code>.</p>
 <p>Suppose we extend our <code>food</code> example into an exercise labelled <code>food-percentage</code> that adds a <code>count</code> column to our <code>foods</code> table and asks students to add a new column, <code>pct</code> with the percentage of our total food is represented by each food.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r food-percentage-setup}</span></span>
@@ -616,11 +616,11 @@ Super job! Correct!
 <p>We expect the final solution to look like this</p>
 <p>but a student might decide to store the total food in a temporary <code>total</code> column.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">.result</span> <span class="op">&lt;-</span> <span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">mutate</span><span class="op">(</span>
-    total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>,
-    pct <span class="op">=</span> <span class="va">count</span> <span class="op">/</span> <span class="va">total</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>,</span>
+<span>    pct <span class="op">=</span> <span class="va">count</span> <span class="op">/</span> <span class="va">total</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>Knowing that we don’t mind the additional column, we can use the <code>pre_check</code> argument to limit <code>.result</code> to the columns that also appear in <code>.solution</code>.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
@@ -713,13 +713,13 @@ Awesome! Correct!
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>A student who quickly scanned the exercise prompt might reverse the expected order of the values in the <code>count</code> column.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="co">#&gt;   food    vegetable color count</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red       5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color count</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red       5</span></span></code></pre></div>
 <div class="alert alert-danger">
 The first 2 values of your <code>count</code> column should be <code>5</code> and <code>3</code>, not <code>3</code> and <code>5</code>.
 </div>
@@ -730,19 +730,19 @@ The first 2 values of your <code>count</code> column should be <code>5</code> an
 <p>Sometimes, we want to handle specific circumstance in a special way. Every <code>tbl_grade_</code> and <code>vec_grade_</code> function includes a <code>tbl_check_</code> or <code>vec_check_</code> counterpart that returns the detected <strong>problem</strong> rather than converting the problem into feedback for the user (a <strong>grade</strong> in gradethis terms).</p>
 <p>If we replace <code><a href="../reference/tbl_check_column.html">tbl_grade_column()</a></code> with <code><a href="../reference/tbl_check_column.html">tbl_check_column()</a></code>, we can store and inspect the problem detected by the column checking function. We’ll experiment in our local R console before writing our final exercise checking code.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">solution</span> <span class="op">&lt;-</span> <span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="va">user</span> <span class="op">&lt;-</span> <span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">problem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tbl_check_column.html">tbl_check_column</a></span><span class="op">(</span><span class="st">"count"</span>, object <span class="op">=</span> <span class="va">user</span>, expected <span class="op">=</span> <span class="va">solution</span><span class="op">)</span>
-
-<span class="va">problem</span>
-<span class="co">#&gt; &lt;tblcheck problem&gt;</span>
-<span class="co">#&gt; The first 2 values of your `count` column should be `5` and `3`, not `3` and `5`.</span>
-<span class="co">#&gt; $ type    : chr "values"</span>
-<span class="co">#&gt; $ expected: num [1:2] 5 3</span>
-<span class="co">#&gt; $ actual  : num [1:2] 3 5</span>
-<span class="co">#&gt; $ location: chr "column"</span>
-<span class="co">#&gt; $ column  : chr "count"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">solution</span> <span class="op">&lt;-</span> <span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">user</span> <span class="op">&lt;-</span> <span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">problem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tbl_check_column.html">tbl_check_column</a></span><span class="op">(</span><span class="st">"count"</span>, object <span class="op">=</span> <span class="va">user</span>, expected <span class="op">=</span> <span class="va">solution</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">problem</span></span>
+<span><span class="co">#&gt; &lt;tblcheck problem&gt;</span></span>
+<span><span class="co">#&gt; The first 2 values of your `count` column should be `5` and `3`, not `3` and `5`.</span></span>
+<span><span class="co">#&gt; $ type    : chr "values"</span></span>
+<span><span class="co">#&gt; $ expected: num [1:2] 5 3</span></span>
+<span><span class="co">#&gt; $ actual  : num [1:2] 3 5</span></span>
+<span><span class="co">#&gt; $ location: chr "column"</span></span>
+<span><span class="co">#&gt; $ column  : chr "count"</span></span></code></pre></div>
 <p>Every problem object contains at least three items:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -758,37 +758,37 @@ The first 2 values of your <code>count</code> column should be <code>5</code> an
 <p>Problems also include additional information depending on the problem type. In the case of a <code>values</code> problem detected by <code><a href="../reference/tbl_check_column.html">tbl_check_column()</a></code>, the problem object also includes the <code>column</code> name.</p>
 <p>tblcheck includes a helper function, <code><a href="../reference/problem_type.html">is_problem()</a></code> that you can use to detect and differentiate between different problem types.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>We can use the <code>type</code> argument of <code><a href="../reference/problem_type.html">is_problem()</a></code> to differentiate between the problem types detected by <code><a href="../reference/tbl_check_column.html">tbl_check_column()</a></code>.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span>, type <span class="op">=</span> <span class="st">"length"</span><span class="op">)</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span>, type <span class="op">=</span> <span class="st">"values"</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span>, type <span class="op">=</span> <span class="st">"length"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span>, type <span class="op">=</span> <span class="st">"values"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>In this exercise, we know in advance that our wording is likely to trip up students, so we may want to create feedback specifically for the case where a student has reversed the food counts. We can use <code><a href="../reference/problem_type.html">is_problem()</a></code> together with <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> to isolate this specific case.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span>, <span class="st">"values"</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">problem</span><span class="op">$</span><span class="va">actual</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">feedback</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>
-    <span class="st">"Make sure that the values in `count` are ordered"</span>,
-    <span class="st">"to match their respective `food`."</span>,
-    <span class="st">"Remember, we have **3** tomatoes and **5** heads of lettuce."</span>
-  <span class="op">)</span>
-  <span class="fu">gradethis</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" class="external-link">fail</a></span><span class="op">(</span><span class="va">feedback</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; &lt;gradethis_graded: [Incorrect]</span>
-<span class="co">#&gt;   Make sure that the values in `count` are ordered to match</span>
-<span class="co">#&gt;   their respective `food`. Remember, we have **3** tomatoes</span>
-<span class="co">#&gt;   and **5** heads of lettuce.</span>
-<span class="co">#&gt; &gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/problem_type.html">is_problem</a></span><span class="op">(</span><span class="va">problem</span>, <span class="st">"values"</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">problem</span><span class="op">$</span><span class="va">actual</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">feedback</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Make sure that the values in `count` are ordered"</span>,</span>
+<span>    <span class="st">"to match their respective `food`."</span>,</span>
+<span>    <span class="st">"Remember, we have **3** tomatoes and **5** heads of lettuce."</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="fu">gradethis</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" class="external-link">fail</a></span><span class="op">(</span><span class="va">feedback</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; &lt;gradethis_graded: [Incorrect]</span></span>
+<span><span class="co">#&gt;   Make sure that the values in `count` are ordered to match</span></span>
+<span><span class="co">#&gt;   their respective `food`. Remember, we have **3** tomatoes</span></span>
+<span><span class="co">#&gt;   and **5** heads of lettuce.</span></span>
+<span><span class="co">#&gt; &gt;</span></span></code></pre></div>
 <p>For problems not handled by your custom grading code, you can pass the problem to <code><a href="../reference/tbl_check.html">tbl_grade()</a></code> to create a grade with the default feedback provided by tblcheck’s <code>grade</code> functions. If there are no problems, <code>tblcheck_grade(problem)</code> won’t return anything.</p>
 <p>Here’s the default feedback <code><a href="../reference/tbl_check_column.html">tbl_grade_column()</a></code> <em>would have returned</em> without our custom grading code.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tblcheck_grade.html">tblcheck_grade</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span>
-<span class="co">#&gt; &lt;gradethis_graded: [Incorrect]</span>
-<span class="co">#&gt;   The first 2 values of your `count` column should be `5` and</span>
-<span class="co">#&gt;   `3`, not `3` and `5`.</span>
-<span class="co">#&gt; &gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/tblcheck_grade.html">tblcheck_grade</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;gradethis_graded: [Incorrect]</span></span>
+<span><span class="co">#&gt;   The first 2 values of your `count` column should be `5` and</span></span>
+<span><span class="co">#&gt;   `3`, not `3` and `5`.</span></span>
+<span><span class="co">#&gt; &gt;</span></span></code></pre></div>
 <p><strong>Tip</strong>: You can also use <code>if</code> statements to ignore differences that you don’t care about in your grading code.</p>
 <p>Putting everything together into our grading <code>food-count-check</code> chunk, our grading code for this exercise would look like this:</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r food-count-check}</span></span>
@@ -810,26 +810,26 @@ The first 2 values of your <code>count</code> column should be <code>5</code> an
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>And the student who reversed the <code>count</code> column values</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="co">#&gt;   food    vegetable color count</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red       5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color count</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red       5</span></span></code></pre></div>
 <p>would receive our custom feedback.</p>
 <div class="alert alert-danger">
 Make sure that the values in <code>count</code> are ordered to match their respective <code>food</code>. Remember, we have <strong>3</strong> tomatoes and <strong>5</strong> heads of lettuce.
 </div>
 <p>By following our specific advice, the student revises their code to correctly create the <code>count</code> column.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="co">#&gt;   food    vegetable color count</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green     5</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red       3</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">foods</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color count</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green     5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red       3</span></span></code></pre></div>
 <div class="alert alert-success">
 Great job!
 </div>
@@ -852,7 +852,7 @@ Great job!
 <div class="pkgdown-footer-right">
   <p></p>
 <p>Developed by Alexander Rossell Hayes, <a href="https://www.garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, RStudio, PBC.</p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
   </div></footer>

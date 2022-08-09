@@ -15,9 +15,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.1/font.css" rel="stylesheet">
-<link href="../deps/_Source%20Code%20Pro-0.4.1/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -86,7 +86,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Examples of tblcheck in action</h1>
             
       
@@ -269,16 +269,16 @@ Create a <code>tibble</code> with three columns: <code>food</code>, <code>vegeta
 <div class="tab-pane" id="correct-answer" role="tabpanel" aria-labelledby="correct-answer-tab">
 
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  FALSE     red</span></span></code></pre></div>
 <div class="alert alert-success">
 That’s a first-class answer! Correct!
 </div>
@@ -286,92 +286,87 @@ That’s a first-class answer! Correct!
 <div class="tab-pane" id="wrong-class" role="tabpanel" aria-labelledby="wrong-class-tab">
 
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  food <span class="op">=</span> <span class="st">"lettuce"</span>,
-  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,
-  color <span class="op">=</span> <span class="st">"green"</span>
-<span class="op">)</span>
-<span class="co">#&gt; $food</span>
-<span class="co">#&gt; [1] "lettuce"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fruit</span>
-<span class="co">#&gt; [1] "TRUE"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $color</span>
-<span class="co">#&gt; [1] "green"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; $food</span></span>
+<span><span class="co">#&gt; [1] "lettuce"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $fruit</span></span>
+<span><span class="co">#&gt; [1] "TRUE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $color</span></span>
+<span><span class="co">#&gt; [1] "green"</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your table should be a tibble (class <code>tbl_df</code>), but it is a list (class <code>list</code>).</p>
-I expected you to call <code>tibble()</code> where you called <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>. Try it again. I have a good feeling about this.
+Your table should be a tibble (class <code>tbl_df</code>), but it is a list (class <code>list</code>). Try it again. I have a good feeling about this.
 </div>
 </div>
 <div class="tab-pane" id="wrong-names" role="tabpanel" aria-labelledby="wrong-names-tab">
 
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="st">"lettuce"</span>,
-  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,
-  color <span class="op">=</span> <span class="st">"green"</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;   food    fruit color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE  green</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   food    fruit color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE  green</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your table should have a column named <code>vegetable</code>. Your table should not have a column named <code>fruit</code>.</p>
-I did not expect your call to <code>tibble()</code> to include <code>fruit = "TRUE"</code>. You may have included an unnecessary argument, or you may have left out or misspelled an important argument name. Let’s try it again.
+Your table should have a column named <code>vegetable</code>. Your table should not have a column named <code>fruit</code>. Let’s try it again.
 </div>
 </div>
 <div class="tab-pane" id="wrong-length" role="tabpanel" aria-labelledby="wrong-length-tab">
 
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="st">"lettuce"</span>,
-  vegetable <span class="op">=</span> <span class="st">"TRUE"</span>,
-  color <span class="op">=</span> <span class="st">"green"</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your table should have 2 rows, but it has 1 row.</p>
-In <code>tibble(food = "lettuce", vegetable = "TRUE", color = "green")</code>, I expected you to call <code>food = c()</code> where you wrote <code>food = "lettuce"</code>. Try it again. You get better each time.
+Your table should have 2 rows, but it has 1 row. Try it again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column-class" role="tabpanel" aria-labelledby="wrong-column-class-tab">
 
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>, <span class="st">"TRUE"</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>, <span class="st">"TRUE"</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your <code>vegetable</code> column should be a vector of TRUE/FALSE values (class <code>logical</code>), but it is a vector of text (class <code>character</code>).</p>
-In <code>c("TRUE", "TRUE")</code>, I expected <code>TRUE</code> where you wrote <code>"TRUE"</code>. Try it again. I have a good feeling about this.
+Your <code>vegetable</code> column should be a vector of TRUE/FALSE values (class <code>logical</code>), but it is a vector of text (class <code>character</code>). Try it again. I have a good feeling about this.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column-values" role="tabpanel" aria-labelledby="wrong-column-values-tab">
 
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="op">(</span>
-  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,
-  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;   food    vegetable color</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   food    vegetable color</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>The first 2 values of your <code>vegetable</code> column should be <code>TRUE</code> and <code>FALSE</code>, not <code>TRUE</code> and <code>TRUE</code>.</p>
-In <code>c(TRUE, TRUE)</code>, I expected <code>FALSE</code> where you wrote <code>TRUE</code>. That’s okay: you learn more from mistakes than successes. Let’s do it one more time.
+The first 2 values of your <code>vegetable</code> column should be <code>TRUE</code> and <code>FALSE</code>, not <code>TRUE</code> and <code>TRUE</code>. That’s okay: you learn more from mistakes than successes. Let’s do it one more time.
 </div>
 </div>
 </div>
@@ -426,79 +421,82 @@ Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn
 
 <p>The correct answer uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code> to divide the <code>height</code> column by <code>2.54</code> (to convert height from <em>cm</em> to <em>in</em>) and to multiply the <code>mass</code> column by <code>2.205</code> (to convert <em>kg</em> to <em>lb</em>). Note that <code>transmute()</code> keeps only the columns named in its calculations, so our final table has only two columns.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">transmute</span><span class="op">(</span>
-    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>, 
-    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span>
-<span class="co">#&gt;    height  mass</span>
-<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   67.7 170. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   65.7 165. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   37.8  70.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   79.5 300. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   59.1 108. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   70.1 265. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   65.0 165. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   38.2  70.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   72.0 185. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   71.7 170. </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">transmute</span><span class="op">(</span></span>
+<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>, </span>
+<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
+<span><span class="co">#&gt;    height  mass</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   67.7 170. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   65.7 165. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   37.8  70.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   79.5 300. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   59.1 108. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   70.1 265. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   65.0 165. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   38.2  70.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   72.0 185. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   71.7 170. </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
 </div>
 <div class="tab-pane" id="wrong-function" role="tabpanel" aria-labelledby="wrong-function-tab">
 
 <p>In this example, the student uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>, which is certainly a reasonable choice but not what was requested. As a result, their submission contains more columns than expected.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>
-    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>,
-    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 14</span></span>
-<span class="co">#&gt;    name  height  mass hair_color skin_color eye_color birth_year sex  </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Luke…   67.7 170.  blond      fair       blue            19   male </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> C-3PO   65.7 165.  <span style="color: #BB0000;">NA</span>         gold       yellow         112   none </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> R2-D2   37.8  70.6 <span style="color: #BB0000;">NA</span>         white, bl… red             33   none </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Dart…   79.5 300.  none       white      yellow          41.9 male </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Leia…   59.1 108.  brown      light      brown           19   fema…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Owen…   70.1 265.  brown, gr… light      blue            52   male </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Beru…   65.0 165.  brown      light      blue            47   fema…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> R5-D4   38.2  70.6 <span style="color: #BB0000;">NA</span>         white, red red             <span style="color: #BB0000;">NA</span>   none </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Bigg…   72.0 185.  black      light      brown           24   male </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Obi-…   71.7 170.  auburn, w… fair       blue-gray       57   male </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows, and 6 more variables: gender &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   starships &lt;list&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>,</span>
+<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 14</span></span></span>
+<span><span class="co">#&gt;    name      height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Luke Sky…   67.7 170.  blond   fair    blue       19   male  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> C-3PO       65.7 165.  <span style="color: #BB0000;">NA</span>      gold    yellow    112   none  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> R2-D2       37.8  70.6 <span style="color: #BB0000;">NA</span>      white,… red        33   none  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Darth Va…   79.5 300.  none    white   yellow     41.9 male  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Leia Org…   59.1 108.  brown   light   brown      19   fema… femin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Owen Lars   70.1 265.  brown,… light   blue       52   male  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Beru Whi…   65.0 165.  brown   light   blue       47   fema… femin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> R5-D4       38.2  70.6 <span style="color: #BB0000;">NA</span>      white,… red        <span style="color: #BB0000;">NA</span>   none  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Biggs Da…   72.0 185.  black   light   brown      24   male  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Obi-Wan …   71.7 170.  auburn… fair    blue-g…    57   male  mascu…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows, 5 more variables: homeworld &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   and abbreviated variable names ¹​hair_color, ²​skin_color,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ³​eye_color, ⁴​birth_year</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your table should not have columns named <code>name</code>, <code>hair_color</code>, <code>skin_color</code>, or 9 more.</p>
-I expected you to call <code>transmute()</code> where you called <code>mutate()</code>. But no need to fret, try it again.
+Your table should not have columns named <code>name</code>, <code>hair_color</code>, <code>skin_color</code>, or 9 more. But no need to fret, try it again.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column-order" role="tabpanel" aria-labelledby="wrong-column-order-tab">
 
 <p>Here the student has done more or less the right thing, but they specified the columns in the opposite order.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">transmute</span><span class="op">(</span>
-    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span>,
-    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span>
-<span class="co">#&gt;     mass height</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 170.    67.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 165.    65.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  70.6   37.8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 300.    79.5</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 108.    59.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 265.    70.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 165.    65.0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  70.6   38.2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 185.    72.0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 170.    71.7</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">transmute</span><span class="op">(</span></span>
+<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span>,</span>
+<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
+<span><span class="co">#&gt;     mass height</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 170.    67.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 165.    65.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  70.6   37.8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 300.    79.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 108.    59.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 265.    70.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 165.    65.0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  70.6   38.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 185.    72.0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 170.    71.7</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
 <div class="alert alert-danger">
 Your table’s columns were not in the expected order. The first 2 columns of your table should be <code>height</code> and <code>mass</code>. Try it again. Perseverence is the key to success.
 </div>
@@ -514,56 +512,56 @@ Someone knows what they’re doing :) Correct!
 
 <p>If the student were to somehow create columns with an incorrect class, e.g. integer values where doubles were expected, tblcheck will alert them to their mistake.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">transmute</span><span class="op">(</span>
-    mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span><span class="op">)</span>,
-    height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span>
-<span class="co">#&gt;     mass height</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   169     67</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   165     65</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    70     37</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   299     79</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   108     59</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   264     70</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   165     64</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    70     38</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   185     72</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   169     71</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">transmute</span><span class="op">(</span></span>
+<span>    mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span><span class="op">)</span>,</span>
+<span>    height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
+<span><span class="co">#&gt;     mass height</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   169     67</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   165     65</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    70     37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   299     79</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   108     59</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   264     70</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   165     64</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    70     38</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   185     72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   169     71</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your table’s columns were not in the expected order. The first 2 columns of your table should be <code>height</code> and <code>mass</code>.</p>
-I expected you to call <code>height = /</code> where you called <code>height = as.integer()</code>. Give it another try.
+Your table’s columns were not in the expected order. The first 2 columns of your table should be <code>height</code> and <code>mass</code>. Give it another try.
 </div>
 </div>
 <div class="tab-pane" id="wrong-calculation" role="tabpanel" aria-labelledby="wrong-calculation-tab">
 
 <p>If the values are completely wrong — here the student is multiplying <code>height</code> by <code>2.54</code> rather than dividing — then tblcheck points out which column is incorrect and gives a hint about the expected values.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">transmute</span><span class="op">(</span>
-    height <span class="op">=</span> <span class="va">height</span> <span class="op">*</span> <span class="fl">2.54</span>,
-    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span> 
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span>
-<span class="co">#&gt;    height  mass</span>
-<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   437. 170. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   424. 165. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   244.  70.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   513. 300. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   381  108. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   452. 265. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   419. 165. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   246.  70.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   465. 185. </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   462. 170. </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">transmute</span><span class="op">(</span></span>
+<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">*</span> <span class="fl">2.54</span>,</span>
+<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span> </span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
+<span><span class="co">#&gt;    height  mass</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   437. 170. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   424. 165. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   244.  70.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   513. 300. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   381  108. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   452. 265. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   419. 165. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   246.  70.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   465. 185. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   462. 170. </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>The first 3 values of your <code>height</code> column should be <code>67.7</code>, <code>65.7</code>, and <code>37.8</code>, not <code>437</code>, <code>424</code>, and <code>244</code>.</p>
-In <code>starwars %&gt;% transmute(height = height * 2.54, mass = mass * 2.205)</code>, I expected you to call <code>height = /</code> where you called <code>height = *</code>. Try it again. You get better each time.
+The first 3 values of your <code>height</code> column should be <code>67.7</code>, <code>65.7</code>, and <code>37.8</code>, not <code>437</code>, <code>424</code>, and <code>244</code>. Try it again. You get better each time.
 </div>
 </div>
 </div>
@@ -617,32 +615,32 @@ Consider the <code>marital_age</code> dataset. Use <code>fct_reorder()</code> to
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Since students aren’t familiar with the <code>marital_age</code> table, we’ve included the starter code so they can see the initial state of the table when they start the exercise.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">marital_age</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   marital       avg_age</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">marital_age</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   marital       avg_age</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></span></code></pre></div>
 </div>
 <div class="tab-pane" id="correct-answer-2" role="tabpanel" aria-labelledby="correct-answer-2-tab">
 
 <p>In the expected solution, the student will use the <code>forecats::fct_reorder()</code> function to transform the <code>marital</code> column, reordering its factor levels by increasing <code>avg_age</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   marital       avg_age</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   marital       avg_age</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></span></code></pre></div>
 <div class="alert alert-success">
 Splendid! Correct!
 </div>
@@ -651,60 +649,57 @@ Splendid! Correct!
 
 <p>Here the student forgets about the <code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code> function and tries to use <code><a href="https://rdrr.io/r/base/order.html" class="external-link">order()</a></code> to set the order of the factor levels in the <code>marital</code> column.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   marital avg_age</span>
-<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>       1    51.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>       2    48.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>       3    33.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>       4    52.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span>       5    45.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span>       6    71.7</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   marital avg_age</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>       1    51.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>       2    48.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>       3    33.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>       4    52.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>       5    45.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>       6    71.7</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your <code>marital</code> column should be a vector of factors (class <code>factor</code>), but it is a vector of integers (class <code>integer</code>).</p>
-In <code>marital_age %&gt;% mutate(marital = order(marital, avg_age))</code>, I expected you to call <code>marital = fct_reorder()</code> where you called <code>marital = order()</code>. Try it again. You get better each time.
+Your <code>marital</code> column should be a vector of factors (class <code>factor</code>), but it is a vector of integers (class <code>integer</code>). Try it again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column" role="tabpanel" aria-labelledby="wrong-column-tab">
 
 <p>In this case the student remembers to use <code>forecats::fct_reorder()</code> but incorrectly assigns the result to an unexpected column.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>marital_fct <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="co">#&gt;   marital       avg_age marital_fct  </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1 Divorced     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7 Married      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9 Never married</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4 No answer    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3 Separated    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7 Widowed</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>marital_fct <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;   marital       avg_age marital_fct  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1 Divorced     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7 Married      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9 Never married</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4 No answer    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3 Separated    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7 Widowed</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your table should not have a column named <code>marital_fct</code>.</p>
-I did not expect your call to <code>mutate()</code> to include <code>marital_fct = fct_reorder()</code>. You may have included an unnecessary argument, or you may have left out or misspelled an important argument name. Try it again. You get better each time.
+Your table should not have a column named <code>marital_fct</code>. Try it again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-direction" role="tabpanel" aria-labelledby="wrong-direction-tab">
 
 <p>In another case, the student uses <code>forecats::fct_reorder()</code> but sets <code>.desc = TRUE</code>, resulting in an unexpected ordering of the factor levels.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="co">#&gt;   marital       avg_age</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   marital       avg_age</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Divorced         51.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Married          48.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Never married    33.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> No answer        52.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>The order of the levels in your <code>marital</code> column are the reverse of the expected order.</p>
-In <code>fct_reorder(marital, avg_age, .desc = TRUE)</code>, I expected <code>.desc = FALSE</code> where you wrote <code>.desc = TRUE</code>. Try it again. You get better each time.
+The order of the levels in your <code>marital</code> column are the reverse of the expected order. Try it again. You get better each time.
 </div>
 </div>
 </div>
@@ -753,22 +748,22 @@ Consider the <code>fruit</code> data. Use a function from <a href="https://strin
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Note that <code>fruit</code> is from <code><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">stringr::fruit</a></code>, a vector containing 80 fruit names.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">fruit</a></span>, <span class="fl">20</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "apple"        "apricot"      "avocado"      "banana"      </span>
-<span class="co">#&gt;  [5] "bell pepper"  "bilberry"     "blackberry"   "blackcurrant"</span>
-<span class="co">#&gt;  [9] "blood orange" "blueberry"    "boysenberry"  "breadfruit"  </span>
-<span class="co">#&gt; [13] "canary melon" "cantaloupe"   "cherimoya"    "cherry"      </span>
-<span class="co">#&gt; [17] "chili pepper" "clementine"   "cloudberry"   "coconut"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">fruit</a></span>, <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "apple"        "apricot"      "avocado"      "banana"      </span></span>
+<span><span class="co">#&gt;  [5] "bell pepper"  "bilberry"     "blackberry"   "blackcurrant"</span></span>
+<span><span class="co">#&gt;  [9] "blood orange" "blueberry"    "boysenberry"  "breadfruit"  </span></span>
+<span><span class="co">#&gt; [13] "canary melon" "cantaloupe"   "cherimoya"    "cherry"      </span></span>
+<span><span class="co">#&gt; [17] "chili pepper" "clementine"   "cloudberry"   "coconut"</span></span></code></pre></div>
 </div>
 <div class="tab-pane" id="correct-answer-3" role="tabpanel" aria-labelledby="correct-answer-3-tab">
 
 <p>11 of the 80 fruits have more than one word. What’s your favorite two-worded fruit name? (Mine is the <a href="https://en.wikipedia.org/wiki/Mangosteen" class="external-link">purple mangosteen</a>.)</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">str_subset</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "bell pepper"       "blood orange"      "canary melon"     </span>
-<span class="co">#&gt;  [4] "chili pepper"      "goji berry"        "kiwi fruit"       </span>
-<span class="co">#&gt;  [7] "purple mangosteen" "rock melon"        "salal berry"      </span>
-<span class="co">#&gt; [10] "star fruit"        "ugli fruit"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">str_subset</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "bell pepper"       "blood orange"      "canary melon"     </span></span>
+<span><span class="co">#&gt;  [4] "chili pepper"      "goji berry"        "kiwi fruit"       </span></span>
+<span><span class="co">#&gt;  [7] "purple mangosteen" "rock melon"        "salal berry"      </span></span>
+<span><span class="co">#&gt; [10] "star fruit"        "ugli fruit"</span></span></code></pre></div>
 <div class="alert alert-success">
 Lovely job! Correct!
 </div>
@@ -777,36 +772,33 @@ Lovely job! Correct!
 
 <p>This student submission makes a potentially common mistake of hoping that <code><a href="https://stringr.tidyverse.org/reference/str_subset.html" class="external-link">stringr::str_which()</a></code> will return the <code>fruit</code> which have <code>pattern</code>. Instead, <code>str_which()</code> follows the base R function <code><a href="https://rdrr.io/r/base/which.html" class="external-link">which()</a></code>, and returns an <code>integer</code> index indicating the items in <code>fruit</code> where the <code>pattern</code> is matched.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">str_which</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span>
-<span class="co">#&gt;  [1]  5  9 13 17 32 42 66 72 73 75 79</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">str_which</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1]  5  9 13 17 32 42 66 72 73 75 79</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your result should be a vector of text (class <code>character</code>), but it is a vector of integers (class <code>integer</code>).</p>
-I expected you to call <code>str_subset()</code> where you called <code>str_which()</code>. Try it again. You get better each time.
+Your result should be a vector of text (class <code>character</code>), but it is a vector of integers (class <code>integer</code>). Try it again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-length-1" role="tabpanel" aria-labelledby="wrong-length-1-tab">
 
 <p>In another mistake example, this student probably expected <code><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">stringr::str_extract()</a></code> to <em>extract</em> elements from the vector. However, <code>str_extract()</code> instead extracts the pattern from each item, so it returns a vector with the same length as the input.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">str_extract</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span>
-<span class="co">#&gt;  [1] NA  NA  NA  NA  " " NA  NA  NA  " " NA  NA  NA  " " NA  NA  NA </span>
-<span class="co">#&gt; [17] " " NA  NA  NA </span>
-<span class="co">#&gt;  [ reached getOption("max.print") -- omitted 60 entries ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">str_extract</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] NA  NA  NA  NA  " " NA  NA  NA  " " NA  NA  NA  " " NA  NA  NA </span></span>
+<span><span class="co">#&gt; [17] " " NA  NA  NA </span></span>
+<span><span class="co">#&gt;  [ reached getOption("max.print") -- omitted 60 entries ]</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your result should contain 11 values, but it has 80 values.</p>
-I expected you to call <code>str_subset()</code> where you called <code>str_extract()</code>. But no need to fret, try it again.
+Your result should contain 11 values, but it has 80 values. But no need to fret, try it again.
 </div>
 </div>
 <div class="tab-pane" id="wrong-subset" role="tabpanel" aria-labelledby="wrong-subset-tab">
 
 <p>Finally, a student might have chosen the right function, but they missed our hint and came up with a pattern that’s too clever. Here the student probably looked at the first 20 fruit names and took a guess at the answer.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">str_subset</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" (pepper|orange|melon|fruit)"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "bell pepper"  "blood orange" "canary melon" "chili pepper"</span>
-<span class="co">#&gt; [5] "kiwi fruit"   "rock melon"   "star fruit"   "ugli fruit"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">str_subset</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" (pepper|orange|melon|fruit)"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "bell pepper"  "blood orange" "canary melon" "chili pepper"</span></span>
+<span><span class="co">#&gt; [5] "kiwi fruit"   "rock melon"   "star fruit"   "ugli fruit"</span></span></code></pre></div>
 <div class="alert alert-danger">
-<p>Your result should contain 11 values, but it has 8 values. I expected your result to include the values <code>goji berry</code>, <code>purple mangosteen</code>, and <code>salal berry</code>.</p>
-In <code>str_subset(fruit, " (pepper|orange|melon|fruit)")</code>, I expected <code>" "</code> where you wrote <code>" (pepper|orange|melon|fruit)"</code>. That’s okay: you learn more from mistakes than successes. Let’s do it one more time.
+Your result should contain 11 values, but it has 8 values. I expected your result to include the values <code>goji berry</code>, <code>purple mangosteen</code>, and <code>salal berry</code>. That’s okay: you learn more from mistakes than successes. Let’s do it one more time.
 </div>
 </div>
 </div>
@@ -828,7 +820,7 @@ In <code>str_subset(fruit, " (pepper|orange|melon|fruit)")</code>, I expected <c
 <div class="pkgdown-footer-right">
   <p></p>
 <p>Developed by Alexander Rossell Hayes, <a href="https://www.garrickadenbuie.com" class="external-link">Garrick Aden-Buie</a>, RStudio, PBC.</p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
   </div></footer>
