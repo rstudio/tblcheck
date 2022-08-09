@@ -170,3 +170,23 @@
         is a vector of integers (class `integer`).
       >
 
+---
+
+    Code
+      grade_pyungrouped_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a DataFrame, but it is an object with class
+        `int`.
+      >
+
+---
+
+    Code
+      grade_pygrouped_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a DataFrame with row labels (i.e. index), but
+        it is an object with class `int`.
+      >
+

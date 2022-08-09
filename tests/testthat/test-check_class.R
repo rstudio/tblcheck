@@ -449,4 +449,46 @@ test_that("tbl_grade_class() with hinted messages", {
     ),
     ignore_attr = "class"
   )
+
+  grade_pyungrouped_int <- tblcheck_test_grade({
+    .result <- 1
+    class(.result) <- "int"
+    .solution <- tibble::tibble(a = letters[1:3], b = a)
+    class(.solution) <- c("py_tbl_df", class(.solution))
+    tbl_grade_class()
+  })
+  expect_snapshot(grade_pyungrouped_int)
+
+  expect_equal(
+    grade_pyungrouped_int$problem,
+    problem(
+      type     = "class",
+      expected = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
+      actual   = "int",
+      expected_length = 2,
+      actual_length = 1
+    )
+  )
+
+  grade_pygrouped_int <- tblcheck_test_grade({
+    .result <- 1
+    class(.result) <- "int"
+    .solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+    class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
+    tbl_grade_class()
+  })
+  expect_snapshot(grade_pygrouped_int)
+
+  expect_equal(
+    grade_pygrouped_int$problem,
+    problem(
+      type     = "class",
+      expected = c(
+        "py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"
+      ),
+      actual   = "int",
+      expected_length = 2,
+      actual_length = 1
+    )
+  )
 })
