@@ -164,7 +164,7 @@ hinted_class_message <- function(obj_class, exp_class) {
       # that we should ignore the class for that object. The use of `all()`
       # accounts for both situations since `all(logical(0))` returns `TRUE`.
       all(hinted_class$obj_class %in% obj_class) &&
-      all(hinted_class$exp_class %in% exp_class)
+        all(hinted_class$exp_class %in% exp_class)
     ) {
       return(hinted_class$message)
     }
@@ -215,18 +215,10 @@ friendly_class <- function(class, length) {
   class_str <- knitr::combine_words(md_code(class))
 
   glue::glue(
-    ifelse(
-      length > 1,
-      ngettext(
-        length(class),
-        "a vector with class {class_str}",
-        "a vector with classes {class_str}"
-      ),
-      ngettext(
-        length(class),
-        "an object with class {class_str}",
-        "an object with classes {class_str}"
-      )
+    ngettext(
+      length(class),
+      "an object with class {class_str}",
+      "an object with classes {class_str}"
     )
   )
 }
