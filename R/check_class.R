@@ -215,18 +215,10 @@ friendly_class <- function(class, length) {
   class_str <- knitr::combine_words(md_code(class))
 
   glue::glue(
-    ifelse(
-      length > 1,
-      ngettext(
-        length(class),
-        "a vector with class {class_str}",
-        "a vector with classes {class_str}"
-      ),
-      ngettext(
-        length(class),
-        "an object with class {class_str}",
-        "an object with classes {class_str}"
-      )
+    ngettext(
+      length(class),
+      "an object with class {class_str}",
+      "an object with classes {class_str}"
     )
   )
 }
