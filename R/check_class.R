@@ -180,6 +180,16 @@ hinted_class_message_list <- function() {
       message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
+      obj_class = "py_tbl_df",
+      exp_class = "py_grouped_df",
+      message   = "I was only expecting 1 value for each grouping in the table, but you have multiple values per grouping. Maybe you are missing a .groupby() call?"
+    ),
+    list(
+      obj_class = "py_grouped_df",
+      exp_class = "py_tbl_df",
+      message   = "Your table row labels (i.e. index) are not a numbered sequence. You can tell by the extra spacing around the column names. You can fix this with .reset_index()"
+    ),
+    list(
       obj_class = "data.frame",
       exp_class = "grouped_df",
       message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
@@ -285,6 +295,14 @@ friendly_class_list <- function() {
     list(
       class    = "data.frame",
       single   = "a data frame (class `data.frame`)"
+    ),
+    list(
+      class    = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a DataFrame"
+    ),
+    list(
+      class    = c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a DataFrame with row labels (i.e. index)"
     ),
     list(
       class    = "list",
