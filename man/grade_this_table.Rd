@@ -41,10 +41,7 @@ ignored. These arguments can also be used in conjunction with the
 
 \item{pass_if_equal}{\verb{[logical(1)]}\cr When \code{TRUE} (default), the \code{.result}
 is compared to the \code{.solution} with \code{\link[gradethis:pass_if_equal]{gradethis::pass_if_equal()}} after the
-\emph{pre check} and before calling the \pkg{tblcheck} grading function. When
-\code{FALSE}, you will need to include your own call to \code{\link[gradethis:graded]{gradethis::pass()}} in
-either \code{pre_check} or \code{post_check} for the student to be able to receive a
-passing grade.}
+\emph{pre check} and before calling the \pkg{tblcheck} grading function.}
 
 \item{...}{Additional arguments passed to \code{graded()} or additional data to be
 included in the feedback object.}
@@ -88,7 +85,7 @@ with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}.}
 
 \item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same \link[dplyr:group_by]{groups}
-with \code{\link[dplyr:group_vars]{dplyr::group_vars()}}.}
+with \code{\link[dplyr:group_data]{dplyr::group_vars()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}

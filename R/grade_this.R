@@ -34,10 +34,7 @@
 #'   `pass_if_equal` option when the grading requirements are more involved.
 #' @param pass_if_equal `[logical(1)]`\cr When `TRUE` (default), the `.result`
 #'   is compared to the `.solution` with [gradethis::pass_if_equal()] after the
-#'   _pre check_ and before calling the \pkg{tblcheck} grading function. When
-#'   `FALSE`, you will need to include your own call to [gradethis::pass()] in
-#'   either `pre_check` or `post_check` for the student to be able to receive a
-#'   passing grade.
+#'   _pre check_ and before calling the \pkg{tblcheck} grading function.
 #' @inheritParams gradethis::fail
 #' @inheritParams gradethis::gradethis_setup
 #'
