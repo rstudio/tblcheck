@@ -262,7 +262,7 @@ problem_grade_this_impl <- function(
       gradethis::pass(message = get(".__correct"), praise = get(".__pass.praise"))
     })(check_env)
 
-    class(grade) <- c("problem_graded", class(grade))
+    class(grade) <- c("tblcheck_graded", class(grade))
     grade
   }
 }
