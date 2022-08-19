@@ -3,6 +3,7 @@
 S3method(format,tblcheck_problem)
 S3method(print,tblcheck_problem)
 S3method(problem_grade,default)
+S3method(problem_grade,gradethis_problem)
 S3method(problem_grade,list)
 S3method(problem_grade,tblcheck_internal_problem)
 S3method(problem_grade,tblcheck_problem)

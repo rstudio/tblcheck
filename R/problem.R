@@ -18,6 +18,9 @@
 #'   included when the value is a summary, e.g. `nrow(expected)` or
 #'   `length(actual)`. Be careful not to include large amounts of data.
 #' @param ... Additional elements to be included in the `problem` object.
+#' @param .class The class of the problem. Typically, we expect the problem
+#'   class to be `<type>_problem`, but if you are building custom classes you
+#'   may set these classes as desired.
 #'
 #' @return Returns a problem with class `<type>_problem` and the base classes
 #'   `tblcheck_problem` and `gradethis_problem`.
@@ -25,9 +28,19 @@
 #' @family Problem functions
 #' @export
 problem <- function(
-  type, expected = NULL, actual = NULL, ...
+  type,
+  expected = NULL,
+  actual = NULL,
+  ...,
+  .class = c(paste0(type, "_problem"), "tblcheck_problem")
 ) {
   checkmate::assert_string(type, min.chars = 1)
+  if (!checkmate::test_character(.class, pattern = "^[[:alpha:]][[:alnum:]_.]*$")) {
+    rlang::abort(
+      "`.class` must be a character vector of valid R class names",
+      class = "error_problem_class"
+    )
+  }
 
   problem <- list(
     type = type,
@@ -38,7 +51,7 @@ problem <- function(
 
   structure(
     purrr::compact(problem),
-    class = c(paste0(type, "_problem"), "tblcheck_problem", "gradethis_problem")
+    class = unique(c(.class, "gradethis_problem"))
   )
 }
 
@@ -102,34 +115,43 @@ problem_type <- function(x) {
 #' @rdname problem_type
 #' @export
 is_problem <- function(x, type = NULL) {
-  inherits(x, "gradethis_problem") && (
-    is.null(type) || inherits(x, paste0(type, "_problem"))
-  )
+  if (!inherits(x, "gradethis_problem")) return(FALSE)
+  if (is.null(type)) return(TRUE)
+  inherits(x, c(type, paste0(type, "_problem")))
 }
 
 #' @rdname problem_type
 #' @export
 is_tblcheck_problem <- function(x, type = NULL) {
-  inherits(x, "tblcheck_problem") && (
-    is.null(type) || inherits(x, paste0(type, "_problem"))
-  )
+  if (!inherits(x, "tblcheck_problem")) return(FALSE)
+  if (is.null(type)) return(TRUE)
+  # tblcheck problem classes always are "<type>_problem"
+  inherits(x, paste0(type, "_problem"))
 }
 
 #' @rdname problem_type
 #' @export
 as_problem <- function(x) {
   checkmate::assert_list(x)
-  class(x) <- c("tblcheck_problem", "gradethis_problem")
 
-  if (!is.null(x$location)) {
-    class(x) <- c(paste0(x$location, "_problem"), class(x))
+  if (!is.null(x$location) && !is.null(x$type) && is.null(x$.class)) {
+    # this is probably a tblcheck problem as a list
+    x$.class <- c(
+      paste0(c(x$type, x$location), "_problem"),
+      "tblcheck_problem",
+      "gradethis_problem"
+    )
   }
 
-  if (!is.null(problem_type(x))) {
-    class(x) <- c(paste0(problem_type(x), "_problem"), class(x))
-  }
-
-  x
+  tryCatch(
+    rlang::eval_bare(rlang::call2("problem", !!!x)),
+    error_problem_class = function(err) {
+      rlang::abort(
+        "Please set `.class` for your list, see `?problem()` for details",
+        parent = err
+      )
+    }
+  )
 }
 
 #' @export

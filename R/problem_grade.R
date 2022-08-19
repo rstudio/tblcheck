@@ -46,7 +46,7 @@ problem_grade.list <- function(
 
 #' @rdname problem_grade
 #' @export
-problem_grade.tblcheck_problem <- function(
+problem_grade.gradethis_problem <- function(
   problem, max_diffs = 3, env = parent.frame(), ...
 ) {
   if (is.null(problem)) {
@@ -68,4 +68,12 @@ problem_grade.tblcheck_problem <- function(
     env = env,
     ...
   )
+}
+
+#' @rdname problem_grade
+#' @export
+problem_grade.tblcheck_problem <- function(
+  problem, max_diffs = 3, env = parent.frame(), ...
+) {
+  NextMethod()
 }

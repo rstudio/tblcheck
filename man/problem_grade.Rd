@@ -4,6 +4,7 @@
 \alias{problem_grade}
 \alias{problem_grade.default}
 \alias{problem_grade.list}
+\alias{problem_grade.gradethis_problem}
 \alias{problem_grade.tblcheck_problem}
 \title{Apply automatic grading to a problem object}
 \usage{
@@ -12,6 +13,8 @@ problem_grade(problem, max_diffs = 3, env = parent.frame(), ...)
 \method{problem_grade}{default}(problem, max_diffs = 3, env = parent.frame(), ...)
 
 \method{problem_grade}{list}(problem, max_diffs = 3, env = parent.frame(), ...)
+
+\method{problem_grade}{gradethis_problem}(problem, max_diffs = 3, env = parent.frame(), ...)
 
 \method{problem_grade}{tblcheck_problem}(problem, max_diffs = 3, env = parent.frame(), ...)
 }

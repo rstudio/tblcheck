@@ -4,7 +4,13 @@
 \alias{problem}
 \title{Declare a problem}
 \usage{
-problem(type, expected = NULL, actual = NULL, ...)
+problem(
+  type,
+  expected = NULL,
+  actual = NULL,
+  ...,
+  .class = c(paste0(type, "_problem"), "tblcheck_problem")
+)
 }
 \arguments{
 \item{type}{A character string, e.g. \code{column_values} or \code{table_rows}, that
@@ -15,6 +21,10 @@ included when the value is a summary, e.g. \code{nrow(expected)} or
 \code{length(actual)}. Be careful not to include large amounts of data.}
 
 \item{...}{Additional elements to be included in the \code{problem} object.}
+
+\item{.class}{The class of the problem. Typically, we expect the problem
+class to be \verb{<type>_problem}, but if you are building custom classes you
+may set these classes as desired.}
 }
 \value{
 Returns a problem with class \verb{<type>_problem} and the base classes
