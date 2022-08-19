@@ -18,8 +18,8 @@ A length-1 character string with a message describing the problem.
 }
 \description{
 \code{problem_message()} is an S3 generic that powers the conversion of problems
-detected by \code{\link[=tbl_check]{tbl_check()}} and \code{\link[=vec_check]{vec_check()}} (and their related helper
-functions) into a human-readable message.
+detected by \code{\link[=tbl_check]{tbl_check()}}, \code{\link[=vec_check]{vec_check()}}, and their related helper functions
+into a human-readable message.
 }
 \examples{
 problem <- problem(

@@ -1,8 +1,8 @@
 #' Create a message from a problem object
 #'
 #' `problem_message()` is an S3 generic that powers the conversion of problems
-#' detected by [tbl_check()] and [vec_check()] (and their related helper
-#' functions) into a human-readable message.
+#' detected by [tbl_check()], [vec_check()], and their related helper functions
+#' into a human-readable message.
 #'
 #' @examples
 #' problem <- problem(
