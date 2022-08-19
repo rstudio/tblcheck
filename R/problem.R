@@ -3,6 +3,15 @@
 #' Useful for constructing a small list to communicate the problem that was
 #' discovered during checking.
 #'
+#' @examples
+#' problem(
+#'   type = "class",
+#'   expected = "character",
+#'   actual = "numeric",
+#'   expected_length = 1,
+#'   actual_length = 2
+#' )
+#'
 #' @param type A character string, e.g. `column_values` or `table_rows`, that
 #'   describes the problem that was discovered.
 #' @param expected,actual The expected and actual values. These should be
@@ -10,8 +19,10 @@
 #'   `length(actual)`. Be careful not to include large amounts of data.
 #' @param ... Additional elements to be included in the `problem` object.
 #'
-#' @keywords internal
-#' @noRd
+#' @return Returns a problem with class `<type>_problem` and the base classes
+#'   `tblcheck_problem` and `gradethis_problem`.
+#'
+#' @export
 problem <- function(
   type, expected = NULL, actual = NULL, ...
 ) {
