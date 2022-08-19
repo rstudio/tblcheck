@@ -1,4 +1,4 @@
-linters::linters_with_defaults(
+linters: linters_with_defaults(
     line_length_linter(120),
     T_and_F_symbol_linter,
     absolute_path_linter,
