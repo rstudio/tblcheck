@@ -34,3 +34,10 @@ problem(
 )
 
 }
+\seealso{
+Other Problem functions: 
+\code{\link{problem_grade}()},
+\code{\link{problem_message}()},
+\code{\link{problem_type}()}
+}
+\concept{Problem functions}

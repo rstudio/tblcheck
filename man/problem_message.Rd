@@ -2,7 +2,7 @@
 % Please edit documentation in R/problem_message.R
 \name{problem_message}
 \alias{problem_message}
-\title{Create a Message from a Problem Object}
+\title{Create a message from a problem object}
 \usage{
 problem_message(problem, ...)
 }
@@ -33,3 +33,10 @@ problem <- problem(
 problem_message(problem)
 
 }
+\seealso{
+Other Problem functions: 
+\code{\link{problem_grade}()},
+\code{\link{problem_type}()},
+\code{\link{problem}()}
+}
+\concept{Problem functions}

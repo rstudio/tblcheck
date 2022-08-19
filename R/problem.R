@@ -22,6 +22,7 @@
 #' @return Returns a problem with class `<type>_problem` and the base classes
 #'   `tblcheck_problem` and `gradethis_problem`.
 #'
+#' @family Problem functions
 #' @export
 problem <- function(
   type, expected = NULL, actual = NULL, ...
@@ -75,6 +76,11 @@ return_if_problem <- function(
 #' If `type` is specified, `is_problem()` and `is_tblcheck_problem()` test
 #' whether an object is a problem of the specified type.
 #'
+#' @examples
+#' problem_type(vec_check(1, "1"))
+#' is_problem(vec_check(1, "1"), "vector_class")
+#' is_tblcheck_problem(vec_check(1, "1"), "class")
+#'
 #' @param x An object
 #' @param type `[character(1)]`\cr A `problem` type
 #'
@@ -82,12 +88,9 @@ return_if_problem <- function(
 #'   of length 1.
 #'   `problem_type()` returns a [character] of length 1.
 #'   `as_problem()` returns a `tblcheck_problem`.
-#' @export
 #'
-#' @examples
-#' problem_type(vec_check(1, "1"))
-#' is_problem(vec_check(1, "1"), "vector_class")
-#' is_tblcheck_problem(vec_check(1, "1"), "class")
+#' @family Problem functions
+#' @export
 problem_type <- function(x) {
   if (is_problem(x)) {
     return(x$type)

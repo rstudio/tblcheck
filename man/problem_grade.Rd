@@ -51,4 +51,12 @@ Apply automatic grading to a problem object
 .solution <- letters[1:10]
 problem <- vec_check()
 problem_grade(problem)
+
 }
+\seealso{
+Other Problem functions: 
+\code{\link{problem_message}()},
+\code{\link{problem_type}()},
+\code{\link{problem}()}
+}
+\concept{Problem functions}
