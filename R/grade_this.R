@@ -87,7 +87,7 @@ grade_this_table <- function(
   pass.praise = NULL
 ) {
   ellipsis::check_dots_empty()
-  grader <- call2_problem_grade_this(tbl_grade)
+  grader <- call2_tblcheck_grade_this(tbl_grade)
   rlang::eval_bare(grader)
 }
 
@@ -149,7 +149,7 @@ grade_this_vector <- function(
   pass.praise = NULL
 ) {
   ellipsis::check_dots_empty()
-  grader <- call2_problem_grade_this(vec_grade)
+  grader <- call2_tblcheck_grade_this(vec_grade)
   rlang::eval_bare(grader)
 }
 
@@ -174,8 +174,8 @@ rlang_call_match <- function(n = 2) {
   }
 }
 
-call2_problem_grade_this <- function(
-  problem_grader = tbl_grade
+call2_tblcheck_grade_this <- function(
+  tblcheck_grader = tbl_grade
 ) {
   # take args of the function calling this one
   call <- rlang_call_match()
@@ -187,14 +187,14 @@ call2_problem_grade_this <- function(
   }
 
   # add the tblcheck grader to the arg list
-  args$problem_grader <- rlang::enexpr(problem_grader)
+  args$tblcheck_grader <- rlang::enexpr(tblcheck_grader)
 
-  # and construct the call to the general purpose `problem_grade_this_impl()`
-  rlang::call2(problem_grade_this_impl, !!!args)
+  # and construct the call to the general purpose `tblcheck_grade_this_impl()`
+  rlang::call2(tblcheck_grade_this_impl, !!!args)
 }
 
-problem_grade_this_impl <- function(
-  problem_grader = tbl_grade,
+tblcheck_grade_this_impl <- function(
+  tblcheck_grader = tbl_grade,
   ...,
   correct = NULL,
   pre_check = NULL,
@@ -208,7 +208,7 @@ problem_grade_this_impl <- function(
   pre_check  <- rlang::enexpr(pre_check)
   post_check <- rlang::enexpr(post_check)
 
-  problem_grader_args <- list(
+  tblcheck_grader_args <- list(
     object = .result,
     expected = .solution,
     hint = hint,
@@ -219,8 +219,8 @@ problem_grade_this_impl <- function(
   function(check_env) {
     check_env_pre <- rlang::new_environment(
       list(
-        ".__problem_grader_args" = problem_grader_args,
-        ".__problem_grader" = problem_grader,
+        ".__tblcheck_grader_args" = tblcheck_grader_args,
+        ".__tblcheck_grader" = tblcheck_grader,
         ".__pre_check"       = pre_check,
         ".__post_check"      = post_check,
         ".__pass_if_equal"   = pass_if_equal,
@@ -250,7 +250,7 @@ problem_grade_this_impl <- function(
       }
 
       # call the tblcheck grader
-      do.call(get(".__problem_grader"), get(".__problem_grader_args"))
+      do.call(get(".__tblcheck_grader"), get(".__tblcheck_grader_args"))
 
       # evaluate post check or extra check code
       post_check <- get0(".__post_check")
