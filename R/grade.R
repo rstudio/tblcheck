@@ -60,6 +60,31 @@ tblcheck_grade.tblcheck_problem <- function(
   )
 }
 
+#' Create a Message from a Problem Object
+#'
+#' `tblcheck_message()` is an S3 generic that powers the conversion of problems
+#' detected by [tbl_check()] and [vec_check()] (and their related helper
+#' functions) into a human-readable message.
+#'
+#' @examples
+#' problem <- problem(
+#'   type = "class",
+#'   expected = "character",
+#'   actual = "numeric",
+#'   expected_length = 1,
+#'   actual_length = 2
+#' )
+#'
+#' tblcheck_message(problem)
+#'
+#' @param problem An object with base class `gradethis_problem`. Problems
+#'   identified by \pkg{tblcheck} also include `tblcheck_problem`, plus
+#'   additional classes that more specifically identify the problem type.
+#' @param ... Additional arguments passed to the underlying methods.
+#'
+#' @return A length-1 character string with a message describing the problem.
+#'
+#' @export
 tblcheck_message <- function(problem, ...) {
   UseMethod("tblcheck_message")
 }
@@ -70,7 +95,7 @@ tblcheck_message.default <- function(problem, ...) {
 }
 
 #' @export
-tblcheck_message.tblcheck_problem <- function(problem, ...) {
+tblcheck_message.gradethis_problem <- function(problem, ...) {
   type_msg <- if (!is.null(problem$type)) {
     gettext("Your code resulted in a `{type}` problem. ")
   } else {
@@ -92,4 +117,9 @@ tblcheck_message.tblcheck_problem <- function(problem, ...) {
   }
 
   glue::glue_data(problem, type_msg, exp_msg, obj_msg)
+}
+
+#' @export
+tblcheck_message.tblcheck_problem <- function(problem, ...) {
+  NextMethod()
 }
