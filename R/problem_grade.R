@@ -1,5 +1,12 @@
 #' Apply automatic grading to a problem object
 #'
+#' Automatically converts a [problem()] object into a \pkg{gradethis} grade.
+#' `problem_grade()` is an S4 generic and \pkg{tblcheck} provides an internal
+#' method for problems with class `"tblcheck_problem"`. In \pkg{tblcheck}, or
+#' for problems with this class, any problems are automatically turned into
+#' failing grades with [gradethis::fail()] and using the message provided by
+#' [problem_message()].
+#'
 #' @examples
 #' .result <- 1:10
 #' .solution <- letters[1:10]

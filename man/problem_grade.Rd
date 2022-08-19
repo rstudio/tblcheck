@@ -45,7 +45,12 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
 A \code{\link[gradethis:graded]{gradethis::fail()}} message or \code{NULL} invisibly.
 }
 \description{
-Apply automatic grading to a problem object
+Automatically converts a \code{\link[=problem]{problem()}} object into a \pkg{gradethis} grade.
+\code{problem_grade()} is an S4 generic and \pkg{tblcheck} provides an internal
+method for problems with class \code{"tblcheck_problem"}. In \pkg{tblcheck}, or
+for problems with this class, any problems are automatically turned into
+failing grades with \code{\link[gradethis:graded]{gradethis::fail()}} and using the message provided by
+\code{\link[=problem_message]{problem_message()}}.
 }
 \examples{
 .result <- 1:10
