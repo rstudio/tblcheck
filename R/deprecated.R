@@ -153,6 +153,6 @@ tblcheck_grade <- function(problem, ...) {
 #' @describeIn deprecated-methods is now [problem_message()].
 #' @export
 tblcheck_message <- function(problem, ...) {
-lifecycle::deprecate_soft("0.2.0", "tblcheck_message()", "problem_message()")
-problem_message(problem, ...)
+  lifecycle::deprecate_soft("0.2.0", "tblcheck_message()", "problem_message()")
+  problem_message(problem, ...)
 }
