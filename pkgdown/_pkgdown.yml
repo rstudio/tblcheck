@@ -97,4 +97,3 @@ reference:
     check function or transform a `problem` into a grade.
   contents:
   - starts_with("problem")
-  - '`tblcheck_grade`'
