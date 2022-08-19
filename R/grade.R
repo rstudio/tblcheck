@@ -53,7 +53,7 @@ tblcheck_grade.tblcheck_problem <- function(
   }
 
   gradethis::fail(
-    tblcheck_message(problem, max_diffs = max_diffs),
+    problem_message(problem, max_diffs = max_diffs),
     problem = problem,
     env = env,
     ...

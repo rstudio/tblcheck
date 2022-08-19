@@ -63,7 +63,7 @@ tbl_grade_is_table <- function(
 }
 
 #' @export
-tblcheck_message.not_table_problem <- function(problem, ...) {
+problem_message.not_table_problem <- function(problem, ...) {
   problem$msg <- problem$msg %||%
     "Your result should be a table, but it is {actual}."
 

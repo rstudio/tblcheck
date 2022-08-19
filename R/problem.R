@@ -65,7 +65,7 @@ return_if_problem <- function(
 
 #' Create a Message from a Problem Object
 #'
-#' `tblcheck_message()` is an S3 generic that powers the conversion of problems
+#' `problem_message()` is an S3 generic that powers the conversion of problems
 #' detected by [tbl_check()] and [vec_check()] (and their related helper
 #' functions) into a human-readable message.
 #'
@@ -78,7 +78,7 @@ return_if_problem <- function(
 #'   actual_length = 2
 #' )
 #'
-#' tblcheck_message(problem)
+#' problem_message(problem)
 #'
 #' @param problem An object with base class `gradethis_problem`. Problems
 #'   identified by \pkg{tblcheck} also include `tblcheck_problem`, plus
@@ -88,17 +88,17 @@ return_if_problem <- function(
 #' @return A length-1 character string with a message describing the problem.
 #'
 #' @export
-tblcheck_message <- function(problem, ...) {
-  UseMethod("tblcheck_message")
+problem_message <- function(problem, ...) {
+  UseMethod("problem_message")
 }
 
 #' @export
-tblcheck_message.default <- function(problem, ...) {
+problem_message.default <- function(problem, ...) {
   invisible()
 }
 
 #' @export
-tblcheck_message.gradethis_problem <- function(problem, ...) {
+problem_message.gradethis_problem <- function(problem, ...) {
   type_msg <- if (!is.null(problem$type)) {
     gettext("Your code resulted in a `{type}` problem. ")
   } else {
@@ -123,7 +123,7 @@ tblcheck_message.gradethis_problem <- function(problem, ...) {
 }
 
 #' @export
-tblcheck_message.tblcheck_problem <- function(problem, ...) {
+problem_message.tblcheck_problem <- function(problem, ...) {
   NextMethod()
 }
 
@@ -202,5 +202,5 @@ print.tblcheck_problem <- function(x, ...) {
 
 #' @export
 format.tblcheck_problem <- function(x, ...) {
-  tblcheck_message(x, ...)
+  problem_message(x, ...)
 }

@@ -111,7 +111,7 @@ tbl_grade_names <- function(
 vec_grade_names <- tbl_grade_names
 
 #' @export
-tblcheck_message.names_problem <- function(problem, max_diffs = 3, ...) {
+problem_message.names_problem <- function(problem, max_diffs = 3, ...) {
   if (is_problem(problem, "column")) {
     problem$missing_msg <- problem$missing_msg %||%
       ngettext(
@@ -172,7 +172,7 @@ tblcheck_message.names_problem <- function(problem, max_diffs = 3, ...) {
 }
 
 #' @export
-tblcheck_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
+problem_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
   problem$n_values <- min(
     max(length(problem$expected), length(problem$actual)),
     max_diffs
