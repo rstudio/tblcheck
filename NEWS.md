@@ -6,6 +6,10 @@
 
 * `problem()` and `problem_message()` are now exported functions. The first helps other packages create problem objects and the second is a generic method that can be used to turn a problem object into a human readable description (#124).
 
+## Deprecated Functions
+
+* `tblcheck_grade()` is now called `problem_grade()`. The old function name will continue to work, but a deprecation warning will prompt you to update to `problem_grade()` (#124).
+
 # tblcheck 0.1.3
 
 * Add `tolerance` argument to `vec_*_values()` (#111).
