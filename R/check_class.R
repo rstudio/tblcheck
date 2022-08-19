@@ -121,7 +121,7 @@ tbl_grade_class <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check_class(object, expected, ignore_class, env),
     env = env,
     ...

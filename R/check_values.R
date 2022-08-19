@@ -87,7 +87,7 @@ vec_grade_values <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     vec_check_values(
       object = object,
       expected = expected,

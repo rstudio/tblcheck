@@ -55,7 +55,7 @@ tbl_grade_is_table <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check_is_table(object, env),
     env = env,
     ...

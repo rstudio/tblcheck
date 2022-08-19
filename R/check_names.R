@@ -98,7 +98,7 @@ tbl_grade_names <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check_names(object, expected, check_order = check_order, env = env),
     max_diffs = max_diffs,
     env = env,

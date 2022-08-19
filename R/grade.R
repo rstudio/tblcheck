@@ -12,31 +12,31 @@
 #' .result <- 1:10
 #' .solution <- letters[1:10]
 #' problem <- vec_check()
-#' tblcheck_grade(problem)
-tblcheck_grade <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
-  UseMethod("tblcheck_grade")
+#' problem_grade(problem)
+problem_grade <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
+  UseMethod("problem_grade")
 }
 
-#' @rdname tblcheck_grade
+#' @rdname problem_grade
 #' @export
-tblcheck_grade.default <- function(
+problem_grade.default <- function(
   problem, max_diffs = 3, env = parent.frame(), ...
 ) {
   invisible()
 }
 
-#' @rdname tblcheck_grade
+#' @rdname problem_grade
 #' @export
-tblcheck_grade.list <- function(
+problem_grade.list <- function(
   problem, max_diffs = 3, env = parent.frame(), ...
 ) {
   problem <- as_problem(problem)
-  tblcheck_grade(problem, max_diffs = max_diffs, env = env, ...)
+  problem_grade(problem, max_diffs = max_diffs, env = env, ...)
 }
 
-#' @rdname tblcheck_grade
+#' @rdname problem_grade
 #' @export
-tblcheck_grade.tblcheck_problem <- function(
+problem_grade.tblcheck_problem <- function(
   problem, max_diffs = 3, env = parent.frame(), ...
 ) {
   if (is.null(problem)) {
@@ -49,7 +49,7 @@ tblcheck_grade.tblcheck_problem <- function(
   )
 
   if (is_problem(err)) {
-    return(tblcheck_grade(err))
+    return(problem_grade(err))
   }
 
   gradethis::fail(

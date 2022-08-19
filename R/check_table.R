@@ -235,7 +235,7 @@ tbl_grade <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check(
       object = object,
       expected = expected,

@@ -113,7 +113,7 @@ tbl_grade_dimensions <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check_dimensions(object, expected, check_ncol = check_ncol, env = env),
     env = env,
     ...
