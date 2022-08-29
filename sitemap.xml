@@ -31,6 +31,9 @@
     <loc>https://pkgs.rstudio.com/tblcheck/news/index.html</loc>
   </url>
   <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/deprecated-methods.html</loc>
+  </url>
+  <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/grade_this_table.html</loc>
   </url>
   <url>
@@ -41,6 +44,15 @@
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem_grade.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem_message.html</loc>
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/problem_type.html</loc>
@@ -71,9 +83,6 @@
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tblcheck_grade.html</loc>
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/vec_check.html</loc>

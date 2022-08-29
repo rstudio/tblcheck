@@ -781,10 +781,10 @@ The first 2 values of your <code>count</code> column should be <code>5</code> an
 <span><span class="co">#&gt;   their respective `food`. Remember, we have **3** tomatoes</span></span>
 <span><span class="co">#&gt;   and **5** heads of lettuce.</span></span>
 <span><span class="co">#&gt; &gt;</span></span></code></pre></div>
-<p>For problems not handled by your custom grading code, you can pass the problem to <code><a href="../reference/tbl_check.html">tbl_grade()</a></code> to create a grade with the default feedback provided by tblcheck’s <code>grade</code> functions. If there are no problems, <code>tblcheck_grade(problem)</code> won’t return anything.</p>
+<p>For problems not handled by your custom grading code, you can pass the problem to <code><a href="../reference/tbl_check.html">tbl_grade()</a></code> to create a grade with the default feedback provided by tblcheck’s <code>grade</code> functions. If there are no problems, <code>problem_grade(problem)</code> won’t return anything.</p>
 <p>Here’s the default feedback <code><a href="../reference/tbl_check_column.html">tbl_grade_column()</a></code> <em>would have returned</em> without our custom grading code.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tblcheck_grade.html">tblcheck_grade</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/problem_grade.html">problem_grade</a></span><span class="op">(</span><span class="va">problem</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;gradethis_graded: [Incorrect]</span></span>
 <span><span class="co">#&gt;   The first 2 values of your `count` column should be `5` and</span></span>
 <span><span class="co">#&gt;   `3`, not `3` and `5`.</span></span>
@@ -804,7 +804,7 @@ The first 2 values of your <code>count</code> column should be <code>5</code> an
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="in">    fail(feedback)</span></span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="in">  tblcheck_grade(problem)</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="in">  problem_grade(problem)</span></span>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="in">  pass("Great job!")</span></span>
 <span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
