@@ -24,56 +24,56 @@
 #' @family Problem functions
 #' @export
 problem_grade <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
-  UseMethod("problem_grade")
+	UseMethod("problem_grade")
 }
 
 #' @rdname problem_grade
 #' @export
 problem_grade.default <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  invisible()
+	invisible()
 }
 
 #' @rdname problem_grade
 #' @export
 problem_grade.list <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  problem <- as_problem(problem)
-  problem_grade(problem, max_diffs = max_diffs, env = env, ...)
+	problem <- as_problem(problem)
+	problem_grade(problem, max_diffs = max_diffs, env = env, ...)
 }
 
 #' @rdname problem_grade
 #' @export
 problem_grade.gradethis_problem <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  if (is.null(problem)) {
-    return(invisible())
-  }
+	if (is.null(problem)) {
+		return(invisible())
+	}
 
-  err <- catch_internal_problem(
-    checkmate::assert_number(max_diffs, lower = 1),
-    call = find_tblcheck_call()
-  )
+	err <- catch_internal_problem(
+		checkmate::assert_number(max_diffs, lower = 1),
+		call = find_tblcheck_call()
+	)
 
-  if (is_problem(err)) {
-    return(problem_grade(err))
-  }
+	if (is_problem(err)) {
+		return(problem_grade(err))
+	}
 
-  gradethis::fail(
-    problem_message(problem, max_diffs = max_diffs),
-    problem = problem,
-    env = env,
-    ...
-  )
+	gradethis::fail(
+		problem_message(problem, max_diffs = max_diffs),
+		problem = problem,
+		env = env,
+		...
+	)
 }
 
 #' @rdname problem_grade
 #' @export
 problem_grade.tblcheck_problem <- function(
-  problem, max_diffs = 3, env = parent.frame(), ...
+	problem, max_diffs = 3, env = parent.frame(), ...
 ) {
-  NextMethod()
+	NextMethod()
 }

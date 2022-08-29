@@ -5,11 +5,11 @@
 #'
 #' @examples
 #' problem(
-#'   type = "class",
-#'   expected = "character",
-#'   actual = "numeric",
-#'   expected_length = 1,
-#'   actual_length = 2
+#' 	type = "class",
+#' 	expected = "character",
+#' 	actual = "numeric",
+#' 	expected_length = 1,
+#' 	actual_length = 2
 #' )
 #'
 #' @param type A character string, e.g. `column_values` or `table_rows`, that
@@ -28,53 +28,53 @@
 #' @family Problem functions
 #' @export
 problem <- function(
-  type,
-  expected = NULL,
-  actual = NULL,
-  ...,
-  .class = c(paste0(type, "_problem"), "tblcheck_problem")
+	type,
+	expected = NULL,
+	actual = NULL,
+	...,
+	.class = c(paste0(type, "_problem"), "tblcheck_problem")
 ) {
-  checkmate::assert_string(type, min.chars = 1)
-  if (!checkmate::test_character(.class, pattern = "^[[:alpha:]][[:alnum:]_.]*$")) {
-    rlang::abort(
-      "`.class` must be a character vector of valid R class names",
-      class = "error_problem_class"
-    )
-  }
+	checkmate::assert_string(type, min.chars = 1)
+	if (!checkmate::test_character(.class, pattern = "^[[:alpha:]][[:alnum:]_.]*$")) {
+		rlang::abort(
+			"`.class` must be a character vector of valid R class names",
+			class = "error_problem_class"
+		)
+	}
 
-  problem <- list(
-    type = type,
-    expected = expected,
-    actual = actual,
-    ...
-  )
+	problem <- list(
+		type = type,
+		expected = expected,
+		actual = actual,
+		...
+	)
 
-  structure(
-    purrr::compact(problem),
-    class = unique(c(.class, "gradethis_problem"))
-  )
+	structure(
+		purrr::compact(problem),
+		class = unique(c(.class, "gradethis_problem"))
+	)
 }
 
 return_if_problem <- function(
-  problem, prefix = NULL, ..., env = parent.frame()
+	problem, prefix = NULL, ..., env = parent.frame()
 ) {
-  if (inherits(problem, "tblcheck_problem")) {
-    if (!is.null(prefix)) {
-      problem$location <- prefix
+	if (inherits(problem, "tblcheck_problem")) {
+		if (!is.null(prefix)) {
+			problem$location <- prefix
 
-      problem_class <- append(
-        class(problem), paste0(prefix, "_problem"), after = 1
-      )
-    } else {
-      problem_class <- class(problem)
-    }
+			problem_class <- append(
+				class(problem), paste0(prefix, "_problem"), after = 1
+			)
+		} else {
+			problem_class <- class(problem)
+		}
 
-    # Attributes are dropped by `c()`, so the class must be reintroduced
-    problem <- c(problem, ...)
-    class(problem) <- unique(problem_class)
+		# Attributes are dropped by `c()`, so the class must be reintroduced
+		problem <- c(problem, ...)
+		class(problem) <- unique(problem_class)
 
-    rlang::return_from(env, problem)
-  }
+		rlang::return_from(env, problem)
+	}
 }
 
 #' Problem helper functions
@@ -105,63 +105,63 @@ return_if_problem <- function(
 #' @family Problem functions
 #' @export
 problem_type <- function(x) {
-  if (is_problem(x)) {
-    return(x$type)
-  }
+	if (is_problem(x)) {
+		return(x$type)
+	}
 
-  NULL
+	NULL
 }
 
 #' @rdname problem_type
 #' @export
 is_problem <- function(x, type = NULL) {
-  if (!inherits(x, "gradethis_problem")) return(FALSE)
-  if (is.null(type)) return(TRUE)
-  inherits(x, c(type, paste0(type, "_problem")))
+	if (!inherits(x, "gradethis_problem")) return(FALSE)
+	if (is.null(type)) return(TRUE)
+	inherits(x, c(type, paste0(type, "_problem")))
 }
 
 #' @rdname problem_type
 #' @export
 is_tblcheck_problem <- function(x, type = NULL) {
-  if (!inherits(x, "tblcheck_problem")) return(FALSE)
-  if (is.null(type)) return(TRUE)
-  # tblcheck problem classes always are "<type>_problem"
-  inherits(x, paste0(type, "_problem"))
+	if (!inherits(x, "tblcheck_problem")) return(FALSE)
+	if (is.null(type)) return(TRUE)
+	# tblcheck problem classes always are "<type>_problem"
+	inherits(x, paste0(type, "_problem"))
 }
 
 #' @rdname problem_type
 #' @export
 as_problem <- function(x) {
-  checkmate::assert_list(x)
+	checkmate::assert_list(x)
 
-  if (!is.null(x$location) && !is.null(x$type) && is.null(x$.class)) {
-    # this is probably a tblcheck problem as a list
-    x$.class <- c(
-      paste0(c(x$type, x$location), "_problem"),
-      "tblcheck_problem",
-      "gradethis_problem"
-    )
-  }
+	if (!is.null(x$location) && !is.null(x$type) && is.null(x$.class)) {
+		# this is probably a tblcheck problem as a list
+		x$.class <- c(
+			paste0(c(x$type, x$location), "_problem"),
+			"tblcheck_problem",
+			"gradethis_problem"
+		)
+	}
 
-  tryCatch(
-    rlang::eval_bare(rlang::call2("problem", !!!x)),
-    error_problem_class = function(err) {
-      rlang::abort(
-        "Please set `.class` for your list, see `?problem()` for details",
-        parent = err
-      )
-    }
-  )
+	tryCatch(
+		rlang::eval_bare(rlang::call2("problem", !!!x)),
+		error_problem_class = function(err) {
+			rlang::abort(
+				"Please set `.class` for your list, see `?problem()` for details",
+				parent = err
+			)
+		}
+	)
 }
 
 #' @export
 print.tblcheck_problem <- function(x, ...) {
-  cat("<tblcheck problem>", format(x, ...) %||% "<no message>", sep = "\n")
-  str <- utils::capture.output(utils::str(unclass(x)))[-1]
-  cat(sub("^ ", "", str), sep = "\n")
+	cat("<tblcheck problem>", format(x, ...) %||% "<no message>", sep = "\n")
+	str <- utils::capture.output(utils::str(unclass(x)))[-1]
+	cat(sub("^ ", "", str), sep = "\n")
 }
 
 #' @export
 format.tblcheck_problem <- function(x, ...) {
-  problem_message(x, ...)
+	problem_message(x, ...)
 }

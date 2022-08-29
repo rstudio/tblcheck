@@ -69,92 +69,92 @@
 #' tbl_grade_column("a", max_diffs = 5)
 #' tbl_grade_column("a", max_diffs = Inf)
 tbl_check_column <- function(
-  column,
-  object = .result,
-  expected = .solution,
-  check_class = TRUE,
-  ignore_class = NULL,
-  check_length = TRUE,
-  check_values = TRUE,
-  tolerance = sqrt(.Machine$double.eps),
-  check_names = FALSE,
-  env = parent.frame()
+	column,
+	object = .result,
+	expected = .solution,
+	check_class = TRUE,
+	ignore_class = NULL,
+	check_length = TRUE,
+	check_values = TRUE,
+	tolerance = sqrt(.Machine$double.eps),
+	check_names = FALSE,
+	env = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", env)
-  }
-  if (inherits(expected, ".solution")) {
-    expected <- get(".solution", env)
-  }
+	if (inherits(object, ".result")) {
+		object <- get(".result", env)
+	}
+	if (inherits(expected, ".solution")) {
+		expected <- get(".solution", env)
+	}
 
-  return_if_internal_problem({
-    checkmate::assert_character(column, len = 1, any.missing = FALSE)
-    checkmate::assert_logical(check_class, any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
-    checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
-  })
+	return_if_internal_problem({
+		checkmate::assert_character(column, len = 1, any.missing = FALSE)
+		checkmate::assert_logical(check_class, any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_values, any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_length, any.missing = FALSE, len = 1)
+		checkmate::assert_data_frame(object)
+		checkmate::assert_data_frame(expected)
+	})
 
-  if (!column %in% names(expected)) {
-    warning("`", column, "` is not a column in `expected`.")
-    return()
-  }
+	if (!column %in% names(expected)) {
+		warning("`", column, "` is not a column in `expected`.")
+		return()
+	}
 
-  names_problem <- tbl_check_names(object, expected)
-  if (column %in% names_problem$missing) {
-    names_problem$missing <- column
-    names_problem$unexpected <- NULL
-    return_if_problem(names_problem, prefix = "table")
-  }
+	names_problem <- tbl_check_names(object, expected)
+	if (column %in% names_problem$missing) {
+		names_problem$missing <- column
+		names_problem$unexpected <- NULL
+		return_if_problem(names_problem, prefix = "table")
+	}
 
-  return_if_problem(
-    vec_check(
-      object[[column]],
-      expected[[column]],
-      check_class = check_class,
-      ignore_class = ignore_class,
-      check_length = check_length,
-      check_values = check_values,
-      tolerance = tolerance,
-      check_names = check_names
-    ),
-    prefix = "column",
-    column = column
-  )
+	return_if_problem(
+		vec_check(
+			object[[column]],
+			expected[[column]],
+			check_class = check_class,
+			ignore_class = ignore_class,
+			check_length = check_length,
+			check_values = check_values,
+			tolerance = tolerance,
+			check_names = check_names
+		),
+		prefix = "column",
+		column = column
+	)
 }
 
 #' @rdname tbl_check_column
 #' @export
 tbl_grade_column <- function(
-  column,
-  object = .result,
-  expected = .solution,
-  max_diffs = 3,
-  check_class = TRUE,
-  ignore_class = NULL,
-  check_length = TRUE,
-  check_values = TRUE,
-  tolerance = sqrt(.Machine$double.eps),
-  check_names = FALSE,
-  env = parent.frame(),
-  ...
+	column,
+	object = .result,
+	expected = .solution,
+	max_diffs = 3,
+	check_class = TRUE,
+	ignore_class = NULL,
+	check_length = TRUE,
+	check_values = TRUE,
+	tolerance = sqrt(.Machine$double.eps),
+	check_names = FALSE,
+	env = parent.frame(),
+	...
 ) {
-  problem_grade(
-    tbl_check_column(
-      column = column,
-      object = object,
-      expected = expected,
-      check_class = check_class,
-      ignore_class = ignore_class,
-      check_length = check_length,
-      check_values = check_values,
-      tolerance = tolerance,
-      check_names = check_names,
-      env = env
-    ),
-    max_diffs = max_diffs,
-    env = env,
-    ...
-  )
+	problem_grade(
+		tbl_check_column(
+			column = column,
+			object = object,
+			expected = expected,
+			check_class = check_class,
+			ignore_class = ignore_class,
+			check_length = check_length,
+			check_values = check_values,
+			tolerance = tolerance,
+			check_names = check_names,
+			env = env
+		),
+		max_diffs = max_diffs,
+		env = env,
+		...
+	)
 }

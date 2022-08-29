@@ -40,195 +40,195 @@
 #' vec_grade_levels(max_diffs = 5)
 #' vec_grade_levels(max_diffs = Inf)
 vec_check_levels <- function(
-  object = .result,
-  expected = .solution,
-  env = parent.frame()
+	object = .result,
+	expected = .solution,
+	env = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", env)
-  }
-  if (inherits(expected, ".solution")) {
-    expected <- get(".solution", env)
-  }
+	if (inherits(object, ".result")) {
+		object <- get(".result", env)
+	}
+	if (inherits(expected, ".solution")) {
+		expected <- get(".solution", env)
+	}
 
-  levels_exp <- levels(expected)
-  levels_obj <- levels(object)
+	levels_exp <- levels(expected)
+	levels_obj <- levels(object)
 
-  if (!identical(levels_exp, levels_obj)) {
-    if (!identical(length(levels_exp), length(levels_obj))) {
-      return(problem("levels_n", length(levels_exp), length(levels_obj)))
-    }
+	if (!identical(levels_exp, levels_obj)) {
+		if (!identical(length(levels_exp), length(levels_obj))) {
+			return(problem("levels_n", length(levels_exp), length(levels_obj)))
+		}
 
-    missing_levels <- setdiff(levels_exp, levels_obj)
-    unexpected_levels <- setdiff(levels_obj, levels_exp)
+		missing_levels <- setdiff(levels_exp, levels_obj)
+		unexpected_levels <- setdiff(levels_obj, levels_exp)
 
-    if (length(missing_levels) || length(unexpected_levels)) {
-      return(
-        problem(
-          "levels", missing = missing_levels, unexpected = unexpected_levels
-        )
-      )
-    }
+		if (length(missing_levels) || length(unexpected_levels)) {
+			return(
+				problem(
+					"levels", missing = missing_levels, unexpected = unexpected_levels
+				)
+			)
+		}
 
-    if (identical(levels_obj, rev(levels_exp))) {
-      return(problem("levels_reversed"))
-    }
+		if (identical(levels_obj, rev(levels_exp))) {
+			return(problem("levels_reversed"))
+		}
 
-    return(problem("levels_order", levels_exp, levels_obj))
-  }
+		return(problem("levels_order", levels_exp, levels_obj))
+	}
 }
 
 #' @rdname vec_check_levels
 #' @export
 vec_grade_levels <- function(
-  object = .result,
-  expected = .solution,
-  max_diffs = 3,
-  env = parent.frame(),
-  ...
+	object = .result,
+	expected = .solution,
+	max_diffs = 3,
+	env = parent.frame(),
+	...
 ) {
-  problem_grade(
-    vec_check_levels(object, expected, env = env),
-    max_diffs = max_diffs,
-    env = env,
-    ...
-  )
+	problem_grade(
+		vec_check_levels(object, expected, env = env),
+		max_diffs = max_diffs,
+		env = env,
+		...
+	)
 }
 
 #' @export
 problem_message.levels_problem <- function(problem, max_diffs = 3, ...) {
-  if (is_problem(problem, "column")) {
-    problem$missing_msg <- problem$missing_msg %||%
-      ngettext(
-        length(problem$missing),
-        "Your `{column}` column should have a level named {missing}. ",
-        "Your `{column}` column should have levels named {missing}. "
-      )
+	if (is_problem(problem, "column")) {
+		problem$missing_msg <- problem$missing_msg %||%
+			ngettext(
+				length(problem$missing),
+				"Your `{column}` column should have a level named {missing}. ",
+				"Your `{column}` column should have levels named {missing}. "
+			)
 
-    problem$unexpected_msg <- problem$unexpected_msg %||%
-      ngettext(
-        length(problem$unexpected),
-        "Your `{column}` column should not have a level named {unexpected}.",
-        "Your `{column}` column should not have levels named {unexpected}."
-      )
-  }
+		problem$unexpected_msg <- problem$unexpected_msg %||%
+			ngettext(
+				length(problem$unexpected),
+				"Your `{column}` column should not have a level named {unexpected}.",
+				"Your `{column}` column should not have levels named {unexpected}."
+			)
+	}
 
-  problem$missing_msg <- problem$missing_msg %||%
-    ngettext(
-      length(problem$missing),
-      "Your result should have a level named {missing}. ",
-      "Your result should have levels named {missing}. "
-    )
+	problem$missing_msg <- problem$missing_msg %||%
+		ngettext(
+			length(problem$missing),
+			"Your result should have a level named {missing}. ",
+			"Your result should have levels named {missing}. "
+		)
 
-  problem$unexpected_msg <- problem$unexpected_msg %||%
-    ngettext(
-      length(problem$unexpected),
-      "Your result should not have a level named {unexpected}.",
-      "Your result should not have levels named {unexpected}."
-    )
+	problem$unexpected_msg <- problem$unexpected_msg %||%
+		ngettext(
+			length(problem$unexpected),
+			"Your result should not have a level named {unexpected}.",
+			"Your result should not have levels named {unexpected}."
+		)
 
-  if (!is.null(problem[["missing"]])) {
-    problem$missing <- combine_words_with_more(problem$missing, max_diffs)
-  } else {
-    problem$missing_msg <- ""
-  }
+	if (!is.null(problem[["missing"]])) {
+		problem$missing <- combine_words_with_more(problem$missing, max_diffs)
+	} else {
+		problem$missing_msg <- ""
+	}
 
-  if (!is.null(problem[["unexpected"]])) {
-    problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
-  } else {
-    problem$unexpected_msg <- ""
-  }
+	if (!is.null(problem[["unexpected"]])) {
+		problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
+	} else {
+		problem$unexpected_msg <- ""
+	}
 
-  glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
+	glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
 #' @export
 problem_message.levels_n_problem <- function(problem, ...) {
-  if (is_problem(problem, "column")) {
-    problem$exp_msg <- problem$exp_msg %||%
-      ngettext(
-        problem$expected,
-        "Your `{column}` column should have {expected} level, ",
-        "Your `{column}` column should have {expected} levels, "
-      )
-  }
+	if (is_problem(problem, "column")) {
+		problem$exp_msg <- problem$exp_msg %||%
+			ngettext(
+				problem$expected,
+				"Your `{column}` column should have {expected} level, ",
+				"Your `{column}` column should have {expected} levels, "
+			)
+	}
 
-  problem$exp_msg <- problem$exp_msg %||%
-    ngettext(
-      problem$expected,
-      "Your result should have {expected} level, ",
-      "Your result should have {expected} levels, "
-    )
+	problem$exp_msg <- problem$exp_msg %||%
+		ngettext(
+			problem$expected,
+			"Your result should have {expected} level, ",
+			"Your result should have {expected} levels, "
+		)
 
-  problem$obj_msg <- problem$obj_msg %||%
-    ngettext(
-      problem$actual,
-      "but it has {actual} level.",
-      "but it has {actual} levels."
-    )
+	problem$obj_msg <- problem$obj_msg %||%
+		ngettext(
+			problem$actual,
+			"but it has {actual} level.",
+			"but it has {actual} levels."
+		)
 
-  glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
+	glue::glue_data(problem, problem$exp_msg, problem$obj_msg)
 }
 
 #' @export
 problem_message.levels_reversed_problem <- function(problem, ...) {
-  if (is_problem(problem, "column")) {
-    problem$msg <- problem$msg %||%
-      gettext("The order of the levels in your `{column}` column are the reverse of the expected order.")
-  }
+	if (is_problem(problem, "column")) {
+		problem$msg <- problem$msg %||%
+			gettext("The order of the levels in your `{column}` column are the reverse of the expected order.")
+	}
 
-  problem$msg <- problem$msg %||%
-    gettext("The order of the levels in your result are the reverse of the expected order.")
+	problem$msg <- problem$msg %||%
+		gettext("The order of the levels in your result are the reverse of the expected order.")
 
-  glue::glue_data(problem, problem$msg, problem$exp_msg %||% "")
+	glue::glue_data(problem, problem$msg, problem$exp_msg %||% "")
 }
 
 #' @export
 problem_message.levels_order_problem <- function(problem, max_diffs = 3, ...) {
-  if (is_problem(problem, "column")) {
-    problem$msg <- problem$msg %||%
-      "Your `{column}` column's levels were not in the expected order. "
-  }
+	if (is_problem(problem, "column")) {
+		problem$msg <- problem$msg %||%
+			"Your `{column}` column's levels were not in the expected order. "
+	}
 
-  problem$msg <- problem$msg %||%
-    "Your result's levels were not in the expected order. "
+	problem$msg <- problem$msg %||%
+		"Your result's levels were not in the expected order. "
 
-  problem$n_levels <- min(
-    max(length(problem$expected), length(problem$actual)),
-    max_diffs
-  )
+	problem$n_levels <- min(
+		max(length(problem$expected), length(problem$actual)),
+		max_diffs
+	)
 
-  if (
-    identical(
-      problem$expected[seq_len(problem$n_levels)],
-      problem$actual[seq_len(problem$n_levels)]
-    )
-  ) {
-    return(glue::glue_data(problem, problem$msg))
-  }
+	if (
+		identical(
+			problem$expected[seq_len(problem$n_levels)],
+			problem$actual[seq_len(problem$n_levels)]
+		)
+	) {
+		return(glue::glue_data(problem, problem$msg))
+	}
 
-  problem$expected <- knitr::combine_words(
-    md_code(problem$expected[seq_len(problem$n_levels)])
-  )
-  problem$actual <- knitr::combine_words(
-    md_code(problem$actual[seq_len(problem$n_levels)])
-  )
+	problem$expected <- knitr::combine_words(
+		md_code(problem$expected[seq_len(problem$n_levels)])
+	)
+	problem$actual <- knitr::combine_words(
+		md_code(problem$actual[seq_len(problem$n_levels)])
+	)
 
-  if (is_problem(problem, "column")) {
-    problem$exp_msg <- problem$exp_msg %||%
-      ngettext(
-        problem$n_levels,
-        "The first level of your `{column}` column should be {expected}, but it was {actual}.",
-        "The first {n_levels} levels of your `{column}` column should be {expected}, but they were {actual}."
-      )
-  }
+	if (is_problem(problem, "column")) {
+		problem$exp_msg <- problem$exp_msg %||%
+			ngettext(
+				problem$n_levels,
+				"The first level of your `{column}` column should be {expected}, but it was {actual}.",
+				"The first {n_levels} levels of your `{column}` column should be {expected}, but they were {actual}."
+			)
+	}
 
-  problem$exp_msg <- problem$exp_msg %||%
-    ngettext(
-      problem$n_levels,
-      "The first level of your result should be {expected}, but it was {actual}.",
-      "The first {n_levels} levels of your result should be {expected}, but they were {actual}."
-    )
+	problem$exp_msg <- problem$exp_msg %||%
+		ngettext(
+			problem$n_levels,
+			"The first level of your result should be {expected}, but it was {actual}.",
+			"The first {n_levels} levels of your result should be {expected}, but they were {actual}."
+		)
 
-  glue::glue_data(problem, problem$msg, problem$exp_msg)
+	glue::glue_data(problem, problem$msg, problem$exp_msg)
 }
