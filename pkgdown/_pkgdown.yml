@@ -19,6 +19,9 @@ template:
       creator: "@rstudio"
       card: summary
 
+search:
+  exclude: ['preview/']
+
 home:
   title: Grade Tables in Learning Exercises
   description: >
