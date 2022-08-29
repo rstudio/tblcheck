@@ -87,7 +87,7 @@ vec_grade_values <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     vec_check_values(
       object = object,
       expected = expected,
@@ -101,7 +101,7 @@ vec_grade_values <- function(
 }
 
 #' @export
-tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
+problem_message.values_problem <- function(problem, max_diffs = 3, ...) {
   # If values problem is empty, return vague message
   if (is.null(problem$actual) && is.null(problem$expected)) {
     if (is_problem(problem, "column")) {
@@ -215,5 +215,5 @@ tblcheck_message.values_problem <- function(problem, max_diffs = 3, ...) {
   }
 
   # If all else fails, return vague message
-  tblcheck_message(problem("values"))
+  problem_message(problem("values"))
 }

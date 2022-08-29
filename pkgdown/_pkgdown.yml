@@ -96,5 +96,4 @@ reference:
     Inspect the contents of a `problem` from a
     check function or transform a `problem` into a grade.
   contents:
-  - '`tblcheck_grade`'
-  - '`problem_type`'
+  - starts_with("problem")
