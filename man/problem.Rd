@@ -36,11 +36,11 @@ discovered during checking.
 }
 \examples{
 problem(
-  type = "class",
-  expected = "character",
-  actual = "numeric",
-  expected_length = 1,
-  actual_length = 2
+	type = "class",
+	expected = "character",
+	actual = "numeric",
+	expected_length = 1,
+	actual_length = 2
 )
 
 }
