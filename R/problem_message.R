@@ -6,11 +6,11 @@
 #'
 #' @examples
 #' problem <- problem(
-#'   type = "class",
-#'   expected = "character",
-#'   actual = "numeric",
-#'   expected_length = 1,
-#'   actual_length = 2
+#' 	type = "class",
+#' 	expected = "character",
+#' 	actual = "numeric",
+#' 	expected_length = 1,
+#' 	actual_length = 2
 #' )
 #'
 #' problem_message(problem)
@@ -25,40 +25,40 @@
 #' @family Problem functions
 #' @export
 problem_message <- function(problem, ...) {
-  UseMethod("problem_message")
+	UseMethod("problem_message")
 }
 
 #' @export
 problem_message.default <- function(problem, ...) {
-  invisible()
+	invisible()
 }
 
 #' @export
 problem_message.gradethis_problem <- function(problem, ...) {
-  type_msg <- if (!is.null(problem$type)) {
-    gettext("Your code resulted in a `{type}` problem. ")
-  } else {
-    ""
-  }
+	type_msg <- if (!is.null(problem$type)) {
+		gettext("Your code resulted in a `{type}` problem. ")
+	} else {
+		""
+	}
 
-  exp_msg <- if (!is.null(problem$expected)) {
-    expected <- paste(md_code(problem$expected), collapse = ", ")
-    gettext("I was expecting a value of {expected}. ")
-  } else {
-    ""
-  }
+	exp_msg <- if (!is.null(problem$expected)) {
+		expected <- paste(md_code(problem$expected), collapse = ", ")
+		gettext("I was expecting a value of {expected}. ")
+	} else {
+		""
+	}
 
-  obj_msg <- if (!is.null(problem$actual)) {
-    actual <- paste(md_code(problem$actual), collapse = ", ")
-    gettext("Your result gave a value of `{actual}`. ")
-  } else {
-    ""
-  }
+	obj_msg <- if (!is.null(problem$actual)) {
+		actual <- paste(md_code(problem$actual), collapse = ", ")
+		gettext("Your result gave a value of `{actual}`. ")
+	} else {
+		""
+	}
 
-  glue::glue_data(problem, type_msg, exp_msg, obj_msg)
+	glue::glue_data(problem, type_msg, exp_msg, obj_msg)
 }
 
 #' @export
 problem_message.tblcheck_problem <- function(problem, ...) {
-  NextMethod()
+	NextMethod()
 }

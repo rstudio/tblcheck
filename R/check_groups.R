@@ -25,85 +25,85 @@
 #' tbl_check_groups()
 #' tbl_grade_groups()
 tbl_check_groups <- function(
-  object = .result,
-  expected = .solution,
-  env = parent.frame()
+	object = .result,
+	expected = .solution,
+	env = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", env)
-  }
-  if (inherits(expected, ".solution")) {
-    expected <- get(".solution", env)
-  }
+	if (inherits(object, ".result")) {
+		object <- get(".result", env)
+	}
+	if (inherits(expected, ".solution")) {
+		expected <- get(".solution", env)
+	}
 
-  return_if_internal_problem({
-    checkmate::assert_data_frame(object)
-    checkmate::assert_data_frame(expected)
-  })
+	return_if_internal_problem({
+		checkmate::assert_data_frame(object)
+		checkmate::assert_data_frame(expected)
+	})
 
-  groups_exp <- group_vars(expected)
-  groups_obj <- group_vars(object)
+	groups_exp <- group_vars(expected)
+	groups_obj <- group_vars(object)
 
-  if (!identical(groups_exp, groups_obj)) {
-    return_if_problem(
-      problem(
-        "groups",
-        missing = setdiff(groups_exp, groups_obj),
-        unexpected = setdiff(groups_obj, groups_exp)
-      ),
-      prefix = "table"
-    )
-  }
+	if (!identical(groups_exp, groups_obj)) {
+		return_if_problem(
+			problem(
+				"groups",
+				missing = setdiff(groups_exp, groups_obj),
+				unexpected = setdiff(groups_obj, groups_exp)
+			),
+			prefix = "table"
+		)
+	}
 }
 
 group_vars <- function(x) {
-  setdiff(names(attr(x, "groups")), ".rows")
+	setdiff(names(attr(x, "groups")), ".rows")
 }
 
 #' @rdname tbl_check_groups
 #' @export
 tbl_grade_groups <- function(
-  object = .result,
-  expected = .solution,
-  max_diffs = 3,
-  env = parent.frame(),
-  ...
+	object = .result,
+	expected = .solution,
+	max_diffs = 3,
+	env = parent.frame(),
+	...
 ) {
-  problem_grade(
-    tbl_check_groups(object, expected, env = env),
-    max_diffs = max_diffs,
-    env = env,
-    ...
-  )
+	problem_grade(
+		tbl_check_groups(object, expected, env = env),
+		max_diffs = max_diffs,
+		env = env,
+		...
+	)
 }
 
 #' @export
 problem_message.groups_problem <- function(problem, max_diffs = 3, ...) {
-  if (is_problem(problem, "table")) {
-    problem$missing_msg <- problem$missing_msg %||%
-      gettext("Your table should be grouped by {missing}. ")
+	if (is_problem(problem, "table")) {
+		problem$missing_msg <- problem$missing_msg %||%
+			gettext("Your table should be grouped by {missing}. ")
 
-    problem$unexpected_msg <- problem$unexpected_msg %||%
-      gettext("Your table should not be grouped by {unexpected}. ")
-  }
+		problem$unexpected_msg <- problem$unexpected_msg %||%
+			gettext("Your table should not be grouped by {unexpected}. ")
+	}
 
-  problem$missing_msg <- problem$missing_msg %||%
-    gettext("Your result should be grouped by {missing}. ")
+	problem$missing_msg <- problem$missing_msg %||%
+		gettext("Your result should be grouped by {missing}. ")
 
-  problem$unexpected_msg <- problem$unexpected_msg %||%
-    gettext("Your result should not be grouped by {unexpected}. ")
+	problem$unexpected_msg <- problem$unexpected_msg %||%
+		gettext("Your result should not be grouped by {unexpected}. ")
 
-  if (!is.null(problem[["missing"]])) {
-    problem$missing <- combine_words_with_more(problem$missing, max_diffs)
-  } else {
-    problem$missing_msg <- ""
-  }
+	if (!is.null(problem[["missing"]])) {
+		problem$missing <- combine_words_with_more(problem$missing, max_diffs)
+	} else {
+		problem$missing_msg <- ""
+	}
 
-  if (!is.null(problem[["unexpected"]])) {
-    problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
-  } else {
-    problem$unexpected_msg <- ""
-  }
+	if (!is.null(problem[["unexpected"]])) {
+		problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
+	} else {
+		problem$unexpected_msg <- ""
+	}
 
-  glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
+	glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }

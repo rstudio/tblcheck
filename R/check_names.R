@@ -41,47 +41,47 @@
 #' tbl_check_names()
 #' tbl_grade_names()
 tbl_check_names <- function(
-  object = .result,
-  expected = .solution,
-  check_order = TRUE,
-  env = parent.frame()
+	object = .result,
+	expected = .solution,
+	check_order = TRUE,
+	env = parent.frame()
 ) {
-  if (inherits(object, ".result")) {
-    object <- get(".result", env)
-  }
-  if (inherits(expected, ".solution")) {
-    expected <- get(".solution", env)
-  }
+	if (inherits(object, ".result")) {
+		object <- get(".result", env)
+	}
+	if (inherits(expected, ".solution")) {
+		expected <- get(".solution", env)
+	}
 
-  names_exp <- names(expected)
-  names_obj <- names(object)
+	names_exp <- names(expected)
+	names_obj <- names(object)
 
-  same_when_sorted <- identical(sort(names_exp), sort(names_obj))
+	same_when_sorted <- identical(sort(names_exp), sort(names_obj))
 
-  if (!check_order && same_when_sorted) {
-    return(invisible())
-  }
+	if (!check_order && same_when_sorted) {
+		return(invisible())
+	}
 
-  if (identical(names_exp, names_obj)) {
-    return(invisible())
-  }
+	if (identical(names_exp, names_obj)) {
+		return(invisible())
+	}
 
-  problem <-
-    if (same_when_sorted) {
-      problem("names_order", names_exp, names_obj)
-    } else {
-      problem(
-        "names",
-        missing = setdiff(names_exp, names_obj),
-        unexpected = setdiff(names_obj, names_exp)
-      )
-    }
+	problem <-
+		if (same_when_sorted) {
+			problem("names_order", names_exp, names_obj)
+		} else {
+			problem(
+				"names",
+				missing = setdiff(names_exp, names_obj),
+				unexpected = setdiff(names_obj, names_exp)
+			)
+		}
 
-  if (is.data.frame(object) && is.data.frame(expected)) {
-    return_if_problem(problem, prefix = "table")
-  }
+	if (is.data.frame(object) && is.data.frame(expected)) {
+		return_if_problem(problem, prefix = "table")
+	}
 
-  return(problem)
+	return(problem)
 }
 
 #' @rdname tbl_check_names
@@ -91,19 +91,19 @@ vec_check_names <- tbl_check_names
 #' @rdname tbl_check_names
 #' @export
 tbl_grade_names <- function(
-  object = .result,
-  expected = .solution,
-  max_diffs = 3,
-  check_order = TRUE,
-  env = parent.frame(),
-  ...
+	object = .result,
+	expected = .solution,
+	max_diffs = 3,
+	check_order = TRUE,
+	env = parent.frame(),
+	...
 ) {
-  problem_grade(
-    tbl_check_names(object, expected, check_order = check_order, env = env),
-    max_diffs = max_diffs,
-    env = env,
-    ...
-  )
+	problem_grade(
+		tbl_check_names(object, expected, check_order = check_order, env = env),
+		max_diffs = max_diffs,
+		env = env,
+		...
+	)
 }
 
 #' @rdname tbl_check_names
@@ -112,121 +112,121 @@ vec_grade_names <- tbl_grade_names
 
 #' @export
 problem_message.names_problem <- function(problem, max_diffs = 3, ...) {
-  if (is_problem(problem, "column")) {
-    problem$missing_msg <- problem$missing_msg %||%
-      ngettext(
-        length(problem$missing),
-        "Your `{column}` column should have the name {missing}. ",
-        "Your `{column}` column should have the names {missing}. "
-      )
+	if (is_problem(problem, "column")) {
+		problem$missing_msg <- problem$missing_msg %||%
+			ngettext(
+				length(problem$missing),
+				"Your `{column}` column should have the name {missing}. ",
+				"Your `{column}` column should have the names {missing}. "
+			)
 
-    problem$unexpected_msg <- problem$unexpected_msg %||%
-      ngettext(
-        length(problem$unexpected),
-        "Your `{column}` column should not have the name {unexpected}.",
-        "Your `{column}` column should not have the names {unexpected}."
-      )
-  } else if (is_problem(problem, "table")) {
-    problem$missing_msg <- problem$missing_msg %||%
-      ngettext(
-        length(problem$missing),
-        "Your table should have a column named {missing}. ",
-        "Your table should have columns named {missing}. "
-      )
+		problem$unexpected_msg <- problem$unexpected_msg %||%
+			ngettext(
+				length(problem$unexpected),
+				"Your `{column}` column should not have the name {unexpected}.",
+				"Your `{column}` column should not have the names {unexpected}."
+			)
+	} else if (is_problem(problem, "table")) {
+		problem$missing_msg <- problem$missing_msg %||%
+			ngettext(
+				length(problem$missing),
+				"Your table should have a column named {missing}. ",
+				"Your table should have columns named {missing}. "
+			)
 
-    problem$unexpected_msg <- problem$unexpected_msg %||%
-      ngettext(
-        length(problem$unexpected),
-        "Your table should not have a column named {unexpected}.",
-        "Your table should not have columns named {unexpected}."
-      )
-  }
+		problem$unexpected_msg <- problem$unexpected_msg %||%
+			ngettext(
+				length(problem$unexpected),
+				"Your table should not have a column named {unexpected}.",
+				"Your table should not have columns named {unexpected}."
+			)
+	}
 
-  problem$missing_msg <- problem$missing_msg %||%
-    ngettext(
-      length(problem$missing),
-      "Your result should have the name {missing}. ",
-      "Your result should have the names {missing}. "
-    )
+	problem$missing_msg <- problem$missing_msg %||%
+		ngettext(
+			length(problem$missing),
+			"Your result should have the name {missing}. ",
+			"Your result should have the names {missing}. "
+		)
 
-  problem$unexpected_msg <- problem$unexpected_msg %||%
-    ngettext(
-      length(problem$unexpected),
-      "Your result should not have the name {unexpected}.",
-      "Your result should not have the names {unexpected}."
-    )
+	problem$unexpected_msg <- problem$unexpected_msg %||%
+		ngettext(
+			length(problem$unexpected),
+			"Your result should not have the name {unexpected}.",
+			"Your result should not have the names {unexpected}."
+		)
 
-  if (!is.null(problem[["missing"]])) {
-    problem$missing <- combine_words_with_more(problem$missing, max_diffs)
-  } else {
-    problem$missing_msg <- ""
-  }
+	if (!is.null(problem[["missing"]])) {
+		problem$missing <- combine_words_with_more(problem$missing, max_diffs)
+	} else {
+		problem$missing_msg <- ""
+	}
 
-  if (!is.null(problem[["unexpected"]])) {
-    problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
-  } else {
-    problem$unexpected_msg <- ""
-  }
+	if (!is.null(problem[["unexpected"]])) {
+		problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
+	} else {
+		problem$unexpected_msg <- ""
+	}
 
-  glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
+	glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }
 
 #' @export
 problem_message.names_order_problem <- function(problem, max_diffs = 3, ...) {
-  problem$n_values <- min(
-    max(length(problem$expected), length(problem$actual)),
-    max_diffs
-  )
+	problem$n_values <- min(
+		max(length(problem$expected), length(problem$actual)),
+		max_diffs
+	)
 
-  if (is_problem(problem, "column")) {
-    problem$msg <- problem$msg %||%
-      "Your `{column}` column's names were not in the expected order. "
-  } else if (is_problem(problem, "table")) {
-    problem$msg <- problem$msg %||%
-      "Your table's columns were not in the expected order. "
-  }
+	if (is_problem(problem, "column")) {
+		problem$msg <- problem$msg %||%
+			"Your `{column}` column's names were not in the expected order. "
+	} else if (is_problem(problem, "table")) {
+		problem$msg <- problem$msg %||%
+			"Your table's columns were not in the expected order. "
+	}
 
-  problem$msg <- problem$msg %||%
-    "Your result's names were not in the expected order. "
+	problem$msg <- problem$msg %||%
+		"Your result's names were not in the expected order. "
 
-  if (
-    identical(
-      problem$expected[seq_len(problem$n_values)],
-      problem$actual[seq_len(problem$n_values)]
-    )
-  ) {
-    return(glue::glue_data(problem, problem$msg))
-  }
+	if (
+		identical(
+			problem$expected[seq_len(problem$n_values)],
+			problem$actual[seq_len(problem$n_values)]
+		)
+	) {
+		return(glue::glue_data(problem, problem$msg))
+	}
 
-  problem$expected <- knitr::combine_words(
-    md_code(problem$expected[seq_len(problem$n_values)])
-  )
-  problem$actual <- knitr::combine_words(
-    md_code(problem$actual[seq_len(problem$n_values)])
-  )
+	problem$expected <- knitr::combine_words(
+		md_code(problem$expected[seq_len(problem$n_values)])
+	)
+	problem$actual <- knitr::combine_words(
+		md_code(problem$actual[seq_len(problem$n_values)])
+	)
 
-  if (is_problem(problem, "column")) {
-    problem$exp_msg <- problem$exp_msg %||%
-      ngettext(
-        problem$n_values,
-        "The first name of your `{column}` column should be {expected}.",
-        "The first {n_values} names of your `{column}` column should be {expected}."
-      )
-  } else if (is_problem(problem, "table")) {
-    problem$exp_msg <- problem$exp_msg %||%
-      ngettext(
-        problem$n_values,
-        "The first column of your table should be {expected}.",
-        "The first {n_values} columns of your table should be {expected}."
-      )
-  }
+	if (is_problem(problem, "column")) {
+		problem$exp_msg <- problem$exp_msg %||%
+			ngettext(
+				problem$n_values,
+				"The first name of your `{column}` column should be {expected}.",
+				"The first {n_values} names of your `{column}` column should be {expected}."
+			)
+	} else if (is_problem(problem, "table")) {
+		problem$exp_msg <- problem$exp_msg %||%
+			ngettext(
+				problem$n_values,
+				"The first column of your table should be {expected}.",
+				"The first {n_values} columns of your table should be {expected}."
+			)
+	}
 
-  problem$exp_msg <- problem$exp_msg %||%
-    ngettext(
-      problem$n_values,
-      "The first name of your result should be {expected}.",
-      "The first {n_values} names of your result should be {expected}."
-    )
+	problem$exp_msg <- problem$exp_msg %||%
+		ngettext(
+			problem$n_values,
+			"The first name of your result should be {expected}.",
+			"The first {n_values} names of your result should be {expected}."
+		)
 
-  glue::glue_data(problem, problem$msg, problem$exp_msg)
+	glue::glue_data(problem, problem$msg, problem$exp_msg)
 }
