@@ -152,12 +152,12 @@ tbl_check <- function(
       tbl_check_class(object, expected, ignore_class),
       prefix = "table"
     )
-  } else (
+  } else {
     return_if_problem(
       tbl_check_is_table(object),
       prefix = "table"
     )
-  )
+  }
 
   # filter columns in object and expected ----
   cols <- rlang::enexpr(cols)
@@ -235,7 +235,7 @@ tbl_grade <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check(
       object = object,
       expected = expected,

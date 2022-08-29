@@ -134,3 +134,25 @@ vec_grade_vector <- function(
     ...
   )
 }
+
+#' Deprecated Generics
+#'
+#' These generics are now deprecated.
+#'
+#' @keywords internal
+#' @name deprecated-methods
+NULL
+
+#' @describeIn deprecated-methods is now [problem_grade()].
+#' @export
+tblcheck_grade <- function(problem, ...) {
+  lifecycle::deprecate_soft("0.2.0", "tblcheck_grade()", "problem_grade()")
+  problem_grade(problem, ...)
+}
+
+#' @describeIn deprecated-methods is now [problem_message()].
+#' @export
+tblcheck_message <- function(problem, ...) {
+  lifecycle::deprecate_soft("0.2.0", "tblcheck_message()", "problem_message()")
+  problem_message(problem, ...)
+}

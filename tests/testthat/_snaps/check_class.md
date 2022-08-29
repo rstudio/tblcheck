@@ -58,6 +58,28 @@
         frame (class `data.frame`).
       >
 
+---
+
+    Code
+      grade_py_tbl_df
+    Output
+      <gradethis_graded: [Incorrect]
+        I was only expecting 1 value for each grouping in the table, but you
+        have multiple values per grouping. Maybe you are missing a .groupby()
+        call?
+      >
+
+---
+
+    Code
+      grade_py_tbl_df_grouped
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table row labels (i.e. index) are not a numbered sequence. You
+        can tell by the extra spacing around the column names. You can fix
+        this with .reset_index()
+      >
+
 # tbl_grade_class() with paired ignore_class
 
     Code
@@ -106,5 +128,65 @@
       <gradethis_graded: [Incorrect]
         Your result should be an integer (class `integer`), but it is an
         object with classes `test`, `class`, and `integer`.
+      >
+
+# tbl_grade_class() with hinted messages
+
+    Code
+      grade_ungrouped
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table isn't a grouped data frame, but I was expecting it to be
+        grouped. Maybe you need to use `group_by()`?
+      >
+
+---
+
+    Code
+      grade_grouped
+    Output
+      <gradethis_graded: [Incorrect]
+        Your table is a grouped data frame, but I wasn't expecting it to be
+        grouped. Maybe you need to use `ungroup()`?
+      >
+
+---
+
+    Code
+      grade_ungrouped_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a grouped tibble (class `grouped_df`), but it
+        is a vector of integers (class `integer`).
+      >
+
+---
+
+    Code
+      grade_unrowwise_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a rowwise tibble (class `rowwise_df`), but it
+        is a vector of integers (class `integer`).
+      >
+
+---
+
+    Code
+      grade_pyungrouped_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a DataFrame, but it is an object with class
+        `int`.
+      >
+
+---
+
+    Code
+      grade_pygrouped_int
+    Output
+      <gradethis_graded: [Incorrect]
+        Your result should be a DataFrame with row labels (i.e. index), but
+        it is an object with class `int`.
       >
 

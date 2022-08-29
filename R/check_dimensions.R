@@ -113,7 +113,7 @@ tbl_grade_dimensions <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check_dimensions(object, expected, check_ncol = check_ncol, env = env),
     env = env,
     ...
@@ -129,7 +129,7 @@ vec_grade_dimensions <- tbl_grade_dimensions
 vec_grade_length <- tbl_grade_dimensions
 
 #' @export
-tblcheck_message.dimensions_n_problem <- function(problem, ...) {
+problem_message.dimensions_n_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
       ngettext(
@@ -164,7 +164,7 @@ tblcheck_message.dimensions_n_problem <- function(problem, ...) {
 }
 
 #' @export
-tblcheck_message.length_problem <- function(problem, ...) {
+problem_message.length_problem <- function(problem, ...) {
   problem$value_msg <- ""
 
   if (is_problem(problem, "column")) {
@@ -225,7 +225,7 @@ tblcheck_message.length_problem <- function(problem, ...) {
 }
 
 #' @export
-tblcheck_message.ncol_problem <- function(problem, ...) {
+problem_message.ncol_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
       ngettext(
@@ -260,7 +260,7 @@ tblcheck_message.ncol_problem <- function(problem, ...) {
 }
 
 #' @export
-tblcheck_message.nrow_problem <- function(problem, ...) {
+problem_message.nrow_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$exp_msg <- problem$exp_msg %||%
       ngettext(
@@ -295,7 +295,7 @@ tblcheck_message.nrow_problem <- function(problem, ...) {
 }
 
 #' @export
-tblcheck_message.dimensions_problem <- function(problem, ...) {
+problem_message.dimensions_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$exp_msg %||%
       gettext("Your `{column}` column should be an array with dimensions {expected}, but it has dimensions {actual}.")

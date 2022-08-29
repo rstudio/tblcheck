@@ -34,7 +34,7 @@
       grade
     Output
       <gradethis_graded: [Incorrect]
-        Your result should be a vector with classes `test`, `class`, and
+        Your result should be an object with classes `test`, `class`, and
         `integer`, but it is a vector of integers (class `integer`).
       >
 

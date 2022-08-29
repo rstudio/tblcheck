@@ -44,4 +44,12 @@ whether an object is a problem of the specified type.
 problem_type(vec_check(1, "1"))
 is_problem(vec_check(1, "1"), "vector_class")
 is_tblcheck_problem(vec_check(1, "1"), "class")
+
 }
+\seealso{
+Other Problem functions: 
+\code{\link{problem_grade}()},
+\code{\link{problem_message}()},
+\code{\link{problem}()}
+}
+\concept{Problem functions}

@@ -101,7 +101,7 @@ tbl_check_class <- function(
       exp_class,
       obj_class,
       # Object lengths are stored so the correct pluralization
-      # can be applied in tblcheck_message.class_problem()
+      # can be applied in problem_message.class_problem()
       expected_length = length(expected),
       actual_length = length(object)
     )
@@ -121,7 +121,7 @@ tbl_grade_class <- function(
   env = parent.frame(),
   ...
 ) {
-  tblcheck_grade(
+  problem_grade(
     tbl_check_class(object, expected, ignore_class, env),
     env = env,
     ...
@@ -133,7 +133,7 @@ tbl_grade_class <- function(
 vec_grade_class <- tbl_grade_class
 
 #' @export
-tblcheck_message.class_problem <- function(problem, ...) {
+problem_message.class_problem <- function(problem, ...) {
   if (is_problem(problem, "column")) {
     problem$msg <- problem$msg %||%
       "Your `{column}` column should be {expected}, but it is {actual}."
@@ -157,18 +157,18 @@ tblcheck_message.class_problem <- function(problem, ...) {
 }
 
 hinted_class_message <- function(obj_class, exp_class) {
-  list <- hinted_class_message_list()
-
-  for (i in seq_along(list)) {
+  for (hinted_class in hinted_class_message_list()) {
     if (
-      all(list[[i]]$obj_class %in% obj_class) &&
-        all(list[[i]]$exp_class %in% exp_class)
+      # We provide hinted messages when the classes on obj/exp match the set of
+      # classes for the hint. The obj/exp class hint might be empty, indicating
+      # that we should ignore the class for that object. The use of `all()`
+      # accounts for both situations since `all(logical(0))` returns `TRUE`.
+      all(hinted_class$obj_class %in% obj_class) &&
+        all(hinted_class$exp_class %in% exp_class)
     ) {
-      return(list[[i]]$message)
+      return(hinted_class$message)
     }
   }
-
-  invisible()
 }
 
 hinted_class_message_list <- function() {
@@ -180,20 +180,34 @@ hinted_class_message_list <- function() {
       message = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
+      obj_class = "py_tbl_df",
+      exp_class = "py_grouped_df",
+      message   = "I was only expecting 1 value for each grouping in the table, but you have multiple values per grouping. Maybe you are missing a .groupby() call?"
+    ),
+    list(
+      obj_class = "py_grouped_df",
+      exp_class = "py_tbl_df",
+      message   = "Your table row labels (i.e. index) are not a numbered sequence. You can tell by the extra spacing around the column names. You can fix this with .reset_index()"
+    ),
+    list(
+      obj_class = "data.frame",
       exp_class = "grouped_df",
       message = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "grouped_df",
-      message = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
+      exp_class = "data.frame",
+      message   = "Your table is a grouped data frame, but I wasn't expecting it to be grouped. Maybe you need to use `ungroup()`?"
     ),
     list(
+      obj_class = "data.frame",
       exp_class = "rowwise_df",
       message = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
     ),
     list(
       obj_class = "rowwise_df",
-      message = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
+      exp_class = "data.frame",
+      message   = "Your table is a rowwise data frame, but I wasn't expecting it to be rowwise. Maybe you need to use `ungroup()`?"
     )
   )
 }
@@ -211,18 +225,10 @@ friendly_class <- function(class, length) {
   class_str <- knitr::combine_words(md_code(class))
 
   glue::glue(
-    ifelse(
-      length > 1,
-      ngettext(
-        length(class),
-        "a vector with class {class_str}",
-        "a vector with classes {class_str}"
-      ),
-      ngettext(
-        length(class),
-        "an object with class {class_str}",
-        "an object with classes {class_str}"
-      )
+    ngettext(
+      length(class),
+      "an object with class {class_str}",
+      "an object with classes {class_str}"
     )
   )
 }
@@ -279,12 +285,28 @@ friendly_class_list <- function() {
       single = "a tibble (class `tbl_df`)"
     ),
     list(
-      class = "data.frame",
-      single = "a data frame (class `data.frame`)"
+      class    = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a grouped tibble (class `grouped_df`)"
     ),
     list(
-      class = "list",
-      single = "a list (class `list`)"
+      class    = c("rowwise_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a rowwise tibble (class `rowwise_df`)"
+    ),
+    list(
+      class    = "data.frame",
+      single   = "a data frame (class `data.frame`)"
+    ),
+    list(
+      class    = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a DataFrame"
+    ),
+    list(
+      class    = c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"),
+      single   = "a DataFrame with row labels (i.e. index)"
+    ),
+    list(
+      class    = "list",
+      single   = "a list (class `list`)"
     ),
     list(
       class = "matrix",

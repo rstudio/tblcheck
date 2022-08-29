@@ -804,12 +804,12 @@ if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
 ```
 
 For problems not handled by your custom grading code, you can pass the problem to `tbl_grade()` to create a grade with the default feedback provided by tblcheck's `grade` functions.
-If there are no problems, `tblcheck_grade(problem)` won't return anything.
+If there are no problems, `problem_grade(problem)` won't return anything.
 
 Here's the default feedback `tbl_grade_column()` _would have returned_ without our custom grading code.
 
 ```{r custom-problem-ex-fallback}
-tblcheck_grade(problem)
+problem_grade(problem)
 ```
 
 **Tip**: You can also use `if` statements to ignore differences that you don't care about in your grading code.
@@ -829,7 +829,7 @@ if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
   fail(feedback)
 }
 
-tblcheck_grade(problem)
+problem_grade(problem)
 pass("Great job!")
 ```
 ````
