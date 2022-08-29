@@ -6,8 +6,8 @@
 #'
 #' @examples
 #' ex <- gradethis::mock_this_exercise(
-#'   .solution_code = tibble::tibble(x = 1:3, y = letters[x]),
-#'   .user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
+#' 	.solution_code = tibble::tibble(x = 1:3, y = letters[x]),
+#' 	.user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
 #' )
 #'
 #' ## Grading Tables ----
@@ -15,9 +15,9 @@
 #'
 #' # Roughly equivalent to...
 #' gradethis::grade_this({
-#'   gradethis::pass_if_equal()
-#'   tbl_grade()
-#'   gradethis::fail()
+#' 	gradethis::pass_if_equal()
+#' 	tbl_grade()
+#' 	gradethis::fail()
 #' })(ex)
 #' @family graders
 #' @seealso [tbl_grade()]
@@ -99,26 +99,26 @@ grade_this_table <- function(
 #'
 #' @examples
 #' ex <- gradethis::mock_this_exercise(
-#'   .solution_code = tibble::tibble(x = 1:3, y = letters[x]),
-#'   .user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
+#' 	.solution_code = tibble::tibble(x = 1:3, y = letters[x]),
+#' 	.user_code = tibble::tibble(x = 1:3, y = c("A", "b", "c"))
 #' )
 #'
 #' #' ## Grading Vectors ----
 #' # Here we use `pre_check` to modify `.result` and
 #' grade_this_vector(
-#'   pre_check = {
-#'     .result <- .result$y
-#'     .solution <- .solution$y
-#'   }
+#' 	pre_check = {
+#' 		.result <- .result$y
+#' 		.solution <- .solution$y
+#' 	}
 #' )(ex)
 #'
 #' # Roughly equivalent to...
 #' gradethis::grade_this({
-#'   .result <- .result$y
-#'   .solution <- .solution$y
-#'   gradethis::pass_if_equal()
-#'   vec_grade()
-#'   gradethis::fail()
+#' 	.result <- .result$y
+#' 	.solution <- .solution$y
+#' 	gradethis::pass_if_equal()
+#' 	vec_grade()
+#' 	gradethis::fail()
 #' })(ex)
 #' @family graders
 #' @seealso [vec_grade()]
@@ -205,7 +205,7 @@ tblcheck_grade_this_impl <- function(
   # gradethis pass/fail options
   pass.praise = NULL
 ) {
-  pre_check  <- rlang::enexpr(pre_check)
+  pre_check <- rlang::enexpr(pre_check)
   post_check <- rlang::enexpr(post_check)
 
   tblcheck_grader_args <- list(
@@ -221,11 +221,11 @@ tblcheck_grade_this_impl <- function(
       list(
         ".__tblcheck_grader_args" = tblcheck_grader_args,
         ".__tblcheck_grader" = tblcheck_grader,
-        ".__pre_check"       = pre_check,
-        ".__post_check"      = post_check,
-        ".__pass_if_equal"   = pass_if_equal,
-        ".__correct"         = correct        %||% getOption("gradethis.pass"),
-        ".__pass.praise"     = pass.praise    %||% getOption("gradethis.pass.praise", FALSE)
+        ".__pre_check" = pre_check,
+        ".__post_check" = post_check,
+        ".__pass_if_equal" = pass_if_equal,
+        ".__correct" = correct %||% getOption("gradethis.pass"),
+        ".__pass.praise" = pass.praise %||% getOption("gradethis.pass.praise", FALSE)
       ),
       parent = rlang::env_parent(check_env)
     )

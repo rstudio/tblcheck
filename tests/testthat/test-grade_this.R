@@ -66,7 +66,7 @@ test_that("grade_this_table()", {
     tblcheck_test_grade({
       grade_this_table(correct = "Correct")(
         gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = 1:10)",
+          .user_code = "tibble::tibble(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -80,7 +80,7 @@ test_that("grade_this_table()", {
     tblcheck_test_grade({
       grade_this_table()(
         gradethis::mock_this_exercise(
-          .user_code     = "data.frame(a = 1:10, b = 1:10)",
+          .user_code = "data.frame(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -105,7 +105,7 @@ test_that("grade_this_table()", {
     tblcheck_test_grade({
       grade_this_table(check_class = FALSE, correct = "PASS")(
         gradethis::mock_this_exercise(
-          .user_code     = "data.frame(a = 1:10, b = 1:10)",
+          .user_code = "data.frame(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -178,7 +178,7 @@ test_that("pre_check setup", {
         correct = "Correct"
       )(
         gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = 1:10)",
+          .user_code = "tibble::tibble(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -194,7 +194,7 @@ test_that("pre_check setup", {
         pre_check = {.result <- .result$b; .solution <- .solution$b}
       )(
         gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
+          .user_code = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -223,7 +223,7 @@ test_that("pre_check setup", {
         correct = "PASS"
       )(
         gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
+          .user_code = "tibble::tibble(a = 1:10, b = as.numeric(1:10))",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -242,7 +242,7 @@ test_that("pre_check test", {
         pre_check = {gradethis::fail_if(is.integer(.result$b), "Incorrect")}
       )(
         gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = 1:10)",
+          .user_code = "tibble::tibble(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -261,7 +261,7 @@ test_that("post_check test", {
         correct = "Correct"
       )(
         gradethis::mock_this_exercise(
-          .user_code     = "tibble::tibble(a = 1:10, b = 1:10)",
+          .user_code = "tibble::tibble(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )
@@ -278,7 +278,7 @@ test_that("post_check test", {
         check_class = FALSE
       )(
         gradethis::mock_this_exercise(
-          .user_code     = "data.frame(a = 1:10, b = 1:10)",
+          .user_code = "data.frame(a = 1:10, b = 1:10)",
           .solution_code = "tibble::tibble(a = 1:10, b = 1:10)"
         )
       )

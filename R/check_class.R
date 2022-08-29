@@ -151,7 +151,7 @@ problem_message.class_problem <- function(problem, ...) {
   }
 
   problem$expected <- friendly_class(problem$expected, problem$expected_length)
-  problem$actual   <- friendly_class(problem$actual,   problem$actual_length)
+  problem$actual <- friendly_class(problem$actual, problem$actual_length)
 
   glue::glue_data(problem, problem$msg)
 }
@@ -177,7 +177,7 @@ hinted_class_message_list <- function() {
     list(
       obj_class = "rowwise_df",
       exp_class = "grouped_df",
-      message   = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message = "Your table is a rowwise data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "py_tbl_df",
@@ -192,7 +192,7 @@ hinted_class_message_list <- function() {
     list(
       obj_class = "data.frame",
       exp_class = "grouped_df",
-      message   = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
+      message = "Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?"
     ),
     list(
       obj_class = "grouped_df",
@@ -202,7 +202,7 @@ hinted_class_message_list <- function() {
     list(
       obj_class = "data.frame",
       exp_class = "rowwise_df",
-      message   = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
+      message = "Your table isn't a rowwise data frame, but I was expecting it to be rowwise. Maybe you need to use `rowwise()`?"
     ),
     list(
       obj_class = "rowwise_df",
@@ -236,53 +236,53 @@ friendly_class <- function(class, length) {
 friendly_class_list <- function() {
   list(
     list(
-      class    = "character",
-      single   = "a text string (class `character`)",
+      class = "character",
+      single = "a text string (class `character`)",
       multiple = "a vector of text (class `character`)"
     ),
     list(
-      class    = "numeric",
-      single   = "a number (class `numeric`)",
+      class = "numeric",
+      single = "a number (class `numeric`)",
       multiple = "a vector of numbers (class `numeric`)"
     ),
     list(
-      class    = "integer",
-      single   = "an integer (class `integer`)",
+      class = "integer",
+      single = "an integer (class `integer`)",
       multiple = "a vector of integers (class `integer`)"
     ),
     list(
-      class    = "logical",
-      single   = "a TRUE/FALSE value (class `logical`)",
+      class = "logical",
+      single = "a TRUE/FALSE value (class `logical`)",
       multiple = "a vector of TRUE/FALSE values (class `logical`)"
     ),
     list(
-      class    = "complex",
-      single   = "a complex number (class `complex`)",
+      class = "complex",
+      single = "a complex number (class `complex`)",
       multiple = "a vector of complex numbers (class `complex`)"
     ),
     list(
-      class    = "raw",
-      single   = "a raw byte value (class `raw`)",
+      class = "raw",
+      single = "a raw byte value (class `raw`)",
       multiple = "a vector of raw byte values (class `raw`)"
     ),
     list(
-      class    = "factor",
-      single   = "a factor (class `factor`)",
+      class = "factor",
+      single = "a factor (class `factor`)",
       multiple = "a vector of factors (class `factor`)"
     ),
     list(
-      class    = c("POSIXct", "POSIXt"),
-      single   = "a date-time (class `POSIXct`)",
+      class = c("POSIXct", "POSIXt"),
+      single = "a date-time (class `POSIXct`)",
       multiple = "a vector of date-times (class `POSIXct`)"
     ),
     list(
-      class    = c("POSIXlt", "POSIXt"),
-      single   = "a date-time (class `POSIXlt`)",
+      class = c("POSIXlt", "POSIXt"),
+      single = "a date-time (class `POSIXlt`)",
       multiple = "a vector of date-times (class `POSIXlt`)"
     ),
     list(
-      class    = c("tbl_df", "tbl", "data.frame"),
-      single   = "a tibble (class `tbl_df`)"
+      class = c("tbl_df", "tbl", "data.frame"),
+      single = "a tibble (class `tbl_df`)"
     ),
     list(
       class    = c("grouped_df", "tbl_df", "tbl", "data.frame"),
@@ -309,16 +309,16 @@ friendly_class_list <- function() {
       single   = "a list (class `list`)"
     ),
     list(
-      class    = "matrix",
-      single   = "a matrix (class `matrix`)"
+      class = "matrix",
+      single = "a matrix (class `matrix`)"
     ),
     list(
-      class    = c("matrix", "array"),
-      single   = "a matrix (class `matrix`)"
+      class = c("matrix", "array"),
+      single = "a matrix (class `matrix`)"
     ),
     list(
-      class    = "array",
-      single   = "an array (class `array`)"
+      class = "array",
+      single = "an array (class `array`)"
     )
   )
 }

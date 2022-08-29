@@ -59,7 +59,7 @@ vec_check_levels <- function(
       return(problem("levels_n", length(levels_exp), length(levels_obj)))
     }
 
-    missing_levels    <- setdiff(levels_exp, levels_obj)
+    missing_levels <- setdiff(levels_exp, levels_obj)
     unexpected_levels <- setdiff(levels_obj, levels_exp)
 
     if (length(missing_levels) || length(unexpected_levels)) {
@@ -120,7 +120,7 @@ problem_message.levels_problem <- function(problem, max_diffs = 3, ...) {
       "Your result should have levels named {missing}. "
     )
 
-  problem$unexpected_msg  <- problem$unexpected_msg %||%
+  problem$unexpected_msg <- problem$unexpected_msg %||%
     ngettext(
       length(problem$unexpected),
       "Your result should not have a level named {unexpected}.",

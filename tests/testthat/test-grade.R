@@ -1,5 +1,5 @@
 test_that("grading", {
-  .result   <- tibble::tibble(a = letters, b = a, c = a)
+  .result <- tibble::tibble(a = letters, b = a, c = a)
   .solution <- tibble::tibble(a = letters, b = a)
 
   tbl_grade <- tbl_grade()
@@ -9,7 +9,7 @@ test_that("grading", {
 })
 
 test_that("list grading", {
-  .result   <- tibble::tibble(a = letters, b = a, c = a)
+  .result <- tibble::tibble(a = letters, b = a, c = a)
   .solution <- tibble::tibble(a = letters, b = a)
 
   problem <- tbl_check()
