@@ -100,8 +100,9 @@ ignored. These arguments can also be used in conjunction with the
 
 
 <dt>pass_if_equal</dt>
-<dd><p><code>[logical(1)]</code><br> When <code>TRUE</code> (default), the <code>.result</code>
-is compared to the <code>.solution</code> with <code><a href="https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html" class="external-link">gradethis::pass_if_equal()</a></code> after the
+<dd><p><code>[logical(1)]</code><br> When <code>TRUE</code> (default for
+<code>grade_this_vector()</code> but not <code><a href="grade_this_table.html">grade_this_table()</a></code>), the <code>.result</code> is
+compared to the <code>.solution</code> with <code><a href="https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html" class="external-link">gradethis::pass_if_equal()</a></code> after the
 <em>pre check</em> and before calling the <span class="pkg">tblcheck</span> grading function.</p></dd>
 
 

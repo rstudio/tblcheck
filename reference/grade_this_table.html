@@ -67,7 +67,7 @@ student's result with the author's solution.</p>
 <span>  correct <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pre_check <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  post_check <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pass_if_equal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  pass_if_equal <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  max_diffs <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -105,8 +105,9 @@ ignored. These arguments can also be used in conjunction with the
 
 
 <dt>pass_if_equal</dt>
-<dd><p><code>[logical(1)]</code><br> When <code>TRUE</code> (default), the <code>.result</code>
-is compared to the <code>.solution</code> with <code><a href="https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html" class="external-link">gradethis::pass_if_equal()</a></code> after the
+<dd><p><code>[logical(1)]</code><br> When <code>TRUE</code> (default for
+<code><a href="grade_this_vector.html">grade_this_vector()</a></code> but not <code>grade_this_table()</code>), the <code>.result</code> is
+compared to the <code>.solution</code> with <code><a href="https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html" class="external-link">gradethis::pass_if_equal()</a></code> after the
 <em>pre check</em> and before calling the <span class="pkg">tblcheck</span> grading function.</p></dd>
 
 
