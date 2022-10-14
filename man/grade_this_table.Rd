@@ -8,7 +8,7 @@ grade_this_table(
   correct = NULL,
   pre_check = NULL,
   post_check = NULL,
-  pass_if_equal = TRUE,
+  pass_if_equal = FALSE,
   ...,
   max_diffs = 3,
   cols = NULL,
@@ -39,8 +39,9 @@ table or vector grading is performed. The pre check runs before calling
 ignored. These arguments can also be used in conjunction with the
 \code{pass_if_equal} option when the grading requirements are more involved.}
 
-\item{pass_if_equal}{\verb{[logical(1)]}\cr When \code{TRUE} (default), the \code{.result}
-is compared to the \code{.solution} with \code{\link[gradethis:pass_if_equal]{gradethis::pass_if_equal()}} after the
+\item{pass_if_equal}{\verb{[logical(1)]}\cr When \code{TRUE} (default for
+\code{grade_this_vector()} but not \code{grade_this_table()}), the \code{.result} is
+compared to the \code{.solution} with \code{\link[gradethis:pass_if_equal]{gradethis::pass_if_equal()}} after the
 \emph{pre check} and before calling the \pkg{tblcheck} grading function.}
 
 \item{...}{Additional arguments passed to \code{graded()} or additional data to be
