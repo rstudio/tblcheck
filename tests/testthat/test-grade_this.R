@@ -257,6 +257,7 @@ test_that("post_check test", {
 	grade_pass <-
 		tblcheck_test_grade({
 			grade_this_table(
+				pass_if_equal = TRUE,
 				post_check = {gradethis::fail_if(is.integer(.result$b), "Incorrect")},
 				correct = "Correct"
 			)(
