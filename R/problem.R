@@ -29,8 +29,8 @@
 #' @export
 problem <- function(
 	type,
-	expected = NULL,
-	actual = NULL,
+	expected,
+	actual,
 	...,
 	.class = c(paste0(type, "_problem"), "tblcheck_problem")
 ) {
@@ -42,15 +42,19 @@ problem <- function(
 		)
 	}
 
-	problem <- list(
-		type = type,
-		expected = expected,
-		actual = actual,
-		...
-	)
+	problem <- list(type = type)
+
+	if (!missing(expected)) problem$expected <- expected
+	if (!missing(actual)) problem$actual <- actual
+
+	problem <- c(problem, list(...))
+
+	if (any(!nzchar(names(problem)))) {
+		rlang::abort("Arguments in `...` must be named.")
+	}
 
 	structure(
-		purrr::compact(problem),
+		problem,
 		class = unique(c(.class, "gradethis_problem"))
 	)
 }
