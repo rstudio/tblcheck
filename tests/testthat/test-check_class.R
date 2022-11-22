@@ -12,8 +12,8 @@ test_that("tbl_grade_class()", {
 		grade_num_chr_1$problem,
 		problem(
 			type = "class",
-			expected = "numeric",
-			actual = "character",
+			expected = 1,
+			actual = "1",
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -32,8 +32,8 @@ test_that("tbl_grade_class()", {
 		grade_num_chr_2$problem,
 		problem(
 			type = "class",
-			expected = "numeric",
-			actual = "character",
+			expected = c(1, 2),
+			actual = c("1", "2"),
 			expected_length = 2,
 			actual_length = 2
 		)
@@ -52,8 +52,8 @@ test_that("tbl_grade_class()", {
 		grade_posixct_1$problem,
 		problem(
 			type = "class",
-			expected = c("POSIXct", "POSIXt"),
-			actual = "character",
+			expected = as.POSIXct("2021-07-29 10:59:59"),
+			actual = "2021-07-29 10:59:59",
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -72,8 +72,8 @@ test_that("tbl_grade_class()", {
 		grade_posixct_2$problem,
 		problem(
 			type = "class",
-			expected = c("POSIXlt", "POSIXt"),
-			actual = "character",
+			expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
+			actual = c("2021-07-29 15:18:00", "1996-03-05 12:00:00"),
 			expected_length = 2,
 			actual_length = 2
 		)
@@ -94,8 +94,8 @@ test_that("tbl_grade_class() ignore classes", {
 		grade_glue_chr$problem,
 		problem(
 			type = "class",
-			expected = "character",
-			actual = c("glue", "character"),
+			expected = "x",
+			actual = glue::glue("x"),
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -123,8 +123,8 @@ test_that("tbl_grade_class() ignore classes", {
 		grade_tbl_df$problem,
 		problem(
 			type = "class",
-			expected = c("tbl_df", "tbl", "data.frame"),
-			actual = c("data.frame"),
+			expected = tibble::tibble(a = 1, b = 2),
+			actual = data.frame(a = 1, b = 2),
 			expected_length = 2,
 			actual_length = 2
 		)
@@ -132,24 +132,28 @@ test_that("tbl_grade_class() ignore classes", {
 
 	grade_py_tbl_df <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = c(1, 2), b = c(3, 4))
+			.result <- tibble::tibble(a = c(1, 2), b = c(3, 4))
 			class(.result) <- c("py_tbl_df", class(.result))
-			.solution   <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
+			.solution <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
 				dplyr::group_by(a)
 			class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
-			tbl_grade_class()
+			tbl_grade_class(.result, .solution)
 		})
 
 	expect_snapshot(grade_py_tbl_df)
 
+	.result <- tibble::tibble(a = c(1, 2), b = c(3, 4))
+	class(.result) <- c("py_tbl_df", class(.result))
+	.solution <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
+		dplyr::group_by(a)
+	class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
+
 	expect_equal(
 		grade_py_tbl_df$problem,
 		problem(
-			type     = "class",
-			expected = c(
-				"py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"
-			),
-			actual   = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
+			type = "class",
+			expected = .solution,
+			actual = .result,
 			expected_length = 2,
 			actual_length = 2
 		)
@@ -157,24 +161,28 @@ test_that("tbl_grade_class() ignore classes", {
 
 	grade_py_tbl_df_grouped <-
 		tblcheck_test_grade({
-			.result   <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
+			.result <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
 				dplyr::group_by(a)
 			class(.result) <- c("py_grouped_df", "py_tbl_df", class(.result))
-			.solution   <- tibble::tibble(a = c(1, 2), b = c(3, 4))
+			.solution <- tibble::tibble(a = c(1, 2), b = c(3, 4))
 			class(.solution) <- c("py_tbl_df", class(.solution))
 			tbl_grade_class()
 		})
 
 	expect_snapshot(grade_py_tbl_df_grouped)
 
+	.result <- tibble::tibble(a = c(1, 2), b = c(3, 4)) %>%
+		dplyr::group_by(a)
+	class(.result) <- c("py_grouped_df", "py_tbl_df", class(.result))
+	.solution <- tibble::tibble(a = c(1, 2), b = c(3, 4))
+	class(.solution) <- c("py_tbl_df", class(.solution))
+
 	expect_equal(
 		grade_py_tbl_df_grouped$problem,
 		problem(
-			type     = "class",
-			expected   = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
-			actual = c(
-				"py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"
-			),
+			type = "class",
+			expected = .solution,
+			actual = .result,
 			expected_length = 2,
 			actual_length = 2
 		)
@@ -204,8 +212,8 @@ test_that("tbl_grade_class() with paired ignore_class", {
 		grade_int_dbl$problem,
 		problem(
 			type = "class",
-			expected = "numeric",
-			actual = "integer",
+			expected = 1,
+			actual = 1L,
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -233,8 +241,8 @@ test_that("tbl_grade_class() with paired ignore_class", {
 		grade_int_chr_wrong_ignore$problem,
 		problem(
 			type = "class",
-			expected = "numeric",
-			actual = "character",
+			expected = 1,
+			actual = "1",
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -253,8 +261,8 @@ test_that("tbl_grade_class() with paired ignore_class", {
 		grade_posix_ct_lt$problem,
 		problem(
 			type = "class",
-			expected = c("POSIXlt", "POSIXt"),
-			actual = c("POSIXct", "POSIXt"),
+			expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
+			actual = as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
 			expected_length = 2,
 			actual_length = 2
 		)
@@ -323,12 +331,15 @@ test_that("tbl_grade_class() with multiple classes", {
 
 	expect_snapshot(grade_class_solution)
 
+	.solution <- 1L
+	class(.solution) <- c("test", "class", "integer")
+
 	expect_equal(
 		grade_class_solution$problem,
 		problem(
 			type = "class",
-			expected = c("test", "class", "integer"),
-			actual = "integer",
+			expected = .solution,
+			actual = 1L,
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -344,12 +355,15 @@ test_that("tbl_grade_class() with multiple classes", {
 
 	expect_snapshot(grade_class_result)
 
+	.result <- 1L
+	class(.result) <- c("test", "class", "integer")
+
 	expect_equal(
 		grade_class_result$problem,
 		problem(
 			type = "class",
-			expected = "integer",
-			actual = c("test", "class", "integer"),
+			expected = 1L,
+			actual = .result,
 			expected_length = 1,
 			actual_length = 1
 		)
@@ -382,8 +396,8 @@ test_that("tbl_grade_class() with hinted messages", {
 		grade_ungrouped$problem,
 		problem(
 			"class",
-			expected = c("grouped_df", "tbl_df", "tbl", "data.frame"),
-			actual = c("tbl_df", "tbl", "data.frame"),
+			expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
+			actual = tibble::tibble(a = letters[1:3], b = a),
 			expected_length = 2,
 			actual_length = 2
 		),
@@ -402,8 +416,8 @@ test_that("tbl_grade_class() with hinted messages", {
 		grade_grouped$problem,
 		problem(
 			"class",
-			expected = c("tbl_df", "tbl", "data.frame"),
-			actual = c("grouped_df", "tbl_df", "tbl", "data.frame"),
+			expected = tibble::tibble(a = letters[1:3], b = a),
+			actual = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
 			expected_length = 2,
 			actual_length = 2
 		),
@@ -422,8 +436,8 @@ test_that("tbl_grade_class() with hinted messages", {
 		grade_ungrouped_int$problem,
 		problem(
 			"class",
-			expected = c("grouped_df", "tbl_df", "tbl", "data.frame"),
-			actual = "integer",
+			expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
+			actual = 1:2,
 			expected_length = 2,
 			actual_length = 2
 		),
@@ -442,51 +456,63 @@ test_that("tbl_grade_class() with hinted messages", {
 		grade_unrowwise_int$problem,
 		problem(
 			"class",
-			expected = c("rowwise_df", "tbl_df", "tbl", "data.frame"),
-			actual = "integer",
+			expected = dplyr::rowwise(tibble::tibble(a = letters[1:3], b = a)),
+			actual = 1:2,
 			expected_length = 2,
 			actual_length = 2
 		),
 		ignore_attr = "class"
 	)
 
-	grade_pyungrouped_int <- tblcheck_test_grade({
-		.result <- 1
-		class(.result) <- "int"
-		.solution <- tibble::tibble(a = letters[1:3], b = a)
-		class(.solution) <- c("py_tbl_df", class(.solution))
-		tbl_grade_class()
-	})
+	grade_pyungrouped_int <-
+		tblcheck_test_grade({
+			.result <- 1
+			class(.result) <- "int"
+			.solution <- tibble::tibble(a = letters[1:3], b = a)
+			class(.solution) <- c("py_tbl_df", class(.solution))
+			tbl_grade_class()
+		})
+
 	expect_snapshot(grade_pyungrouped_int)
+
+	.result <- 1
+	class(.result) <- "int"
+	.solution <- tibble::tibble(a = letters[1:3], b = a)
+	class(.solution) <- c("py_tbl_df", class(.solution))
 
 	expect_equal(
 		grade_pyungrouped_int$problem,
 		problem(
-			type     = "class",
-			expected = c("py_tbl_df", "tbl_df", "tbl", "data.frame"),
-			actual   = "int",
+			type = "class",
+			expected = .solution,
+			actual = .result,
 			expected_length = 2,
 			actual_length = 1
 		)
 	)
 
-	grade_pygrouped_int <- tblcheck_test_grade({
-		.result <- 1
-		class(.result) <- "int"
-		.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
-		class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
-		tbl_grade_class()
-	})
+	grade_pygrouped_int <-
+		tblcheck_test_grade({
+			.result <- 1
+			class(.result) <- "int"
+			.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+			class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
+			tbl_grade_class()
+		})
+
 	expect_snapshot(grade_pygrouped_int)
+
+	.result <- 1
+	class(.result) <- "int"
+	.solution <- dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
+	class(.solution) <- c("py_grouped_df", "py_tbl_df", class(.solution))
 
 	expect_equal(
 		grade_pygrouped_int$problem,
 		problem(
-			type     = "class",
-			expected = c(
-				"py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"
-			),
-			actual   = "int",
+			type = "class",
+			expected = .solution,
+			actual = .result,
 			expected_length = 2,
 			actual_length = 1
 		)

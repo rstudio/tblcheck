@@ -98,8 +98,8 @@ tbl_check_class <- function(
 	if (!setequal(obj_class_ignored, exp_class_ignored)) {
 		problem(
 			"class",
-			exp_class,
-			obj_class,
+			expected,
+			object,
 			# Object lengths are stored so the correct pluralization
 			# can be applied in problem_message.class_problem()
 			expected_length = length(expected),
@@ -145,13 +145,19 @@ problem_message.class_problem <- function(problem, ...) {
 	problem$msg <- problem$msg %||%
 		"Your result should be {expected}, but it is {actual}."
 
-	hinted_class_message <- hinted_class_message(problem$actual, problem$expected)
+	hinted_class_message <- hinted_class_message(
+		class(problem$actual), class(problem$expected)
+	)
 	if (!is.null(hinted_class_message)) {
 		return(hinted_class_message)
 	}
 
-	problem$expected <- friendly_class(problem$expected, problem$expected_length)
-	problem$actual <- friendly_class(problem$actual, problem$actual_length)
+	problem$expected <- friendly_class(
+		class(problem$expected), problem$expected_length
+	)
+	problem$actual <- friendly_class(
+		class(problem$actual), problem$actual_length
+	)
 
 	glue::glue_data(problem, problem$msg)
 }
