@@ -11,8 +11,7 @@ test_that("tbl_grade_is_table() with non-tables", {
 		grade_list$problem,
 		problem(
 			type = "not_table",
-			expected = "data.frame",
-			actual = "list",
+			actual = list(a = 1:10),
 			actual_length = 1
 		)
 	)
@@ -29,8 +28,7 @@ test_that("tbl_grade_is_table() with non-tables", {
 		grade_vector$problem,
 		problem(
 			type = "not_table",
-			expected = "data.frame",
-			actual = "integer",
+			actual = 1:10,
 			actual_length = 10
 		)
 	)
