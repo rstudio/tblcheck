@@ -162,7 +162,7 @@ friendly_class <- function(class, length) {
 	list <- friendly_class_list()
 
 	for (i in seq_along(list)) {
-		if (unordered_identical(list[[i]]$class, class)) {
+		if (setequal(list[[i]]$class, class)) {
 			if (length > 1) return(list[[i]]$multiple %||% list[[i]]$single)
 			return(list[[i]]$single)
 		}
@@ -267,10 +267,4 @@ friendly_class_list <- function() {
 			single = "an array (class `array`)"
 		)
 	)
-}
-
-# Test that two vectors are identical
-# with the exception that they may be in different orders
-unordered_identical <- function(x, y) {
-	all(x %in% y) && all(y %in% x)
 }
