@@ -67,7 +67,7 @@ problem_message.not_table_problem <- function(problem, ...) {
 	problem$msg <- problem$msg %||%
 		"Your result should be a table, but it is {actual}."
 
-	problem$actual <- friendly_class(problem$actual, problem$actual_length)
+	problem$actual <- friendly_class(problem$actual)
 
 	glue::glue_data(problem, problem$msg)
 }
