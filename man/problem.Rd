@@ -6,8 +6,8 @@
 \usage{
 problem(
   type,
-  expected = NULL,
-  actual = NULL,
+  expected,
+  actual,
   ...,
   .class = c(paste0(type, "_problem"), "tblcheck_problem")
 )
