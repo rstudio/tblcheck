@@ -65,8 +65,8 @@
     Output
       <gradethis_graded: [Incorrect]
         I was only expecting 1 value for each grouping in the table, but you
-        have multiple values per grouping. Maybe you are missing a .groupby()
-        call?
+        have multiple values per grouping. Maybe you are missing a
+        `.groupby()` call?
       >
 
 ---
@@ -77,7 +77,7 @@
       <gradethis_graded: [Incorrect]
         Your table row labels (i.e. index) are not a numbered sequence. You
         can tell by the extra spacing around the column names. You can fix
-        this with .reset_index()
+        this with `.reset_index()`
       >
 
 # tbl_grade_class() with paired ignore_class
