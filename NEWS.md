@@ -6,6 +6,10 @@
   * `hinted_class_message()` is an R7 generic that generates messages when `object` and `expected` are both a specific class.
     * e.g. if `object` is an ungrouped tibble and `expected` is a grouped tibble, `hinted_class_message()` generates a message that suggests using `group_by()`.
   * Using generic functions allows `tbl_grade_class()` messages to be expanded by adding methods for new classes in tutorial setup code or external packages.
+  
+# tblcheck 0.2.1
+
+* `grade_this_table()` now sets `pass_if_equal = FALSE` by default (#128).
 
 # tblcheck 0.2.0
 

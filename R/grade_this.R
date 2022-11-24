@@ -32,8 +32,9 @@
 #'   `.result` or the `.solution` if there are parts of either that need to be
 #'   ignored. These arguments can also be used in conjunction with the
 #'   `pass_if_equal` option when the grading requirements are more involved.
-#' @param pass_if_equal `[logical(1)]`\cr When `TRUE` (default), the `.result`
-#'   is compared to the `.solution` with [gradethis::pass_if_equal()] after the
+#' @param pass_if_equal `[logical(1)]`\cr When `TRUE` (default for
+#'   `grade_this_vector()` but not `grade_this_table()`), the `.result` is
+#'   compared to the `.solution` with [gradethis::pass_if_equal()] after the
 #'   _pre check_ and before calling the \pkg{tblcheck} grading function.
 #' @inheritParams gradethis::fail
 #' @inheritParams gradethis::gradethis_setup
@@ -66,7 +67,7 @@ grade_this_table <- function(
 	correct = NULL,
 	pre_check = NULL,
 	post_check = NULL,
-	pass_if_equal = TRUE,
+	pass_if_equal = FALSE,
 	...,
 	# all the arguments from tbl_grade_table() except object/expected
 	max_diffs = 3,
