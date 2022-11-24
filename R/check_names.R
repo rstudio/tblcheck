@@ -53,8 +53,11 @@ tbl_check_names <- function(
 		expected <- get(".solution", env)
 	}
 
-	names_exp <- names(expected)
-	names_obj <- names(object)
+	# We use `as.character()` to ensure the result is always a character vector.
+	# For an unnamed object, this will return `character(0)`.
+	# Otherwise, it would return `NULL`.
+	names_exp <- as.character(names(expected))
+	names_obj <- as.character(names(object))
 
 	same_when_sorted <- identical(sort(names_exp), sort(names_obj))
 
@@ -156,13 +159,13 @@ problem_message.names_problem <- function(problem, max_diffs = 3, ...) {
 			"Your result should not have the names {unexpected}."
 		)
 
-	if (!is.null(problem[["missing"]])) {
+	if (length(problem[["missing"]]) > 0) {
 		problem$missing <- combine_words_with_more(problem$missing, max_diffs)
 	} else {
 		problem$missing_msg <- ""
 	}
 
-	if (!is.null(problem[["unexpected"]])) {
+	if (length(problem[["unexpected"]]) > 0) {
 		problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
 	} else {
 		problem$unexpected_msg <- ""
