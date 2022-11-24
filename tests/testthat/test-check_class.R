@@ -13,9 +13,7 @@ test_that("tbl_grade_class()", {
 		problem(
 			type = "class",
 			expected = 1,
-			actual = "1",
-			expected_length = 1,
-			actual_length = 1
+			actual = "1"
 		)
 	)
 
@@ -33,9 +31,7 @@ test_that("tbl_grade_class()", {
 		problem(
 			type = "class",
 			expected = c(1, 2),
-			actual = c("1", "2"),
-			expected_length = 2,
-			actual_length = 2
+			actual = c("1", "2")
 		)
 	)
 
@@ -53,9 +49,7 @@ test_that("tbl_grade_class()", {
 		problem(
 			type = "class",
 			expected = as.POSIXct("2021-07-29 10:59:59"),
-			actual = "2021-07-29 10:59:59",
-			expected_length = 1,
-			actual_length = 1
+			actual = "2021-07-29 10:59:59"
 		)
 	)
 
@@ -73,9 +67,7 @@ test_that("tbl_grade_class()", {
 		problem(
 			type = "class",
 			expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
-			actual = c("2021-07-29 15:18:00", "1996-03-05 12:00:00"),
-			expected_length = 2,
-			actual_length = 2
+			actual = c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
 		)
 	)
 })
@@ -95,9 +87,7 @@ test_that("tbl_grade_class() ignore classes", {
 		problem(
 			type = "class",
 			expected = "x",
-			actual = glue::glue("x"),
-			expected_length = 1,
-			actual_length = 1
+			actual = glue::glue("x")
 		)
 	)
 
@@ -124,9 +114,7 @@ test_that("tbl_grade_class() ignore classes", {
 		problem(
 			type = "class",
 			expected = tibble::tibble(a = 1, b = 2),
-			actual = data.frame(a = 1, b = 2),
-			expected_length = 2,
-			actual_length = 2
+			actual = data.frame(a = 1, b = 2)
 		)
 	)
 
@@ -153,9 +141,7 @@ test_that("tbl_grade_class() ignore classes", {
 		problem(
 			type = "class",
 			expected = .solution,
-			actual = .result,
-			expected_length = 2,
-			actual_length = 2
+			actual = .result
 		)
 	)
 
@@ -182,9 +168,7 @@ test_that("tbl_grade_class() ignore classes", {
 		problem(
 			type = "class",
 			expected = .solution,
-			actual = .result,
-			expected_length = 2,
-			actual_length = 2
+			actual = .result
 		)
 	)
 
@@ -213,9 +197,7 @@ test_that("tbl_grade_class() with paired ignore_class", {
 		problem(
 			type = "class",
 			expected = 1,
-			actual = 1L,
-			expected_length = 1,
-			actual_length = 1
+			actual = 1L
 		)
 	)
 
@@ -242,9 +224,7 @@ test_that("tbl_grade_class() with paired ignore_class", {
 		problem(
 			type = "class",
 			expected = 1,
-			actual = "1",
-			expected_length = 1,
-			actual_length = 1
+			actual = "1"
 		)
 	)
 
@@ -262,9 +242,7 @@ test_that("tbl_grade_class() with paired ignore_class", {
 		problem(
 			type = "class",
 			expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
-			actual = as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
-			expected_length = 2,
-			actual_length = 2
+			actual = as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
 		)
 	)
 
@@ -339,9 +317,7 @@ test_that("tbl_grade_class() with multiple classes", {
 		problem(
 			type = "class",
 			expected = .solution,
-			actual = 1L,
-			expected_length = 1,
-			actual_length = 1
+			actual = 1L
 		)
 	)
 
@@ -363,9 +339,7 @@ test_that("tbl_grade_class() with multiple classes", {
 		problem(
 			type = "class",
 			expected = 1L,
-			actual = .result,
-			expected_length = 1,
-			actual_length = 1
+			actual = .result
 		)
 	)
 })
@@ -397,9 +371,7 @@ test_that("tbl_grade_class() with hinted messages", {
 		problem(
 			"class",
 			expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
-			actual = tibble::tibble(a = letters[1:3], b = a),
-			expected_length = 2,
-			actual_length = 2
+			actual = tibble::tibble(a = letters[1:3], b = a)
 		),
 		ignore_attr = "class"
 	)
@@ -417,9 +389,7 @@ test_that("tbl_grade_class() with hinted messages", {
 		problem(
 			"class",
 			expected = tibble::tibble(a = letters[1:3], b = a),
-			actual = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
-			expected_length = 2,
-			actual_length = 2
+			actual = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 		),
 		ignore_attr = "class"
 	)
@@ -437,9 +407,7 @@ test_that("tbl_grade_class() with hinted messages", {
 		problem(
 			"class",
 			expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
-			actual = 1:2,
-			expected_length = 2,
-			actual_length = 2
+			actual = 1:2
 		),
 		ignore_attr = "class"
 	)
@@ -457,9 +425,7 @@ test_that("tbl_grade_class() with hinted messages", {
 		problem(
 			"class",
 			expected = dplyr::rowwise(tibble::tibble(a = letters[1:3], b = a)),
-			actual = 1:2,
-			expected_length = 2,
-			actual_length = 2
+			actual = 1:2
 		),
 		ignore_attr = "class"
 	)
@@ -485,9 +451,7 @@ test_that("tbl_grade_class() with hinted messages", {
 		problem(
 			type = "class",
 			expected = .solution,
-			actual = .result,
-			expected_length = 2,
-			actual_length = 1
+			actual = .result
 		)
 	)
 
@@ -512,9 +476,7 @@ test_that("tbl_grade_class() with hinted messages", {
 		problem(
 			type = "class",
 			expected = .solution,
-			actual = .result,
-			expected_length = 2,
-			actual_length = 1
+			actual = .result
 		)
 	)
 })

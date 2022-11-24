@@ -13,8 +13,6 @@ test_that("tbl_grade_column() checks classes", {
 			"class",
 			expected = 1:3,
 			actual = letters,
-			expected_length = 3,
-			actual_length = 26,
 			location = "column",
 			column = "a"
 		),
@@ -35,8 +33,6 @@ test_that("tbl_grade_column() checks classes", {
 			"class",
 			expected = as.integer(c(1, 2, 3)),
 			actual = as.numeric(c(1, 2, 3)),
-			expected_length = 3,
-			actual_length = 3,
 			location = "column",
 			column = "a"
 		),
@@ -85,8 +81,6 @@ test_that("tbl_grade_column() checks multiple classes", {
 			type = "class",
 			expected = tibble::tibble(x = 1),
 			actual = data.frame(x = 1),
-			expected_length = 1,
-			actual_length = 1,
 			location = "column",
 			column = "a"
 		),

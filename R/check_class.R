@@ -96,15 +96,7 @@ tbl_check_class <- function(
 	}
 
 	if (!setequal(obj_class_ignored, exp_class_ignored)) {
-		problem(
-			"class",
-			expected,
-			object,
-			# Object lengths are stored so the correct pluralization
-			# can be applied in problem_message.class_problem()
-			expected_length = length(expected),
-			actual_length = length(object)
-		)
+		problem("class", expected, object)
 	}
 }
 

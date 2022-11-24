@@ -14,8 +14,6 @@ test_that("tbl_grade() class", {
 			"class",
 			expected = tibble::tibble(a = 1:10, b = 1:10),
 			actual = data.frame(a = 1:10, b = 1:10),
-			expected_length = 2,
-			actual_length = 2,
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -45,8 +43,6 @@ test_that("tbl_grade() class", {
 			"class",
 			expected = dplyr::group_by(tibble::tibble(a = 1:10, b = a), a),
 			actual = tibble::tibble(a = 1:10, b = a),
-			expected_length = 2,
-			actual_length = 2,
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -76,8 +72,6 @@ test_that("tbl_grade() class", {
 			"class",
 			expected = tibble::tibble(a = 1:10, b = a),
 			actual = dplyr::rowwise(tibble::tibble(a = 1:10, b = a)),
-			expected_length = 2,
-			actual_length = 2,
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -98,8 +92,6 @@ test_that("tbl_grade() class", {
 			"class",
 			expected = dplyr::group_by(tibble::tibble(a = 1:10, b = a), a),
 			actual = dplyr::rowwise(tibble::tibble(a = 1:10, b = a)),
-			expected_length = 2,
-			actual_length = 2,
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -237,8 +229,6 @@ test_that("tbl_grade() columns", {
 			"class",
 			expected = as.integer(c(1, 2, 3)),
 			actual = as.numeric(c(1, 2, 3)),
-			expected_length = 3,
-			actual_length = 3,
 			location = "column",
 			column = "a"
 		),

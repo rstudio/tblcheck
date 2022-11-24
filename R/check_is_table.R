@@ -39,7 +39,7 @@ tbl_check_is_table <- function(
 	}
 
 	if (!inherits(object, "data.frame")) {
-		problem("not_table", actual = object, actual_length = length(object))
+		problem("not_table", actual = object)
 	}
 }
 

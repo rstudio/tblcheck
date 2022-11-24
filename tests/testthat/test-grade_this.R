@@ -94,8 +94,6 @@ test_that("grade_this_table()", {
 			"class",
 			expected = tibble::tibble(a = 1:10, b = 1:10),
 			actual = data.frame(a = 1:10, b = 1:10),
-			expected_length = 2,
-			actual_length = 2,
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -148,8 +146,6 @@ test_that("grade_this_vector()", {
 			"class",
 			expected = 1:10,
 			actual = as.numeric(1:10),
-			expected_length = 10,
-			actual_length = 10,
 			location = "vector"
 		),
 		ignore_attr = "class"
@@ -208,8 +204,6 @@ test_that("pre_check setup", {
 			"class",
 			expected = 1:10,
 			actual = as.numeric(1:10),
-			expected_length = 10,
-			actual_length = 10,
 			location = "vector"
 		),
 		ignore_attr = "class"
