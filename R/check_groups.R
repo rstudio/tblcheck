@@ -81,12 +81,10 @@ tbl_grade_groups <- function(
 
 #' @export
 problem_message.groups_problem <- function(problem, max_diffs = 3, ...) {
-	problem$missing_msg <- gettext(
-		"Your {location} should be grouped by {missing}. "
-	)
-	problem$unexpected_msg <- gettext(
-		"Your {location} should not be grouped by {unexpected}. "
-	)
+	problem$missing_msg <- problem$missing_msg %||%
+		gettext("Your {location} should be grouped by {missing}. ")
+	problem$unexpected_msg <- problem$unexpected_msg %||%
+		gettext("Your {location} should not be grouped by {unexpected}. ")
 
 	if (length(problem[["missing"]]) > 0) {
 		problem$missing <- combine_words_with_more(problem$missing, max_diffs)
