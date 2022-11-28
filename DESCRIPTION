@@ -41,8 +41,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    rstudio/gradethis,
-    R7=RConsortium/OOP-WG
+    R7=RConsortium/OOP-WG,
+    rstudio/gradethis
 Config/Needs/learnr: rstudio/learnr, rstudio/gradethis
 Config/Needs/website: pkgdown, tidyverse/tidytemplate, forcats, stringr
 Config/testthat/edition: 3
