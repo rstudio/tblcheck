@@ -134,7 +134,7 @@ friendly_class.list <- function(object) {
 friendly_class.matrix <- function(object) {
 	if (
 		!setequal(class(object), "matrix") &&
-		!setequal(class(object), c("matrix", "array"))
+			!setequal(class(object), c("matrix", "array"))
 	) {
 		return(NextMethod())
 	}

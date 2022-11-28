@@ -156,15 +156,15 @@ library(gradethis)
 library(tblcheck)
 
 gradethis_setup(
-  pass.praise = TRUE,
-  fail.hint = TRUE,
-  fail.encourage = TRUE,
-  maybe_code_feedback.before = "\n\n"
+	pass.praise = TRUE,
+	fail.hint = TRUE,
+	fail.encourage = TRUE,
+	maybe_code_feedback.before = "\n\n"
 )
 
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+	collapse = TRUE,
+	comment = "#>"
 )
 
 set.seed(424341)
@@ -173,19 +173,19 @@ options(max.print = 20, width = 70)
 source(system.file("internal", "fake-grading.R", package = "tblcheck"), local = TRUE)
 
 fake_grade_example <- function(example) {
-  ex_prefix <- strsplit(example, "-")[[1]][1]
-  fake_grade_chunks(
-    user = example,
-    setup = paste0(ex_prefix, "-setup"),
-    solution = paste0(ex_prefix, "-solution"),
-    check = paste0(ex_prefix, "-check")
-  )
+	ex_prefix <- strsplit(example, "-")[[1]][1]
+	fake_grade_chunks(
+		user = example,
+		setup = paste0(ex_prefix, "-setup"),
+		solution = paste0(ex_prefix, "-solution"),
+		check = paste0(ex_prefix, "-check")
+	)
 }
 
 icons <- list(
-  code = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg>',
-  correct = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>',
-  wrong = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>'
+	code = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg>',
+	correct = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>',
+	wrong = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>'
 )
 ```
 
@@ -243,14 +243,13 @@ library(tibble)
 ```
 
 ```{r tomato, is_exercise = TRUE, chunk_label = TRUE}
-
 ```
 
 ```{r tomato-solution, chunk_label = TRUE}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red")
 )
 ```
 
@@ -260,13 +259,11 @@ grade_this_table()
 ````
 
 ```{r ref.label = "tomato-setup", include = FALSE}
-
 ```
 
 ### `r icons$correct` Correct Answer
 
 ```{r ref.label = "tomato-solution"}
-
 ```
 
 ```{r echo=FALSE}
@@ -277,9 +274,9 @@ fake_grade_example("tomato-solution")
 
 ```{r tomato-wrong-class}
 list(
-  food = "lettuce",
-  fruit = "TRUE",
-  color = "green"
+	food = "lettuce",
+	fruit = "TRUE",
+	color = "green"
 )
 ```
 
@@ -291,9 +288,9 @@ fake_grade_example("tomato-wrong-class")
 
 ```{r tomato-wrong-names}
 tibble(
-  food = "lettuce",
-  fruit = "TRUE",
-  color = "green"
+	food = "lettuce",
+	fruit = "TRUE",
+	color = "green"
 )
 ```
 
@@ -305,9 +302,9 @@ fake_grade_example("tomato-wrong-names")
 
 ```{r tomato-wrong-length}
 tibble(
-  food = "lettuce",
-  vegetable = "TRUE",
-  color = "green"
+	food = "lettuce",
+	vegetable = "TRUE",
+	color = "green"
 )
 ```
 
@@ -319,9 +316,9 @@ fake_grade_example("tomato-wrong-length")
 
 ```{r tomato-wrong-column-class}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c("TRUE", "TRUE"),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c("TRUE", "TRUE"),
+	color = c("green", "red")
 )
 ```
 
@@ -333,9 +330,9 @@ fake_grade_example("tomato-wrong-column-class")
 
 ```{r tomato-wrong-column-values}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, TRUE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, TRUE),
+	color = c("green", "red")
 )
 ```
 
@@ -363,15 +360,14 @@ library(dplyr)
 ```
 
 ```{r starwars, is_exercise = TRUE, chunk_label = TRUE}
-
 ```
 
 ```{r starwars-solution, chunk_label = TRUE}
 starwars %>%
-  transmute(
-    height = height / 2.54, 
-    mass = mass * 2.205
-  )
+	transmute(
+		height = height / 2.54,
+		mass = mass * 2.205
+	)
 ```
 
 ```{r starwars-check, chunk_label = TRUE}
@@ -380,7 +376,6 @@ grade_this_table(check_column_order = TRUE)
 ````
 
 ```{r ref.label = "starwars-setup", include=FALSE}
-
 ```
 
 ### `r icons$correct` Correct Answer
@@ -392,7 +387,6 @@ Note that `transmute()` keeps only the columns named in its calculations,
 so our final table has only two columns.
 
 ```{r ref.label = "starwars-solution"}
-
 ```
 
 ### `r icons$wrong` Wrong Function
@@ -403,10 +397,10 @@ As a result, their submission contains more columns than expected.
 
 ```{r starwars-wrong-mutate}
 starwars %>%
-  mutate(
-    height = height / 2.54,
-    mass = mass * 2.205
-  )
+	mutate(
+		height = height / 2.54,
+		mass = mass * 2.205
+	)
 ```
 
 ```{r echo=FALSE}
@@ -420,10 +414,10 @@ but they specified the columns in the opposite order.
 
 ```{r starwars-wrong-columns}
 starwars %>%
-  transmute(
-    mass = mass * 2.205,
-    height = height / 2.54
-  )
+	transmute(
+		mass = mass * 2.205,
+		height = height / 2.54
+	)
 ```
 
 ```{r echo=FALSE}
@@ -451,10 +445,10 @@ tblcheck will alert them to their mistake.
 
 ```{r starwars-wrong-class}
 starwars %>%
-  transmute(
-    mass = as.integer(mass * 2.205),
-    height = as.integer(height / 2.54)
-  )
+	transmute(
+		mass = as.integer(mass * 2.205),
+		height = as.integer(height / 2.54)
+	)
 ```
 
 ```{r echo=FALSE}
@@ -470,10 +464,10 @@ and gives a hint about the expected values.
 
 ```{r starwars-wrong-values}
 starwars %>%
-  transmute(
-    height = height * 2.54,
-    mass = mass * 2.205 
-  )
+	transmute(
+		height = height * 2.54,
+		mass = mass * 2.205
+	)
 ```
 
 ```{r echo=FALSE}
@@ -502,10 +496,10 @@ library(dplyr)
 library(forcats)
 
 marital_age <- gss_cat %>%
-  mutate(marital = as.character(marital)) %>%
-  group_by(marital) %>% 
-  summarize(avg_age = mean(age, na.rm = TRUE)) %>% 
-  ungroup()
+	mutate(marital = as.character(marital)) %>%
+	group_by(marital) %>%
+	summarize(avg_age = mean(age, na.rm = TRUE)) %>%
+	ungroup()
 ```
 
 ```{r factor, is_exercise = TRUE, chunk_label = TRUE}
@@ -514,7 +508,7 @@ marital_age
 
 ```{r factor-solution, chunk_label = TRUE}
 marital_age %>%
-  mutate(marital = fct_reorder(marital, avg_age))
+	mutate(marital = fct_reorder(marital, avg_age))
 ```
 
 ```{r factor-check, chunk_label = TRUE}
@@ -523,7 +517,6 @@ grade_this_table()
 ````
 
 ```{r ref.label = "factor-setup", include=FALSE}
-
 ```
 
 Since students aren't familiar with the `marital_age` table,
@@ -531,7 +524,6 @@ we've included the starter code so they can see the initial state of the table
 when they start the exercise.
 
 ```{r ref.label = "factor"}
-
 ```
 
 ### `r icons$correct` Correct Answer
@@ -542,7 +534,6 @@ to transform the `marital` column,
 reordering its factor levels by increasing `avg_age`.
 
 ```{r ref.label = "factor-solution"}
-
 ```
 
 ```{r echo=FALSE}
@@ -556,7 +547,7 @@ and tries to use `order()` to set the order of the factor levels in the `marital
 
 ```{r factor-wrong-class}
 marital_age %>%
-  mutate(marital = order(marital, avg_age))
+	mutate(marital = order(marital, avg_age))
 ```
 
 ```{r echo=FALSE}
@@ -570,7 +561,7 @@ but incorrectly assigns the result to an unexpected column.
 
 ```{r factor-wrong-column}
 marital_age %>%
-  mutate(marital_fct = fct_reorder(marital, avg_age))
+	mutate(marital_fct = fct_reorder(marital, avg_age))
 ```
 
 ```{r echo=FALSE}
@@ -584,7 +575,7 @@ resulting in an unexpected ordering of the factor levels.
 
 ```{r factor-wrong-subset}
 marital_age %>%
-  mutate(marital = fct_reorder(marital, avg_age, .desc = TRUE))
+	mutate(marital = fct_reorder(marital, avg_age, .desc = TRUE))
 ```
 
 ```{r echo=FALSE}
@@ -622,7 +613,6 @@ library(stringr)
 ```
 
 ```{r string, is_exercise = TRUE, chunk_label = TRUE}
-
 ```
 
 ```{r string-solution, chunk_label = TRUE}
@@ -635,7 +625,6 @@ grade_this_vector()
 ````
 
 ```{r ref.label = "string-setup", include=FALSE}
-
 ```
 
 Note that `fruit` is from `stringr::fruit`, 
@@ -656,7 +645,6 @@ What's your favorite two-worded fruit name?
 (Mine is the [purple mangosteen](https://en.wikipedia.org/wiki/Mangosteen).)
 
 ```{r ref.label = "string-solution"}
-
 ```
 
 ```{r echo=FALSE}
