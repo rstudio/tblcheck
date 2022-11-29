@@ -1,3 +1,4 @@
+#' @export
 friendly_class <- function(object) {
 	UseMethod("friendly_class")
 }
