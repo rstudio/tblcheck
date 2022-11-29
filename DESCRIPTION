@@ -25,8 +25,8 @@ Imports:
     knitr,
     lifecycle,
     magrittr,
+    methods,
     purrr,
-    R7 (>= 0.0.0.9000),
     rlang,
     tidyselect,
     utils,
@@ -41,7 +41,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    R7=RConsortium/OOP-WG,
     rstudio/gradethis
 Config/Needs/learnr: rstudio/learnr, rstudio/gradethis
 Config/Needs/website: pkgdown, tidyverse/tidytemplate, forcats, stringr
