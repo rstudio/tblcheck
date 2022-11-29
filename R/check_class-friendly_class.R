@@ -1,3 +1,8 @@
+#' Generate a human-readable description of an object's class
+#'
+#' @param object An object whose class will be described
+#'
+#' @return A [character] string of length 1
 #' @export
 friendly_class <- function(object) {
 	UseMethod("friendly_class")
