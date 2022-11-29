@@ -26,7 +26,6 @@ Imports:
     lifecycle,
     magrittr,
     methods,
-    purrr,
     rlang,
     tidyselect,
     utils,
