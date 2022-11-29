@@ -2,9 +2,33 @@
 % Please edit documentation in R/check_class-hinted_class_message.R
 \name{hinted_class_message}
 \alias{hinted_class_message}
+\alias{hinted_class_message,ANY,ANY-method}
+\alias{hinted_class_message,rowwise_df,grouped_df-method}
+\alias{hinted_class_message,data.frame,grouped_df-method}
+\alias{hinted_class_message,grouped_df,data.frame-method}
+\alias{hinted_class_message,data.frame,rowwise_df-method}
+\alias{hinted_class_message,rowwise_df,data.frame-method}
+\alias{hinted_class_message,py_tbl_df,py_grouped_df-method}
+\alias{hinted_class_message,py_grouped_df,py_tbl_df-method}
 \title{Generate a hint for how to convert one object type to another}
 \usage{
 hinted_class_message(object, expected)
+
+\S4method{hinted_class_message}{ANY,ANY}(object, expected)
+
+\S4method{hinted_class_message}{rowwise_df,grouped_df}(object, expected)
+
+\S4method{hinted_class_message}{data.frame,grouped_df}(object, expected)
+
+\S4method{hinted_class_message}{grouped_df,data.frame}(object, expected)
+
+\S4method{hinted_class_message}{data.frame,rowwise_df}(object, expected)
+
+\S4method{hinted_class_message}{rowwise_df,data.frame}(object, expected)
+
+\S4method{hinted_class_message}{py_tbl_df,py_grouped_df}(object, expected)
+
+\S4method{hinted_class_message}{py_grouped_df,py_tbl_df}(object, expected)
 }
 \arguments{
 \item{object}{An object to be compared to \code{expected}}

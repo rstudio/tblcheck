@@ -9,7 +9,7 @@ setGeneric("hinted_class_message", function(object, expected) {
 	standardGeneric("hinted_class_message")
 })
 
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("ANY", "ANY"),
 	function(object, expected) {
 		NULL
@@ -18,7 +18,7 @@ setMethod("hinted_class_message", signature("ANY", "ANY"),
 
 setOldClass("rowwise_df")
 setOldClass("grouped_df")
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("rowwise_df", "grouped_df"),
 	function(object, expected) {
 		paste(
@@ -30,7 +30,7 @@ setMethod("hinted_class_message", signature("rowwise_df", "grouped_df"),
 )
 
 setOldClass("data.frame")
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("data.frame", "grouped_df"),
 	function(object, expected) {
 		paste(
@@ -41,7 +41,7 @@ setMethod("hinted_class_message", signature("data.frame", "grouped_df"),
 	}
 )
 
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("grouped_df", "data.frame"),
 	function(object, expected) {
 		paste(
@@ -52,7 +52,7 @@ setMethod("hinted_class_message", signature("grouped_df", "data.frame"),
 	}
 )
 
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("data.frame", "rowwise_df"),
 	function(object, expected) {
 		paste(
@@ -63,7 +63,7 @@ setMethod("hinted_class_message", signature("data.frame", "rowwise_df"),
 	}
 )
 
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("rowwise_df", "data.frame"),
 	function(object, expected) {
 		paste(
@@ -76,7 +76,7 @@ setMethod("hinted_class_message", signature("rowwise_df", "data.frame"),
 
 setOldClass("py_tbl_df")
 setOldClass("py_grouped_df")
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("py_tbl_df", "py_grouped_df"),
 	function(object, expected) {
 		paste(
@@ -87,7 +87,7 @@ setMethod("hinted_class_message", signature("py_tbl_df", "py_grouped_df"),
 	}
 )
 
-#' @export
+#' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("py_grouped_df", "py_tbl_df"),
 	function(object, expected) {
 		paste(
