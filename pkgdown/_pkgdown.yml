@@ -100,3 +100,9 @@ reference:
     check function or transform a `problem` into a grade.
   contents:
   - starts_with("problem")
+- title: Helper functions
+  desc: |
+    Helper functions used to provide friendlier feedback.
+  contents:
+  - friendly_class
+  - hinted_class_message
