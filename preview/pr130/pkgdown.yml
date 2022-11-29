@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   examples: examples.html
   tblcheck: tblcheck.html
-last_built: 2022-11-28T19:08Z
+last_built: 2022-11-29T20:25Z
 urls:
   reference: https://pkgs.rstudio.com/tblcheck/preview/pr130/reference
   article: https://pkgs.rstudio.com/tblcheck/preview/pr130/articles
