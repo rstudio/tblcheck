@@ -201,7 +201,7 @@ Otherwise, invisibly returns <code><a href="https://rdrr.io/r/base/NULL.html" cl
 <span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="va">a</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tbl_check_class</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Your result should be a grouped tibble (class `grouped_df`), but it is a tibble (class `tbl_df`).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "class"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ expected: gropd_df [10 × 2] (S3: grouped_df/tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ..$ a: int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
@@ -218,8 +218,8 @@ Otherwise, invisibly returns <code><a href="https://rdrr.io/r/base/NULL.html" cl
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ..$ b: logi [1:10] FALSE TRUE FALSE TRUE FALSE TRUE ...</span>
 <span class="r-in"><span><span class="fu">tbl_grade_class</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Your result should be a grouped tibble (class `grouped_df`),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   but it is a tibble (class `tbl_df`).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Your table isn't a grouped data frame, but I was expecting it</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   to be grouped. Maybe you need to use `group_by()`?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Ignore the difference between tibble and data frame</span></span></span>

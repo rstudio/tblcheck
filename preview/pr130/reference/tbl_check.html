@@ -263,8 +263,6 @@ not expected, or is missing groups that are expected.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tbl_check</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Found more than one class "tbl_df" in cache; using the first, from namespace 'tibble'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Also defined by ‘tblcheck’</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Your table should be a tibble (class `tbl_df`), but it is a data frame (class `data.frame`).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "class"</span>
@@ -374,12 +372,8 @@ not expected, or is missing groups that are expected.</p></li>
 <span class="r-in"><span><span class="va">.result</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">.solution</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>, <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">tbl_check</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Found more than one class "tbl_df" in cache; using the first, from namespace 'tibble'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Also defined by ‘tblcheck’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Found more than one class "grouped_df" in cache; using the first, from namespace 'tblcheck'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Also defined by ‘dplyr’</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Your table should be a grouped tibble (class `grouped_df`), but it is a tibble (class `tbl_df`).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Your table isn't a grouped data frame, but I was expecting it to be grouped. Maybe you need to use `group_by()`?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "class"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ expected: gropd_df [10 × 2] (S3: grouped_df/tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ..$ a: int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
@@ -397,8 +391,8 @@ not expected, or is missing groups that are expected.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ location: chr "table"</span>
 <span class="r-in"><span><span class="fu">tbl_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Your table should be a grouped tibble (class `grouped_df`), but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   it is a tibble (class `tbl_df`).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Your table isn't a grouped data frame, but I was expecting it</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   to be grouped. Maybe you need to use `group_by()`?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &gt;</span>
 <span class="r-in"><span><span class="fu">tbl_grade</span><span class="op">(</span>check_groups <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 </code></pre></div>
