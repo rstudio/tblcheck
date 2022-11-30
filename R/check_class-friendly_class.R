@@ -80,6 +80,7 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 	paste0("a vector of date-times (class `", class, "`)")
 })
 
+setOldClass("tbl_df")
 #' @rdname friendly_class
 setMethod("friendly_class", signature("tbl_df"), function(object) {
 	if (!setequal(class(object), c("tbl_df", "tbl", "data.frame"))) {
@@ -88,6 +89,7 @@ setMethod("friendly_class", signature("tbl_df"), function(object) {
 	"a tibble (class `tbl_df`)"
 })
 
+setOldClass("grouped_df")
 #' @rdname friendly_class
 setMethod("friendly_class", signature("grouped_df"), function(object) {
 	if (!setequal(class(object), c("grouped_df", "tbl_df", "tbl", "data.frame"))) {
@@ -96,6 +98,7 @@ setMethod("friendly_class", signature("grouped_df"), function(object) {
 	"a grouped tibble (class `grouped_df`)"
 })
 
+setOldClass("rowwise_df")
 #' @rdname friendly_class
 setMethod("friendly_class", signature("rowwise_df"), function(object) {
 	if (!setequal(class(object), c("rowwise_df", "tbl_df", "tbl", "data.frame"))) {
