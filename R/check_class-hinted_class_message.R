@@ -16,8 +16,8 @@ setMethod("hinted_class_message", signature("ANY", "ANY"),
 	}
 )
 
-setOldClass("rowwise_df")
-setOldClass("grouped_df")
+setOldClass(c("grouped_df", "tbl_df", "tbl", "data.frame"))
+setOldClass(c("rowwise_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname hinted_class_message
 setMethod("hinted_class_message", signature("rowwise_df", "grouped_df"),
 	function(object, expected) {

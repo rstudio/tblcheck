@@ -80,7 +80,7 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 	paste0("a vector of date-times (class `", class, "`)")
 })
 
-setOldClass("tbl_df")
+setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("tbl_df"), function(object) {
 	if (!setequal(class(object), c("tbl_df", "tbl", "data.frame"))) {
@@ -89,7 +89,7 @@ setMethod("friendly_class", signature("tbl_df"), function(object) {
 	"a tibble (class `tbl_df`)"
 })
 
-setOldClass("grouped_df")
+setOldClass(c("grouped_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("grouped_df"), function(object) {
 	if (!setequal(class(object), c("grouped_df", "tbl_df", "tbl", "data.frame"))) {
@@ -98,7 +98,7 @@ setMethod("friendly_class", signature("grouped_df"), function(object) {
 	"a grouped tibble (class `grouped_df`)"
 })
 
-setOldClass("rowwise_df")
+setOldClass(c("rowwise_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("rowwise_df"), function(object) {
 	if (!setequal(class(object), c("rowwise_df", "tbl_df", "tbl", "data.frame"))) {
@@ -113,7 +113,7 @@ setMethod("friendly_class", signature("data.frame"), function(object) {
 	"a data frame (class `data.frame`)"
 })
 
-setOldClass("py_tbl_df")
+setOldClass(c("py_tbl_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("py_tbl_df"), function(object) {
 	if (!setequal(class(object), c("py_tbl_df", "tbl_df", "tbl", "data.frame"))) {
@@ -122,7 +122,7 @@ setMethod("friendly_class", signature("py_tbl_df"), function(object) {
 	"a DataFrame"
 })
 
-setOldClass("py_grouped_df")
+setOldClass(c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("py_grouped_df"), function(object) {
 	if (!setequal(class(object), c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"))) {
