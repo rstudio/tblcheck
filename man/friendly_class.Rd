@@ -10,7 +10,9 @@
 \alias{friendly_class,complex-method}
 \alias{friendly_class,raw-method}
 \alias{friendly_class,factor-method}
+\alias{friendly_class,Date-method}
 \alias{friendly_class,POSIXt-method}
+\alias{friendly_class,Period-method}
 \alias{friendly_class,tbl_df-method}
 \alias{friendly_class,grouped_df-method}
 \alias{friendly_class,rowwise_df-method}
@@ -40,7 +42,11 @@ friendly_class(object)
 
 \S4method{friendly_class}{factor}(object)
 
+\S4method{friendly_class}{Date}(object)
+
 \S4method{friendly_class}{POSIXt}(object)
+
+\S4method{friendly_class}{Period}(object)
 
 \S4method{friendly_class}{tbl_df}(object)
 
@@ -64,7 +70,8 @@ friendly_class(object)
 \item{object}{An object whose class will be described}
 }
 \value{
-A \link{character} string of length 1
+A \link{character} string of length 1,
+based on the \link{class} and \link{length} of \code{object}.
 }
 \description{
 Generate a human-readable description of an object's class

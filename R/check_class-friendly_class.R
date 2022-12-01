@@ -2,7 +2,8 @@
 #'
 #' @param object An object whose class will be described
 #'
-#' @return A [character] string of length 1
+#' @return A [character] string of length 1,
+#'   based on the [class] and [length] of `object`.
 #' @importFrom glue glue
 #' @export
 setGeneric("friendly_class", function(object) {
@@ -73,6 +74,13 @@ setMethod("friendly_class", signature("factor"), function(object) {
 })
 
 #' @rdname friendly_class
+setMethod("friendly_class", signature("Date"), function(object) {
+	if (!identical(class(object), "Date")) return(NextMethod())
+	if (length(object) == 1) return("a date (class `Date`)")
+	"a vector of dates (class `Date`)"
+})
+
+#' @rdname friendly_class
 setMethod("friendly_class", signature("POSIXt"), function(object) {
 	class <- setdiff(class(object), "POSIXt")
 	if (!identical(class, "POSIXct") && !identical(class, "POSIXlt")) {
@@ -80,6 +88,14 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 	}
 	if (length(object) == 1) return(paste0("a date-time (class `", class, "`)"))
 	paste0("a vector of date-times (class `", class, "`)")
+})
+
+setOldClass("Period")
+#' @rdname friendly_class
+setMethod("friendly_class", signature("Period"), function(object) {
+	if (!identical(class(object), "Period")) return(NextMethod())
+	if (length(object) == 1) return("a time period (class `Period`)")
+	"a vector of time periods (class `Period`)"
 })
 
 setOldClass(c("tbl_df", "tbl", "data.frame"))
