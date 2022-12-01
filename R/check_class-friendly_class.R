@@ -3,6 +3,7 @@
 #' @param object An object whose class will be described
 #'
 #' @return A [character] string of length 1
+#' @importFrom glue glue
 #' @export
 setGeneric("friendly_class", function(object) {
 	standardGeneric("friendly_class")
@@ -12,7 +13,7 @@ setGeneric("friendly_class", function(object) {
 setMethod("friendly_class", signature("ANY"), function(object) {
 	class <- class(object)
 	class_str <- knitr::combine_words(md_code(class))
-	glue::glue(
+	glue(
 		ngettext(
 			length(class),
 			"an object with class {class_str}",
@@ -45,8 +46,9 @@ setMethod("friendly_class", signature("integer"), function(object) {
 #' @rdname friendly_class
 setMethod("friendly_class", signature("logical"), function(object) {
 	if (!identical(class(object), "logical")) return(NextMethod())
-	if (length(object) == 1) return("a TRUE/FALSE value (class `logical`)")
-	"a vector of TRUE/FALSE values (class `logical`)"
+	logical <- if (any(is.na(object))) "`TRUE`/`FALSE`/`NA`" else "`TRUE`/`FALSE`"
+	if (length(object) == 1) return(glue("a {logical} value (class `logical`)"))
+	glue("a vector of {logical} values (class `logical`)")
 })
 
 #' @rdname friendly_class
