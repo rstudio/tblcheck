@@ -86,8 +86,8 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 	if (!identical(class, "POSIXct") && !identical(class, "POSIXlt")) {
 		return(NextMethod())
 	}
-	if (length(object) == 1) return(paste0("a date-time (class `", class, "`)"))
-	paste0("a vector of date-times (class `", class, "`)")
+	if (length(object) == 1) return(glue("a date-time (class `{class}`)"))
+	glue("a vector of date-times (class `{class}`)")
 })
 
 setOldClass("Period")
