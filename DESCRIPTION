@@ -24,6 +24,7 @@ Imports:
     gradethis (>= 0.2.7.9000),
     knitr,
     lifecycle,
+    lubridate,
     magrittr,
     methods,
     rlang,

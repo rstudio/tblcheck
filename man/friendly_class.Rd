@@ -13,10 +13,10 @@
 \alias{friendly_class,Date-method}
 \alias{friendly_class,POSIXt-method}
 \alias{friendly_class,Period-method}
+\alias{friendly_class,data.frame-method}
 \alias{friendly_class,tbl_df-method}
 \alias{friendly_class,grouped_df-method}
 \alias{friendly_class,rowwise_df-method}
-\alias{friendly_class,data.frame-method}
 \alias{friendly_class,py_tbl_df-method}
 \alias{friendly_class,py_grouped_df-method}
 \alias{friendly_class,list-method}
@@ -48,13 +48,13 @@ friendly_class(object)
 
 \S4method{friendly_class}{Period}(object)
 
+\S4method{friendly_class}{data.frame}(object)
+
 \S4method{friendly_class}{tbl_df}(object)
 
 \S4method{friendly_class}{grouped_df}(object)
 
 \S4method{friendly_class}{rowwise_df}(object)
-
-\S4method{friendly_class}{data.frame}(object)
 
 \S4method{friendly_class}{py_tbl_df}(object)
 
