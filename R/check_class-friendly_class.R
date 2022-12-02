@@ -39,14 +39,14 @@ setMethod("friendly_class", signature("numeric"), function(object) {
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("integer"), function(object) {
-	if (!identical(class(object), "integer")) return(NextMethod())
+	if (!identical(class(object), "integer")) return(callNextMethod())
 	if (length(object) == 1) return("an integer (class `integer`)")
 	"a vector of integers (class `integer`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("logical"), function(object) {
-	if (!identical(class(object), "logical")) return(NextMethod())
+	if (!identical(class(object), "logical")) return(callNextMethod())
 	logical <- if (any(is.na(object))) "`TRUE`/`FALSE`/`NA`" else "`TRUE`/`FALSE`"
 	if (length(object) == 1) return(glue("a {logical} value (class `logical`)"))
 	glue("a vector of {logical} values (class `logical`)")
@@ -54,28 +54,28 @@ setMethod("friendly_class", signature("logical"), function(object) {
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("complex"), function(object) {
-	if (!identical(class(object), "complex")) return(NextMethod())
+	if (!identical(class(object), "complex")) return(callNextMethod())
 	if (length(object) == 1) return("a complex number (class `complex`)")
 	"a vector of complex numbers (class `complex`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("raw"), function(object) {
-	if (!identical(class(object), "raw")) return(NextMethod())
+	if (!identical(class(object), "raw")) return(callNextMethod())
 	if (length(object) == 1) return("a raw byte value (class `raw`)")
 	"a vector of raw byte values (class `raw`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("factor"), function(object) {
-	if (!identical(class(object), "factor")) return(NextMethod())
+	if (!identical(class(object), "factor")) return(callNextMethod())
 	if (length(object) == 1) return("a factor (class `factor`)")
 	"a vector of factors (class `factor`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("Date"), function(object) {
-	if (!identical(class(object), "Date")) return(NextMethod())
+	if (!identical(class(object), "Date")) return(callNextMethod())
 	if (length(object) == 1) return("a date (class `Date`)")
 	"a vector of dates (class `Date`)"
 })
@@ -84,7 +84,7 @@ setMethod("friendly_class", signature("Date"), function(object) {
 setMethod("friendly_class", signature("POSIXt"), function(object) {
 	class <- setdiff(class(object), "POSIXt")
 	if (!identical(class, "POSIXct") && !identical(class, "POSIXlt")) {
-		return(NextMethod())
+		return(callNextMethod())
 	}
 	if (length(object) == 1) return(glue("a date-time (class `{class}`)"))
 	glue("a vector of date-times (class `{class}`)")
@@ -93,16 +93,22 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 setOldClass("Period")
 #' @rdname friendly_class
 setMethod("friendly_class", signature("Period"), function(object) {
-	if (!identical(class(object), "Period")) return(NextMethod())
+	if (!identical(class(object), "Period")) return(callNextMethod())
 	if (length(object) == 1) return("a time period (class `Period`)")
 	"a vector of time periods (class `Period`)"
+})
+
+#' @rdname friendly_class
+setMethod("friendly_class", signature("data.frame"), function(object) {
+	if (!identical(class(object), "data.frame")) return(callNextMethod())
+	"a data frame (class `data.frame`)"
 })
 
 setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("tbl_df"), function(object) {
 	if (!setequal(class(object), c("tbl_df", "tbl", "data.frame"))) {
-		return(NextMethod())
+		return(callNextMethod())
 	}
 	"a tibble (class `tbl_df`)"
 })
@@ -111,7 +117,7 @@ setOldClass(c("grouped_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("grouped_df"), function(object) {
 	if (!setequal(class(object), c("grouped_df", "tbl_df", "tbl", "data.frame"))) {
-		return(NextMethod())
+		return(callNextMethod())
 	}
 	"a grouped tibble (class `grouped_df`)"
 })
@@ -120,22 +126,16 @@ setOldClass(c("rowwise_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("rowwise_df"), function(object) {
 	if (!setequal(class(object), c("rowwise_df", "tbl_df", "tbl", "data.frame"))) {
-		return(NextMethod())
+		return(callNextMethod())
 	}
 	"a rowwise tibble (class `rowwise_df`)"
-})
-
-#' @rdname friendly_class
-setMethod("friendly_class", signature("data.frame"), function(object) {
-	if (!identical(class(object), "data.frame")) return(NextMethod())
-	"a data frame (class `data.frame`)"
 })
 
 setOldClass(c("py_tbl_df", "tbl_df", "tbl", "data.frame"))
 #' @rdname friendly_class
 setMethod("friendly_class", signature("py_tbl_df"), function(object) {
 	if (!setequal(class(object), c("py_tbl_df", "tbl_df", "tbl", "data.frame"))) {
-		return(NextMethod())
+		return(callNextMethod())
 	}
 	"a DataFrame"
 })
@@ -144,26 +144,26 @@ setOldClass(c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data
 #' @rdname friendly_class
 setMethod("friendly_class", signature("py_grouped_df"), function(object) {
 	if (!setequal(class(object), c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"))) {
-		return(NextMethod())
+		return(callNextMethod())
 	}
 	"a DataFrame with row labels (i.e. index)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("list"), function(object) {
-	if (!identical(class(object), "list")) return(NextMethod())
+	if (!identical(class(object), "list")) return(callNextMethod())
 	"a list (class `list`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("matrix"), function(object) {
 	class(object) <- setdiff(class(object), "array")
-	if (!identical(class(object), "matrix")) return(NextMethod())
+	if (!identical(class(object), "matrix")) return(callNextMethod())
 	"a matrix (class `matrix`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("array"), function(object) {
-	if (!identical(class(object), "array")) return(NextMethod())
+	if (!identical(class(object), "array")) return(callNextMethod())
 	"an array (class `array`)"
 })
