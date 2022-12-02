@@ -25,28 +25,28 @@ setMethod("friendly_class", signature("ANY"), function(object) {
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("character"), function(object) {
-	if (!identical(class(object), "character")) return(callNextMethod())
+	if (!setequal(class(object), "character")) return(callNextMethod())
 	if (length(object) == 1) return("a text string (class `character`)")
 	"a vector of text (class `character`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("numeric"), function(object) {
-	if (!identical(class(object), "numeric")) return(callNextMethod())
+	if (!setequal(class(object), "numeric")) return(callNextMethod())
 	if (length(object) == 1) return("a number (class `numeric`)")
 	"a vector of numbers (class `numeric`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("integer"), function(object) {
-	if (!identical(class(object), "integer")) return(callNextMethod())
+	if (!setequal(class(object), "integer")) return(callNextMethod())
 	if (length(object) == 1) return("an integer (class `integer`)")
 	"a vector of integers (class `integer`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("logical"), function(object) {
-	if (!identical(class(object), "logical")) return(callNextMethod())
+	if (!setequal(class(object), "logical")) return(callNextMethod())
 	logical <- if (any(is.na(object))) "`TRUE`/`FALSE`/`NA`" else "`TRUE`/`FALSE`"
 	if (length(object) == 1) return(glue("a {logical} value (class `logical`)"))
 	glue("a vector of {logical} values (class `logical`)")
@@ -54,28 +54,28 @@ setMethod("friendly_class", signature("logical"), function(object) {
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("complex"), function(object) {
-	if (!identical(class(object), "complex")) return(callNextMethod())
+	if (!setequal(class(object), "complex")) return(callNextMethod())
 	if (length(object) == 1) return("a complex number (class `complex`)")
 	"a vector of complex numbers (class `complex`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("raw"), function(object) {
-	if (!identical(class(object), "raw")) return(callNextMethod())
+	if (!setequal(class(object), "raw")) return(callNextMethod())
 	if (length(object) == 1) return("a raw byte value (class `raw`)")
 	"a vector of raw byte values (class `raw`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("factor"), function(object) {
-	if (!identical(class(object), "factor")) return(callNextMethod())
+	if (!setequal(class(object), "factor")) return(callNextMethod())
 	if (length(object) == 1) return("a factor (class `factor`)")
 	"a vector of factors (class `factor`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("Date"), function(object) {
-	if (!identical(class(object), "Date")) return(callNextMethod())
+	if (!setequal(class(object), "Date")) return(callNextMethod())
 	if (length(object) == 1) return("a date (class `Date`)")
 	"a vector of dates (class `Date`)"
 })
@@ -93,14 +93,14 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 #' @rdname friendly_class
 #' @importClassesFrom lubridate Period
 setMethod("friendly_class", signature("Period"), function(object) {
-	if (!identical(class(object), "Period")) return(callNextMethod())
+	if (!setequal(class(object), "Period")) return(callNextMethod())
 	if (length(object) == 1) return("a time period (class `Period`)")
 	"a vector of time periods (class `Period`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("data.frame"), function(object) {
-	if (!identical(class(object), "data.frame")) return(callNextMethod())
+	if (!setequal(class(object), "data.frame")) return(callNextMethod())
 	"a data frame (class `data.frame`)"
 })
 
@@ -151,19 +151,19 @@ setMethod("friendly_class", signature("py_grouped_df"), function(object) {
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("list"), function(object) {
-	if (!identical(class(object), "list")) return(callNextMethod())
+	if (!setequal(class(object), "list")) return(callNextMethod())
 	"a list (class `list`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("matrix"), function(object) {
 	class(object) <- setdiff(class(object), "array")
-	if (!identical(class(object), "matrix")) return(callNextMethod())
+	if (!setequal(class(object), "matrix")) return(callNextMethod())
 	"a matrix (class `matrix`)"
 })
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("array"), function(object) {
-	if (!identical(class(object), "array")) return(callNextMethod())
+	if (!setequal(class(object), "array")) return(callNextMethod())
 	"an array (class `array`)"
 })
