@@ -24,7 +24,6 @@ Imports:
     gradethis (>= 0.2.7.9000),
     knitr,
     lifecycle,
-    lubridate,
     magrittr,
     methods,
     rlang,
@@ -34,6 +33,7 @@ Imports:
 Suggests:
     dplyr,
     learnr,
+    lubridate,
     mockery,
     rmarkdown,
     testthat (>= 3.0.0),

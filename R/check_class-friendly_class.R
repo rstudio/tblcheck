@@ -90,8 +90,8 @@ setMethod("friendly_class", signature("POSIXt"), function(object) {
 	glue("a vector of date-times (class `{class}`)")
 })
 
+setOldClass(c("Period"))
 #' @rdname friendly_class
-#' @importClassesFrom lubridate Period
 setMethod("friendly_class", signature("Period"), function(object) {
 	if (!setequal(class(object), "Period")) return(callNextMethod())
 	if (length(object) == 1) return("a time period (class `Period`)")
