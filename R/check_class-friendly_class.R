@@ -157,8 +157,8 @@ setMethod("friendly_class", signature("list"), function(object) {
 
 #' @rdname friendly_class
 setMethod("friendly_class", signature("matrix"), function(object) {
-	class(object) <- setdiff(class(object), "array")
-	if (!setequal(class(object), "matrix")) return(callNextMethod())
+	class <- setdiff(class(object), "array")
+	if (!identical(class, "matrix")) return(callNextMethod())
 	"a matrix (class `matrix`)"
 })
 
