@@ -14,10 +14,10 @@ test_that("friendly_class() default", {
 })
 
 test_that("friendly_class() character", {
-  expect_equal(
-  	friendly_class("a"),
-  	"a text string (class `character`)"
-  )
+	expect_equal(
+		friendly_class("a"),
+		"a text string (class `character`)"
+	)
 	expect_equal(
 		friendly_class(letters),
 		"a vector of text (class `character`)"
