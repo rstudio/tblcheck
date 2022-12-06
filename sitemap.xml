@@ -34,10 +34,16 @@
     <loc>https://pkgs.rstudio.com/tblcheck/reference/deprecated-methods.html</loc>
   </url>
   <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/friendly_class.html</loc>
+  </url>
+  <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/grade_this_table.html</loc>
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/grade_this_vector.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/hinted_class_message.html</loc>
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/index.html</loc>
@@ -83,6 +89,9 @@
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_table.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/tblcheck-package.html</loc>
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/tblcheck_grade.html</loc>

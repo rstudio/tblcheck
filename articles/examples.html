@@ -16,8 +16,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.4/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.4/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -42,7 +42,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tblcheck</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -198,8 +198,14 @@ button[role="tab"] > svg {
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>To help you get a feel for the kind of advice tblcheck provides, we’ve collected a few example exercises that use <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> or <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> from tblcheck to grade a <a href="https://rstudio.github.io/learnr/" class="external-link">learnr</a> exercise.</p>
-<p>In the examples below, we’ll show the specific R chunks you’d need to prepare the exercise. Globally, we assume <a href="https://rstudio.github.io/learnr/" class="external-link">learnr</a> and <a href="https://pkgs.rstudio.com/gradethis/" class="external-link">gradethis</a> are already loaded, and we’ve made a few adjustments to the default gradethis options using <code><a href="https://pkgs.rstudio.com/gradethis/reference/gradethis_setup.html" class="external-link">gradethis::gradethis_setup()</a></code>:</p>
+<p>To help you get a feel for the kind of advice tblcheck provides,
+we’ve collected a few example exercises that use
+<code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> or <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> from
+tblcheck to grade a <a href="https://rstudio.github.io/learnr/" class="external-link">learnr</a> exercise.</p>
+<p>In the examples below, we’ll show the specific R chunks you’d need to
+prepare the exercise. Globally, we assume <a href="https://rstudio.github.io/learnr/" class="external-link">learnr</a> and <a href="https://pkgs.rstudio.com/gradethis/" class="external-link">gradethis</a> are already
+loaded, and we’ve made a few adjustments to the default gradethis
+options using <code><a href="https://pkgs.rstudio.com/gradethis/reference/gradethis_setup.html" class="external-link">gradethis::gradethis_setup()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(learnr)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">library(gradethis)</span></span>
@@ -212,18 +218,26 @@ button[role="tab"] > svg {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">  maybe_code_feedback.before = "\n\n"</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>Note that in all examples below we’re using either <code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> or <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> without any additional customizations. We’ve also made sure that each exercise contains a <code>-solution</code> chunk. (<a href="tblcheck.html#usage">Read more about how to set up an exercise</a> for use with tblcheck.)</p>
+<p>Note that in all examples below we’re using either
+<code><a href="../reference/grade_this_table.html">grade_this_table()</a></code> or <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code>
+without any additional customizations. We’ve also made sure that each
+exercise contains a <code>-solution</code> chunk. (<a href="tblcheck.html#usage">Read more about how to set up an exercise</a>
+for use with tblcheck.)</p>
 </div>
 <div class="section level2 tabset">
 <h2 class="tabset" id="create-a-table">Create a Table<a class="anchor" aria-label="anchor" href="#create-a-table"></a>
 </h2>
-<p>The first example repeats the example presented in the <a href="tblcheck.html"><em>Get started</em> article</a>. The goal is for the learner to use the <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> function to create a table, but it takes them a few tries.</p>
+<p>The first example repeats the example presented in the <a href="tblcheck.html"><em>Get started</em> article</a>. The goal is for
+the learner to use the <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> function to create
+a table, but it takes them a few tries.</p>
 <blockquote>
 <p><strong>Prompt</strong><br>
-Create a <code>tibble</code> with three columns: <code>food</code>, <code>vegetable</code>, and <code>color</code>.</p>
+Create a <code>tibble</code> with three columns: <code>food</code>,
+<code>vegetable</code>, and <code>color</code>.</p>
 <ul>
 <li>In <code>food</code>, store “lettuce” and “tomato”.</li>
-<li>In <code>vegetable</code>, store whether the food is a vegetable.</li>
+<li>In <code>vegetable</code>, store whether the food is a
+vegetable.</li>
 <li>In <code>color</code>, store the color of the food.</li>
 </ul>
 </blockquote>
@@ -235,13 +249,20 @@ Create a <code>tibble</code> with three columns: <code>food</code>, <code>vegeta
 
 
 <ul class="nav nav-tabs" id="create-a-table" role="tablist">
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code" id="exercise-code-tab" type="button" role="tab" aria-controls="exercise-code" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg> Exercise Code</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer" id="correct-answer-tab" type="button" role="tab" aria-controls="correct-answer" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg> Correct Answer</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-class" id="wrong-class-tab" type="button" role="tab" aria-controls="wrong-class" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Class</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-names" id="wrong-names-tab" type="button" role="tab" aria-controls="wrong-names" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Names</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-length" id="wrong-length-tab" type="button" role="tab" aria-controls="wrong-length" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Length</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-class" id="wrong-column-class-tab" type="button" role="tab" aria-controls="wrong-column-class" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Column Class</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-values" id="wrong-column-values-tab" type="button" role="tab" aria-controls="wrong-column-values" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Column Values</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code" id="exercise-code-tab" type="button" role="tab" aria-controls="exercise-code" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg>
+Exercise Code</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer" id="correct-answer-tab" type="button" role="tab" aria-controls="correct-answer" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>
+Correct Answer</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-class" id="wrong-class-tab" type="button" role="tab" aria-controls="wrong-class" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Class</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-names" id="wrong-names-tab" type="button" role="tab" aria-controls="wrong-names" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Names</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-length" id="wrong-length-tab" type="button" role="tab" aria-controls="wrong-length" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Length</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-class" id="wrong-column-class-tab" type="button" role="tab" aria-controls="wrong-column-class" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Column Class</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-values" id="wrong-column-values-tab" type="button" role="tab" aria-controls="wrong-column-values" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Column Values</button></li>
 </ul>
 <div class="tab-content">
 <div class="active  tab-pane" id="exercise-code" role="tabpanel" aria-labelledby="exercise-code-tab">
@@ -256,9 +277,9 @@ Create a <code>tibble</code> with three columns: <code>food</code>, <code>vegeta
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tomato-solution}</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">tibble(</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">  food = c("lettuce", "tomato"),</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">  vegetable = c(TRUE, FALSE),</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">  color = c("green", "red")</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">    food = c("lettuce", "tomato"),</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">    vegetable = c(TRUE, FALSE),</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">    color = c("green", "red")</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
@@ -270,9 +291,9 @@ Create a <code>tibble</code> with three columns: <code>food</code>, <code>vegeta
 
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
-<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
-<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span>    food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>    vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
 <span><span class="co">#&gt;   food    vegetable color</span></span>
@@ -287,9 +308,9 @@ That’s a first-class answer! Correct!
 
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
-<span>  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
-<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span>    food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>    fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"green"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; $food</span></span>
 <span><span class="co">#&gt; [1] "lettuce"</span></span>
@@ -300,48 +321,52 @@ That’s a first-class answer! Correct!
 <span><span class="co">#&gt; $color</span></span>
 <span><span class="co">#&gt; [1] "green"</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table should be a tibble (class <code>tbl_df</code>), but it is a list (class <code>list</code>). Try it again. I have a good feeling about this.
+Your table should be a tibble (class <code>tbl_df</code>), but it is a
+list (class <code>list</code>). Try it again. I have a good feeling
+about this.
 </div>
 </div>
 <div class="tab-pane" id="wrong-names" role="tabpanel" aria-labelledby="wrong-names-tab">
 
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
-<span>  fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
-<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span>    food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>    fruit <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"green"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   food    fruit color</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE  green</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table should have a column named <code>vegetable</code>. Your table should not have a column named <code>fruit</code>. Let’s try it again.
+Your table should have a column named <code>vegetable</code>. Your table
+should not have a column named <code>fruit</code>. Let’s try it again.
 </div>
 </div>
 <div class="tab-pane" id="wrong-length" role="tabpanel" aria-labelledby="wrong-length-tab">
 
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>  food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
-<span>  vegetable <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
-<span>  color <span class="op">=</span> <span class="st">"green"</span></span>
+<span>    food <span class="op">=</span> <span class="st">"lettuce"</span>,</span>
+<span>    vegetable <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"green"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   food    vegetable color</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table should have 2 rows, but it has 1 row. Try it again. You get better each time.
+Your table should have 2 rows, but it has 1 row. Try it again. You get
+better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column-class" role="tabpanel" aria-labelledby="wrong-column-class-tab">
 
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
-<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>, <span class="st">"TRUE"</span><span class="op">)</span>,</span>
-<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span>    food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>    vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>, <span class="st">"TRUE"</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
 <span><span class="co">#&gt;   food    vegetable color</span></span>
@@ -349,16 +374,19 @@ Your table should have 2 rows, but it has 1 row. Try it again. You get better ea
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your <code>vegetable</code> column should be a vector of TRUE/FALSE values (class <code>logical</code>), but it is a vector of text (class <code>character</code>). Try it again. I have a good feeling about this.
+Your <code>vegetable</code> column should be a vector of
+<code>TRUE</code>/<code>FALSE</code> values (class
+<code>logical</code>), but it is a vector of text (class
+<code>character</code>). Try it again. I have a good feeling about this.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column-values" role="tabpanel" aria-labelledby="wrong-column-values-tab">
 
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
-<span>  food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
-<span>  vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
+<span>    food <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lettuce"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
+<span>    vegetable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
 <span><span class="co">#&gt;   food    vegetable color</span></span>
@@ -366,7 +394,10 @@ Your <code>vegetable</code> column should be a vector of TRUE/FALSE values (clas
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> lettuce TRUE      green</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> tomato  TRUE      red</span></span></code></pre></div>
 <div class="alert alert-danger">
-The first 2 values of your <code>vegetable</code> column should be <code>TRUE</code> and <code>FALSE</code>, not <code>TRUE</code> and <code>TRUE</code>. That’s okay: you learn more from mistakes than successes. Let’s do it one more time.
+The first 2 values of your <code>vegetable</code> column should be
+<code>TRUE</code> and <code>FALSE</code>, not <code>TRUE</code> and
+<code>TRUE</code>. That’s okay: you learn more from mistakes than
+successes. Let’s do it one more time.
 </div>
 </div>
 </div>
@@ -374,11 +405,18 @@ The first 2 values of your <code>vegetable</code> column should be <code>TRUE</c
 <div class="section level2 tabset">
 <h2 class="tabset" id="transform-a-table-with-transmute">Transform a Table with <code>transmute()</code><a class="anchor" aria-label="anchor" href="#transform-a-table-with-transmute"></a>
 </h2>
-<p>The <a href="#create-a-table">first example</a> shows <em>all</em> of the problems that tblcheck will discover. This example, however, is more realistic.</p>
-<p>In this problem students are asked to use the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code> function to transform the <code>starwars</code> dataset.</p>
+<p>The <a href="#create-a-table">first example</a> shows <em>all</em> of
+the problems that tblcheck will discover. This example, however, is more
+realistic.</p>
+<p>In this problem students are asked to use the
+<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code> function to transform the
+<code>starwars</code> dataset.</p>
 <blockquote>
 <p><strong>Prompt</strong><br>
-Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn convert <code>height</code> from centimeters into inches and <code>mass</code> from kilgrams into pounds, keeping only those columns.</p>
+Consider the <code>starwars</code> dataset. Use <code>transmute()</code>
+to turn convert <code>height</code> from centimeters into inches and
+<code>mass</code> from kilgrams into pounds, keeping only those
+columns.</p>
 </blockquote>
 
 
@@ -387,12 +425,18 @@ Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn
 
 
 <ul class="nav nav-tabs" id="transform-a-table-with-transmute" role="tablist">
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code-1" id="exercise-code-1-tab" type="button" role="tab" aria-controls="exercise-code-1" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg> Exercise Code</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer-1" id="correct-answer-1-tab" type="button" role="tab" aria-controls="correct-answer-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg> Correct Answer</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-function" id="wrong-function-tab" type="button" role="tab" aria-controls="wrong-function" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Function</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-order" id="wrong-column-order-tab" type="button" role="tab" aria-controls="wrong-column-order" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Column Order</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-classes" id="wrong-column-classes-tab" type="button" role="tab" aria-controls="wrong-column-classes" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Column Classes</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-calculation" id="wrong-calculation-tab" type="button" role="tab" aria-controls="wrong-calculation" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Calculation</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code-1" id="exercise-code-1-tab" type="button" role="tab" aria-controls="exercise-code-1" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg>
+Exercise Code</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer-1" id="correct-answer-1-tab" type="button" role="tab" aria-controls="correct-answer-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>
+Correct Answer</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-function" id="wrong-function-tab" type="button" role="tab" aria-controls="wrong-function" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Function</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-order" id="wrong-column-order-tab" type="button" role="tab" aria-controls="wrong-column-order" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Column Order</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column-classes" id="wrong-column-classes-tab" type="button" role="tab" aria-controls="wrong-column-classes" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Column Classes</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-calculation" id="wrong-calculation-tab" type="button" role="tab" aria-controls="wrong-calculation" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Calculation</button></li>
 </ul>
 <div class="tab-content">
 <div class="active  tab-pane" id="exercise-code-1" role="tabpanel" aria-labelledby="exercise-code-1-tab">
@@ -407,10 +451,10 @@ Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r starwars-solution}</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="in">starwars %&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">  transmute(</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="in">    height = height / 2.54, </span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">    mass = mass * 2.205</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">    transmute(</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="in">        height = height / 2.54,</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">        mass = mass * 2.205</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r starwars-check}</span></span>
@@ -419,13 +463,18 @@ Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn
 </div>
 <div class="tab-pane" id="correct-answer-1" role="tabpanel" aria-labelledby="correct-answer-1-tab">
 
-<p>The correct answer uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code> to divide the <code>height</code> column by <code>2.54</code> (to convert height from <em>cm</em> to <em>in</em>) and to multiply the <code>mass</code> column by <code>2.205</code> (to convert <em>kg</em> to <em>lb</em>). Note that <code>transmute()</code> keeps only the columns named in its calculations, so our final table has only two columns.</p>
+<p>The correct answer uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code> to divide the
+<code>height</code> column by <code>2.54</code> (to convert height from
+<em>cm</em> to <em>in</em>) and to multiply the <code>mass</code> column
+by <code>2.205</code> (to convert <em>kg</em> to <em>lb</em>). Note that
+<code>transmute()</code> keeps only the columns named in its
+calculations, so our final table has only two columns.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">transmute</span><span class="op">(</span></span>
-<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>, </span>
-<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
-<span>  <span class="op">)</span></span>
+<span>    <span class="fu">transmute</span><span class="op">(</span></span>
+<span>        height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>,</span>
+<span>        mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
+<span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
 <span><span class="co">#&gt;    height  mass</span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -443,13 +492,15 @@ Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn
 </div>
 <div class="tab-pane" id="wrong-function" role="tabpanel" aria-labelledby="wrong-function-tab">
 
-<p>In this example, the student uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>, which is certainly a reasonable choice but not what was requested. As a result, their submission contains more columns than expected.</p>
+<p>In this example, the student uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>, which
+is certainly a reasonable choice but not what was requested. As a
+result, their submission contains more columns than expected.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>,</span>
-<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
-<span>  <span class="op">)</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>        height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span>,</span>
+<span>        mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
+<span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 14</span></span></span>
 <span><span class="co">#&gt;    name      height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
@@ -468,18 +519,21 @@ Consider the <code>starwars</code> dataset. Use <code>transmute()</code> to turn
 <span><span class="co">#&gt; <span style="color: #949494;">#   and abbreviated variable names ¹​hair_color, ²​skin_color,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ³​eye_color, ⁴​birth_year</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table should not have columns named <code>name</code>, <code>hair_color</code>, <code>skin_color</code>, or 9 more. But no need to fret, try it again.
+Your table should not have columns named <code>name</code>,
+<code>hair_color</code>, <code>skin_color</code>, or 9 more. But no need
+to fret, try it again.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column-order" role="tabpanel" aria-labelledby="wrong-column-order-tab">
 
-<p>Here the student has done more or less the right thing, but they specified the columns in the opposite order.</p>
+<p>Here the student has done more or less the right thing, but they
+specified the columns in the opposite order.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">transmute</span><span class="op">(</span></span>
-<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span>,</span>
-<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span></span>
-<span>  <span class="op">)</span></span>
+<span>    <span class="fu">transmute</span><span class="op">(</span></span>
+<span>        mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span>,</span>
+<span>        height <span class="op">=</span> <span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span></span>
+<span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
 <span><span class="co">#&gt;     mass height</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -495,9 +549,13 @@ Your table should not have columns named <code>name</code>, <code>hair_color</co
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 170.    71.7</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table’s columns were not in the expected order. The first 2 columns of your table should be <code>height</code> and <code>mass</code>. Try it again. Perseverence is the key to success.
+Your table’s columns were not in the expected order. The first 2 columns
+of your table should be <code>height</code> and <code>mass</code>. Try
+it again. Perseverence is the key to success.
 </div>
-<p>If we decide we don’t mind if the columns aren’t in the right order, we could set <code>check_column_order = FALSE</code> in the check code for this exercise.</p>
+<p>If we decide we don’t mind if the columns aren’t in the right order,
+we could set <code>check_column_order = FALSE</code> in the check code
+for this exercise.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r starwars-check}</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="in">grade_this_table(check_column_order = FALSE)</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
@@ -507,13 +565,15 @@ Someone knows what they’re doing :) Correct!
 </div>
 <div class="tab-pane" id="wrong-column-classes" role="tabpanel" aria-labelledby="wrong-column-classes-tab">
 
-<p>If the student were to somehow create columns with an incorrect class, e.g. integer values where doubles were expected, tblcheck will alert them to their mistake.</p>
+<p>If the student were to somehow create columns with an incorrect
+class, e.g. integer values where doubles were expected, tblcheck will
+alert them to their mistake.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">transmute</span><span class="op">(</span></span>
-<span>    mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span><span class="op">)</span>,</span>
-<span>    height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<span>    <span class="fu">transmute</span><span class="op">(</span></span>
+<span>        mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span><span class="op">)</span>,</span>
+<span>        height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">height</span> <span class="op">/</span> <span class="fl">2.54</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
 <span><span class="co">#&gt;     mass height</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -529,18 +589,23 @@ Someone knows what they’re doing :) Correct!
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   169     71</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table’s columns were not in the expected order. The first 2 columns of your table should be <code>height</code> and <code>mass</code>. Give it another try.
+Your table’s columns were not in the expected order. The first 2 columns
+of your table should be <code>height</code> and <code>mass</code>. Give
+it another try.
 </div>
 </div>
 <div class="tab-pane" id="wrong-calculation" role="tabpanel" aria-labelledby="wrong-calculation-tab">
 
-<p>If the values are completely wrong — here the student is multiplying <code>height</code> by <code>2.54</code> rather than dividing — then tblcheck points out which column is incorrect and gives a hint about the expected values.</p>
+<p>If the values are completely wrong — here the student is multiplying
+<code>height</code> by <code>2.54</code> rather than dividing — then
+tblcheck points out which column is incorrect and gives a hint about the
+expected values.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">starwars</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">transmute</span><span class="op">(</span></span>
-<span>    height <span class="op">=</span> <span class="va">height</span> <span class="op">*</span> <span class="fl">2.54</span>,</span>
-<span>    mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span> </span>
-<span>  <span class="op">)</span></span>
+<span>    <span class="fu">transmute</span><span class="op">(</span></span>
+<span>        height <span class="op">=</span> <span class="va">height</span> <span class="op">*</span> <span class="fl">2.54</span>,</span>
+<span>        mass <span class="op">=</span> <span class="va">mass</span> <span class="op">*</span> <span class="fl">2.205</span></span>
+<span>    <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 87 × 2</span></span></span>
 <span><span class="co">#&gt;    height  mass</span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -556,7 +621,10 @@ Your table’s columns were not in the expected order. The first 2 columns of yo
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   462. 170. </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 77 more rows</span></span></span></code></pre></div>
 <div class="alert alert-danger">
-The first 3 values of your <code>height</code> column should be <code>67.7</code>, <code>65.7</code>, and <code>37.8</code>, not <code>437</code>, <code>424</code>, and <code>244</code>. Try it again. You get better each time.
+The first 3 values of your <code>height</code> column should be
+<code>67.7</code>, <code>65.7</code>, and <code>37.8</code>, not
+<code>437</code>, <code>424</code>, and <code>244</code>. Try it again.
+You get better each time.
 </div>
 </div>
 </div>
@@ -564,10 +632,14 @@ The first 3 values of your <code>height</code> column should be <code>67.7</code
 <div class="section level2 tabset">
 <h2 class="tabset" id="transform-a-factor-column">Transform a Factor Column<a class="anchor" aria-label="anchor" href="#transform-a-factor-column"></a>
 </h2>
-<p>This example comes from a lesson on <code>factors</code> in R. Students have just learned about functions from the <a href="https://forcats.tidyverse.org" class="external-link">forcats package</a>, and are now asked to practice using <code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code>.</p>
+<p>This example comes from a lesson on <code>factors</code> in R.
+Students have just learned about functions from the <a href="https://forcats.tidyverse.org" class="external-link">forcats package</a>, and are now
+asked to practice using <code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code>.</p>
 <blockquote>
 <p><strong>Prompt</strong><br>
-Consider the <code>marital_age</code> dataset. Use <code>fct_reorder()</code> to turn the <code>marital</code> column into a factor with levels ordered based on <code>avg_age</code>.</p>
+Consider the <code>marital_age</code> dataset. Use
+<code>fct_reorder()</code> to turn the <code>marital</code> column into
+a factor with levels ordered based on <code>avg_age</code>.</p>
 </blockquote>
 
 
@@ -575,25 +647,32 @@ Consider the <code>marital_age</code> dataset. Use <code>fct_reorder()</code> to
 
 
 <ul class="nav nav-tabs" id="transform-a-factor-column" role="tablist">
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code-2" id="exercise-code-2-tab" type="button" role="tab" aria-controls="exercise-code-2" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg> Exercise Code</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer-2" id="correct-answer-2-tab" type="button" role="tab" aria-controls="correct-answer-2" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg> Correct Answer</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-function-1" id="wrong-function-1-tab" type="button" role="tab" aria-controls="wrong-function-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Function</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column" id="wrong-column-tab" type="button" role="tab" aria-controls="wrong-column" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Column</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-direction" id="wrong-direction-tab" type="button" role="tab" aria-controls="wrong-direction" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Direction</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code-2" id="exercise-code-2-tab" type="button" role="tab" aria-controls="exercise-code-2" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg>
+Exercise Code</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer-2" id="correct-answer-2-tab" type="button" role="tab" aria-controls="correct-answer-2" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>
+Correct Answer</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-function-1" id="wrong-function-1-tab" type="button" role="tab" aria-controls="wrong-function-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Function</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-column" id="wrong-column-tab" type="button" role="tab" aria-controls="wrong-column" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Column</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-direction" id="wrong-direction-tab" type="button" role="tab" aria-controls="wrong-direction" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Direction</button></li>
 </ul>
 <div class="tab-content">
 <div class="active  tab-pane" id="exercise-code-2" role="tabpanel" aria-labelledby="exercise-code-2-tab">
 
-<p>We created a new table specifically for this exercise in the <code>factor-setup</code> chunk, drawing from the data provided in <code><a href="https://forcats.tidyverse.org/reference/gss_cat.html" class="external-link">forcats::gss_cat</a></code>.</p>
+<p>We created a new table specifically for this exercise in the
+<code>factor-setup</code> chunk, drawing from the data provided in
+<code><a href="https://forcats.tidyverse.org/reference/gss_cat.html" class="external-link">forcats::gss_cat</a></code>.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r factor-setup}</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="in">library(forcats)</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="in">marital_age &lt;- gss_cat %&gt;%</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(marital = as.character(marital)) %&gt;%</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(marital) %&gt;% </span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="in">  summarize(avg_age = mean(age, na.rm = TRUE)) %&gt;% </span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="in">  ungroup()</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="in">    mutate(marital = as.character(marital)) %&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="in">    group_by(marital) %&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="in">    summarize(avg_age = mean(age, na.rm = TRUE)) %&gt;%</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="in">    ungroup()</span></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r factor, exercise=TRUE}</span></span>
@@ -602,13 +681,15 @@ Consider the <code>marital_age</code> dataset. Use <code>fct_reorder()</code> to
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r factor-solution}</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="in">marital_age %&gt;%</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(marital = fct_reorder(marital, avg_age))</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="in">    mutate(marital = fct_reorder(marital, avg_age))</span></span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r factor-check}</span></span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="in">grade_this_table()</span></span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>Since students aren’t familiar with the <code>marital_age</code> table, we’ve included the starter code so they can see the initial state of the table when they start the exercise.</p>
+<p>Since students aren’t familiar with the <code>marital_age</code>
+table, we’ve included the starter code so they can see the initial state
+of the table when they start the exercise.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marital_age</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
@@ -623,10 +704,13 @@ Consider the <code>marital_age</code> dataset. Use <code>fct_reorder()</code> to
 </div>
 <div class="tab-pane" id="correct-answer-2" role="tabpanel" aria-labelledby="correct-answer-2-tab">
 
-<p>In the expected solution, the student will use the <code>forecats::fct_reorder()</code> function to transform the <code>marital</code> column, reordering its factor levels by increasing <code>avg_age</code>.</p>
+<p>In the expected solution, the student will use the
+<code>forecats::fct_reorder()</code> function to transform the
+<code>marital</code> column, reordering its factor levels by increasing
+<code>avg_age</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   marital       avg_age</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -642,10 +726,13 @@ Splendid! Correct!
 </div>
 <div class="tab-pane" id="wrong-function-1" role="tabpanel" aria-labelledby="wrong-function-1-tab">
 
-<p>Here the student forgets about the <code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code> function and tries to use <code><a href="https://rdrr.io/r/base/order.html" class="external-link">order()</a></code> to set the order of the factor levels in the <code>marital</code> column.</p>
+<p>Here the student forgets about the
+<code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code> function and tries to use
+<code><a href="https://rdrr.io/r/base/order.html" class="external-link">order()</a></code> to set the order of the factor levels in the
+<code>marital</code> column.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   marital avg_age</span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -656,15 +743,19 @@ Splendid! Correct!
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>       5    45.3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>       6    71.7</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your <code>marital</code> column should be a vector of factors (class <code>factor</code>), but it is a vector of integers (class <code>integer</code>). Try it again. You get better each time.
+Your <code>marital</code> column should be a vector of factors (class
+<code>factor</code>), but it is a vector of integers (class
+<code>integer</code>). Try it again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-column" role="tabpanel" aria-labelledby="wrong-column-tab">
 
-<p>In this case the student remembers to use <code>forecats::fct_reorder()</code> but incorrectly assigns the result to an unexpected column.</p>
+<p>In this case the student remembers to use
+<code>forecats::fct_reorder()</code> but incorrectly assigns the result
+to an unexpected column.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>marital_fct <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>marital_fct <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   marital       avg_age marital_fct  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        </span></span>
@@ -675,15 +766,18 @@ Your <code>marital</code> column should be a vector of factors (class <code>fact
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3 Separated    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7 Widowed</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your table should not have a column named <code>marital_fct</code>. Try it again. You get better each time.
+Your table should not have a column named <code>marital_fct</code>. Try
+it again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-direction" role="tabpanel" aria-labelledby="wrong-direction-tab">
 
-<p>In another case, the student uses <code>forecats::fct_reorder()</code> but sets <code>.desc = TRUE</code>, resulting in an unexpected ordering of the factor levels.</p>
+<p>In another case, the student uses
+<code>forecats::fct_reorder()</code> but sets <code>.desc = TRUE</code>,
+resulting in an unexpected ordering of the factor levels.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marital_age</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>marital <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">marital</span>, <span class="va">avg_age</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   marital       avg_age</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -694,7 +788,8 @@ Your table should not have a column named <code>marital_fct</code>. Try it again
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Separated        45.3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Widowed          71.7</span></span></code></pre></div>
 <div class="alert alert-danger">
-The order of the levels in your <code>marital</code> column are the reverse of the expected order. Try it again. You get better each time.
+The order of the levels in your <code>marital</code> column are the
+reverse of the expected order. Try it again. You get better each time.
 </div>
 </div>
 </div>
@@ -702,12 +797,18 @@ The order of the levels in your <code>marital</code> column are the reverse of t
 <div class="section level2 tabset">
 <h2 class="tabset" id="subset-a-vector-with-stringr">Subset a Vector with stringr<a class="anchor" aria-label="anchor" href="#subset-a-vector-with-stringr"></a>
 </h2>
-<p>In addition to table-checking functions, tblcheck includes <a href="tblcheck.html#grading-vectors">functions for checking vectors</a> — after all, columns in a table are vectors!</p>
-<p>Here’s an example exercise from a tutorial on string transformations with the <a href="https://stringr.tidyverse.org" class="external-link">stringr package</a>. Students are asked to practice concepts they just discovered in the tutorial:</p>
+<p>In addition to table-checking functions, tblcheck includes <a href="tblcheck.html#grading-vectors">functions for checking vectors</a>
+— after all, columns in a table are vectors!</p>
+<p>Here’s an example exercise from a tutorial on string transformations
+with the <a href="https://stringr.tidyverse.org" class="external-link">stringr package</a>.
+Students are asked to practice concepts they just discovered in the
+tutorial:</p>
 <blockquote>
 <p><strong>Prompt</strong><br>
-Consider the <code>fruit</code> data. Use a function from <a href="https://stringr.tidyverse.org" class="external-link">stringr</a> to create a vector containing only the fruits with more than one word in their name.</p>
-<p><em>Hint: a fruit named with more than one word also has at least one space in its name.</em></p>
+Consider the <code>fruit</code> data. Use a function from <a href="https://stringr.tidyverse.org" class="external-link">stringr</a> to create a vector
+containing only the fruits with more than one word in their name.</p>
+<p><em>Hint: a fruit named with more than one word also has at least one
+space in its name.</em></p>
 </blockquote>
 
 
@@ -715,16 +816,23 @@ Consider the <code>fruit</code> data. Use a function from <a href="https://strin
 
 
 <ul class="nav nav-tabs" id="subset-a-vector-with-stringr" role="tablist">
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code-3" id="exercise-code-3-tab" type="button" role="tab" aria-controls="exercise-code-3" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg> Exercise Code</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer-3" id="correct-answer-3-tab" type="button" role="tab" aria-controls="correct-answer-3" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg> Correct Answer</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-class-1" id="wrong-class-1-tab" type="button" role="tab" aria-controls="wrong-class-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Class</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-length-1" id="wrong-length-1-tab" type="button" role="tab" aria-controls="wrong-length-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Length</button></li>
-<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-subset" id="wrong-subset-tab" type="button" role="tab" aria-controls="wrong-subset" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg> Wrong Subset</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#exercise-code-3" id="exercise-code-3-tab" type="button" role="tab" aria-controls="exercise-code-3" aria-selected="true" class="active nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75zM0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm9.22 3.72a.75.75 0 000 1.06L10.69 8 9.22 9.47a.75.75 0 101.06 1.06l2-2a.75.75 0 000-1.06l-2-2a.75.75 0 00-1.06 0zM6.78 6.53a.75.75 0 00-1.06-1.06l-2 2a.75.75 0 000 1.06l2 2a.75.75 0 101.06-1.06L5.31 8l1.47-1.47z"></path></svg>
+Exercise Code</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#correct-answer-3" id="correct-answer-3-tab" type="button" role="tab" aria-controls="correct-answer-3" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.78-9.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>
+Correct Answer</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-class-1" id="wrong-class-1-tab" type="button" role="tab" aria-controls="wrong-class-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Class</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-length-1" id="wrong-length-1-tab" type="button" role="tab" aria-controls="wrong-length-1" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Length</button></li>
+<li role="presentation" class="nav-item"><button data-bs-toggle="tab" data-bs-target="#wrong-subset" id="wrong-subset-tab" type="button" role="tab" aria-controls="wrong-subset" aria-selected="false" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+Wrong Subset</button></li>
 </ul>
 <div class="tab-content">
 <div class="active  tab-pane" id="exercise-code-3" role="tabpanel" aria-labelledby="exercise-code-3-tab">
 
-<p>In the exercise markdown, we call <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> in the <code>string-check</code> chunk to automatically compare the result of the student’s submission with our <code>string-solution</code>.</p>
+<p>In the exercise markdown, we call <code><a href="../reference/grade_this_vector.html">grade_this_vector()</a></code> in
+the <code>string-check</code> chunk to automatically compare the result
+of the student’s submission with our <code>string-solution</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r string-setup}</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="in">library(stringr)</span></span>
@@ -741,7 +849,8 @@ Consider the <code>fruit</code> data. Use a function from <a href="https://strin
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r string-check}</span></span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="in">grade_this_vector()</span></span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<p>Note that <code>fruit</code> is from <code><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">stringr::fruit</a></code>, a vector containing 80 fruit names.</p>
+<p>Note that <code>fruit</code> is from <code><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">stringr::fruit</a></code>, a
+vector containing 80 fruit names.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/stringr-data.html" class="external-link">fruit</a></span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "apple"        "apricot"      "avocado"      "banana"      </span></span>
@@ -752,7 +861,9 @@ Consider the <code>fruit</code> data. Use a function from <a href="https://strin
 </div>
 <div class="tab-pane" id="correct-answer-3" role="tabpanel" aria-labelledby="correct-answer-3-tab">
 
-<p>11 of the 80 fruits have more than one word. What’s your favorite two-worded fruit name? (Mine is the <a href="https://en.wikipedia.org/wiki/Mangosteen" class="external-link">purple mangosteen</a>.)</p>
+<p>11 of the 80 fruits have more than one word. What’s your favorite
+two-worded fruit name? (Mine is the <a href="https://en.wikipedia.org/wiki/Mangosteen" class="external-link">purple
+mangosteen</a>.)</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">str_subset</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "bell pepper"       "blood orange"      "canary melon"     </span></span>
@@ -765,35 +876,55 @@ Lovely job! Correct!
 </div>
 <div class="tab-pane" id="wrong-class-1" role="tabpanel" aria-labelledby="wrong-class-1-tab">
 
-<p>This student submission makes a potentially common mistake of hoping that <code><a href="https://stringr.tidyverse.org/reference/str_subset.html" class="external-link">stringr::str_which()</a></code> will return the <code>fruit</code> which have <code>pattern</code>. Instead, <code>str_which()</code> follows the base R function <code><a href="https://rdrr.io/r/base/which.html" class="external-link">which()</a></code>, and returns an <code>integer</code> index indicating the items in <code>fruit</code> where the <code>pattern</code> is matched.</p>
+<p>This student submission makes a potentially common mistake of hoping
+that <code><a href="https://stringr.tidyverse.org/reference/str_which.html" class="external-link">stringr::str_which()</a></code> will return the
+<code>fruit</code> which have <code>pattern</code>. Instead,
+<code>str_which()</code> follows the base R function
+<code><a href="https://rdrr.io/r/base/which.html" class="external-link">which()</a></code>, and returns an <code>integer</code> index
+indicating the items in <code>fruit</code> where the
+<code>pattern</code> is matched.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">str_which</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1]  5  9 13 17 32 42 66 72 73 75 79</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your result should be a vector of text (class <code>character</code>), but it is a vector of integers (class <code>integer</code>). Try it again. You get better each time.
+Your result should be a vector of text (class <code>character</code>),
+but it is a vector of integers (class <code>integer</code>). Try it
+again. You get better each time.
 </div>
 </div>
 <div class="tab-pane" id="wrong-length-1" role="tabpanel" aria-labelledby="wrong-length-1-tab">
 
-<p>In another mistake example, this student probably expected <code><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">stringr::str_extract()</a></code> to <em>extract</em> elements from the vector. However, <code>str_extract()</code> instead extracts the pattern from each item, so it returns a vector with the same length as the input.</p>
+<p>In another mistake example, this student probably expected
+<code><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">stringr::str_extract()</a></code> to <em>extract</em> elements from
+the vector. However, <code>str_extract()</code> instead extracts the
+pattern from each item, so it returns a vector with the same length as
+the input.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">str_extract</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" "</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] NA  NA  NA  NA  " " NA  NA  NA  " " NA  NA  NA  " " NA  NA  NA </span></span>
 <span><span class="co">#&gt; [17] " " NA  NA  NA </span></span>
 <span><span class="co">#&gt;  [ reached getOption("max.print") -- omitted 60 entries ]</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your result should contain 11 values, but it has 80 values. But no need to fret, try it again.
+Your result should contain 11 values, but it has 80 values. But no need
+to fret, try it again.
 </div>
 </div>
 <div class="tab-pane" id="wrong-subset" role="tabpanel" aria-labelledby="wrong-subset-tab">
 
-<p>Finally, a student might have chosen the right function, but they missed our hint and came up with a pattern that’s too clever. Here the student probably looked at the first 20 fruit names and took a guess at the answer.</p>
+<p>Finally, a student might have chosen the right function, but they
+missed our hint and came up with a pattern that’s too clever. Here the
+student probably looked at the first 20 fruit names and took a guess at
+the answer.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">str_subset</span><span class="op">(</span><span class="va">fruit</span>, <span class="st">" (pepper|orange|melon|fruit)"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "bell pepper"  "blood orange" "canary melon" "chili pepper"</span></span>
 <span><span class="co">#&gt; [5] "kiwi fruit"   "rock melon"   "star fruit"   "ugli fruit"</span></span></code></pre></div>
 <div class="alert alert-danger">
-Your result should contain 11 values, but it has 8 values. I expected your result to include the values <code>goji berry</code>, <code>purple mangosteen</code>, and <code>salal berry</code>. That’s okay: you learn more from mistakes than successes. Let’s do it one more time.
+Your result should contain 11 values, but it has 8 values. I expected
+your result to include the values <code>goji berry</code>,
+<code>purple mangosteen</code>, and <code>salal berry</code>. That’s
+okay: you learn more from mistakes than successes. Let’s do it one more
+time.
 </div>
 </div>
 </div>
