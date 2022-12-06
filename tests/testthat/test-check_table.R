@@ -12,10 +12,8 @@ test_that("tbl_grade() class", {
 		grade_tbl_class_df$problem,
 		problem(
 			"class",
-			c("tbl_df", "tbl", "data.frame"),
-			"data.frame",
-			expected_length = 2,
-			actual_length = 2,
+			expected = tibble::tibble(a = 1:10, b = 1:10),
+			actual = data.frame(a = 1:10, b = 1:10),
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -43,10 +41,8 @@ test_that("tbl_grade() class", {
 		grade_tbl_class_grouped$problem,
 		problem(
 			"class",
-			c("grouped_df", "tbl_df", "tbl", "data.frame"),
-			c("tbl_df", "tbl", "data.frame"),
-			expected_length = 2,
-			actual_length = 2,
+			expected = dplyr::group_by(tibble::tibble(a = 1:10, b = a), a),
+			actual = tibble::tibble(a = 1:10, b = a),
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -74,10 +70,8 @@ test_that("tbl_grade() class", {
 		grade_tbl_class_rowwise$problem,
 		problem(
 			"class",
-			c("tbl_df", "tbl", "data.frame"),
-			c("rowwise_df", "tbl_df", "tbl", "data.frame"),
-			expected_length = 2,
-			actual_length = 2,
+			expected = tibble::tibble(a = 1:10, b = a),
+			actual = dplyr::rowwise(tibble::tibble(a = 1:10, b = a)),
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -96,10 +90,8 @@ test_that("tbl_grade() class", {
 		grade_tbl_class_grouped_rowwise$problem,
 		problem(
 			"class",
-			c("grouped_df", "tbl_df", "tbl", "data.frame"),
-			c("rowwise_df", "tbl_df", "tbl", "data.frame"),
-			expected_length = 2,
-			actual_length = 2,
+			expected = dplyr::group_by(tibble::tibble(a = 1:10, b = a), a),
+			actual = dplyr::rowwise(tibble::tibble(a = 1:10, b = a)),
 			location = "table"
 		),
 		ignore_attr = "class"
@@ -235,10 +227,8 @@ test_that("tbl_grade() columns", {
 		grade_int$problem,
 		problem(
 			"class",
-			"integer",
-			"numeric",
-			expected_length = 3,
-			actual_length = 3,
+			expected = as.integer(c(1, 2, 3)),
+			actual = as.numeric(c(1, 2, 3)),
 			location = "column",
 			column = "a"
 		),
@@ -289,6 +279,7 @@ test_that("tbl_grade() cols", {
 		grade$problem,
 		problem(
 			"names",
+			missing = character(0),
 			unexpected = "intermediate",
 			location = "table"
 		),
@@ -305,6 +296,7 @@ test_that("tbl_grade() cols", {
 		check,
 		problem(
 			"names",
+			missing = character(0),
 			unexpected = "intermediate",
 			location = "table"
 		),

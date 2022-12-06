@@ -146,8 +146,8 @@ library(gradethis)
 library(tblcheck)
 
 opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+	collapse = TRUE,
+	comment = "#>"
 )
 
 set.seed(424341)
@@ -313,9 +313,9 @@ We'll demonstrate how this works for a simple exercise that asks students to cre
 
 ```{r example-table-prompt, echo=FALSE}
 solution_table <- tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red")
 )
 knitr::kable(solution_table)
 ```
@@ -324,14 +324,13 @@ In the R Markdown source of the learnr tutorial, we use an exercise chunk labell
 
 ````markdown
 ```{r ex-food, chunk_label = "food", is_exercise = TRUE}
-
 ```
 
 ```{r ex-food-solution, chunk_label = "food-solution"}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red")
 )
 ```
 
@@ -351,9 +350,9 @@ Here, the student attempts to store the data in the table as a list rather than 
 
 ```{r exercise-2}
 list(
-  food = "lettuce",
-  fruit = "TRUE",
-  color = "green"
+	food = "lettuce",
+	fruit = "TRUE",
+	color = "green"
 )
 ```
 
@@ -370,9 +369,9 @@ Here, `grade_this_table()` notices that the student has an unexpected column nam
 
 ```{r exercise-3}
 tibble(
-  food = "lettuce",
-  fruit = "TRUE",
-  color = "green"
+	food = "lettuce",
+	fruit = "TRUE",
+	color = "green"
 )
 ```
 
@@ -388,9 +387,9 @@ Next, `grade_this_table()` checks that the student has submitted the correct num
 
 ```{r exercise-4}
 tibble(
-  food = "lettuce",
-  vegetable = "TRUE",
-  color = "green"
+	food = "lettuce",
+	vegetable = "TRUE",
+	color = "green"
 )
 ```
 
@@ -408,9 +407,9 @@ Here, the student has stored the values of the `vegetable` column as a string, b
 
 ```{r exercise-5}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c("TRUE", "TRUE"),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c("TRUE", "TRUE"),
+	color = c("green", "red")
 )
 ```
 
@@ -427,9 +426,9 @@ Here, the student made a mistake during their transcription of the `vegetable` c
 
 ```{r exercise-6}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, TRUE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, TRUE),
+	color = c("green", "red")
 )
 ```
 
@@ -442,9 +441,9 @@ Based on this advice, the student revises their submission, changing the second 
 
 ```{r exercise-7}
 tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red")
 )
 ```
 
@@ -511,7 +510,6 @@ In the R Markdown source of the learnr tutorial, we use an exercise chunk labell
 
 ````markdown
 ```{r ex-vector, chunk_label = "toppings", is_exercise = TRUE}
-
 ```
 
 ```{r ex-vector-solution, chunk_label = "toppings-solution"}
@@ -564,10 +562,10 @@ For example, suppose a student answering our `food` exercise used a `data.frame`
 
 ```{r skip-check-class}
 data.frame(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red"),
-  stringsAsFactors = FALSE
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red"),
+	stringsAsFactors = FALSE
 )
 ```
 
@@ -621,21 +619,20 @@ Suppose we extend our `food` example into an exercise labelled `food-percentage`
 library(dplyr)
 
 foods <- tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red"),
-  count = c(5, 3)
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red"),
+	count = c(5, 3)
 )
 ```
 
 ```{r ex-additional-prompt, chunk_label = "food-percentage", is_exercise = TRUE}
-
 ```
 
 ```{r ex-additional-solution, chunk_label = "food-percentage-solution"}
 .solution <-
-foods %>%
-  mutate(pct = count / sum(count))
+	foods %>%
+	mutate(pct = count / sum(count))
 ```
 ````
 
@@ -650,11 +647,11 @@ We expect the final solution to look like this
 but a student might decide to store the total food in a temporary `total` column.
 
 ```{r ex-additional-student}
-.result <- foods %>% 
-  mutate(
-    total = sum(count),
-    pct = count / total
-  )
+.result <- foods %>%
+	mutate(
+		total = sum(count),
+		pct = count / total
+	)
 ```
 
 Knowing that we don't mind the additional column, we can use the `pre_check` argument to limit `.result` to the columns that also appear in `.solution`.
@@ -662,18 +659,18 @@ Knowing that we don't mind the additional column, we can use the `pre_check` arg
 ````markdown
 ```{r ex-additional-check-1, eval=FALSE}
 grade_this_table(pre_check = {
-  tbl_grade_is_table(.result)
-  .result <- .result[intersect(names(.result), names(.solution))]
+	tbl_grade_is_table(.result)
+	.result <- .result[intersect(names(.result), names(.solution))]
 })
 ```
 ````
 
 ```{r echo=FALSE}
 fake_grade_chunks(
-  user = "ex-additional-student",
-  solution = "ex-additional-solution",
-  check = "ex-additional-check-1",
-  setup = "ex-additional-setup"
+	user = "ex-additional-student",
+	solution = "ex-additional-solution",
+	check = "ex-additional-check-1",
+	setup = "ex-additional-setup"
 )
 ```
 
@@ -702,20 +699,19 @@ For this example, we'll use the lower-level functions in conjunction with `grade
 library(dplyr)
 
 foods <- tibble(
-  food = c("lettuce", "tomato"),
-  vegetable = c(TRUE, FALSE),
-  color = c("green", "red")
+	food = c("lettuce", "tomato"),
+	vegetable = c(TRUE, FALSE),
+	color = c("green", "red")
 )
 ```
 
 
 ```{r ex-specific-prompt, chunk_label = "food-count", is_exercise = TRUE}
-
 ```
 
 ```{r ex-specific-solution, chunk_label = "food-count-solution"}
 foods %>%
-  mutate(count = c(5, 3))
+	mutate(count = c(5, 3))
 ```
 ````
 
@@ -736,7 +732,7 @@ A student who quickly scanned the exercise prompt might reverse the expected ord
 
 ```{r ex-specific}
 foods %>%
-  mutate(count = c(3, 5))
+	mutate(count = c(3, 5))
 ```
 
 ```{r echo=FALSE}
@@ -794,12 +790,12 @@ We can use `is_problem()` together with `all.equal()` to isolate this specific c
 
 ```{r custom-problem-ex-feedback}
 if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
-  feedback <- paste(
-    "Make sure that the values in `count` are ordered",
-    "to match their respective `food`.",
-    "Remember, we have **3** tomatoes and **5** heads of lettuce."
-  )
-  gradethis::fail(feedback)
+	feedback <- paste(
+		"Make sure that the values in `count` are ordered",
+		"to match their respective `food`.",
+		"Remember, we have **3** tomatoes and **5** heads of lettuce."
+	)
+	gradethis::fail(feedback)
 }
 ```
 
@@ -821,12 +817,12 @@ Putting everything together into our grading `food-count-check` chunk, our gradi
 problem <- tbl_check_column("count")
 
 if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
-  feedback <- paste(
-    "Make sure that the values in `count` are ordered",
-    "to match their respective `food`.",
-    "Remember, we have **3** tomatoes and **5** heads of lettuce."
-  )
-  fail(feedback)
+	feedback <- paste(
+		"Make sure that the values in `count` are ordered",
+		"to match their respective `food`.",
+		"Remember, we have **3** tomatoes and **5** heads of lettuce."
+	)
+	fail(feedback)
 }
 
 problem_grade(problem)
@@ -849,7 +845,7 @@ By following our specific advice, the student revises their code to correctly cr
 
 ```{r ex-specific-correct}
 foods %>%
-  mutate(count = c(5, 3))
+	mutate(count = c(5, 3))
 ```
 
 ```{r echo=FALSE}

@@ -58,28 +58,6 @@
         frame (class `data.frame`).
       >
 
----
-
-    Code
-      grade_py_tbl_df
-    Output
-      <gradethis_graded: [Incorrect]
-        I was only expecting 1 value for each grouping in the table, but you
-        have multiple values per grouping. Maybe you are missing a .groupby()
-        call?
-      >
-
----
-
-    Code
-      grade_py_tbl_df_grouped
-    Output
-      <gradethis_graded: [Incorrect]
-        Your table row labels (i.e. index) are not a numbered sequence. You
-        can tell by the extra spacing around the column names. You can fix
-        this with .reset_index()
-      >
-
 # tbl_grade_class() with paired ignore_class
 
     Code
@@ -168,25 +146,5 @@
       <gradethis_graded: [Incorrect]
         Your result should be a rowwise tibble (class `rowwise_df`), but it
         is a vector of integers (class `integer`).
-      >
-
----
-
-    Code
-      grade_pyungrouped_int
-    Output
-      <gradethis_graded: [Incorrect]
-        Your result should be a DataFrame, but it is an object with class
-        `int`.
-      >
-
----
-
-    Code
-      grade_pygrouped_int
-    Output
-      <gradethis_graded: [Incorrect]
-        Your result should be a DataFrame with row labels (i.e. index), but
-        it is an object with class `int`.
       >
 

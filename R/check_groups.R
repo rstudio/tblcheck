@@ -57,7 +57,9 @@ tbl_check_groups <- function(
 }
 
 group_vars <- function(x) {
-	setdiff(names(attr(x, "groups")), ".rows")
+	# We use `rlang::names2()` to ensure output is always character vector
+	# Otherwise, if there are no groups, the output will be `NULL`
+	setdiff(rlang::names2(attr(x, "groups")), ".rows")
 }
 
 #' @rdname tbl_check_groups
@@ -79,31 +81,26 @@ tbl_grade_groups <- function(
 
 #' @export
 problem_message.groups_problem <- function(problem, max_diffs = 3, ...) {
-	if (is_problem(problem, "table")) {
-		problem$missing_msg <- problem$missing_msg %||%
-			gettext("Your table should be grouped by {missing}. ")
-
-		problem$unexpected_msg <- problem$unexpected_msg %||%
-			gettext("Your table should not be grouped by {unexpected}. ")
-	}
-
 	problem$missing_msg <- problem$missing_msg %||%
-		gettext("Your result should be grouped by {missing}. ")
-
+		gettext("Your {location} should be grouped by {missing}. ")
 	problem$unexpected_msg <- problem$unexpected_msg %||%
-		gettext("Your result should not be grouped by {unexpected}. ")
+		gettext("Your {location} should not be grouped by {unexpected}. ")
 
-	if (!is.null(problem[["missing"]])) {
+	if (length(problem[["missing"]]) > 0) {
 		problem$missing <- combine_words_with_more(problem$missing, max_diffs)
 	} else {
 		problem$missing_msg <- ""
 	}
 
-	if (!is.null(problem[["unexpected"]])) {
-		problem$unexpected <- combine_words_with_more(problem$unexpected, max_diffs, and = " or ")
+	if (length(problem[["unexpected"]]) > 0) {
+		problem$unexpected <- combine_words_with_more(
+			problem$unexpected, max_diffs, and = " or "
+		)
 	} else {
 		problem$unexpected_msg <- ""
 	}
+
+	problem$location <- problem$location %||% "result"
 
 	glue::glue_data(problem, paste0(problem$missing_msg, problem$unexpected_msg))
 }

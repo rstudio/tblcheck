@@ -11,10 +11,8 @@ test_that("tbl_grade_column() checks classes", {
 		grade$problem,
 		problem(
 			"class",
-			"integer",
-			"character",
-			expected_length = 3,
-			actual_length = 26,
+			expected = 1:3,
+			actual = letters,
 			location = "column",
 			column = "a"
 		),
@@ -33,10 +31,8 @@ test_that("tbl_grade_column() checks classes", {
 		grade_int$problem,
 		problem(
 			"class",
-			"integer",
-			"numeric",
-			expected_length = 3,
-			actual_length = 3,
+			expected = as.integer(c(1, 2, 3)),
+			actual = as.numeric(c(1, 2, 3)),
 			location = "column",
 			column = "a"
 		),
@@ -83,10 +79,8 @@ test_that("tbl_grade_column() checks multiple classes", {
 		grade$problem,
 		problem(
 			type = "class",
-			expected = c("tbl_df", "tbl", "data.frame"),
-			actual = "data.frame",
-			expected_length = 1,
-			actual_length = 1,
+			expected = tibble::tibble(x = 1),
+			actual = data.frame(x = 1),
 			location = "column",
 			column = "a"
 		),

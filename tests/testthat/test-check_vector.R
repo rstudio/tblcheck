@@ -11,10 +11,8 @@ test_that("vec_grade() checks classes", {
 		grade$problem,
 		problem(
 			"class",
-			"integer",
-			"character",
-			expected_length = 3,
-			actual_length = 26,
+			expected = 1:3,
+			actual = letters,
 			location = "vector"
 		),
 		ignore_attr = "class"
@@ -32,10 +30,8 @@ test_that("vec_grade() checks classes", {
 		grade_int$problem,
 		problem(
 			"class",
-			"integer",
-			"numeric",
-			expected_length = 3,
-			actual_length = 3,
+			expected = as.integer(c(1, 2, 3)),
+			actual = as.numeric(c(1, 2, 3)),
 			location = "vector"
 		),
 		ignore_attr = "class"
@@ -80,10 +76,8 @@ test_that("vec_grade() checks multiple classes", {
 		grade$problem,
 		problem(
 			type = "class",
-			expected = c("test", "class", "integer"),
-			actual = "integer",
-			expected_length = 10,
-			actual_length = 10,
+			expected = `class<-`(1:10, c("test", "class", "integer")),
+			actual = 1:10,
 			location = "vector"
 		),
 		ignore_attr = "class"
