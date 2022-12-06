@@ -131,24 +131,6 @@ setMethod("friendly_class", signature("rowwise_df"), function(object) {
 	"a rowwise tibble (class `rowwise_df`)"
 })
 
-setOldClass(c("py_tbl_df", "tbl_df", "tbl", "data.frame"))
-#' @rdname friendly_class
-setMethod("friendly_class", signature("py_tbl_df"), function(object) {
-	if (!setequal(class(object), c("py_tbl_df", "tbl_df", "tbl", "data.frame"))) {
-		return(callNextMethod())
-	}
-	"a DataFrame"
-})
-
-setOldClass(c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"))
-#' @rdname friendly_class
-setMethod("friendly_class", signature("py_grouped_df"), function(object) {
-	if (!setequal(class(object), c("py_grouped_df", "py_tbl_df", "grouped_df", "tbl_df", "tbl", "data.frame"))) {
-		return(callNextMethod())
-	}
-	"a DataFrame with row labels (i.e. index)"
-})
-
 #' @rdname friendly_class
 setMethod("friendly_class", signature("list"), function(object) {
 	if (!setequal(class(object), "list")) return(callNextMethod())

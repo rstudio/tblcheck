@@ -17,8 +17,6 @@
 \alias{friendly_class,tbl_df-method}
 \alias{friendly_class,grouped_df-method}
 \alias{friendly_class,rowwise_df-method}
-\alias{friendly_class,py_tbl_df-method}
-\alias{friendly_class,py_grouped_df-method}
 \alias{friendly_class,list-method}
 \alias{friendly_class,matrix-method}
 \alias{friendly_class,array-method}
@@ -55,10 +53,6 @@ friendly_class(object)
 \S4method{friendly_class}{grouped_df}(object)
 
 \S4method{friendly_class}{rowwise_df}(object)
-
-\S4method{friendly_class}{py_tbl_df}(object)
-
-\S4method{friendly_class}{py_grouped_df}(object)
 
 \S4method{friendly_class}{list}(object)
 
