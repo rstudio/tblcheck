@@ -19,6 +19,7 @@ URL: https://pkgs.rstudio.com/tblcheck,
 BugReports: https://github.com/rstudio/tblcheck/issues
 Imports:
     checkmate,
+    dplyr,
     ellipsis,
     glue,
     gradethis (>= 0.2.7.9000),
@@ -31,7 +32,6 @@ Imports:
     utils,
     vctrs
 Suggests:
-    dplyr,
     learnr,
     lubridate,
     mockery,

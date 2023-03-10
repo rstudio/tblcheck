@@ -23,6 +23,7 @@ grade_this_table(
   check_column_levels = check_columns,
   check_column_values = check_columns,
   tolerance = sqrt(.Machine$double.eps),
+  check_row_order = check_columns,
   hint = getOption("gradethis.fail.hint", FALSE),
   encourage = getOption("gradethis.fail.encourage", FALSE),
   pass.praise = NULL
@@ -87,7 +88,7 @@ with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}.}
 
 \item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same \link[dplyr:group_by]{groups}
-with \code{\link[dplyr:group_vars]{dplyr::group_vars()}}.}
+with \code{\link[dplyr:group_data]{dplyr::group_vars()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
@@ -103,6 +104,9 @@ column has the same values in \code{object} and \code{expected}.}
 
 \item{tolerance}{\verb{[numeric(1) ≥ 0]}\cr \code{values} differences smaller than
 \code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
+
+\item{check_row_order}{\verb{[logical(1)]}\cr Whether to check that the values in
+each column are in the same order in \code{object} and \code{expected}.}
 
 \item{hint}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is

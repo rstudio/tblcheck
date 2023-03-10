@@ -1,5 +1,7 @@
 # tblcheck (development version)
 
+* Add `check_row_order` argument to `tbl_check()`, `tbl_grade()`, and `tbl_equal()`. When `check_row_order()` is set to false, `object` and `expected` are arranged so that their row orders match before checking for differences in column values.
+
 # tblcheck 0.3.0
 
 * Add `tbl_equal()`, which returns a `TRUE` or `FALSE` value indicating if two tables are equivalent, using the same process as `tbl_check()`.

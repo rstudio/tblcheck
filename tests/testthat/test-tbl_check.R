@@ -525,6 +525,34 @@ test_that("tbl_grade() groups", {
 	)
 })
 
+test_that("tbl_grade() ignoring row order", {
+	grade_ignore_rows <- tblcheck_test_grade({
+		.result <- tibble::tibble(a = 1:3, b = 24:26)
+		.solution <- tibble::tibble(a = 3:1, b = 26:24)
+		tbl_grade(check_row_order = FALSE)
+	})
+
+	expect_null(grade_ignore_rows)
+
+	grade_ignore_rows_values_diff <- tblcheck_test_grade({
+		.result <- tibble::tibble(a = 1:3, b = 24:26)
+		.solution <- tibble::tibble(a = 3:1, b = 24:26)
+		tbl_grade(check_row_order = FALSE)
+	})
+
+	expect_snapshot(grade_ignore_rows_values_diff)
+
+	expect_problem(
+		grade_ignore_rows_values_diff$problem,
+		type = "values",
+		expected = 26:24,
+		actual = 24:26,
+		location = "column",
+		column = "b",
+		check_order = FALSE
+	)
+})
+
 test_that("tbl_grade() handles bad user input", {
 	expect_internal_problem(
 		tblcheck_test_grade({

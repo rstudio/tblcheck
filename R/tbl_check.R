@@ -61,6 +61,8 @@
 #'   column has the same [factor levels][levels()] in `object` and `expected`.
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
+#' @param check_row_order `[logical(1)]`\cr Whether to check that the values in
+#'   each column are in the same order in `object` and `expected`.
 #' @inheritParams vec_check_values
 #' @param env The environment in which to find `.result` and `.solution`.
 #' @inheritDotParams gradethis::fail -message
@@ -125,6 +127,7 @@ tbl_check <- function(
 	check_column_levels = check_columns,
 	check_column_values = check_columns,
 	tolerance = sqrt(.Machine$double.eps),
+	check_row_order = check_columns,
 	env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
@@ -141,7 +144,9 @@ tbl_check <- function(
 		checkmate::assert_logical(check_groups, any.missing = FALSE, len = 1)
 		checkmate::assert_logical(check_columns, any.missing = FALSE, len = 1)
 		checkmate::assert_logical(check_column_class, any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_column_levels, any.missing = FALSE, len = 1)
 		checkmate::assert_logical(check_column_values, any.missing = FALSE, len = 1)
+		checkmate::assert_logical(check_row_order, any.missing = FALSE, len = 1)
 		checkmate::assert_data_frame(expected)
 	})
 
@@ -199,9 +204,24 @@ tbl_check <- function(
 		)
 	}
 
+	columns_in_common <- intersect(names(object), names(expected))
+
+	# If we don't care about row order,
+	# arrange the rows in `object` and `expected` in the same way
+	if (!check_row_order) {
+		object <- dplyr::arrange(
+			object,
+			dplyr::across(tidyselect::all_of(columns_in_common))
+		)
+		expected <- dplyr::arrange(
+			expected,
+			dplyr::across(tidyselect::all_of(columns_in_common))
+		)
+	}
+
 	# check column contents ----
 	if (check_columns) {
-		for (column in names(expected)) {
+		for (column in columns_in_common) {
 			return_if_problem(
 				tbl_check_column(
 					column = column,
@@ -213,7 +233,8 @@ tbl_check <- function(
 					check_values = check_column_values,
 					tolerance = tolerance,
 					check_length = FALSE
-				)
+				),
+				check_order = check_row_order
 			)
 		}
 	}
@@ -237,6 +258,7 @@ tbl_grade <- function(
 	check_column_levels = check_columns,
 	check_column_values = check_columns,
 	tolerance = sqrt(.Machine$double.eps),
+	check_row_order = check_columns,
 	env = parent.frame(),
 	...
 ) {
@@ -255,6 +277,7 @@ tbl_grade <- function(
 			check_column_class = check_column_class,
 			check_column_levels = check_column_levels,
 			check_column_values = check_column_values,
+			check_row_order = check_row_order,
 			tolerance = tolerance,
 			env = env
 		),
