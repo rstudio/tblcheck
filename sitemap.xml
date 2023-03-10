@@ -91,6 +91,9 @@
     <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_table.html</loc>
   </url>
   <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_equal.html</loc>
+  </url>
+  <url>
     <loc>https://pkgs.rstudio.com/tblcheck/reference/tblcheck-package.html</loc>
   </url>
   <url>
@@ -203,5 +206,110 @@
   </url>
   <url>
     <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/vec_check_vector.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/404.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/articles/examples.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/articles/tblcheck.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/index.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/deprecated-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/friendly_class.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/grade_this_table.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/grade_this_vector.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/hinted_class_message.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem_grade.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem_message.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem_type.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_class.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_column.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_dimensions.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_groups.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_is_table.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_names.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_table.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tblcheck-package.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check_levels.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check_values.html</loc>
+  </url>
+  <url>
+    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check_vector.html</loc>
   </url>
 </urlset>
