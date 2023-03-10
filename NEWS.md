@@ -1,3 +1,5 @@
+# tblcheck (development version)
+
 # tblcheck 0.3.0
 
 * Add `tbl_equal()`, which returns a `TRUE` or `FALSE` value indicating if two tables are equivalent, using the same process as `tbl_check()`.
