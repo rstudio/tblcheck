@@ -56,7 +56,9 @@
 #' @param check_columns `[logical(1)]`\cr Whether to check that all columns
 #'   have the same contents with [tbl_check_column()].
 #' @param check_column_class `[logical(1)]`\cr Whether to check that each
-#'   columns has the same class in `object` and `expected`.
+#'   column has the same class in `object` and `expected`.
+#' @param check_column_levels `[logical(1)]`\cr Whether to check that each
+#'   column has the same [factor levels][levels()] in `object` and `expected`.
 #' @param check_column_values `[logical(1)]`\cr Whether to check that each
 #'   column has the same values in `object` and `expected`.
 #' @inheritParams vec_check_values
@@ -120,6 +122,7 @@ tbl_check <- function(
 	check_groups = TRUE,
 	check_columns = TRUE,
 	check_column_class = check_columns,
+	check_column_levels = check_columns,
 	check_column_values = check_columns,
 	tolerance = sqrt(.Machine$double.eps),
 	env = parent.frame()
@@ -206,6 +209,7 @@ tbl_check <- function(
 					expected = expected,
 					check_class = check_column_class,
 					ignore_class = ignore_class,
+					check_levels = check_column_levels,
 					check_values = check_column_values,
 					tolerance = tolerance,
 					check_length = FALSE
@@ -230,6 +234,7 @@ tbl_grade <- function(
 	check_groups = TRUE,
 	check_columns = TRUE,
 	check_column_class = check_columns,
+	check_column_levels = check_columns,
 	check_column_values = check_columns,
 	tolerance = sqrt(.Machine$double.eps),
 	env = parent.frame(),
@@ -248,6 +253,7 @@ tbl_grade <- function(
 			check_groups = check_groups,
 			check_columns = check_columns,
 			check_column_class = check_column_class,
+			check_column_levels = check_column_levels,
 			check_column_values = check_column_values,
 			tolerance = tolerance,
 			env = env
