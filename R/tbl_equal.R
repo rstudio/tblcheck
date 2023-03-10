@@ -10,8 +10,8 @@
 #'
 #' @examples
 #' tbl_equal(
-#'   data.frame(a = 1:10, b = 11:20),
-#'   data.frame(b = 11:20, a = 1:10)
+#' 	data.frame(a = 1:10, b = 11:20),
+#' 	data.frame(b = 11:20, a = 1:10)
 #' )
 tbl_equal <- function(
 	object = .result,
