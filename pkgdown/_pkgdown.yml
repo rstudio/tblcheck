@@ -101,8 +101,7 @@ reference:
   contents:
   - starts_with("problem")
 - title: Helper functions
-  desc: |
-    Helper functions used to provide friendlier feedback.
   contents:
+  - tbl_equal
   - friendly_class
   - hinted_class_message
