@@ -14,6 +14,7 @@ grade_this_vector(
   check_class = TRUE,
   ignore_class = NULL,
   check_length = TRUE,
+  check_levels = TRUE,
   check_values = TRUE,
   tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
@@ -62,6 +63,9 @@ a \code{class} problem will never be returned.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same length.}
+
+\item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
+\code{expected} have the same \link[=levels]{factor levels}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} contain the same values.}

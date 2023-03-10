@@ -20,6 +20,7 @@ grade_this_table(
   check_groups = TRUE,
   check_columns = TRUE,
   check_column_class = check_columns,
+  check_column_levels = check_columns,
   check_column_values = check_columns,
   tolerance = sqrt(.Machine$double.eps),
   hint = getOption("gradethis.fail.hint", FALSE),
@@ -92,7 +93,10 @@ with \code{\link[dplyr:group_vars]{dplyr::group_vars()}}.}
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
 
 \item{check_column_class}{\verb{[logical(1)]}\cr Whether to check that each
-columns has the same class in \code{object} and \code{expected}.}
+column has the same class in \code{object} and \code{expected}.}
+
+\item{check_column_levels}{\verb{[logical(1)]}\cr Whether to check that each
+column has the same \link[=levels]{factor levels} in \code{object} and \code{expected}.}
 
 \item{check_column_values}{\verb{[logical(1)]}\cr Whether to check that each
 column has the same values in \code{object} and \code{expected}.}

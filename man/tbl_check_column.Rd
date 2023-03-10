@@ -12,6 +12,7 @@ tbl_check_column(
   check_class = TRUE,
   ignore_class = NULL,
   check_length = TRUE,
+  check_levels = TRUE,
   check_values = TRUE,
   tolerance = sqrt(.Machine$double.eps),
   check_names = FALSE,
@@ -26,6 +27,7 @@ tbl_grade_column(
   check_class = TRUE,
   ignore_class = NULL,
   check_length = TRUE,
+  check_levels = TRUE,
   check_values = TRUE,
   tolerance = sqrt(.Machine$double.eps),
   check_names = FALSE,
@@ -57,6 +59,9 @@ a \code{class} problem will never be returned.}
 
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same length in \code{object} and \code{expected}.}
+
+\item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{column} and
+has the same \link[=levels]{factor levels} in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same values in \code{object} and \code{expected}.}

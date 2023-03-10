@@ -36,8 +36,8 @@
 #' @inheritParams tbl_check_class
 #' @param check_length `[logical(1)]`\cr Whether to check that `column` has the
 #'   same length in `object` and `expected`.
-#' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
-#'   same values in `object` and `expected`.
+#' @param check_levels `[logical(1)]`\cr Whether to check that `column` and
+#'   has the same [factor levels][levels()] in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
 #'   same values in `object` and `expected`.
 #' @inheritParams vec_check_values
@@ -75,6 +75,7 @@ tbl_check_column <- function(
 	check_class = TRUE,
 	ignore_class = NULL,
 	check_length = TRUE,
+	check_levels = TRUE,
 	check_values = TRUE,
 	tolerance = sqrt(.Machine$double.eps),
 	check_names = FALSE,
@@ -115,6 +116,7 @@ tbl_check_column <- function(
 			check_class = check_class,
 			ignore_class = ignore_class,
 			check_length = check_length,
+			check_levels = check_levels,
 			check_values = check_values,
 			tolerance = tolerance,
 			check_names = check_names
@@ -134,6 +136,7 @@ tbl_grade_column <- function(
 	check_class = TRUE,
 	ignore_class = NULL,
 	check_length = TRUE,
+	check_levels = TRUE,
 	check_values = TRUE,
 	tolerance = sqrt(.Machine$double.eps),
 	check_names = FALSE,
@@ -148,6 +151,7 @@ tbl_grade_column <- function(
 			check_class = check_class,
 			ignore_class = ignore_class,
 			check_length = check_length,
+			check_levels = check_levels,
 			check_values = check_values,
 			tolerance = tolerance,
 			check_names = check_names,

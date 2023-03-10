@@ -112,7 +112,7 @@ vec_check <- function(
 		)
 	}
 
-	if (check_levels) {
+	if (check_levels && is.factor(object) && is.factor(expected)) {
 		return_if_problem(
 			vec_check_levels(object, expected),
 			prefix = "vector"
@@ -143,6 +143,7 @@ vec_grade <- function(
 	check_class = TRUE,
 	ignore_class = NULL,
 	check_length = TRUE,
+	check_levels = TRUE,
 	check_values = TRUE,
 	tolerance = sqrt(.Machine$double.eps),
 	check_names = TRUE,
@@ -156,6 +157,7 @@ vec_grade <- function(
 			check_class = check_class,
 			ignore_class = ignore_class,
 			check_length = check_length,
+			check_levels = check_levels,
 			check_values = check_values,
 			tolerance = tolerance,
 			check_names = check_names,

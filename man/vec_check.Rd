@@ -25,6 +25,7 @@ vec_grade(
   check_class = TRUE,
   ignore_class = NULL,
   check_length = TRUE,
+  check_levels = TRUE,
   check_values = TRUE,
   tolerance = sqrt(.Machine$double.eps),
   check_names = TRUE,
