@@ -112,7 +112,7 @@ vec_check <- function(
 		)
 	}
 
-	if (check_levels) {
+	if (check_levels && is.factor(object) && is.factor(expected)) {
 		return_if_problem(
 			vec_check_levels(object, expected),
 			prefix = "vector"

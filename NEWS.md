@@ -1,6 +1,7 @@
 # tblcheck (development version)
 
 * `tbl_check()`, `tbl_grade()`, `tbl_check_column()`, `tbl_grade_column()` and `vec_grade()` gain arguments to set whether they will check the levels of factors.
+* `vec_check()` and `vec_grade()` now only check factor levels if both `object` and `expected` are factors. In most cases, this difference would be caught earlier by class checking. Previously, calling `vec_check(x, factor(x), check_class = FALSE)` would signal a problem because one vector has levels and the other does not.
 
 # tblcheck 0.2.2
 
