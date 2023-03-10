@@ -8,13 +8,11 @@ test_that("tbl_grade_class()", {
 
 	expect_snapshot(grade_num_chr_1)
 
-	expect_equal(
+	expect_problem(
 		grade_num_chr_1$problem,
-		problem(
-			type = "class",
-			expected = 1,
-			actual = "1"
-		)
+		type = "class",
+		expected = 1,
+		actual = "1"
 	)
 
 	grade_num_chr_2 <-
@@ -26,13 +24,11 @@ test_that("tbl_grade_class()", {
 
 	expect_snapshot(grade_num_chr_2)
 
-	expect_equal(
+	expect_problem(
 		grade_num_chr_2$problem,
-		problem(
-			type = "class",
-			expected = c(1, 2),
-			actual = c("1", "2")
-		)
+		type = "class",
+		expected = c(1, 2),
+		actual = c("1", "2")
 	)
 
 	grade_posixct_1 <-
@@ -44,13 +40,11 @@ test_that("tbl_grade_class()", {
 
 	expect_snapshot(grade_posixct_1)
 
-	expect_equal(
+	expect_problem(
 		grade_posixct_1$problem,
-		problem(
-			type = "class",
-			expected = as.POSIXct("2021-07-29 10:59:59"),
-			actual = "2021-07-29 10:59:59"
-		)
+		type = "class",
+		expected = as.POSIXct("2021-07-29 10:59:59"),
+		actual = "2021-07-29 10:59:59"
 	)
 
 	grade_posixct_2 <-
@@ -62,13 +56,11 @@ test_that("tbl_grade_class()", {
 
 	expect_snapshot(grade_posixct_2)
 
-	expect_equal(
+	expect_problem(
 		grade_posixct_2$problem,
-		problem(
-			type = "class",
-			expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
-			actual = c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
-		)
+		type = "class",
+		expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
+		actual = c("2021-07-29 15:18:00", "1996-03-05 12:00:00")
 	)
 })
 
@@ -82,13 +74,11 @@ test_that("tbl_grade_class() ignore classes", {
 
 	expect_snapshot(grade_glue_chr)
 
-	expect_equal(
+	expect_problem(
 		grade_glue_chr$problem,
-		problem(
-			type = "class",
-			expected = "x",
-			actual = glue::glue("x")
-		)
+		type = "class",
+		expected = "x",
+		actual = glue::glue("x")
 	)
 
 	grade_glue_chr_ignore <-
@@ -109,13 +99,11 @@ test_that("tbl_grade_class() ignore classes", {
 
 	expect_snapshot(grade_tbl_df)
 
-	expect_equal(
+	expect_problem(
 		grade_tbl_df$problem,
-		problem(
-			type = "class",
-			expected = tibble::tibble(a = 1, b = 2),
-			actual = data.frame(a = 1, b = 2)
-		)
+		type = "class",
+		expected = tibble::tibble(a = 1, b = 2),
+		actual = data.frame(a = 1, b = 2)
 	)
 
 	grade_tbl_df_ignore <-
@@ -138,13 +126,11 @@ test_that("tbl_grade_class() with paired ignore_class", {
 
 	expect_snapshot(grade_int_dbl)
 
-	expect_equal(
+	expect_problem(
 		grade_int_dbl$problem,
-		problem(
-			type = "class",
-			expected = 1,
-			actual = 1L
-		)
+		type = "class",
+		expected = 1,
+		actual = 1L
 	)
 
 	grade_int_dbl_ignore <-
@@ -165,13 +151,11 @@ test_that("tbl_grade_class() with paired ignore_class", {
 
 	expect_snapshot(grade_int_chr_wrong_ignore)
 
-	expect_equal(
+	expect_problem(
 		grade_int_chr_wrong_ignore$problem,
-		problem(
-			type = "class",
-			expected = 1,
-			actual = "1"
-		)
+		type = "class",
+		expected = 1,
+		actual = "1"
 	)
 
 	grade_posix_ct_lt <-
@@ -183,13 +167,11 @@ test_that("tbl_grade_class() with paired ignore_class", {
 
 	expect_snapshot(grade_posix_ct_lt)
 
-	expect_equal(
+	expect_problem(
 		grade_posix_ct_lt$problem,
-		problem(
-			type = "class",
-			expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
-			actual = as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
-		)
+		type = "class",
+		expected = as.POSIXlt(c("2021-07-29 15:18:00", "1996-03-05 12:00:00")),
+		actual = as.POSIXct(c("2021-07-29 15:18:00", "1996-03-05 12:00:00"))
 	)
 
 	grade_posix_ct_lt_ignore <-
@@ -258,13 +240,11 @@ test_that("tbl_grade_class() with multiple classes", {
 	.solution <- 1L
 	class(.solution) <- c("test", "class", "integer")
 
-	expect_equal(
+	expect_problem(
 		grade_class_solution$problem,
-		problem(
-			type = "class",
-			expected = .solution,
-			actual = 1L
-		)
+		type = "class",
+		expected = .solution,
+		actual = 1L
 	)
 
 	grade_class_result <-
@@ -280,13 +260,11 @@ test_that("tbl_grade_class() with multiple classes", {
 	.result <- 1L
 	class(.result) <- c("test", "class", "integer")
 
-	expect_equal(
+	expect_problem(
 		grade_class_result$problem,
-		problem(
-			type = "class",
-			expected = 1L,
-			actual = .result
-		)
+		type = "class",
+		expected = 1L,
+		actual = .result
 	)
 })
 

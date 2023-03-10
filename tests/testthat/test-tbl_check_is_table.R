@@ -7,12 +7,10 @@ test_that("tbl_grade_is_table() with non-tables", {
 
 	expect_snapshot(grade_list)
 
-	expect_equal(
+	expect_problem(
 		grade_list$problem,
-		problem(
-			type = "not_table",
-			actual = list(a = 1:10)
-		)
+		type = "not_table",
+		actual = list(a = 1:10)
 	)
 
 	grade_vector <-
@@ -23,12 +21,10 @@ test_that("tbl_grade_is_table() with non-tables", {
 
 	expect_snapshot(grade_vector)
 
-	expect_equal(
+	expect_problem(
 		grade_vector$problem,
-		problem(
-			type = "not_table",
-			actual = 1:10
-		)
+		type = "not_table",
+		actual = 1:10
 	)
 })
 

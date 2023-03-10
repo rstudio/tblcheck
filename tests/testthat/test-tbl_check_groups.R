@@ -7,12 +7,12 @@ test_that("grade missing groups", {
 
 	expect_snapshot(grade_ungrouped)
 
-	expect_equal(
+	expect_problem(
 		grade_ungrouped$problem,
-		problem(
-			"groups", missing = "b", unexpected = character(0), location = "table"
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = "b",
+		unexpected = character(0),
+		location = "table"
 	)
 
 	grade_grouped <- tblcheck_test_grade({
@@ -27,15 +27,12 @@ test_that("grade missing groups", {
 
 	expect_snapshot(grade_grouped)
 
-	expect_equal(
+	expect_problem(
 		grade_grouped$problem,
-		problem(
-			"groups",
-			missing = c("b", "c"),
-			unexpected = character(0),
-			location = "table"
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = c("b", "c"),
+		unexpected = character(0),
+		location = "table"
 	)
 })
 
@@ -48,12 +45,12 @@ test_that("grade unexpected groups", {
 
 	expect_snapshot(grade_single)
 
-	expect_equal(
+	expect_problem(
 		grade_single$problem,
-		problem(
-			"groups", missing = character(0), unexpected = "b", location = "table"
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = character(0),
+		unexpected = "b",
+		location = "table"
 	)
 
 	grade_multiple <- tblcheck_test_grade({
@@ -68,15 +65,12 @@ test_that("grade unexpected groups", {
 
 	expect_snapshot(grade_multiple)
 
-	expect_equal(
+	expect_problem(
 		grade_multiple$problem,
-		problem(
-			"groups",
-			missing = character(0),
-			unexpected = c("b", "c"),
-			location = "table"
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = character(0),
+		unexpected = c("b", "c"),
+		location = "table"
 	)
 })
 
@@ -89,10 +83,12 @@ test_that("grade missing and unexpected groups", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("groups", missing = "b", unexpected = "a", location = "table"),
-		ignore_attr = "class"
+		type = "groups",
+		missing = "b",
+		unexpected = "a",
+		location = "table"
 	)
 })
 
@@ -107,15 +103,12 @@ test_that("grade groups max_diffs()", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		tbl_check_groups(
-			tibble::tibble(a = letters[1:3], b = a, c = a, d = a),
-			dplyr::group_by(
-				tibble::tibble(a = letters[1:3], b = a, c = a, d = a), a, b, c, d
-			)
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = c("a", "b", "c", "d"),
+		unexpected = character(0),
+		location = "table"
 	)
 
 	grade_inf <- tblcheck_test_grade({
@@ -128,15 +121,12 @@ test_that("grade groups max_diffs()", {
 
 	expect_snapshot(grade_inf)
 
-	expect_equal(
+	expect_problem(
 		grade_inf$problem,
-		tbl_check_groups(
-			tibble::tibble(a = letters[1:3], b = a, c = a, d = a),
-			dplyr::group_by(
-				tibble::tibble(a = letters[1:3], b = a, c = a, d = a), a, b, c, d
-			)
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = c("a", "b", "c", "d"),
+		unexpected = character(0),
+		location = "table"
 	)
 
 	grade_one <- tblcheck_test_grade({
@@ -149,15 +139,12 @@ test_that("grade groups max_diffs()", {
 
 	expect_snapshot(grade_one)
 
-	expect_equal(
+	expect_problem(
 		grade_one$problem,
-		tbl_check_groups(
-			tibble::tibble(a = letters[1:3], b = a, c = a, d = a),
-			dplyr::group_by(
-				tibble::tibble(a = letters[1:3], b = a, c = a, d = a), a, b, c, d
-			)
-		),
-		ignore_attr = "class"
+		type = "groups",
+		missing = c("a", "b", "c", "d"),
+		unexpected = character(0),
+		location = "table"
 	)
 })
 

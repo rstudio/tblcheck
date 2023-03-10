@@ -7,8 +7,11 @@ test_that("value differences", {
 
 	expect_snapshot(grade_default)
 
-	expect_equal(
-		grade_default$problem, problem("values", 11:20, 1:10), ignore_attr = "class"
+	expect_problem(
+		grade_default$problem,
+		type = "values",
+		expected = 11:20,
+		actual = 1:10
 	)
 
 	grade_1 <- tblcheck_test_grade({
@@ -48,10 +51,11 @@ test_that("NA values", {
 
 	expect_snapshot(grade_na)
 
-	expect_equal(
+	expect_problem(
 		grade_na$problem,
-		problem("values", c(TRUE, TRUE, TRUE), c(TRUE, TRUE, NA)),
-		ignore_attr = "class"
+		type = "values",
+		expected = c(TRUE, TRUE, TRUE),
+		actual = c(TRUE, TRUE, NA)
 	)
 
 	grade_na_match <- tblcheck_test_grade({
@@ -87,12 +91,7 @@ test_that("vec_grade_values() failures", {
 	})
 
 	expect_snapshot(grade_attr)
-
-	expect_equal(
-		grade_attr$problem,
-		problem("values"),
-		ignore_attr = "class"
-	)
+	expect_problem(grade_attr$problem, type = "values")
 })
 
 test_that("column values problem messages are created correctly", {

@@ -7,15 +7,12 @@ test_that("vec_grade() checks classes", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"class",
-			expected = 1:3,
-			actual = letters,
-			location = "vector"
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = 1:3,
+		actual = letters,
+		location = "vector"
 	)
 
 	grade_int <- tblcheck_test_grade({
@@ -26,15 +23,12 @@ test_that("vec_grade() checks classes", {
 
 	expect_snapshot(grade_int)
 
-	expect_equal(
+	expect_problem(
 		grade_int$problem,
-		problem(
-			"class",
-			expected = as.integer(c(1, 2, 3)),
-			actual = as.numeric(c(1, 2, 3)),
-			location = "vector"
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = as.integer(c(1, 2, 3)),
+		actual = as.numeric(c(1, 2, 3)),
+		location = "vector"
 	)
 
 	grade_int_ignore <- tblcheck_test_grade({
@@ -55,10 +49,12 @@ test_that("vec_grade() checks the first three values", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("values", letters, rev(letters), location = "vector"),
-		ignore_attr = "class"
+		type = "values",
+		expected = letters,
+		actual = rev(letters),
+		location = "vector"
 	)
 })
 
@@ -72,15 +68,12 @@ test_that("vec_grade() checks multiple classes", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			type = "class",
-			expected = `class<-`(1:10, c("test", "class", "integer")),
-			actual = 1:10,
-			location = "vector"
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = `class<-`(1:10, c("test", "class", "integer")),
+		actual = 1:10,
+		location = "vector"
 	)
 })
 
@@ -93,12 +86,12 @@ test_that("vec_grade() checks for value differences beyond the first 3", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"values", c(rep(1, 3), 10:15), c(rep(1, 3), 5:10), location = "vector"
-		),
-		ignore_attr = "class"
+		type = "values",
+		expected = c(rep(1, 3), 10:15),
+		actual = c(rep(1, 3), 5:10),
+		location = "vector"
 	)
 })
 
@@ -111,10 +104,12 @@ test_that("max_diffs modifies the number of values to print", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("values", rev(letters), letters, location = "vector"),
-		ignore_attr = "class"
+		type = "values",
+		expected = rev(letters),
+		actual = letters,
+		location = "vector"
 	)
 })
 
@@ -127,10 +122,12 @@ test_that("max_diffs doesn't overflow", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("values", letters[2:1], letters[1:2], location = "vector"),
-		ignore_attr = "class"
+		type = "values",
+		expected = letters[2:1],
+		actual = letters[1:2],
+		location = "vector"
 	)
 })
 
@@ -143,13 +140,14 @@ test_that("checks that vectors have the same length", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"length", letters[1:4], letters[1:3],
-			expected_length = 4, actual_length = 3, location = "vector"
-		),
-		ignore_attr = "class"
+		type = "length",
+		expected = letters[1:4],
+		actual = letters[1:3],
+		expected_length = 4,
+		actual_length = 3,
+		location = "vector"
 	)
 })
 
@@ -162,14 +160,12 @@ test_that("checks that vectors have the same names", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"names",
-			missing = letters[1:3], unexpected = letters[24:26],
-			location = "vector"
-		),
-		ignore_attr = "class"
+		type = "names",
+		missing = letters[1:3],
+		unexpected = letters[24:26],
+		location = "vector"
 	)
 })
 
@@ -182,10 +178,12 @@ test_that("number of levels", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("levels_n", 3, 2, location = "vector"),
-		ignore_attr = "class"
+		type = "levels_n",
+		expected = 3,
+		actual = 2,
+		location = "vector"
 	)
 })
 
@@ -198,15 +196,12 @@ test_that("level labels", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"levels",
-			missing = c("x", "y", "z"),
-			unexpected = c("a", "b", "c"),
-			location = "vector"
-		),
-		ignore_attr = "class"
+		type = "levels",
+		missing = c("x", "y", "z"),
+		unexpected = c("a", "b", "c"),
+		location = "vector"
 	)
 })
 
@@ -219,10 +214,10 @@ test_that("level order", {
 
 	expect_snapshot(grade_reverse)
 
-	expect_equal(
+	expect_problem(
 		grade_reverse$problem,
-		problem("levels_reversed", location = "vector"),
-		ignore_attr = "class"
+		type = "levels_reversed",
+		location = "vector"
 	)
 
 	grade_diffs <- tblcheck_test_grade({
@@ -233,12 +228,12 @@ test_that("level order", {
 
 	expect_snapshot(grade_diffs)
 
-	expect_equal(
+	expect_problem(
 		grade_diffs$problem,
-		problem(
-			"levels_order", c("c", "a", "b"), c("a", "b", "c"), location = "vector"
-		),
-		ignore_attr = "class"
+		type = "levels_order",
+		expected = c("c", "a", "b"),
+		actual = c("a", "b", "c"),
+		location = "vector"
 	)
 
 	grade <- tblcheck_test_grade({
@@ -249,15 +244,12 @@ test_that("level order", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"levels_order",
-			c("a", "b", "c", "e", "d"),
-			c("a", "b", "c", "d", "e"),
-			location = "vector"
-		),
-		ignore_attr = "class"
+		type = "levels_order",
+		expected = c("a", "b", "c", "e", "d"),
+		actual = c("a", "b", "c", "d", "e"),
+		location = "vector"
 	)
 })
 
