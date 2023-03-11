@@ -83,6 +83,7 @@ grade_this_table <- function(
 	check_column_levels = check_columns,
 	check_column_values = check_columns,
 	tolerance = sqrt(.Machine$double.eps),
+	check_row_order = check_columns,
 	hint = getOption("gradethis.fail.hint", FALSE),
 	encourage = getOption("gradethis.fail.encourage", FALSE),
 	# gradethis pass/fail options

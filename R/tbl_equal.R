@@ -28,6 +28,7 @@ tbl_equal <- function(
 	check_column_levels = check_columns,
 	check_column_values = check_columns,
 	tolerance = sqrt(.Machine$double.eps),
+	check_row_order = check_columns,
 	env = parent.frame()
 ) {
 	is.null(
@@ -46,6 +47,7 @@ tbl_equal <- function(
 			check_column_levels = check_column_levels,
 			check_column_values = check_column_values,
 			tolerance = tolerance,
+			check_row_order = check_row_order,
 			env = env
 		)
 	)

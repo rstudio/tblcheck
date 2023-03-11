@@ -18,6 +18,19 @@ expect_warning <- function(...) {
 	suppressWarnings(testthat::expect_warning(...))
 }
 
+expect_problem <- function(object, type, expected, actual, ...) {
+	testthat::expect_s3_class(object, "tblcheck_problem")
+
+	if (!rlang::is_missing(type)) testthat::expect_equal(object$type, type)
+	if (!rlang::is_missing(expected)) testthat::expect_equal(object$expected, expected)
+	if (!rlang::is_missing(actual)) testthat::expect_equal(object$actual, actual)
+
+	purrr::iwalk(
+		list(...),
+		function(value, name) testthat::expect_equal(object[[name]], value)
+	)
+}
+
 tblcheck_test_grade <- function(expr, return_all = FALSE) {
 	expr <- rlang::enexpr(expr)
 

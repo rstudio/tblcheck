@@ -116,47 +116,50 @@ problem_message.values_problem <- function(problem, max_diffs = 3, ...) {
 	}
 
 	# First, alert the user if the first `n` values do not match
-	problem$n_values <- min(
-		max(length(problem$expected), length(problem$actual)),
-		max_diffs
-	)
-
-	first_n_values_are_equal <-
-		vctrs::vec_equal(
-			problem$expected[seq_len(problem$n_values)],
-			problem$actual[seq_len(problem$n_values)],
-			na_equal = TRUE
+	# Skip this if order was not checked, since that would make "first" meaningless
+	if (!isFALSE(problem$check_order)) {
+		problem$n_values <- min(
+			max(length(problem$expected), length(problem$actual)),
+			max_diffs
 		)
 
-	if (!all(first_n_values_are_equal)) {
-		problem$expected <- knitr::combine_words(
-			md_code(problem$expected[seq_len(problem$n_values)])
-		)
-		problem$actual <- knitr::combine_words(
-			md_code(problem$actual[seq_len(problem$n_values)])
-		)
+		first_n_values_are_equal <-
+			vctrs::vec_equal(
+				problem$expected[seq_len(problem$n_values)],
+				problem$actual[seq_len(problem$n_values)],
+				na_equal = TRUE
+			)
 
-		problem$expected_msg <- problem$expected_msg %||%
-			if (is_problem(problem, "column")) {
-				ngettext(
-					problem$n_values,
-					"The first value of your `{column}` column should be {expected}, not {actual},",
-					"The first {n_values} values of your `{column}` column should be {expected},"
-				)
-			} else {
-				ngettext(
-					problem$n_values,
-					"The first value of your result should be {expected},",
-					"The first {n_values} values of your result should be {expected},"
-				)
-			}
+		if (!all(first_n_values_are_equal)) {
+			problem$expected <- knitr::combine_words(
+				md_code(problem$expected[seq_len(problem$n_values)])
+			)
+			problem$actual <- knitr::combine_words(
+				md_code(problem$actual[seq_len(problem$n_values)])
+			)
 
-		problem$actual_message <- problem$actual_message %||%
-			" not {actual}."
+			problem$expected_msg <- problem$expected_msg %||%
+				if (is_problem(problem, "column")) {
+					ngettext(
+						problem$n_values,
+						"The first value of your `{column}` column should be {expected}, not {actual},",
+						"The first {n_values} values of your `{column}` column should be {expected},"
+					)
+				} else {
+					ngettext(
+						problem$n_values,
+						"The first value of your result should be {expected},",
+						"The first {n_values} values of your result should be {expected},"
+					)
+				}
 
-		return(
-			glue::glue_data(problem, problem$expected_msg, problem$actual_message)
-		)
+			problem$actual_message <- problem$actual_message %||%
+				" not {actual}."
+
+			return(
+				glue::glue_data(problem, problem$expected_msg, problem$actual_message)
+			)
+		}
 	}
 
 	# Next, alert if there are values in `actual` that aren't in `expected`
@@ -215,5 +218,7 @@ problem_message.values_problem <- function(problem, max_diffs = 3, ...) {
 	}
 
 	# If all else fails, return vague message
-	problem_message(problem("values"))
+	problem$expected <- NULL
+	problem$actual <- NULL
+	problem_message(problem)
 }

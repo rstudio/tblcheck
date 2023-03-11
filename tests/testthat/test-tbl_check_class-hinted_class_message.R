@@ -7,14 +7,11 @@ test_that("tbl_grade_class() with hinted messages", {
 
 	expect_snapshot(grade_ungrouped)
 
-	expect_equal(
+	expect_problem(
 		grade_ungrouped$problem,
-		problem(
-			"class",
-			expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
-			actual = tibble::tibble(a = letters[1:3], b = a)
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
+		actual = tibble::tibble(a = letters[1:3], b = a)
 	)
 
 	grade_grouped <- tblcheck_test_grade({
@@ -25,14 +22,11 @@ test_that("tbl_grade_class() with hinted messages", {
 
 	expect_snapshot(grade_grouped)
 
-	expect_equal(
+	expect_problem(
 		grade_grouped$problem,
-		problem(
-			"class",
-			expected = tibble::tibble(a = letters[1:3], b = a),
-			actual = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = tibble::tibble(a = letters[1:3], b = a),
+		actual = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b)
 	)
 
 	grade_ungrouped_int <- tblcheck_test_grade({
@@ -43,14 +37,11 @@ test_that("tbl_grade_class() with hinted messages", {
 
 	expect_snapshot(grade_ungrouped_int)
 
-	expect_equal(
+	expect_problem(
 		grade_ungrouped_int$problem,
-		problem(
-			"class",
-			expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
-			actual = 1:2
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = dplyr::group_by(tibble::tibble(a = letters[1:3], b = a), b),
+		actual = 1:2
 	)
 
 	grade_unrowwise_int <- tblcheck_test_grade({
@@ -61,13 +52,10 @@ test_that("tbl_grade_class() with hinted messages", {
 
 	expect_snapshot(grade_unrowwise_int)
 
-	expect_equal(
+	expect_problem(
 		grade_unrowwise_int$problem,
-		problem(
-			"class",
-			expected = dplyr::rowwise(tibble::tibble(a = letters[1:3], b = a)),
-			actual = 1:2
-		),
-		ignore_attr = "class"
+		type = "class",
+		expected = dplyr::rowwise(tibble::tibble(a = letters[1:3], b = a)),
+		actual = 1:2
 	)
 })

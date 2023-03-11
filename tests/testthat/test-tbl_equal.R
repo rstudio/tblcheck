@@ -35,7 +35,7 @@ test_that("factors equal only if levels equal", {
 	expect_false(tbl_equal(df2, df1))
 })
 
-test_that("factor comparison requires strict equality of levels (#2440)", {
+test_that("factor comparison requires strict equality of levels", {
 	df1 <- tibble::tibble(x = factor("a"))
 	df2 <- tibble::tibble(x = factor("a", levels = c("a", "b")))
 	expect_true(tbl_equal(df1, df2, check_column_levels = FALSE))
@@ -51,7 +51,18 @@ test_that("all.equal.data.frame handles data.frames with NULL names", {
 	expect_true(tbl_equal(x, x))
 })
 
-test_that("all.equal handles NA_character_ correctly. #1095", {
+
+test_that("data frame equality test with check_row_order=FALSE detects difference in number of rows", {
+	DF1 <- tibble::tibble(a = 1:4, b = letters[1:4])
+	DF2 <- tibble::tibble(a = c(1:4, 4L), b = letters[c(1:4, 4L)])
+	expect_false(tbl_equal(DF1, DF2, check_row_order = FALSE))
+
+	DF1 <- tibble::tibble(a = c(1:4, 2L), b = letters[c(1:4, 2L)])
+	DF2 <- tibble::tibble(a = c(1:4, 4L), b = letters[c(1:4, 4L)])
+	expect_false(tbl_equal(DF1, DF2, check_row_order = FALSE))
+})
+
+test_that("all.equal handles NA_character_ correctly", {
 	d1 <- tibble::tibble(x = c(NA_character_))
 	expect_true(tbl_equal(d1, d1))
 
@@ -59,13 +70,13 @@ test_that("all.equal handles NA_character_ correctly. #1095", {
 	expect_true(tbl_equal(d2, d2))
 })
 
-test_that("handle Date columns of different types, integer and numeric (#1204)", {
+test_that("handle Date columns of different types, integer and numeric", {
 	a <- data.frame(date = as.Date("2015-06-07"))
 	b <- data.frame(date = structure(as.integer(a$date), class = "Date"))
 	expect_true(tbl_equal(a, b))
 })
 
-test_that("equality test fails when convert is FALSE and types don't match (#1484)", {
+test_that("equality test fails when convert is FALSE and types don't match", {
 	df1 <- tibble::tibble(x = "a")
 	df2 <- tibble::tibble(x = factor("a"))
 	expect_true(tbl_equal(df1, df2, check_column_class = FALSE))

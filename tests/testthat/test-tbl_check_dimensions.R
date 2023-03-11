@@ -7,13 +7,13 @@ test_that("vector length", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"length",
-			letters[1:6], letters[1:3], expected_length = 6, actual_length = 3
-		),
-		ignore_attr = "class"
+		type = "length",
+		expected = letters[1:6],
+		actual = letters[1:3],
+		expected_length = 6,
+		actual_length = 3
 	)
 
 	grade <- tblcheck_test_grade({
@@ -24,13 +24,13 @@ test_that("vector length", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"length",
-			letters[1:5], letters[1:3], expected_length = 5, actual_length = 3
-		),
-		ignore_attr = "class"
+		type = "length",
+		expected = letters[1:5],
+		actual = letters[1:3],
+		expected_length = 5,
+		actual_length = 3
 	)
 
 	grade <- tblcheck_test_grade({
@@ -41,13 +41,13 @@ test_that("vector length", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"length",
-			letters[1:4], letters[1:3], expected_length = 4, actual_length = 3
-		),
-		ignore_attr = "class"
+		type = "length",
+		expected = letters[1:4],
+		actual = letters[1:3],
+		expected_length = 4,
+		actual_length = 3
 	)
 
 	grade <- tblcheck_test_grade({
@@ -58,13 +58,13 @@ test_that("vector length", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"length",
-			letters[4:7], letters[1:3], expected_length = 4, actual_length = 3
-		),
-		ignore_attr = "class"
+		type = "length",
+		expected = letters[4:7],
+		actual = letters[1:3],
+		expected_length = 4,
+		actual_length = 3
 	)
 
 	grade_no_unique <- tblcheck_test_grade({
@@ -75,13 +75,13 @@ test_that("vector length", {
 
 	expect_snapshot(grade_no_unique)
 
-	expect_equal(
+	expect_problem(
 		grade_no_unique$problem,
-		problem(
-			"length",
-			rep("a", 4), rep("a", 3), expected_length = 4, actual_length = 3
-		),
-		ignore_attr = "class"
+		type = "length",
+		expected = rep("a", 4),
+		actual = rep("a", 3),
+		expected_length = 4,
+		actual_length = 3
 	)
 })
 
@@ -95,10 +95,11 @@ test_that("table rows", {
 
 	expect_snapshot(grade_tbl_rows_missing_1)
 
-	expect_equal(
+	expect_problem(
 		grade_tbl_rows_missing_1$problem,
-		problem("nrow", 25, 26),
-		ignore_attr = "class"
+		type = "nrow",
+		expected = 25,
+		actual = 26
 	)
 
 	grade_tbl_rows_extra_1 <-
@@ -110,10 +111,11 @@ test_that("table rows", {
 
 	expect_snapshot(grade_tbl_rows_extra_1)
 
-	expect_equal(
+	expect_problem(
 		grade_tbl_rows_extra_1$problem,
-		problem("nrow", 1, 26),
-		ignore_attr = "class"
+		type = "nrow",
+		expected = 1,
+		actual = 26
 	)
 })
 
@@ -127,10 +129,11 @@ test_that("tbl_grade_dimensions() ncol", {
 
 	expect_snapshot(grade_tbl_cols_extra_1)
 
-	expect_equal(
+	expect_problem(
 		grade_tbl_cols_extra_1$problem,
-		problem("ncol", 2, 3),
-		ignore_attr = "class"
+		type = "ncol",
+		expected = 2,
+		actual = 3
 	)
 
 	grade_tbl_cols_extra_2 <-
@@ -142,10 +145,11 @@ test_that("tbl_grade_dimensions() ncol", {
 
 	expect_snapshot(grade_tbl_cols_extra_2)
 
-	expect_equal(
+	expect_problem(
 		grade_tbl_cols_extra_2$problem,
-		problem("ncol", 1, 3),
-		ignore_attr = "class"
+		type = "ncol",
+		expected = 1,
+		actual = 3
 	)
 
 	grade_tbl_cols_missing_1 <-
@@ -157,10 +161,11 @@ test_that("tbl_grade_dimensions() ncol", {
 
 	expect_snapshot(grade_tbl_cols_missing_1)
 
-	expect_equal(
+	expect_problem(
 		grade_tbl_cols_missing_1$problem,
-		problem("ncol", 2, 1),
-		ignore_attr = "class"
+		type = "ncol",
+		expected = 2,
+		actual = 1
 	)
 })
 
@@ -174,10 +179,11 @@ test_that("mismatched dimensions", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("dimensions_n", 2, 1),
-		ignore_attr = "class"
+		type = "dimensions_n",
+		expected = 2,
+		actual = 1
 	)
 })
 
@@ -191,10 +197,11 @@ test_that("multidimensional array", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("dimensions", c(2, 2, 3), c(1, 3, 4)),
-		ignore_attr = "class"
+		type = "dimensions",
+		expected = c(2, 2, 3),
+		actual = c(1, 3, 4)
 	)
 })
 
@@ -208,10 +215,11 @@ test_that("matrices", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("ncol", 3, 4),
-		ignore_attr = "class"
+		type = "ncol",
+		expected = 3,
+		actual = 4
 	)
 
 	grade_n <-
@@ -223,9 +231,10 @@ test_that("matrices", {
 
 	expect_snapshot(grade_n)
 
-	expect_equal(
+	expect_problem(
 		grade_n$problem,
-		problem("dimensions_n", 2, 1),
-		ignore_attr = "class"
+		type = "dimensions_n",
+		expected = 2,
+		actual = 1
 	)
 })

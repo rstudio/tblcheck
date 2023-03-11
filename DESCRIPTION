@@ -1,6 +1,6 @@
 Package: tblcheck
 Title: Grade Tables in Learning Exercises
-Version: 0.3.0.9000
+Version: 0.3.1
 Authors@R: c(
     person("Alexander", "Rossell Hayes", , "alex.rossellhayes@rstudio.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9412-0457")),
@@ -19,6 +19,7 @@ URL: https://pkgs.rstudio.com/tblcheck,
 BugReports: https://github.com/rstudio/tblcheck/issues
 Imports:
     checkmate,
+    dplyr,
     ellipsis,
     glue,
     gradethis (>= 0.2.7.9000),
@@ -26,12 +27,12 @@ Imports:
     lifecycle,
     magrittr,
     methods,
+    purrr,
     rlang,
     tidyselect,
     utils,
     vctrs
 Suggests:
-    dplyr,
     learnr,
     lubridate,
     mockery,

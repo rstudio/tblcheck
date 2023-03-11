@@ -7,10 +7,11 @@ test_that("number of levels", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("levels_n", 3, 2),
-		ignore_attr = "class"
+		type = "levels_n",
+		expected = 3,
+		actual = 2
 	)
 })
 
@@ -23,10 +24,11 @@ test_that("level labels", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("levels", missing = c("x", "y", "z"), unexpected = c("a", "b", "c")),
-		ignore_attr = "class"
+		type = "levels",
+		missing = c("x", "y", "z"),
+		unexpected = c("a", "b", "c")
 	)
 })
 
@@ -38,12 +40,7 @@ test_that("level order", {
 	})
 
 	expect_snapshot(grade_diffs)
-
-	expect_equal(
-		grade_diffs$problem,
-		problem("levels_reversed"),
-		ignore_attr = "class"
-	)
+	expect_problem(grade_diffs$problem, type = "levels_reversed")
 
 	grade_diffs <- tblcheck_test_grade({
 		.result <- factor(1:3, c("a", "b", "c"))
@@ -53,10 +50,11 @@ test_that("level order", {
 
 	expect_snapshot(grade_diffs)
 
-	expect_equal(
+	expect_problem(
 		grade_diffs$problem,
-		problem("levels_order", c("c", "a", "b"), c("a", "b", "c")),
-		ignore_attr = "class"
+		type = "levels_order",
+		expected = c("c", "a", "b"),
+		actual = c("a", "b", "c")
 	)
 
 	grade <- tblcheck_test_grade({
@@ -67,11 +65,10 @@ test_that("level order", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"levels_order", c("a", "b", "c", "e", "d"), c("a", "b", "c", "d", "e")
-		),
-		ignore_attr = "class"
+		type = "levels_order",
+		expected = c("a", "b", "c", "e", "d"),
+		actual = c("a", "b", "c", "d", "e")
 	)
 })

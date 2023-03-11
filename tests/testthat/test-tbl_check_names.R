@@ -8,12 +8,12 @@ test_that("grade missing names", {
 
 	expect_snapshot(grade_missing_1)
 
-	expect_equal(
+	expect_problem(
 		grade_missing_1$problem,
-		problem(
-			"names", missing = "b", unexpected = character(0), location = "table"
-		),
-		ignore_attr = "class"
+		type = "names",
+		missing = "b",
+		unexpected = character(0),
+		location = "table"
 	)
 
 	grade_missing_2 <-
@@ -25,15 +25,12 @@ test_that("grade missing names", {
 
 	expect_snapshot(grade_missing_2)
 
-	expect_equal(
+	expect_problem(
 		grade_missing_2$problem,
-		problem(
-			"names",
-			missing = c("b", "c"),
-			unexpected = character(0),
-			location = "table"
-		),
-		ignore_attr = "class"
+		type = "names",
+		missing = c("b", "c"),
+		unexpected = character(0),
+		location = "table"
 	)
 })
 
@@ -47,12 +44,12 @@ test_that("grade unexpected names", {
 
 	expect_snapshot(grade_unexpected_1)
 
-	expect_equal(
+	expect_problem(
 		grade_unexpected_1$problem,
-		problem(
-			"names", missing = character(0), unexpected = "b", location = "table"
-		),
-		ignore_attr = "class"
+		type = "names",
+		missing = character(0),
+		unexpected = "b",
+		location = "table"
 	)
 
 	grade_unexpected_2 <-
@@ -64,15 +61,12 @@ test_that("grade unexpected names", {
 
 	expect_snapshot(grade_unexpected_2)
 
-	expect_equal(
+	expect_problem(
 		grade_unexpected_2$problem,
-		problem(
-			"names",
-			missing = character(0),
-			unexpected = c("b", "c"),
-			location = "table"
-		),
-		ignore_attr = "class"
+		type = "names",
+		missing = character(0),
+		unexpected = c("b", "c"),
+		location = "table"
 	)
 })
 
@@ -85,15 +79,12 @@ test_that("grade missing and unexpected names", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem(
-			"names",
-			missing = c("x", "y"),
-			unexpected = c("a", "b"),
-			location = "table"
-		),
-		ignore_attr = "class"
+		type = "names",
+		missing = c("x", "y"),
+		unexpected = c("a", "b"),
+		location = "table"
 	)
 })
 
@@ -106,10 +97,12 @@ test_that("grade names in wrong order", {
 
 	expect_snapshot(grade)
 
-	expect_equal(
+	expect_problem(
 		grade$problem,
-		problem("names_order", c("b", "a"), c("a", "b"), location = "table"),
-		ignore_attr = "class"
+		type = "names_order",
+		expected = c("b", "a"),
+		actual = c("a", "b"),
+		location = "table"
 	)
 
 	grade_false <- tblcheck_test_grade({

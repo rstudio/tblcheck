@@ -238,3 +238,12 @@
         by `a`.
       >
 
+# tbl_grade() ignoring row order
+
+    Code
+      grade_ignore_rows_values_diff
+    Output
+      <gradethis_graded: [Incorrect]
+        Your `b` column contains unexpected values.
+      >
+
