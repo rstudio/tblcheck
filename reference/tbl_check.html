@@ -36,7 +36,7 @@ with gradethis::fail()
     
     <a class="navbar-brand me-2" href="../index.html">tblcheck</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,6 +105,7 @@ with <code><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" cl
 <span>  check_column_levels <span class="op">=</span> <span class="va">check_columns</span>,</span>
 <span>  check_column_values <span class="op">=</span> <span class="va">check_columns</span>,</span>
 <span>  tolerance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span>,</span>
+<span>  check_row_order <span class="op">=</span> <span class="va">check_columns</span>,</span>
 <span>  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -124,6 +125,7 @@ with <code><a href="https://pkgs.rstudio.com/gradethis/reference/graded.html" cl
 <span>  check_column_levels <span class="op">=</span> <span class="va">check_columns</span>,</span>
 <span>  check_column_values <span class="op">=</span> <span class="va">check_columns</span>,</span>
 <span>  tolerance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span>,</span>
+<span>  check_row_order <span class="op">=</span> <span class="va">check_columns</span>,</span>
 <span>  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -208,6 +210,11 @@ column has the same values in <code>object</code> and <code>expected</code>.</p>
 <dt>tolerance</dt>
 <dd><p><code>[numeric(1) ≥ 0]</code><br><code>values</code> differences smaller than
 <code>tolerance</code> are ignored. The default value is close to <code>1.5e-8</code>.</p></dd>
+
+
+<dt>check_row_order</dt>
+<dd><p><code>[logical(1)]</code><br> Whether to check that the values in
+each column are in the same order in <code>object</code> and <code>expected</code>.</p></dd>
 
 
 <dt>env</dt>
@@ -333,11 +340,12 @@ not expected, or is missing groups that are expected.</p></li>
 <span class="r-in"><span><span class="fu">tbl_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Your `a` column should be a vector of text (class `character`), but it is a vector of integers (class `integer`).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "class"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ expected: chr [1:10] "a" "b" "c" "d" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ actual  : int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ location: chr "column"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ column  : chr "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ type       : chr "class"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ expected   : chr [1:10] "a" "b" "c" "d" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ actual     : int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ location   : chr "column"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ column     : chr "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ check_order: logi TRUE</span>
 <span class="r-in"><span><span class="fu">tbl_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Your `a` column should be a vector of text (class `character`),</span>
@@ -354,11 +362,12 @@ not expected, or is missing groups that are expected.</p></li>
 <span class="r-in"><span><span class="fu">tbl_check</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tblcheck problem&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The first 3 values of your `a` column should be `11`, `12`, and `13`, not `1`, `2`, and `3`.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ type    : chr "values"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ expected: int [1:10] 11 12 13 14 15 16 17 18 19 20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ actual  : int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ location: chr "column"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ column  : chr "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ type       : chr "values"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ expected   : int [1:10] 11 12 13 14 15 16 17 18 19 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ actual     : int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ location   : chr "column"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ column     : chr "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ check_order: logi TRUE</span>
 <span class="r-in"><span><span class="fu">tbl_grade</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;gradethis_graded: [Incorrect]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   The first 3 values of your `a` column should be `11`, `12`, and</span>
