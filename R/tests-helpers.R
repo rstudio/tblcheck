@@ -19,15 +19,15 @@ expect_warning <- function(...) {
 }
 
 expect_problem <- function(object, type, expected, actual, ...) {
-	expect_s3_class(object, "tblcheck_problem")
+	testthat::expect_s3_class(object, "tblcheck_problem")
 
-	if (!rlang::is_missing(type)) expect_equal(object$type, type)
-	if (!rlang::is_missing(expected)) expect_equal(object$expected, expected)
-	if (!rlang::is_missing(actual)) expect_equal(object$actual, actual)
+	if (!rlang::is_missing(type)) testthat::expect_equal(object$type, type)
+	if (!rlang::is_missing(expected)) testthat::expect_equal(object$expected, expected)
+	if (!rlang::is_missing(actual)) testthat::expect_equal(object$actual, actual)
 
 	purrr::iwalk(
 		list(...),
-		function(value, name) expect_equal(object[[name]], value)
+		function(value, name) testthat::expect_equal(object[[name]], value)
 	)
 }
 
