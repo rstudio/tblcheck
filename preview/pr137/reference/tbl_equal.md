@@ -1,11 +1,11 @@
 # Check that the rows and columns of two tables are the same
 
 Test if two tables are equivalent using the same process as
-[`tbl_check()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md).
+[`tbl_check()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md).
 Unlike
-[`tbl_check()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md),
+[`tbl_check()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md),
 which returns either a
-[problem](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem.md)
+[problem](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem.md)
 object or [`NULL`](https://rdrr.io/r/base/NULL.html), `tbl_equal()`
 returns either [`TRUE`](https://rdrr.io/r/base/logical.html) or
 [`FALSE`](https://rdrr.io/r/base/logical.html).
@@ -56,7 +56,7 @@ tbl_equal(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same classes
   with
-  [`tbl_check_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md).
+  [`tbl_check_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md).
 
 - ignore_class:
 
@@ -79,14 +79,14 @@ tbl_equal(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same column
   names with
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
 
 - check_column_order:
 
   `[logical(1)]`  
   Whether to check that the columns of `object` are in the same order as
   `expected` with
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
   Defaults to `FALSE`.
 
 - check_dimensions:
@@ -94,7 +94,7 @@ tbl_equal(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same number of
   rows and columns with
-  [`tbl_check_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md).
+  [`tbl_check_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md).
 
 - check_groups:
 
@@ -107,7 +107,7 @@ tbl_equal(
 
   `[logical(1)]`  
   Whether to check that all columns have the same contents with
-  [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
+  [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
 
 - check_column_class:
 

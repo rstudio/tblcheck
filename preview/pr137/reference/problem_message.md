@@ -2,8 +2,8 @@
 
 `problem_message()` is an S3 generic that powers the conversion of
 problems detected by
-[`tbl_check()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md),
-[`vec_check()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md),
+[`tbl_check()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md),
+[`vec_check()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md),
 and their related helper functions into a human-readable message.
 
 ## Usage
@@ -31,9 +31,9 @@ A length-1 character string with a message describing the problem.
 ## See also
 
 Other Problem functions:
-[`problem()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem.md),
-[`problem_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md),
-[`problem_type()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
+[`problem()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem.md),
+[`problem_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md),
+[`problem_type()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
 
 ## Examples
 

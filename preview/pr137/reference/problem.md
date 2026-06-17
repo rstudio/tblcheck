@@ -46,9 +46,9 @@ Returns a problem with class `<type>_problem` and the base classes
 ## See also
 
 Other Problem functions:
-[`problem_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md),
-[`problem_message()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.md),
-[`problem_type()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
+[`problem_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md),
+[`problem_message()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.md),
+[`problem_type()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
 
 ## Examples
 

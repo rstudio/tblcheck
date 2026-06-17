@@ -4,19 +4,19 @@ Checks for differences between `object` and `expected` in the following
 order:
 
 1.  Check class with
-    [`vec_check_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md)
+    [`vec_check_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md)
 
 2.  Check length with
-    [`vec_check_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md)
+    [`vec_check_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md)
 
 3.  If the vector is a factor, check factor levels are the same with
-    [`vec_check_levels()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md)
+    [`vec_check_levels()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md)
 
 4.  Check vector values are the same with
-    [`vec_check_values()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.md)
+    [`vec_check_values()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.md)
 
 5.  Check names with
-    [`vec_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
+    [`vec_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
 
 If the vectors differ
 
@@ -188,7 +188,7 @@ message from `vec_grade()`. Otherwise, invisibly returns
 2.  `length`: `object` doesn't have the same length as `expected`.
 
 3.  `levels_n`, `levels`, `levels_reversed`, `levels_order`: See
-    [`vec_check_levels()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md).
+    [`vec_check_levels()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md).
 
 4.  `values`: `object` doesn't contain the same values as `expected`.
 

@@ -6,16 +6,16 @@ Checks for differences between the `name` column in `object` and in
 1.  Check that the `name` column exists in `object`
 
 2.  Check class with
-    [`vec_check_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md)
+    [`vec_check_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md)
 
 3.  Check length with
-    [`vec_check_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md)
+    [`vec_check_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md)
 
 4.  If the column is a factor, check factor levels with
-    [`vec_check_levels()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md)
+    [`vec_check_levels()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md)
 
 5.  Check column values with
-    [`vec_check_values()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.md)
+    [`vec_check_values()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.md)
 
 If the columns differ
 
@@ -204,7 +204,7 @@ message from `tbl_grade_column()`. Otherwise, invisibly returns
 3.  `length`: The `column` doesn't have the expected length.
 
 4.  `levels_n`, `levels`, `levels_reversed`, `levels_order`: See
-    [`vec_check_levels()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md).
+    [`vec_check_levels()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md).
 
 5.  `values`: The `column` doesn't have the expected values.
 

@@ -4,9 +4,9 @@
 
 To help you get a feel for the kind of advice tblcheck provides, we’ve
 collected a few example exercises that use
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 or
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 from tblcheck to grade a [learnr](https://rstudio.github.io/learnr/)
 exercise.
 
@@ -33,19 +33,19 @@ gradethis_setup(
 ````
 
 Note that in all examples below we’re using either
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 or
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 without any additional customizations. We’ve also made sure that each
 exercise contains a `-solution` chunk. ([Read more about how to set up
 an
-exercise](https:/rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.html#usage)
+exercise](https://rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.html#usage)
 for use with tblcheck.)
 
 ## Create a Table
 
 The first example repeats the example presented in the [*Get started*
-article](https:/rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.md).
+article](https://rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.md).
 The goal is for the learner to use the
 [`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
 function to create a table, but it takes them a few tries.
@@ -577,7 +577,7 @@ expected order. Try it again. You get better each time.
 
 In addition to table-checking functions, tblcheck includes [functions
 for checking
-vectors](https:/rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.html#grading-vectors)
+vectors](https://rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.html#grading-vectors)
 — after all, columns in a table are vectors!
 
 Here’s an example exercise from a tutorial on string transformations
@@ -604,7 +604,7 @@ asked to practice concepts they just discovered in the tutorial:
   Wrong Subset
 
 In the exercise markdown, we call
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 in the `string-check` chunk to automatically compare the result of the
 student’s submission with our `string-solution`.
 

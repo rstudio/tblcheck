@@ -1,11 +1,10 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.8.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   examples: examples.html
   tblcheck: tblcheck.html
-last_built: 2023-03-11T01:27Z
+last_built: 2026-06-17T21:03Z
 urls:
-  reference: https://pkgs.rstudio.com/tblcheck/reference
-  article: https://pkgs.rstudio.com/tblcheck/articles
-
+  reference: https://rstudio.github.io/tblcheck/reference
+  article: https://rstudio.github.io/tblcheck/articles

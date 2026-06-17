@@ -3,9 +3,9 @@
 **\[deprecated\]**
 
 `tbl_check_table()` and `tbl_grade_table()` were renamed to
-[`tbl_check()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_check()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 and
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md).
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md).
 
 ## Usage
 

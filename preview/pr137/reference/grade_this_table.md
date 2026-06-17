@@ -3,7 +3,7 @@
 Automatically grade a table resulting from student code using
 [`gradethis::grade_this()`](https://pkgs.rstudio.com/gradethis/reference/grade_this.html)
 and
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 to compare the student's result with the author's solution.
 
 ## Usage
@@ -59,7 +59,7 @@ grade_this_table(
 
   `[logical(1)]`  
   When `TRUE` (default for
-  [`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+  [`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
   but not `grade_this_table()`), the `.result` is compared to the
   `.solution` with
   [`gradethis::pass_if_equal()`](https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html)
@@ -76,10 +76,10 @@ grade_this_table(
   `[numeric(1)]`  
   The maximum number of mismatched values to display in an informative
   failure message. Passed to
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
   to determine the number of mismatched column names to display and the
   `n_values` argument of
-  [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
+  [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
   to determine the number of mismatched column values to display.
   Defaults to 3.
 
@@ -96,7 +96,7 @@ grade_this_table(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same classes
   with
-  [`tbl_check_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md).
+  [`tbl_check_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md).
 
 - ignore_class:
 
@@ -119,14 +119,14 @@ grade_this_table(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same column
   names with
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
 
 - check_column_order:
 
   `[logical(1)]`  
   Whether to check that the columns of `object` are in the same order as
   `expected` with
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
   Defaults to `FALSE`.
 
 - check_dimensions:
@@ -134,7 +134,7 @@ grade_this_table(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same number of
   rows and columns with
-  [`tbl_check_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md).
+  [`tbl_check_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md).
 
 - check_groups:
 
@@ -147,7 +147,7 @@ grade_this_table(
 
   `[logical(1)]`  
   Whether to check that all columns have the same contents with
-  [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
+  [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
 
 - check_column_class:
 
@@ -232,11 +232,11 @@ with the following components:
     feedback:
 
     1.  `grade_this_table()` returns the results from
-        [`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+        [`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 
-    2.  [`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+    2.  [`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
         returns the results from
-        [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+        [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 
 4.  The `post_check` code, if any, is evaluated and any feedback from a
     call to
@@ -251,10 +251,10 @@ with the following components:
 
 ## See also
 
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 
 Other graders:
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 
 ## Examples
 

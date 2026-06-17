@@ -1,531 +1,304 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/articles/tblcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/articles/tblcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/deprecated-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/friendly_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/grade_this_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/grade_this_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/hinted_class_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/problem.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/problem_grade.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/problem_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/problem_type.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_column.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_groups.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_is_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_names.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_check_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tbl_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/tblcheck-package.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/vec_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/vec_check_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/vec_check_values.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/preview/pr133/reference/vec_check_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/deprecated-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/friendly_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/grade_this_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/grade_this_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/hinted_class_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem_grade.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/problem_type.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_column.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_groups.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_is_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_names.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_check_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tbl_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tblcheck-package.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/tblcheck_grade.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/vec_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/vec_check_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/vec_check_values.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/reference/vec_check_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/articles/tblcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/deprecated-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/grade_this_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/grade_this_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/problem.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/problem_grade.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/problem_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/problem_type.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_column.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_groups.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_is_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_names.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/tbl_check_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/vec_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/vec_check_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/vec_check_values.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.1/reference/vec_check_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/articles/tblcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/deprecated-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/friendly_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/grade_this_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/grade_this_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/hinted_class_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem_grade.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/problem_type.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_column.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_groups.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_is_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_names.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tbl_check_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/tblcheck-package.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check_values.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.2.2/reference/vec_check_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/404.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/articles/examples.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/articles/tblcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/deprecated-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/friendly_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/grade_this_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/grade_this_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/hinted_class_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/problem.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/problem_grade.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/problem_message.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/problem_type.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_class.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_column.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_groups.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_is_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_names.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_check_table.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tbl_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/tblcheck-package.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/vec_check.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/vec_check_levels.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/vec_check_values.html</loc>
-  </url>
-  <url>
-    <loc>https://pkgs.rstudio.com/tblcheck/v0.3.0/reference/vec_check_vector.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rstudio.github.io/tblcheck/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/friendly_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/hinted_class_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tbl_equal.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/tblcheck-package.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr133/reference/vec_check_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/as_problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,ANY-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,Date-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,POSIXt-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,Period-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,array-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,character-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,complex-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,data.frame-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,factor-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,grouped_df-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,integer-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,list-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,logical-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,matrix-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,numeric-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,raw-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,rowwise_df-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class,tbl_df-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/friendly_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message,ANY,ANY-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message,data.frame,grouped_df-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message,data.frame,rowwise_df-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message,grouped_df,data.frame-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message,rowwise_df,data.frame-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message,rowwise_df,grouped_df-method.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/hinted_class_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/is_problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/is_tblcheck_problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.default.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.gradethis_problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.list.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.tblcheck_problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_equal.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_grade_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tblcheck-package.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tblcheck_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/tblcheck_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_length.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_length.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_grade_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/friendly_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/hinted_class_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tbl_equal.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/tblcheck-package.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/reference/vec_check_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.1/reference/vec_check_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/friendly_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/hinted_class_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/tblcheck-package.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.2.2/reference/vec_check_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/friendly_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/hinted_class_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tbl_equal.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/tblcheck-package.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.0/reference/vec_check_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/404.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/articles/examples.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/articles/tblcheck.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/deprecated-methods.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/friendly_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/grade_this_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/grade_this_vector.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/hinted_class_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/problem.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/problem_grade.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/problem_message.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/problem_type.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/reexports.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_class.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_column.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_dimensions.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_groups.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_is_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_names.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_check_table.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tbl_equal.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/tblcheck-package.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/vec_check.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/vec_check_levels.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/vec_check_values.html</loc></url>
+<url><loc>https://rstudio.github.io/tblcheck/v0.3.1/reference/vec_check_vector.html</loc></url>
 </urlset>
+

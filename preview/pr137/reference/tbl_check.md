@@ -4,20 +4,20 @@ Checks for differences between `object` and `expected` in the following
 order:
 
 1.  Check table class with
-    [`tbl_check_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md)
+    [`tbl_check_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md)
 
 2.  Check column names with
-    [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
+    [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
 
 3.  Check number of rows and columns with
-    [`tbl_check_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md)
+    [`tbl_check_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md)
 
 4.  Check [groups](https://dplyr.tidyverse.org/reference/group_by.html)
     with
-    [`tbl_check_groups()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_groups.md)
+    [`tbl_check_groups()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_groups.md)
 
 5.  Check that each column is the same with
-    [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
+    [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
 
 If the tables differ
 
@@ -93,7 +93,7 @@ tbl_grade(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same classes
   with
-  [`tbl_check_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md).
+  [`tbl_check_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md).
 
 - ignore_class:
 
@@ -116,14 +116,14 @@ tbl_grade(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same column
   names with
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
 
 - check_column_order:
 
   `[logical(1)]`  
   Whether to check that the columns of `object` are in the same order as
   `expected` with
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md).
   Defaults to `FALSE`.
 
 - check_dimensions:
@@ -131,7 +131,7 @@ tbl_grade(
   `[logical(1)]`  
   Whether to check that `object` and `expected` have the same number of
   rows and columns with
-  [`tbl_check_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md).
+  [`tbl_check_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md).
 
 - check_groups:
 
@@ -144,7 +144,7 @@ tbl_grade(
 
   `[logical(1)]`  
   Whether to check that all columns have the same contents with
-  [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
+  [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
 
 - check_column_class:
 
@@ -186,10 +186,10 @@ tbl_grade(
   `[numeric(1)]`  
   The maximum number of mismatched values to display in an informative
   failure message. Passed to
-  [`tbl_check_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
+  [`tbl_check_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md)
   to determine the number of mismatched column names to display and the
   `n_values` argument of
-  [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
+  [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
   to determine the number of mismatched column values to display.
   Defaults to 3.
 
@@ -272,7 +272,7 @@ message from `tbl_grade()`. Otherwise, invisibly returns
     are not expected, or is missing groups that are expected.
 
 Additional problems may be produced by
-[`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
+[`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
 
 ## Examples
 

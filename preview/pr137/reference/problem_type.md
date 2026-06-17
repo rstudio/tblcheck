@@ -50,9 +50,9 @@ whether an object is a problem of the specified type.
 ## See also
 
 Other Problem functions:
-[`problem()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem.md),
-[`problem_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md),
-[`problem_message()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.md)
+[`problem()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem.md),
+[`problem_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md),
+[`problem_message()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.md)
 
 ## Examples
 

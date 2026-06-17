@@ -13,7 +13,7 @@ tblcheck_message(problem, ...)
 ## Functions
 
 - `tblcheck_grade()`: is now
-  [`problem_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md).
+  [`problem_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_grade.md).
 
 - `tblcheck_message()`: is now
-  [`problem_message()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.md).
+  [`problem_message()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_message.md).

@@ -3,7 +3,7 @@
 Automatically grade a vector resulting from student code using
 [`gradethis::grade_this()`](https://pkgs.rstudio.com/gradethis/reference/grade_this.html)
 and
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 to compare the student's result with the author's solution.
 
 ## Usage
@@ -53,7 +53,7 @@ grade_this_vector(
 
   `[logical(1)]`  
   When `TRUE` (default for `grade_this_vector()` but not
-  [`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)),
+  [`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)),
   the `.result` is compared to the `.solution` with
   [`gradethis::pass_if_equal()`](https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html)
   after the *pre check* and before calling the tblcheck grading
@@ -168,12 +168,12 @@ with the following components:
 3.  The appropriate tblcheck grading function is called, returning any
     feedback:
 
-    1.  [`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+    1.  [`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
         returns the results from
-        [`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+        [`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 
     2.  `grade_this_vector()` returns the results from
-        [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+        [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 
 4.  The `post_check` code, if any, is evaluated and any feedback from a
     call to
@@ -188,10 +188,10 @@ with the following components:
 
 ## See also
 
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 
 Other graders:
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 
 ## Examples
 

@@ -17,13 +17,13 @@ tblcheck provides four levels of grading:
 1.  For fully automatic grading as a drop-in replacement for
     [`gradethis::grade_this()`](https://pkgs.rstudio.com/gradethis/reference/grade_this.html),
     use
-    [`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+    [`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
     or
-    [`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md).
+    [`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md).
 2.  To integrate tblcheck into existing grading code, you can use
-    [`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+    [`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
     or
-    [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+    [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
     for specific automated checks.
 3.  You can directly call the [specialized individual grading
     functions](#specific-grading-functions) that power the higher-level
@@ -35,7 +35,7 @@ The most common use case for tblcheck is to provide automatic feedback
 for [common problems in tables](#grading-tables). Because the columns of
 data frames in R are vectors, tblcheck can also provide feedback for
 [common problems in vectors](#grading-vectors) with
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
 
 These all-in-one grading functions check for a set of possible problems,
 or differences, between the exercise solution and the student’s table or
@@ -67,7 +67,7 @@ Then, ensure your exercise has a `-solution` chunk and choose one of the
 following grading functions to grade your exercise:
 
 - If the solution is a **table**, use
-  [`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+  [`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 
   ```` markdown
   ```{r ex-check}
@@ -76,7 +76,7 @@ following grading functions to grade your exercise:
   ````
 
   or use
-  [`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+  [`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
   in existing grading code.
 
   ```` markdown
@@ -99,7 +99,7 @@ following grading functions to grade your exercise:
   ````
 
   or use
-  [`tbl_grade_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
+  [`tbl_grade_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
   in existing grading code.
 
   ```` markdown
@@ -113,7 +113,7 @@ following grading functions to grade your exercise:
   ````
 
 - If the solution is a **vector**, use
-  [`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+  [`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 
   ```` markdown
   ```{r ex-check}
@@ -122,7 +122,7 @@ following grading functions to grade your exercise:
   ````
 
   or use
-  [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+  [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
   in existing grading code.
 
   ```` markdown
@@ -143,14 +143,14 @@ functionally equivalent to the second version that uses
 
 ### Automated table checking
 
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 uses
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 to compare the result of the user’s input to the result of the
 `-solution` chunk, automatically returning targeted feedback to the user
 if any problems are discovered.
 
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 checks that the user’s table
 
 1.  is the correct class,
@@ -168,7 +168,7 @@ on the order described above.
 
 To grade an exercise where the solution is a table, ensure you have a
 `-solution` chunk and call
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 in your `-check` chunk
 
 ```` markdown
@@ -178,7 +178,7 @@ grade_this_table()
 ````
 
 or add
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 to the grading code in your `-check` chunk.
 
 ```` markdown
@@ -198,11 +198,11 @@ and
 [`gradethis::fail_if_equal()`](https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html).
 
 If you are using
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md),
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md),
 be sure to include a function like `pass()` or `pass_if_equal()` in your
 checking code to ensure students can get a passing grade!
 
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 only returns feedback to the student if it discovers a problem; if the
 student gives the correct answer, it produces no output. This lets you
 quickly check for simple problems, following up with more detailed
@@ -211,10 +211,10 @@ checking with other `gradethis` functions.
 ### Finding problems
 
 If the user’s submitted table differs from the correct table,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 returns a failing grade and a message with an explanation for what went
 wrong. If there are multiple problems with a student’s submission,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 tries to give the most actionable item first.
 
 We’ll demonstrate how this works for a simple exercise that asks
@@ -253,13 +253,13 @@ demonstrate how tblcheck will respond to various types of errors that
 students may make. Keep in mind this is a contrived example designed for
 this vignette. In real-world usage, students are likely to only
 encounter one or two of the problems
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 is designed to find.
 
 #### Checking class
 
 First,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 ensures that the class of the student’s submission matches the class of
 the expected solution. Here, the student attempts to store the data in
 the table as a list rather than by using `tibble()`.
@@ -292,7 +292,7 @@ Based on this advice, the student revises their solution to use
 Next, the code checks that the student used the correct column names,
 and they haven’t missed any columns or included any unexpected columns.
 Here,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 notices that the student has an unexpected column named `fruit`.
 
 ``` r
@@ -317,7 +317,7 @@ second column `vegetable` instead of `fruit`.
 #### Checking length
 
 Next,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 checks that the student has submitted the correct number of rows, and in
 this case notices that the student has only included one row.
 
@@ -343,7 +343,7 @@ second row to their submission.
 #### Checking column classes
 
 Next,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 checks that each individual column contains the correct type of data.
 Here, the student has stored the values of the `vegetable` column as a
 string, but we were expecting them to be logical values.
@@ -371,7 +371,7 @@ the `vegetable` column to use R’s logical `TRUE`.
 #### Checking column values
 
 Finally,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 gives a hint as to what the values in each column should look like.
 Here, the student made a mistake during their transcription of the
 `vegetable` column.
@@ -421,9 +421,9 @@ can also be applied to vectors — after all, data frame columns in R are
 *vectors*.
 
 When your exercise uses vectors rather than tables,
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 and
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 allows you to apply the same tests that are normally applied to the
 columns of a table to a vector. They check that the user’s vector
 
@@ -434,7 +434,7 @@ columns of a table to a vector. They check that the user’s vector
 5.  has the correct names (if the vector has names)
 
 Like
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md),
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md),
 if a problem is detected by any of these checks, the student will see a
 single message with the first detected problem, based on the order
 described above.
@@ -443,7 +443,7 @@ described above.
 
 To grade an exercise where the solution is a vector, ensure you have a
 `-solution` chunk and call
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 in your `-check` chunk
 
 ```` markdown
@@ -453,7 +453,7 @@ grade_this_vector()
 ````
 
 or add
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 to the grading code in your `-check` chunk, e.g.
 
 ```` markdown
@@ -467,32 +467,32 @@ grade_this({
 ````
 
 Just like
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 and other tblcheck functions,
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 automatically compares the user’s `.result` to the `.solution` when used
 in
 [`gradethis::grade_this()`](https://pkgs.rstudio.com/gradethis/reference/grade_this.html).
 
 While
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 always returns a passing or failing grade, note that
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 only returns feedback when a problem is detected. Be sure to include
 [`gradethis::pass()`](https://pkgs.rstudio.com/gradethis/reference/graded.html)
 or
 [`gradethis::pass_if_equal()`](https://pkgs.rstudio.com/gradethis/reference/pass_if_equal.html)
 when using
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 to ensure that students can get a passing grade.
 
 ### Finding problems
 
 If the user’s submitted vector differs from the correct vector,
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 returns a failing grade and a message with an explanation for what went
 wrong. If there are multiple problems with a student’s submission,
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 tries to give the most actionable item first.
 
 Suppose an exercise asks a student to create a factor of the sandwich
@@ -527,7 +527,7 @@ grade_this_vector()
 
 For example, if the student submits a vector of the wrong class, that
 will be the first message returned by
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md).
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md).
 
 ``` r
 
@@ -539,7 +539,7 @@ Your result should be a vector of factors (class `factor`), but it is a
 vector of text (class `character`).
 
 If the student submits a factor with the wrong factor levels,
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 will warn the student about their mistake.
 
 ``` r
@@ -560,27 +560,27 @@ how the feedback is given to the students.
 
 - The first is to [enable or disable specific checks](#skipping-tests)
   using the `check_*` arguments of
-  [`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+  [`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
   and
-  [`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+  [`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
   (or their counterparts,
-  [`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+  [`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
   and
-  [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)).
+  [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)).
 
 - Both
-  [`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+  [`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
   and
-  [`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+  [`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
   include `pre_check` and `post_check` options that allow you to add
   [additional tests and logic to the grading code](#additional-checks).
 
 - You may also choose to [call specific grading
   functions](#specific-grading-functions) associated with the checks
   underlying
-  [`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+  [`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
   and
-  [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
+  [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
 
 - Or you can [`check` rather than `grade` for specific
   problems](#checking-for-problems-with-custom-feedback) to obtain a
@@ -592,13 +592,13 @@ how the feedback is given to the students.
 ### Skipping tests
 
 Every test performed by
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 and
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 (or
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 and
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md))
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md))
 can be enabled or disabled with an argument. The argument names are
 prefixed with `check_` — such as `check_class` or `check_groups` — and
 each take a `TRUE` or `FALSE` value.
@@ -624,7 +624,7 @@ Your table should be a tibble (class `tbl_df`), but it is a data frame
 
 If you don’t care about the class of the table, you can add
 `check_class = FALSE` to
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md).
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md).
 This will skip checking the table’s class, but still run all other
 tests.
 
@@ -638,15 +638,15 @@ Super job! Correct!
 
 Since the only problem with the student’s submission was the class of
 the table,
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 doesn’t directly return any feedback.
 
 ### Additional Checks
 
 Both
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 and
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md)
 provide two additional arguments, `pre_check` and `post_check`, that
 allow you to add additional checks or modify the `.result` or
 `.solution`.
@@ -675,9 +675,9 @@ grade_this({
 Two examples of reasons why you might want to use these arguments are to
 limit the table grading checks to specific columns only, or to include
 additional checks after
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 or
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
 
 Suppose we extend our `food` example into an exercise labelled
 `food-percentage` that adds a `count` column to our `foods` table and
@@ -739,28 +739,28 @@ Awesome! Correct!
 
 ### Specific grading functions
 
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 and
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 calls a number of grading functions internally. You can call these
 functions directly to perform more specific grading, either in the
 `pre_check` or `post_check` arguments of
-[`grade_this_table()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
+[`grade_this_table()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_table.md)
 or
-[`grade_this_vector()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md),
+[`grade_this_vector()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/grade_this_vector.md),
 or in standard
 [`gradethis::grade_this()`](https://pkgs.rstudio.com/gradethis/reference/grade_this.html)
 grading code.
 
 | Function | Grades |
 |----|----|
-| [`tbl_grade_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md) [`vec_grade_class()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md) | the class of an object |
-| [`tbl_grade_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md) | applies the tests in [`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md) to a single column of a table |
-| [`tbl_grade_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md) [`vec_grade_dimensions()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md) | the length and dimensions of an object |
-| [`tbl_grade_groups()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_groups.md) | the groups of a table |
-| [`tbl_grade_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md) [`vec_grade_names()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md) | the names of an object |
-| [`vec_grade_levels()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md) | the levels of a factor |
-| [`vec_grade_values()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.md) | the values of a vector |
+| [`tbl_grade_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md) [`vec_grade_class()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_class.md) | the class of an object |
+| [`tbl_grade_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md) | applies the tests in [`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md) to a single column of a table |
+| [`tbl_grade_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md) [`vec_grade_dimensions()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_dimensions.md) | the length and dimensions of an object |
+| [`tbl_grade_groups()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_groups.md) | the groups of a table |
+| [`tbl_grade_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md) [`vec_grade_names()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_names.md) | the names of an object |
+| [`vec_grade_levels()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_levels.md) | the levels of a factor |
+| [`vec_grade_values()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check_values.md) | the values of a vector |
 
 Suppose we modified our `food` example, telling students that we have 3
 tomatoes and 5 heads of lettuce. We’d like the students to create a
@@ -793,7 +793,7 @@ foods %>%
 
 In our grading code, we may choose to grade only the `count` column of
 `foods` using
-[`tbl_grade_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md),
+[`tbl_grade_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md),
 ignoring the other columns since they were provided by our setup code.
 
 ```` markdown
@@ -832,9 +832,9 @@ than converting the problem into feedback for the user (a **grade** in
 gradethis terms).
 
 If we replace
-[`tbl_grade_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
+[`tbl_grade_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
 with
-[`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md),
+[`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md),
 we can store and inspect the problem detected by the column checking
 function. We’ll experiment in our local R console before writing our
 final exercise checking code.
@@ -864,7 +864,7 @@ Every problem object contains at least three items:
     function are enumerated.
 
     - **Your Turn:** What types of problems are discovered by
-      [`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)?
+      [`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)?
       Use the help pages to find out.
 
 2.  `actual` contains the value returned by the user’s code and
@@ -875,11 +875,11 @@ Every problem object contains at least three items:
 
 Problems also include additional information depending on the problem
 type. In the case of a `values` problem detected by
-[`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md),
+[`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md),
 the problem object also includes the `column` name.
 
 tblcheck includes a helper function,
-[`is_problem()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
+[`is_problem()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
 that you can use to detect and differentiate between different problem
 types.
 
@@ -890,9 +890,9 @@ is_problem(problem)
 ```
 
 We can use the `type` argument of
-[`is_problem()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
+[`is_problem()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
 to differentiate between the problem types detected by
-[`tbl_check_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
+[`tbl_check_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md).
 
 ``` r
 
@@ -905,7 +905,7 @@ is_problem(problem, type = "values")
 In this exercise, we know in advance that our wording is likely to trip
 up students, so we may want to create feedback specifically for the case
 where a student has reversed the food counts. We can use
-[`is_problem()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
+[`is_problem()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/problem_type.md)
 together with [`all.equal()`](https://rdrr.io/r/base/all.equal.html) to
 isolate this specific case.
 
@@ -928,13 +928,13 @@ if (is_problem(problem, "values") && all.equal(problem$actual, c(3, 5))) {
 
 For problems not handled by your custom grading code, you can pass the
 problem to
-[`tbl_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
+[`tbl_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check.md)
 to create a grade with the default feedback provided by tblcheck’s
 `grade` functions. If there are no problems, `problem_grade(problem)`
 won’t return anything.
 
 Here’s the default feedback
-[`tbl_grade_column()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
+[`tbl_grade_column()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/tbl_check_column.md)
 *would have returned* without our custom grading code.
 
 ``` r

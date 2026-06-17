@@ -3,9 +3,9 @@
 **\[deprecated\]**
 
 `vec_check_vector()` and `vec_grade_vector()` were renamed to
-[`vec_check()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
+[`vec_check()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md)
 and
-[`vec_grade()`](https:/rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
+[`vec_grade()`](https://rstudio.github.io/tblcheck/preview/pr137/reference/vec_check.md).
 
 ## Usage
 
