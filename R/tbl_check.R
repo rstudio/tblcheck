@@ -113,22 +113,22 @@
 #' tbl_grade()
 #' tbl_grade(check_groups = FALSE)
 tbl_check <- function(
-	object = .result,
-	expected = .solution,
-	cols = NULL,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_names = TRUE,
-	check_column_order = FALSE,
-	check_dimensions = TRUE,
-	check_groups = TRUE,
-	check_columns = TRUE,
-	check_column_class = check_columns,
-	check_column_levels = check_columns,
-	check_column_values = check_columns,
-	tolerance = sqrt(.Machine$double.eps),
-	check_row_order = check_columns,
-	env = parent.frame()
+																						object = .result,
+																						expected = .solution,
+																						cols = NULL,
+																						check_class = TRUE,
+																						ignore_class = NULL,
+																						check_names = TRUE,
+																						check_column_order = FALSE,
+																						check_dimensions = TRUE,
+																						check_groups = TRUE,
+																						check_columns = TRUE,
+																						check_column_class = check_columns,
+																						check_column_levels = check_columns,
+																						check_column_values = check_columns,
+																						tolerance = sqrt(.Machine$double.eps),
+																						check_row_order = check_columns,
+																						env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -243,24 +243,24 @@ tbl_check <- function(
 #' @rdname tbl_check
 #' @export
 tbl_grade <- function(
-	object = .result,
-	expected = .solution,
-	cols = NULL,
-	max_diffs = 3,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_names = TRUE,
-	check_column_order = FALSE,
-	check_dimensions = TRUE,
-	check_groups = TRUE,
-	check_columns = TRUE,
-	check_column_class = check_columns,
-	check_column_levels = check_columns,
-	check_column_values = check_columns,
-	tolerance = sqrt(.Machine$double.eps),
-	check_row_order = check_columns,
-	env = parent.frame(),
-	...
+																						object = .result,
+																						expected = .solution,
+																						cols = NULL,
+																						max_diffs = 3,
+																						check_class = TRUE,
+																						ignore_class = NULL,
+																						check_names = TRUE,
+																						check_column_order = FALSE,
+																						check_dimensions = TRUE,
+																						check_groups = TRUE,
+																						check_columns = TRUE,
+																						check_column_class = check_columns,
+																						check_column_levels = check_columns,
+																						check_column_values = check_columns,
+																						tolerance = sqrt(.Machine$double.eps),
+																						check_row_order = check_columns,
+																						env = parent.frame(),
+																						...
 ) {
 	problem_grade(
 		tbl_check(

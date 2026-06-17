@@ -44,10 +44,10 @@
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 vec_check_values <- function(
-	object = .result,
-	expected = .solution,
-	tolerance = sqrt(.Machine$double.eps),
-	env = parent.frame()
+																													object = .result,
+																													expected = .solution,
+																													tolerance = sqrt(.Machine$double.eps),
+																													env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -80,12 +80,12 @@ vec_check_values <- function(
 #' @rdname vec_check_values
 #' @export
 vec_grade_values <- function(
-	object = .result,
-	expected = .solution,
-	tolerance = sqrt(.Machine$double.eps),
-	max_diffs = 3,
-	env = parent.frame(),
-	...
+																													object = .result,
+																													expected = .solution,
+																													tolerance = sqrt(.Machine$double.eps),
+																													max_diffs = 3,
+																													env = parent.frame(),
+																													...
 ) {
 	problem_grade(
 		vec_check_values(

@@ -28,11 +28,11 @@
 #' @family Problem functions
 #' @export
 problem <- function(
-	type,
-	expected,
-	actual,
-	...,
-	.class = c(paste0(type, "_problem"), "tblcheck_problem")
+																				type,
+																				expected,
+																				actual,
+																				...,
+																				.class = c(paste0(type, "_problem"), "tblcheck_problem")
 ) {
 	checkmate::assert_string(type, min.chars = 1)
 	if (!checkmate::test_character(.class, pattern = "^[[:alpha:]][[:alnum:]_.]*$")) {
@@ -60,7 +60,7 @@ problem <- function(
 }
 
 return_if_problem <- function(
-	problem, prefix = NULL, ..., env = parent.frame()
+																														problem, prefix = NULL, ..., env = parent.frame()
 ) {
 	if (inherits(problem, "tblcheck_problem")) {
 		if (!is.null(prefix)) {

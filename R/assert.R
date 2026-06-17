@@ -13,7 +13,7 @@ return_if_internal_problem <- function(expr, ..., env = parent.frame()) {
 
 #' @export
 problem_grade.tblcheck_internal_problem <- function(
-	problem, max_diffs = 3, env = parent.frame(), ...
+																																																				problem, max_diffs = 3, env = parent.frame(), ...
 ) {
 	# move error up to top-level of grade
 	error <- problem$error

@@ -18,7 +18,7 @@ md_code <- function(x) {
 }
 
 combine_words_with_more <- function(
-	x, max_length = Inf, transform = md_code, ...
+																																				x, max_length = Inf, transform = md_code, ...
 ) {
 	if (!length(x)) {
 		return(NULL)
@@ -62,10 +62,10 @@ has_rlang_version <- function(minimum = "0.4.12.9001") {
 }
 
 is_all_equal <- function(
-	x, y,
-	tolerance = sqrt(.Machine$double.eps),
-	check.attributes = FALSE,
-	check.names = FALSE
+																									x, y,
+																									tolerance = sqrt(.Machine$double.eps),
+																									check.attributes = FALSE,
+																									check.names = FALSE
 ) {
 	objects <- vctrs::vec_cast_common(x, y)
 

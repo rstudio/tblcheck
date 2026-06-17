@@ -30,7 +30,7 @@ problem_grade <- function(problem, max_diffs = 3, env = parent.frame(), ...) {
 #' @rdname problem_grade
 #' @export
 problem_grade.default <- function(
-	problem, max_diffs = 3, env = parent.frame(), ...
+																																		problem, max_diffs = 3, env = parent.frame(), ...
 ) {
 	invisible()
 }
@@ -38,7 +38,7 @@ problem_grade.default <- function(
 #' @rdname problem_grade
 #' @export
 problem_grade.list <- function(
-	problem, max_diffs = 3, env = parent.frame(), ...
+																															problem, max_diffs = 3, env = parent.frame(), ...
 ) {
 	problem <- as_problem(problem)
 	problem_grade(problem, max_diffs = max_diffs, env = env, ...)
@@ -47,7 +47,7 @@ problem_grade.list <- function(
 #' @rdname problem_grade
 #' @export
 problem_grade.gradethis_problem <- function(
-	problem, max_diffs = 3, env = parent.frame(), ...
+																																												problem, max_diffs = 3, env = parent.frame(), ...
 ) {
 	if (is.null(problem)) {
 		return(invisible())
@@ -73,7 +73,7 @@ problem_grade.gradethis_problem <- function(
 #' @rdname problem_grade
 #' @export
 problem_grade.tblcheck_problem <- function(
-	problem, max_diffs = 3, env = parent.frame(), ...
+																																											problem, max_diffs = 3, env = parent.frame(), ...
 ) {
 	NextMethod()
 }

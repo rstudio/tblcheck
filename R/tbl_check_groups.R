@@ -25,9 +25,9 @@
 #' tbl_check_groups()
 #' tbl_grade_groups()
 tbl_check_groups <- function(
-	object = .result,
-	expected = .solution,
-	env = parent.frame()
+																													object = .result,
+																													expected = .solution,
+																													env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -65,11 +65,11 @@ group_vars <- function(x) {
 #' @rdname tbl_check_groups
 #' @export
 tbl_grade_groups <- function(
-	object = .result,
-	expected = .solution,
-	max_diffs = 3,
-	env = parent.frame(),
-	...
+																													object = .result,
+																													expected = .solution,
+																													max_diffs = 3,
+																													env = parent.frame(),
+																													...
 ) {
 	problem_grade(
 		tbl_check_groups(object, expected, env = env),

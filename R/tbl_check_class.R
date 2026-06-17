@@ -61,10 +61,10 @@
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 tbl_check_class <- function(
-	object = .result,
-	expected = .solution,
-	ignore_class = NULL,
-	env = parent.frame()
+																												object = .result,
+																												expected = .solution,
+																												ignore_class = NULL,
+																												env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -107,11 +107,11 @@ vec_check_class <- tbl_check_class
 #' @rdname tbl_check_class
 #' @export
 tbl_grade_class <- function(
-	object = .result,
-	expected = .solution,
-	ignore_class = NULL,
-	env = parent.frame(),
-	...
+																												object = .result,
+																												expected = .solution,
+																												ignore_class = NULL,
+																												env = parent.frame(),
+																												...
 ) {
 	problem_grade(
 		tbl_check_class(object, expected, ignore_class, env),
