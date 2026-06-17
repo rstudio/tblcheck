@@ -70,7 +70,7 @@ same values in \code{object} and \code{expected}.}
 \code{tolerance} are ignored. The default value is close to \code{1.5e-8}.}
 
 \item{check_names}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
-same \link[=names]{names} in \code{object} and \code{expected}.
+same \link{names} in \code{object} and \code{expected}.
 Defaults to \code{FALSE}.}
 
 \item{env}{The environment in which to find \code{.result} and \code{.solution}.}
@@ -79,8 +79,21 @@ Defaults to \code{FALSE}.}
 print. Defaults to 3.}
 
 \item{...}{
-  Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
+  Arguments passed on to \code{\link[gradethis:fail]{gradethis::fail}}
   \describe{
+    \item{\code{correct}}{A logical value of whether or not the checked code is correct.}
+    \item{\code{type,location}}{The \code{type} and \code{location} of the feedback object
+provided to \pkg{learnr}. See
+\url{https://rstudio.github.io/learnr/exercises.html#Custom_checking} for more
+details.
+
+\code{type} may be one of "auto", "success", "info", "warning", "error", or
+"custom".
+
+\code{location} may be one of "append", "prepend", or "replace".}
+    \item{\code{praise}}{Include a random praising phrase with \code{\link[gradethis:random_praise]{random_praise()}}? The
+default value of \code{praise} can be set using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the
+\code{gradethis.pass.praise} option.}
     \item{\code{hint}}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
 added using the default options of \code{\link[gradethis:give_code_feedback]{give_code_feedback()}} and
@@ -93,7 +106,7 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_column()} or a
-\code{\link[gradethis:graded]{gradethis::fail()}} message from \code{tbl_grade_column()}.
+\code{\link[gradethis:fail]{gradethis::fail()}} message from \code{tbl_grade_column()}.
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
@@ -111,7 +124,7 @@ If the columns differ
 \itemize{
 \item \code{tbl_check_column()} returns a list describing the problem
 \item \code{tbl_grade_column()} returns a failing grade and informative message
-with \code{\link[gradethis:graded]{gradethis::fail()}}
+with \code{\link[gradethis:fail]{gradethis::fail()}}
 }
 }
 \section{Problems}{
@@ -123,9 +136,9 @@ with \code{\link[gradethis:graded]{gradethis::fail()}}
 \item \code{levels_n}, \code{levels}, \code{levels_reversed}, \code{levels_order}:
 See \code{\link[=vec_check_levels]{vec_check_levels()}}.
 \item \code{values}: The \code{column} doesn't have the expected values.
-\item \code{names} (\code{column_problem}): The \code{column} has different \link[=names]{names}
+\item \code{names} (\code{column_problem}): The \code{column} has different \link{names}
 than expected.
-\item \code{names_order}: The \code{column} has the same \link[=names]{names} as expected,
+\item \code{names_order}: The \code{column} has the same \link{names} as expected,
 but in a different order.
 }
 }

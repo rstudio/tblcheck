@@ -113,7 +113,7 @@ any feedback:
 to \code{\link[gradethis:graded]{pass()}}, \code{\link[gradethis:graded]{fail()}}, or
 their equivalents is returned.
 \item Finally, if no other feedback is returned, the feedback from
-\code{\link[gradethis:graded]{gradethis::fail()}} is provided to the student, using the options
+\code{\link[gradethis:fail]{gradethis::fail()}} is provided to the student, using the options
 \code{fail.message}, \code{fail.hint} and \code{fail.encourage}.
 }
 }
@@ -149,7 +149,7 @@ gradethis::grade_this({
 \seealso{
 \code{\link[=vec_grade]{vec_grade()}}
 
-Other graders: 
-\code{\link{grade_this_table}()}
+Other graders:
+\code{\link[=grade_this_table]{grade_this_table()}}
 }
 \concept{graders}

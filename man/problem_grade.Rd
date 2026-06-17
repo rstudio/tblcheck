@@ -32,8 +32,21 @@ Defaults to 3.}
 \item{env}{The environment used for grading.}
 
 \item{...}{
-  Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
+  Arguments passed on to \code{\link[gradethis:fail]{gradethis::fail}}
   \describe{
+    \item{\code{correct}}{A logical value of whether or not the checked code is correct.}
+    \item{\code{type,location}}{The \code{type} and \code{location} of the feedback object
+provided to \pkg{learnr}. See
+\url{https://rstudio.github.io/learnr/exercises.html#Custom_checking} for more
+details.
+
+\code{type} may be one of "auto", "success", "info", "warning", "error", or
+"custom".
+
+\code{location} may be one of "append", "prepend", or "replace".}
+    \item{\code{praise}}{Include a random praising phrase with \code{\link[gradethis:random_praise]{random_praise()}}? The
+default value of \code{praise} can be set using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the
+\code{gradethis.pass.praise} option.}
     \item{\code{hint}}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
 added using the default options of \code{\link[gradethis:give_code_feedback]{give_code_feedback()}} and
@@ -45,14 +58,14 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
   }}
 }
 \value{
-A \code{\link[gradethis:graded]{gradethis::fail()}} message or \code{NULL} invisibly.
+A \code{\link[gradethis:fail]{gradethis::fail()}} message or \code{NULL} invisibly.
 }
 \description{
 Automatically converts a \code{\link[=problem]{problem()}} object into a \pkg{gradethis} grade.
 \code{problem_grade()} is an S4 generic and \pkg{tblcheck} provides an internal
 method for problems with class \code{"tblcheck_problem"}. In \pkg{tblcheck}, or
 for problems with this class, any problems are automatically turned into
-failing grades with \code{\link[gradethis:graded]{gradethis::fail()}} and using the message provided by
+failing grades with \code{\link[gradethis:fail]{gradethis::fail()}} and using the message provided by
 \code{\link[=problem_message]{problem_message()}}.
 }
 \examples{
@@ -63,9 +76,9 @@ problem_grade(problem)
 
 }
 \seealso{
-Other Problem functions: 
-\code{\link{problem_message}()},
-\code{\link{problem_type}()},
-\code{\link{problem}()}
+Other Problem functions:
+\code{\link[=problem]{problem()}},
+\code{\link[=problem_message]{problem_message()}},
+\code{\link[=problem_type]{problem_type()}}
 }
 \concept{Problem functions}

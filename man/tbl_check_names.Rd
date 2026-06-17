@@ -54,8 +54,21 @@ unexpected names to include in an informative failure message.
 Defaults to 3.}
 
 \item{...}{
-  Arguments passed on to \code{\link[gradethis:graded]{gradethis::fail}}
+  Arguments passed on to \code{\link[gradethis:fail]{gradethis::fail}}
   \describe{
+    \item{\code{correct}}{A logical value of whether or not the checked code is correct.}
+    \item{\code{type,location}}{The \code{type} and \code{location} of the feedback object
+provided to \pkg{learnr}. See
+\url{https://rstudio.github.io/learnr/exercises.html#Custom_checking} for more
+details.
+
+\code{type} may be one of "auto", "success", "info", "warning", "error", or
+"custom".
+
+\code{location} may be one of "append", "prepend", or "replace".}
+    \item{\code{praise}}{Include a random praising phrase with \code{\link[gradethis:random_praise]{random_praise()}}? The
+default value of \code{praise} can be set using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the
+\code{gradethis.pass.praise} option.}
     \item{\code{hint}}{Include a code feedback hint with the failing message? This
 argument only applies to \code{fail()} and \code{fail_if_equal()} and the message is
 added using the default options of \code{\link[gradethis:give_code_feedback]{give_code_feedback()}} and
@@ -68,18 +81,18 @@ using \code{\link[gradethis:gradethis_setup]{gradethis_setup()}} or the \code{gr
 }
 \value{
 If there are any issues, a \link{list} from \code{tbl_check_names()} and
-\code{vec_check_names()} or a \code{\link[gradethis:graded]{gradethis::fail()}} message from
+\code{vec_check_names()} or a \code{\link[gradethis:fail]{gradethis::fail()}} message from
 \code{tbl_grade_names()} and \code{vec_grade_names()}.
 Otherwise, invisibly returns \code{\link{NULL}}.
 }
 \description{
-Checks if \code{object} and \code{expected} have the same \link[=names]{names}.
+Checks if \code{object} and \code{expected} have the same \link{names}.
 If the names differ
 \itemize{
 \item \code{tbl_check_names()} and \code{vec_check_names()} returns a list describing
 the problem
 \item \code{tbl_grade_names()} and \code{vec_grade_names()} returns a failing grade and
-informative message with \code{\link[gradethis:graded]{gradethis::fail()}}
+informative message with \code{\link[gradethis:fail]{gradethis::fail()}}
 }
 }
 \section{Problems}{

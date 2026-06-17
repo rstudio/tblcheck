@@ -47,9 +47,9 @@ is_tblcheck_problem(vec_check(1, "1"), "class")
 
 }
 \seealso{
-Other Problem functions: 
-\code{\link{problem_grade}()},
-\code{\link{problem_message}()},
-\code{\link{problem}()}
+Other Problem functions:
+\code{\link[=problem]{problem()}},
+\code{\link[=problem_grade]{problem_grade()}},
+\code{\link[=problem_message]{problem_message()}}
 }
 \concept{Problem functions}
