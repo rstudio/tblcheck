@@ -13,8 +13,8 @@ vignette: >
 ---
 
 [learnr]: https://rstudio.github.io/learnr/
-[gradethis-get-started]: https://pkgs.rstudio.com/gradethis/articles/gradethis.html
-[gradethis]: https://pkgs.rstudio.com/gradethis/
+[gradethis-get-started]: https://rstudio.github.io/gradethis/articles/gradethis.html
+[gradethis]: https://rstudio.github.io/gradethis/
 [forcats]: https://forcats.tidyverse.org
 [stringr]: https://stringr.tidyverse.org
 

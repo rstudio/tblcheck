@@ -1,6 +1,6 @@
 destination: reference
 
-url: https://pkgs.rstudio.com/tblcheck
+url: https://rstudio.github.io/tblcheck
 
 template:
   package: tidytemplate
@@ -31,7 +31,7 @@ home:
   - text: Learn more about learnr
     href: "https://rstudio.github.io/learnr"
   - text: Learn more about gradethis
-    href: "https://pkgs.rstudio.com/gradethis"
+    href: "https://rstudio.github.io/gradethis"
 
 authors:
   Garrick Aden-Buie:

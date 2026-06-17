@@ -12,16 +12,16 @@ status](https://www.r-pkg.org/badges/version/tblcheck)](https://CRAN.R-project.o
 <!-- badges: end -->
 
 tblcheck provides functions for grading tibbles, data frames, and
-vectors with [gradethis](https://pkgs.rstudio.com/gradethis/).
+vectors with [gradethis](https://rstudio.github.io/gradethis/).
 
 gradethis is designed for use with
-[gradethis](https://pkgs.rstudio.com/gradethis/) in
+[gradethis](https://rstudio.github.io/gradethis/) in
 [learnr](https://rstudio.github.io/learnr/) tutorials. We recommend that
 you first be comfortable grading
 [learnr](https://rstudio.github.io/learnr/) tutorials with
-[gradethis](https://pkgs.rstudio.com/gradethis/) before you begin using
+[gradethis](https://rstudio.github.io/gradethis/) before you begin using
 tblcheck. You can learn more with the [gradethis package
-documentation](https://pkgs.rstudio.com/gradethis/) and the [learnr
+documentation](https://rstudio.github.io/gradethis/) and the [learnr
 package documentation](https://rstudio.github.io/learnr/).
 
 <img src="man/figures/screenshot.png" alt="A screenshot of the tblcheck package in action. An exercise starts with the following instructions: 'Create a tibble with two columns. The first column should be called &quot;fruit&quot; and contain the value &quot;tomato&quot;. The second column should be called &quot;color&quot; and contain the value &quot;red&quot;.' The student has entered the following code: 'tibble(vegetable = &quot;tomato&quot;, color = &quot;red&quot;)'. The tblcheck package generates the following message: 'Your table should have a column named &quot;fruit&quot;. Your table should not have a column named &quot;vegetable&quot;. Please try again.'" style="border: 1px solid black; box-shadow: 5px 5px 5px #eee; max-width: 66%; display: block; margin: 1em auto;">
