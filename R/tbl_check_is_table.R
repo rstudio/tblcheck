@@ -31,8 +31,8 @@
 #'   Otherwise, invisibly returns [`NULL`].
 #' @export
 tbl_check_is_table <- function(
-	object = .result,
-	env = parent.frame()
+																															object = .result,
+																															env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -46,9 +46,9 @@ tbl_check_is_table <- function(
 #' @rdname tbl_check_is_table
 #' @export
 tbl_grade_is_table <- function(
-	object = .result,
-	env = parent.frame(),
-	...
+																															object = .result,
+																															env = parent.frame(),
+																															...
 ) {
 	problem_grade(
 		tbl_check_is_table(object, env),

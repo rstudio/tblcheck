@@ -14,22 +14,22 @@
 #' 	data.frame(b = 11:20, a = 1:10)
 #' )
 tbl_equal <- function(
-	object = .result,
-	expected = .solution,
-	cols = NULL,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_names = TRUE,
-	check_column_order = FALSE,
-	check_dimensions = TRUE,
-	check_groups = TRUE,
-	check_columns = TRUE,
-	check_column_class = check_columns,
-	check_column_levels = check_columns,
-	check_column_values = check_columns,
-	tolerance = sqrt(.Machine$double.eps),
-	check_row_order = check_columns,
-	env = parent.frame()
+																						object = .result,
+																						expected = .solution,
+																						cols = NULL,
+																						check_class = TRUE,
+																						ignore_class = NULL,
+																						check_names = TRUE,
+																						check_column_order = FALSE,
+																						check_dimensions = TRUE,
+																						check_groups = TRUE,
+																						check_columns = TRUE,
+																						check_column_class = check_columns,
+																						check_column_levels = check_columns,
+																						check_column_values = check_columns,
+																						tolerance = sqrt(.Machine$double.eps),
+																						check_row_order = check_columns,
+																						env = parent.frame()
 ) {
 	is.null(
 		tbl_check(

@@ -41,10 +41,10 @@
 #' tbl_check_names()
 #' tbl_grade_names()
 tbl_check_names <- function(
-	object = .result,
-	expected = .solution,
-	check_order = TRUE,
-	env = parent.frame()
+																												object = .result,
+																												expected = .solution,
+																												check_order = TRUE,
+																												env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -94,12 +94,12 @@ vec_check_names <- tbl_check_names
 #' @rdname tbl_check_names
 #' @export
 tbl_grade_names <- function(
-	object = .result,
-	expected = .solution,
-	max_diffs = 3,
-	check_order = TRUE,
-	env = parent.frame(),
-	...
+																												object = .result,
+																												expected = .solution,
+																												max_diffs = 3,
+																												check_order = TRUE,
+																												env = parent.frame(),
+																												...
 ) {
 	problem_grade(
 		tbl_check_names(object, expected, check_order = check_order, env = env),

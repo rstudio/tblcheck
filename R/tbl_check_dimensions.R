@@ -50,10 +50,10 @@
 #' tbl_check_dimensions()
 #' tbl_grade_dimensions()
 tbl_check_dimensions <- function(
-	object = .result,
-	expected = .solution,
-	check_ncol = TRUE,
-	env = parent.frame()
+																																	object = .result,
+																																	expected = .solution,
+																																	check_ncol = TRUE,
+																																	env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -107,11 +107,11 @@ vec_check_length <- tbl_check_dimensions
 #' @rdname tbl_check_dimensions
 #' @export
 tbl_grade_dimensions <- function(
-	object = .result,
-	expected = .solution,
-	check_ncol = TRUE,
-	env = parent.frame(),
-	...
+																																	object = .result,
+																																	expected = .solution,
+																																	check_ncol = TRUE,
+																																	env = parent.frame(),
+																																	...
 ) {
 	problem_grade(
 		tbl_check_dimensions(object, expected, check_ncol = check_ncol, env = env),

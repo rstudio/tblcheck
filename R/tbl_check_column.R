@@ -69,17 +69,17 @@
 #' tbl_grade_column("a", max_diffs = 5)
 #' tbl_grade_column("a", max_diffs = Inf)
 tbl_check_column <- function(
-	column,
-	object = .result,
-	expected = .solution,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_levels = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = FALSE,
-	env = parent.frame()
+																													column,
+																													object = .result,
+																													expected = .solution,
+																													check_class = TRUE,
+																													ignore_class = NULL,
+																													check_length = TRUE,
+																													check_levels = TRUE,
+																													check_values = TRUE,
+																													tolerance = sqrt(.Machine$double.eps),
+																													check_names = FALSE,
+																													env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -129,19 +129,19 @@ tbl_check_column <- function(
 #' @rdname tbl_check_column
 #' @export
 tbl_grade_column <- function(
-	column,
-	object = .result,
-	expected = .solution,
-	max_diffs = 3,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_levels = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = FALSE,
-	env = parent.frame(),
-	...
+																													column,
+																													object = .result,
+																													expected = .solution,
+																													max_diffs = 3,
+																													check_class = TRUE,
+																													ignore_class = NULL,
+																													check_length = TRUE,
+																													check_levels = TRUE,
+																													check_values = TRUE,
+																													tolerance = sqrt(.Machine$double.eps),
+																													check_names = FALSE,
+																													env = parent.frame(),
+																													...
 ) {
 	problem_grade(
 		tbl_check_column(

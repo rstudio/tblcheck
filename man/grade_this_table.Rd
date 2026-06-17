@@ -88,7 +88,7 @@ with \code{\link[=tbl_check_dimensions]{tbl_check_dimensions()}}.}
 
 \item{check_groups}{\verb{[logical(1)]}\cr Whether to check that \code{object} and
 \code{expected} have the same \link[dplyr:group_by]{groups}
-with \code{\link[dplyr:group_data]{dplyr::group_vars()}}.}
+with \code{\link[dplyr:group_vars]{dplyr::group_vars()}}.}
 
 \item{check_columns}{\verb{[logical(1)]}\cr Whether to check that all columns
 have the same contents with \code{\link[=tbl_check_column]{tbl_check_column()}}.}
@@ -145,7 +145,7 @@ any feedback:
 to \code{\link[gradethis:graded]{pass()}}, \code{\link[gradethis:graded]{fail()}}, or
 their equivalents is returned.
 \item Finally, if no other feedback is returned, the feedback from
-\code{\link[gradethis:graded]{gradethis::fail()}} is provided to the student, using the options
+\code{\link[gradethis:fail]{gradethis::fail()}} is provided to the student, using the options
 \code{fail.message}, \code{fail.hint} and \code{fail.encourage}.
 }
 }
@@ -173,7 +173,7 @@ gradethis::grade_this({
 \seealso{
 \code{\link[=tbl_grade]{tbl_grade()}}
 
-Other graders: 
-\code{\link{grade_this_vector}()}
+Other graders:
+\code{\link[=grade_this_vector]{grade_this_vector()}}
 }
 \concept{graders}

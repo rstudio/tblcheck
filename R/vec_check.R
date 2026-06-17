@@ -73,16 +73,16 @@
 #' vec_grade(max_diffs = 5)
 #' vec_grade(max_diffs = Inf)
 vec_check <- function(
-	object = .result,
-	expected = .solution,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_levels = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = TRUE,
-	env = parent.frame()
+																						object = .result,
+																						expected = .solution,
+																						check_class = TRUE,
+																						ignore_class = NULL,
+																						check_length = TRUE,
+																						check_levels = TRUE,
+																						check_values = TRUE,
+																						tolerance = sqrt(.Machine$double.eps),
+																						check_names = TRUE,
+																						env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -137,18 +137,18 @@ vec_check <- function(
 #' @rdname vec_check
 #' @export
 vec_grade <- function(
-	object = .result,
-	expected = .solution,
-	max_diffs = 3,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_levels = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = TRUE,
-	env = parent.frame(),
-	...
+																						object = .result,
+																						expected = .solution,
+																						max_diffs = 3,
+																						check_class = TRUE,
+																						ignore_class = NULL,
+																						check_length = TRUE,
+																						check_levels = TRUE,
+																						check_values = TRUE,
+																						tolerance = sqrt(.Machine$double.eps),
+																						check_names = TRUE,
+																						env = parent.frame(),
+																						...
 ) {
 	problem_grade(
 		vec_check(

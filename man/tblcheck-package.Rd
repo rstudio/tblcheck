@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Alexander Rossell Hayes \email{alex.rossellhayes@rstudio.com} (\href{https://orcid.org/0000-0001-9412-0457}{ORCID})
   \item Garrick Aden-Buie \email{garrick@rstudio.com} (\href{https://orcid.org/0000-0002-7111-0077}{ORCID})
 }
 

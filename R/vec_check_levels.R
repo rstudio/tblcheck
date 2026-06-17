@@ -40,9 +40,9 @@
 #' vec_grade_levels(max_diffs = 5)
 #' vec_grade_levels(max_diffs = Inf)
 vec_check_levels <- function(
-	object = .result,
-	expected = .solution,
-	env = parent.frame()
+																													object = .result,
+																													expected = .solution,
+																													env = parent.frame()
 ) {
 	if (inherits(object, ".result")) {
 		object <- get(".result", env)
@@ -81,11 +81,11 @@ vec_check_levels <- function(
 #' @rdname vec_check_levels
 #' @export
 vec_grade_levels <- function(
-	object = .result,
-	expected = .solution,
-	max_diffs = 3,
-	env = parent.frame(),
-	...
+																													object = .result,
+																													expected = .solution,
+																													max_diffs = 3,
+																													env = parent.frame(),
+																													...
 ) {
 	problem_grade(
 		vec_check_levels(object, expected, env = env),

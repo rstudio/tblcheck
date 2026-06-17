@@ -64,30 +64,30 @@
 #'
 #' @export
 grade_this_table <- function(
-	correct = NULL,
-	pre_check = NULL,
-	post_check = NULL,
-	pass_if_equal = FALSE,
-	...,
-	# all the arguments from tbl_grade_table() except object/expected
-	max_diffs = 3,
-	cols = NULL,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_names = TRUE,
-	check_column_order = FALSE,
-	check_dimensions = TRUE,
-	check_groups = TRUE,
-	check_columns = TRUE,
-	check_column_class = check_columns,
-	check_column_levels = check_columns,
-	check_column_values = check_columns,
-	tolerance = sqrt(.Machine$double.eps),
-	check_row_order = check_columns,
-	hint = getOption("gradethis.fail.hint", FALSE),
-	encourage = getOption("gradethis.fail.encourage", FALSE),
-	# gradethis pass/fail options
-	pass.praise = NULL
+																													correct = NULL,
+																													pre_check = NULL,
+																													post_check = NULL,
+																													pass_if_equal = FALSE,
+																													...,
+																													# all the arguments from tbl_grade_table() except object/expected
+																													max_diffs = 3,
+																													cols = NULL,
+																													check_class = TRUE,
+																													ignore_class = NULL,
+																													check_names = TRUE,
+																													check_column_order = FALSE,
+																													check_dimensions = TRUE,
+																													check_groups = TRUE,
+																													check_columns = TRUE,
+																													check_column_class = check_columns,
+																													check_column_levels = check_columns,
+																													check_column_values = check_columns,
+																													tolerance = sqrt(.Machine$double.eps),
+																													check_row_order = check_columns,
+																													hint = getOption("gradethis.fail.hint", FALSE),
+																													encourage = getOption("gradethis.fail.encourage", FALSE),
+																													# gradethis pass/fail options
+																													pass.praise = NULL
 ) {
 	ellipsis::check_dots_empty()
 	grader <- call2_tblcheck_grade_this(tbl_grade)
@@ -133,24 +133,24 @@ grade_this_table <- function(
 #'
 #' @export
 grade_this_vector <- function(
-	correct = NULL,
-	pre_check = NULL,
-	post_check = NULL,
-	pass_if_equal = TRUE,
-	...,
-	# all the arguments from tbl_grade_table() except object/expected
-	max_diffs = 3,
-	check_class = TRUE,
-	ignore_class = NULL,
-	check_length = TRUE,
-	check_levels = TRUE,
-	check_values = TRUE,
-	tolerance = sqrt(.Machine$double.eps),
-	check_names = TRUE,
-	hint = getOption("gradethis.fail.hint", FALSE),
-	encourage = getOption("gradethis.fail.encourage", FALSE),
-	# gradethis pass/fail options
-	pass.praise = NULL
+																														correct = NULL,
+																														pre_check = NULL,
+																														post_check = NULL,
+																														pass_if_equal = TRUE,
+																														...,
+																														# all the arguments from tbl_grade_table() except object/expected
+																														max_diffs = 3,
+																														check_class = TRUE,
+																														ignore_class = NULL,
+																														check_length = TRUE,
+																														check_levels = TRUE,
+																														check_values = TRUE,
+																														tolerance = sqrt(.Machine$double.eps),
+																														check_names = TRUE,
+																														hint = getOption("gradethis.fail.hint", FALSE),
+																														encourage = getOption("gradethis.fail.encourage", FALSE),
+																														# gradethis pass/fail options
+																														pass.praise = NULL
 ) {
 	ellipsis::check_dots_empty()
 	grader <- call2_tblcheck_grade_this(vec_grade)
@@ -179,7 +179,7 @@ rlang_call_match <- function(n = 2) {
 }
 
 call2_tblcheck_grade_this <- function(
-	tblcheck_grader = tbl_grade
+																																						tblcheck_grader = tbl_grade
 ) {
 	# take args of the function calling this one
 	call <- rlang_call_match()
@@ -198,16 +198,16 @@ call2_tblcheck_grade_this <- function(
 }
 
 tblcheck_grade_this_impl <- function(
-	tblcheck_grader = tbl_grade,
-	...,
-	correct = NULL,
-	pre_check = NULL,
-	post_check = NULL,
-	pass_if_equal = TRUE,
-	hint = getOption("gradethis.fail.hint", FALSE),
-	encourage = getOption("gradethis.fail.encourage", FALSE),
-	# gradethis pass/fail options
-	pass.praise = NULL
+																																					tblcheck_grader = tbl_grade,
+																																					...,
+																																					correct = NULL,
+																																					pre_check = NULL,
+																																					post_check = NULL,
+																																					pass_if_equal = TRUE,
+																																					hint = getOption("gradethis.fail.hint", FALSE),
+																																					encourage = getOption("gradethis.fail.encourage", FALSE),
+																																					# gradethis pass/fail options
+																																					pass.praise = NULL
 ) {
 	pre_check <- rlang::enexpr(pre_check)
 	post_check <- rlang::enexpr(post_check)
