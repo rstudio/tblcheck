@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   examples: examples.html
   tblcheck: tblcheck.html
-last_built: 2026-06-18T12:52Z
+last_built: 2026-06-18T13:33Z
 urls:
   reference: https://rstudio.github.io/tblcheck/reference
   article: https://rstudio.github.io/tblcheck/articles
