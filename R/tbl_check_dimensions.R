@@ -1,4 +1,4 @@
-#' Check that the dimensions of two object are the same
+#' Check that the dimensions of two objects are the same
 #'
 #' Checks if `object` and `expected` have the same [dimenisons][dim()].
 #' If the dimensions differ

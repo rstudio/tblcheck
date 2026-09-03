@@ -7,7 +7,7 @@
 \alias{tbl_grade_dimensions}
 \alias{vec_grade_dimensions}
 \alias{vec_grade_length}
-\title{Check that the dimensions of two object are the same}
+\title{Check that the dimensions of two objects are the same}
 \usage{
 tbl_check_dimensions(
   object = .result,

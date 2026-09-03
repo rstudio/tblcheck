@@ -5,7 +5,7 @@
 \alias{vec_check_names}
 \alias{tbl_grade_names}
 \alias{vec_grade_names}
-\title{Check that the names of two object are the same}
+\title{Check that the names of two objects are the same}
 \usage{
 tbl_check_names(
   object = .result,
@@ -89,9 +89,9 @@ Otherwise, invisibly returns \code{\link{NULL}}.
 Checks if \code{object} and \code{expected} have the same \link{names}.
 If the names differ
 \itemize{
-\item \code{tbl_check_names()} and \code{vec_check_names()} returns a list describing
+\item \code{tbl_check_names()} and \code{vec_check_names()} return a list describing
 the problem
-\item \code{tbl_grade_names()} and \code{vec_grade_names()} returns a failing grade and
+\item \code{tbl_grade_names()} and \code{vec_grade_names()} return a failing grade and
 informative message with \code{\link[gradethis:fail]{gradethis::fail()}}
 }
 }

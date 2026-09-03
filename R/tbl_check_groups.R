@@ -1,4 +1,4 @@
-#' Check that the groups of two object are the same
+#' Check that the groups of two objects are the same
 #'
 #' Checks if `object` and `expected` have the same [groups][dplyr::group_by()].
 #' If the groups differ
