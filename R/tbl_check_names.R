@@ -1,10 +1,10 @@
-#' Check that the names of two object are the same
+#' Check that the names of two objects are the same
 #'
 #' Checks if `object` and `expected` have the same [names][names()].
 #' If the names differ
-#' - `tbl_check_names()` and `vec_check_names()` returns a list describing
+#' - `tbl_check_names()` and `vec_check_names()` return a list describing
 #'   the problem
-#' - `tbl_grade_names()` and `vec_grade_names()` returns a failing grade and
+#' - `tbl_grade_names()` and `vec_grade_names()` return a failing grade and
 #'   informative message with [gradethis::fail()]
 #'
 #' @section Problems:

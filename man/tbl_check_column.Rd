@@ -60,7 +60,7 @@ a \code{class} problem will never be returned.}
 \item{check_length}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
 same length in \code{object} and \code{expected}.}
 
-\item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{column} and
+\item{check_levels}{\verb{[logical(1)]}\cr Whether to check that \code{column}
 has the same \link[=levels]{factor levels} in \code{object} and \code{expected}.}
 
 \item{check_values}{\verb{[logical(1)]}\cr Whether to check that \code{column} has the
@@ -130,7 +130,7 @@ with \code{\link[gradethis:fail]{gradethis::fail()}}
 \section{Problems}{
 
 \enumerate{
-\item \code{names} (\code{table_problem}): \code{object} doesn't contain a column named column.
+\item \code{names} (\code{table_problem}): \code{object} doesn't contain a column named \code{column}.
 \item \code{class}: Any mismatch in the classes of the \code{column}.
 \item \code{length}: The \code{column} doesn't have the expected length.
 \item \code{levels_n}, \code{levels}, \code{levels_reversed}, \code{levels_order}:

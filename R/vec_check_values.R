@@ -1,4 +1,4 @@
-#' Checks that two vectors are contain the same values
+#' Checks that two vectors contain the same values
 #'
 #' Check if two vectors contain the same values.
 #' If the values differ

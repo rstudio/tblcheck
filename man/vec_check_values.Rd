@@ -3,7 +3,7 @@
 \name{vec_check_values}
 \alias{vec_check_values}
 \alias{vec_grade_values}
-\title{Checks that two vectors are contain the same values}
+\title{Checks that two vectors contain the same values}
 \usage{
 vec_check_values(
   object = .result,

@@ -3,7 +3,7 @@
 \name{tbl_check_groups}
 \alias{tbl_check_groups}
 \alias{tbl_grade_groups}
-\title{Check that the groups of two object are the same}
+\title{Check that the groups of two objects are the same}
 \usage{
 tbl_check_groups(object = .result, expected = .solution, env = parent.frame())
 

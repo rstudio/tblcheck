@@ -16,7 +16,7 @@
 #'
 #' @section Problems:
 #'
-#' 1. `names` (`table_problem`): `object` doesn't contain a column named column.
+#' 1. `names` (`table_problem`): `object` doesn't contain a column named `column`.
 #' 1. `class`: Any mismatch in the classes of the `column`.
 #' 1. `length`: The `column` doesn't have the expected length.
 #' 1. `levels_n`, `levels`, `levels_reversed`, `levels_order`:
@@ -36,7 +36,7 @@
 #' @inheritParams tbl_check_class
 #' @param check_length `[logical(1)]`\cr Whether to check that `column` has the
 #'   same length in `object` and `expected`.
-#' @param check_levels `[logical(1)]`\cr Whether to check that `column` and
+#' @param check_levels `[logical(1)]`\cr Whether to check that `column`
 #'   has the same [factor levels][levels()] in `object` and `expected`.
 #' @param check_values `[logical(1)]`\cr Whether to check that `column` has the
 #'   same values in `object` and `expected`.
